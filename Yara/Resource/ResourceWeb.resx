@@ -162,6 +162,15 @@
   <data name="LbAmount" xml:space="preserve">
     <value>المبلغ</value>
   </data>
+  <data name="Lbbgw" xml:space="preserve">
+    <value>bgw</value>
+  </data>
+  <data name="Lbbranch" xml:space="preserve">
+    <value>branch</value>
+  </data>
+  <data name="Lbbypass" xml:space="preserve">
+    <value>bypass</value>
+  </data>
   <data name="LbCity" xml:space="preserve">
     <value>المدينة</value>
   </data>
@@ -189,6 +198,9 @@
   <data name="LbCompanyName" xml:space="preserve">
     <value>اسم الشركة</value>
   </data>
+  <data name="LbCompanyNamem" xml:space="preserve">
+    <value>Merchant Company Namem</value>
+  </data>
   <data name="LbCompanyURl" xml:space="preserve">
     <value>الموقع الاكتروني</value>
   </data>
@@ -206,6 +218,9 @@
   </data>
   <data name="LbCountryto" xml:space="preserve">
     <value>سعر الصرف إلى</value>
+  </data>
+  <data name="Lbcredit" xml:space="preserve">
+    <value>credit</value>
   </data>
   <data name="lbCurrentState" xml:space="preserve">
     <value>الحالة</value>
@@ -261,6 +276,9 @@
   <data name="Lbhexcode" xml:space="preserve">
     <value>الرمز</value>
   </data>
+  <data name="Lbhidden" xml:space="preserve">
+    <value>hidden</value>
+  </data>
   <data name="LbId" xml:space="preserve">
     <value>ID</value>
   </data>
@@ -279,6 +297,9 @@
   <data name="LbIsNorth" xml:space="preserve">
     <value>من مدن الجنوب </value>
   </data>
+  <data name="LbisPublic" xml:space="preserve">
+    <value>isPublic</value>
+  </data>
   <data name="Lblat" xml:space="preserve">
     <value>خط العرض</value>
   </data>
@@ -287,6 +308,12 @@
   </data>
   <data name="Lblon" xml:space="preserve">
     <value>خط الطول</value>
+  </data>
+  <data name="Lbmerchant_mob" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+  <data name="LbMerchant_name" xml:space="preserve">
+    <value>اسم التاجر</value>
   </data>
   <data name="lbMsgErrorLogin" xml:space="preserve">
     <value>Error User Name Or Password.....!</value>
@@ -322,7 +349,7 @@
     <value>بيانات الشركات </value>
   </data>
   <data name="LBMyMerchant" xml:space="preserve">
-    <value>بينات عملاء الشركات والمتاجر</value>
+    <value>بينات التجار</value>
   </data>
   <data name="LBMyShippingPrice" xml:space="preserve">
     <value>تسعير أنظمة الشحن </value>
@@ -341,6 +368,9 @@
   </data>
   <data name="LbNikeNAme" xml:space="preserve">
     <value>الاسم المستعار</value>
+  </data>
+  <data name="LbNikeNAmeM" xml:space="preserve">
+    <value>Merchant Company Namem</value>
   </data>
   <data name="LbNormalizedName" xml:space="preserve">
     <value>Normalized Name</value>
@@ -375,6 +405,9 @@
   <data name="LbOpration" xml:space="preserve">
     <value>العمليات </value>
   </data>
+  <data name="Lboutskirts" xml:space="preserve">
+    <value>outskirts</value>
+  </data>
   <data name="LbPhoneCompany" xml:space="preserve">
     <value>الهاتف</value>
   </data>
@@ -396,11 +429,20 @@
   <data name="LbSector" xml:space="preserve">
     <value>القطاع</value>
   </data>
+  <data name="Lbsms_alert" xml:space="preserve">
+    <value>تنبيهات sms</value>
+  </data>
+  <data name="Lbsorting" xml:space="preserve">
+    <value>sorting</value>
+  </data>
   <data name="LbSpec" xml:space="preserve">
     <value>المساحة</value>
   </data>
   <data name="LbTypesCompanies" xml:space="preserve">
     <value>الفئة</value>
+  </data>
+  <data name="LbTypesCompaniesM" xml:space="preserve">
+    <value>Merchant Types Companies</value>
   </data>
   <data name="LbTypeSystem" xml:space="preserve">
     <value>النظام</value>
@@ -426,14 +468,23 @@
   <data name="LbUserPhone" xml:space="preserve">
     <value>Phone</value>
   </data>
+  <data name="Lbuserpwd" xml:space="preserve">
+    <value>userpwd</value>
+  </data>
   <data name="LBUsersInformationEn" xml:space="preserve">
     <value>Users Information</value>
+  </data>
+  <data name="LbUS_delivery" xml:space="preserve">
+    <value>مستخدم نظام التوصيل</value>
   </data>
   <data name="LbZone" xml:space="preserve">
     <value>حي</value>
   </data>
   <data name="LTitleShipping" xml:space="preserve">
     <value>وصف صلاحية الشحن</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Merchant Nike Name</value>
   </data>
   <data name="VLCitydoplceted" xml:space="preserve">
     <value>تم إدخال تسعيرة التوصيل لهذه المدينة يرجى التأكد وإعادة المحاولة لاحقا ...!</value>
