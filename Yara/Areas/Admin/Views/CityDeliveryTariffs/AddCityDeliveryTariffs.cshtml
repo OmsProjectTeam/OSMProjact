@@ -1,0 +1,138 @@
+﻿@model ViewmMODeElMASTER
+@{
+    ViewData["Title"] = ResourceWeb.LBAddCityDeliveryTariffs;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+
+<div class="row small-spacing">
+    <div class="col-lg-6 col-xs-12">
+        <div class="box-content card white">
+            <h4 class="box-title">@ResourceWeb.LBAddCityDeliveryTariffs</h4>
+            <!-- /.box-title -->
+
+
+
+            <div class="card-content">
+                <form role="form" method="post" asp-controller="CityDeliveryTariffs" asp-action="Save" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="@Model.CityDeliveryTariffs.DataEntry" class="form-control" value="@User.Identity.Name">
+                        <input type="hidden" asp-for="@Model.CityDeliveryTariffs.IdCityDeliveryTariffs" class="form-control">
+                        <input type="hidden" asp-for="@Model.CityDeliveryTariffs.DateTimeEntry" value="@DateTime.Now">
+                        <input type="hidden" asp-for="@Model.returnUrl" id="url">
+
+                    </div>
+
+                    <div class="card-content">
+                        <div class="row small-spacing">
+                            <div class="col-xs-4">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.CityDeliveryTariffs.CityId" for="exampleInputEmail1">@ResourceWeb.LbCity</label>
+                                    <select class="form-control" asp-for="@Model.CityDeliveryTariffs.CityId" asp-items="@(new SelectList(ViewBag.City,"Id","Description"))">
+                                    </select>
+                                    <span asp-validation-for="@Model.CityDeliveryTariffs.CityId" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-4">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.CityDeliveryTariffs.IdInformationCompanies" for="exampleInputEmail1">@ResourceWeb.LbCompanyName</label>
+                                    <select class="form-control" asp-for="@Model.CityDeliveryTariffs.IdInformationCompanies" asp-items="@(new SelectList(ViewBag.InformationCompanies,"IdInformationCompanies","CompanyName"))">
+                                    </select>
+                                    <span asp-validation-for="@Model.CityDeliveryTariffs.IdInformationCompanies" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.CityDeliveryTariffs.IdCurrenciesExchangeRates" for="exampleInputEmail1">@ResourceWeb.LbTypeSystem</label>
+                                    <select class="form-control" asp-for="@Model.CityDeliveryTariffs.IdCurrenciesExchangeRates" asp-items="@(new SelectList(ViewBag.Currenc,"IdCurrenciesExchangeRates","Country"))">
+                                    </select>
+                                    <span asp-validation-for="@Model.CityDeliveryTariffs.IdCurrenciesExchangeRates" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                    <div class="card-content">
+                        <div class="row small-spacing">
+                            <div class="col-xs-4">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.CityDeliveryTariffs.TitleShipping" for="exampleInputEmail1">@ResourceWeb.LTitleShipping</label>
+                                    <input asp-for="@Model.CityDeliveryTariffs.TitleShipping" type="text" placeholder="@ResourceWeb.LTitleShipping ...." class="form-control" maxlength="300">
+                                    <span asp-validation-for="@Model.CityDeliveryTariffs.TitleShipping" class="text-danger"></span>
+                                    <span style="color:red"> <strong>@TempData["Country"]</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.CityDeliveryTariffs.CompanyDelivery" for="exampleInputEmail1">@ResourceWeb.LbCompanyDelivery</label>
+                                    <input asp-for="@Model.CityDeliveryTariffs.CompanyDelivery" type="text" placeholder="@ResourceWeb.LbCompanyDelivery ...." class="form-control" maxlength="20">
+                                    <span asp-validation-for="@Model.CityDeliveryTariffs.CompanyDelivery" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="col-xs-4">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.CityDeliveryTariffs.ClintDelivery" for="exampleInputEmail1">@ResourceWeb.LbClintDelivery</label>
+                                    <input asp-for="@Model.CityDeliveryTariffs.ClintDelivery" type="text" placeholder="@ResourceWeb.LbClintDelivery ...." class="form-control" maxlength="20">
+                                    <span asp-validation-for="@Model.CityDeliveryTariffs.ClintDelivery" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                   
+
+
+
+                    <div class="checkbox margin-bottom-20">
+                        <div class="switch success"><input type="checkbox" asp-for="@Model.CityDeliveryTariffs.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWeb.lbCurrentState</label></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
+                </form>
+            </div>
+            <!-- /.card-content -->
+        </div>
+        <!-- /.box-content -->
+    </div>
+
+
+    <div class="col-lg-6 col-xs-12">
+        <div class="box-content card white">
+            <h4 class="box-title">@ResourceWeb.lbOldeAndUserGide</h4>
+            <!-- /.box-title -->
+            <div class="card-content">
+
+                @*   <div class="form-group">
+                <img src="~/images/user gide/Product.png" width="1920" height="1077" />
+                </div> *@
+
+
+            </div>
+            <!-- /.card-content -->
+        </div>
+        <!-- /.box-content -->
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+    <script>
+        $("#url").val(window.location.href);
+    </script>
+}
+

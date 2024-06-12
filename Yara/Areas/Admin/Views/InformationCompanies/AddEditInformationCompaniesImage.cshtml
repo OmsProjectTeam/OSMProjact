@@ -1,0 +1,184 @@
+﻿@model ViewmMODeElMASTER
+@{
+    ViewData["Title"] = ResourceWeb.LbAddEditInformationCompanies;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+
+<div class="row small-spacing">
+    <div class="col-lg-6 col-xs-12">
+        <div class="box-content card white">
+            <h4 class="box-title">@ResourceWeb.LBEmageSise</h4>
+            <!-- /.box-title -->
+
+
+
+            <div class="card-content">
+                <form role="form" method="post" asp-controller="InformationCompanies" asp-action="Save" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="@Model.InformationCompanies.DataEntry" class="form-control" value="@User.Identity.Name">
+                        <input type="hidden" asp-for="@Model.InformationCompanies.IdInformationCompanies" class="form-control">
+                        <input type="hidden" asp-for="@Model.InformationCompanies.DateTimeEntry" value="@DateTime.Now">
+                        <input type="hidden" asp-for="@Model.returnUrl" id="url">
+                        <input type="hidden" asp-for="@Model.InformationCompanies.Photo" for="exampleInputEmail1"></input>
+
+                    </div>
+
+                    <div class="card-content">
+                        <div class="row small-spacing">
+                            <div class="col-xs-3">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.InformationCompanies.IdTypesCompanies" for="exampleInputEmail1">@ResourceWeb.LbTypesCompanies</label>
+                                    <select class="form-control" asp-for="@Model.InformationCompanies.IdTypesCompanies" asp-items="@(new SelectList(ViewBag.Categorie,"IdTypesCompanies","TypesCompanies"))">
+                                    </select>
+                                    <span asp-validation-for="@Model.InformationCompanies.IdTypesCompanies" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-3">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.InformationCompanies.CompanyName" for="exampleInputEmail1">@ResourceWeb.LbCompanyName</label>
+                                    <input asp-for="@Model.InformationCompanies.CompanyName" type="text" placeholder="@ResourceWeb.LbCompanyName ...." class="form-control" maxlength="300">
+                                    <span asp-validation-for="@Model.InformationCompanies.CompanyName" class="text-danger"></span>
+                                    <span style="color:red"> <strong>@TempData["CompanyName"]</strong></span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-3">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.InformationCompanies.PhoneCompany" for="exampleInputEmail1">@ResourceWeb.LbPhoneCompany</label>
+                                    <input asp-for="@Model.InformationCompanies.PhoneCompany" type="text" placeholder="@ResourceWeb.LbPhoneCompany ...." class="form-control" maxlength="20">
+                                    <span asp-validation-for="@Model.InformationCompanies.PhoneCompany" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.InformationCompanies.PhoneCompanySecand" for="exampleInputEmail1">@ResourceWeb.LbPhoneCompanySecand</label>
+                                    <input asp-for="@Model.InformationCompanies.PhoneCompanySecand" type="text" placeholder="@ResourceWeb.LbPhoneCompanySecand ...." class="form-control" maxlength="20">
+                                    <span asp-validation-for="@Model.InformationCompanies.PhoneCompanySecand" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-content">
+                        <div class="row small-spacing">
+
+
+
+                            <div class="col-xs-3">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.InformationCompanies.EmailCompany" for="exampleInputEmail1">@ResourceWeb.LbEmailCompany</label>
+                                    <input asp-for="@Model.InformationCompanies.EmailCompany" type="email" placeholder="@ResourceWeb.LbEmailCompany ...." class="form-control" maxlength="300">
+                                    <span asp-validation-for="@Model.InformationCompanies.EmailCompany" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.InformationCompanies.AddresCompany" for="exampleInputEmail1">@ResourceWeb.LbAddresCompany</label>
+                                    <input asp-for="@Model.InformationCompanies.AddresCompany" type="text" placeholder="@ResourceWeb.LbAddresCompany ...." class="form-control" maxlength="300">
+                                    <span asp-validation-for="@Model.InformationCompanies.AddresCompany" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.InformationCompanies.NikeNAme" for="exampleInputEmail1">@ResourceWeb.LbNikeNAme</label>
+                                    <input asp-for="@Model.InformationCompanies.NikeNAme" type="text" placeholder="@ResourceWeb.LbNikeNAme ...." class="form-control" maxlength="300">
+                                    <span asp-validation-for="@Model.InformationCompanies.NikeNAme" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.InformationCompanies.CompanyDescription" for="exampleInputEmail1">@ResourceWeb.LbCompanyDescription</label>
+                                    <textarea asp-for="@Model.InformationCompanies.CompanyDescription" type="text" placeholder="@ResourceWeb.LbCompanyDescription ...." class="form-control" maxlength="2000" rows="5"></textarea>
+                                    <span asp-validation-for="@Model.InformationCompanies.CompanyDescription" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                    <div class="card-content">
+                        <div class="row small-spacing">
+                            <div class="col-xs-4">
+                                <div class="checkbox margin-bottom-20">
+                                    <div class="switch success"><input type="checkbox" asp-for="@Model.InformationCompanies.Active" id="switch-2"><label for="switch-2">@ResourceWeb.LbActive</label></div>
+                                </div>
+                            </div>
+                            <!-- /.col-xs-3 -->
+                            <!-- /.col-xs-4 -->
+                            <!-- /.col-xs-5 -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+
+
+                    <div class="form-group">
+                        @*  <label for="lastNameinput" class="form-label">222222</label> *@
+                        <p><input type="file" accept="image/*" name="Files" id="file" onchange="loadFile(event)" style="display: none;"></p>
+                        <p><label class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" for="file" style="cursor: pointer;" name="Files">@ResourceWeb.LBUpload_image</label></p>
+                        <p><img id="output" width="450" height="300" /></p>
+                        <span style="color:red"> <strong>@TempData["Message"]</strong></span>
+                    </div>
+                    <div class="checkbox margin-bottom-20">
+                        <div class="switch success"><input type="checkbox" asp-for="@Model.InformationCompanies.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWeb.lbCurrentState</label></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
+                </form>
+            </div>
+            <!-- /.card-content -->
+        </div>
+        <!-- /.box-content -->
+    </div>
+
+
+    <div class="col-lg-6 col-xs-12">
+        <div class="box-content card white">
+            <h4 class="box-title">@ResourceWeb.lbOldeAndUserGide</h4>
+            <!-- /.box-title -->
+            <div class="card-content">
+                <div class="form-group">
+                    <input type="hidden" asp-for="@Model.InformationCompanies.Photo" for="exampleInputEmail1"></input>
+                    <p><img src="@string.Format("/Images/Home/{0}",Model.InformationCompanies.Photo)" id="output" width="450" height="300" /></p>
+                </div>
+
+                @*   <div class="form-group">
+                <img src="~/images/user gide/Product.png" width="1920" height="1077" />
+                </div> *@
+
+
+            </div>
+            <!-- /.card-content -->
+        </div>
+        <!-- /.box-content -->
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+    <script>
+        $("#url").val(window.location.href);
+    </script>
+}
+
