@@ -13,7 +13,10 @@ namespace Domin.Entity
         public int MyProperty { get; set; }
         public int MyProperty2 { get; set; }
 
+
         // changes fro master
+        // makew changes fromk rayhan
+
 
     }
 }
