@@ -17,7 +17,7 @@
         </ul>
         <!-- /.box-title -->
         <div class="dropdown js__drop_down">
-            <a asp-area="Admin" asp-controller="CityDeliveryTariffs" asp-action="AddCityDeliveryTariffs"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a>
+            <a asp-area="Admin" asp-controller="Merchant" asp-action="AddMerchant"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a>
         </div>
         <!-- /.dropdown js__dropdown -->
         <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -25,8 +25,6 @@
             <div class="row">
 
                 <div class="col-sm-12">
-
-
                     <div class="box-content">
 
                         <div id="rootwizard-progress">
@@ -38,6 +36,7 @@
                                         <ul>
                                             <li><a href="#tab-progress-1" data-toggle="tab">@ResourceWeb.LbInformaitionco</a></li>
                                             <li><a href="#tab-progress-2" data-toggle="tab">@ResourceWeb.LbInformaitioncl</a></li>
+                                            <li><a href="#tab-progress-5" data-toggle="tab">@ResourceWeb.LbInformaitioncl</a></li>
 
                                             <li><a href="#tab-progress-3" data-toggle="tab">@ResourceWeb.LbOpration</a></li>
                                             @*  <li><a href="#tab-progress-4" data-toggle="tab">Forth</a></li>
@@ -58,43 +57,45 @@
                                                 <thead>
                                                     <tr role="row">
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbId</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbdescriptioncity</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTypesCompanies</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbCompanyName</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbNikeNAme</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbCountry</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbcode</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LTitleShipping</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbCompanyDelivery</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbMerchant_name</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbmerchant_mob</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbsms_alert</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbUS_delivery</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbisPublic</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbCity</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbbgw</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDescription</th>
 
                                                 <tfoot>
                                                     <tr>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbdescriptioncity</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbTypesCompanies</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbCompanyName</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbNikeNAme</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbCountry</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbcode</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LTitleShipping</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbCompanyDelivery</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbMerchant_name</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbmerchant_mob</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbsms_alert</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbUS_delivery<</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbisPublic</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbCity</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbbgw</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbDescription</th>
 
 
                                                 </tfoot>
                                                 <tbody>
-                                                            @foreach (var item in Model.ListViewCityDeliveryTariffs)
+                                                            @foreach (var item in Model.ListViewMerchant)
                                                             {
                                                         <tr role="row" class="odd">
-                                                            <td>@item.IdCityDeliveryTariffs</td>
-                                                            <td class="truncate-50">@item.description</td>
+                                                            <td>@item.id</td>
+                                                            <td>@item.Merchant_name</td>
+                                                            <td>@item.merchant_mob</td>
+                                                            <td>@item.sms_alert</td>
+                                                            <td>@item.US_delivery</td>
+                                                            <td>@item.isPublic</td>
+                                                            <td>@item.CityName</td>
+                                                            <td>@item.bgw</td>
+                                                            <td>@item.description</td>
+                                                     
 
-                                                            <td class="truncate-50">@item.TypesCompanies</td>
-                                                            <td class="truncate-50">@item.CompanyName</td>
-                                                            <td class="truncate-50">@item.NikeNAme</td>
-                                                            <td class="truncate-50">@item.Country</td>
-                                                            <td class="truncate-50">@item.code</td>
-                                                            <td class="truncate-50">@item.TitleShipping</td>
-                                                            <td class="truncate-50">@item.CompanyDelivery</td>
+                                                        
 
 
                                                         </tr>
@@ -114,29 +115,45 @@
                                                 <thead>
                                                     <tr role="row">
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbId</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LTitleShipping</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbdescriptioncity</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbClintDelivery</th>
-                                                        >
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbMerchant_name</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbhidden</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbcust_name</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbcust_mob</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbcust_mob2</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTypesCompanies</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbCompanyName</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbNikeNAme</th>
+                                                       
 
                                                 <tfoot>
                                                     <tr>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LTitleShipping</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbdescriptioncity</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbClintDelivery</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbMerchant_name</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbhidden</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbcust_name</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbcust_mob</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbcust_mob2</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbTypesCompanies</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbCompanyName</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbNikeNAme</th>
 
 
 
                                                 </tfoot>
                                                 <tbody>
-                                                            @foreach (var item in Model.ListViewCityDeliveryTariffs)
+                                                            @foreach (var item in Model.ListViewMerchant)
                                                             {
                                                         <tr role="row" class="odd">
-                                                            <td>@item.IdCityDeliveryTariffs</td>
-                                                            <td class="truncate-50">@item.TitleShipping</td>
-                                                            <td class="truncate-50">@item.description</td>
-                                                            <td class="truncate-50">@item.ClintDelivery</td>
+                                                            <td>@item.id</td>
+                                                            <td>@item.Merchant_name</td>
+                                                            <td>@item.hidden</td>
+                                                            <td>@item.cust_name</td>
+                                                            <td>@item.cust_mob</td>
+                                                            <td>@item.cust_mob2</td>
+                                                            <td>@item.TypesCompanies</td>
+                                                            <td>@item.CompanyName</td>
+                                                            <td>@item.NikeNAme</td>
+                                              
 
 
                                                         </tr>
@@ -146,6 +163,64 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="tab-pane" id="tab-progress-5">
+                                    <div class='table-responsive'>
+                                        <div style="overflow-x:auto;">
+                                            <table id="example9" class="table table-striped table-bordered display dataTable responsive" style="width: 100%;" role="grid" aria-describedby="example_info">
+
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbId</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbMerchant_name</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lboutskirts</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbbranch</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbsorting</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbcredit</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbbypass</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbUserName</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbuserpwd</th>
+                                                        >
+
+                                                <tfoot>
+                                                    <tr>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbMerchant_name</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lboutskirts</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbbranch</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbsorting</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbcredit</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbbypass</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbUserName</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbuserpwd</th>
+
+
+
+                                                </tfoot>
+                                                <tbody>
+                                                            @foreach (var item in Model.ListViewMerchant)
+                                                            {
+                                                        <tr role="row" class="odd">
+                                                            <td>@item.id</td>
+                                                            <td>@item.Merchant_name</td>
+                                                            <td>@item.outskirts</td>
+                                                            <td>@item.branch</td>
+                                                            <td>@item.sorting</td>
+                                                            <td>@item.credit</td>
+                                                            <td>@item.bypass</td>
+                                                            <td>@item.username</td>
+                                                            <td>@item.userpwd</td>
+                                                     
+
+
+
+                                                        </tr>
+                                                            }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                         
 
                                 <div class="tab-pane" id="tab-progress-3">
                                     <div class='table-responsive'>
@@ -154,7 +229,11 @@
                                                 <thead>
                                                     <tr role="row">
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbId</th>
-                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LTitleShipping</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbMerchant_name</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbActive</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbTypesCompaniesM</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbCompanyNamem</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbNikeNAmeM</th>
 
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDataEntry</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDateTimeEntry</th>
@@ -163,7 +242,11 @@
                                                 <tfoot>
                                                     <tr>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LTitleShipping</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbMerchant_name</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbActive</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbTypesCompaniesM</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbCompanyNamem<</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbNikeNAmeM<</th>
 
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbDataEntry</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbDateTimeEntry</th>
@@ -171,20 +254,26 @@
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbOpration</th>
                                                 </tfoot>
                                                 <tbody>
-                                                            @foreach (var item in Model.ListViewCityDeliveryTariffs)
+                                                            @foreach (var item in Model.ListViewMerchant)
                                                             {
                                                         <tr role="row" class="odd">
-                                                            <td>@item.IdCityDeliveryTariffs</td>
-                                                            <td>@item.TitleShipping</td>
+                                                            <td>@item.id</td>
+                                                            <td>@item.Merchant_name</td>
+                                                            <td>
+                                                                <div class="switch primary"><input type="checkbox" checked="@item.Active" id="switch-8" disabled><label for="switch-8">@item.Active</label></div>
+                                                            </td>
+                                                            <td>@item.TypesCompaniesM</td>
+                                                            <td>@item.CompanyNameM</td>
+                                                            <td>@item.NikeNAmeM</td>
                                                             <td>@item.DataEntry</td>
                                                             <td>@item.DateTimeEntry</td>
                                                             <td>
-                                                                <div class="switch primary"><input type="checkbox" checked="@item.CurrentState" IdCityDeliveryTariffs="switch-2" disabled><label for="switch-2">@item.CurrentState</label></div>
+                                                                <div class="switch primary"><input type="checkbox" checked="@item.CurrentState" id="switch-2" disabled><label for="switch-2">@item.CurrentState</label></div>
                                                             </td>
                                                             <td>
                                                                 <ul class="list-inline">
-                                                                    <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="CityDeliveryTariffs" asp-action="AddCityDeliveryTariffs" asp-route-IdCityDeliveryTariffs="@item.IdCityDeliveryTariffs"><button type="button" class="btn btn-primary btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-edit"></i></button></a></li>|
-                                                                    <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="CityDeliveryTariffs" asp-action="DeleteData" asp-route-IdCityDeliveryTariffs="@item.IdCityDeliveryTariffs"><button type="button" class="btn btn-danger btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-remove"></i></button></a></li>
+                                                                    <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Merchant" asp-action="AddMerchant" asp-route-id="@item.id"><button type="button" class="btn btn-primary btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-edit"></i></button></a></li>|
+                                                                    <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Merchant" asp-action="DeleteData" asp-route-id="@item.id"><button type="button" class="btn btn-danger btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-remove"></i></button></a></li>
                                                                 </ul>
                                                             </td>
                                                         </tr>
@@ -195,6 +284,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                                 <ul class="pager wizard">
                                     <li class="previous"><a href="javascript:void(0)">Previous</a></li>
                                     <li class="next"><a href="javascript:void(0)">Next</a></li>
@@ -217,7 +307,7 @@
 <span style="color:royalblue"> <strong>@TempData["Saved successfully"]</strong></span>
 <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
 
-@* <img src="~/images/user gide/CityDeliveryTariffs.png" width="1920" height="1077" /> *@
+@* <img src="~/images/user gide/Merchant.png" width="1920" height="1077" /> *@
 
 @section Scripts
 {
@@ -265,6 +355,21 @@
         $(function () {
             $("#example5").DataTable().fnDestroy();
             $('#example5').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+            });
+        });
+
+
+    </script>
+    <script>
+        $(function () {
+            $("#example9").DataTable().fnDestroy();
+            $('#example9').DataTable({
                 "paging": false,
                 "lengthChange": false,
                 "searching": false,
