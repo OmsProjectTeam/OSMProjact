@@ -61,7 +61,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to حالة التعامل .
+        ///   Looks up a localized string similar to Dealing status.
         /// </summary>
         public static string LbActive {
             get {
@@ -79,7 +79,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to أضافة وتعديل المناطق.
+        ///   Looks up a localized string similar to Adding and modifying regions.
         /// </summary>
         public static string LBAddArea {
             get {
@@ -88,7 +88,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to إضافة وتعديل تسعيرة شركات التوصيل للمناطق.
+        ///   Looks up a localized string similar to Adding and modifying the pricing of delivery companies for the regions.
         /// </summary>
         public static string LBAddAreaDeliveryTariffs {
             get {
@@ -97,7 +97,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to أضافة وتعديل بيانات المدن .
+        ///   Looks up a localized string similar to Adding and modifying city data.
         /// </summary>
         public static string LBAddCity {
             get {
@@ -106,7 +106,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to أضافة وتعديل تسعيرة شركات التوصيل للمدن .
+        ///   Looks up a localized string similar to Adding and modifying the pricing of delivery companies to cities.
         /// </summary>
         public static string LBAddCityDeliveryTariffs {
             get {
@@ -115,7 +115,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to أضافة وتعديل العملات .
+        ///   Looks up a localized string similar to Add and modify currencies.
         /// </summary>
         public static string LBAddCurrenciesExchangeRates {
             get {
@@ -124,7 +124,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to إضافة وتعديل بيانات الشركات .
+        ///   Looks up a localized string similar to Add and modify company data.
         /// </summary>
         public static string LbAddEditInformationCompanies {
             get {
@@ -133,7 +133,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to إضافة وتعديل سعر الصرف.
+        ///   Looks up a localized string similar to Add and modify the exchange rate.
         /// </summary>
         public static string LBAddExchangeRate {
             get {
@@ -142,7 +142,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to العنوان.
+        ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string LbAddresCompany {
             get {
@@ -151,7 +151,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to أضافة وتعديل تسعير أنظمة الشحن.
+        ///   Looks up a localized string similar to Adding and modifying pricing for shipping systems.
         /// </summary>
         public static string LBAddShippingPrice {
             get {
@@ -160,7 +160,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to أضافة وتعديل حاسبة العملات .
+        ///   Looks up a localized string similar to Add and modify currency calculator.
         /// </summary>
         public static string LBAddTransaction {
             get {
@@ -169,7 +169,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to إضافة وتعديل فئات الشركات .
+        ///   Looks up a localized string similar to Add and modify company categories.
         /// </summary>
         public static string LBAddTypesCompanies {
             get {
@@ -178,7 +178,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to أضافة وتعديل الانظمة .
+        ///   Looks up a localized string similar to Adding and modifying systems.
         /// </summary>
         public static string LBAddTypeSystem {
             get {
@@ -187,7 +187,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to المبلغ.
+        ///   Looks up a localized string similar to Amount.
         /// </summary>
         public static string LbAmount {
             get {
@@ -223,7 +223,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to المدينة.
+        ///   Looks up a localized string similar to City.
         /// </summary>
         public static string LbCity {
             get {
@@ -232,7 +232,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تسعيرة التوصيل للعميل.
+        ///   Looks up a localized string similar to Delivery price to the customer.
         /// </summary>
         public static string LbClintDelivery {
             get {
@@ -241,7 +241,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to سعر شحن العميل أكثر من 10.
+        ///   Looks up a localized string similar to Customer shipping price is more than 10.
         /// </summary>
         public static string LbClintPricePerkgAbove10 {
             get {
@@ -250,7 +250,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to سعر شحن العميل اقل من 10.
+        ///   Looks up a localized string similar to Customer shipping price is less than 10.
         /// </summary>
         public static string LbClintPricePerkgUnder10 {
             get {
@@ -259,7 +259,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الرمز.
+        ///   Looks up a localized string similar to code.
         /// </summary>
         public static string Lbcode {
             get {
@@ -268,7 +268,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الرمز .
+        ///   Looks up a localized string similar to code.
         /// </summary>
         public static string Lbcodeto {
             get {
@@ -277,7 +277,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تسعيرة شركة التوصيل.
+        ///   Looks up a localized string similar to Delivery company pricing.
         /// </summary>
         public static string LbCompanyDelivery {
             get {
@@ -286,7 +286,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to وصف الشركة.
+        ///   Looks up a localized string similar to Company description.
         /// </summary>
         public static string LbCompanyDescription {
             get {
@@ -295,7 +295,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to اسم الشركة.
+        ///   Looks up a localized string similar to Company Name.
         /// </summary>
         public static string LbCompanyName {
             get {
@@ -331,7 +331,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to سعر شحن الشركة أكثرمن 10.
+        ///   Looks up a localized string similar to The company&apos;s shipping price is more than 10.
         /// </summary>
         public static string LbCoPricePerkgAbove10 {
             get {
@@ -340,7 +340,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to سعر شحن الشركة اقل من 10.
+        ///   Looks up a localized string similar to The company&apos;s shipping price is less than 10.
         /// </summary>
         public static string LbCoPricePerkgUnder10 {
             get {
@@ -349,7 +349,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to العملة .
+        ///   Looks up a localized string similar to  currency.
         /// </summary>
         public static string LbCountry {
             get {
@@ -358,7 +358,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to سعر الصرف إلى.
+        ///   Looks up a localized string similar to Exchange rate to.
         /// </summary>
         public static string LbCountryto {
             get {
@@ -376,7 +376,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الحالة.
+        ///   Looks up a localized string similar to status.
         /// </summary>
         public static string lbCurrentState {
             get {
@@ -385,7 +385,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to أقرب معلم.
+        ///   Looks up a localized string similar to Nearest Teacher.
         /// </summary>
         public static string Lbcust_landmark {
             get {
@@ -394,7 +394,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to هاتف1.
+        ///   Looks up a localized string similar to Phone1.
         /// </summary>
         public static string Lbcust_mob {
             get {
@@ -403,7 +403,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to هاتف2.
+        ///   Looks up a localized string similar to Phone2.
         /// </summary>
         public static string Lbcust_mob2 {
             get {
@@ -412,7 +412,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to العميل.
+        ///   Looks up a localized string similar to Client.
         /// </summary>
         public static string Lbcust_name {
             get {
@@ -421,7 +421,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الملف التعريفي .
+        ///   Looks up a localized string similar to Profile.
         /// </summary>
         public static string Lbcust_profile {
             get {
@@ -430,7 +430,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to حالة old.
+        ///   Looks up a localized string similar to old status.
         /// </summary>
         public static string Lbcust_status {
             get {
@@ -439,7 +439,16 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to مدخل البيانات.
+        ///   Looks up a localized string similar to Customers.
+        /// </summary>
+        public static string LBCustomers {
+            get {
+                return ResourceManager.GetString("LBCustomers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to data entry.
         /// </summary>
         public static string LbDataEntry {
             get {
@@ -448,7 +457,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to وقت وتاريخ الادخال.
+        ///   Looks up a localized string similar to Time and date of entry.
         /// </summary>
         public static string LbDateTimeEntry {
             get {
@@ -457,7 +466,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to المنطقة.
+        ///   Looks up a localized string similar to Region.
         /// </summary>
         public static string LbDescription {
             get {
@@ -466,7 +475,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to المدينة.
+        ///   Looks up a localized string similar to City.
         /// </summary>
         public static string Lbdescriptioncity {
             get {
@@ -475,7 +484,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to حجم الصورة 150 *150 .
+        ///   Looks up a localized string similar to Image size 150*150.
         /// </summary>
         public static string LBEmageSise {
             get {
@@ -484,7 +493,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to البريد الاكتروني.
+        ///   Looks up a localized string similar to E-mail.
         /// </summary>
         public static string LbEmailCompany {
             get {
@@ -493,7 +502,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to سعر الصرف.
+        ///   Looks up a localized string similar to exchange rate.
         /// </summary>
         public static string LbExchangeRate {
             get {
@@ -511,7 +520,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to بكج كامل.
+        ///   Looks up a localized string similar to Full package.
         /// </summary>
         public static string Lbfull_package {
             get {
@@ -520,7 +529,16 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الرابط .
+        ///   Looks up a localized string similar to General Settings.
+        /// </summary>
+        public static string LBGeneralSettings {
+            get {
+                return ResourceManager.GetString("LBGeneralSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Link.
         /// </summary>
         public static string Lbgisurl {
             get {
@@ -529,7 +547,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الرمز.
+        ///   Looks up a localized string similar to code.
         /// </summary>
         public static string Lbhexcode {
             get {
@@ -556,7 +574,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to المعلومات .
+        ///   Looks up a localized string similar to information.
         /// </summary>
         public static string LbInformaition {
             get {
@@ -565,7 +583,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to معلوما ت العميل.
+        ///   Looks up a localized string similar to customer information.
         /// </summary>
         public static string LbInformaitioncl {
             get {
@@ -574,7 +592,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to معلومات الشركة.
+        ///   Looks up a localized string similar to company information.
         /// </summary>
         public static string LbInformaitionco {
             get {
@@ -583,7 +601,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تاريخ الاضافة .
+        ///   Looks up a localized string similar to Date added.
         /// </summary>
         public static string Lbinsert_dt {
             get {
@@ -592,7 +610,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to من مدن الجنوب .
+        ///   Looks up a localized string similar to The South.
         /// </summary>
         public static string LbIsNorth {
             get {
@@ -610,7 +628,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to خط العرض.
+        ///   Looks up a localized string similar to Latitude.
         /// </summary>
         public static string Lblat {
             get {
@@ -628,7 +646,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to خط الطول.
+        ///   Looks up a localized string similar to longitude.
         /// </summary>
         public static string Lblon {
             get {
@@ -637,7 +655,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to رقم الهاتف.
+        ///   Looks up a localized string similar to phone number.
         /// </summary>
         public static string Lbmerchant_mob {
             get {
@@ -646,11 +664,20 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to اسم التاجر.
+        ///   Looks up a localized string similar to Merchant name.
         /// </summary>
         public static string LbMerchant_name {
             get {
                 return ResourceManager.GetString("LbMerchant_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Merchants.
+        /// </summary>
+        public static string LBMerchants {
+            get {
+                return ResourceManager.GetString("LBMerchants", resourceCulture);
             }
         }
         
@@ -664,7 +691,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Error The new password was not saved...!.
         /// </summary>
         public static string lbMsgNotSavedChangePassword {
             get {
@@ -673,7 +700,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The new password was saved successfully.
         /// </summary>
         public static string lbMsgSavedChangePassword {
             get {
@@ -682,7 +709,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to المناطق.
+        ///   Looks up a localized string similar to Regions.
         /// </summary>
         public static string LBMyArea {
             get {
@@ -691,7 +718,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تسعيرة شركات التوصيل للمناطق.
+        ///   Looks up a localized string similar to Pricing of delivery companies to the regions.
         /// </summary>
         public static string LBMyAreaDeliveryTariffs {
             get {
@@ -700,7 +727,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to بيانات المدن .
+        ///   Looks up a localized string similar to Cities data.
         /// </summary>
         public static string LBMyCity {
             get {
@@ -709,7 +736,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تسعيرة شركات التوصيل للمدن.
+        ///   Looks up a localized string similar to Pricing of delivery companies to cities.
         /// </summary>
         public static string LBMyCityDeliveryTariffs {
             get {
@@ -718,7 +745,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to العملات  .
+        ///   Looks up a localized string similar to Currencies.
         /// </summary>
         public static string LBMyCurrenciesExchangeRates {
             get {
@@ -727,7 +754,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to بيانات العملاء الافراد.
+        ///   Looks up a localized string similar to Individual customer data.
         /// </summary>
         public static string LBMyCustomer {
             get {
@@ -736,7 +763,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to سعر الصرف .
+        ///   Looks up a localized string similar to exchange rate.
         /// </summary>
         public static string LBMyExchangeRate {
             get {
@@ -745,7 +772,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to بيانات الشركات .
+        ///   Looks up a localized string similar to Information Companies.
         /// </summary>
         public static string LBMYInformationCompanies {
             get {
@@ -754,7 +781,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to بينات التجار.
+        ///   Looks up a localized string similar to Merchants&apos; data.
         /// </summary>
         public static string LBMyMerchant {
             get {
@@ -763,7 +790,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تسعير أنظمة الشحن .
+        ///   Looks up a localized string similar to Shipping systems pricing.
         /// </summary>
         public static string LBMyShippingPrice {
             get {
@@ -772,7 +799,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to حاسبة العملات.
+        ///   Looks up a localized string similar to Currency calculator.
         /// </summary>
         public static string LBMyTransaction {
             get {
@@ -781,7 +808,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to فئات الشركات .
+        ///   Looks up a localized string similar to Categories of companies.
         /// </summary>
         public static string LBMyTypesCompanies {
             get {
@@ -790,7 +817,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الأنظمة.
+        ///   Looks up a localized string similar to Systems.
         /// </summary>
         public static string LBMyTypeSystem {
             get {
@@ -808,7 +835,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الاسم المستعار.
+        ///   Looks up a localized string similar to Nick name.
         /// </summary>
         public static string LbNikeNAme {
             get {
@@ -835,7 +862,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Error while saving. Please check and try again later...!.
         /// </summary>
         public static string lbNotSaved {
             get {
@@ -844,7 +871,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The validity process was not saved, please check and try again later.
         /// </summary>
         public static string lbNotSavedMsgRole {
             get {
@@ -853,7 +880,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The validity process was not saved, please check and try again later.
         /// </summary>
         public static string lbNotSavedMsgUser {
             get {
@@ -862,7 +889,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The validity process was not saved, please check and try again later.
         /// </summary>
         public static string lbNotSavedMsgUserRole {
             get {
@@ -871,7 +898,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Error during the editing process. Please check and try again later..!.
         /// </summary>
         public static string lbNotUpdate {
             get {
@@ -880,7 +907,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Error during the editing process. Please check and try again later..!.
         /// </summary>
         public static string lbNotUpdateMsgRole {
             get {
@@ -889,7 +916,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Error during the editing process. Please check and try again later..!.
         /// </summary>
         public static string lbNotUpdateMsgUser {
             get {
@@ -898,7 +925,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Error during the editing process. Please check and try again later..!.
         /// </summary>
         public static string lbNotUpdateMsgUserRole {
             get {
@@ -907,7 +934,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الصورة القديمة .
+        ///   Looks up a localized string similar to Old photo.
         /// </summary>
         public static string lbOldeAndUserGide {
             get {
@@ -916,7 +943,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to العمليات .
+        ///   Looks up a localized string similar to Processes.
         /// </summary>
         public static string LbOpration {
             get {
@@ -934,7 +961,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الهاتف.
+        ///   Looks up a localized string similar to phone.
         /// </summary>
         public static string LbPhoneCompany {
             get {
@@ -943,7 +970,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to هاتف 2.
+        ///   Looks up a localized string similar to Phone 2.
         /// </summary>
         public static string LbPhoneCompanySecand {
             get {
@@ -952,7 +979,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الصورة.
+        ///   Looks up a localized string similar to Photo.
         /// </summary>
         public static string LbPhoto {
             get {
@@ -961,7 +988,16 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to سعر الصرف.
+        ///   Looks up a localized string similar to Pricing System.
+        /// </summary>
+        public static string LBPricingSystem {
+            get {
+                return ResourceManager.GetString("LBPricingSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to exchange rate.
         /// </summary>
         public static string LbRate {
             get {
@@ -979,7 +1015,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to save.
         /// </summary>
         public static string lbSaveMsgRole {
             get {
@@ -988,7 +1024,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to القطاع.
+        ///   Looks up a localized string similar to sector.
         /// </summary>
         public static string LbSector {
             get {
@@ -997,7 +1033,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تنبيهات sms.
+        ///   Looks up a localized string similar to  sms alert.
         /// </summary>
         public static string Lbsms_alert {
             get {
@@ -1015,7 +1051,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to المساحة.
+        ///   Looks up a localized string similar to Space.
         /// </summary>
         public static string LbSpec {
             get {
@@ -1024,7 +1060,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الفئة.
+        ///   Looks up a localized string similar to Category.
         /// </summary>
         public static string LbTypesCompanies {
             get {
@@ -1042,7 +1078,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to النظام.
+        ///   Looks up a localized string similar to system.
         /// </summary>
         public static string LbTypeSystem {
             get {
@@ -1051,7 +1087,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Update.
         /// </summary>
         public static string lbUpdate {
             get {
@@ -1060,7 +1096,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Update.
         /// </summary>
         public static string lbUpdateMsgRole {
             get {
@@ -1069,7 +1105,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تحميل.
+        ///   Looks up a localized string similar to upload.
         /// </summary>
         public static string LBUpload_image {
             get {
@@ -1078,7 +1114,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to مستخدم نظام التوصيل.
+        ///   Looks up a localized string similar to Delivery system user.
         /// </summary>
         public static string LbUS_delivery {
             get {
@@ -1141,7 +1177,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to حي.
+        ///   Looks up a localized string similar to Residential quarter.
         /// </summary>
         public static string LbZone {
             get {
@@ -1150,7 +1186,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to وصف صلاحية الشحن.
+        ///   Looks up a localized string similar to Description of shipping validity.
         /// </summary>
         public static string LTitleShipping {
             get {
@@ -1168,7 +1204,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم إدخال تسعيرة التوصيل لهذه المدينة يرجى التأكد وإعادة المحاولة لاحقا ...!.
+        ///   Looks up a localized string similar to The delivery price for this city has been entered. Please check and try again later...!.
         /// </summary>
         public static string VLCitydoplceted {
             get {
@@ -1177,7 +1213,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم ادخال الشركة مسبقا يرجى التاكد وإعادة المحاولة لاحقا ....!.
+        ///   Looks up a localized string similar to The company has already been entered. Please check and try again later....!.
         /// </summary>
         public static string VLCompanyNameDoplceted {
             get {
@@ -1186,7 +1222,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم أدخال الدولة مسبقا يرجى التأكد وإعادة المحاولة لاحقا...!.
+        ///   Looks up a localized string similar to The country has already been entered. Please check and try again later...!.
         /// </summary>
         public static string VLCountryDoplceted {
             get {
@@ -1195,7 +1231,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم إدخال هاتف العميل مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!.
+        ///   Looks up a localized string similar to The customer&apos;s phone has already been entered. Please confirm and try again later...!.
         /// </summary>
         public static string VLCustMob2doplceted {
             get {
@@ -1204,7 +1240,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم إدخال هاتف العميل مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!.
+        ///   Looks up a localized string similar to The customer&apos;s phone has already been entered. Please confirm and try again later...!.
         /// </summary>
         public static string VLCustMobdoplceted {
             get {
@@ -1213,7 +1249,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم ادخال اسم العميل مسبقا يرجى التأكد وإعادى المحاولة لاحقا ....!.
+        ///   Looks up a localized string similar to The customer name has already been entered. Please verify and try again later....!.
         /// </summary>
         public static string VLCustNamedoplceted {
             get {
@@ -1240,7 +1276,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تمت عملية الحذف بنجاح.
+        ///   Looks up a localized string similar to The deletion was completed successfully.
         /// </summary>
         public static string VLdELETESuccessfully {
             get {
@@ -1249,7 +1285,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم ادخال المنطقة مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!.
+        ///   Looks up a localized string similar to The region has already been entered. Please verify and try again later...!.
         /// </summary>
         public static string VLDescriptionareadoplceted {
             get {
@@ -1258,7 +1294,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم أدخال المدينة مسبقا يرجى التأكد وإعادة المحاولة لاحقا ....!.
+        ///   Looks up a localized string similar to The city has already been entered. Please check and try again later....!.
         /// </summary>
         public static string VLDescriptionDoplceted {
             get {
@@ -1276,7 +1312,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to خطأ في عملية الحذف...!.
+        ///   Looks up a localized string similar to Deletion error...!.
         /// </summary>
         public static string VLErrorDeleteData {
             get {
@@ -1285,7 +1321,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to خطأ في عملية الحفظ ....!.
+        ///   Looks up a localized string similar to Error during saving process....!.
         /// </summary>
         public static string VLErrorSave {
             get {
@@ -1294,7 +1330,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to خطأ في عملية التعديل ....!.
+        ///   Looks up a localized string similar to Error in the editing process....!.
         /// </summary>
         public static string VLErrorUpdate {
             get {
@@ -1303,7 +1339,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم إلإدخال العملة مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!.
+        ///   Looks up a localized string similar to The currency has already been entered. Please check and try again later...!.
         /// </summary>
         public static string VLExchangeRateDoplceted {
             get {
@@ -1321,7 +1357,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم إدخال رقم الهاتف مسبقا يرجى التأكد واعادة المحاولة لاحقا ...!.
+        ///   Looks up a localized string similar to The phone number has already been entered. Please verify and try again later...!.
         /// </summary>
         public static string VLMerchantMobDoplceted {
             get {
@@ -1330,7 +1366,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم أضافة اسم الميل مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!.
+        ///   Looks up a localized string similar to The email address has already been added. Please check and try again later...!.
         /// </summary>
         public static string VLMerchantNameDoplceted {
             get {
@@ -1339,7 +1375,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تمت عملية الحفظ بنجاح .
+        ///   Looks up a localized string similar to The saving process was completed successfully.
         /// </summary>
         public static string VLSavedSuccessfully {
             get {
@@ -1348,7 +1384,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم ادخال عنوان تسعيرة الشحن يرجى التأكد وإعادة المحاولة لاحقا ....!.
+        ///   Looks up a localized string similar to The shipping price address has been entered. Please verify and try again later....!.
         /// </summary>
         public static string VLTitleShippingoplceted {
             get {
@@ -1357,7 +1393,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم أدخال فئة الشركة مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!.
+        ///   Looks up a localized string similar to The company category has already been entered. Please check and try again later...!.
         /// </summary>
         public static string VLTypesCompaniesDoplceted {
             get {
@@ -1366,7 +1402,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تم ادخال النظام مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!.
+        ///   Looks up a localized string similar to The system has already been entered. Please confirm and try again later...!.
         /// </summary>
         public static string VLTypeSystemDoplceted {
             get {
@@ -1375,7 +1411,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تمت عملية التعديل بنجاح .
+        ///   Looks up a localized string similar to The modification process was completed successfully.
         /// </summary>
         public static string VLUpdatedSuccessfully {
             get {

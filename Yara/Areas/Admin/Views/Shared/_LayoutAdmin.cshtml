@@ -83,7 +83,7 @@
 					<!-- /.sub-menu js__content -->
 				</li>
 				<li>
-					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-adjust"></i><span>الأعدادات العامة </span><span class="menu-arrow fa fa-angle-down"></span></a>
+						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-adjust"></i><span>@ResourceWeb.LBGeneralSettings</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
 							<li><a asp-area="Admin" asp-controller="TypeSystem" asp-action="MyTypeSystem">@ResourceWeb.LBMyTypeSystem</a></li>
 							<li><a asp-area="Admin" asp-controller="TypesCompanies" asp-action="MyTypesCompanies">@ResourceWeb.LBMyTypesCompanies</a></li>
@@ -105,7 +105,7 @@
 			<!-- /.title -->
 			<ul class="menu js__accordion">
 				<li>
-					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-bar-chart"></i><span>نظام التعرفة </span><span class="menu-arrow fa fa-angle-down"></span></a>
+						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-bar-chart"></i><span>@ResourceWeb.LBPricingSystem</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
 							<li><a asp-area="Admin" asp-controller="CurrenciesExchangeRates" asp-action="MyCurrenciesExchangeRates">@ResourceWeb.LBMyCurrenciesExchangeRates</a></li>
 							<li><a asp-area="Admin" asp-controller="ExchangeRate" asp-action="MyExchangeRate">@ResourceWeb.LBMyExchangeRate</a></li>
@@ -116,11 +116,9 @@
 					</ul>
 					<!-- /.sub-menu js__content -->
 				</li>
+			
 				<li>
-					<a class="waves-effect" href="calendar.html"><i class="menu-icon fa fa-calendar"></i><span>Calendar</span></a>
-				</li>
-				<li>
-					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>العملاء</span><span class="notice notice-blue">7</span></a>
+						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBCustomers</span><span class="notice notice-blue">7</span></a>
 					<ul class="sub-menu js__content">
 							<li><a asp-area="Admin" asp-controller="Customer" asp-action="MyCustomer">@ResourceWeb.LBMyCustomer</a></li>
 					
@@ -128,12 +126,15 @@
 					<!-- /.sub-menu js__content -->
 				</li>
 					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>التجار</span><span class="notice notice-blue">7</span></a>
+						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBMerchants</span><span class="notice notice-blue">7</span></a>
 						<ul class="sub-menu js__content">
 							<li><a asp-area="Admin" asp-controller="Merchant" asp-action="MyMerchant">@ResourceWeb.LBMyMerchant</a></li>
 
 						</ul>
 						<!-- /.sub-menu js__content -->
+					</li>
+					<li>
+						<a class="waves-effect" href="calendar.html"><i class="menu-icon fa fa-calendar"></i><span>Calendar</span></a>
 					</li>
 				<li>
 					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>Tables</span><span class="menu-arrow fa fa-angle-down"></span></a>

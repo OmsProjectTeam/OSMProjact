@@ -61,7 +61,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج سعر الكيلو  ضمن فئة الاقل من 10 كيلو الخاص بالعميل  لتتم العملية بنجاح ....!.
+        ///   Looks up a localized string similar to Please include the price per kilo within the customer’s category of less than 10 kilos so that the process can be completed successfully....!.
         /// </summary>
         public static string ClintPricePerkgUnder10 {
             get {
@@ -88,7 +88,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يجب ان لا يزيد عدد الاحرف المدخلة عن100 حرف ...!.
+        ///   Looks up a localized string similar to The number of characters entered must not exceed 100 characters...!.
         /// </summary>
         public static string MaxLength100 {
             get {
@@ -97,7 +97,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يجب ان لا يزيد عدد الاحرف المدخلة عن 20 حرف ...!.
+        ///   Looks up a localized string similar to The number of characters entered must not exceed 20 characters...!.
         /// </summary>
         public static string MaxLength20 {
             get {
@@ -106,7 +106,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يجب ان لا يزيد عدد الاحرف المدخلة عن2000 حرف ...!.
+        ///   Looks up a localized string similar to The number of characters entered must not exceed 2000 characters...!.
         /// </summary>
         public static string MaxLength2000 {
             get {
@@ -115,7 +115,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يجب ان لا يزيد عدد الاحرف المدخلة عن 300 حرف ...!.
+        ///   Looks up a localized string similar to The number of characters entered must not exceed 300 characters...!.
         /// </summary>
         public static string MaxLength300 {
             get {
@@ -124,7 +124,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يجب ان لا يزيد عدد الاحرف المدخلة عن 500 حرف ...!.
+        ///   Looks up a localized string similar to The number of characters entered must not exceed 500 characters...!.
         /// </summary>
         public static string MaxLength500 {
             get {
@@ -133,7 +133,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يجب ان لا يقل عدد الاحرف المدخلة عن حرف واحد ويمكن استخدم الرمز # لدلالة على نفس الصفحة   ....!.
+        ///   Looks up a localized string similar to The number of characters entered must not be less than one character, and the # symbol can be used to indicate the same page....!.
         /// </summary>
         public static string MinLength1 {
             get {
@@ -142,7 +142,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يجب ان لا يقل عدد الاحرف المدخلة عن 3 أحرف  ....!.
+        ///   Looks up a localized string similar to The number of characters entered must not be less than 3 characters....!.
         /// </summary>
         public static string MinLength3 {
             get {
@@ -151,7 +151,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يجب ان لا يقل عدد الاحرف المدخلة عن 5 أحرف  ....!.
+        ///   Looks up a localized string similar to The number of characters entered must not be less than 5 characters....!.
         /// </summary>
         public static string MinLength5 {
             get {
@@ -241,7 +241,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج عنوان الشركة لتتم العملية بنجاح ...!.
+        ///   Looks up a localized string similar to Please include the company address for the process to complete successfully...!.
         /// </summary>
         public static string VlAddresCompany {
             get {
@@ -250,7 +250,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج سعر الصرف بالعملة المحلية في السوق السوداء لتتم العملية بنجاح....!.
+        ///   Looks up a localized string similar to Please include the exchange rate in the local currency on the black market for the process to complete successfully....!.
         /// </summary>
         public static string VlBlackMarketExchangeRate {
             get {
@@ -259,7 +259,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج سعر توصيل العميل لتتم العملية بنجاح...!.
+        ///   Looks up a localized string similar to Please include the customer&apos;s delivery price so that the process is completed successfully...!.
         /// </summary>
         public static string VlClintDelivery {
             get {
@@ -268,7 +268,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج سعر الكيلو  ضمن فئة الاعلى من 10 كيلو الخاص بالعميل  لتتم العملية بنجاح ....!.
+        ///   Looks up a localized string similar to Please include the price per kilo within the customer’s category of more than 10 kilos so that the process can be completed successfully....!.
         /// </summary>
         public static string VlClintPricePerkgAbove10 {
             get {
@@ -277,7 +277,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج رمز العملة المحلية لتتم العملية بنجاح ..!.
+        ///   Looks up a localized string similar to Please include the local currency code for the operation to complete successfully..!.
         /// </summary>
         public static string Vlcode {
             get {
@@ -286,7 +286,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج سعر توصيل الشركة لتتم العملية بنجاح ...!.
+        ///   Looks up a localized string similar to Please include the company&apos;s delivery price so that the process can be completed successfully...!.
         /// </summary>
         public static string VlCompanyDelivery {
             get {
@@ -295,7 +295,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج وصف الشركة لتتم العملية بنجاح ....!.
+        ///   Looks up a localized string similar to Please include the company&apos;s delivery price so that the process can be completed successfully...!.
         /// </summary>
         public static string VlCompanyDescription {
             get {
@@ -304,7 +304,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج اسم الشركة لتتم العملية بنجاح ...!.
+        ///   Looks up a localized string similar to Please include the company name for the process to complete successfully...!.
         /// </summary>
         public static string VlCompanyName {
             get {
@@ -313,7 +313,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج سعر الكيلو  ضمن فئة  الاعلى من 10 كيلو الوارد من شركة الشحن لتتم العملية بنجاح ....!.
+        ///   Looks up a localized string similar to Please include the price per kilo within the category higher than 10 kilograms received from the shipping company so that the process can be completed successfully....!.
         /// </summary>
         public static string VlCoPricePerkgAbove10 {
             get {
@@ -322,7 +322,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج سعر الكيلو  ضمن فئة الاقل من 10 كيلو الوارد من شركة الشحن لتتم العملية بنجاح ....!.
+        ///   Looks up a localized string similar to Please include the price per kilo within the category of less than 10 kilograms received from the shipping company so that the process can be completed successfully....!.
         /// </summary>
         public static string VlCoPricePerkgUnder10 {
             get {
@@ -331,7 +331,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج الدولة لتتم العملية بنجاح ...!.
+        ///   Looks up a localized string similar to Please include the country for the process to complete successfully...!.
         /// </summary>
         public static string VlCountry {
             get {
@@ -340,7 +340,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج بريد الشركة لتتم العملية بنجاح ...!.
+        ///   Looks up a localized string similar to Please include the company&apos;s email so that the process is completed successfully...!.
         /// </summary>
         public static string VlEmailCompany {
             get {
@@ -349,7 +349,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أضافة سعر الصرف بالعملة الاجنبية لتتم العملية بنجاح ...!.
+        ///   Looks up a localized string similar to Please add the exchange rate in foreign currency for the process to complete successfully...!.
         /// </summary>
         public static string VlForeignCurrency {
             get {
@@ -358,7 +358,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج سعر الصرف بالعملة المحلية لتتم العملية بنجاح ...!.
+        ///   Looks up a localized string similar to Please include the exchange rate in the local currency for the process to complete successfully...!.
         /// </summary>
         public static string VlGlobalExchangeRate {
             get {
@@ -367,7 +367,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى ادراج اسم العملة المحلية لتتم العملية بنجاح ...!.
+        ///   Looks up a localized string similar to Please include the exchange rate in the local currency for the process to complete successfully...!.
         /// </summary>
         public static string VllocalCurrency {
             get {
@@ -376,7 +376,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج الاسم المستعار لتتم العملية بنجاح ..!.
+        ///   Looks up a localized string similar to Please include the nickname for the process to complete successfully..!.
         /// </summary>
         public static string VlNikeNAme {
             get {
@@ -385,7 +385,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى ادراج رقم الهاتف لتتم العملية بنجاح ....!.
+        ///   Looks up a localized string similar to Please include the phone number for the process to complete successfully....!.
         /// </summary>
         public static string VlPhoneCompany {
             get {
@@ -394,7 +394,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج العنوان المناسب الخاص في فئة الشحن لتتم العملية بنجاح ...!.
+        ///   Looks up a localized string similar to Please include the appropriate address in the shipping category for the process to complete successfully...!.
         /// </summary>
         public static string VlTitleShipping {
             get {
@@ -403,7 +403,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يجب أن تكون الصيغة المدخلة صيغة البريد الاكتروني  لتتم العملية بنجاح ...!.
+        ///   Looks up a localized string similar to The entered format must be the email format for the process to complete successfully...!.
         /// </summary>
         public static string VLTypEmail {
             get {
@@ -412,7 +412,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى أدراج نوع الشركة لتتم العملية بنجاح .....!.
+        ///   Looks up a localized string similar to Please include the nickname for the process to complete successfully..!.
         /// </summary>
         public static string VlTypesCompanies {
             get {
@@ -421,7 +421,7 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يرجى إدراج نوع النظام لتتم العملية بنجاح ..!.
+        ///   Looks up a localized string similar to Please include the system type for the process to complete successfully..!.
         /// </summary>
         public static string VlTypeSystem {
             get {
