@@ -118,49 +118,49 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LbActive" xml:space="preserve">
-    <value>حالة التعامل </value>
+    <value>Dealing status</value>
   </data>
   <data name="LbActiveUser" xml:space="preserve">
     <value>Active User</value>
   </data>
   <data name="LBAddArea" xml:space="preserve">
-    <value>أضافة وتعديل المناطق</value>
+    <value>Adding and modifying regions</value>
   </data>
   <data name="LBAddAreaDeliveryTariffs" xml:space="preserve">
-    <value>إضافة وتعديل تسعيرة شركات التوصيل للمناطق</value>
+    <value>Adding and modifying the pricing of delivery companies for the regions</value>
   </data>
   <data name="LBAddCity" xml:space="preserve">
-    <value>أضافة وتعديل بيانات المدن </value>
+    <value>Adding and modifying city data</value>
   </data>
   <data name="LBAddCityDeliveryTariffs" xml:space="preserve">
-    <value>أضافة وتعديل تسعيرة شركات التوصيل للمدن </value>
+    <value>Adding and modifying the pricing of delivery companies to cities</value>
   </data>
   <data name="LBAddCurrenciesExchangeRates" xml:space="preserve">
-    <value>أضافة وتعديل العملات </value>
+    <value>Add and modify currencies</value>
   </data>
   <data name="LbAddEditInformationCompanies" xml:space="preserve">
-    <value>إضافة وتعديل بيانات الشركات </value>
+    <value>Add and modify company data</value>
   </data>
   <data name="LBAddExchangeRate" xml:space="preserve">
-    <value>إضافة وتعديل سعر الصرف</value>
+    <value>Add and modify the exchange rate</value>
   </data>
   <data name="LbAddresCompany" xml:space="preserve">
-    <value>العنوان</value>
+    <value>Address</value>
   </data>
   <data name="LBAddShippingPrice" xml:space="preserve">
-    <value>أضافة وتعديل تسعير أنظمة الشحن</value>
+    <value>Adding and modifying pricing for shipping systems</value>
   </data>
   <data name="LBAddTransaction" xml:space="preserve">
-    <value>أضافة وتعديل حاسبة العملات </value>
+    <value>Add and modify currency calculator</value>
   </data>
   <data name="LBAddTypesCompanies" xml:space="preserve">
-    <value>إضافة وتعديل فئات الشركات </value>
+    <value>Add and modify company categories</value>
   </data>
   <data name="LBAddTypeSystem" xml:space="preserve">
-    <value>أضافة وتعديل الانظمة </value>
+    <value>Adding and modifying systems</value>
   </data>
   <data name="LbAmount" xml:space="preserve">
-    <value>المبلغ</value>
+    <value>Amount</value>
   </data>
   <data name="Lbbgw" xml:space="preserve">
     <value>bgw</value>
@@ -172,31 +172,31 @@
     <value>bypass</value>
   </data>
   <data name="LbCity" xml:space="preserve">
-    <value>المدينة</value>
+    <value>City</value>
   </data>
   <data name="LbClintDelivery" xml:space="preserve">
-    <value>تسعيرة التوصيل للعميل</value>
+    <value>Delivery price to the customer</value>
   </data>
   <data name="LbClintPricePerkgAbove10" xml:space="preserve">
-    <value>سعر شحن العميل أكثر من 10</value>
+    <value>Customer shipping price is more than 10</value>
   </data>
   <data name="LbClintPricePerkgUnder10" xml:space="preserve">
-    <value>سعر شحن العميل اقل من 10</value>
+    <value>Customer shipping price is less than 10</value>
   </data>
   <data name="Lbcode" xml:space="preserve">
-    <value>الرمز</value>
+    <value>code</value>
   </data>
   <data name="Lbcodeto" xml:space="preserve">
-    <value>الرمز </value>
+    <value>code</value>
   </data>
   <data name="LbCompanyDelivery" xml:space="preserve">
-    <value>تسعيرة شركة التوصيل</value>
+    <value>Delivery company pricing</value>
   </data>
   <data name="LbCompanyDescription" xml:space="preserve">
-    <value>وصف الشركة</value>
+    <value>Company description</value>
   </data>
   <data name="LbCompanyName" xml:space="preserve">
-    <value>اسم الشركة</value>
+    <value>Company Name</value>
   </data>
   <data name="LbCompanyNamem" xml:space="preserve">
     <value>Merchant Company Namem</value>
@@ -208,73 +208,79 @@
     <value>المبلغ المحول</value>
   </data>
   <data name="LbCoPricePerkgAbove10" xml:space="preserve">
-    <value>سعر شحن الشركة أكثرمن 10</value>
+    <value>The company's shipping price is more than 10</value>
   </data>
   <data name="LbCoPricePerkgUnder10" xml:space="preserve">
-    <value>سعر شحن الشركة اقل من 10</value>
+    <value>The company's shipping price is less than 10</value>
   </data>
   <data name="LbCountry" xml:space="preserve">
-    <value>العملة </value>
+    <value> currency</value>
   </data>
   <data name="LbCountryto" xml:space="preserve">
-    <value>سعر الصرف إلى</value>
+    <value>Exchange rate to</value>
   </data>
   <data name="Lbcredit" xml:space="preserve">
     <value>credit</value>
   </data>
   <data name="lbCurrentState" xml:space="preserve">
-    <value>الحالة</value>
+    <value>status</value>
+  </data>
+  <data name="LBCustomers" xml:space="preserve">
+    <value>Customers</value>
   </data>
   <data name="Lbcust_landmark" xml:space="preserve">
-    <value>أقرب معلم</value>
+    <value>Nearest Teacher</value>
   </data>
   <data name="Lbcust_mob" xml:space="preserve">
-    <value>هاتف1</value>
+    <value>Phone1</value>
   </data>
   <data name="Lbcust_mob2" xml:space="preserve">
-    <value>هاتف2</value>
+    <value>Phone2</value>
   </data>
   <data name="Lbcust_name" xml:space="preserve">
-    <value>العميل</value>
+    <value>Client</value>
   </data>
   <data name="Lbcust_profile" xml:space="preserve">
-    <value>الملف التعريفي </value>
+    <value>Profile</value>
   </data>
   <data name="Lbcust_status" xml:space="preserve">
-    <value>حالة old</value>
+    <value>old status</value>
   </data>
   <data name="LbDataEntry" xml:space="preserve">
-    <value>مدخل البيانات</value>
+    <value>data entry</value>
   </data>
   <data name="LbDateTimeEntry" xml:space="preserve">
-    <value>وقت وتاريخ الادخال</value>
+    <value>Time and date of entry</value>
   </data>
   <data name="LbDescription" xml:space="preserve">
-    <value>المنطقة</value>
+    <value>Region</value>
   </data>
   <data name="Lbdescriptioncity" xml:space="preserve">
-    <value>المدينة</value>
+    <value>City</value>
   </data>
   <data name="LBEmageSise" xml:space="preserve">
-    <value>حجم الصورة 150 *150 </value>
+    <value>Image size 150*150</value>
   </data>
   <data name="LbEmailCompany" xml:space="preserve">
-    <value>البريد الاكتروني</value>
+    <value>E-mail</value>
   </data>
   <data name="LbExchangeRate" xml:space="preserve">
-    <value>سعر الصرف</value>
+    <value>exchange rate</value>
   </data>
   <data name="Lbfbid" xml:space="preserve">
     <value>fb</value>
   </data>
   <data name="Lbfull_package" xml:space="preserve">
-    <value>بكج كامل</value>
+    <value>Full package</value>
+  </data>
+  <data name="LBGeneralSettings" xml:space="preserve">
+    <value>General Settings</value>
   </data>
   <data name="Lbgisurl" xml:space="preserve">
-    <value>الرابط </value>
+    <value>Link</value>
   </data>
   <data name="Lbhexcode" xml:space="preserve">
-    <value>الرمز</value>
+    <value>code</value>
   </data>
   <data name="Lbhidden" xml:space="preserve">
     <value>hidden</value>
@@ -283,91 +289,94 @@
     <value>ID</value>
   </data>
   <data name="LbInformaition" xml:space="preserve">
-    <value>المعلومات </value>
+    <value>information</value>
   </data>
   <data name="LbInformaitioncl" xml:space="preserve">
-    <value>معلوما ت العميل</value>
+    <value>customer information</value>
   </data>
   <data name="LbInformaitionco" xml:space="preserve">
-    <value>معلومات الشركة</value>
+    <value>company information</value>
   </data>
   <data name="Lbinsert_dt" xml:space="preserve">
-    <value>تاريخ الاضافة </value>
+    <value>Date added</value>
   </data>
   <data name="LbIsNorth" xml:space="preserve">
-    <value>من مدن الجنوب </value>
+    <value>The South</value>
   </data>
   <data name="LbisPublic" xml:space="preserve">
     <value>isPublic</value>
   </data>
   <data name="Lblat" xml:space="preserve">
-    <value>خط العرض</value>
+    <value>Latitude</value>
   </data>
   <data name="LBLbRoles" xml:space="preserve">
     <value>Roles</value>
   </data>
   <data name="Lblon" xml:space="preserve">
-    <value>خط الطول</value>
+    <value>longitude</value>
+  </data>
+  <data name="LBMerchants" xml:space="preserve">
+    <value>Merchants</value>
   </data>
   <data name="Lbmerchant_mob" xml:space="preserve">
-    <value>رقم الهاتف</value>
+    <value>phone number</value>
   </data>
   <data name="LbMerchant_name" xml:space="preserve">
-    <value>اسم التاجر</value>
+    <value>Merchant name</value>
   </data>
   <data name="lbMsgErrorLogin" xml:space="preserve">
     <value>Error User Name Or Password.....!</value>
   </data>
   <data name="lbMsgNotSavedChangePassword" xml:space="preserve">
-    <value />
+    <value>Error The new password was not saved...!</value>
   </data>
   <data name="lbMsgSavedChangePassword" xml:space="preserve">
-    <value />
+    <value>The new password was saved successfully</value>
   </data>
   <data name="LBMyArea" xml:space="preserve">
-    <value>المناطق</value>
+    <value>Regions</value>
   </data>
   <data name="LBMyAreaDeliveryTariffs" xml:space="preserve">
-    <value>تسعيرة شركات التوصيل للمناطق</value>
+    <value>Pricing of delivery companies to the regions</value>
   </data>
   <data name="LBMyCity" xml:space="preserve">
-    <value>بيانات المدن </value>
+    <value>Cities data</value>
   </data>
   <data name="LBMyCityDeliveryTariffs" xml:space="preserve">
-    <value>تسعيرة شركات التوصيل للمدن</value>
+    <value>Pricing of delivery companies to cities</value>
   </data>
   <data name="LBMyCurrenciesExchangeRates" xml:space="preserve">
-    <value>العملات  </value>
+    <value>Currencies</value>
   </data>
   <data name="LBMyCustomer" xml:space="preserve">
-    <value>بيانات العملاء الافراد</value>
+    <value>Individual customer data</value>
   </data>
   <data name="LBMyExchangeRate" xml:space="preserve">
-    <value>سعر الصرف </value>
+    <value>exchange rate</value>
   </data>
   <data name="LBMYInformationCompanies" xml:space="preserve">
-    <value>بيانات الشركات </value>
+    <value>Information Companies</value>
   </data>
   <data name="LBMyMerchant" xml:space="preserve">
-    <value>بينات التجار</value>
+    <value>Merchants' data</value>
   </data>
   <data name="LBMyShippingPrice" xml:space="preserve">
-    <value>تسعير أنظمة الشحن </value>
+    <value>Shipping systems pricing</value>
   </data>
   <data name="LBMyTransaction" xml:space="preserve">
-    <value>حاسبة العملات</value>
+    <value>Currency calculator</value>
   </data>
   <data name="LBMyTypesCompanies" xml:space="preserve">
-    <value>فئات الشركات </value>
+    <value>Categories of companies</value>
   </data>
   <data name="LBMyTypeSystem" xml:space="preserve">
-    <value>الأنظمة</value>
+    <value>Systems</value>
   </data>
   <data name="LbNameRols" xml:space="preserve">
     <value>NameRols</value>
   </data>
   <data name="LbNikeNAme" xml:space="preserve">
-    <value>الاسم المستعار</value>
+    <value>Nick name</value>
   </data>
   <data name="LbNikeNAmeM" xml:space="preserve">
     <value>Merchant Company Namem</value>
@@ -376,85 +385,88 @@
     <value>Normalized Name</value>
   </data>
   <data name="lbNotSaved" xml:space="preserve">
-    <value />
+    <value>Error while saving. Please check and try again later...!</value>
   </data>
   <data name="lbNotSavedMsgRole" xml:space="preserve">
-    <value />
+    <value>The validity process was not saved, please check and try again later</value>
   </data>
   <data name="lbNotSavedMsgUser" xml:space="preserve">
-    <value />
+    <value>The validity process was not saved, please check and try again later</value>
   </data>
   <data name="lbNotSavedMsgUserRole" xml:space="preserve">
-    <value />
+    <value>The validity process was not saved, please check and try again later</value>
   </data>
   <data name="lbNotUpdate" xml:space="preserve">
-    <value />
+    <value>Error during the editing process. Please check and try again later..!</value>
   </data>
   <data name="lbNotUpdateMsgRole" xml:space="preserve">
-    <value />
+    <value>Error during the editing process. Please check and try again later..!</value>
   </data>
   <data name="lbNotUpdateMsgUser" xml:space="preserve">
-    <value />
+    <value>Error during the editing process. Please check and try again later..!</value>
   </data>
   <data name="lbNotUpdateMsgUserRole" xml:space="preserve">
-    <value />
+    <value>Error during the editing process. Please check and try again later..!</value>
   </data>
   <data name="lbOldeAndUserGide" xml:space="preserve">
-    <value>الصورة القديمة </value>
+    <value>Old photo</value>
   </data>
   <data name="LbOpration" xml:space="preserve">
-    <value>العمليات </value>
+    <value>Processes</value>
   </data>
   <data name="Lboutskirts" xml:space="preserve">
     <value>outskirts</value>
   </data>
   <data name="LbPhoneCompany" xml:space="preserve">
-    <value>الهاتف</value>
+    <value>phone</value>
   </data>
   <data name="LbPhoneCompanySecand" xml:space="preserve">
-    <value>هاتف 2</value>
+    <value>Phone 2</value>
   </data>
   <data name="LbPhoto" xml:space="preserve">
-    <value>الصورة</value>
+    <value>Photo</value>
+  </data>
+  <data name="LBPricingSystem" xml:space="preserve">
+    <value>Pricing System</value>
   </data>
   <data name="LbRate" xml:space="preserve">
-    <value>سعر الصرف</value>
+    <value>exchange rate</value>
   </data>
   <data name="lbSave" xml:space="preserve">
     <value>حفظ</value>
   </data>
   <data name="lbSaveMsgRole" xml:space="preserve">
-    <value />
+    <value>save</value>
   </data>
   <data name="LbSector" xml:space="preserve">
-    <value>القطاع</value>
+    <value>sector</value>
   </data>
   <data name="Lbsms_alert" xml:space="preserve">
-    <value>تنبيهات sms</value>
+    <value> sms alert</value>
   </data>
   <data name="Lbsorting" xml:space="preserve">
     <value>sorting</value>
   </data>
   <data name="LbSpec" xml:space="preserve">
-    <value>المساحة</value>
+    <value>Space</value>
   </data>
   <data name="LbTypesCompanies" xml:space="preserve">
-    <value>الفئة</value>
+    <value>Category</value>
   </data>
   <data name="LbTypesCompaniesM" xml:space="preserve">
     <value>Merchant Types Companies</value>
   </data>
   <data name="LbTypeSystem" xml:space="preserve">
-    <value>النظام</value>
+    <value>system</value>
   </data>
   <data name="lbUpdate" xml:space="preserve">
-    <value />
+    <value>Update</value>
   </data>
   <data name="lbUpdateMsgRole" xml:space="preserve">
-    <value />
+    <value>Update</value>
   </data>
   <data name="LBUpload_image" xml:space="preserve">
-    <value>تحميل</value>
+    <value>upload</value>
   </data>
   <data name="LbUserEmage" xml:space="preserve">
     <value>Image</value>
@@ -475,34 +487,34 @@
     <value>Users Information</value>
   </data>
   <data name="LbUS_delivery" xml:space="preserve">
-    <value>مستخدم نظام التوصيل</value>
+    <value>Delivery system user</value>
   </data>
   <data name="LbZone" xml:space="preserve">
-    <value>حي</value>
+    <value>Residential quarter</value>
   </data>
   <data name="LTitleShipping" xml:space="preserve">
-    <value>وصف صلاحية الشحن</value>
+    <value>Description of shipping validity</value>
   </data>
   <data name="String1" xml:space="preserve">
     <value>Merchant Nike Name</value>
   </data>
   <data name="VLCitydoplceted" xml:space="preserve">
-    <value>تم إدخال تسعيرة التوصيل لهذه المدينة يرجى التأكد وإعادة المحاولة لاحقا ...!</value>
+    <value>The delivery price for this city has been entered. Please check and try again later...!</value>
   </data>
   <data name="VLCompanyNameDoplceted" xml:space="preserve">
-    <value>تم ادخال الشركة مسبقا يرجى التاكد وإعادة المحاولة لاحقا ....!</value>
+    <value>The company has already been entered. Please check and try again later....!</value>
   </data>
   <data name="VLCountryDoplceted" xml:space="preserve">
-    <value>تم أدخال الدولة مسبقا يرجى التأكد وإعادة المحاولة لاحقا...!</value>
+    <value>The country has already been entered. Please check and try again later...!</value>
   </data>
   <data name="VLCustMob2doplceted" xml:space="preserve">
-    <value>تم إدخال هاتف العميل مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!</value>
+    <value>The customer's phone has already been entered. Please confirm and try again later...!</value>
   </data>
   <data name="VLCustMobdoplceted" xml:space="preserve">
-    <value>تم إدخال هاتف العميل مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!</value>
+    <value>The customer's phone has already been entered. Please confirm and try again later...!</value>
   </data>
   <data name="VLCustNamedoplceted" xml:space="preserve">
-    <value>تم ادخال اسم العميل مسبقا يرجى التأكد وإعادى المحاولة لاحقا ....!</value>
+    <value>The customer name has already been entered. Please verify and try again later....!</value>
   </data>
   <data name="VLDeleteError" xml:space="preserve">
     <value>The deletion was not completed. There was an error</value>
@@ -511,51 +523,51 @@
     <value>The deletion was completed successfully</value>
   </data>
   <data name="VLdELETESuccessfully" xml:space="preserve">
-    <value>تمت عملية الحذف بنجاح</value>
+    <value>The deletion was completed successfully</value>
   </data>
   <data name="VLDescriptionareadoplceted" xml:space="preserve">
-    <value>تم ادخال المنطقة مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!</value>
+    <value>The region has already been entered. Please verify and try again later...!</value>
   </data>
   <data name="VLDescriptionDoplceted" xml:space="preserve">
-    <value>تم أدخال المدينة مسبقا يرجى التأكد وإعادة المحاولة لاحقا ....!</value>
+    <value>The city has already been entered. Please check and try again later....!</value>
   </data>
   <data name="VLEmailOreUserOrPaswo" xml:space="preserve">
     <value>Email or username already exists...!</value>
   </data>
   <data name="VLErrorDeleteData" xml:space="preserve">
-    <value>خطأ في عملية الحذف...!</value>
+    <value>Deletion error...!</value>
   </data>
   <data name="VLErrorSave" xml:space="preserve">
-    <value>خطأ في عملية الحفظ ....!</value>
+    <value>Error during saving process....!</value>
   </data>
   <data name="VLErrorUpdate" xml:space="preserve">
-    <value>خطأ في عملية التعديل ....!</value>
+    <value>Error in the editing process....!</value>
   </data>
   <data name="VLExchangeRateDoplceted" xml:space="preserve">
-    <value>تم إلإدخال العملة مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!</value>
+    <value>The currency has already been entered. Please check and try again later...!</value>
   </data>
   <data name="VLimageuplode" xml:space="preserve">
     <value>Please upload the image...!</value>
   </data>
   <data name="VLMerchantMobDoplceted" xml:space="preserve">
-    <value>تم إدخال رقم الهاتف مسبقا يرجى التأكد واعادة المحاولة لاحقا ...!</value>
+    <value>The phone number has already been entered. Please verify and try again later...!</value>
   </data>
   <data name="VLMerchantNameDoplceted" xml:space="preserve">
-    <value>تم أضافة اسم الميل مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!</value>
+    <value>The email address has already been added. Please check and try again later...!</value>
   </data>
   <data name="VLSavedSuccessfully" xml:space="preserve">
-    <value>تمت عملية الحفظ بنجاح </value>
+    <value>The saving process was completed successfully</value>
   </data>
   <data name="VLTitleShippingoplceted" xml:space="preserve">
-    <value>تم ادخال عنوان تسعيرة الشحن يرجى التأكد وإعادة المحاولة لاحقا ....!</value>
+    <value>The shipping price address has been entered. Please verify and try again later....!</value>
   </data>
   <data name="VLTypesCompaniesDoplceted" xml:space="preserve">
-    <value>تم أدخال فئة الشركة مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!</value>
+    <value>The company category has already been entered. Please check and try again later...!</value>
   </data>
   <data name="VLTypeSystemDoplceted" xml:space="preserve">
-    <value>تم ادخال النظام مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...!</value>
+    <value>The system has already been entered. Please confirm and try again later...!</value>
   </data>
   <data name="VLUpdatedSuccessfully" xml:space="preserve">
-    <value>تمت عملية التعديل بنجاح </value>
+    <value>The modification process was completed successfully</value>
   </data>
 </root>
