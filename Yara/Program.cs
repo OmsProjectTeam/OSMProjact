@@ -53,8 +53,8 @@ builder.Services.AddScoped<IIMerchant, CLSMerchant>();
 
 
 
-
-
+// Controlers for APIs
+builder.Services.AddControllers();
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
