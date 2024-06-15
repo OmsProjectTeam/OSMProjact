@@ -1313,10 +1313,22 @@ namespace Infarstuructre.Data
             builder.Entity<Merchant>()
            .Property(b => b.Active)
            .HasDefaultValueSql("((1))");
-            //---------------------------------	
-        }
+			//---------------------------------	
 
-        public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
+			//---------------------------------	
+			builder.Entity<Order>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<Order>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+			builder.Entity<Order>()
+		   .Property(b => b.Active)
+		   .HasDefaultValueSql("((1))");
+			//---------------------------------	
+		}
+
+		public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
 
         public virtual DbSet<Account> accounts { get; set; }
 
