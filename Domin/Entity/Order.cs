@@ -14,7 +14,7 @@ namespace Domin.Entity
 
         public DateOnly? OrderDt { get; set; }
 
-        public int? OrderOwner { get; set; }
+        public int? OrderOwner { get; set; }//custmor id
 
         public int? WithDelivery { get; set; }
 
