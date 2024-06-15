@@ -51,7 +51,15 @@ builder.Services.AddScoped<IIAreaDeliveryTariffs, CLSTBAreaDeliveryTariffs>();
 builder.Services.AddScoped<IICustomer, CLSCustomer>();
 builder.Services.AddScoped<IIMerchant, CLSMerchant>();
 
-
+builder.Services.AddSwaggerGen(c =>
+{
+	c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+	{
+		Version = "v1",
+		Title = "My API",
+		Description = "API documentation for My API"
+	});
+});
 
 // Controlers for APIs
 builder.Services.AddControllers();
@@ -59,9 +67,6 @@ builder.Services.AddControllers();
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
-
-
-
 
 
 var app = builder.Build();
@@ -91,6 +96,11 @@ app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
 
-
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Yara Project API V1");
+	c.RoutePrefix = "api-docs"; ;
+});
 
 app.Run();

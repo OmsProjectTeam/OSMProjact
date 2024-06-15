@@ -2,6 +2,7 @@
 
 namespace Yara.Areas.Admin.API_Controller;
 
+[Authorize(Roles = "Admin,ApiRoles")]
 [Route("api/[controller]")]
 [ApiController]
 public class MerchantAPIController : ControllerBase
@@ -13,7 +14,7 @@ public class MerchantAPIController : ControllerBase
 
     private readonly IIMerchant iMerchant;
 
-    [HttpGet]
+    [HttpPost("GitAllMerchants")]
     public async Task<ActionResult<IEnumerable<TBViewMerchant>>> GitAllMerchants()
     {
         var merchants = await iMerchant.GetAllMerchantsAsync();
@@ -23,7 +24,7 @@ public class MerchantAPIController : ControllerBase
         return Ok(merchants);
     }
 
-    [HttpGet("GitAllMerchantsWithCondition")]
+    [HttpPost("GitAllMerchantsWithCondition")]
     public async Task<ActionResult<IEnumerable<TBViewMerchant>>> GitAllMerchantsWithCondition(Expression<Func<TBViewMerchant, bool>> condition)
     {
         var merchants = await iMerchant.GetAllMerchantsWithConditionAsync(condition);
@@ -33,10 +34,10 @@ public class MerchantAPIController : ControllerBase
         return Ok(merchants);
     }
 
-    [HttpGet("{id}")]
+    [HttpPost("{id}")]
     public async Task<ActionResult<TBViewMerchant>> GitMerchantById(int id)
     {
-        var merchant = iMerchant.GetMerchantAsync(id);
+        var merchant = await iMerchant.GetMerchantAsync(id);
         if (merchant == null)
             return NotFound();
 
