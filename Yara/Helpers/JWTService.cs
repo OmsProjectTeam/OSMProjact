@@ -7,7 +7,7 @@ using System.Configuration;
 namespace LamarModa.Api.Auth;
 public interface ITokenService
 {
-	string GenerateToken(IdentityUser user, IList<string> roles);
+	string GenerateToken(ApplicationUser user, IList<string> roles);
 }
 
 public class TokenService : ITokenService
@@ -19,7 +19,7 @@ public class TokenService : ITokenService
 		_configuration = configuration;
 	}
 
-	public string GenerateToken(IdentityUser user, IList<string> roles)
+	public string GenerateToken(ApplicationUser user, IList<string> roles)
 	{
 		var claims = new List<Claim>
 		{

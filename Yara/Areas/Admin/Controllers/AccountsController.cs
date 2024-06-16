@@ -296,7 +296,7 @@ namespace Yara.Areas.Admin.Controllers
 					{
 
 						// Token Here
-						return RedirectToAction("Index", "Home", new { area = "", token = token });
+						return RedirectToAction("Index", "Home", new { area = "", token = token});
 					}
 					else
 					{
