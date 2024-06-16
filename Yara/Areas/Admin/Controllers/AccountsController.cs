@@ -1,6 +1,9 @@
 ﻿
 
 
+using Domin.Entity;
+using LamarModa.Api.Auth;
+
 namespace Yara.Areas.Admin.Controllers
 {
 	[Area("Admin")]
@@ -11,6 +14,7 @@ namespace Yara.Areas.Admin.Controllers
 		private readonly RoleManager<IdentityRole> _roleManager;
 		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly SignInManager<ApplicationUser> _signInManager;
+		private readonly ITokenService _tokenService;
 		private readonly MasterDbcontext _context;
 		IIRolsInformation iRolsInformation;
 		IIUserInformation iUserInformation;
@@ -18,7 +22,7 @@ namespace Yara.Areas.Admin.Controllers
 
 		#region Constructor
 		public AccountsController(RoleManager<IdentityRole> roleManager,
-			UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, MasterDbcontext context, IIRolsInformation iRolsInformation1, IIUserInformation iUserInformation1)
+			UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, MasterDbcontext context, IIRolsInformation iRolsInformation1, IIUserInformation iUserInformation1, ITokenService tokenService)
 		{
 			_roleManager = roleManager;
 			_userManager = userManager;
@@ -26,6 +30,7 @@ namespace Yara.Areas.Admin.Controllers
 			_context = context;
 			iRolsInformation = iRolsInformation1;
 			iUserInformation = iUserInformation1;
+			_tokenService = tokenService;
 		}
 		#endregion
 
@@ -279,18 +284,25 @@ namespace Yara.Areas.Admin.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
+				var user = await _userManager.FindByEmailAsync(model.Eamil);
 				var Result = await _signInManager.PasswordSignInAsync(model.Eamil,
 					model.Password, model.RememberMy, false);
 				if (Result.Succeeded)
+				{
+					var roles = await _userManager.GetRolesAsync(user);
+					var token = _tokenService.GenerateToken(user, roles);
+
 					if (returnUrl == null)
 					{
 
-						return RedirectToAction("Index", "Home", new { area = "" });
+						// Token Here
+						return RedirectToAction("Index", "Home", new { area = "", token = token });
 					}
 					else
 					{
-						return Redirect(returnUrl);
+						return Redirect($"{returnUrl}?token={token}");
 					}
+				}
 
 				else
 					ViewBag.ErrorLogin = false;

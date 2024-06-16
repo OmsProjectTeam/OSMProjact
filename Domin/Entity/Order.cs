@@ -14,7 +14,7 @@ namespace Domin.Entity
 
         public DateOnly? OrderDt { get; set; }
 
-        public int? OrderOwner { get; set; }
+        public int? OrderOwner { get; set; }//custmor id
 
         public int? WithDelivery { get; set; }
 
@@ -153,5 +153,12 @@ namespace Domin.Entity
         public int? PreClose { get; set; }
 
         public int? CenrtralBankPrice { get; set; }
-    }
+
+		public bool Active { get; set; }
+		public bool CurrentState { get; set; }
+		public string DataEntry { get; set; }
+		public DateTime DateTimeEntry { get; set; }
+		public int IdInformationCompanies { get; set; }
+
+	}
 }

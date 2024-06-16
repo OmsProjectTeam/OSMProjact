@@ -117,6 +117,16 @@ namespace Infarstuructre.Data
             });
 
             //************************************************************
+               //************************************************************
+
+
+            builder.Entity<TBViewOrder>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewOrder");
+            });
+
+            //************************************************************
 
 
             builder.UseCollation("Arabic_CI_AS");
@@ -1313,10 +1323,31 @@ namespace Infarstuructre.Data
             builder.Entity<Merchant>()
            .Property(b => b.Active)
            .HasDefaultValueSql("((1))");
-            //---------------------------------	
-        }
+			//---------------------------------	
 
-        public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
+			//---------------------------------	
+			builder.Entity<Order>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<Order>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+			builder.Entity<Order>()
+		   .Property(b => b.Active)
+		   .HasDefaultValueSql("((1))");
+			//---------------------------------	
+            //---------------------------------	
+			builder.Entity<OrderCase>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<OrderCase>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+		
+			//---------------------------------	
+		}
+
+		public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
 
         public virtual DbSet<Account> accounts { get; set; }
 
@@ -1477,5 +1508,6 @@ namespace Infarstuructre.Data
         public DbSet<TBViewAreaDeliveryTariffs> ViewAreaDeliveryTariffs { get; set; }
         public DbSet<TBViewCustomers> ViewCustomers { get; set; }
         public DbSet<TBViewMerchant> ViewMerchant { get; set; }
+        public DbSet<TBViewOrder> ViewOrder { get; set; }
     }
 }

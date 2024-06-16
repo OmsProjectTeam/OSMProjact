@@ -1,4 +1,5 @@
 
+using Yara.Helpers;
 using static Infarstuructre.BL.IIExchangeRate;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,18 +52,24 @@ builder.Services.AddScoped<IIAreaDeliveryTariffs, CLSTBAreaDeliveryTariffs>();
 builder.Services.AddScoped<IICustomer, CLSCustomer>();
 builder.Services.AddScoped<IIMerchant, CLSMerchant>();
 
+builder.Services.AddSwaggerGen(c =>
+{
+	c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+	{
+		Version = "v1",
+		Title = "My API",
+		Description = "API documentation for My API"
+	});
+});
 
-
-
-
+// Controlers for APIs
+builder.Services.AddControllers();
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 
-
-
-
+JWTSettings.GenerateToken(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
@@ -81,6 +88,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCookiePolicy();
+
 app.UseSession();
 
 app.MapControllerRoute(
@@ -91,6 +99,11 @@ app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
 
-
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Yara Project API V1");
+	c.RoutePrefix = "api-docs"; ;
+});
 
 app.Run();

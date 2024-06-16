@@ -2,7 +2,7 @@
 namespace Yara.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,ApiRoles")]
     public class CityDeliveryTariffsController : Controller
     {
         MasterDbcontext dbcontext;

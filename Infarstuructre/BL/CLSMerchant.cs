@@ -1,4 +1,5 @@
-﻿
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 namespace Infarstuructre.BL
 {
     public  interface IIMerchant
@@ -9,6 +10,13 @@ namespace Infarstuructre.BL
         bool UpdateData(Merchant updatss);
         bool deleteData(int id);
         List<TBViewMerchant> GetAllv(int id);
+
+        // Methods for APIs
+        Task<IEnumerable<TBViewMerchant>> GetAllMerchantsAsync();
+        Task<IEnumerable<TBViewMerchant>> GetAllMerchantsWithConditionAsync(Expression<Func<TBViewMerchant, bool>> condition);
+        Task<Merchant> GetMerchantAsync(int id);
+        Task AddMerchantAsync(Merchant merchant);
+        Task UpdateMerchantAsync(Merchant merchant);
     }
     public class CLSMerchant: IIMerchant
     {
@@ -78,5 +86,37 @@ namespace Infarstuructre.BL
             return MySlider;
         }
 
+
+
+        // Methods for APIs
+        public async Task<IEnumerable<TBViewMerchant>>? GetAllMerchantsAsync()
+        {
+            IEnumerable<TBViewMerchant> merchants = await dbcontext.ViewMerchant.OrderByDescending(n => n.id).Where(a => a.CurrentState == true).ToListAsync();
+            return merchants;
+        }
+
+        public async Task<IEnumerable<TBViewMerchant>> GetAllMerchantsWithConditionAsync(Expression<Func<TBViewMerchant, bool>> condition)
+        {
+            IEnumerable<TBViewMerchant> merchants = await dbcontext.ViewMerchant.Where(condition).ToListAsync();
+            return merchants;
+        }
+
+        public async Task<Merchant>? GetMerchantAsync(int id)
+        {
+            Merchant merchant = await dbcontext.Merchants.FindAsync(id);
+            return merchant;
+        }
+
+        public async Task AddMerchantAsync(Merchant merchant)
+        {
+            await dbcontext.AddAsync(merchant);
+            await dbcontext.SaveChangesAsync();
+        }
+
+        public async Task UpdateMerchantAsync(Merchant merchant)
+        {
+            dbcontext.Entry(merchant).State = EntityState.Modified;
+            await dbcontext.SaveChangesAsync();
+        }
     }
 }

@@ -4,6 +4,7 @@ using Infarstuructre.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infarstuructre.Migrations
 {
     [DbContext(typeof(MasterDbcontext))]
-    partial class MasterDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20240615095009_orderupdate")]
+    partial class orderupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1249,9 +1252,6 @@ namespace Infarstuructre.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("hxcode");
 
-                    b.Property<int>("IdInformationCompanies")
-                        .HasColumnType("int");
-
                     b.Property<int?>("IsCredit")
                         .HasColumnType("int")
                         .HasColumnName("is_credit");
@@ -1403,20 +1403,6 @@ namespace Infarstuructre.Migrations
                         .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("CurrentState")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
-
-                    b.Property<string>("DataEntry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTimeEntry")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Description")
                         .HasMaxLength(150)
@@ -3106,285 +3092,6 @@ namespace Infarstuructre.Migrations
                     b.ToTable((string)null);
 
                     b.ToView("ViewMerchant", (string)null);
-                });
-
-            modelBuilder.Entity("Domin.Entity.TBViewOrder", b =>
-                {
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("AreaName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("BatchID")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("CurrentState")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("DataEntry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTimeEntry")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IdInformationCompanies")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Merchant_name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("NetAmount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NikeNAme")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderCase")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TaskStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("acknoledged")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("actual_delivery_dt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("admin_adj")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("admin_bonus")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("adv_order")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("advance_payment")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("agent_user_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("aliexbatchid")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("assymblyCleared")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("assymbly_charges")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("assymbly_collected_by")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("bonusIQ")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("bonus_deduct")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("booking_dt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal?>("booking_source")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("branch_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("cenrtral_bank_price")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("city_receipt")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("close_acknoledge_dt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("closed")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("collected")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("collected_by_owner")
-                        .HasColumnType("int");
-
-                    b.Property<DateOnly?>("collection_adjustment_dt")
-                        .HasColumnType("date");
-
-                    b.Property<DateTime?>("collection_dt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("comp_delivery_adj")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("comp_sort_adj")
-                        .HasColumnType("int");
-
-                    b.Property<string>("cust_landmark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("cust_mob")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("cust_mob2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("cust_name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("deduct_progressed")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("deliveryCleared")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("deliveryCollectedBy")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("delivery_charges")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("delivery_dt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("delivery_notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("financ_adj")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("finance_status")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("fully_package")
-                        .HasColumnType("int");
-
-                    b.Property<string>("hxcode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("is_credit")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("last_before_status_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("linked_adv_norder_no")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("local_delivery_adj")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("merchant_id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("merchant_mob")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("netrevenue")
-                        .HasColumnType("int");
-
-                    b.Property<string>("notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("online_order")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("order_case_id")
-                        .HasColumnType("int");
-
-                    b.Property<DateOnly?>("order_dt")
-                        .HasColumnType("date");
-
-                    b.Property<int?>("order_owner")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("order_status")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("page_return_arrange")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("pickup_dt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("pre_close")
-                        .HasColumnType("int");
-
-                    b.Property<string>("price_log")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly?>("receipt_dt")
-                        .HasColumnType("date");
-
-                    b.Property<string>("receipt_no")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly?>("return_dt")
-                        .HasColumnType("date");
-
-                    b.Property<int?>("returned")
-                        .HasColumnType("int");
-
-                    b.Property<string>("role")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("service_charges")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("smsnotification_dt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("sort_fees_adj")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("source")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("task_status_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("task_with_agent_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("to_warehouse")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("totalqty")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("transferred")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("user_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("with_agent")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("with_agent_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("with_delivery")
-                        .HasColumnType("int");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("ViewOrder", (string)null);
                 });
 
             modelBuilder.Entity("Domin.Entity.TBViewShippingPrices", b =>

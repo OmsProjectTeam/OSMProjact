@@ -9,6 +9,7 @@ global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.CodeAnalysis.CSharp.Syntax;
 global using System.Resources;
 global using Yara.Resource;
+global using Microsoft.EntityFrameworkCore;
 
 
 global using Microsoft.AspNetCore.Authentication.Cookies;

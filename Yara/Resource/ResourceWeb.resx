@@ -360,6 +360,9 @@
   <data name="LBMyMerchant" xml:space="preserve">
     <value>Merchants' data</value>
   </data>
+  <data name="LBMyOrderCase" xml:space="preserve">
+    <value>Order Cases</value>
+  </data>
   <data name="LBMyShippingPrice" xml:space="preserve">
     <value>Shipping systems pricing</value>
   </data>
@@ -413,6 +416,9 @@
   </data>
   <data name="LbOpration" xml:space="preserve">
     <value>Processes</value>
+  </data>
+  <data name="LbOrderCase" xml:space="preserve">
+    <value>Case</value>
   </data>
   <data name="Lboutskirts" xml:space="preserve">
     <value>outskirts</value>
