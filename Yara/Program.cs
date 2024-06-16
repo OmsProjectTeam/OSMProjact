@@ -1,4 +1,5 @@
 
+using Yara.Helpers;
 using static Infarstuructre.BL.IIExchangeRate;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -68,6 +69,7 @@ builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 
+JWTSettings.GenerateToken(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
