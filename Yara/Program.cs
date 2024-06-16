@@ -1,4 +1,12 @@
-
+using Domin.Entity;
+using LamarModa.Api.Auth;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Yara.Helpers;
 using static Infarstuructre.BL.IIExchangeRate;
 
@@ -13,6 +21,25 @@ builder.Services.AddDbContext<MasterDbcontext>(options => {
 	options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 
+builder.Services.AddAuthentication(options =>
+{
+	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+	options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+	options.TokenValidationParameters = new TokenValidationParameters
+	{
+		ValidateIssuer = true,
+		ValidateAudience = true,
+		ValidateLifetime = true,
+		ValidateIssuerSigningKey = true,
+		ValidIssuer = builder.Configuration["JWT:Issuer"],
+		ValidAudience = builder.Configuration["JWT:Audience"],
+		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
+	};
+});
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
 	options.Password.RequireDigit = false;
@@ -22,8 +49,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 	options.Password.RequiredLength = 5;
 	options.Password.RequireNonAlphanumeric = false;
 	options.User.RequireUniqueEmail = true;
-	//options.User.RequireUniqueEmail = true;
-}).AddEntityFrameworkStores<MasterDbcontext>();
+})
+.AddEntityFrameworkStores<MasterDbcontext>();
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
 	options.LoginPath = "/Admin/Accounts/Login";
@@ -34,7 +62,6 @@ builder.Services.ConfigureApplicationCookie(options =>
 	options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
 	options.SlidingExpiration = true;
 });
-
 
 builder.Services.AddScoped<IIUserInformation, CLSUserInformation>();
 builder.Services.AddScoped<IIRolsInformation, CLSRolsInformation>();
@@ -51,6 +78,7 @@ builder.Services.AddScoped<IICityDeliveryTariffs, CLSTBCityDeliveryTariffs>();
 builder.Services.AddScoped<IIAreaDeliveryTariffs, CLSTBAreaDeliveryTariffs>();
 builder.Services.AddScoped<IICustomer, CLSCustomer>();
 builder.Services.AddScoped<IIMerchant, CLSMerchant>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -62,21 +90,16 @@ builder.Services.AddSwaggerGen(c =>
 	});
 });
 
-// Controlers for APIs
-builder.Services.AddControllers();
-
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 
-JWTSettings.GenerateToken(builder.Services, builder.Configuration);
-
 var app = builder.Build();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
 	app.UseExceptionHandler("/Home/Error");
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 	app.UseHsts();
 }
 
@@ -93,17 +116,18 @@ app.UseSession();
 
 app.MapControllerRoute(
 	name: "areas",
-	   pattern: "{area:exists}/{controller=Accounts}/{action=Login}/{id?}"
-	);
+	pattern: "{area:exists}/{controller=Accounts}/{action=Login}/{id?}"
+);
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}");
+	pattern: "{controller=Home}/{action=Index}/{id?}"
+);
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
 	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Yara Project API V1");
-	c.RoutePrefix = "api-docs"; ;
+	c.RoutePrefix = "api-docs";
 });
 
 app.Run();
