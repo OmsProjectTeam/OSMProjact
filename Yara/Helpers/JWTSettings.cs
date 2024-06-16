@@ -8,7 +8,7 @@ public static class JWTSettings
 {
 	public static void GenerateToken(IServiceCollection services, IConfiguration configuration)
 	{
-		var key = Encoding.ASCII.GetBytes(configuration["JWT:SecretKey"]);
+		var key = Encoding.UTF8.GetBytes(configuration["JWT:SecretKey"]);
 
 		services.AddAuthentication(x =>
 		{
