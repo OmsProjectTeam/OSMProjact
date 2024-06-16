@@ -158,6 +158,7 @@ namespace Domin.Entity
 		public bool CurrentState { get; set; }
 		public string DataEntry { get; set; }
 		public DateTime DateTimeEntry { get; set; }
+		public int IdInformationCompanies { get; set; }
 
 	}
 }

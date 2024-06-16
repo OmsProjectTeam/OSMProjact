@@ -50,7 +50,9 @@ namespace Infarstuructre.ViewModel
         public IEnumerable<TBViewCustomers> ListViewCustomers { get; set; }
         public Customer Customer { get; set; }
         public IEnumerable<TBViewMerchant> ListViewMerchant { get; set; }
-        public Merchant Merchant { get; set; }
+        public Merchant Merchant { get; set; }  
+        public IEnumerable<OrderCase> ListOrderCase { get; set; }
+        public OrderCase OrderCase { get; set; }
 
 
 
