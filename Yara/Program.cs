@@ -79,6 +79,7 @@ builder.Services.AddScoped<IIAreaDeliveryTariffs, CLSTBAreaDeliveryTariffs>();
 builder.Services.AddScoped<IICustomer, CLSCustomer>();
 builder.Services.AddScoped<IIMerchant, CLSMerchant>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IIOrderCase, CLSOrderCase>();
 
 builder.Services.AddSwaggerGen(c =>
 {
