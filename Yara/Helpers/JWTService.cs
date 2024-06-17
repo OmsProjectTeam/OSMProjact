@@ -21,6 +21,7 @@ public class TokenService : ITokenService
 
 	public string GenerateToken(ApplicationUser user, IList<string> roles)
 	{
+
 		var claims = new List<Claim>
 		{
 			new(ClaimTypes.Email, user.Email),
