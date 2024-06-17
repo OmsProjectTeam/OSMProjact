@@ -1,12 +1,15 @@
-using Domin.Entity;
+﻿using Domin.Entity;
 using LamarModa.Api.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
+using System.Text.Json;
 using Yara.Helpers;
 using static Infarstuructre.BL.IIExchangeRate;
 
@@ -21,24 +24,61 @@ builder.Services.AddDbContext<MasterDbcontext>(options => {
 	options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 
+builder.Services.AddControllers(options =>
+{
+	options.Filters.Add(new CustomAuthorizeFilter());
+});
+
 builder.Services.AddAuthentication(options =>
 {
 	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 	options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-.AddJwtBearer(options =>
+		.AddJwtBearer(options =>
+		{
+			options.TokenValidationParameters = new TokenValidationParameters
+			{
+				ValidateIssuer = true,
+				ValidateAudience = true,
+				ValidateLifetime = true,
+				ValidateIssuerSigningKey = true,
+				ValidIssuer = builder.Configuration["Jwt:Issuer"],
+				ValidAudience = builder.Configuration["Jwt:Audience"],
+				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+			};
+		});
+
+builder.Services.AddSwaggerGen(c =>
 {
-	options.TokenValidationParameters = new TokenValidationParameters
+	c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+	var securityScheme = new OpenApiSecurityScheme
 	{
-		ValidateIssuer = true,
-		ValidateAudience = true,
-		ValidateLifetime = true,
-		ValidateIssuerSigningKey = true,
-		ValidIssuer = builder.Configuration["JWT:Issuer"],
-		ValidAudience = builder.Configuration["JWT:Audience"],
-		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
+		Name = "Authorization",
+		Type = SecuritySchemeType.Http,
+		Scheme = "bearer",
+		BearerFormat = "JWT",
+		In = ParameterLocation.Header,
+		Description = "JWT Authorization header using the Bearer scheme.",
+		Reference = new OpenApiReference
+		{
+			Type = ReferenceType.SecurityScheme,
+			Id = "Bearer"
+		}
 	};
+
+	c.AddSecurityDefinition("Bearer", securityScheme);
+
+	var securityRequirement = new OpenApiSecurityRequirement
+			{
+				{ securityScheme, new[] { "Bearer" } }
+			};
+
+	c.AddSecurityRequirement(securityRequirement);
 });
+
+
+
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
@@ -81,15 +121,7 @@ builder.Services.AddScoped<IIMerchant, CLSMerchant>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IIOrderCase, CLSOrderCase>();
 
-builder.Services.AddSwaggerGen(c =>
-{
-	c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-	{
-		Version = "v1",
-		Title = "My API",
-		Description = "API documentation for My API"
-	});
-});
+
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
@@ -100,8 +132,13 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
+	app.UseDeveloperExceptionPage();
 	app.UseExceptionHandler("/Home/Error");
 	app.UseHsts();
+}
+else
+{
+	app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();
@@ -127,8 +164,9 @@ app.MapControllerRoute(
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Yara Project API V1");
+	c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
 	c.RoutePrefix = "api-docs";
 });
+
 
 app.Run();
