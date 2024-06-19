@@ -9,7 +9,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
-using TaskStatus = Domin.Entity.TaskStatus;
+
 
 namespace Infarstuructre.Data
 {
@@ -124,6 +124,16 @@ namespace Infarstuructre.Data
             {
                 entity.HasNoKey();
                 entity.ToView("ViewOrder");
+            });
+
+            //************************************************************
+                   //************************************************************
+
+
+            builder.Entity<TBViewOrderStatus>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewOrderStatus");
             });
 
             //************************************************************
@@ -1345,6 +1355,35 @@ namespace Infarstuructre.Data
 		   .HasDefaultValueSql("((1))");
 		
 			//---------------------------------	
+        
+			builder.Entity<OrderStatus>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<OrderStatus>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+		
+			//---------------------------------	
+            //---------------------------------	
+        
+			builder.Entity<RolesName>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<RolesName>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+		
+			//---------------------------------	
+            //---------------------------------	
+        
+			builder.Entity<TaskStatus>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<TaskStatus>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+		
+			//---------------------------------	
 		}
 
 		public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
@@ -1509,5 +1548,6 @@ namespace Infarstuructre.Data
         public DbSet<TBViewCustomers> ViewCustomers { get; set; }
         public DbSet<TBViewMerchant> ViewMerchant { get; set; }
         public DbSet<TBViewOrder> ViewOrder { get; set; }
+        public DbSet<TBViewOrderStatus> ViewOrderStatus { get; set; }
     }
 }

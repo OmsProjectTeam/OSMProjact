@@ -24,29 +24,24 @@ builder.Services.AddDbContext<MasterDbcontext>(options => {
 	options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 
-builder.Services.AddControllers(options =>
-{
-	options.Filters.Add(new CustomAuthorizeFilter());
-});
-
 builder.Services.AddAuthentication(options =>
 {
 	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 	options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-		.AddJwtBearer(options =>
-		{
-			options.TokenValidationParameters = new TokenValidationParameters
-			{
-				ValidateIssuer = true,
-				ValidateAudience = true,
-				ValidateLifetime = true,
-				ValidateIssuerSigningKey = true,
-				ValidIssuer = builder.Configuration["Jwt:Issuer"],
-				ValidAudience = builder.Configuration["Jwt:Audience"],
-				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-			};
-		});
+.AddJwtBearer(options =>
+{
+	options.TokenValidationParameters = new TokenValidationParameters
+	{
+		ValidateIssuer = true,
+		ValidateAudience = true,
+		ValidateLifetime = true,
+		ValidateIssuerSigningKey = true,
+		ValidIssuer = builder.Configuration["Jwt:Issuer"],
+		ValidAudience = builder.Configuration["Jwt:Audience"],
+		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+	};
+});
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -70,15 +65,12 @@ builder.Services.AddSwaggerGen(c =>
 	c.AddSecurityDefinition("Bearer", securityScheme);
 
 	var securityRequirement = new OpenApiSecurityRequirement
-			{
-				{ securityScheme, new[] { "Bearer" } }
-			};
+	{
+		{ securityScheme, new[] { "Bearer" } }
+	};
 
 	c.AddSecurityRequirement(securityRequirement);
 });
-
-
-
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
@@ -120,8 +112,9 @@ builder.Services.AddScoped<IICustomer, CLSCustomer>();
 builder.Services.AddScoped<IIMerchant, CLSMerchant>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IIOrderCase, CLSOrderCase>();
-
-
+builder.Services.AddScoped<IIRolesName, CLSRolesName>();
+builder.Services.AddScoped<IIOrderStatus, CLSOrderStatus>();
+builder.Services.AddScoped<IITaskStatus, CLSTaskStatus>();
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
@@ -152,21 +145,36 @@ app.UseCookiePolicy();
 
 app.UseSession();
 
+// Middleware للتحقق من تسجيل الدخول قبل الوصول إلى Swagger
+app.Use(async (context, next) =>
+{
+	if (context.Request.Path.StartsWithSegments("/api-docs") || context.Request.Path.StartsWithSegments("/swagger"))
+	{
+		if (!context.User.Identity.IsAuthenticated)
+		{
+			context.Response.Redirect("/Admin/Accounts/Login");
+			return;
+		}
+	}
+	await next.Invoke();
+});
+
 app.MapControllerRoute(
 	name: "areas",
 	pattern: "{area:exists}/{controller=Accounts}/{action=Login}/{id?}"
 );
+
 app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}"
 );
 
 app.UseSwagger();
+
 app.UseSwaggerUI(c =>
 {
 	c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
 	c.RoutePrefix = "api-docs";
 });
-
 
 app.Run();

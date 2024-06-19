@@ -2,36 +2,38 @@
 
 namespace Infarstuructre.BL
 {
-    public interface IICity
+    public interface IIRolesName
     {
-        List<City> GetAll();
-        City GetById(int Id);
-        bool saveData(City savee);
-        bool UpdateData(City updatss);
+        List<RolesName> GetAll();
+        RolesName GetById(int Id);
+        bool saveData(RolesName savee);
+        bool UpdateData(RolesName updatss);
         bool deleteData(int Id);
+
     }
-    public class CLSCity: IICity
+
+    public class CLSRolesName: IIRolesName
     {
         MasterDbcontext dbcontext;
-        public CLSCity(MasterDbcontext dbcontext1)
+        public CLSRolesName(MasterDbcontext dbcontext1)
         {
-            dbcontext = dbcontext1;
+            dbcontext=dbcontext1;
         }
-        public List<City> GetAll()
+        public List<RolesName> GetAll()
         {
-            List<City> MySlider = dbcontext.cities.OrderByDescending(n => n.Id).Where(a => a.CurrentState == true).ToList();
+            List<RolesName> MySlider = dbcontext.RolesNames.OrderByDescending(n => n.Id).Where(a => a.CurrentState == true).ToList();
             return MySlider;
         }
-        public City GetById(int Id)
+        public RolesName GetById(int Id)
         {
-            City sslid = dbcontext.cities.FirstOrDefault(a => a.Id == Id);
+            RolesName sslid = dbcontext.RolesNames.FirstOrDefault(a => a.Id == Id);
             return sslid;
         }
-        public bool saveData(City savee)
+        public bool saveData(RolesName savee)
         {
             try
             {
-                dbcontext.Add<City>(savee);
+                dbcontext.Add<RolesName>(savee);
                 dbcontext.SaveChanges();
                 return true;
             }
@@ -40,7 +42,7 @@ namespace Infarstuructre.BL
                 return false;
             }
         }
-        public bool UpdateData(City updatss)
+        public bool UpdateData(RolesName updatss)
         {
             try
             {
@@ -71,7 +73,5 @@ namespace Infarstuructre.BL
             }
 
         }
-   
-
     }
 }

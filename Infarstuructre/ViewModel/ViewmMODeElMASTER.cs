@@ -52,7 +52,15 @@ namespace Infarstuructre.ViewModel
         public IEnumerable<TBViewMerchant> ListViewMerchant { get; set; }
         public Merchant Merchant { get; set; }  
         public IEnumerable<OrderCase> ListOrderCase { get; set; }
-        public OrderCase OrderCase { get; set; }
+        public OrderCase OrderCase { get; set; } 
+        public IEnumerable<RolesName> ListRolesName { get; set; }
+        public RolesName RolesName { get; set; }   
+        public IEnumerable<TBViewOrderStatus> ListViewOrderStatus { get; set; }
+        public OrderStatus OrderStatus { get; set; }  
+        public IEnumerable<TaskStatus> ListTaskStatus { get; set; }
+        public TaskStatus TaskStatus { get; set; } 
+        public IEnumerable<TBViewOrder> ListViewOrder { get; set; }
+        public Order Order { get; set; }
 
 
 

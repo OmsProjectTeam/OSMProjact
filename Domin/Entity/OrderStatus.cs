@@ -15,5 +15,8 @@ namespace Domin.Entity
         public string? Description { get; set; }
 
         public int? Role { get; set; }
+        public string DataEntry { get; set; }
+        public DateTime DateTimeEntry { get; set; }
+        public bool CurrentState { get; set; }
     }
 }

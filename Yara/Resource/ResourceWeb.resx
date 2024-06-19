@@ -144,11 +144,23 @@
   <data name="LBAddExchangeRate" xml:space="preserve">
     <value>Add and modify the exchange rate</value>
   </data>
+  <data name="LBAddOrderCase" xml:space="preserve">
+    <value>Adding and modifying Order Case</value>
+  </data>
+  <data name="LBAddOrderStatus" xml:space="preserve">
+    <value>Adding and modifying Order Status</value>
+  </data>
   <data name="LbAddresCompany" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="LBAddRolesName" xml:space="preserve">
+    <value>Adding and modifying Roles</value>
+  </data>
   <data name="LBAddShippingPrice" xml:space="preserve">
     <value>Adding and modifying pricing for shipping systems</value>
+  </data>
+  <data name="LBAddTaskStatus" xml:space="preserve">
+    <value>Adding and modifying Task Status</value>
   </data>
   <data name="LBAddTransaction" xml:space="preserve">
     <value>Add and modify currency calculator</value>
@@ -363,8 +375,17 @@
   <data name="LBMyOrderCase" xml:space="preserve">
     <value>Order Cases</value>
   </data>
+  <data name="LBMyOrderStatus" xml:space="preserve">
+    <value>Order Status</value>
+  </data>
+  <data name="LBMyRolesName" xml:space="preserve">
+    <value>Roles </value>
+  </data>
   <data name="LBMyShippingPrice" xml:space="preserve">
     <value>Shipping systems pricing</value>
+  </data>
+  <data name="LBMyTaskStatus" xml:space="preserve">
+    <value>Task Status</value>
   </data>
   <data name="LBMyTransaction" xml:space="preserve">
     <value>Currency calculator</value>
@@ -420,6 +441,9 @@
   <data name="LbOrderCase" xml:space="preserve">
     <value>Case</value>
   </data>
+  <data name="LBOrderStatus" xml:space="preserve">
+    <value>Order Status</value>
+  </data>
   <data name="Lboutskirts" xml:space="preserve">
     <value>outskirts</value>
   </data>
@@ -438,6 +462,9 @@
   <data name="LbRate" xml:space="preserve">
     <value>exchange rate</value>
   </data>
+  <data name="LbRolesName" xml:space="preserve">
+    <value>Roles Name</value>
+  </data>
   <data name="lbSave" xml:space="preserve">
     <value>حفظ</value>
   </data>
@@ -455,6 +482,9 @@
   </data>
   <data name="LbSpec" xml:space="preserve">
     <value>Space</value>
+  </data>
+  <data name="LbTaskStatus" xml:space="preserve">
+    <value>Task Status</value>
   </data>
   <data name="LbTypesCompanies" xml:space="preserve">
     <value>Category</value>
@@ -501,9 +531,6 @@
   <data name="LTitleShipping" xml:space="preserve">
     <value>Description of shipping validity</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value>Merchant Nike Name</value>
-  </data>
   <data name="VLCitydoplceted" xml:space="preserve">
     <value>The delivery price for this city has been entered. Please check and try again later...!</value>
   </data>
@@ -537,6 +564,9 @@
   <data name="VLDescriptionDoplceted" xml:space="preserve">
     <value>The city has already been entered. Please check and try again later....!</value>
   </data>
+  <data name="VLDescriptiondplceted" xml:space="preserve">
+    <value>The order status has been entered. Please confirm and try again later....!</value>
+  </data>
   <data name="VLEmailOreUserOrPaswo" xml:space="preserve">
     <value>Email or username already exists...!</value>
   </data>
@@ -552,6 +582,9 @@
   <data name="VLExchangeRateDoplceted" xml:space="preserve">
     <value>The currency has already been entered. Please check and try again later...!</value>
   </data>
+  <data name="VLHxcodedoplceted" xml:space="preserve">
+    <value>The code has already been entered, please verify and try again later...!</value>
+  </data>
   <data name="VLimageuplode" xml:space="preserve">
     <value>Please upload the image...!</value>
   </data>
@@ -560,6 +593,9 @@
   </data>
   <data name="VLMerchantNameDoplceted" xml:space="preserve">
     <value>The email address has already been added. Please check and try again later...!</value>
+  </data>
+  <data name="VLRoleNameDoplceted" xml:space="preserve">
+    <value>Validity has already been entered, please confirm and try again later...!</value>
   </data>
   <data name="VLSavedSuccessfully" xml:space="preserve">
     <value>The saving process was completed successfully</value>
