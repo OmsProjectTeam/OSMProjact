@@ -1456,6 +1456,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The code has already been entered, please verify and try again later...!.
+        /// </summary>
+        public static string VLHxcodedoplceted {
+            get {
+                return ResourceManager.GetString("VLHxcodedoplceted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please upload the image...!.
         /// </summary>
         public static string VLimageuplode {

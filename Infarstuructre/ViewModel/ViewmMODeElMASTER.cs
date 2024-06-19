@@ -58,7 +58,9 @@ namespace Infarstuructre.ViewModel
         public IEnumerable<TBViewOrderStatus> ListViewOrderStatus { get; set; }
         public OrderStatus OrderStatus { get; set; }  
         public IEnumerable<TaskStatus> ListTaskStatus { get; set; }
-        public TaskStatus TaskStatus { get; set; }
+        public TaskStatus TaskStatus { get; set; } 
+        public IEnumerable<TBViewOrder> ListViewOrder { get; set; }
+        public Order Order { get; set; }
 
 
 
