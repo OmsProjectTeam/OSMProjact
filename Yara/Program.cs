@@ -112,6 +112,8 @@ builder.Services.AddScoped<IICustomer, CLSCustomer>();
 builder.Services.AddScoped<IIMerchant, CLSMerchant>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IIOrderCase, CLSOrderCase>();
+builder.Services.AddScoped<IIRolesName, CLSRolesName>();
+builder.Services.AddScoped<IIOrderStatus, CLSOrderStatus>();
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();

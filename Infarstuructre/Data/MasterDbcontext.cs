@@ -127,6 +127,16 @@ namespace Infarstuructre.Data
             });
 
             //************************************************************
+                   //************************************************************
+
+
+            builder.Entity<TBViewOrderStatus>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewOrderStatus");
+            });
+
+            //************************************************************
 
 
             builder.UseCollation("Arabic_CI_AS");
@@ -1345,6 +1355,25 @@ namespace Infarstuructre.Data
 		   .HasDefaultValueSql("((1))");
 		
 			//---------------------------------	
+        
+			builder.Entity<OrderStatus>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<OrderStatus>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+		
+			//---------------------------------	
+            //---------------------------------	
+        
+			builder.Entity<RolesName>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<RolesName>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+		
+			//---------------------------------	
 		}
 
 		public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
@@ -1509,5 +1538,6 @@ namespace Infarstuructre.Data
         public DbSet<TBViewCustomers> ViewCustomers { get; set; }
         public DbSet<TBViewMerchant> ViewMerchant { get; set; }
         public DbSet<TBViewOrder> ViewOrder { get; set; }
+        public DbSet<TBViewOrderStatus> ViewOrderStatus { get; set; }
     }
 }

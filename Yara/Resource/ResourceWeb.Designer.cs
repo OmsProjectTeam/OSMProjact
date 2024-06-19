@@ -142,11 +142,38 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adding and modifying Order Case.
+        /// </summary>
+        public static string LBAddOrderCase {
+            get {
+                return ResourceManager.GetString("LBAddOrderCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adding and modifying Order Status.
+        /// </summary>
+        public static string LBAddOrderStatus {
+            get {
+                return ResourceManager.GetString("LBAddOrderStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string LbAddresCompany {
             get {
                 return ResourceManager.GetString("LbAddresCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adding and modifying Roles.
+        /// </summary>
+        public static string LBAddRolesName {
+            get {
+                return ResourceManager.GetString("LBAddRolesName", resourceCulture);
             }
         }
         
@@ -799,6 +826,24 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order Status.
+        /// </summary>
+        public static string LBMyOrderStatus {
+            get {
+                return ResourceManager.GetString("LBMyOrderStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Roles .
+        /// </summary>
+        public static string LBMyRolesName {
+            get {
+                return ResourceManager.GetString("LBMyRolesName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shipping systems pricing.
         /// </summary>
         public static string LBMyShippingPrice {
@@ -970,6 +1015,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order Status.
+        /// </summary>
+        public static string LBOrderStatus {
+            get {
+                return ResourceManager.GetString("LBOrderStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to outskirts.
         /// </summary>
         public static string Lboutskirts {
@@ -1020,6 +1074,15 @@ namespace Yara.Resource {
         public static string LbRate {
             get {
                 return ResourceManager.GetString("LbRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Roles Name.
+        /// </summary>
+        public static string LbRolesName {
+            get {
+                return ResourceManager.GetString("LbRolesName", resourceCulture);
             }
         }
         
@@ -1213,15 +1276,6 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Merchant Nike Name.
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The delivery price for this city has been entered. Please check and try again later...!.
         /// </summary>
         public static string VLCitydoplceted {
@@ -1321,6 +1375,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The order status has been entered. Please confirm and try again later....!.
+        /// </summary>
+        public static string VLDescriptiondplceted {
+            get {
+                return ResourceManager.GetString("VLDescriptiondplceted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email or username already exists...!.
         /// </summary>
         public static string VLEmailOreUserOrPaswo {
@@ -1389,6 +1452,15 @@ namespace Yara.Resource {
         public static string VLMerchantNameDoplceted {
             get {
                 return ResourceManager.GetString("VLMerchantNameDoplceted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validity has already been entered, please confirm and try again later...!.
+        /// </summary>
+        public static string VLRoleNameDoplceted {
+            get {
+                return ResourceManager.GetString("VLRoleNameDoplceted", resourceCulture);
             }
         }
         
