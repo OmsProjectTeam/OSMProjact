@@ -187,6 +187,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adding and modifying Task Status.
+        /// </summary>
+        public static string LBAddTaskStatus {
+            get {
+                return ResourceManager.GetString("LBAddTaskStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add and modify currency calculator.
         /// </summary>
         public static string LBAddTransaction {
@@ -853,6 +862,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Task Status.
+        /// </summary>
+        public static string LBMyTaskStatus {
+            get {
+                return ResourceManager.GetString("LBMyTaskStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Currency calculator.
         /// </summary>
         public static string LBMyTransaction {
@@ -1137,6 +1155,15 @@ namespace Yara.Resource {
         public static string LbSpec {
             get {
                 return ResourceManager.GetString("LbSpec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task Status.
+        /// </summary>
+        public static string LbTaskStatus {
+            get {
+                return ResourceManager.GetString("LbTaskStatus", resourceCulture);
             }
         }
         

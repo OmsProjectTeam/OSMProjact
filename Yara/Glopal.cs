@@ -14,3 +14,4 @@ global using Microsoft.EntityFrameworkCore;
 
 global using Microsoft.AspNetCore.Authentication.Cookies;
 global using static Infarstuructre.BL.IIRolsInformation;
+global using TaskStatus = Domin.Entity.TaskStatus;

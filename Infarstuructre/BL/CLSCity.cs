@@ -19,7 +19,7 @@ namespace Infarstuructre.BL
         }
         public List<City> GetAll()
         {
-            List<City> MySlider = dbcontext.cities.OrderByDescending(n => n.Id).ToList();
+            List<City> MySlider = dbcontext.cities.OrderByDescending(n => n.Id).Where(a => a.CurrentState == true).ToList();
             return MySlider;
         }
         public City GetById(int Id)

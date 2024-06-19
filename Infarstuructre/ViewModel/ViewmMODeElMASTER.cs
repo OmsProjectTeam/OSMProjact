@@ -56,7 +56,9 @@ namespace Infarstuructre.ViewModel
         public IEnumerable<RolesName> ListRolesName { get; set; }
         public RolesName RolesName { get; set; }   
         public IEnumerable<TBViewOrderStatus> ListViewOrderStatus { get; set; }
-        public OrderStatus OrderStatus { get; set; }
+        public OrderStatus OrderStatus { get; set; }  
+        public IEnumerable<TaskStatus> ListTaskStatus { get; set; }
+        public TaskStatus TaskStatus { get; set; }
 
 
 

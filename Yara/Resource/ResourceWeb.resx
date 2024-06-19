@@ -159,6 +159,9 @@
   <data name="LBAddShippingPrice" xml:space="preserve">
     <value>Adding and modifying pricing for shipping systems</value>
   </data>
+  <data name="LBAddTaskStatus" xml:space="preserve">
+    <value>Adding and modifying Task Status</value>
+  </data>
   <data name="LBAddTransaction" xml:space="preserve">
     <value>Add and modify currency calculator</value>
   </data>
@@ -381,6 +384,9 @@
   <data name="LBMyShippingPrice" xml:space="preserve">
     <value>Shipping systems pricing</value>
   </data>
+  <data name="LBMyTaskStatus" xml:space="preserve">
+    <value>Task Status</value>
+  </data>
   <data name="LBMyTransaction" xml:space="preserve">
     <value>Currency calculator</value>
   </data>
@@ -476,6 +482,9 @@
   </data>
   <data name="LbSpec" xml:space="preserve">
     <value>Space</value>
+  </data>
+  <data name="LbTaskStatus" xml:space="preserve">
+    <value>Task Status</value>
   </data>
   <data name="LbTypesCompanies" xml:space="preserve">
     <value>Category</value>

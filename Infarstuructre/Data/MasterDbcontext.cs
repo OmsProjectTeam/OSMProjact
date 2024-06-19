@@ -9,7 +9,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
-using TaskStatus = Domin.Entity.TaskStatus;
+
 
 namespace Infarstuructre.Data
 {
@@ -1370,6 +1370,16 @@ namespace Infarstuructre.Data
 		   .Property(b => b.DateTimeEntry)
 		   .HasDefaultValueSql("getdate()");
 			builder.Entity<RolesName>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+		
+			//---------------------------------	
+            //---------------------------------	
+        
+			builder.Entity<TaskStatus>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<TaskStatus>()
 		   .Property(b => b.CurrentState)
 		   .HasDefaultValueSql("((1))");
 		

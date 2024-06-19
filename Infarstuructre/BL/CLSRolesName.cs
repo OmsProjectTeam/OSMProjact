@@ -21,7 +21,7 @@ namespace Infarstuructre.BL
         }
         public List<RolesName> GetAll()
         {
-            List<RolesName> MySlider = dbcontext.RolesNames.OrderByDescending(n => n.Id).ToList();
+            List<RolesName> MySlider = dbcontext.RolesNames.OrderByDescending(n => n.Id).Where(a => a.CurrentState == true).ToList();
             return MySlider;
         }
         public RolesName GetById(int Id)
