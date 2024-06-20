@@ -20,7 +20,9 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<MasterDbcontext>(options => {
 	options.UseSqlServer(
-		builder.Configuration.GetConnectionString("MasterConnection"));
+		builder.Configuration.GetConnectionString("MasterConnection"),
+		sqlOptions => sqlOptions.CommandTimeout(180) // تحديد مهلة الاتصال بـ 180 ثانية
+	);
 	options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 
@@ -115,6 +117,7 @@ builder.Services.AddScoped<IIOrderCase, CLSOrderCase>();
 builder.Services.AddScoped<IIRolesName, CLSRolesName>();
 builder.Services.AddScoped<IIOrderStatus, CLSOrderStatus>();
 builder.Services.AddScoped<IITaskStatus, CLSTaskStatus>();
+builder.Services.AddScoped<IIOrder, CLSOrder>();
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();

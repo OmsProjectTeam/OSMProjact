@@ -372,6 +372,9 @@
   <data name="LBMyMerchant" xml:space="preserve">
     <value>Merchants' data</value>
   </data>
+  <data name="LBMyOrder" xml:space="preserve">
+    <value>Order</value>
+  </data>
   <data name="LBMyOrderCase" xml:space="preserve">
     <value>Order Cases</value>
   </data>
@@ -524,6 +527,9 @@
   </data>
   <data name="LbUS_delivery" xml:space="preserve">
     <value>Delivery system user</value>
+  </data>
+  <data name="Lbwith_delivery" xml:space="preserve">
+    <value>with Delivery</value>
   </data>
   <data name="LbZone" xml:space="preserve">
     <value>Residential quarter</value>
