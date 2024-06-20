@@ -1,4 +1,6 @@
-﻿using System.Linq.Expressions;
+﻿using Domin.Entity;
+using System.Linq.Expressions;
+using System.Net;
 
 namespace Yara.Areas.Admin.API_Controller;
 
@@ -7,75 +9,170 @@ namespace Yara.Areas.Admin.API_Controller;
 [ApiController]
 public class MerchantAPIController : ControllerBase
 {
-    public MerchantAPIController(IIMerchant iMerchant)
+	private ApiResponse _response;
+	public MerchantAPIController(IIMerchant iMerchant)
     {
         this.iMerchant = iMerchant;
+        _response = new ApiResponse();
     }
 
     private readonly IIMerchant iMerchant;
 
+    [HttpGet("get")]
+    public async Task<ActionResult<IEnumerable<TBViewMerchant>>> Get()
+	{
+        try
+        {
+            var merchants = await iMerchant.GetAllMerchantsAsync();
+            if (merchants == null)
+                _response.StatusCode = HttpStatusCode.BadRequest;
+
+            _response.Result = merchants;
+            _response.StatusCode = HttpStatusCode.OK;
+
+            return Ok(_response);
+        }
+        catch (Exception ex)
+        { 
+            _response.IsSuccess = false;
+            _response.ErrorMessage = new List<string> { ex.Message };
+        }
+        return Ok(_response);
+	}
+
     [HttpPost("GitAllMerchants")]
     public async Task<ActionResult<IEnumerable<TBViewMerchant>>> GitAllMerchants()
     {
-        var merchants = await iMerchant.GetAllMerchantsAsync();
-        if(merchants == null)
-            return NotFound("No data to show! ");
+        try
+        {
+			var merchants = await iMerchant.GetAllMerchantsAsync();
+			if (merchants == null)
+				_response.StatusCode = HttpStatusCode.BadRequest;
 
-        return Ok(merchants);
+			_response.Result = merchants;
+			_response.StatusCode = HttpStatusCode.Created;
+
+			return Ok(_response);
+		}
+        catch (Exception ex)
+		{
+			_response.IsSuccess = false;
+			_response.ErrorMessage = new List<string> { ex.Message };
+		}
+        return Ok(_response);
     }
 
     [HttpPost("GitAllMerchantsWithCondition")]
     public async Task<ActionResult<IEnumerable<TBViewMerchant>>> GitAllMerchantsWithCondition(Expression<Func<TBViewMerchant, bool>> condition)
     {
-        var merchants = await iMerchant.GetAllMerchantsWithConditionAsync(condition);
-        if (merchants == null)
-            return NoContent();
+        try
+        {
+            var merchants = await iMerchant.GetAllMerchantsWithConditionAsync(condition);
+            if (merchants == null)
+                _response.StatusCode = HttpStatusCode.BadRequest;
+            _response.Result = merchants;
+            _response.StatusCode = HttpStatusCode.Created;
 
-        return Ok(merchants);
+            return Ok(_response);
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessage = new List<string> { ex.Message };
+        } 
+        return Ok(_response);
     }
 
     [HttpPost("{id}")]
     public async Task<ActionResult<TBViewMerchant>> GitMerchantById(int id)
     {
-        var merchant = await iMerchant.GetMerchantAsync(id);
-        if (merchant == null)
-            return NotFound();
+        try
+        {
+            var merchant = await iMerchant.GetMerchantAsync(id);
+            if (merchant == null)
+                _response.StatusCode = HttpStatusCode.BadRequest;
+            _response.Result = merchant;
+            _response.StatusCode = HttpStatusCode.Created;
 
-        return Ok(merchant);
-    }
+            return Ok(_response);
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessage = new List<string> { ex.Message };
+        }
+
+        return Ok(_response);
+	}
 
     [HttpPost]
     public async Task<ActionResult> AddMerchant(Merchant merchant)
     {
-        if (!ModelState.IsValid)
-            return BadRequest();
+        try
+        {
+            if (!ModelState.IsValid)
+                _response.StatusCode = HttpStatusCode.BadRequest;
 
-        await iMerchant.AddMerchantAsync(merchant);
-        return Ok();
+            await iMerchant.AddMerchantAsync(merchant);
+
+            _response.Result = merchant;
+            return Ok(_response);
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessage = new List<string> { ex.Message };
+        }
+
+        return Ok(_response);
     }
 
     [HttpPut("{id}")]
     public async Task<ActionResult> EditMerchant(int id, [FromBody] Merchant merchant)
     {
-        var merch = await iMerchant.GetMerchantAsync(id);
-        if (merch == null)
-            return NotFound();
+        try
+        {
+			var merch = await iMerchant.GetMerchantAsync(id);
+			if (merch == null)
+				_response.StatusCode = HttpStatusCode.BadRequest;
 
-        merch = merchant;
-        await iMerchant.UpdateMerchantAsync(merch);
-        return Ok();
+			merch = merchant;
+			await iMerchant.UpdateMerchantAsync(merch);
+
+			_response.Result = merch;
+			return Ok(_response);
+		}
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessage = new List<string> { ex.Message };
+        }
+
+        return Ok(_response);
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteMerchant(int id)
     {
-        var merch = await iMerchant.GetMerchantAsync(id);
-        if (merch == null)
-            return NotFound();
+        try
+        {
+			var merch = await iMerchant.GetMerchantAsync(id);
+			if (merch == null)
+				_response.StatusCode = HttpStatusCode.BadRequest;
 
-        merch.CurrentState = false;
-        await iMerchant.UpdateMerchantAsync(merch);
-        return Ok();
+			merch.CurrentState = false;
+			await iMerchant.UpdateMerchantAsync(merch);
+
+			_response.Result = merch;
+			return Ok(_response);
+		}
+        catch (Exception ex)
+		{
+			_response.IsSuccess = false;
+			_response.ErrorMessage = new List<string> { ex.Message };
+		}
+
+		return Ok(_response);
     }
 }
 
