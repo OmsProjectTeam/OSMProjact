@@ -826,6 +826,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order.
+        /// </summary>
+        public static string LBMyOrder {
+            get {
+                return ResourceManager.GetString("LBMyOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Order Cases.
         /// </summary>
         public static string LBMyOrderCase {
@@ -1281,6 +1290,15 @@ namespace Yara.Resource {
         public static string LBUsersInformationEn {
             get {
                 return ResourceManager.GetString("LBUsersInformationEn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to with Delivery.
+        /// </summary>
+        public static string Lbwith_delivery {
+            get {
+                return ResourceManager.GetString("Lbwith_delivery", resourceCulture);
             }
         }
         

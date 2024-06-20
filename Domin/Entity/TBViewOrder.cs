@@ -18,12 +18,13 @@ namespace Domin.Entity
         public string? AreaName { get; set; }
         public string? cust_landmark { get; set; }
         public int? with_delivery { get; set; }
+
         public int? delivery_charges { get; set; }
         public string? notes { get; set; }
         public int? order_status { get; set; }
         public string? OrderStatus { get; set; }
-        public string? role { get; set; }
-        public string? receipt_no { get; set; }
+        public int? role { get; set; }
+      public string? receipt_no { get; set; }
         public DateOnly? receipt_dt { get; set; }
         public int? user_id { get; set; }
         public int? BatchID { get; set; }
@@ -92,12 +93,12 @@ namespace Domin.Entity
         public DateOnly? return_dt { get; set; }
         public int? pre_close { get; set; }
         public int? cenrtral_bank_price { get; set; }
-		public bool Active { get; set; }
-		public bool CurrentState { get; set; }
-		public string DataEntry { get; set; }
-		public DateTime DateTimeEntry { get; set; }
-		public int IdInformationCompanies { get; set; }
-		public string NikeNAme { get; set; }
+        public bool? Active { get; set; }
+		public bool? CurrentState { get; set; }
+		public string? DataEntry { get; set; }
+		public DateTime? DateTimeEntry { get; set; }
+		public int? IdInformationCompanies { get; set; }
+		public string? NikeNAme { get; set; }
 
 
 	}
