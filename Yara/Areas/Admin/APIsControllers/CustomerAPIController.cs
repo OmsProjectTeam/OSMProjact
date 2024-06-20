@@ -18,51 +18,31 @@ public class CustomerAPIController : ControllerBase
 
     private readonly IICustomer iCustomer;
 
-    [HttpGet("get")]
-    public async Task<ActionResult<IEnumerable<TBViewCustomers>>> Get()
-	{
-        try
-        {
-            var customers = await iCustomer.GetAllCustomersAsync();
-            if (customers == null)
-                _response.StatusCode = HttpStatusCode.BadRequest;
-
-            _response.Result = customers;
-            _response.StatusCode = HttpStatusCode.OK;
-
-            return Ok(_response);
-        }
-        catch (Exception ex)
-        { 
-            _response.IsSuccess = false;
-            _response.ErrorMessage = new List<string> { ex.Message };
-        }
-        return Ok(_response);
-	}
-
     [HttpPost("GitAllCustomers")]
     public async Task<ActionResult<IEnumerable<TBViewCustomers>>> GitAllCustomers()
     {
         try
         {
-			var customers = await iCustomer.GetAllCustomersAsync();
-			if (customers == null)
-				_response.StatusCode = HttpStatusCode.BadRequest;
+            var customers = iCustomer.GetAllCustomersAsync();
+            if (customers == null)
+                _response.StatusCode = HttpStatusCode.BadRequest;
 
-			_response.Result = customers;
-			_response.StatusCode = HttpStatusCode.Created;
+            _response.Result = customers;
+            _response.StatusCode = HttpStatusCode.Created;
 
-			return Ok(_response);
-		}
+            return Ok(_response);
+        }
         catch (Exception ex)
-		{
-			_response.IsSuccess = false;
-			_response.ErrorMessage = new List<string> { ex.Message };
-		}
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessage = new List<string> { ex.Message };
+        }
         return Ok(_response);
     }
 
-    [HttpPost("GitAllCustomersWithCondition")]
+	
+
+	[HttpPost("GitAllCustomersWithCondition")]
     public async Task<ActionResult<IEnumerable<TBViewCustomers>>> GitAllCustomersWithCondition(Expression<Func<TBViewCustomers, bool>> condition)
     {
         try
@@ -88,7 +68,7 @@ public class CustomerAPIController : ControllerBase
     {
         try
         {
-            var customer = await iCustomer.GetCustomerAsync(id);
+            var customer = await iCustomer.GetCustomerAsyncview(id);
             if (customer == null)
                 _response.StatusCode = HttpStatusCode.BadRequest;
             _response.Result = customer;
@@ -104,8 +84,30 @@ public class CustomerAPIController : ControllerBase
 
         return Ok(_response);
 	}
+	[HttpGet("{name}")]
+	public async Task<ActionResult<TBViewCustomers>> GitCustomerByNaame(string name)
+	{
+		try
+		{
+			var customer = await iCustomer.GetCustomerAsyncviewName(name);
+			if (customer == null)
+			{
+				_response.StatusCode = HttpStatusCode.BadRequest;
+				return Ok(_response);
+			}
 
-    [HttpPost]
+			_response.Result = customer;
+			_response.StatusCode = HttpStatusCode.Created;
+			return Ok(_response);
+		}
+		catch (Exception ex)
+		{
+			_response.IsSuccess = false;
+			_response.ErrorMessage = new List<string> { ex.Message };
+			return StatusCode(500, _response);
+		}
+	}
+	[HttpPost]
     public async Task<ActionResult> AddCustomer(Customer customer)
     {
         try
