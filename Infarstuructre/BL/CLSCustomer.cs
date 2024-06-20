@@ -87,7 +87,7 @@ namespace Infarstuructre.BL
             List<TBViewCustomers> MySlider = dbcontext.ViewCustomers.OrderByDescending(n => n.id == id).Where(a => a.id == id).Where(a => a.CurrentState == true).ToList();
             return MySlider;
         }
-
+        //Api
 		public async Task<IEnumerable<TBViewCustomers>>? GetAllCustomersAsync()
 		{
 			IEnumerable<TBViewCustomers> customers = await dbcontext.ViewCustomers.OrderByDescending(n => n.id).Where(a => a.CurrentState == true).ToListAsync();

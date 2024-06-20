@@ -18,28 +18,6 @@ public class MerchantAPIController : ControllerBase
 
     private readonly IIMerchant iMerchant;
 
-    [HttpGet("get")]
-    public async Task<ActionResult<IEnumerable<TBViewMerchant>>> Get()
-	{
-        try
-        {
-            var merchants = await iMerchant.GetAllMerchantsAsync();
-            if (merchants == null)
-                _response.StatusCode = HttpStatusCode.BadRequest;
-
-            _response.Result = merchants;
-            _response.StatusCode = HttpStatusCode.OK;
-
-            return Ok(_response);
-        }
-        catch (Exception ex)
-        { 
-            _response.IsSuccess = false;
-            _response.ErrorMessage = new List<string> { ex.Message };
-        }
-        return Ok(_response);
-	}
-
     [HttpPost("GitAllMerchants")]
     public async Task<ActionResult<IEnumerable<TBViewMerchant>>> GitAllMerchants()
     {

@@ -1,15 +1,26 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Linq.Expressions;
+
 namespace Infarstuructre.BL
 {
 	public interface IIOrder
 	{
 		List<TBViewOrder> GetAll();
 		Order GetById(int id);
-		bool saveData(Order savee);
-		bool UpdateData(Order updatss);
+		bool saveData(Order order);
+		bool UpdateData(Order order);
 		bool deleteData(int id);
 		List<TBViewOrder> GetAllv(int id);
+		///////////////////////////////////////////
+		///Api 
+		Task<IEnumerable<TBViewOrder>> GetAllOrdersAsync();
+		Task<IEnumerable<TBViewOrder>> GetAllOrdersWithConditionAsync(Expression<Func<TBViewOrder, bool>> condition);
+		Task<Order> GetOrderAsync(int id);
+		Task AddOrderAsync(Order merchant);
+		Task UpdateOrderAsync(Order merchant);
 	}
 	public class CLSOrder: IIOrder
 	{
@@ -78,5 +89,36 @@ namespace Infarstuructre.BL
 			List<TBViewOrder> MySlider = dbcontext.ViewOrder.OrderByDescending(n => n.id == id).Where(a => a.id == id).Where(a => a.CurrentState == true).ToList();
 			return MySlider;
 		}
-	}
+
+		/////////////////// Api
+		public async Task<IEnumerable<TBViewOrder>> GetAllOrdersAsync()
+		{
+			IEnumerable<TBViewOrder> orders = await dbcontext.ViewOrder.OrderByDescending(n => n.id).Where(a => a.CurrentState == true).ToListAsync();
+			return orders;
+		}
+
+		public async Task<IEnumerable<TBViewOrder>> GetAllOrdersWithConditionAsync(Expression<Func<TBViewOrder, bool>> condition)
+		{
+			IEnumerable<TBViewOrder> orders = await dbcontext.ViewOrder.Where(condition).ToListAsync();
+			return orders;
+		}
+
+		public async Task<Order> GetOrderAsync(int id)
+		{
+			Order order = await dbcontext.orders.FindAsync(id);
+			return order;
+		}
+
+		public async Task AddOrderAsync(Order order)
+		{
+			await dbcontext.AddAsync(order);
+			await dbcontext.SaveChangesAsync();
+		}
+
+		public async Task UpdateOrderAsync(Order order)
+		{
+			dbcontext.Entry(order).State = EntityState.Modified;
+			await dbcontext.SaveChangesAsync();
+		}
+	}	
 }
