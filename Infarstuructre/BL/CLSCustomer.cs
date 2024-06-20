@@ -13,11 +13,13 @@ namespace Infarstuructre.BL
         bool UpdateData(Customer updatss);
         bool deleteData(int id);
         List<TBViewCustomers> GetAllv(int id);
-        Task<IEnumerable<TBViewCustomers>>? GetAllCustomersAsync();
+        IAsyncEnumerable<TBViewCustomers> GetAllCustomersAsync(int batchSize = 250);
 		Task<IEnumerable<TBViewCustomers>> GetAllCustomersWithConditionAsync(Expression<Func<TBViewCustomers, bool>> condition);
 		Task<Customer>? GetCustomerAsync(int id);
 		Task AddCustomerAsync(Customer customer);
 		Task UpdateCustomerAsync(Customer customer);
+        Task<TBViewCustomers>? GetCustomerAsyncview(int id);
+        Task<TBViewCustomers?> GetCustomerAsyncviewName(string Name);
 
 
 	}
@@ -87,12 +89,34 @@ namespace Infarstuructre.BL
             List<TBViewCustomers> MySlider = dbcontext.ViewCustomers.OrderByDescending(n => n.id == id).Where(a => a.id == id).Where(a => a.CurrentState == true).ToList();
             return MySlider;
         }
-        //Api
-		public async Task<IEnumerable<TBViewCustomers>>? GetAllCustomersAsync()
+		//Api
+		public async IAsyncEnumerable<TBViewCustomers> GetAllCustomersAsync(int batchSize = 250)
 		{
-			IEnumerable<TBViewCustomers> customers = await dbcontext.ViewCustomers.OrderByDescending(n => n.id).Where(a => a.CurrentState == true).ToListAsync();
-			return customers;
+			int skip = 0;
+			bool moreDataAvailable;
+
+			do
+			{
+				var batch = await dbcontext.ViewCustomers
+					.AsNoTracking() // تحسين الأداء بعدم تتبع الكيانات المسترجعة
+					.OrderByDescending(n => n.id)
+					.Where(a => a.CurrentState == true)
+					.Skip(skip)
+					.Take(batchSize)
+					.ToListAsync();
+
+				moreDataAvailable = batch.Count == batchSize;
+				skip += batchSize;
+
+				foreach (var customer in batch)
+				{
+					yield return customer;
+				}
+
+			} while (moreDataAvailable);
 		}
+
+
 
 		public async Task<IEnumerable<TBViewCustomers>> GetAllCustomersWithConditionAsync(Expression<Func<TBViewCustomers, bool>> condition)
 		{
@@ -103,6 +127,24 @@ namespace Infarstuructre.BL
 		public async Task<Customer>? GetCustomerAsync(int id)
 		{
 			Customer customer = await dbcontext.customers.FindAsync(id);
+			return customer;
+		}
+
+		public async Task<TBViewCustomers?> GetCustomerAsyncview(int id)
+		{
+			TBViewCustomers? customer = await dbcontext.ViewCustomers
+				.Where(a => a.id == id && a.CurrentState == true)
+				.FirstOrDefaultAsync();
+			return customer;
+		}
+
+
+
+		public async Task<TBViewCustomers?> GetCustomerAsyncviewName(string name)
+		{
+			TBViewCustomers? customer = await dbcontext.ViewCustomers
+				.Where(a => a.cust_name == name && a.CurrentState == true)
+				.FirstOrDefaultAsync();
 			return customer;
 		}
 
