@@ -18,28 +18,6 @@ public class CustomerAPIController : ControllerBase
 
     private readonly IICustomer iCustomer;
 
-    [HttpGet("get")]
-    public async Task<ActionResult<IEnumerable<TBViewCustomers>>> Get()
-	{
-        try
-        {
-            var customers = await iCustomer.GetAllCustomersAsync();
-            if (customers == null)
-                _response.StatusCode = HttpStatusCode.BadRequest;
-
-            _response.Result = customers;
-            _response.StatusCode = HttpStatusCode.OK;
-
-            return Ok(_response);
-        }
-        catch (Exception ex)
-        { 
-            _response.IsSuccess = false;
-            _response.ErrorMessage = new List<string> { ex.Message };
-        }
-        return Ok(_response);
-	}
-
     [HttpPost("GitAllCustomers")]
     public async Task<ActionResult<IEnumerable<TBViewCustomers>>> GitAllCustomers()
     {
