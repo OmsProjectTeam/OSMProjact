@@ -18,28 +18,6 @@ public class OrderApiController : ControllerBase
 
 	private readonly IIOrder iOrder;
 
-	[HttpGet("get")]
-	public async Task<ActionResult<IEnumerable<TBViewOrder>>> Get()
-	{
-		try
-		{
-			var orders = await iOrder.GetAllOrdersAsync();
-			if (orders == null)
-				_response.StatusCode = HttpStatusCode.BadRequest;
-
-			_response.Result = orders;
-			_response.StatusCode = HttpStatusCode.OK;
-
-			return Ok(_response);
-		}
-		catch (Exception ex)
-		{
-			_response.IsSuccess = false;
-			_response.ErrorMessage = new List<string> { ex.Message };
-		}
-		return Ok(_response);
-	}
-
 	[HttpPost("GitAllMerchants")]
 	public async Task<ActionResult<IEnumerable<TBViewOrder>>> GitAllOrders()
 	{
