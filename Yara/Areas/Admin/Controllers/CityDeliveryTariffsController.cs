@@ -10,13 +10,17 @@ namespace Yara.Areas.Admin.Controllers
         IIInformationCompanies iInformationCompanies;
         IICurrenciesExchangeRates iCurrenciesExchangeRates;
         IICityDeliveryTariffs iCityDeliveryTariffs;
-        public CityDeliveryTariffsController(MasterDbcontext dbcontext1,IICity iCity1,IIInformationCompanies iInformationCompanies1,IICurrenciesExchangeRates iCurrenciesExchangeRates1,IICityDeliveryTariffs iCityDeliveryTariffs1)
+        IIArea iArea;
+        IITypeSystemDelivery iTypeSystemDelivery;
+        public CityDeliveryTariffsController(MasterDbcontext dbcontext1,IICity iCity1,IIInformationCompanies iInformationCompanies1,IICurrenciesExchangeRates iCurrenciesExchangeRates1,IICityDeliveryTariffs iCityDeliveryTariffs1,IIArea iArea1,IITypeSystemDelivery iTypeSystemDelivery1)
         {
             dbcontext = dbcontext1;
             iCity = iCity1;
             iInformationCompanies= iInformationCompanies1;
             iCurrenciesExchangeRates= iCurrenciesExchangeRates1;
             iCityDeliveryTariffs= iCityDeliveryTariffs1;
+            iArea = iArea1;
+            iTypeSystemDelivery = iTypeSystemDelivery1;
 
         }
         public IActionResult MyCityDeliveryTariffs()
@@ -31,6 +35,8 @@ namespace Yara.Areas.Admin.Controllers
             ViewBag.Currenc = iCurrenciesExchangeRates.GetAll();
             ViewBag.City = iCity.GetAll();
             ViewBag.InformationCompanies = iInformationCompanies.GetAll();
+            ViewBag.area = iArea.GetAll();
+            ViewBag.TypeSystemDelivery = iTypeSystemDelivery.GetAll();
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewCityDeliveryTariffs = iCityDeliveryTariffs.GetAll();
             if (IdCityDeliveryTariffs != null)
@@ -51,6 +57,8 @@ namespace Yara.Areas.Admin.Controllers
             {
                 slider.IdCityDeliveryTariffs = model.CityDeliveryTariffs.IdCityDeliveryTariffs;
                 slider.CityId = model.CityDeliveryTariffs.CityId;
+                slider.AreaId = model.CityDeliveryTariffs.AreaId;
+                slider.IdTypeSystemDelivery = model.CityDeliveryTariffs.IdTypeSystemDelivery;
                 slider.IdInformationCompanies = model.CityDeliveryTariffs.IdInformationCompanies;
                 slider.IdCurrenciesExchangeRates = model.CityDeliveryTariffs.IdCurrenciesExchangeRates;
                 slider.TitleShipping = model.CityDeliveryTariffs.TitleShipping;
@@ -59,17 +67,23 @@ namespace Yara.Areas.Admin.Controllers
                 slider.DataEntry = model.CityDeliveryTariffs.DataEntry;
                 slider.DateTimeEntry = model.CityDeliveryTariffs.DateTimeEntry;
                 slider.CurrentState = model.CityDeliveryTariffs.CurrentState;
+                slider.Active = model.CityDeliveryTariffs.Active;
                 if (slider.IdCityDeliveryTariffs == 0 || slider.IdCityDeliveryTariffs == null)
                 {
                     if (dbcontext.TBCityDeliveryTariffss.Where(a => a.TitleShipping == slider.TitleShipping).ToList().Count > 0)
                     {
                         TempData["TitleShipping"] = ResourceWeb.VLTitleShippingoplceted;
-                        return RedirectToAction("AddCityDeliveryTariffs", model);
+                        return Redirect(returnUrl);
                     }
-                    if (dbcontext.TBCityDeliveryTariffss.Where(a => a.CityId == slider.CityId).ToList().Count > 0)
+                    if (dbcontext.TBCityDeliveryTariffss.Where(a => a.CityId == slider.CityId).Where(a => a.TitleShipping == slider.TitleShipping).ToList().Count > 0)
                     {
                         TempData["City"] = ResourceWeb.VLCitydoplceted;
-                        return RedirectToAction("AddCityDeliveryTariffs", model);
+                        return Redirect(returnUrl);
+                    }
+                    if (dbcontext.TBCityDeliveryTariffss.Where(a => a.AreaId == slider.AreaId).Where(a => a.TitleShipping == slider.TitleShipping).ToList().Count > 0)
+                    {
+                        TempData["Area"] = ResourceWeb.VLAreadoplceted;
+                        return Redirect(returnUrl);
                     }
                     var reqwest = iCityDeliveryTariffs.saveData(slider);
                     if (reqwest == true)
