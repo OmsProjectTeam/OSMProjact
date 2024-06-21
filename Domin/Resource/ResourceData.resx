@@ -177,6 +177,9 @@
   <data name="userName" xml:space="preserve">
     <value>You must enter the user name...!</value>
   </data>
+  <data name="VlAddres" xml:space="preserve">
+    <value>Please include the address for the process to complete successfully</value>
+  </data>
   <data name="VlAddresCompany" xml:space="preserve">
     <value>Please include the company address for the process to complete successfully...!</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="VlDescriptionClint" xml:space="preserve">
     <value>Please include a description of the link between the customer and the pricing. The process is completed successfully...!</value>
+  </data>
+  <data name="VlDescriptionOrder" xml:space="preserve">
+    <value>Please include the order description for the process to complete successfully</value>
   </data>
   <data name="VlEmailCompany" xml:space="preserve">
     <value>Please include the company's email so that the process is completed successfully...!</value>

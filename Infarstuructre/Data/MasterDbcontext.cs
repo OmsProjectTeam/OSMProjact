@@ -137,6 +137,16 @@ namespace Infarstuructre.Data
                 entity.ToView("ViewClintWitheDeliveryTariffs");
             });
 
+            //************************************************************    
+            //************************************************************
+
+
+            builder.Entity<TBViewOrderNew>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewOrderNew");
+            });
+
             //************************************************************
 
 
@@ -1395,6 +1405,15 @@ namespace Infarstuructre.Data
 		   .HasDefaultValueSql("((1))");
 		
 			//---------------------------------	
+            //---------------------------------	
+            builder.Entity<TBOrderNew>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<TBOrderNew>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+		
+			//---------------------------------	
 		}
 
 		public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
@@ -1562,5 +1581,7 @@ namespace Infarstuructre.Data
         public DbSet<TBTypeSystemDelivery> TBTypeSystemDeliverys { get; set; }
         public DbSet<TBClintWitheDeliveryTariffs> TBClintWitheDeliveryTariffss { get; set; }
         public DbSet<TBViewClintWitheDeliveryTariffs> ViewClintWitheDeliveryTariffs { get; set; }
+        public DbSet<TBOrderNew> TBOrderNews { get; set; }
+        public DbSet<TBViewOrderNew> ViewOrderNew { get; set; }
     }
 }
