@@ -13,7 +13,9 @@ namespace Infarstuructre.BL
         bool UpdateData(Customer updatss);
         bool deleteData(int id);
         List<TBViewCustomers> GetAllv(int id);
-        IAsyncEnumerable<TBViewCustomers> GetAllCustomersAsync(int batchSize = 250);
+
+        /// Api 
+        Task<IEnumerable<TBViewCustomers>>? GetAllCustomersAsync(int pageNumber, int pageSize);
 		Task<IEnumerable<TBViewCustomers>> GetAllCustomersWithConditionAsync(Expression<Func<TBViewCustomers, bool>> condition);
 		Task<Customer>? GetCustomerAsync(int id);
 		Task AddCustomerAsync(Customer customer);
@@ -89,31 +91,18 @@ namespace Infarstuructre.BL
             List<TBViewCustomers> MySlider = dbcontext.ViewCustomers.OrderByDescending(n => n.id == id).Where(a => a.id == id).Where(a => a.CurrentState == true).ToList();
             return MySlider;
         }
-		//Api
-		public async IAsyncEnumerable<TBViewCustomers> GetAllCustomersAsync(int batchSize = 250)
+
+        //Api
+		public async Task<IEnumerable<TBViewCustomers>>? GetAllCustomersAsync(int pageNumber, int pageSize)
 		{
-			int skip = 0;
-			bool moreDataAvailable;
+			IEnumerable<TBViewCustomers> customers = await dbcontext.ViewCustomers
+				.Where(a => a.CurrentState == true)
+				.OrderByDescending(n => n.id)
+				.Skip((pageNumber - 1) * pageSize)
+				.Take(pageSize)
+				.ToListAsync();
 
-			do
-			{
-				var batch = await dbcontext.ViewCustomers
-					.AsNoTracking() // تحسين الأداء بعدم تتبع الكيانات المسترجعة
-					.OrderByDescending(n => n.id)
-					.Where(a => a.CurrentState == true)
-					.Skip(skip)
-					.Take(batchSize)
-					.ToListAsync();
-
-				moreDataAvailable = batch.Count == batchSize;
-				skip += batchSize;
-
-				foreach (var customer in batch)
-				{
-					yield return customer;
-				}
-
-			} while (moreDataAvailable);
+			return customers;
 		}
 
 
