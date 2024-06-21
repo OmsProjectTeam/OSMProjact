@@ -12,6 +12,8 @@ namespace Domin.Entity
         public int IdCityDeliveryTariffs { get; set; }
         public int CityId { get; set; }
         public string description { get; set; }
+        public int AreaId { get; set; }
+        public string AreaName { get; set; }
         public int IdInformationCompanies { get; set; }
         public string TypesCompanies { get; set; }
         public string CompanyName { get; set; }
@@ -25,6 +27,9 @@ namespace Domin.Entity
         public string DataEntry { get; set; }
         public DateTime DateTimeEntry { get; set; }
         public bool CurrentState { get; set; }
+        public bool Active { get; set; }
+        public int IdTypeSystemDelivery { get; set; }
+        public string TypeSystemDelivery { get; set; }
 
     }
 }

@@ -90,16 +90,7 @@ namespace Infarstuructre.Data
 			});
 
             //************************************************************
-                //************************************************************
-
-				builder.Entity<TBViewAreaDeliveryTariffs>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("ViewAreaDeliveryTariffs");
-			});
-
-            //************************************************************
-         
+          
 
 				builder.Entity<TBViewCustomers>(entity =>
 			{
@@ -134,6 +125,26 @@ namespace Infarstuructre.Data
             {
                 entity.HasNoKey();
                 entity.ToView("ViewOrderStatus");
+            });
+
+            //************************************************************
+                      //************************************************************
+
+
+            builder.Entity<TBViewClintWitheDeliveryTariffs>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewClintWitheDeliveryTariffs");
+            });
+
+            //************************************************************    
+            //************************************************************
+
+
+            builder.Entity<TBViewOrderNew>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewOrderNew");
             });
 
             //************************************************************
@@ -1301,14 +1312,7 @@ namespace Infarstuructre.Data
            .Property(b => b.CurrentState)
            .HasDefaultValueSql("((1))");
             //---------------------------------	    //---------------------------------	
-            builder.Entity<TBAreaDeliveryTariffs>()
-           .Property(b => b.DateTimeEntry)
-           .HasDefaultValueSql("getdate()");
-            builder.Entity<TBAreaDeliveryTariffs>()
-           .Property(b => b.CurrentState)
-           .HasDefaultValueSql("((1))");
-            //---------------------------------	
-
+      
 
 
 
@@ -1380,6 +1384,32 @@ namespace Infarstuructre.Data
 		   .Property(b => b.DateTimeEntry)
 		   .HasDefaultValueSql("getdate()");
 			builder.Entity<TaskStatus>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+		
+			//---------------------------------	
+            builder.Entity<TBTypeSystemDelivery>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<TBTypeSystemDelivery>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+		
+			//---------------------------------	
+            //---------------------------------	
+            builder.Entity<TBClintWitheDeliveryTariffs>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<TBClintWitheDeliveryTariffs>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+		
+			//---------------------------------	
+            //---------------------------------	
+            builder.Entity<TBOrderNew>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<TBOrderNew>()
 		   .Property(b => b.CurrentState)
 		   .HasDefaultValueSql("((1))");
 		
@@ -1542,12 +1572,16 @@ namespace Infarstuructre.Data
         public DbSet<TBViewShippingPrices> ViewShippingPrices { get; set; }
         public DbSet<TBViewAreas> ViewAreas { get; set; }
         public DbSet<TBCityDeliveryTariffs> TBCityDeliveryTariffss { get; set; }
-        public DbSet<TBAreaDeliveryTariffs> TBAreaDeliveryTariffss { get; set; }
         public DbSet<TBViewCityDeliveryTariffs> ViewCityDeliveryTariffs { get; set; }
-        public DbSet<TBViewAreaDeliveryTariffs> ViewAreaDeliveryTariffs { get; set; }
+      
         public DbSet<TBViewCustomers> ViewCustomers { get; set; }
         public DbSet<TBViewMerchant> ViewMerchant { get; set; }
         public DbSet<TBViewOrder> ViewOrder { get; set; }
         public DbSet<TBViewOrderStatus> ViewOrderStatus { get; set; }
+        public DbSet<TBTypeSystemDelivery> TBTypeSystemDeliverys { get; set; }
+        public DbSet<TBClintWitheDeliveryTariffs> TBClintWitheDeliveryTariffss { get; set; }
+        public DbSet<TBViewClintWitheDeliveryTariffs> ViewClintWitheDeliveryTariffs { get; set; }
+        public DbSet<TBOrderNew> TBOrderNews { get; set; }
+        public DbSet<TBViewOrderNew> ViewOrderNew { get; set; }
     }
 }

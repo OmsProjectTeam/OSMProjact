@@ -241,6 +241,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please include the address for the process to complete successfully.
+        /// </summary>
+        public static string VlAddres {
+            get {
+                return ResourceManager.GetString("VlAddres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please include the company address for the process to complete successfully...!.
         /// </summary>
         public static string VlAddresCompany {
@@ -340,6 +349,24 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please include a description of the link between the customer and the pricing. The process is completed successfully...!.
+        /// </summary>
+        public static string VlDescriptionClint {
+            get {
+                return ResourceManager.GetString("VlDescriptionClint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please include the order description for the process to complete successfully.
+        /// </summary>
+        public static string VlDescriptionOrder {
+            get {
+                return ResourceManager.GetString("VlDescriptionOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please include the company&apos;s email so that the process is completed successfully...!.
         /// </summary>
         public static string VlEmailCompany {
@@ -426,6 +453,15 @@ namespace Domin.Resource {
         public static string VlTypeSystem {
             get {
                 return ResourceManager.GetString("VlTypeSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please include the type of delivery system for the process to complete successfully...!.
+        /// </summary>
+        public static string VlTypeSystemDelivery {
+            get {
+                return ResourceManager.GetString("VlTypeSystemDelivery", resourceCulture);
             }
         }
     }

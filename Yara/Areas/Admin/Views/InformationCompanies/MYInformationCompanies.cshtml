@@ -97,10 +97,11 @@
                                                             <td class="truncate-50">@item.PhoneCompanySecand</td>
                                                             <td class="truncate-50">@item.EmailCompany</td>
                                                             <td class="truncate-50">@item.AddresCompany</td>
-                                                            <td class="truncate-50"> <a href="@item.CompanyURl"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">URl</button></a></td>
+                                                            @* <td > <a href="@item.CompanyURl"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">URL</button></a></td> *@
+                                                            <td>
+                                                                <a href="@item.CompanyURl"> <input type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" value="URL" data-bs-toggle="modal" data-bs-target="#exampleModal" /></a>
+                                                            </td>
                                                             <td class="truncate-50">@item.CompanyDescription</td>
-
-
                                                         </tr>
                                                             }
                                                 </tbody>

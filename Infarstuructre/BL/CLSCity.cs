@@ -9,6 +9,7 @@ namespace Infarstuructre.BL
         bool saveData(City savee);
         bool UpdateData(City updatss);
         bool deleteData(int Id);
+        List<City> GetAllv(int Id);
     }
     public class CLSCity: IICity
     {
@@ -71,7 +72,11 @@ namespace Infarstuructre.BL
             }
 
         }
-   
 
+        public List<City> GetAllv(int Id)
+        {
+            List<City> MySlider = dbcontext.cities.OrderByDescending(n => n.Id == Id).Where(a => a.Id == Id).Where(a => a.CurrentState == true).ToList();
+            return MySlider;
+        }
     }
 }

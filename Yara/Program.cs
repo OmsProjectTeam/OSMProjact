@@ -109,7 +109,6 @@ builder.Services.AddScoped<IITransaction, CLSTBTransaction>();
 builder.Services.AddScoped<IIShippingPrice, CLSTBShippingPrice>();
 builder.Services.AddScoped<IIArea, CLSArea>();
 builder.Services.AddScoped<IICityDeliveryTariffs, CLSTBCityDeliveryTariffs>();
-builder.Services.AddScoped<IIAreaDeliveryTariffs, CLSTBAreaDeliveryTariffs>();
 builder.Services.AddScoped<IICustomer, CLSCustomer>();
 builder.Services.AddScoped<IIMerchant, CLSMerchant>();
 builder.Services.AddScoped<ITokenService, TokenService>();
@@ -118,6 +117,15 @@ builder.Services.AddScoped<IIRolesName, CLSRolesName>();
 builder.Services.AddScoped<IIOrderStatus, CLSOrderStatus>();
 builder.Services.AddScoped<IITaskStatus, CLSTaskStatus>();
 builder.Services.AddScoped<IIOrder, CLSOrder>();
+builder.Services.AddScoped<IITypeSystemDelivery, CLSTBTypeSystemDelivery>();
+builder.Services.AddScoped<IIClintWitheDeliveryTariffs, CLSTBClintWitheDeliveryTariffs>();
+builder.Services.AddScoped<IIOrderNew, CLSTBOrderNew>();
+
+
+
+
+
+
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();

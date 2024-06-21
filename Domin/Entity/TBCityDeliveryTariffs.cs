@@ -12,6 +12,8 @@ namespace Domin.Entity
         [Key]
         public int IdCityDeliveryTariffs { get; set; }
         public int CityId { get; set; }
+        public int AreaId { get; set; }
+        public int IdTypeSystemDelivery { get; set; }
         public int IdInformationCompanies { get; set; }
         public int IdCurrenciesExchangeRates { get; set; }
         [Required(ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "VlTitleShipping")]
@@ -25,6 +27,7 @@ namespace Domin.Entity
         public string DataEntry { get; set; }
         public DateTime DateTimeEntry { get; set; }
         public bool CurrentState { get; set; }
+        public bool Active { get; set; }
 
     }
 }

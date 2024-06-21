@@ -21,7 +21,6 @@ namespace Infarstuructre.ViewModel
         public NewRegister SNewRegister { get; set; }
         public ChangePasswordViewModel SChangePassword { get; set; }
 		public IEnumerable<RegisterViewModel> ListRegisterViewModel { get; set; }
-
 		public IEnumerable<TBTypesCompanies> ListTypesCompanies { get; set; }
 		public TBTypesCompanies TypesCompanies { get; set; }
         public IEnumerable<TBViewInformationCompanies> ListViewInformationCompanies { get; set; }
@@ -45,8 +44,7 @@ namespace Infarstuructre.ViewModel
         public IEnumerable<TBViewCityDeliveryTariffs> ListViewCityDeliveryTariffs { get; set; }
         public TBCityDeliveryTariffs CityDeliveryTariffs { get; set; }
 
-        public IEnumerable<TBViewAreaDeliveryTariffs> ListViewAreaDeliveryTariffs { get; set; }
-        public TBAreaDeliveryTariffs AreaDeliveryTariffs { get; set; }
+    
         public IEnumerable<TBViewCustomers> ListViewCustomers { get; set; }
         public Customer Customer { get; set; }
         public IEnumerable<TBViewMerchant> ListViewMerchant { get; set; }
@@ -61,6 +59,10 @@ namespace Infarstuructre.ViewModel
         public TaskStatus TaskStatus { get; set; } 
         public IEnumerable<TBViewOrder> ListViewOrder { get; set; }
         public Order Order { get; set; }
+        public IEnumerable<TBTypeSystemDelivery> ListTypeSystemDelivery { get; set; }
+        public TBTypeSystemDelivery TypeSystemDelivery { get; set; } 
+        public IEnumerable<TBViewClintWitheDeliveryTariffs> ListViewClintWitheDeliveryTariffs { get; set; }
+        public TBClintWitheDeliveryTariffs ClintWitheDeliveryTariffs { get; set; }
 
 
 
