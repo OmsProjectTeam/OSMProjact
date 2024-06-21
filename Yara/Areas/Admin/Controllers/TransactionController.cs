@@ -10,10 +10,12 @@ namespace Yara.Areas.Admin.Controllers
     {
         IICurrenciesExchangeRates iCurrenciesTransactions;
         IITransaction iTransaction;
-        public TransactionController(IICurrenciesExchangeRates iCurrenciesTransactions1,IITransaction iTransaction1)
+        IIExchangeRate iExchangeRate;
+        public TransactionController(IICurrenciesExchangeRates iCurrenciesTransactions1,IITransaction iTransaction1, IIExchangeRate iExchangeRate1)
         {
             iCurrenciesTransactions = iCurrenciesTransactions1;
             iTransaction=iTransaction1;
+            iExchangeRate = iExchangeRate1;
         }
         public IActionResult MyTransaction()
         {
@@ -107,6 +109,21 @@ namespace Yara.Areas.Admin.Controllers
       
 
 
+        }
+
+        [HttpGet]
+        public IActionResult GetExchangeRate(int fromCurrencyId, int toCurrencyId)
+        {
+            // Fetch the exchange rate from the database
+            var exchangeRate = iExchangeRate.GetAll()
+                              .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
+                              .Rate;
+
+            if (exchangeRate != null)
+            {
+                return Json(exchangeRate);
+            }
+            return Json("N/A");
         }
     }
 }
