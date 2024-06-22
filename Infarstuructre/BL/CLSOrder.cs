@@ -16,7 +16,7 @@ namespace Infarstuructre.BL
 		List<TBViewOrder> GetAllv(int id);
 		///////////////////////////////////////////
 		///Api 
-		Task<IEnumerable<TBViewOrder>> GetAllOrdersAsync();
+		Task<IEnumerable<TBViewOrder>> GetAllOrdersAsync(int pageNumber, int pageSize);
 		Task<IEnumerable<TBViewOrder>> GetAllOrdersWithConditionAsync(Expression<Func<TBViewOrder, bool>> condition);
 		Task<Order> GetOrderAsync(int id);
 		Task AddOrderAsync(Order merchant);
@@ -91,9 +91,13 @@ namespace Infarstuructre.BL
 		}
 
 		/////////////////// Api
-		public async Task<IEnumerable<TBViewOrder>> GetAllOrdersAsync()
+		public async Task<IEnumerable<TBViewOrder>> GetAllOrdersAsync(int pageNumber, int pageSize)
 		{
-			IEnumerable<TBViewOrder> orders = await dbcontext.ViewOrder.OrderByDescending(n => n.id).Where(a => a.CurrentState == true).ToListAsync();
+			IEnumerable<TBViewOrder> orders = await dbcontext.ViewOrder.OrderByDescending(n => n.id)
+				.Where(a => a.CurrentState == true)
+				.Skip((pageNumber - 1) * pageSize)
+				.Take(pageSize)
+				.ToListAsync();
 			return orders;
 		}
 

@@ -18,12 +18,12 @@ public class MerchantAPIController : ControllerBase
 
     private readonly IIMerchant iMerchant;
 
-    [HttpPost("GitAllMerchants")]
-    public async Task<ActionResult<IEnumerable<TBViewMerchant>>> GitAllMerchants()
+    [HttpPost("GitAllMerchants/{start}/{end}")]
+    public async Task<ActionResult<IEnumerable<TBViewMerchant>>> GitAllMerchants(int start, int end)
     {
         try
         {
-			var merchants = await iMerchant.GetAllMerchantsAsync();
+			var merchants = await iMerchant.GetAllMerchantsAsync(start, end);
 			if (merchants == null)
 				_response.StatusCode = HttpStatusCode.BadRequest;
 

@@ -135,6 +135,9 @@
   <data name="LBAddCityDeliveryTariffs" xml:space="preserve">
     <value>Adding and modifying the pricing of delivery companies to cities</value>
   </data>
+  <data name="LBAddClintWitheDeliveryTariffs" xml:space="preserve">
+    <value>Adding and modifying systems Clint Withe Delivery Tariffs</value>
+  </data>
   <data name="LBAddCurrenciesExchangeRates" xml:space="preserve">
     <value>Add and modify currencies</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="LBAddTypeSystem" xml:space="preserve">
     <value>Adding and modifying systems</value>
+  </data>
+  <data name="LBAddTypeSystemDelivery" xml:space="preserve">
+    <value>Adding and modifying Type System Delivery</value>
   </data>
   <data name="LbAmount" xml:space="preserve">
     <value>Amount</value>
@@ -264,11 +270,17 @@
   <data name="LbDateTimeEntry" xml:space="preserve">
     <value>Time and date of entry</value>
   </data>
+  <data name="Lbdelivery_charges" xml:space="preserve">
+    <value>Delivery Charges</value>
+  </data>
   <data name="LbDescription" xml:space="preserve">
     <value>Region</value>
   </data>
   <data name="Lbdescriptioncity" xml:space="preserve">
     <value>City</value>
+  </data>
+  <data name="LbDescriptionClint" xml:space="preserve">
+    <value>Description Clint</value>
   </data>
   <data name="LBEmageSise" xml:space="preserve">
     <value>Image size 150*150</value>
@@ -297,6 +309,9 @@
   <data name="Lbhidden" xml:space="preserve">
     <value>hidden</value>
   </data>
+  <data name="LBhxcode" xml:space="preserve">
+    <value>Hxcode</value>
+  </data>
   <data name="LbId" xml:space="preserve">
     <value>ID</value>
   </data>
@@ -320,6 +335,9 @@
   </data>
   <data name="Lblat" xml:space="preserve">
     <value>Latitude</value>
+  </data>
+  <data name="LBLbAreaName" xml:space="preserve">
+    <value>Area Name</value>
   </data>
   <data name="LBLbRoles" xml:space="preserve">
     <value>Roles</value>
@@ -356,6 +374,9 @@
   </data>
   <data name="LBMyCityDeliveryTariffs" xml:space="preserve">
     <value>Pricing of delivery companies to cities</value>
+  </data>
+  <data name="LBMyClintWitheDeliveryTariffs" xml:space="preserve">
+    <value>Clint Withe Delivery Tariffs</value>
   </data>
   <data name="LBMyCurrenciesExchangeRates" xml:space="preserve">
     <value>Currencies</value>
@@ -399,6 +420,9 @@
   <data name="LBMyTypeSystem" xml:space="preserve">
     <value>Systems</value>
   </data>
+  <data name="LBMyTypeSystemDelivery" xml:space="preserve">
+    <value>Type System Delivery</value>
+  </data>
   <data name="LbNameRols" xml:space="preserve">
     <value>NameRols</value>
   </data>
@@ -410,6 +434,9 @@
   </data>
   <data name="LbNormalizedName" xml:space="preserve">
     <value>Normalized Name</value>
+  </data>
+  <data name="Lbnotes" xml:space="preserve">
+    <value>Notes</value>
   </data>
   <data name="lbNotSaved" xml:space="preserve">
     <value>Error while saving. Please check and try again later...!</value>
@@ -465,6 +492,12 @@
   <data name="LbRate" xml:space="preserve">
     <value>exchange rate</value>
   </data>
+  <data name="LBreceipt_dt" xml:space="preserve">
+    <value>Receipt Date</value>
+  </data>
+  <data name="LBreceipt_no" xml:space="preserve">
+    <value>Receipt No</value>
+  </data>
   <data name="LbRolesName" xml:space="preserve">
     <value>Roles Name</value>
   </data>
@@ -476,6 +509,9 @@
   </data>
   <data name="LbSector" xml:space="preserve">
     <value>sector</value>
+  </data>
+  <data name="LBservice_charges" xml:space="preserve">
+    <value>Service Charges</value>
   </data>
   <data name="Lbsms_alert" xml:space="preserve">
     <value> sms alert</value>
@@ -537,6 +573,9 @@
   <data name="LTitleShipping" xml:space="preserve">
     <value>Description of shipping validity</value>
   </data>
+  <data name="VLAreadoplceted" xml:space="preserve">
+    <value>Pricing has already been added to the region. Please check and try again later...!</value>
+  </data>
   <data name="VLCitydoplceted" xml:space="preserve">
     <value>The delivery price for this city has been entered. Please check and try again later...!</value>
   </data>
@@ -555,6 +594,9 @@
   <data name="VLCustNamedoplceted" xml:space="preserve">
     <value>The customer name has already been entered. Please verify and try again later....!</value>
   </data>
+  <data name="VLCustomerDoplceted" xml:space="preserve">
+    <value>The customer has been introduced to the pricing system. Please confirm and try again later...!</value>
+  </data>
   <data name="VLDeleteError" xml:space="preserve">
     <value>The deletion was not completed. There was an error</value>
   </data>
@@ -566,6 +608,9 @@
   </data>
   <data name="VLDescriptionareadoplceted" xml:space="preserve">
     <value>The region has already been entered. Please verify and try again later...!</value>
+  </data>
+  <data name="VLDescriptionClintDoplceted" xml:space="preserve">
+    <value>The description of the connection to the tariff system has already been entered. Please verify and try again later...!</value>
   </data>
   <data name="VLDescriptionDoplceted" xml:space="preserve">
     <value>The city has already been entered. Please check and try again later....!</value>
@@ -594,6 +639,9 @@
   <data name="VLimageuplode" xml:space="preserve">
     <value>Please upload the image...!</value>
   </data>
+  <data name="VLMerchantDoplceted" xml:space="preserve">
+    <value>The merchant has been introduced to the pricing system. Please confirm and try again later...!</value>
+  </data>
   <data name="VLMerchantMobDoplceted" xml:space="preserve">
     <value>The phone number has already been entered. Please verify and try again later...!</value>
   </data>
@@ -611,6 +659,9 @@
   </data>
   <data name="VLTypesCompaniesDoplceted" xml:space="preserve">
     <value>The company category has already been entered. Please check and try again later...!</value>
+  </data>
+  <data name="VLTypeSystemDeliveryDoplceted" xml:space="preserve">
+    <value>The delivery system type is already listed, please check and try again later...!</value>
   </data>
   <data name="VLTypeSystemDoplceted" xml:space="preserve">
     <value>The system has already been entered. Please confirm and try again later...!</value>

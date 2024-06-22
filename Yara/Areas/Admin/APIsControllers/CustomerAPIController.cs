@@ -11,27 +11,31 @@ public class CustomerAPIController : ControllerBase
 {
 	private ApiResponse _response;
 	public CustomerAPIController(IICustomer iCustomer)
-    {
-        this.iCustomer = iCustomer;
-        _response = new ApiResponse();
-    }
+	{
+		this.iCustomer = iCustomer;
+		_response = new ApiResponse();
+	}
 
-    private readonly IICustomer iCustomer;
+	private readonly IICustomer iCustomer;
 
-    [HttpPost("GitAllCustomers")]
-    public async Task<ActionResult<IEnumerable<TBViewCustomers>>> GitAllCustomers()
+    [HttpPost("GitAllCustomers/{start}/{end}")]
+    public async Task<ActionResult<IEnumerable<TBViewCustomers>>> GitAllCustomers(int start, int end)
     {
         try
         {
-            var customers = iCustomer.GetAllCustomersAsync();
-            if (customers == null)
-                _response.StatusCode = HttpStatusCode.BadRequest;
+
+			var customers = await iCustomer.GetAllCustomersAsync(start, end);
+			if (customers == null)
+				_response.StatusCode = HttpStatusCode.BadRequest;
 
             _response.Result = customers;
             _response.StatusCode = HttpStatusCode.Created;
 
-            return Ok(_response);
-        }
+
+			return Ok(_response);
+
+		}
+
         catch (Exception ex)
         {
             _response.IsSuccess = false;
@@ -64,7 +68,7 @@ public class CustomerAPIController : ControllerBase
     }
 
     [HttpPost("{id}")]
-    public async Task<ActionResult<TBViewCustomers>> GitCustomerById(int id)
+    public async Task<ActionResult<Customer>> GitCustomerById(int id)
     {
         try
         {
