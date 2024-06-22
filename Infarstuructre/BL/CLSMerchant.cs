@@ -12,7 +12,7 @@ namespace Infarstuructre.BL
         List<TBViewMerchant> GetAllv(int id);
 
         // Methods for APIs
-        Task<IEnumerable<TBViewMerchant>> GetAllMerchantsAsync();
+        Task<IEnumerable<TBViewMerchant>> GetAllMerchantsAsync(int pageNumber, int pageSize);
         Task<IEnumerable<TBViewMerchant>> GetAllMerchantsWithConditionAsync(Expression<Func<TBViewMerchant, bool>> condition);
         Task<Merchant> GetMerchantAsync(int id);
         Task AddMerchantAsync(Merchant merchant);
@@ -89,9 +89,13 @@ namespace Infarstuructre.BL
 
 
         // Methods for APIs
-        public async Task<IEnumerable<TBViewMerchant>>? GetAllMerchantsAsync()
+        public async Task<IEnumerable<TBViewMerchant>>? GetAllMerchantsAsync(int pageNumber, int pageSize)
         {
-            IEnumerable<TBViewMerchant> merchants = await dbcontext.ViewMerchant.OrderByDescending(n => n.id).Where(a => a.CurrentState == true).ToListAsync();
+            IEnumerable<TBViewMerchant> merchants = await dbcontext.ViewMerchant.OrderByDescending(n => n.id)
+                .Where(a => a.CurrentState == true)
+				.Skip((pageNumber - 1) * pageSize)
+				.Take(pageSize)
+				.ToListAsync();
             return merchants;
         }
 

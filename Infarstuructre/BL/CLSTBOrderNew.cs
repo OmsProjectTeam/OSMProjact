@@ -1,5 +1,9 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
 namespace Infarstuructre.BL
 {
     public interface IIOrderNew
@@ -10,6 +14,13 @@ namespace Infarstuructre.BL
         bool UpdateData(TBOrderNew updatss);
         bool deleteData(int IdOrderNew);
         List<TBViewOrderNew> GetAllv(int IdOrderNew);
+
+        //////////////////// API /////////////////////////////////////
+        Task<IEnumerable<TBViewOrderNew>> GetAllOrdersNewAsync(int pageNumber, int pageSize);
+		Task<TBOrderNew> GetOrderNewByIdAsync(int Id);
+        Task<IEnumerable<TBViewOrderNew>> GetAllOrdersNewWithConditionAsync(Expression<Func<TBViewOrderNew, bool>> condition);
+        Task AddOrderNewAsync(TBOrderNew orderNew);
+        Task UpdateOrderNewAsync(TBOrderNew orderNew);
     }
     public class CLSTBOrderNew: IIOrderNew
     {
@@ -77,5 +88,40 @@ namespace Infarstuructre.BL
             List<TBViewOrderNew> MySlider = dbcontext.ViewOrderNew.OrderByDescending(n => n.IdOrderNew == IdOrderNew).Where(a => a.IdOrderNew == IdOrderNew).Where(a => a.CurrentState == true).ToList();
             return MySlider;
         }
-    }
+
+        // /////////////////// APIs /////////////////////////////////////////
+		public async Task<IEnumerable<TBViewOrderNew>> GetAllOrdersNewAsync(int pageNumber, int pageSize)
+		{
+			IEnumerable<TBViewOrderNew> ordersNew = await dbcontext.ViewOrderNew.OrderByDescending(n => n.IdOrderNew)
+                .Where(a => a.CurrentState == true)
+				.Skip((pageNumber - 1) * pageSize)
+				.Take(pageSize)
+				.ToListAsync();
+			return ordersNew;
+		}
+
+		public async Task<TBOrderNew> GetOrderNewByIdAsync(int Id)
+		{
+            var orderNew = await dbcontext.TBOrderNews.FindAsync(Id);
+            return orderNew;
+		}
+
+		public async Task<IEnumerable<TBViewOrderNew>> GetAllOrdersNewWithConditionAsync(Expression<Func<TBViewOrderNew, bool>> condition)
+		{
+			IEnumerable<TBViewOrderNew> ordersNew = await dbcontext.ViewOrderNew.OrderByDescending(n => n.IdOrderNew).Where(condition).ToListAsync();
+			return ordersNew;
+		}
+
+		public async Task AddOrderNewAsync(TBOrderNew orderNew)
+		{
+			await dbcontext.AddAsync(orderNew);
+			await dbcontext.SaveChangesAsync();
+		}
+
+		public async Task UpdateOrderNewAsync(TBOrderNew orderNew)
+		{
+		    dbcontext.Entry(orderNew).State = EntityState.Modified;
+			await dbcontext.SaveChangesAsync();
+		}
+	}
 }

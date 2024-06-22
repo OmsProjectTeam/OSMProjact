@@ -1,37 +1,38 @@
-﻿using Domin.Entity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
 using System.Net;
 
-namespace Yara.Areas.Admin.API_Controller;
+namespace Yara.Areas.Admin.APIsControllers;
 
-[Authorize(Roles = "Admin,ApiRoles")]
 [Route("api/[controller]")]
 [ApiController]
-public class OrderApiController : ControllerBase
+public class OrderNewApiController : ControllerBase
 {
-	private ApiResponse _response;
-	public OrderApiController(IIOrder iOrder)
+	public OrderNewApiController(IIOrderNew iOrderNew)
 	{
-		this.iOrder = iOrder;
+		this.iOrderNew = iOrderNew;
 		_response = new ApiResponse();
 	}
 
-	private readonly IIOrder iOrder;
+	private readonly IIOrderNew iOrderNew;
+	private ApiResponse _response;
 
-	[HttpPost("GitAllOrders/{start}/{end}")]
-	public async Task<ActionResult<IEnumerable<TBViewOrder>>> GitAllOrders(int start, int end)
+	[HttpPost("GitAllOrdersNew/{start}/{end}")]
+	public async Task<ActionResult<IEnumerable<TBViewOrderNew>>> GitAllOrdersNew(int start, int end)
 	{
 		try
 		{
-			var orders = await iOrder.GetAllOrdersAsync(start, end);
-			if (orders == null)
+			var customers = await iOrderNew.GetAllOrdersNewAsync(start, end);
+			if (customers == null)
 				_response.StatusCode = HttpStatusCode.BadRequest;
 
-			_response.Result = orders;
+			_response.Result = customers;
 			_response.StatusCode = HttpStatusCode.Created;
 
 			return Ok(_response);
 		}
+
 		catch (Exception ex)
 		{
 			_response.IsSuccess = false;
@@ -40,15 +41,15 @@ public class OrderApiController : ControllerBase
 		return Ok(_response);
 	}
 
-	[HttpPost("GitAllOrdersWithCondition")]
-	public async Task<ActionResult<IEnumerable<TBViewOrder>>> GitAllOrdersWithCondition(Expression<Func<TBViewOrder, bool>> condition)
+	[HttpPost("GitAllOrdersNewWithCondition")]
+	public async Task<ActionResult<IEnumerable<TBViewOrderNew>>> GitAllOrdersNewWithCondition(Expression<Func<TBViewOrderNew, bool>> condition)
 	{
 		try
 		{
-			var orders = await iOrder.GetAllOrdersWithConditionAsync(condition);
-			if (orders == null)
+			var customers = await iOrderNew.GetAllOrdersNewWithConditionAsync(condition);
+			if (customers == null)
 				_response.StatusCode = HttpStatusCode.BadRequest;
-			_response.Result = orders;
+			_response.Result = customers;
 			_response.StatusCode = HttpStatusCode.Created;
 
 			return Ok(_response);
@@ -62,14 +63,14 @@ public class OrderApiController : ControllerBase
 	}
 
 	[HttpPost("{id}")]
-	public async Task<ActionResult<TBViewMerchant>> GitOrderById(int id)
+	public async Task<ActionResult<TBOrderNew>> GitOrderNewById(int id)
 	{
 		try
 		{
-			var merchant = await iOrder.GetOrderAsync(id);
-			if (merchant == null)
+			var order = await iOrderNew.GetOrderNewByIdAsync(id);
+			if (order == null)
 				_response.StatusCode = HttpStatusCode.BadRequest;
-			_response.Result = merchant;
+			_response.Result = order;
 			_response.StatusCode = HttpStatusCode.Created;
 
 			return Ok(_response);
@@ -82,16 +83,16 @@ public class OrderApiController : ControllerBase
 
 		return Ok(_response);
 	}
-
+	
 	[HttpPost]
-	public async Task<ActionResult> AddOrder(Order order)
+	public async Task<ActionResult> AddOrderNewAsync(TBOrderNew order)
 	{
 		try
 		{
 			if (!ModelState.IsValid)
 				_response.StatusCode = HttpStatusCode.BadRequest;
 
-			await iOrder.AddOrderAsync(order);
+			await iOrderNew.AddOrderNewAsync(order);
 
 			_response.Result = order;
 			return Ok(_response);
@@ -106,18 +107,18 @@ public class OrderApiController : ControllerBase
 	}
 
 	[HttpPut("{id}")]
-	public async Task<ActionResult> EditOrder(int id, [FromBody] Order order)
+	public async Task<ActionResult> UpdateOrderNewAsync(int id, [FromBody] TBOrderNew orderNew)
 	{
 		try
 		{
-			var ord = await iOrder.GetOrderAsync(id);
-			if (ord == null)
+			var order = await iOrderNew.GetOrderNewByIdAsync(id);
+			if (order == null)
 				_response.StatusCode = HttpStatusCode.BadRequest;
 
-			ord = order;
-			await iOrder.UpdateOrderAsync(ord);
+			order = orderNew;
+			await iOrderNew.UpdateOrderNewAsync(order);
 
-			_response.Result = ord;
+			_response.Result = order;
 			return Ok(_response);
 		}
 		catch (Exception ex)
@@ -130,16 +131,16 @@ public class OrderApiController : ControllerBase
 	}
 
 	[HttpDelete("{id}")]
-	public async Task<ActionResult> DeleteOrder(int id)
+	public async Task<ActionResult> DeleteOrderNew(int id)
 	{
 		try
 		{
-			var order = await iOrder.GetOrderAsync(id);
+			var order = await iOrderNew.GetOrderNewByIdAsync(id);
 			if (order == null)
 				_response.StatusCode = HttpStatusCode.BadRequest;
 
 			order.CurrentState = false;
-			await iOrder.UpdateOrderAsync(order);
+			await iOrderNew.UpdateOrderNewAsync(order);
 
 			_response.Result = order;
 			return Ok(_response);
@@ -153,4 +154,3 @@ public class OrderApiController : ControllerBase
 		return Ok(_response);
 	}
 }
-

@@ -68,7 +68,7 @@ public class CustomerAPIController : ControllerBase
     }
 
     [HttpPost("{id}")]
-    public async Task<ActionResult<TBViewCustomers>> GitCustomerById(int id)
+    public async Task<ActionResult<Customer>> GitCustomerById(int id)
     {
         try
         {

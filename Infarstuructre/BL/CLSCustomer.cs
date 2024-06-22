@@ -105,8 +105,6 @@ namespace Infarstuructre.BL
 			return customers;
 		}
 
-
-
 		public async Task<IEnumerable<TBViewCustomers>> GetAllCustomersWithConditionAsync(Expression<Func<TBViewCustomers, bool>> condition)
 		{
 			IEnumerable<TBViewCustomers> customers = await dbcontext.ViewCustomers.Where(condition).ToListAsync();
