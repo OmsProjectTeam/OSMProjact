@@ -62,7 +62,9 @@ namespace Infarstuructre.ViewModel
         public IEnumerable<TBTypeSystemDelivery> ListTypeSystemDelivery { get; set; }
         public TBTypeSystemDelivery TypeSystemDelivery { get; set; } 
         public IEnumerable<TBViewClintWitheDeliveryTariffs> ListViewClintWitheDeliveryTariffs { get; set; }
-        public TBClintWitheDeliveryTariffs ClintWitheDeliveryTariffs { get; set; }
+        public TBClintWitheDeliveryTariffs ClintWitheDeliveryTariffs { get; set; }  
+        public IEnumerable<TBViewOrderNew> ListViewOrderNew { get; set; }
+        public TBOrderNew OrderNew { get; set; }
 
 
 
