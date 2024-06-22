@@ -148,6 +148,15 @@ namespace Infarstuructre.Data
             });
 
             //************************************************************
+            
+
+            builder.Entity<TBViewUsers>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewUsers");
+            });
+
+            //************************************************************
 
 
             builder.UseCollation("Arabic_CI_AS");
@@ -1412,11 +1421,18 @@ namespace Infarstuructre.Data
 			builder.Entity<TBOrderNew>()
 		   .Property(b => b.CurrentState)
 		   .HasDefaultValueSql("((1))");
-		
-			//---------------------------------	
-		}
 
-		public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
+            //---------------------------------	
+
+
+
+            //---------------------------------	
+        
+          
+    
+        }
+
+        public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
 
         public virtual DbSet<Account> accounts { get; set; }
 
@@ -1583,5 +1599,6 @@ namespace Infarstuructre.Data
         public DbSet<TBViewClintWitheDeliveryTariffs> ViewClintWitheDeliveryTariffs { get; set; }
         public DbSet<TBOrderNew> TBOrderNews { get; set; }
         public DbSet<TBViewOrderNew> ViewOrderNew { get; set; }
+        public DbSet<TBViewUsers> ViewUsers { get; set; }
     }
 }

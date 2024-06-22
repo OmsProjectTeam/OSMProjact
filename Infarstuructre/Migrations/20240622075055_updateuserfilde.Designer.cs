@@ -4,6 +4,7 @@ using Infarstuructre.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infarstuructre.Migrations
 {
     [DbContext(typeof(MasterDbcontext))]
-    partial class MasterDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20240622075055_updateuserfilde")]
+    partial class updateuserfilde
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -3807,43 +3810,6 @@ namespace Infarstuructre.Migrations
                     b.ToTable((string)null);
 
                     b.ToView("ViewTransaction", (string)null);
-                });
-
-            modelBuilder.Entity("Domin.Entity.TBViewUsers", b =>
-                {
-                    b.Property<string>("EmailUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhotoUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("cust_mob")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("cust_name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("customer_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userpwd")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("ViewUsers", (string)null);
                 });
 
             modelBuilder.Entity("Domin.Entity.Table1", b =>
