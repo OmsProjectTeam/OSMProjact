@@ -526,7 +526,7 @@ namespace Yara.Areas.Admin.Controllers
                     {
                         Id = usersife.id.ToString(),
                         Name = usersife.cust_name,
-                        UserName = usersife.cust_mob,
+                        UserName = usersife.username + "@cu.com",
                         Email = usersife.username +"@cu.com",
                         ActiveUser = true,
                         ImageUser = usersife.PhotoUser,
