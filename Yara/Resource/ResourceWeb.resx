@@ -153,6 +153,9 @@
   <data name="LBAddOrderStatus" xml:space="preserve">
     <value>Adding and modifying Order Status</value>
   </data>
+  <data name="LbAddres" xml:space="preserve">
+    <value>Address</value>
+  </data>
   <data name="LbAddresCompany" xml:space="preserve">
     <value>Address</value>
   </data>
@@ -231,6 +234,9 @@
   <data name="LbCoPricePerkgUnder10" xml:space="preserve">
     <value>The company's shipping price is less than 10</value>
   </data>
+  <data name="LbCostPrice" xml:space="preserve">
+    <value>Cost Price</value>
+  </data>
   <data name="LbCountry" xml:space="preserve">
     <value> currency</value>
   </data>
@@ -281,6 +287,12 @@
   </data>
   <data name="LbDescriptionClint" xml:space="preserve">
     <value>Description Clint</value>
+  </data>
+  <data name="LbDescriptionOrder" xml:space="preserve">
+    <value>Description Order</value>
+  </data>
+  <data name="LbdescriptionOrderStuse" xml:space="preserve">
+    <value>Description Order Status</value>
   </data>
   <data name="LBEmageSise" xml:space="preserve">
     <value>Image size 150*150</value>
@@ -399,6 +411,9 @@
   <data name="LBMyOrderCase" xml:space="preserve">
     <value>Order Cases</value>
   </data>
+  <data name="LBMyOrderNew" xml:space="preserve">
+    <value>Order New </value>
+  </data>
   <data name="LBMyOrderStatus" xml:space="preserve">
     <value>Order Status</value>
   </data>
@@ -462,6 +477,9 @@
   <data name="lbNotUpdateMsgUserRole" xml:space="preserve">
     <value>Error during the editing process. Please check and try again later..!</value>
   </data>
+  <data name="LbNouts" xml:space="preserve">
+    <value>Noute</value>
+  </data>
   <data name="lbOldeAndUserGide" xml:space="preserve">
     <value>Old photo</value>
   </data>
@@ -470,6 +488,9 @@
   </data>
   <data name="LbOrderCase" xml:space="preserve">
     <value>Case</value>
+  </data>
+  <data name="LborderCases" xml:space="preserve">
+    <value>Order Cases</value>
   </data>
   <data name="LBOrderStatus" xml:space="preserve">
     <value>Order Status</value>
@@ -486,6 +507,9 @@
   <data name="LbPhoto" xml:space="preserve">
     <value>Photo</value>
   </data>
+  <data name="LbPrice" xml:space="preserve">
+    <value>Price</value>
+  </data>
   <data name="LBPricingSystem" xml:space="preserve">
     <value>Pricing System</value>
   </data>
@@ -497,6 +521,9 @@
   </data>
   <data name="LBreceipt_no" xml:space="preserve">
     <value>Receipt No</value>
+  </data>
+  <data name="Lbrole" xml:space="preserve">
+    <value>Role</value>
   </data>
   <data name="LbRolesName" xml:space="preserve">
     <value>Roles Name</value>
@@ -564,6 +591,9 @@
   <data name="LbUS_delivery" xml:space="preserve">
     <value>Delivery system user</value>
   </data>
+  <data name="LbWeight" xml:space="preserve">
+    <value>Weight</value>
+  </data>
   <data name="Lbwith_delivery" xml:space="preserve">
     <value>with Delivery</value>
   </data>
@@ -617,6 +647,9 @@
   </data>
   <data name="VLDescriptiondplceted" xml:space="preserve">
     <value>The order status has been entered. Please confirm and try again later....!</value>
+  </data>
+  <data name="VLDescriptionOrderDoplceted" xml:space="preserve">
+    <value>The order description has already been entered. Please confirm and try again later...!</value>
   </data>
   <data name="VLEmailOreUserOrPaswo" xml:space="preserve">
     <value>Email or username already exists...!</value>

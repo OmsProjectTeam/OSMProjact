@@ -116,7 +116,6 @@ namespace Infarstuructre.BL
 			Customer customer = await dbcontext.customers.FindAsync(id);
 			return customer;
 		}
-
 		public async Task<TBViewCustomers?> GetCustomerAsyncview(int id)
 		{
 			TBViewCustomers? customer = await dbcontext.ViewCustomers
@@ -124,9 +123,6 @@ namespace Infarstuructre.BL
 				.FirstOrDefaultAsync();
 			return customer;
 		}
-
-
-
 		public async Task<TBViewCustomers?> GetCustomerAsyncviewName(string name)
 		{
 			TBViewCustomers? customer = await dbcontext.ViewCustomers
