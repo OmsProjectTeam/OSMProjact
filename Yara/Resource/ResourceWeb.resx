@@ -357,6 +357,9 @@
   <data name="Lblon" xml:space="preserve">
     <value>longitude</value>
   </data>
+  <data name="LBMerchantInformation" xml:space="preserve">
+    <value>Merchant Information</value>
+  </data>
   <data name="LBMerchants" xml:space="preserve">
     <value>Merchants</value>
   </data>

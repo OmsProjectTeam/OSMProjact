@@ -300,7 +300,7 @@ namespace Yara.Areas.Admin.Controllers
 
 					if (returnUrl == null)
 					{
-
+//if user role name merchint then redirect to merchant areago to merchant area withe id   user 
 						// Token Here
 						return RedirectToAction("Index", "Home", new { area = "", token = token});
 					}

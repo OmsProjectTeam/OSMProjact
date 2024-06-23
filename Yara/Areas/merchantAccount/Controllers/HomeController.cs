@@ -3,7 +3,7 @@
 namespace Yara.Areas.merchantAccount.Controllers
 {
     [Area("merchantAccount")]
-    [Authorize(Roles = "Admin,Customer")]
+    [Authorize(Roles = "Admin,Merchant")]
     public class HomeController : Controller
     {
         public IActionResult Index()
