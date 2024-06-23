@@ -90,11 +90,6 @@
                                                         <th rowspan="1" colspan="1">@ResourceWeb.Lbrole</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LborderCases</th>
 
-                                                    
-
-
-
-
                                                 </tfoot>
                                                 <tbody>
                                                             @foreach (var item in Model.ListViewOrderNew)
@@ -176,7 +171,6 @@
                                                             <td class="truncate-50">@item.CityName</td>
                                                             <td class="truncate-50">@item.AreaMersh</td>
 
-
                                                         </tr>
                                                             }
                                                 </tbody>
@@ -193,6 +187,7 @@
                                                     <tr role="row">
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbId</th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbDescriptionOrder</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbOrderDate</th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbWeight</th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbAddres</th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbNouts</th>
@@ -204,6 +199,7 @@
                                                     <tr>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbDescriptionOrder</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbOrderDate</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbWeight</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbAddres</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbNouts</th>
@@ -218,6 +214,7 @@
                                                         <tr role="row" class="odd">
                                                             <td>@item.IdOrderNew</td>
                                                             <td>@item.DescriptionOrder</td>
+                                                            <td>@item.OrderDate</td>
                                                             <td>@item.Weight</td>
                                                             <td>@item.Addres</td>
                                                             <td>@item.Nouts</td>
