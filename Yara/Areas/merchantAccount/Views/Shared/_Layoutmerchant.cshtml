@@ -76,7 +76,7 @@
 					<li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-user"></i><span>@ResourceWeb.LBMerchantInformation</span><span class="menu-arrow fa fa-angle-down"></span></a>
 						<ul class="sub-menu js__content">
-							<li><a asp-area="merchantAccount" asp-controller="Profile" asp-action="MyProfile">@ResourceWeb.Lbcust_profile</a></li>
+							<li><a asp-area="merchantAccount" asp-controller="Profile" asp-action="MyProfile" asp-route-id="@ViewBag.UserId">@ResourceWeb.Lbcust_profile</a></li>
 						@* 	<li><a asp-area="Admin" asp-controller="Accounts" asp-action="Registers">Users</a></li>
 							<li><a href="icons-material-icons.html">Material Design Icons</a></li>
 							<li><a href="icons-material-design-iconic.html">Material Design Iconic Font</a></li>
