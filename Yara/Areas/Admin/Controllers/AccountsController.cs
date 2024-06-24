@@ -4,6 +4,7 @@
 using Domin.Entity;
 using Infarstuructre.BL;
 using LamarModa.Api.Auth;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Yara.Areas.Admin.Controllers
@@ -100,6 +101,11 @@ namespace Yara.Areas.Admin.Controllers
 			}
 			return RedirectToAction("Roles");
 		}
+
+
+
+
+
 		[Authorize(Roles = "Admin")]
 		public async Task<IActionResult> DeleteRole(string Id)
 		{
@@ -589,9 +595,116 @@ namespace Yara.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> AddEditRolesUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var roles = _roleManager.Roles.ToList();
+
+            var model = new UserChingRole
+            {
+                UserId = user.Id,
+                UserName = user.UserName,
+                Roles = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = userRoles.Contains(r.Name)
+                }).ToList()
+            };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddEditRolesUser(UserChingRole model)
+        {
+            if (ModelState.IsValid)
+            {
+                var roles = _roleManager.Roles.ToList();
+                model.Roles = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = r.Id == model.SelectedRoleId
+                }).ToList();
+                return View("AddEditRolesUser", model);
+            }
+
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var selectedRole = await _roleManager.FindByIdAsync(model.SelectedRoleId);
+
+            if (selectedRole == null)
+            {
+                ModelState.AddModelError(string.Empty, "Role not found");
+                var roles = _roleManager.Roles.ToList();
+                model.Roles = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = r.Id == model.SelectedRoleId
+                }).ToList();
+                return View("AddEditRolesUser", model);
+            }
+
+            var removeResult = await _userManager.RemoveFromRolesAsync(user, userRoles);
+            if (!removeResult.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Failed to remove user roles");
+                var roles = _roleManager.Roles.ToList();
+                model.Roles = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = r.Id == model.SelectedRoleId
+                }).ToList();
+                return View("AddEditRolesUser", model);
+            }
+
+            var addResult = await _userManager.AddToRoleAsync(user, selectedRole.Name);
+            if (!addResult.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Failed to add user to the new role");
+                var roles = _roleManager.Roles.ToList();
+                model.Roles = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = r.Id == model.SelectedRoleId
+                }).ToList();
+                return View("AddEditRolesUser", model);
+            }
+
+            return RedirectToAction("Registers"); // Assuming you have an Index action in UserController
+        }
     }
+
+
+
+
+
+
+
 }
+
+
+
 
     #endregion
 

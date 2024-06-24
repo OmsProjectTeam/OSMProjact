@@ -90,6 +90,12 @@
                                             <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Accounts" asp-action="EditeRegister" asp-route-Id="@item.Id"><button type="button" class="btn btn-primary btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-edit"></i></button></a></li>|
                                             <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Accounts" asp-action="DeleteUser" asp-route-userId="@item.Id"><button type="button" class="btn btn-danger btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-remove"></i></button></a></li>|
                                             <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Accounts" asp-action="ChangePassword" asp-route-Id="@item.Id"><button type="button" class="btn btn-success btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-lock"></i></button></a></li>|
+                                            <li class="margin-bottom-10">
+                                                <a asp-area="Admin" asp-controller="Accounts" asp-action="AddEditRolesUser" asp-route-id="@item.Id" asp-route-roleId="@item.RoleId" class="btn btn-violet btn-circle btn-lg waves-effect waves-light">
+                                                    <i class="ico fa fa-random"></i>
+                                                </a>
+                                            </li>
+
                                         </ul>
                                     </td>
 
