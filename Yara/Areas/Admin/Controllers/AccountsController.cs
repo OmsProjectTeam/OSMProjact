@@ -179,7 +179,7 @@ namespace Yara.Areas.Admin.Controllers
 					Name = model.NewRegister.Name,
 					UserName = model.NewRegister.Email,
 					Email = model.NewRegister.Email,
-					ActiveUser = model.NewRegister.ActiveUser,
+					ActiveUser = true,
 					ImageUser = model.NewRegister.ImageUser,
 					PhoneNumber = model.NewRegister.PhoneNumber
 
@@ -320,6 +320,11 @@ namespace Yara.Areas.Admin.Controllers
                     {
                         // Redirect to merchant area with user ID
                         return RedirectToAction("Index", "Home", new { area = "Admin", userId = user.Id, token = token });
+                    }// Check if user has the role "Admin"
+                    if (roles.Contains("AirFreight"))
+                    {
+						// Redirect to AirFreight area with user ID
+						return RedirectToAction("Index", "Home", new { area = "AirFreight", userId = user.Id, token = token });
                     }
                     if (string.IsNullOrEmpty(returnUrl))
 					{
@@ -357,18 +362,18 @@ namespace Yara.Areas.Admin.Controllers
 			return View(new RegisterViewModel());
 		}
 
-
-
         [AllowAnonymous]
         public IActionResult RegisterCustomer(string? Id)
         {
             return View(new RegisterViewModel());
         }
-
-
-
 		[AllowAnonymous]
 		public IActionResult RegisterMerchant(string? Id)
+		{
+			return View(new RegisterViewModel());
+		}	
+		[AllowAnonymous]
+		public IActionResult RegisterAirFreight(string? Id)
 		{
 			return View(new RegisterViewModel());
 		}
@@ -418,7 +423,7 @@ namespace Yara.Areas.Admin.Controllers
 					Name = model.NewRegister.Name,
 					UserName = model.NewRegister.Email,
 					Email = model.NewRegister.Email,
-					ActiveUser = model.NewRegister.ActiveUser,
+					ActiveUser = true,
 					ImageUser = model.NewRegister.ImageUser,
 					PhoneNumber = model.NewRegister.PhoneNumber
 				};
@@ -508,7 +513,7 @@ namespace Yara.Areas.Admin.Controllers
 					Name = model.NewRegister.Name,
 					UserName = model.NewRegister.Email,
 					Email = model.NewRegister.Email,
-					ActiveUser = model.NewRegister.ActiveUser,
+					ActiveUser = true,
 					ImageUser = model.NewRegister.ImageUser,
 					PhoneNumber = model.NewRegister.PhoneNumber
 				};
@@ -595,7 +600,7 @@ namespace Yara.Areas.Admin.Controllers
 					Name = model.NewRegister.Name,
 					UserName = model.NewRegister.Email,
 					Email = model.NewRegister.Email,
-					ActiveUser = model.NewRegister.ActiveUser,
+					ActiveUser = true,
 					ImageUser = model.NewRegister.ImageUser,
 					PhoneNumber = model.NewRegister.PhoneNumber
 				};
@@ -652,7 +657,92 @@ namespace Yara.Areas.Admin.Controllers
 			}
 			return RedirectToAction("regesters");
 		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		[AllowAnonymous]
+		public async Task<IActionResult> RegistersAirFreight(RegisterViewModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				var file = HttpContext.Request.Form.Files;
+				if (file.Count() > 0)
+				{
+					string ImageName = Guid.NewGuid().ToString() + Path.GetExtension(file[0].FileName);
+					var fileStream = new FileStream(Path.Combine(@"wwwroot/", Helper.PathSaveImageuser, ImageName), FileMode.Create);
+					file[0].CopyTo(fileStream);
+					model.NewRegister.ImageUser = ImageName;
+				}
+				else
+				{
+					TempData["Message"] = ResourceWeb.VLimageuplode;
+					return RedirectToAction("Register", model);
 
+
+					//model.sUser.ImageUser = model.sUser.ImageUser;
+				}
+				var user = new ApplicationUser
+				{
+					Id = model.NewRegister.Id,
+					Name = model.NewRegister.Name,
+					UserName = model.NewRegister.Email,
+					Email = model.NewRegister.Email,
+					ActiveUser = true,
+					ImageUser = model.NewRegister.ImageUser,
+					PhoneNumber = model.NewRegister.PhoneNumber
+				};
+				if (user.Id == null)
+				{
+					//Craete
+					user.Id = Guid.NewGuid().ToString();
+					var result = await _userManager.CreateAsync(user, model.NewRegister.Password);
+					if (result.Succeeded)
+					{
+						//Succsseded				
+						//var myuser = await _userManager.FindByEmailAsync(user.Email);
+						var myuser = await _userManager.FindByIdAsync(user.Id);
+						var toaw = await _userManager.AddToRoleAsync(myuser, "AirFreight");
+						var loginResulte = await _signInManager.PasswordSignInAsync(user, model.NewRegister.Password, true, true);
+						if (toaw.Succeeded)
+							return RedirectToAction("Index", "Home", new { area = "" });
+						else
+							return RedirectToAction("Register");
+					}
+					else //Not Successeded
+						TempData["Message2"] = ResourceWeb.VLEmailOreUserOrPaswo;
+
+					return RedirectToAction("Register", model);
+				}
+				else
+				{
+					//Update
+					var userUpdate = await _userManager.FindByIdAsync(user.Id);
+
+
+					userUpdate.Id = user.Id;
+					userUpdate.Name = user.Name;
+					userUpdate.UserName = user.Email;
+					userUpdate.Email = user.Email;
+					userUpdate.ActiveUser = user.ActiveUser;
+					userUpdate.ImageUser = user.ImageUser;
+					var result = await _userManager.UpdateAsync(userUpdate);
+					if (result.Succeeded)
+					{
+						//var oldRole = await _userManager.GetRolesAsync(userUpdate);
+						//await _userManager.RemoveFromRolesAsync(userUpdate, oldRole);
+						//var AddRole = await _userManager.AddToRoleAsync(userUpdate, model.NewRegister.RoleName);
+						////if (AddRole.Succeeded)
+						SessionMsg(Helper.Success, Resource.ResourceWeb.lbUpdate, Resource.ResourceWeb.lbNotUpdateMsgUserRole);
+
+					}
+					else
+					{
+						SessionMsg(Helper.Error, Resource.ResourceWeb.lbNotUpdate, Resource.ResourceWeb.lbNotUpdateMsgUserRole);
+					}
+
+				}
+			}
+			return RedirectToAction("regesters");
+		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
