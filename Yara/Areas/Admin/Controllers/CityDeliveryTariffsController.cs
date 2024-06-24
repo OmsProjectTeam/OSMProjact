@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+
 namespace Yara.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -132,6 +134,12 @@ namespace Yara.Areas.Admin.Controllers
                 TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
                 return RedirectToAction("MyCityDeliveryTariffs");
             }
+        }
+
+        public JsonResult GetAreasByCity(int cityId)
+        {
+            var areas = dbcontext.ViewAreas.Where(a => a.city_id == cityId).Select(a => new { a.id, a.Description }).ToList();
+            return Json(areas);
         }
     }
 }
