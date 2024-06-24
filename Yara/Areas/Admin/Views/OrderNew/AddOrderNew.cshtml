@@ -45,7 +45,6 @@
                                     <select id="customer-select" class="form-control select2_1" asp-for="@Model.OrderNew.IdorderStatus" asp-items="@(new SelectList(ViewBag.OrderStatus, "id", "description"))">
                                     </select>
                                     <span asp-validation-for="@Model.OrderNew.IdorderStatus" class="text-danger"></span>
-                                    <span style="color:red"><strong>@TempData["Customer"]</strong></span>
                                 </div>
                             </div>
                       
@@ -74,7 +73,9 @@
                                     <label asp-for="@Model.OrderNew.DescriptionOrder" for="exampleInputEmail1">@ResourceWeb.LbDescriptionOrder</label>
                                     <input asp-for="@Model.OrderNew.DescriptionOrder" type="text" placeholder="@ResourceWeb.LbDescriptionOrder ...." class="form-control" maxlength="300">
                                     <span asp-validation-for="@Model.OrderNew.DescriptionOrder" class="text-danger"></span>
+                                    <span style="color:red"><strong>@TempData["DescriptionOrder"]</strong></span>
 
+                                    
                                 </div>
                             </div>
                             <div class="col-xs-4">

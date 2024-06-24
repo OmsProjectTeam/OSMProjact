@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34601.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yara", "Yara\Yara.csproj", "{2B2562C1-3E96-4AC2-A582-5E218D5BD11E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yara", "Yara\Yara.csproj", "{2B2562C1-3E96-4AC2-A582-5E218D5BD11E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domin", "Domin\Domin.csproj", "{4BB261C2-FAB5-4DDB-A6D7-EC5D7395D26E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domin", "Domin\Domin.csproj", "{4BB261C2-FAB5-4DDB-A6D7-EC5D7395D26E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infarstuructre", "Infarstuructre\Infarstuructre.csproj", "{F25FF5A6-E7E8-4CD2-98B6-39B125541C16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infarstuructre", "Infarstuructre\Infarstuructre.csproj", "{F25FF5A6-E7E8-4CD2-98B6-39B125541C16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

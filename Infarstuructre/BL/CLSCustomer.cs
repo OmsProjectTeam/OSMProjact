@@ -9,7 +9,7 @@ namespace Infarstuructre.BL
     {
         List<TBViewCustomers> GetAll();
         Customer GetById(int id);
-        bool saveData(Customer savee);
+		bool saveData(Customer savee);
         bool UpdateData(Customer updatss);
         bool deleteData(int id);
         List<TBViewCustomers> GetAllv(int id);
@@ -92,7 +92,7 @@ namespace Infarstuructre.BL
             return MySlider;
         }
 
-        //Api
+		//Api
 		public async Task<IEnumerable<TBViewCustomers>>? GetAllCustomersAsync(int pageNumber, int pageSize)
 		{
 			IEnumerable<TBViewCustomers> customers = await dbcontext.ViewCustomers

@@ -12,9 +12,12 @@
 	<link href="~/Web/css/bootstrap.css" rel="stylesheet">
 	<link href="~/Web/css/style.css" rel="stylesheet">
 	<link href="~/Web/css/responsive.css" rel="stylesheet">
-
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -173,7 +176,9 @@
 											else
 											{
 											<li><a asp-area="Admin" asp-controller="Accounts" asp-action="Login">login</a></li>
-											<li><a asp-area="Admin" asp-controller="Accounts" asp-action="Register">Register</a></li>
+											<li><a asp-area="Admin" asp-controller="Accounts" asp-action="Register">Register User</a></li>
+												<li><a asp-area="Admin" asp-controller="Accounts" asp-action="RegisterCustomer">Register Customer</a></li>
+												<li><a asp-area="Admin" asp-controller="Accounts" asp-action="RegisterMerchant">Register Merchant</a></li>
 											}
 			
 										</ul>
@@ -435,6 +440,11 @@
 	<script src="~/Web/js/magnific-popup.min.js"></script>
 
 	<script src="~/Web/js/script.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF8FLgro8cHrm" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+xhJ5lE+1gx2h9PzI0z+AfofBd6EwFf4yK8" crossorigin="anonymous"></script>
+
 	@await RenderSectionAsync("Scripts", required: false)
 	<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
 	<!--[if lt IE 9]><script src="~/Web/js/respond.js"></script><![endif]-->
