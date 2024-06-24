@@ -522,6 +522,9 @@
   <data name="LBPricingSystem" xml:space="preserve">
     <value>Pricing System</value>
   </data>
+  <data name="LBProfile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
   <data name="LbRate" xml:space="preserve">
     <value>exchange rate</value>
   </data>
