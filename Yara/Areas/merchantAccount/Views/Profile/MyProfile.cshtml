@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ViewmMODeElMASTER
+@{
     ViewData["Title"] = "MyProfile";
     Layout = "~/Areas/merchantAccount/Views/Shared/_Layoutmerchant.cshtml";
 }
@@ -14,11 +15,11 @@
                 <div class="dropdown js__drop_down">
                     <a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
                     <ul class="sub-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else there</a></li>
+                        <li><a href="#">Edit</a></li>
+                        <li class="text-danger"><a href="#">Delete</a></li>
+                        @* <li><a href="#">Something else there</a></li>
                         <li class="split"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">Separated link</a></li> *@
                     </ul>
                     <!-- /.sub-menu -->
                 </div>
@@ -27,15 +28,15 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col-xs-5"><label>First Name:</label></div>
+                                <div class="col-xs-5"><label>@ResourceWeb.LBAddRolesName</label></div>
                                 <!-- /.col-xs-5 -->
-                                <div class="col-xs-7">Betty</div>
+                                <div class="col-xs-7">@Model.Merchant.MerchantName</div>
                                 <!-- /.col-xs-7 -->
                             </div>
                             <!-- /.row -->
                         </div>
                         <!-- /.col-md-6 -->
-                        <div class="col-md-6">
+                        @* <div class="col-md-6">
                             <div class="row">
                                 <div class="col-xs-5"><label>Last Name:</label></div>
                                 <!-- /.col-xs-5 -->
@@ -43,13 +44,13 @@
                                 <!-- /.col-xs-7 -->
                             </div>
                             <!-- /.row -->
-                        </div>
+                        </div> *@
                         <!-- /.col-md-6 -->
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col-xs-5"><label>User Name:</label></div>
+                                <div class="col-xs-5"><label>@ResourceWeb.LbId:</label></div>
                                 <!-- /.col-xs-5 -->
-                                <div class="col-xs-7">Betty</div>
+                                <div class="col-xs-7">@Model.Merchant.UserId</div>
                                 <!-- /.col-xs-7 -->
                             </div>
                             <!-- /.row -->
@@ -57,9 +58,9 @@
                         <!-- /.col-md-6 -->
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col-xs-5"><label>Email:</label></div>
+                                <div class="col-xs-5"><label>@ResourceWeb.Lbmerchant_mob:</label></div>
                                 <!-- /.col-xs-5 -->
-                                <div class="col-xs-7">youremail@gmail.com</div>
+                                <div class="col-xs-7">@Model.Merchant.MerchantMob</div>
                                 <!-- /.col-xs-7 -->
                             </div>
                             <!-- /.row -->
@@ -67,9 +68,9 @@
                         <!-- /.col-md-6 -->
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col-xs-5"><label>City:</label></div>
+                                <div class="col-xs-5"><label>@ResourceWeb.LbCity:</label></div>
                                 <!-- /.col-xs-5 -->
-                                <div class="col-xs-7">Los Angeles</div>
+                                <div class="col-xs-7">@Model.Merchant.CityId.Value</div>
                                 <!-- /.col-xs-7 -->
                             </div>
                             <!-- /.row -->
@@ -77,9 +78,9 @@
                         <!-- /.col-md-6 -->
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col-xs-5"><label>Country:</label></div>
+                                <div class="col-xs-5"><label>@ResourceWeb.Lbbranch:</label></div>
                                 <!-- /.col-xs-5 -->
-                                <div class="col-xs-7">United States</div>
+                                <div class="col-xs-7">@Model.Merchant.Branch</div>
                                 <!-- /.col-xs-7 -->
                             </div>
                             <!-- /.row -->
@@ -87,9 +88,9 @@
                         <!-- /.col-md-6 -->
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col-xs-5"><label>Birthday:</label></div>
+                                <div class="col-xs-5"><label>@ResourceWeb.LbCompanyDelivery:</label></div>
                                 <!-- /.col-xs-5 -->
-                                <div class="col-xs-7">Jan 22, 1984</div>
+                                <div class="col-xs-7">@Model.Merchant.UsDelivery</div>
                                 <!-- /.col-xs-7 -->
                             </div>
                             <!-- /.row -->
@@ -97,9 +98,9 @@
                         <!-- /.col-md-6 -->
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col-xs-5"><label>Interests:</label></div>
+                                <div class="col-xs-5"><label>@ResourceWeb.Lboutskirts:</label></div>
                                 <!-- /.col-xs-5 -->
-                                <div class="col-xs-7">Basketball, Web, Design, etc.</div>
+                                <div class="col-xs-7">@Model.Merchant.Outskirts</div>
                                 <!-- /.col-xs-7 -->
                             </div>
                             <!-- /.row -->
@@ -107,15 +108,15 @@
                         <!-- /.col-md-6 -->
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col-xs-5"><label>Website:</label></div>
+                                <div class="col-xs-5"><label>@ResourceWeb.Lbcredit:</label></div>
                                 <!-- /.col-xs-5 -->
-                                <div class="col-xs-7"><a href="#">yourwebsite.com</a></div>
+                                <div class="col-xs-7"><a href="#">@Model.Merchant.Credit</a></div>
                                 <!-- /.col-xs-7 -->
                             </div>
                             <!-- /.row -->
                         </div>
                         <!-- /.col-md-6 -->
-                        <div class="col-md-6">
+                        @* <div class="col-md-6">
                             <div class="row">
                                 <div class="col-xs-5"><label>Phone:</label></div>
                                 <!-- /.col-xs-5 -->
@@ -123,7 +124,7 @@
                                 <!-- /.col-xs-7 -->
                             </div>
                             <!-- /.row -->
-                        </div>
+                        </div> *@
                         <!-- /.col-md-6 -->
                     </div>
                     <!-- /.row -->

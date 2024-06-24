@@ -6,16 +6,37 @@ namespace Yara.Areas.merchantAccount.Controllers
 	public class ProfileController : Controller
 	{
 		IIMerchant iMerchant;
-        public ProfileController(IIMerchant iMerchant1)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public ProfileController(IIMerchant iMerchant1, UserManager<ApplicationUser> userManager)
 		{
             iMerchant = iMerchant1;
-
+			_userManager = userManager;
         }
-		public IActionResult MyProfile(int id)
-		{
-            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-            vmodel.ListViewMerchant = iMerchant.GetAllv(id);
-            return View();
-		}
-	}
+        public async Task<IActionResult> MyProfile()
+        {
+            // Get the current logged-in user
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (!int.TryParse(user.Id, out int merchantId))
+            {
+                return BadRequest("Invalid merchant ID.");
+            }
+
+            var merchant = await iMerchant.GetMerchantAsync(merchantId);
+            if (merchant == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new ViewmMODeElMASTER
+            {
+                Merchant = merchant
+            };
+
+            return View(viewModel);
+        }
+    }
 }

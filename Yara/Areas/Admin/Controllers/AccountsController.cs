@@ -298,9 +298,15 @@ namespace Yara.Areas.Admin.Controllers
 					var roles = await _userManager.GetRolesAsync(user);
 					var token = _tokenService.GenerateToken(user, roles);
 
-					if (returnUrl == null)
+                    // Check if user has the role "Merchant"
+                    if (roles.Contains("Merchant"))
+                    {
+                        // Redirect to merchant area with user ID
+                        return RedirectToAction("Index", "MerchantHome", new { area = "Merchant", userId = user.Id, token = token });
+                    }
+                    if (string.IsNullOrEmpty(returnUrl))
 					{
-//if user role name merchint then redirect to merchant areago to merchant area withe id   user 
+//if user role name merchint then redirect to merchant area withe id   user 
 						// Token Here
 						return RedirectToAction("Index", "Home", new { area = "", token = token});
 					}
