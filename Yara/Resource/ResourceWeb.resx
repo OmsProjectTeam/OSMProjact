@@ -150,6 +150,9 @@
   <data name="LBAddOrderCase" xml:space="preserve">
     <value>Adding and modifying Order Case</value>
   </data>
+  <data name="LBAddOrderNew" xml:space="preserve">
+    <value>Adding and modifying Add Order New</value>
+  </data>
   <data name="LBAddOrderStatus" xml:space="preserve">
     <value>Adding and modifying Order Status</value>
   </data>
@@ -357,6 +360,9 @@
   <data name="Lblon" xml:space="preserve">
     <value>longitude</value>
   </data>
+  <data name="LBMerchantInformation" xml:space="preserve">
+    <value>Merchant Information</value>
+  </data>
   <data name="LBMerchants" xml:space="preserve">
     <value>Merchants</value>
   </data>
@@ -491,6 +497,9 @@
   </data>
   <data name="LborderCases" xml:space="preserve">
     <value>Order Cases</value>
+  </data>
+  <data name="LbOrderDate" xml:space="preserve">
+    <value>Order Date</value>
   </data>
   <data name="LBOrderStatus" xml:space="preserve">
     <value>Order Status</value>

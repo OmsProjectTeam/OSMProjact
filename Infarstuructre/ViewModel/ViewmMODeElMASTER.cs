@@ -65,6 +65,8 @@ namespace Infarstuructre.ViewModel
         public TBClintWitheDeliveryTariffs ClintWitheDeliveryTariffs { get; set; }  
         public IEnumerable<TBViewOrderNew> ListViewOrderNew { get; set; }
         public TBOrderNew OrderNew { get; set; }
+        public IEnumerable<TBViewUsers> ListViewUsers { get; set; }
+
 
 
 

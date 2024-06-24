@@ -17,6 +17,7 @@ namespace Infarstuructre.ViewModel
         public List<IdentityRole> Roles { get; set; }
         public ChangePasswordViewModel ChangePassword { get; set; }
         public ApplicationUser sUser { get; set; }
+        public ViewmMODeElMASTER ListIdentityRole { get; set; }
     }
     public class NewRegister
     {
@@ -50,6 +51,10 @@ namespace Infarstuructre.ViewModel
 
 		public returnUrl? returnUrl { get; set; }
         public bool Rememberme { get; set; }
+
+
+
+
 
 	}
 }

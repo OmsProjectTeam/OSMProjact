@@ -2,7 +2,10 @@
 
 
 using Domin.Entity;
+using Infarstuructre.BL;
 using LamarModa.Api.Auth;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Yara.Areas.Admin.Controllers
 {
@@ -18,11 +21,12 @@ namespace Yara.Areas.Admin.Controllers
 		private readonly MasterDbcontext _context;
 		IIRolsInformation iRolsInformation;
 		IIUserInformation iUserInformation;
-		#endregion
+		IIUser iUser;
+        #endregion
 
-		#region Constructor
-		public AccountsController(RoleManager<IdentityRole> roleManager,
-			UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, MasterDbcontext context, IIRolsInformation iRolsInformation1, IIUserInformation iUserInformation1, ITokenService tokenService)
+        #region Constructor
+        public AccountsController(RoleManager<IdentityRole> roleManager,
+			UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, MasterDbcontext context, IIRolsInformation iRolsInformation1, IIUserInformation iUserInformation1, ITokenService tokenService, IIUser iUser1)
 		{
 			_roleManager = roleManager;
 			_userManager = userManager;
@@ -31,7 +35,10 @@ namespace Yara.Areas.Admin.Controllers
 			iRolsInformation = iRolsInformation1;
 			iUserInformation = iUserInformation1;
 			_tokenService = tokenService;
-		}
+			_context = context;
+            iUser =	iUser1;
+
+        }
 		#endregion
 
 		#region Method
@@ -94,6 +101,11 @@ namespace Yara.Areas.Admin.Controllers
 			}
 			return RedirectToAction("Roles");
 		}
+
+
+
+
+
 		[Authorize(Roles = "Admin")]
 		public async Task<IActionResult> DeleteRole(string Id)
 		{
@@ -292,9 +304,15 @@ namespace Yara.Areas.Admin.Controllers
 					var roles = await _userManager.GetRolesAsync(user);
 					var token = _tokenService.GenerateToken(user, roles);
 
-					if (returnUrl == null)
+                    // Check if user has the role "Merchant"
+                    if (roles.Contains("Merchant"))
+                    {
+                        // Redirect to merchant area with user ID
+                        return RedirectToAction("Index", "MerchantHome", new { area = "Merchant", userId = user.Id, token = token });
+                    }
+                    if (string.IsNullOrEmpty(returnUrl))
 					{
-
+//if user role name merchint then redirect to merchant area withe id   user 
 						// Token Here
 						return RedirectToAction("Index", "Home", new { area = "", token = token});
 					}
@@ -487,7 +505,206 @@ namespace Yara.Areas.Admin.Controllers
 			}
 			return RedirectToAction("regesters");
 		}
-	}
 
-	#endregion
+
+        [AllowAnonymous]
+        public async Task<IActionResult> RegistersUserTable(RegisterViewModel model)
+        {
+            // إذا كان النموذج غير صالح، نعرض رسالة خطأ ونعيد التوجيه إلى صفحة التسجيل.
+            // إذا أردت التحقق من صحة النموذج، قم بإلغاء التعليق على الأسطر التالية:
+            // if (!ModelState.IsValid)
+            // {
+            //     TempData["Message"] = ResourceWeb.VLimageuplode;
+            //     return RedirectToAction("Register", model);
+            // }
+
+            // استرجاع جميع المستخدمين من جدول TBViewUsers.
+            var usersafe = iUser.GetAll();
+
+            foreach (var usersife in usersafe)
+            {
+                try
+                {
+                    // التحقق مما إذا كان اسم المستخدم موجودًا بالفعل في AspNetUsers.
+                    var existingUser = await _userManager.FindByNameAsync(usersife.username);
+                    if (existingUser != null)
+                    {
+                        // إذا كان اسم المستخدم موجودًا، نتجاوز هذا المستخدم وننتقل إلى التالي.
+                        TempData["Message"] = $"Username {usersife.username} already exists. Skipping.";
+                        continue;
+                    }
+
+                    var user = new ApplicationUser
+                    {
+                        Id = usersife.id.ToString(),
+                        Name = usersife.cust_name,
+                        UserName = usersife.username + "@cu.com",
+                        Email = usersife.username +"@cu.com",
+                        ActiveUser = true,
+                        ImageUser = usersife.PhotoUser,
+                        PhoneNumber = usersife.cust_mob
+                    };
+
+                    // إذا لم يكن لدى المستخدم معرف، نقوم بإنشاء معرف جديد.
+                   
+                        user.Id = Guid.NewGuid().ToString();
+                    
+
+                    // إنشاء المستخدم في جدول AspNetUsers.
+                    var result = await _userManager.CreateAsync(user, usersife.userpwd);
+                    if (result.Succeeded)
+                    {
+                        // إذا تم إنشاء المستخدم بنجاح، نقوم بإضافة دوره وتسجيل دخوله.
+                        var myuser = await _userManager.FindByIdAsync(user.Id);
+                        var toaw = await _userManager.AddToRoleAsync(myuser, "Customer");
+                        var loginResult = await _signInManager.PasswordSignInAsync(user.UserName, usersife.userpwd, true, true);
+
+                        if (toaw.Succeeded)
+                        {
+                            // حذف المستخدم من جدول User بعد إضافته إلى AspNetUsers.
+                            var userToDelete = _context.Users.SingleOrDefault(u => u.Id == usersife.id.ToString());
+                            if (userToDelete != null)
+                            {
+                                _context.Users.Remove(userToDelete);
+                                await _context.SaveChangesAsync();
+                            }
+                        }
+                        else
+                        {
+                            TempData["Message"] = "Failed to add role for user " + usersife.username;
+                            continue; // تجاوز المستخدم التالي إذا فشل إضافة الدور.
+                        }
+                    }
+                    else
+                    {
+                        // إذا فشل إنشاء المستخدم، نتخطى هذا المستخدم وننتقل إلى التالي.
+                        TempData["Message2"] = "Failed to create user " + usersife.username + ": " + ResourceWeb.VLEmailOreUserOrPaswo;
+                        continue; // تجاوز المستخدم التالي إذا فشل إنشاء المستخدم.
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // معالجة الأخطاء وعرض رسالة مفيدة.
+                    TempData["Message2"] = $"An error occurred while processing user {usersife.username}: {ex.Message}";
+                    continue; // تجاوز المستخدم التالي في حالة حدوث خطأ.
+                }
+            }
+
+            // إعادة التوجيه إلى الصفحة بعد الانتهاء من معالجة جميع المستخدمين.
+            return RedirectToAction("RegistersUserTable");
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> AddEditRolesUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var roles = _roleManager.Roles.ToList();
+
+            var model = new UserChingRole
+            {
+                UserId = user.Id,
+                UserName = user.UserName,
+                Roles = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = userRoles.Contains(r.Name)
+                }).ToList()
+            };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddEditRolesUser(UserChingRole model)
+        {
+            if (ModelState.IsValid)
+            {
+                var roles = _roleManager.Roles.ToList();
+                model.Roles = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = r.Id == model.SelectedRoleId
+                }).ToList();
+                return View("AddEditRolesUser", model);
+            }
+
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var selectedRole = await _roleManager.FindByIdAsync(model.SelectedRoleId);
+
+            if (selectedRole == null)
+            {
+                ModelState.AddModelError(string.Empty, "Role not found");
+                var roles = _roleManager.Roles.ToList();
+                model.Roles = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = r.Id == model.SelectedRoleId
+                }).ToList();
+                return View("AddEditRolesUser", model);
+            }
+
+            var removeResult = await _userManager.RemoveFromRolesAsync(user, userRoles);
+            if (!removeResult.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Failed to remove user roles");
+                var roles = _roleManager.Roles.ToList();
+                model.Roles = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = r.Id == model.SelectedRoleId
+                }).ToList();
+                return View("AddEditRolesUser", model);
+            }
+
+            var addResult = await _userManager.AddToRoleAsync(user, selectedRole.Name);
+            if (!addResult.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Failed to add user to the new role");
+                var roles = _roleManager.Roles.ToList();
+                model.Roles = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = r.Id == model.SelectedRoleId
+                }).ToList();
+                return View("AddEditRolesUser", model);
+            }
+
+            return RedirectToAction("Registers"); // Assuming you have an Index action in UserController
+        }
+    }
+
+
+
+
+
+
+
 }
+
+
+
+
+    #endregion
+

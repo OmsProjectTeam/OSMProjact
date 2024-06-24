@@ -11,11 +11,13 @@ namespace Yara.Areas.Admin.Controllers
         IICurrenciesExchangeRates iCurrenciesTransactions;
         IITransaction iTransaction;
         IIExchangeRate iExchangeRate;
-        public TransactionController(IICurrenciesExchangeRates iCurrenciesTransactions1,IITransaction iTransaction1, IIExchangeRate iExchangeRate1)
+        IIUser iUser;
+        public TransactionController(IICurrenciesExchangeRates iCurrenciesTransactions1,IITransaction iTransaction1, IIExchangeRate iExchangeRate1,IIUser iUser1)
         {
             iCurrenciesTransactions = iCurrenciesTransactions1;
             iTransaction=iTransaction1;
             iExchangeRate = iExchangeRate1;
+            iUser = iUser1;
         }
         public IActionResult MyTransaction()
         {

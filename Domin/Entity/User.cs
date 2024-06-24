@@ -49,5 +49,8 @@ namespace Domin.Entity
         public int? FullPackage { get; set; }
 
         public int? MerchantId { get; set; }
+        public string? EmailUser { get; set; }
+        public string? PhotoUser { get; set; }
+
     }
 }

@@ -160,6 +160,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adding and modifying Add Order New.
+        /// </summary>
+        public static string LBAddOrderNew {
+            get {
+                return ResourceManager.GetString("LBAddOrderNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adding and modifying Order Status.
         /// </summary>
         public static string LBAddOrderStatus {
@@ -799,6 +808,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Merchant Information.
+        /// </summary>
+        public static string LBMerchantInformation {
+            get {
+                return ResourceManager.GetString("LBMerchantInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Merchants.
         /// </summary>
         public static string LBMerchants {
@@ -1182,6 +1200,15 @@ namespace Yara.Resource {
         public static string LborderCases {
             get {
                 return ResourceManager.GetString("LborderCases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Date.
+        /// </summary>
+        public static string LbOrderDate {
+            get {
+                return ResourceManager.GetString("LbOrderDate", resourceCulture);
             }
         }
         
