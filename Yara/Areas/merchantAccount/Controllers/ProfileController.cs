@@ -12,6 +12,7 @@ namespace Yara.Areas.merchantAccount.Controllers
             iMerchant = iMerchant1;
 			_userManager = userManager;
         }
+
 		public async Task<IActionResult> MyProfile(string? id)
 		{
 
@@ -32,4 +33,5 @@ namespace Yara.Areas.merchantAccount.Controllers
 			return View(user);
 		}
 	}
+
 }
