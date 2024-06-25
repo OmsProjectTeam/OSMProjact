@@ -15,28 +15,15 @@ namespace Yara.Areas.merchantAccount.Controllers
         public async Task<IActionResult> MyProfile(string id)
         {
             // Get the current logged-in user
-            var user = await _userManager.GetUserIdAsync(string id);
+            var user = await _userManager.FindByIdAsync(id);
             if (user == null)
             {
                 return Unauthorized();
             }
-            //if (!int.TryParse(user.Id, out int merchantId))
-            //{
-            //    return BadRequest("Invalid merchant ID.");
-            //}
+            if (user == null)
+                return NotFound();
 
-            //var merchant = await iMerchant.GetMerchantAsync(merchantId);
-            //if (merchant == null)
-            //{
-            //    return NotFound();
-            //}
-
-            var viewModel = new ViewmMODeElMASTER
-            {
-                Merchant = merchant
-            };
-
-            return View(viewModel);
+            return View(user);
         }
     }
 }
