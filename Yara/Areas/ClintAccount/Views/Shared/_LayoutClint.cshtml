@@ -43,18 +43,16 @@
 <body>
 	<div class="main-menu">
 		<header class="header">
-			<a href="index.html" class="logo">NinjaTeam</a>
+			<a href="index.html" class="logo">@ViewBag.Name</a>
 			<button type="button" class="button-close fa fa-times js__menu_close"></button>
 			<div class="user">
-				<a href="#" class="avatar"><img src="http://placehold.it/80x80" alt=""><span class="status online"></span></a>
-				<h5 class="name"><a href="profile.html">Emily Stanley</a></h5>
-				<h5 class="position">Administrator</h5>
+				<a href="#" class="avatar"><img src="@ViewBag.UserImage" alt="User Image"><span class="status online"></span></a>
+				<h5 class="name"><a href="profile.html">@ViewBag.UserName</a></h5>
+				<h5 class="position">@ViewBag.UserRole</h5>
 				<!-- /.name -->
 				<div class="control-wrap js__drop_down">
 					<i class="fa fa-caret-down js__drop_down_button"></i>
 					<div class="control-list">
-						<div class="control-item"><a href="profile.html"><i class="fa fa-user"></i> Profile</a></div>
-						<div class="control-item"><a href="#"><i class="fa fa-gear"></i> Settings</a></div>
 						<div class="control-item"><a asp-area="Admin" asp-controller="Accounts" asp-action="Logout1"><i class="fa fa-sign-out"></i> Log out</a></div>
 					</div>
 					<!-- /.control-list -->
@@ -74,17 +72,44 @@
 						<a class="waves-effect" href="index.html"><i class="menu-icon fa fa-home"></i><span>Dashboard</span></a>
 					</li>
 					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-user"></i><span>@ResourceWeb.LBUsersInformationEn</span><span class="menu-arrow fa fa-angle-down"></span></a>
+						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-user"></i><span>User Informations</span><span class="menu-arrow fa fa-angle-down"></span></a>
 						<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="Accounts" asp-action="Roles">@ResourceWeb.LBLbRoles</a></li>
-							<li><a asp-area="Admin" asp-controller="Accounts" asp-action="Registers">Users</a></li>
-							<li><a href="icons-material-icons.html">Material Design Icons</a></li>
-							<li><a href="icons-material-design-iconic.html">Material Design Iconic Font</a></li>
-							<li><a href="icons-themify-icons.html">Themify Icons</a></li>
+							<li><a asp-area="ClintAccount" asp-controller="Profile" asp-action="MyProfile" asp-route-id="@ViewBag.UserId">Personal Informations</a></li>
 						</ul>
 						<!-- /.sub-menu js__content -->
 					</li>
-					<li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* 					<li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-adjust"></i><span>@ResourceWeb.LBGeneralSettings</span><span class="menu-arrow fa fa-angle-down"></span></a>
 						<ul class="sub-menu js__content">
 							<li><a asp-area="Admin" asp-controller="TypeSystem" asp-action="MyTypeSystem">@ResourceWeb.LBMyTypeSystem</a></li>
@@ -105,10 +130,10 @@
 					</li>
 					<li>
 						<a class="waves-effect" href="widgets.html"><i class="menu-icon fa fa-code"></i><span>Widgets</span><span class="notice notice-yellow">6</span></a>
-					</li>
+					</li> *@
 				</ul>
 				<!-- /.menu js__accordion -->
-				<h5 class="title">Components</h5>
+@* 				<h5 class="title">Components</h5>
 				<!-- /.title -->
 				<ul class="menu js__accordion">
 					<li>
@@ -199,14 +224,37 @@
 						</ul>
 						<!-- /.sub-menu js__content -->
 					</li>
-				</ul>
+				</ul> *@
 				<!-- /.menu js__accordion -->
 			</div>
 			<!-- /.navigation -->
 		</div>
 		<!-- /.content -->
 	</div>
+
+
 	<!-- /.main-menu -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<div class="fixed-navbar">
 		<div class="pull-left">

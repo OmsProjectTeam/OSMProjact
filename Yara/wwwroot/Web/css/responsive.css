@@ -1,4 +1,11 @@
-/* IT-Firm IT Businees HTML-5 Template */
+﻿/* IT-Firm IT Businees HTML-5 Template */
+.modal {
+	z-index: 1050; /* تأكد من أن القيمة تكون أعلى من خلفية ال PopUp */
+}
+
+.modal-backdrop {
+	z-index: 1040; /* تأكد من أن القيمة تكون أقل من خلفية ال PopUp */
+}
 
 @media only screen and (max-width: 1540px){
 	
