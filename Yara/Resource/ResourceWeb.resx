@@ -501,6 +501,9 @@
   <data name="LbOrderDate" xml:space="preserve">
     <value>Order Date</value>
   </data>
+  <data name="LBOrdersSystem" xml:space="preserve">
+    <value>Orders System</value>
+  </data>
   <data name="LBOrderStatus" xml:space="preserve">
     <value>Order Status</value>
   </data>

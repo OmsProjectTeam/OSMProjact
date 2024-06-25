@@ -47,7 +47,7 @@ namespace Yara.Areas.Admin.Controllers
 				slider.CurrentState = model.OrderCase.CurrentState;
 				if (slider.Id == 0 || slider.Id == null)
 				{
-					if (dbcontext.cities.Where(a => a.Description == slider.Description).ToList().Count > 0)
+					if (dbcontext.order_cases.Where(a => a.Description == slider.Description).ToList().Count > 0)
 					{
 						TempData["Description"] = ResourceWeb.VLDescriptionDoplceted;
 						return RedirectToAction("AddOrderCase", model);

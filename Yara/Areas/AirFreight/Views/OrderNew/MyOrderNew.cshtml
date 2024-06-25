@@ -1,7 +1,7 @@
 ﻿@model ViewmMODeElMASTER
 @{
-    ViewData["Title"] = ResourceWeb.LBMyOrderNew;
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "MyOrderNew";
+    Layout = "~/Areas/AirFreight/Views/Shared/_LayoutAirFreight.cshtml";
 }
 
 
@@ -22,7 +22,7 @@
         </ul>
         <!-- /.box-title -->
         <div class="dropdown js__drop_down">
-            <a asp-area="Admin" asp-controller="OrderNew" asp-action="AddOrderNew"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a>
+            <a asp-area="AirFreight" asp-controller="OrderNew" asp-action="AddOrderNew"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a>
         </div>
         <!-- /.dropdown js__dropdown -->
         <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -72,7 +72,6 @@
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbCostPrice</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbPrice</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbdescriptionOrderStuse</th>
-                                                     
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LborderCases</th>
 
 
@@ -103,7 +102,7 @@
                                                             <td class="truncate-50">@item.CostPrice</td>
                                                             <td class="truncate-50">@item.Price</td>
                                                             <td class="truncate-50">@item.description</td>@* اردر ستيوس *@
-                                                           
+                                                       
                                                             <td class="truncate-50">@item.orderCases</td>
 
 
@@ -340,11 +339,4 @@
         });
     </script>
 
-
-}
-
-
-
-
-
-
+    }
