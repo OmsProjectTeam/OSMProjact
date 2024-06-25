@@ -1,112 +1,188 @@
 ﻿@model ApplicationUser
 @{
-    ViewData["Title"] = "MyProfile";
-    Layout = "~/Areas/merchantAccount/Views/Shared/_Layoutmerchant.cshtml";
+	ViewData["Title"] = "MyProfile";
+	Layout = "~/Areas/merchantAccount/Views/Shared/_Layoutmerchant.cshtml";
 }
 
-<div class="row small-spacing">
-    <div class="col-md-3 col-xs-12">
-        <div class="box-content bordered primary margin-bottom-20">
-            <div class="profile-avatar">
-                <img src=@Model.ImageUser
-                     alt="">
-                <h3><strong>@Model.Name</strong></h3>
-                <h4>@Model.Email</h4>
-            </div>
-            <!-- .profile-avatar -->
-            <table class="table table-hover no-margin">
-                <tbody>
-                    <tr>
-                        <td>Status</td>
-                        <td><span class="notice notice-danger">Active</span></td>
-                    </tr>
-                    <tr>
-                        <td>Merchant Rating</td>
-                        <td><i class="fa fa-star text-warning"></i> <i class="fa fa-star text-warning"></i> <i class="fa fa-star text-warning"></i> <i class="fa fa-star text-warning"></i> <i class="fa fa-star text-warning"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Member Since</td>
-                        <td>Jan 07, 2014</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <!-- /.col-md-3 col-xs-12 -->
-    <div class="col-md-9 col-xs-12">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="box-content card">
-                    <h4 class="box-title"><i class="fa fa-user ico"></i>About</h4>
-                    <!-- /.box-title -->
-                    <div class="dropdown js__drop_down">
-                        <a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-                        <ul class="sub-menu">
-                            <li><a href="#">Edit</a></li>
-                            <li><a asp-area="merchantAccount" asp-controller="Profile" asp-action="ShowUserData" asp-route-id="@Model.Id">Edit Profile</a></li>
-                        </ul>
-                        <!-- /.sub-menu -->
-                    </div>
-                    <!-- /.dropdown js__dropdown -->
-                    <div class="card-content">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-5"><label>@ResourceWeb.LbMerchant_name</label></div>
-                                    <!-- /.col-xs-5 -->
-                                    <div class="col-xs-7">@Model.Name</div>
-                                    <!-- /.col-xs-7 -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-                            <!-- /.col-md-6 -->
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-5"><label>@ResourceWeb.LbUserEmail:</label></div>
-                                    <!-- /.col-xs-5 -->
-                                    <div class="col-xs-7">@Model.Email</div>
-                                    <!-- /.col-xs-7 -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-                            <!-- /.col-md-6 -->
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-5"><label>@ResourceWeb.Lbmerchant_mob:</label></div>
-                                    <!-- /.col-xs-5 -->
-                                    <div class="col-xs-7">@Model.PhoneNumber</div>
-                                    <!-- /.col-xs-7 -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-                            <!-- /.col-md-6 -->
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-5"><label>@ResourceWeb.LbActiveUser:</label></div>
-                                    <!-- /.col-xs-5 -->
-                                    <div class="col-xs-7">@Model.ActiveUser</div>
-                                    <!-- /.col-xs-7 -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-                            <!-- /.col-md-6 -->
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-5"><label>@ResourceWeb.LbUserName:</label></div>
-                                    <!-- /.col-xs-5 -->
-                                    <div class="col-xs-7">@Model.UserName</div>
-                                    <!-- /.col-xs-7 -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.card-content -->
-                </div>
-                <!-- /.box-content card -->
-            </div>
-        </div>
-    </div>
-    <!-- /.col-md-9 col-xs-12 -->
+
+
+
+
+<div class="col-xs-12">
+	<div class="col-xs-8">
+
+		<div class="box-content card">
+			<h4 class="box-title"><i class="fa fa-user ico"></i>About</h4>
+			<!-- /.box-title -->
+			<div class="dropdown js__drop_down">
+				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
+				<ul class="sub-menu">
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Another action</a></li>
+					<li><a href="#">Something else there</a></li>
+					<li class="split"></li>
+					<li><a href="#">Separated link</a></li>
+				</ul>
+				<!-- /.sub-menu -->
+			</div>
+			<!-- /.dropdown js__dropdown -->
+			<div class="card-content">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-xs-5"><label>First Name:</label></div>
+							<!-- /.col-xs-5 -->
+							<div class="col-xs-7">@Model.Name</div>
+							<!-- /.col-xs-7 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-xs-5"><label>Last Name:</label></div>
+							<!-- /.col-xs-5 -->
+							<div class="col-xs-7">Simmons</div>
+							<!-- /.col-xs-7 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-xs-5"><label>User Name:</label></div>
+							<!-- /.col-xs-5 -->
+							<div class="col-xs-7">Betty</div>
+							<!-- /.col-xs-7 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-xs-5"><label>Email:</label></div>
+							<!-- /.col-xs-5 -->
+							<div class="col-xs-7">@Model.Email</div>
+							<!-- /.col-xs-7 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-xs-5"><label>City:</label></div>
+							<!-- /.col-xs-5 -->
+							<div class="col-xs-7">Los Angeles</div>
+							<!-- /.col-xs-7 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-xs-5"><label>Country:</label></div>
+							<!-- /.col-xs-5 -->
+							<div class="col-xs-7">United States</div>
+							<!-- /.col-xs-7 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-xs-5"><label>Birthday:</label></div>
+							<!-- /.col-xs-5 -->
+							<div class="col-xs-7">Jan 22, 1984</div>
+							<!-- /.col-xs-7 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-xs-5"><label>Interests:</label></div>
+							<!-- /.col-xs-5 -->
+							<div class="col-xs-7">Basketball, Web, Design, etc.</div>
+							<!-- /.col-xs-7 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-xs-5"><label>Website:</label></div>
+							<!-- /.col-xs-5 -->
+							<div class="col-xs-7"><a href="#">yourwebsite.com</a></div>
+							<!-- /.col-xs-7 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-xs-5"><label>Phone:</label></div>
+							<!-- /.col-xs-5 -->
+							<div class="col-xs-7">@Model.PhoneNumber</div>
+							<!-- /.col-xs-7 -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.col-md-6 -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.card-content -->
+		</div>
+
+
+	</div>
+
+
+
+
+
+
+	<div class="col-xs-4">
+		<div class="box-content bordered primary margin-bottom-20">
+			<div class="profile-avatar">
+				<img src="@string.Format("/Images/Users/{0}",Model.ImageUser)" alt="">
+
+				<h3><strong>Betty Simmons</strong></h3>
+
+			</div>
+			<!-- .profile-avatar -->
+			<table class="table table-hover no-margin">
+				<tbody>
+					<tr>
+						<td>Status</td>
+						<td><span class="notice notice-danger">Active</span></td>
+					</tr>
+					@* 	<tr>
+					<td>User Rating</td>
+					<td><i class="fa fa-star text-warning"></i> <i class="fa fa-star text-warning"></i> <i class="fa fa-star text-warning"></i> <i class="fa fa-star text-warning"></i> <i class="fa fa-star text-warning"></i></td>
+					</tr> *@
+					<tr>
+						<td>Member Since</td>
+						<td>Jan 07, 2014</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
+
+
+
+

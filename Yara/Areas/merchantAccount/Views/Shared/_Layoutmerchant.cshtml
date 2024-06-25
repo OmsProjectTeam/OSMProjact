@@ -74,127 +74,112 @@
 						<a class="waves-effect" href="index.html"><i class="menu-icon fa fa-home"></i><span>Dashboard</span></a>
 					</li>
 					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-user"></i><span>@ResourceWeb.LBMerchantInformation</span><span class="menu-arrow fa fa-angle-down"></span></a>
+						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-user"></i><span>@ResourceWeb.LBUsersInformationEn</span><span class="menu-arrow fa fa-angle-down"></span></a>
 						<ul class="sub-menu js__content">
-							<li><a asp-area="merchantAccount" asp-controller="Profile" asp-action="MyProfile" asp-route-id="@ViewBag.UserId">@ResourceWeb.Lbcust_profile</a></li>
-						@* 	<li><a asp-area="Admin" asp-controller="Accounts" asp-action="Registers">Users</a></li>
+							<li><a asp-area="merchantAccount" asp-controller="Profile" asp-action="MyProfile" asp-route-id="@ViewBag.UserId">@ResourceWeb.LBProfile</a></li>
+							@* <li><a asp-area="Admin" asp-controller="Accounts" asp-action="Registers">Users</a></li>
 							<li><a href="icons-material-icons.html">Material Design Icons</a></li>
 							<li><a href="icons-material-design-iconic.html">Material Design Iconic Font</a></li>
 							<li><a href="icons-themify-icons.html">Themify Icons</a></li> *@
 						</ul>
 						<!-- /.sub-menu js__content -->
 					</li>
-					@* <li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-adjust"></i><span>@ResourceWeb.LBGeneralSettings</span><span class="menu-arrow fa fa-angle-down"></span></a>
-						<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="TypeSystem" asp-action="MyTypeSystem">@ResourceWeb.LBMyTypeSystem</a></li>
-			
 
-							<li><a asp-area="Admin" asp-controller="OrderStatus" asp-action="MyOrderStatus">@ResourceWeb.LBMyOrderStatus</a></li>
-
-
-
-						</ul>
-						<!-- /.sub-menu js__content -->
-					</li>
-					<li>
-						<a class="waves-effect" href="widgets.html"><i class="menu-icon fa fa-code"></i><span>Widgets</span><span class="notice notice-yellow">6</span></a>
-					</li> *@
 				</ul>
 				<!-- /.menu js__accordion -->
-				@* <h5 class="title">Components</h5>
+				<h5 class="title">Components</h5>
 				<!-- /.title -->
-				<ul class="menu js__accordion">
-					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-bar-chart"></i><span>@ResourceWeb.LBPricingSystem</span><span class="menu-arrow fa fa-angle-down"></span></a>
-						<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="CurrenciesExchangeRates" asp-action="MyCurrenciesExchangeRates">@ResourceWeb.LBMyCurrenciesExchangeRates</a></li>
-							<li><a asp-area="Admin" asp-controller="ExchangeRate" asp-action="MyExchangeRate">@ResourceWeb.LBMyExchangeRate</a></li>
-							<li><a asp-area="Admin" asp-controller="Transaction" asp-action="MyTransaction">@ResourceWeb.LBMyTransaction</a></li>
-							<li><a asp-area="Admin" asp-controller="ShippingPrice" asp-action="MyShippingPrice">@ResourceWeb.LBMyShippingPrice</a></li>
-							<li><a asp-area="Admin" asp-controller="TypeSystemDelivery" asp-action="MyTypeSystemDelivery">@ResourceWeb.LBMyTypeSystemDelivery</a></li>
-							<li><a asp-area="Admin" asp-controller="CityDeliveryTariffs" asp-action="MyCityDeliveryTariffs">@ResourceWeb.LBMyCityDeliveryTariffs</a></li>
-							<li><a asp-area="Admin" asp-controller="ClintWitheDeliveryTariffs" asp-action="MyClintWitheDeliveryTariffs">@ResourceWeb.LBMyClintWitheDeliveryTariffs</a></li>
-						</ul>
-						<!-- /.sub-menu js__content -->
-					</li>
-
-					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBCustomers</span><span class="notice notice-blue">7</span></a>
-						<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="Customer" asp-action="MyCustomer">@ResourceWeb.LBMyCustomer</a></li>
-
-						</ul>
-						<!-- /.sub-menu js__content -->
-					</li>
-					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBMerchants</span><span class="notice notice-blue">7</span></a>
-						<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="Merchant" asp-action="MyMerchant">@ResourceWeb.LBMyMerchant</a></li>
-
-						</ul>
-						<!-- /.sub-menu js__content -->
-					</li>
-					<li>
-						<a class="waves-effect" href="calendar.html"><i class="menu-icon fa fa-calendar"></i><span>Calendar</span></a>
-					</li>
-					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>order</span><span class="menu-arrow fa fa-angle-down"></span></a>
-						<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="OrderNew" asp-action="MyOrderNew">@ResourceWeb.LBMyOrderNew</a></li>
-
-
-
-							<li><a asp-area="Admin" asp-controller="Order" asp-action="MyOrder">@ResourceWeb.LBMyOrder</a></li>
-
-
-						</ul>
-						<!-- /.sub-menu js__content -->
-					</li>
+				@* <ul class="menu js__accordion">
+				<li>
+				<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-bar-chart"></i><span>@ResourceWeb.LBPricingSystem</span><span class="menu-arrow fa fa-angle-down"></span></a>
+				<ul class="sub-menu js__content">
+				<li><a asp-area="Admin" asp-controller="CurrenciesExchangeRates" asp-action="MyCurrenciesExchangeRates">@ResourceWeb.LBMyCurrenciesExchangeRates</a></li>
+				<li><a asp-area="Admin" asp-controller="ExchangeRate" asp-action="MyExchangeRate">@ResourceWeb.LBMyExchangeRate</a></li>
+				<li><a asp-area="Admin" asp-controller="Transaction" asp-action="MyTransaction">@ResourceWeb.LBMyTransaction</a></li>
+				<li><a asp-area="Admin" asp-controller="ShippingPrice" asp-action="MyShippingPrice">@ResourceWeb.LBMyShippingPrice</a></li>
+				<li><a asp-area="Admin" asp-controller="TypeSystemDelivery" asp-action="MyTypeSystemDelivery">@ResourceWeb.LBMyTypeSystemDelivery</a></li>
+				<li><a asp-area="Admin" asp-controller="CityDeliveryTariffs" asp-action="MyCityDeliveryTariffs">@ResourceWeb.LBMyCityDeliveryTariffs</a></li>
+				<li><a asp-area="Admin" asp-controller="ClintWitheDeliveryTariffs" asp-action="MyClintWitheDeliveryTariffs">@ResourceWeb.LBMyClintWitheDeliveryTariffs</a></li>
 				</ul>
-				<!-- /.menu js__accordion -->
-				<h5 class="title">Additions</h5>
-				<!-- /.title -->
-				<ul class="menu js__accordion">
-					<li>
-						<a class="waves-effect" href="profile.html"><i class="menu-icon fa fa-user"></i><span>Profile</span></a>
-					</li>
-					<li>
-						<a class="waves-effect" href="inbox.html"><i class="menu-icon fa fa-envelope"></i><span>Mail</span><span class="notice notice-danger">New</span></a>
-					</li>
-					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-file-text"></i><span>Page</span><span class="menu-arrow fa fa-angle-down"></span></a>
-						<ul class="sub-menu js__content">
-							<li><a href="page-starter.html">Starter Page</a></li>
-							<li><a href="page-login.html">Login</a></li>
-							<li><a href="page-register.html">Register</a></li>
-							<li><a href="page-recoverpw.html">Recover Password</a></li>
-							<li><a href="page-lock-screen.html">Lock Screen</a></li>
-							<li><a href="page-confirm-mail.html">Confirm Mail</a></li>
-							<li><a href="page-404.html">Error 404</a></li>
-							<li><a href="page-500.html">Error 500</a></li>
-						</ul>
-						<!-- /.sub-menu js__content -->
-					</li>
-					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-folder-open"></i><span>Extra Pages</span><span class="menu-arrow fa fa-angle-down"></span></a>
-						<ul class="sub-menu js__content">
-							<li><a href="extras-contact.html">Contact list</a></li>
-							<li><a href="extras-email-template.html">Email template</a></li>
-							<li><a href="extras-faq.html">FAQ</a></li>
-							<li><a href="extras-gallery.html">Gallery</a></li>
-							<li><a href="extras-invoice.html">Invoice</a></li>
-							<li><a href="extras-maps.html">Maps</a></li>
-							<li><a href="extras-pricing.html">Pricing</a></li>
-							<li><a href="extras-projects.html">Projects</a></li>
-							<li><a href="extras-taskboard.html">Taskboard</a></li>
-							<li><a href="extras-timeline.html">Timeline</a></li>
-							<li><a href="extras-tour.html">Tour</a></li>
-						</ul>
-						<!-- /.sub-menu js__content -->
-					</li>
+				<!-- /.sub-menu js__content -->
+				</li>
+
+				<li>
+				<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBCustomers</span><span class="notice notice-blue">7</span></a>
+				<ul class="sub-menu js__content">
+				<li><a asp-area="Admin" asp-controller="Customer" asp-action="MyCustomer">@ResourceWeb.LBMyCustomer</a></li>
+
+				</ul>
+				<!-- /.sub-menu js__content -->
+				</li>
+				<li>
+				<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBMerchants</span><span class="notice notice-blue">7</span></a>
+				<ul class="sub-menu js__content">
+				<li><a asp-area="Admin" asp-controller="Merchant" asp-action="MyMerchant">@ResourceWeb.LBMyMerchant</a></li>
+
+				</ul>
+				<!-- /.sub-menu js__content -->
+				</li>
+				<li>
+				<a class="waves-effect" href="calendar.html"><i class="menu-icon fa fa-calendar"></i><span>Calendar</span></a>
+				</li>
+				<li>
+				<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>order</span><span class="menu-arrow fa fa-angle-down"></span></a>
+				<ul class="sub-menu js__content">
+				<li><a asp-area="Admin" asp-controller="OrderNew" asp-action="MyOrderNew">@ResourceWeb.LBMyOrderNew</a></li>
+
+
+
+				<li><a asp-area="Admin" asp-controller="Order" asp-action="MyOrder">@ResourceWeb.LBMyOrder</a></li>
+
+
+				</ul>
+				<!-- /.sub-menu js__content -->
+				</li>
 				</ul> *@
 				<!-- /.menu js__accordion -->
+				<h5 class="title">Additions</h5>
+				@* 	<!-- /.title -->
+				<ul class="menu js__accordion">
+				<li>
+				<a class="waves-effect" href="profile.html"><i class="menu-icon fa fa-user"></i><span>Profile</span></a>
+				</li>
+				<li>
+				<a class="waves-effect" href="inbox.html"><i class="menu-icon fa fa-envelope"></i><span>Mail</span><span class="notice notice-danger">New</span></a>
+				</li>
+				<li>
+				<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-file-text"></i><span>Page</span><span class="menu-arrow fa fa-angle-down"></span></a>
+				<ul class="sub-menu js__content">
+				<li><a href="page-starter.html">Starter Page</a></li>
+				<li><a href="page-login.html">Login</a></li>
+				<li><a href="page-register.html">Register</a></li>
+				<li><a href="page-recoverpw.html">Recover Password</a></li>
+				<li><a href="page-lock-screen.html">Lock Screen</a></li>
+				<li><a href="page-confirm-mail.html">Confirm Mail</a></li>
+				<li><a href="page-404.html">Error 404</a></li>
+				<li><a href="page-500.html">Error 500</a></li>
+				</ul>
+				<!-- /.sub-menu js__content -->
+				</li>
+				<li>
+				<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-folder-open"></i><span>Extra Pages</span><span class="menu-arrow fa fa-angle-down"></span></a>
+				<ul class="sub-menu js__content">
+				<li><a href="extras-contact.html">Contact list</a></li>
+				<li><a href="extras-email-template.html">Email template</a></li>
+				<li><a href="extras-faq.html">FAQ</a></li>
+				<li><a href="extras-gallery.html">Gallery</a></li>
+				<li><a href="extras-invoice.html">Invoice</a></li>
+				<li><a href="extras-maps.html">Maps</a></li>
+				<li><a href="extras-pricing.html">Pricing</a></li>
+				<li><a href="extras-projects.html">Projects</a></li>
+				<li><a href="extras-taskboard.html">Taskboard</a></li>
+				<li><a href="extras-timeline.html">Timeline</a></li>
+				<li><a href="extras-tour.html">Tour</a></li>
+				</ul>
+				<!-- /.sub-menu js__content -->
+				</li>
+				</ul>
+				<!-- /.menu js__accordion --> *@
 			</div>
 			<!-- /.navigation -->
 		</div>
