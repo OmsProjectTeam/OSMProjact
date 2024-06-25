@@ -12,31 +12,24 @@ namespace Yara.Areas.merchantAccount.Controllers
             iMerchant = iMerchant1;
 			_userManager = userManager;
         }
-        public async Task<IActionResult> MyProfile(string id)
-        {
-            // Get the current logged-in user
-            var user = await _userManager.GetUserIdAsync(string id);
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-            //if (!int.TryParse(user.Id, out int merchantId))
-            //{
-            //    return BadRequest("Invalid merchant ID.");
-            //}
+		public async Task<IActionResult> MyProfile(string? id)
+		{
 
-            //var merchant = await iMerchant.GetMerchantAsync(merchantId);
-            //if (merchant == null)
-            //{
-            //    return NotFound();
-            //}
 
-            var viewModel = new ViewmMODeElMASTER
-            {
-                Merchant = merchant
-            };
+			var user = await _userManager.FindByIdAsync(id);
+			if (user == null)
+				return NotFound();
 
-            return View(viewModel);
-        }
-    }
+			return View(user);
+		}
+
+		public async Task<IActionResult> ShowUserData(string id)
+		{
+			var user = await _userManager.FindByIdAsync(id);
+			if (user == null)
+				return NotFound();
+
+			return View(user);
+		}
+	}
 }
