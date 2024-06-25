@@ -50,8 +50,11 @@
 				<div class="right-content">
 					<h2 class="counter">@ViewBag.Favorit</h2>
 					<!-- /.counter -->
+					@foreach (var item in Model.ListViewOrderNew.Take(1))
+					{
+						<p class="text">@item.cust_mob </p>
+					}
 					
-					<p class="text"> </p>
 					<!-- /.text -->
 				</div>
 				<!-- /.right-content -->

@@ -1,4 +1,5 @@
 ﻿
+
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
 <head>
@@ -46,7 +47,7 @@
 			<a href="index.html" class="logo">@ViewBag.UserName</a>
 			<button type="button" class="button-close fa fa-times js__menu_close"></button>
 			<div class="user">
-				<a href="#" class="avatar"><img src="@string.Format("/Images/Users/{0}",Model.ImageUser)" alt=""><span class="status online"></span></a>
+				<a href="#" class="avatar"><img src="@string.Format("/Images/Users/{0}",ViewBag.imag)" alt=""><span class="status online"></span></a>
 				<h5 class="name"><a href="profile.html">@ViewBag.Name</a></h5>
 				<h5 class="position">Administrator</h5>
 				<!-- /.name -->
