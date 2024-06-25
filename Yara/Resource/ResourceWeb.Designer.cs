@@ -1213,6 +1213,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Orders System.
+        /// </summary>
+        public static string LBOrdersSystem {
+            get {
+                return ResourceManager.GetString("LBOrdersSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Order Status.
         /// </summary>
         public static string LBOrderStatus {

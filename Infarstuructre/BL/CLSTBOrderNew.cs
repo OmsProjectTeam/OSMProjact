@@ -14,9 +14,10 @@ namespace Infarstuructre.BL
         bool UpdateData(TBOrderNew updatss);
         bool deleteData(int IdOrderNew);
         List<TBViewOrderNew> GetAllv(int IdOrderNew);
+        public List<TBViewOrderNew> GetAllDataentry(string IdOrderNew);
 
-        //////////////////// API /////////////////////////////////////
-        Task<IEnumerable<TBViewOrderNew>> GetAllOrdersNewAsync(int pageNumber, int pageSize);
+		//////////////////// API /////////////////////////////////////
+		Task<IEnumerable<TBViewOrderNew>> GetAllOrdersNewAsync(int pageNumber, int pageSize);
 		Task<TBOrderNew> GetOrderNewByIdAsync(int Id);
         Task<IEnumerable<TBViewOrderNew>> GetAllOrdersNewWithConditionAsync(Expression<Func<TBViewOrderNew, bool>> condition);
         Task AddOrderNewAsync(TBOrderNew orderNew);
@@ -89,7 +90,13 @@ namespace Infarstuructre.BL
             return MySlider;
         }
 
-        // /////////////////// APIs /////////////////////////////////////////
+		public List<TBViewOrderNew> GetAllDataentry(string IdOrderNew)
+		{
+			List<TBViewOrderNew> MySlider = dbcontext.ViewOrderNew.Where(a => a.DataEntry == IdOrderNew).Where(a => a.CurrentState == true).ToList();
+			return MySlider;
+		}
+
+		// /////////////////// APIs /////////////////////////////////////////
 		public async Task<IEnumerable<TBViewOrderNew>> GetAllOrdersNewAsync(int pageNumber, int pageSize)
 		{
 			IEnumerable<TBViewOrderNew> ordersNew = await dbcontext.ViewOrderNew.OrderByDescending(n => n.IdOrderNew)

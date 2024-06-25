@@ -46,7 +46,7 @@
 			<a href="index.html" class="logo">@ViewBag.Name</a>
 			<button type="button" class="button-close fa fa-times js__menu_close"></button>
 			<div class="user">
-				<a href="#" class="avatar"><img src="@ViewBag.UserImage" alt="User Image"><span class="status online"></span></a>
+				<a href="#" class="avatar"><img src="@string.Format("/Images/Users/{0}",Model.ImageUser)" alt="User Image"><span class="status online"></span></a>
 				<h5 class="name"><a href="profile.html">@ViewBag.UserName</a></h5>
 				<h5 class="position">@ViewBag.UserRole</h5>
 				<!-- /.name -->

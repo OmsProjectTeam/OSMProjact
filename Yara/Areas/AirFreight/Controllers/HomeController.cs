@@ -24,7 +24,7 @@ namespace Yara.Areas.AirFreight.Controllers
 			ViewBag.UserImage = user.ImageUser;
 			ViewBag.Name = user.Name;
 			ViewBag.UserRole = role[0];
-			return View();
+			return View(user);
 		}
 	}
 }

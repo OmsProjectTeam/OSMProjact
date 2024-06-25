@@ -4,10 +4,6 @@
     Layout = "~/Areas/AirFreight/Views/Shared/_LayoutAirFreight.cshtml";
 }
 
-
-
-
-
 <div class="col-xs-12">
 	<div class="col-xs-8">
 
@@ -17,11 +13,8 @@
 		<div class="dropdown js__drop_down">
 			<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
 			<ul class="sub-menu">
-				<li><a href="#">Action</a></li>
-				<li><a href="#">Another action</a></li>
-				<li><a href="#">Something else there</a></li>
-				<li class="split"></li>
-				<li><a href="#">Separated link</a></li>
+					<li><a asp-area="AirFreight" asp-controller="Profile" asp-action="ShowUserData" asp-route-Id="@Model.Id">Edit Profile</a></li>
+					<li><a asp-area="AirFreight" asp-controller="Profile" asp-action="ChangePassword" asp-route-Id="@Model.Id">Change Password</a></li>
 			</ul>
 			<!-- /.sub-menu -->
 		</div>

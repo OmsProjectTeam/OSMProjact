@@ -15,8 +15,6 @@ namespace Yara.Areas.AirFreight.Controllers
 		}
 		public async Task<IActionResult> MyProfile(string? id)
 		{
-
-
 			var user = await _userManager.FindByIdAsync(id);
 			if (user == null)
 				return NotFound();
@@ -26,11 +24,32 @@ namespace Yara.Areas.AirFreight.Controllers
 
 		public async Task<IActionResult> ShowUserData(string id)
 		{
-			var user = await _userManager.FindByIdAsync(id);
-			if (user == null)
-				return NotFound();
+			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+			//vmodel.ListVwUser = iUserInformation.GetAll();
+			if (id != null)
+			{
+				vmodel.sUser = iUserInformation.GetById(Convert.ToString(id));
+				return View(vmodel);
+			}
+			else
+			{
+				return View(new RegisterViewModel());
+			}
+		}
 
-			return View(user);
+		public IActionResult ChangePassword(string Id)
+		{
+			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+			//vmodel.ListVwUser = iUserInformation.GetAll();
+			if (Id != null)
+			{
+				vmodel.sUser = iUserInformation.GetById(Convert.ToString(Id));
+				return View(vmodel);
+			}
+			else
+			{
+				return View(new RegisterViewModel());
+			}
 		}
 	}
 }

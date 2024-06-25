@@ -24,7 +24,7 @@ namespace Domin.Entity
         public string? DescriptionClint { get; set; }
         public int? IdorderStatus { get; set; }
         public string? description { get; set; }
-        public string? role { get; set; }
+       
         public int? IdorderCases { get; set; }
         public string? orderCases { get; set; }
         public DateOnly? OrderDate { get; set; }
