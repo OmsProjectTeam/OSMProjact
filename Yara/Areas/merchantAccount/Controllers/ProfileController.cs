@@ -14,14 +14,11 @@ namespace Yara.Areas.merchantAccount.Controllers
         }
 
 
-		public async Task<IActionResult> MyProfile(string id)
+		public async Task<IActionResult> MyProfile(string? id)
 		{
-			// Get the current logged-in user
+
+
 			var user = await _userManager.FindByIdAsync(id);
-			if (user == null)
-			{
-				return Unauthorized();
-			}
 			if (user == null)
 				return NotFound();
 
