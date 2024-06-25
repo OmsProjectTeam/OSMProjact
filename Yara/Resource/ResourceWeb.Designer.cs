@@ -1276,6 +1276,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string LBProfile {
+            get {
+                return ResourceManager.GetString("LBProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to exchange rate.
         /// </summary>
         public static string LbRate {

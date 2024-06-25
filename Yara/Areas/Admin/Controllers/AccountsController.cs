@@ -326,24 +326,6 @@ namespace Yara.Areas.Admin.Controllers
 						// Redirect to AirFreight area with user ID
 						return RedirectToAction("Index", "Home", new { area = "AirFreight", userId = user.Id, token = token });
                     }
-                    if (string.IsNullOrEmpty(returnUrl))
-					// Check if user has the role "Merchant"
-					if (roles.Contains("Merchant"))
-					{
-						// Redirect to merchant area with user ID
-						return RedirectToAction("Index", "Home", new { area = "merchantAccount", id = user.Id, token = token });
-					}
-					// Check if user has the role "Customer"
-					if (roles.Contains("Customer"))
-					{
-						// Redirect to merchant area with user ID
-						return RedirectToAction("Index", "Home", new { area = "ClintAccount", userId = user.Id, token = token });
-					}// Check if user has the role "Admin"
-					if (roles.Contains("Admin"))
-					{
-						// Redirect to merchant area with user ID
-						return RedirectToAction("Index", "Home", new { area = "Admin", userId = user.Id, token = token });
-					}
 					if (string.IsNullOrEmpty(returnUrl))
 					{
 						// Token Here
@@ -385,15 +367,6 @@ namespace Yara.Areas.Admin.Controllers
         {
             return View(new RegisterViewModel());
         }
-
-
-		[AllowAnonymous]
-		public IActionResult RegisterCustomer(string? Id)
-		{
-			return View(new RegisterViewModel());
-		}
-
-
 
 		[AllowAnonymous]
 		public IActionResult RegisterMerchant(string? Id)
