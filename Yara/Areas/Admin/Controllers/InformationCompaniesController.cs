@@ -9,7 +9,8 @@ namespace Yara.Areas.Admin.Controllers
         MasterDbcontext dbcontext;
         IIInformationCompanies iInformationCompanies;
         IITypesCompanies iTypesCompanies;
-        public InformationCompaniesController(MasterDbcontext dbcontext1,IIInformationCompanies iInformationCompanies1,IITypesCompanies iTypesCompanies1)
+        IIUserInformation iUserInformation;
+		public InformationCompaniesController(MasterDbcontext dbcontext1,IIInformationCompanies iInformationCompanies1,IITypesCompanies iTypesCompanies1,IIUserInformation iUserInformation1)
         {
             dbcontext = dbcontext1;
             iInformationCompanies = iInformationCompanies1;
@@ -23,7 +24,9 @@ namespace Yara.Areas.Admin.Controllers
         }
         public IActionResult AddEditInformationCompanies(int? IdInformationCompanies)
         {
+
             ViewBag.Categorie = iTypesCompanies.GetAll();
+            ViewBag.user = iUserInformation.GetAll();
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewInformationCompanies = iInformationCompanies.GetAll();
             if (IdInformationCompanies != null)

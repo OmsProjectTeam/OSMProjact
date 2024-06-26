@@ -33,8 +33,10 @@ namespace Yara.Areas.AirFreight.Controllers
 				return NotFound();
 			vmodel.ListViewOrderNew = iOrderNew.GetAllDataentry(user.UserName);
 			//vmodel.ListlicationUser = (IEnumerable<ApplicationUser>)iUserInformation.GetAllByName(name).Take(1);
-			vmodel.ListlicationUser = iUserInformation.GetAllByName(user.UserName).Take(1);
+			//vmodel.ListlicationUser = iUserInformation.GetAllByName(user.UserName).Take(1);
 			return View(vmodel);
+
+
 		}
 		public IActionResult AddOrderNew(int? IdOrderNew,string name)
 		{

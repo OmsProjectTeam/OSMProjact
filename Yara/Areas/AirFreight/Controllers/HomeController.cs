@@ -24,15 +24,7 @@ namespace Yara.Areas.AirFreight.Controllers
 		public async Task<IActionResult> Index(string userId)
 		{
 			
-			
-			
-			
-			
-			
 	
-
-
-
 
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 			//vmodel.ListlicationUser = iUserInformation.GetAllByName(user.UserName).Take(1);
@@ -42,9 +34,13 @@ namespace Yara.Areas.AirFreight.Controllers
 			if (user == null)
 				return NotFound();
 			// الحصول على دور المستخدم
-			var role = await _userManager.GetRolesAsync(user);
+			//var role = await _userManager.GetRolesAsync(user);
 
-			ViewBag.UserRole = role.FirstOrDefault();
+			//ViewBag.UserRole = role.FirstOrDefault();
+
+
+
+
 
 
 			// جلب البيانات وإعداد النموذج
