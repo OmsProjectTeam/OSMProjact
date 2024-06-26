@@ -131,6 +131,7 @@ builder.Services.AddScoped<IIUser, CLSUser>();
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 

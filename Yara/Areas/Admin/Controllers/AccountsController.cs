@@ -6,6 +6,8 @@ using Infarstuructre.BL;
 using LamarModa.Api.Auth;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Common;
+using static Domin.Entity.Helper;
 
 namespace Yara.Areas.Admin.Controllers
 {
@@ -267,7 +269,7 @@ namespace Yara.Areas.Admin.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Authorize(Roles = "Admin,User")]
+		[AllowAnonymous]
 		public async Task<IActionResult> ChangePassword1(ViewmMODeElMASTER model1, RegisterViewModel? model)
 		{
 			var user = await _userManager.FindByIdAsync(model1.sUser.Id);
@@ -275,8 +277,16 @@ namespace Yara.Areas.Admin.Controllers
 			{
 				await _userManager.RemovePasswordAsync(user);
 				var AddNewPassword = await _userManager.AddPasswordAsync(user, model1.SChangePassword.NewPassword);
+				var roles = await _userManager.GetRolesAsync(user);
 				if (AddNewPassword.Succeeded)
+				{
+					if (roles.Contains("Customer"))
+					{
+						// Redirect to merchant area with user ID
+						return RedirectToAction("Index", "Home", new { area = "ClintAccount", userId = user.Id });
+					}
 					return RedirectToAction(nameof(Registers));
+				}
 				else
 					return RedirectToAction(nameof(ChangePassword1));
 			}
@@ -783,9 +793,16 @@ namespace Yara.Areas.Admin.Controllers
 				userUpdate.ImageUser = user.ImageUser;
 				userUpdate.PhoneNumber = user.PhoneNumber;
 				var result = await _userManager.UpdateAsync(userUpdate);
+
+				var roles = await _userManager.GetRolesAsync(userUpdate);
 				if (result.Succeeded)
 
 				{
+					if (roles.Contains("Customer"))
+					{
+						// Redirect to merchant area with user ID
+						return RedirectToAction("Index", "Home", new { area = "ClintAccount", userId = user.Id});
+					}
 					return RedirectToAction("Registers");
 					//var oldRole = await _userManager.GetRolesAsync(userUpdate);
 					//await _userManager.RemoveFromRolesAsync(userUpdate, oldRole);
