@@ -1,3 +1,4 @@
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Yara.Models;
@@ -7,15 +8,25 @@ namespace Yara.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
+		UserManager<ApplicationUser> _userManager;
 
-		public HomeController(ILogger<HomeController> logger)
+		public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
 		{
 			_logger = logger;
+			_userManager= userManager;
 		}
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			return View();
+			var user = await _userManager.GetUserAsync(User);
+			if (user == null)
+				return View();
+			// الحصول على دور المستخدم
+			var role = await _userManager.GetRolesAsync(user);
+			ViewBag.UserRole = role.FirstOrDefault();
+		
+			
+			 return View(user);
 		}
 		public IActionResult IndexAr()
 		{

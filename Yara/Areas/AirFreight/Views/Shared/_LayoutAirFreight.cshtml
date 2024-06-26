@@ -1,5 +1,6 @@
-﻿
-
+﻿@model ViewmMODeElMASTER
+@inject UserManager<ApplicationUser> userManager
+@inject SignInManager<ApplicationUser> signInManager
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
 <head>
@@ -8,33 +9,24 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-
 	<title>Home - Ninja Admin Template</title>
-
 	<!-- Main Styles -->
 	<link rel="stylesheet" href="~/Admin/assets/styles/style.min.css">
-
 	<!-- mCustomScrollbar -->
 	<link rel="stylesheet" href="~/Admin/assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
-
 	<!-- Waves Effect -->
 	<link rel="stylesheet" href="~/Admin/assets/plugin/waves/waves.min.css">
-
 	<!-- Sweet Alert -->
 	<link rel="stylesheet" href="~/Admin/assets/plugin/sweet-alert/sweetalert.css">
-
 	<!-- Percent Circle -->
 	<link rel="stylesheet" href="~/Admin/assets/plugin/percircle/css/percircle.css">
-
 	<!-- Chartist Chart -->
 	<link rel="stylesheet" href="~/Admin/assets/plugin/chart/chartist/chartist.min.css">
-
 	<!-- FullCalendar -->
 	<link rel="stylesheet" href="~/Admin/assets/plugin/fullcalendar/fullcalendar.min.css">
 	<link rel="stylesheet" href="~/Admin/assets/plugin/fullcalendar/fullcalendar.print.css" media='print'>
 	<!-- Select2 -->
 	<link rel="stylesheet" href="~/Admin/assets/plugin/select2/css/select2.min.css">
-
 	<!-- Dark Themes -->
 	<link rel="stylesheet" href="~/Admin/assets/styles/style-dark.min.css">
 	<!-- RTL -->
@@ -47,9 +39,25 @@
 			<a href="index.html" class="logo">@ViewBag.UserName</a>
 			<button type="button" class="button-close fa fa-times js__menu_close"></button>
 			<div class="user">
-				<a href="#" class="avatar"><img src="@string.Format("/Images/Users/{0}",ViewBag.imag)" alt=""><span class="status online"></span></a>
-				<h5 class="name"><a href="profile.html">@ViewBag.Name</a></h5>
-				<h5 class="position">Administrator</h5>
+
+				@{
+					var user = await userManager.GetUserAsync(User);
+					var roles = await userManager.GetRolesAsync(user);
+					var userRole = roles.FirstOrDefault();
+				}
+
+				<a href="#" class="avatar">
+					<img src="@Helper.PathImageuser@user.ImageUser" alt="">
+					<span class="status online"></span>
+				</a>
+				<h5 class="name">
+					<a href="profile.html" style="font-size:8px">@user.Name</a>
+				</h5>
+				<h5 class="position">
+					@userRole
+				</h5>
+			
+			
 				<!-- /.name -->
 				<div class="control-wrap js__drop_down">
 					<i class="fa fa-caret-down js__drop_down_button"></i>
@@ -64,7 +72,6 @@
 		</header>
 		<!-- /.header -->
 		<div class="content">
-
 			<div class="navigation">
 				<h5 class="title">Navigation</h5>
 				<!-- /.title -->
@@ -75,15 +82,14 @@
 					<li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-user"></i><span>@ResourceWeb.LBUsersInformationEn</span><span class="menu-arrow fa fa-angle-down"></span></a>
 						<ul class="sub-menu js__content">
-							<li><a asp-area="AirFreight" asp-controller="Profile" asp-action="MyProfile" asp-route-id="@ViewBag.UserId">@ResourceWeb.LBProfile</a></li>
+							<li><a asp-area="AirFreight" asp-controller="Profile" asp-action="MyProfile" asp-route-userId="@user.Id">@ResourceWeb.LBProfile</a></li>
 							@* <li><a asp-area="Admin" asp-controller="Accounts" asp-action="Registers">Users</a></li>
 							<li><a href="icons-material-icons.html">Material Design Icons</a></li>
 							<li><a href="icons-material-design-iconic.html">Material Design Iconic Font</a></li>
 							<li><a href="icons-themify-icons.html">Themify Icons</a></li> *@
 						</ul>
 						<!-- /.sub-menu js__content -->
-					</li>
-					
+					</li>			
 				</ul>
 				<!-- /.menu js__accordion -->
 				<h5 class="title">Orders</h5>
@@ -92,8 +98,7 @@
 					<li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-bar-chart"></i><span>@ResourceWeb.LBOrdersSystem</span><span class="menu-arrow fa fa-angle-down"></span></a>
 						<ul class="sub-menu js__content">
-							<li><a asp-area="AirFreight" asp-controller="OrderNew" asp-action="MyOrderNew" asp-route-name="@User.Identity.Name">@ResourceWeb.LBMyOrderNew</a></li>
-			
+							<li><a asp-area="AirFreight" asp-controller="OrderNew" asp-action="MyOrderNew" asp-route-userId="@user.Id">@ResourceWeb.LBMyOrderNew</a></li>
 						</ul>
 						<!-- /.sub-menu js__content -->
 					</li>

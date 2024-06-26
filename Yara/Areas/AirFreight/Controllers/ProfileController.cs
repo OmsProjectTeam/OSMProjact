@@ -13,22 +13,31 @@ namespace Yara.Areas.AirFreight.Controllers
 			_userManager = userManager;
 			iUserInformation= iUserInformation1;
 		}
-		public async Task<IActionResult> MyProfile(string? id)
+		public async Task<IActionResult> MyProfile(string userId)
 		{
-			var user = await _userManager.FindByIdAsync(id);
+
+			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+			var userd = vmodel.sUser = iUserInformation.GetById(userId);
+		
+			var user = await _userManager.FindByIdAsync(userId);
 			if (user == null)
 				return NotFound();
 
-			return View(user);
+			return View(vmodel);
 		}
 
-		public async Task<IActionResult> ShowUserData(string id)
+
+
+
+
+
+		public async Task<IActionResult> ShowUserData(string userId)
 		{
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 			//vmodel.ListVwUser = iUserInformation.GetAll();
-			if (id != null)
+			if (userId != null)
 			{
-				vmodel.sUser = iUserInformation.GetById(Convert.ToString(id));
+				vmodel.sUser = iUserInformation.GetById(Convert.ToString(userId));
 				return View(vmodel);
 			}
 			else
@@ -37,13 +46,13 @@ namespace Yara.Areas.AirFreight.Controllers
 			}
 		}
 
-		public IActionResult ChangePassword(string Id)
+		public IActionResult ChangePassword(string userId)
 		{
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 			//vmodel.ListVwUser = iUserInformation.GetAll();
-			if (Id != null)
+			if (userId != null)
 			{
-				vmodel.sUser = iUserInformation.GetById(Convert.ToString(Id));
+				vmodel.sUser = iUserInformation.GetById(Convert.ToString(userId));
 				return View(vmodel);
 			}
 			else

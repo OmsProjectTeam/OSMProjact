@@ -137,13 +137,8 @@ namespace Yara.Areas.Admin.Controllers
 
 
 
-			var model = new RegisterViewModel
+			var model = new ViewmMODeElMASTER
 			{
-
-
-
-
-
 
 				NewRegister = new NewRegister(),
 				Roles = _roleManager.Roles.OrderBy(x => x.Name).ToList(),
@@ -294,10 +289,15 @@ namespace Yara.Areas.Admin.Controllers
 						// Redirect to merchant area with user ID
 						return RedirectToAction("Index", "Home", new { area = "merchantAccount", userId = user.Id });
 					}
+					if (roles.Contains("Admin"))
+					{
+						// Redirect to merchant area with user ID
+						return RedirectToAction("Index", "Home", new { area = "Admin", userId = user.Id });
+					}
 					return RedirectToAction(nameof(Registers));
 				}
 				else
-					return RedirectToAction(nameof(ChangePassword1));
+					return RedirectToAction("Index", "Home", new { area = "", userId = user.Id });
 			}
 
 			return RedirectToAction(nameof(Registers));

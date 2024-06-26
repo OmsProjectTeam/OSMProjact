@@ -15,6 +15,8 @@ namespace Infarstuructre.BL
 	{
 		List<VwUser> GetAll();
 		ApplicationUser GetById(string? Id);
+		List<ApplicationUser> GetAllByName(string name);
+		List<VwUser> GetAllbyId(string userId);
 
 
 	}
@@ -35,22 +37,34 @@ namespace Infarstuructre.BL
 			List<VwUser> MySlider = dbcontext.VwUsers.OrderBy(x => x.Role).ToList(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
 			//List<VwUser> MySlider = dbcontext.VwUsers.OrderByDescending(n => n.Id).Where(a => a.ActiveUser == true).ToList();
 			return MySlider;
-		}	
+		}
 
 
-        public ApplicationUser GetById(string? Id)
+		public List<VwUser> GetAllbyId(string userId)
+
+		{
+			//Roles = _roleManager.Roles.OrderBy(x => x.Name).ToList(),
+			List<VwUser> MySlider = dbcontext.VwUsers.Where(x => x.Id== userId).ToList(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
+																					 //List<VwUser> MySlider = dbcontext.VwUsers.OrderByDescending(n => n.Id).Where(a => a.ActiveUser == true).ToList();
+			return MySlider;
+		}
+
+
+		public List<ApplicationUser> GetAllByName(string name)
+
+		{
+			//Roles = _roleManager.Roles.OrderBy(x => x.Name).ToList(),
+			List<ApplicationUser> MySlider = _userManager.Users.Where(x => x.Email == name).ToList(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
+																							 //List<VwUser> MySlider = dbcontext.VwUsers.OrderByDescending(n => n.Id).Where(a => a.ActiveUser == true).ToList();
+			return MySlider;
+		}
+
+		public ApplicationUser GetById(string? Id)
         {
 			ApplicationUser sslid = _userManager.Users.FirstOrDefault(a => a.Id == Id);
             return sslid;
         }
 
-		//public List<ApplicationUser> GetAllv()
-
-		//{
-		//	//Roles = _roleManager.Roles.OrderBy(x => x.Name).ToList(),
-		//	List<ApplicationUser> MySlider = _userManager.FindByIdAsync(x => x.Role).ToList(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
-		//																			 //List<VwUser> MySlider = dbcontext.VwUsers.OrderByDescending(n => n.Id).Where(a => a.ActiveUser == true).ToList();
-		//	return MySlider;
-		//}
+	
 	}
 }

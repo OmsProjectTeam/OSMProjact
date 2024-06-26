@@ -1,4 +1,8 @@
 ﻿
+using Domin.Entity;
+using Infarstuructre.BL;
+using Microsoft.AspNetCore.Identity;
+
 namespace Yara.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -8,16 +12,21 @@ namespace Yara.Areas.Admin.Controllers
         MasterDbcontext dbcontext;
         IICity iCity;
         IIArea iArea;
-        public AreaController(MasterDbcontext dbcontext1,IICity iCity1,IIArea iArea1)
+        IIUserInformation iUserInformation;
+        UserManager<ApplicationUser> _userManager;
+		public AreaController(MasterDbcontext dbcontext1,IICity iCity1,IIArea iArea1, IIUserInformation iUserInformation1, UserManager<ApplicationUser> userManager)
         {
             dbcontext=dbcontext1;
             iCity=iCity1;
             iArea=iArea1;
-        }
-        public IActionResult MyArea()
+			iUserInformation=iUserInformation1;
+
+		}
+        public async Task<IActionResult> MyArea()
         {
-            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-            vmodel.ListViewAreas = iArea.GetAll();
+			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+	
+			vmodel.ListViewAreas = iArea.GetAll();
             return View(vmodel);
         }
         public IActionResult AddArea(int? Id)
@@ -53,8 +62,6 @@ namespace Yara.Areas.Admin.Controllers
                 slider.DataEntry = model.Area.DataEntry;
                 slider.DateTimeEntry = model.Area.DateTimeEntry;
                 slider.CurrentState = model.Area.CurrentState;
-
-
                 if (slider.Id == 0 || slider.Id == null)
                 {
                     if (dbcontext.areas.Where(a => a.Description == slider.Description).ToList().Count > 0)

@@ -13,17 +13,17 @@ namespace Yara.Areas.merchantAccount.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-                return NotFound();
+            //var user = await _userManager.GetUserAsync(User);
+            //if (user == null)
+            //    return NotFound();
 
-            var role = await _userManager.GetRolesAsync(user);
+            //var role = await _userManager.GetRolesAsync(user);
 
-            ViewBag.UserName = user.UserName;
-            ViewBag.UserId = user.Id;
-            ViewBag.UserImage = user.ImageUser;
-            ViewBag.Name = user.Name;
-            ViewBag.UserRole = role[0];
+            //ViewBag.UserName = user.UserName;
+            //ViewBag.UserId = user.Id;
+            //ViewBag.UserImage = user.ImageUser;
+            //ViewBag.Name = user.Name;
+            //ViewBag.UserRole = role[0];
             return View();
         }
     }

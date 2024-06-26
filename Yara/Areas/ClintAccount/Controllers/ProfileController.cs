@@ -20,13 +20,17 @@ public class ProfileController : Controller
 		this.iUserInformation = iUserInformation;
 	}
 
-	public async Task<IActionResult> MyProfile(string id)
+	public async Task<IActionResult> MyProfile(string userId)
 	{
-		var user = await _userManager.FindByIdAsync(id);
-		if (user == null) 
+
+		ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+		var userd = vmodel.sUser = iUserInformation.GetById(userId);
+
+		var user = await _userManager.FindByIdAsync(userId);
+		if (user == null)
 			return NotFound();
 
-		return View(user);
+		return View(vmodel);
 	}
 
 	public async Task<IActionResult> ShowUserData(string id)
