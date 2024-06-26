@@ -282,8 +282,12 @@ namespace Yara.Areas.Admin.Controllers
 				{
 					if (roles.Contains("Customer"))
 					{
-						// Redirect to merchant area with user ID
 						return RedirectToAction("Index", "Home", new { area = "ClintAccount", userId = user.Id });
+					}
+					if (roles.Contains("AirFreight"))
+					{
+
+						return RedirectToAction("Index", "Home", new { area = "AirFreight", userId = user.Id });
 					}
 					return RedirectToAction(nameof(Registers));
 				}
@@ -800,8 +804,11 @@ namespace Yara.Areas.Admin.Controllers
 				{
 					if (roles.Contains("Customer"))
 					{
-						// Redirect to merchant area with user ID
 						return RedirectToAction("Index", "Home", new { area = "ClintAccount", userId = user.Id});
+					}
+					if (roles.Contains("AirFreight"))
+					{
+						return RedirectToAction("Index", "Home", new { area = "AirFreight", userId = user.Id });
 					}
 					return RedirectToAction("Registers");
 					//var oldRole = await _userManager.GetRolesAsync(userUpdate);
