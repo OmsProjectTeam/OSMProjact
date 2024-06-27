@@ -32,28 +32,13 @@ namespace Yara.Areas.merchantAccount.Controllers
             return View(vmodel);
         }
 
-        public async Task<IActionResult> ShowUserData(string id)
+        public async Task<IActionResult> ShowUserData(string userId)
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             //vmodel.ListVwUser = iUserInformation.GetAll();
-            if (id != null)
+            if (userId != null)
             {
-                vmodel.sUser = iUserInformation.GetById(Convert.ToString(id));
-                return View(vmodel);
-            }
-            else
-            {
-                return View(new RegisterViewModel());
-            }
-        }
-
-        public IActionResult ChangePassword(string Id)
-        {
-            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-            //vmodel.ListVwUser = iUserInformation.GetAll();
-            if (Id != null)
-            {
-                vmodel.sUser = iUserInformation.GetById(Convert.ToString(Id));
+                vmodel.sUser = iUserInformation.GetById(Convert.ToString(userId));
                 return View(vmodel);
             }
             else

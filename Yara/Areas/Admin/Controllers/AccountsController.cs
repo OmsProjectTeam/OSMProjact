@@ -245,8 +245,8 @@ namespace Yara.Areas.Admin.Controllers
 			return RedirectToAction("Registers", "Accounts");
 		}
 
-		[Authorize(Roles = "Admin,User")]
-		public IActionResult ChangePassword(string Id)
+        [AllowAnonymous]
+        public IActionResult ChangePassword(string Id)
 		{
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 			//vmodel.ListVwUser = iUserInformation.GetAll();
