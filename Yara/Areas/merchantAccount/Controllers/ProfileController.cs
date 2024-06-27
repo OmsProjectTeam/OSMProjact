@@ -47,6 +47,21 @@ namespace Yara.Areas.merchantAccount.Controllers
             }
         }
 
+        public IActionResult ChangePassword(string userId)
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            //vmodel.ListVwUser = iUserInformation.GetAll();
+            if (userId != null)
+            {
+                vmodel.sUser = iUserInformation.GetById(Convert.ToString(userId));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(new RegisterViewModel());
+            }
+        }
+
     }
 }
 

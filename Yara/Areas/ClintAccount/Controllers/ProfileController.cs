@@ -33,28 +33,28 @@ public class ProfileController : Controller
 		return View(vmodel);
 	}
 
-	public async Task<IActionResult> ShowUserData(string id)
-	{
-		ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-		//vmodel.ListVwUser = iUserInformation.GetAll();
-		if (id != null)
-		{
-			vmodel.sUser = iUserInformation.GetById(Convert.ToString(id));
-			return View(vmodel);
-		}
-		else
-		{
-			return View(new RegisterViewModel());
-		}
-	}
+    public async Task<IActionResult> ShowUserData(string userId)
+    {
+        ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+        //vmodel.ListVwUser = iUserInformation.GetAll();
+        if (userId != null)
+        {
+            vmodel.sUser = iUserInformation.GetById(Convert.ToString(userId));
+            return View(vmodel);
+        }
+        else
+        {
+            return View(new RegisterViewModel());
+        }
+    }
 
-	public IActionResult ChangePassword(string Id)
+    public IActionResult ChangePassword(string userId)
 	{
 		ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 		//vmodel.ListVwUser = iUserInformation.GetAll();
-		if (Id != null)
+		if (userId != null)
 		{
-			vmodel.sUser = iUserInformation.GetById(Convert.ToString(Id));
+			vmodel.sUser = iUserInformation.GetById(Convert.ToString(userId));
 			return View(vmodel);
 		}
 		else
