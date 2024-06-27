@@ -811,7 +811,11 @@ namespace Yara.Areas.Admin.Controllers
 					{
 						return RedirectToAction("Index", "Home", new { area = "ClintAccount", userId = user.Id});
 					}
-					return RedirectToAction("Registers");
+                    if (roles.Contains("Merchant"))
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "merchantAccount", userId = user.Id });
+                    }
+                    return RedirectToAction("Registers");
 					//var oldRole = await _userManager.GetRolesAsync(userUpdate);
 					//await _userManager.RemoveFromRolesAsync(userUpdate, oldRole);
 					//var AddRole = await _userManager.AddToRoleAsync(userUpdate, model.ruser.NewRegister.RoleName);
