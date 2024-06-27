@@ -141,8 +141,8 @@ namespace Yara.Areas.Admin.Controllers
 			{
 
 				NewRegister = new NewRegister(),
-				Roles = _roleManager.Roles.OrderBy(x => x.Name).ToList(),
-				Users = _context.VwUsers.OrderBy(x => x.Role).ToList() //_userManager.Users.OrderBy(x=>x.Name).ToList()
+				Roles = _roleManager.Roles.OrderBy(x => x.Name). ToList(),
+				Users = _context.VwUsers.OrderBy(x => x.Role).Where(a => a.ActiveUser==true).ToList() //_userManager.Users.OrderBy(x=>x.Name).ToList()
 			};
 			return View(model);
 		}

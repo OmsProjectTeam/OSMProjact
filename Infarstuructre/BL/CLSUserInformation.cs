@@ -17,9 +17,11 @@ namespace Infarstuructre.BL
 		ApplicationUser GetById(string? Id);
 		List<ApplicationUser> GetAllByName(string name);
 		List<VwUser> GetAllbyId(string userId);
+		List<ApplicationUser> GetAllByNameall();
 
 
-	}
+
+    }
 	public class CLSUserInformation: IIUserInformation
 	{
 		UserManager<ApplicationUser> _userManager;
@@ -34,8 +36,8 @@ namespace Infarstuructre.BL
 
 		{
 			//Roles = _roleManager.Roles.OrderBy(x => x.Name).ToList(),
-			List<VwUser> MySlider = dbcontext.VwUsers.OrderBy(x => x.Role).ToList(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
-			//List<VwUser> MySlider = dbcontext.VwUsers.OrderByDescending(n => n.Id).Where(a => a.ActiveUser == true).ToList();
+			//List<VwUser> MySlider = dbcontext.VwUsers.OrderBy(x => x.Role).ToList(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
+			List<VwUser> MySlider = dbcontext.VwUsers.OrderByDescending(n => n.Id).Where(n => n.ActiveUser == true).ToList();
 			return MySlider;
 		}
 
@@ -44,7 +46,7 @@ namespace Infarstuructre.BL
 
 		{
 			//Roles = _roleManager.Roles.OrderBy(x => x.Name).ToList(),
-			List<VwUser> MySlider = dbcontext.VwUsers.Where(x => x.Id== userId).ToList(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
+			List<VwUser> MySlider = dbcontext.VwUsers.Where(x => x.Id== userId).Where(n => n.ActiveUser == true).ToList(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
 																					 //List<VwUser> MySlider = dbcontext.VwUsers.OrderByDescending(n => n.Id).Where(a => a.ActiveUser == true).ToList();
 			return MySlider;
 		}
@@ -54,12 +56,20 @@ namespace Infarstuructre.BL
 
 		{
 			//Roles = _roleManager.Roles.OrderBy(x => x.Name).ToList(),
-			List<ApplicationUser> MySlider = _userManager.Users.Where(x => x.Email == name).ToList(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
+			List<ApplicationUser> MySlider = _userManager.Users.Where(x => x.Email == name).Where(n => n.ActiveUser == true).ToList(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
 																							 //List<VwUser> MySlider = dbcontext.VwUsers.OrderByDescending(n => n.Id).Where(a => a.ActiveUser == true).ToList();
 			return MySlider;
 		}
+        public List<ApplicationUser> GetAllByNameall()
 
-		public ApplicationUser GetById(string? Id)
+        {
+            //Roles = _roleManager.Roles.OrderBy(x => x.Name).ToList(),
+            List<ApplicationUser> MySlider = _userManager.Users.OrderByDescending(x => x.Id).Where(n=>n.ActiveUser==true). ToList(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
+                                                                                                      //List<VwUser> MySlider = dbcontext.VwUsers.OrderByDescending(n => n.Id).Where(a => a.ActiveUser == true).ToList();
+            return MySlider;
+        }
+
+        public ApplicationUser GetById(string? Id)
         {
 			ApplicationUser sslid = _userManager.Users.FirstOrDefault(a => a.Id == Id);
             return sslid;

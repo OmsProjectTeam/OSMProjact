@@ -51,27 +51,26 @@ namespace Yara.Areas.Admin.Controllers
             try
             {
                 slider.IdClintWitheDeliveryTariffs = model.ClintWitheDeliveryTariffs.IdClintWitheDeliveryTariffs;
-                slider.DescriptionClint = model.ClintWitheDeliveryTariffs.DescriptionClint;
                 slider.IdCityDeliveryTariffs = model.ClintWitheDeliveryTariffs.IdCityDeliveryTariffs;
-                slider.IdCustomer = model.ClintWitheDeliveryTariffs.IdCustomer;
-                slider.IdMerchant = model.ClintWitheDeliveryTariffs.IdMerchant;          
+                slider.IdUserIntity = model.ClintWitheDeliveryTariffs.IdUserIntity;
+                slider.DescriptionClint = model.ClintWitheDeliveryTariffs.DescriptionClint;
+                slider.Nouts = model.ClintWitheDeliveryTariffs.Nouts;                          
                 slider.DataEntry = model.ClintWitheDeliveryTariffs.DataEntry;
                 slider.DateTimeEntry = model.ClintWitheDeliveryTariffs.DateTimeEntry;
-                slider.CurrentState = model.ClintWitheDeliveryTariffs.CurrentState;
-              
+                slider.CurrentState = model.ClintWitheDeliveryTariffs.CurrentState;             
                 if (slider.IdClintWitheDeliveryTariffs == 0 || slider.IdClintWitheDeliveryTariffs == null)
                 {
-                    if (dbcontext.TBClintWitheDeliveryTariffss.Where(a => a.IdCityDeliveryTariffs == slider.IdCityDeliveryTariffs).Where(a => a.IdCustomer == slider.IdCustomer).ToList().Count > 0)
-                    {
-                        TempData["Customer"] = ResourceWeb.VLCustomerDoplceted;
-                        return Redirect(returnUrl);
-                    }
-                    if (dbcontext.TBClintWitheDeliveryTariffss.Where(a => a.IdCityDeliveryTariffs == slider.IdCityDeliveryTariffs).Where(a => a.IdMerchant == slider.IdMerchant).ToList().Count > 0)
+                    //if (dbcontext.TBClintWitheDeliveryTariffss.Where(a => a.IdCityDeliveryTariffs == slider.IdCityDeliveryTariffs).Where(a => a.IdCustomer == slider.IdCustomer).ToList().Count > 0)
+                    //{
+                    //    TempData["Customer"] = ResourceWeb.VLCustomerDoplceted;
+                    //    return Redirect(returnUrl);
+                    //}
+                    //if (dbcontext.TBClintWitheDeliveryTariffss.Where(a => a.IdCityDeliveryTariffs == slider.IdCityDeliveryTariffs).Where(a => a.IdMerchant == slider.IdMerchant).ToList().Count > 0)
 
-                    {
-                        TempData["Merchant"] = ResourceWeb.VLMerchantDoplceted;
-                        return Redirect(returnUrl);
-                    }
+                    //{
+                    //    TempData["Merchant"] = ResourceWeb.VLMerchantDoplceted;
+                    //    return Redirect(returnUrl);
+                    //}
                     if (dbcontext.TBClintWitheDeliveryTariffss.Where(a => a.DescriptionClint == slider.DescriptionClint).ToList().Count > 0)
 
                     {

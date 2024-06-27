@@ -4,6 +4,7 @@ using Infarstuructre.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infarstuructre.Migrations
 {
     [DbContext(typeof(MasterDbcontext))]
-    partial class MasterDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20240626185416_updatecompny")]
+    partial class updatecompny
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2331,12 +2334,11 @@ namespace Infarstuructre.Migrations
                     b.Property<int>("IdCityDeliveryTariffs")
                         .HasColumnType("int");
 
-                    b.Property<string>("IdUserIntity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("IdCustomer")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Nouts")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("IdMerchant")
+                        .HasColumnType("int");
 
                     b.HasKey("IdClintWitheDeliveryTariffs");
 
@@ -2890,7 +2892,19 @@ namespace Infarstuructre.Migrations
 
             modelBuilder.Entity("Domin.Entity.TBViewClintWitheDeliveryTariffs", b =>
                 {
+                    b.Property<string>("AreaCustemor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AreaMersh")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AreaName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CityCustemor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CityName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("ClintDelivery")
@@ -2908,40 +2922,37 @@ namespace Infarstuructre.Migrations
                     b.Property<string>("DescriptionClint")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("IdCityDeliveryTariffs")
                         .HasColumnType("int");
 
                     b.Property<int?>("IdClintWitheDeliveryTariffs")
                         .HasColumnType("int");
 
-                    b.Property<string>("IdUserIntity")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("IdCustomer")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<int?>("IdMerchant")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Merchant_name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NikeNAme")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nouts")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleShippingTitleShipping")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TypesCompanies")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("code")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("cust_mob")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cust_name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("merchant_mob")
                         .HasColumnType("nvarchar(max)");
 
                     b.ToTable((string)null);
