@@ -153,11 +153,25 @@ namespace Yara.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetPrices (int selectedCompanyId)
+        public IActionResult GetPrices(int selectedCompanyId, float weight)
         {
             var prices = iShippingPrice.GetAll()
-                .FirstOrDefault(x => x.IdInformationCompanies == selectedCompanyId)?.ClintPricePerkgAbove10;
-            return Json(prices);
+                .FirstOrDefault(x => x.IdInformationCompanies == selectedCompanyId);
+
+            if (prices != null)
+            {
+                if (weight <= 10)
+                {
+                    return Json(prices.CoPricePerkgUnder10);
+                }
+                else
+                {
+                    return Json(prices.CoPricePerkgAbove10);
+                }
+            }
+
+            return Json(null);
         }
+
     }
 }
