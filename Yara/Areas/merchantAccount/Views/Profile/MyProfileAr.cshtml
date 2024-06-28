@@ -1,4 +1,4 @@
-﻿@model ApplicationUser
+﻿@model ViewmMODeElMASTER
 @{
 	ViewData["Title"] = "MyProfile";
 	Layout = "~/Areas/merchantAccount/Views/Shared/_Layoutmerchant.cshtml";
@@ -17,8 +17,8 @@
 			<div class="dropdown js__drop_down">
 				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
 				<ul class="sub-menu">
-					<li><a asp-area="merchantAccount" asp-controller="Profile" asp-action="ShowUserDataAr" asp-route-Id="@Model.Id">Edit Profile</a></li>
-					<li><a asp-area="merchantAccount" asp-controller="Profile" asp-action="ChangePasswordAr" asp-route-Id="@Model.Id">Change Password</a></li>
+					<li><a asp-area="Admin" asp-controller="Accounts" asp-action="EditeRegister" asp-route-Id="@Model.sUser.Id">Edit Profile</a></li>
+					<li><a asp-area="Admin" asp-controller="Accounts" asp-action="ChangePassword" asp-route-Id="@Model.sUser.Id">Change Password</a></li>
 				</ul>
 				<!-- /.sub-menu -->
 			</div>
