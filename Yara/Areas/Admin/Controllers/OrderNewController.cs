@@ -13,13 +13,15 @@ namespace Yara.Areas.Admin.Controllers
         IIOrderStatus iOrderStatus;
         IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs;
         MasterDbcontext dbcontext;
-        public OrderNewController(IIOrderNew iOrderNew1, IIOrderCase iOrderCase1, IIOrderStatus iOrderStatus1, IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1,MasterDbcontext dbcontext1)
+        IIShippingPrice iShippingPrice;
+        public OrderNewController(IIOrderNew iOrderNew1, IIOrderCase iOrderCase1, IIOrderStatus iOrderStatus1, IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1,MasterDbcontext dbcontext1,IIShippingPrice iShippingPrice1)
         {
             iOrderNew = iOrderNew1;
             iOrderCase = iOrderCase1;
             iOrderStatus = iOrderStatus1;
             iClintWitheDeliveryTariffs = iClintWitheDeliveryTariffs1;
             dbcontext = dbcontext1;
+            iShippingPrice= iShippingPrice1;
         }
         public IActionResult MyOrderNew()
         {
@@ -32,6 +34,7 @@ namespace Yara.Areas.Admin.Controllers
             ViewBag.OrderCase = iOrderCase.GetAll();
             ViewBag.OrderStatus = iOrderStatus.GetAll();
             ViewBag.ClintWith = iClintWitheDeliveryTariffs.GetAll();
+            ViewBag.ShippingPrice = iShippingPrice.GetAll();
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewOrderNew = iOrderNew.GetAll();
             if (IdOrderNew != null)
@@ -52,6 +55,7 @@ namespace Yara.Areas.Admin.Controllers
             {
                 slider.IdOrderNew = model.OrderNew.IdOrderNew;
                 slider.IdClintWitheDeliveryTariffs = model.OrderNew.IdClintWitheDeliveryTariffs;
+                slider.IdInformationCompanies = model.OrderNew.IdInformationCompanies;
                 slider.IdorderStatus = model.OrderNew.IdorderStatus;
                 slider.IdorderCases = model.OrderNew.IdorderCases;
                 slider.OrderDate = model.OrderNew.OrderDate;
