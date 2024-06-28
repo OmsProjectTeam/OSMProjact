@@ -24,5 +24,10 @@ namespace Domin.Entity
         public bool Active { get; set; }
         public bool CurrentState { get; set; }
         public string NikeNAme { get; set; }
+        public int IdArea { get; set; }
+        public string description { get; set; }
+        public int IdCitu { get; set; }
+        public string City { get; set; }
+        public string IdUserIdentity { get; set; }
     }
 }

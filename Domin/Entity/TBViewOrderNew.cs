@@ -14,7 +14,7 @@ namespace Domin.Entity
         public string description { get; set; }
         public string AreaName { get; set; }
         public string NikeNAme { get; set; }
-        public string ClintDelivery { get; set; }
+        public decimal ClintDelivery { get; set; }
         public string code { get; set; }
         public string TitleShipping { get; set; }
         public string Name { get; set; }
@@ -38,6 +38,9 @@ namespace Domin.Entity
         public DateTime? DateTimeEntry { get; set; }
         public bool? CurrentState { get; set; }
         public string? ImageUser { get; set; }
+        public string? IdInformationCompanies { get; set; }
+        public string? IdUserIdentity { get; set; }
+
   
 
 
