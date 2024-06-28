@@ -20,7 +20,14 @@ namespace Yara.Areas.Admin.Controllers
 			vmodel.ListTypesCompanies = iTypesCompanies.GetAll();
 			return View(vmodel);
 		}
-		public IActionResult AddTypesCompanies(int? IdTypesCompanies)
+
+        public IActionResult MyTypesCompaniesAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListTypesCompanies = iTypesCompanies.GetAll();
+            return View(vmodel);
+        }
+        public IActionResult AddTypesCompanies(int? IdTypesCompanies)
 		{
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 			vmodel.ListTypesCompanies = iTypesCompanies.GetAll();
@@ -34,7 +41,23 @@ namespace Yara.Areas.Admin.Controllers
 				return View(vmodel);
 			}
 		}
-		[HttpPost]
+
+        public IActionResult AddTypesCompaniesAr(int? IdTypesCompanies)
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListTypesCompanies = iTypesCompanies.GetAll();
+            if (IdTypesCompanies != null)
+            {
+                vmodel.TypesCompanies = iTypesCompanies.GetById(Convert.ToInt32(IdTypesCompanies));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
+        [HttpPost]
 		[AutoValidateAntiforgeryToken]
 		public async Task<IActionResult> Save(ViewmMODeElMASTER model, TBTypesCompanies slider, List<IFormFile> Files, string returnUrl)
 		{

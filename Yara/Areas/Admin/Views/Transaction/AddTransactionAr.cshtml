@@ -1,0 +1,211 @@
+﻿@model ViewmMODeElMASTER
+@{
+    ViewData["Title"] = ResourceWebAr.LBAddTransaction;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row small-spacing">
+    <div class="col-lg-6 col-xs-12">
+        <div class="box-content card white">
+            <h4 class="box-title">@ResourceWebAr.LBAddTransaction</h4>
+            <div class="card-content">
+                <form role="form" method="post" asp-controller="Transaction" asp-action="Save" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="@Model.Transaction.DataEntry" class="form-control" value="@User.Identity.Name">
+                        <input type="hidden" asp-for="@Model.Transaction.IdTransaction" class="form-control">
+                        <input type="hidden" asp-for="@Model.Transaction.DateTimeEntry" value="@DateTime.Now">
+                        <input type="hidden" asp-for="@Model.returnUrl" id="url">
+                    </div>
+                    <div class="card-content">
+                        <div class="row small-spacing">
+                            <div class="col-xs-3">
+                                <div class="form-group">
+                                    <label asp-for="@Model.Transaction.FromCurrencyID" for="exampleInputEmail1">@ResourceWebAr.LbTypesCompanies</label>
+                                    <select class="form-control" asp-for="@Model.Transaction.FromCurrencyID" asp-items="@(new SelectList(ViewBag.Currenc, "IdCurrenciesExchangeRates", "Country"))" id="fromCurrency">
+                                    </select>
+                                    <span asp-validation-for="@Model.Transaction.FromCurrencyID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="form-group">
+                                    <label asp-for="@Model.Transaction.ToCurrencyID" for="exampleInputEmail1">@ResourceWebAr.LbTypesCompanies</label>
+                                    <select class="form-control" asp-for="@Model.Transaction.ToCurrencyID" asp-items="@(new SelectList(ViewBag.Currenc, "IdCurrenciesExchangeRates", "Country"))" id="toCurrency">
+                                    </select>
+                                    <span asp-validation-for="@Model.Transaction.ToCurrencyID" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="row small-spacing">
+                            <div class="col-xs-3">
+                                <div class="form-group">
+                                    <label asp-for="@Model.Transaction.Amount" for="exampleInputEmail1">@ResourceWebAr.LbAmount</label>
+                                    <input asp-for="@Model.Transaction.Amount" type="text" placeholder="@ResourceWebAr.LbAmount ...." class="form-control" maxlength="20" id="amount">
+                                    <span asp-validation-for="@Model.Transaction.Amount" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="form-group">
+                                    <label asp-for="@Model.Transaction.ConvertedAmount" for="exampleInputEmail1">@ResourceWebAr.LbConvertedAmount</label>
+                                    <input asp-for="@Model.Transaction.ConvertedAmount" type="text" placeholder="@ResourceWebAr.LbConvertedAmount ...." class="form-control" maxlength="20" id="convertedAmount" readonly>
+                                    <span asp-validation-for="@Model.Transaction.ConvertedAmount" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="form-group">
+                                    <label asp-for="@Model.Transaction.ExchangeRate" for="exampleInputEmail1">@ResourceWebAr.LbExchangeRate</label>
+                                    <input asp-for="@Model.Transaction.ExchangeRate" type="text" placeholder="@ResourceWebAr.LbExchangeRate ...." class="form-control" maxlength="20" id="exchangeRate" readonly>
+                                    <span asp-validation-for="@Model.Transaction.ExchangeRate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkbox margin-bottom-20">
+                        <div class="switch success"><input type="checkbox" asp-for="@Model.Transaction.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWebAr.lbCurrentState</label></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWebAr.lbSave</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-xs-12">
+        <div class="box-content card white">
+            <h4 class="box-title">@ResourceWebAr.lbOldeAndUserGide</h4>
+            <div class="card-content">
+                @* <div class="form-group">
+                <img src="~/images/user gide/Product.png" width="1920" height="1077" />
+                </div> *@
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @*  <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+        $(document).ready(function () {
+            // Function to update the exchange rate based on selected currencies
+            function updateExchangeRate() {
+                // Get the selected values from the currency dropdowns
+                const fromCurrency = $('#fromCurrency').val();
+                const toCurrency = $('#toCurrency').val();
+
+                // Make an AJAX request to get the exchange rate for the selected currencies
+                $.ajax({
+                    // URL for the GetExchangeRate action in the Transaction controller
+                    url: '@Url.Action("GetExchangeRate", "Transaction")',
+                    // Data to be sent to the server (selected currencies)
+                    data: { fromCurrencyId: fromCurrency, toCurrencyId: toCurrency },
+                    // Function to handle success response
+                    success: function (rate) {
+                        // Update the exchange rate input field with the fetched rate
+                        $('#exchangeRate').val(rate);
+                        // Calculate the converted amount based on the fetched exchange rate
+                        calculateConvertedAmount();
+                    },
+                    error: function () {
+                        $('#exchangeRate').val('N/A');
+                    }
+                });
+            }
+
+            // Function to calculate the converted amount based on the entered amount and exchange rate
+            function calculateConvertedAmount() {
+                // Get the values from the amount and exchange rate input fields
+                const amount = parseFloat($('#amount').val());
+                const rate = parseFloat($('#exchangeRate').val());
+
+                // Check if the amount and rate are valid numbers
+                if (!isNaN(amount) && !isNaN(rate)) {
+                    // Calculate the converted amount
+                    const convertedAmount = amount * rate;
+                    // Update the converted amount input field with the calculated value
+                    $('#convertedAmount').val(convertedAmount.toFixed(2));
+                } else {
+                    $('#convertedAmount').val('');
+                }
+            }
+
+            $('#fromCurrency, #toCurrency').change(function () {
+                updateExchangeRate();
+            });
+
+            $('#amount').on('input', function () {
+                calculateConvertedAmount();
+            });
+
+            updateExchangeRate();
+        });
+    </script> *@
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+        $(document).ready(function () {
+            // Function to update the exchange rate based on selected currencies
+            function updateExchangeRate() {
+                // Get the selected values from the currency dropdowns
+                const fromCurrency = $('#fromCurrency').val();
+                const toCurrency = $('#toCurrency').val();
+
+                // Make an AJAX request to get the exchange rate for the selected currencies
+                $.ajax({
+                    // URL for the GetExchangeRate action in the Transaction controller
+                    url: '@Url.Action("GetExchangeRate", "Transaction")',
+                    // Data to be sent to the server (selected currencies)
+                    data: { fromCurrencyId: fromCurrency, toCurrencyId: toCurrency },
+                    // Function to handle success response
+                    success: function (rate) {
+                        // Update the exchange rate input field with the fetched rate
+                        $('#exchangeRate').val(rate);
+                        // Calculate the converted amount based on the fetched exchange rate
+                        calculateConvertedAmount();
+
+                        // Calculate and display the reverse exchange rate
+                        const reverseRate = 1 / rate;
+                        $('#reverseExchangeRate').val(reverseRate.toFixed(6));
+                    },
+                    error: function () {
+                        $('#exchangeRate').val('N/A');
+                        $('#reverseExchangeRate').val('N/A');
+                    }
+                });
+            }
+
+            // Function to calculate the converted amount based on the entered amount and exchange rate
+            function calculateConvertedAmount() {
+                // Get the values from the amount and exchange rate input fields
+                const amount = parseFloat($('#amount').val());
+                const rate = parseFloat($('#exchangeRate').val());
+
+                // Check if the amount and rate are valid numbers
+                if (!isNaN(amount) && !isNaN(rate)) {
+                    // Calculate the converted amount
+                    const convertedAmount = amount * rate;
+                    // Update the converted amount input field with the calculated value
+                    $('#convertedAmount').val(convertedAmount.toFixed(2));
+                } else {
+                    $('#convertedAmount').val('');
+                }
+            }
+
+            $('#fromCurrency, #toCurrency').change(function () {
+                updateExchangeRate();
+            });
+
+            $('#amount').on('input', function () {
+                calculateConvertedAmount();
+            });
+
+            updateExchangeRate();
+        });
+    </script>
+
+}

@@ -29,12 +29,39 @@ namespace Yara.Areas.Admin.Controllers
 			vmodel.ListViewAreas = iArea.GetAll();
             return View(vmodel);
         }
+
+        public async Task<IActionResult> MyAreaAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+
+            vmodel.ListViewAreas = iArea.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddArea(int? Id)
 
         {
             ////
             ViewBag.City = iCity.GetAll();
        
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewAreas = iArea.GetAll();
+            if (Id != null)
+            {
+                vmodel.Area = iArea.GetById(Convert.ToInt32(Id));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
+        public IActionResult AddAreaAr(int? Id)
+
+        {
+            ////
+            ViewBag.City = iCity.GetAll();
+
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewAreas = iArea.GetAll();
             if (Id != null)

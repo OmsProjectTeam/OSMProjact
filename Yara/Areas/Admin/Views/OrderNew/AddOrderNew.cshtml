@@ -55,11 +55,8 @@
                                     </select>
                                     <span asp-validation-for="@Model.OrderNew.IdorderStatus" class="text-danger"></span>
                                 </div>
-                            </div>
-                      
-                         
+                            </div>                            
                         </div>
-
                     </div>
 
 
@@ -67,14 +64,11 @@
                     <div class="card-content">
                         <div class="row small-spacing">
 
-
-
                             <div class="col-xs-4">
                                 <div class="form-group ">
                                     <label asp-for="@Model.OrderNew.OrderDate" for="exampleInputEmail1">@ResourceWeb.LbOrderDate</label>
                                     <input asp-for="@Model.OrderNew.OrderDate" type="date" placeholder="@ResourceWeb.LbEmailCompany ...." class="form-control" maxlength="300">
                                     <span asp-validation-for="@Model.OrderNew.OrderDate" class="text-danger"></span>
-
                                 </div>
                             </div>
                             <div class="col-xs-4">
@@ -101,7 +95,6 @@
                     </div>
                     <div class="card-content">
                         <div class="row small-spacing">
-
                             <div class="col-xs-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.OrderNew.CostPrice" for="exampleInputEmail1">@ResourceWeb.LbCostPrice</label>
@@ -132,10 +125,8 @@
                                     <label asp-for="@Model.OrderNew.Nouts" for="exampleInputEmail1">@ResourceWeb.LbNouts</label>
                                     <input asp-for="@Model.OrderNew.Nouts" type="text" placeholder="@ResourceWeb.LbNouts ...." class="form-control" maxlength="300">
                                     <span asp-validation-for="@Model.OrderNew.Nouts" class="text-danger"></span>
-
                                 </div>
-                            </div>
-                         
+                            </div>                       
                         </div>
 
                     </div>

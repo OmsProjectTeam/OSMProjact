@@ -21,11 +21,36 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListViewOrderStatus = iOrderStatus.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyOrderStatusAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewOrderStatus = iOrderStatus.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddOrderStatus(int? Id)
 
         {
             ViewBag.RolesName = iRolesName.GetAll();
       
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewOrderStatus = iOrderStatus.GetAll();
+            if (Id != null)
+            {
+                vmodel.OrderStatus = iOrderStatus.GetById(Convert.ToInt32(Id));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
+        public IActionResult AddOrderStatusAr(int? Id)
+
+        {
+            ViewBag.RolesName = iRolesName.GetAll();
+
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewOrderStatus = iOrderStatus.GetAll();
             if (Id != null)
