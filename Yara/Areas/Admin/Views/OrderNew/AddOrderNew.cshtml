@@ -24,6 +24,15 @@
                         <div class="row small-spacing">
                             <div class="col-xs-3">
                                 <div class="form-group">
+                                    <label asp-for="@Model.OrderNew.IdInformationCompanies" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
+                                    <select id="merchant-select" class="form-control select2_1" asp-for="@Model.OrderNew.IdInformationCompanies" asp-items="@(new SelectList(ViewBag.ShippingPrice, "IdInformationCompanies", "NikeNAme"))">
+                                    </select>
+                                    <span asp-validation-for="@Model.OrderNew.IdInformationCompanies" class="text-danger"></span>
+                                    <span style="color:red"><strong>@TempData["Customer"]</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="form-group">
                                     <label asp-for="@Model.OrderNew.IdClintWitheDeliveryTariffs" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
                                     <select id="merchant-select" class="form-control select2_1" asp-for="@Model.OrderNew.IdClintWitheDeliveryTariffs" asp-items="@(new SelectList(ViewBag.ClintWith, "IdClintWitheDeliveryTariffs", "DescriptionClint"))">
                                     </select>
