@@ -150,5 +150,13 @@ namespace Yara.Areas.Admin.Controllers
                 return RedirectToAction("MyOrderNew");
             }
         }
+
+        [HttpGet]
+        public IActionResult GetPrices (int selectedCompanyId)
+        {
+            var prices = iShippingPrice.GetAll()
+                .FirstOrDefault(x => x.IdInformationCompanies == selectedCompanyId)?.ClintPricePerkgAbove10;
+            return Json(prices);
+        }
     }
 }
