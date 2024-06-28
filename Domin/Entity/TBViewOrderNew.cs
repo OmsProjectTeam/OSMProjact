@@ -39,10 +39,7 @@ namespace Domin.Entity
         public bool? CurrentState { get; set; }
         public string? ImageUser { get; set; }
         public string? IdInformationCompanies { get; set; }
-     
         public string? NikeNAmeShipping { get; set; }
-
-  
 
 
     }
