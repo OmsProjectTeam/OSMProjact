@@ -19,6 +19,13 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListTypeSystem = iTypeSystem.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyTypeSystemAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListTypeSystem = iTypeSystem.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddTypeSystem(int? IdTypeSystem)
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
@@ -33,6 +40,22 @@ namespace Yara.Areas.Admin.Controllers
                 return View(vmodel);
             }
         }
+
+        public IActionResult AddTypeSystemAr(int? IdTypeSystem)
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListTypeSystem = iTypeSystem.GetAll();
+            if (IdTypeSystem != null)
+            {
+                vmodel.TypeSystem = iTypeSystem.GetById(Convert.ToInt32(IdTypeSystem));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Save(ViewmMODeElMASTER model, TBTypeSystem slider, List<IFormFile> Files, string returnUrl)

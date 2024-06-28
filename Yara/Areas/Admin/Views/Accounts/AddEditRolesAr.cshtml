@@ -1,0 +1,25 @@
+﻿@model ViewmMODeElMASTER
+@{
+    ViewData["Title"] = "AddEditRoles";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<form role="form" method="post" asp-controller="Accounts" asp-action="Roles" enctype="multipart/form-data">
+    <input type="hidden" asp-for="@Model.sIdentityRole.Id" class="form-control">
+    <div class="col-lg-6 col-xs-12">
+        <div class="box-content card white">
+            <h4 class="box-title">Add Role</h4>
+            <!-- /.box-title -->
+            <div class="card-content">
+                <div class="form-group">
+                    <label for="inp-type-1" asp-for="@Model.sIdentityRole.Name" class="col-sm-3 control-label">Name Of Role</label>
+                    <div class="col-sm-9">
+                        <input type="text" asp-for="@Model.sIdentityRole.Name" class="form-control" id="inp-type-1" placeholder="Name Of Rol ...">
+                        <span asp-validation-for="@Model.sIdentityRole.Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">save</button>
+            </div>
+        </div>
+    </div>
+</form>
+

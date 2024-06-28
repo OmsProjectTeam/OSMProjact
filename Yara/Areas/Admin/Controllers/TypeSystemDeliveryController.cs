@@ -18,7 +18,15 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListTypeSystemDelivery = iTypeSystemDelivery.GetAll();
             return View(vmodel);
         }
-        public IActionResult AddTypeSystemDelivery(int? IdTypeSystemDelivery)
+
+		public IActionResult MyTypeSystemDeliveryAr()
+		{
+			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+			vmodel.ListTypeSystemDelivery = iTypeSystemDelivery.GetAll();
+			return View(vmodel);
+		}
+
+		public IActionResult AddTypeSystemDelivery(int? IdTypeSystemDelivery)
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListTypeSystemDelivery = iTypeSystemDelivery.GetAll();
@@ -32,6 +40,22 @@ namespace Yara.Areas.Admin.Controllers
                 return View(vmodel);
             }
         }
+
+        public IActionResult AddTypeSystemDeliveryAr(int? IdTypeSystemDelivery)
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListTypeSystemDelivery = iTypeSystemDelivery.GetAll();
+            if (IdTypeSystemDelivery != null)
+            {
+                vmodel.TypeSystemDelivery = iTypeSystemDelivery.GetById(Convert.ToInt32(IdTypeSystemDelivery));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Save(ViewmMODeElMASTER model, TBTypeSystemDelivery slider, List<IFormFile> Files, string returnUrl)

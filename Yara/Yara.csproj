@@ -37,12 +37,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ResourceWeb.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resource\ResourceWebAr.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceWebAr.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Resource\ResourceWeb.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ResourceWeb.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resource\ResourceWebAr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceWebAr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

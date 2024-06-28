@@ -20,6 +20,13 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListTaskStatus = iTaskStatus.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyTaskStatusAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListTaskStatus = iTaskStatus.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddTaskStatus(int? Id)
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
@@ -34,6 +41,22 @@ namespace Yara.Areas.Admin.Controllers
                 return View(vmodel);
             }
         }
+
+        public IActionResult AddTaskStatusAr(int? Id)
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListTaskStatus = iTaskStatus.GetAll();
+            if (Id != null)
+            {
+                vmodel.TaskStatus = iTaskStatus.GetById(Convert.ToInt32(Id));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Save(ViewmMODeElMASTER model, TaskStatus slider, List<IFormFile> Files, string returnUrl)

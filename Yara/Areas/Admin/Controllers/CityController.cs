@@ -19,6 +19,13 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListCity = iCity.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyCityAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListCity = iCity.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddCity(int? Id)
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
@@ -33,6 +40,22 @@ namespace Yara.Areas.Admin.Controllers
                 return View(vmodel);
             }
         }
+
+        public IActionResult AddCityAr(int? Id)
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListCity = iCity.GetAll();
+            if (Id != null)
+            {
+                vmodel.City = iCity.GetById(Convert.ToInt32(Id));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Save(ViewmMODeElMASTER model, City slider, List<IFormFile> Files, string returnUrl)
