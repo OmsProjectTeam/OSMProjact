@@ -42,5 +42,6 @@ namespace Domin.Entity
         public string? NikeNAmeShipping { get; set; }
 
 
+
     }
 }
