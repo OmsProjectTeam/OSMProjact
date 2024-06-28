@@ -29,6 +29,13 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListViewOrderNew = iOrderNew.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyOrderNewAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewOrderNew = iOrderNew.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddOrderNew(int? IdOrderNew)
         {
             ViewBag.OrderCase = iOrderCase.GetAll();
@@ -47,6 +54,25 @@ namespace Yara.Areas.Admin.Controllers
                 return View(vmodel);
             }
         }
+
+        public IActionResult AddOrderNewAr(int? IdOrderNew)
+        {
+            ViewBag.OrderCase = iOrderCase.GetAll();
+            ViewBag.OrderStatus = iOrderStatus.GetAll();
+            ViewBag.ClintWith = iClintWitheDeliveryTariffs.GetAll();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewOrderNew = iOrderNew.GetAll();
+            if (IdOrderNew != null)
+            {
+                vmodel.OrderNew = iOrderNew.GetById(Convert.ToInt32(IdOrderNew));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Save(ViewmMODeElMASTER model, TBOrderNew slider, List<IFormFile> Files, string returnUrl)

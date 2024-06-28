@@ -52,7 +52,15 @@ namespace Yara.Areas.Admin.Controllers
 			return View(vmodel);
 		}
 
-		public IActionResult AddEditRoles(string? Id)
+        [Authorize(Roles = "Admin,User")]
+        public IActionResult RolesAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListIdentityRole = iRolsInformation.GetAll();
+            return View(vmodel);
+        }
+
+        public IActionResult AddEditRoles(string? Id)
 		{
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 			vmodel.ListIdentityRole = iRolsInformation.GetAll();
@@ -66,6 +74,22 @@ namespace Yara.Areas.Admin.Controllers
 				return View(vmodel);
 			}
 		}
+
+		public IActionResult AddEditRolesAr(string? Id)
+		{
+			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+			vmodel.ListIdentityRole = iRolsInformation.GetAll();
+			if (Id != null)
+			{
+				vmodel.sIdentityRole = iRolsInformation.GetById(Convert.ToString(Id));
+				return View(vmodel);
+			}
+			else
+			{
+				return View(vmodel);
+			}
+		}
+
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Authorize(Roles = "Admin")]
@@ -147,7 +171,32 @@ namespace Yara.Areas.Admin.Controllers
 			return View(model);
 		}
 
-		[HttpPost]
+        public IActionResult RegistersAr()
+        {
+
+
+            //ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            //vmodel.ListVwUser = iUserInformation.GetAll();
+            //return View(vmodel);
+
+
+
+
+
+            var model = new ViewmMODeElMASTER
+            {
+
+                NewRegister = new NewRegister(),
+                Roles = _roleManager.Roles.OrderBy(x => x.Name).ToList(),
+                Users = _context.VwUsers.OrderBy(x => x.Role).ToList() //_userManager.Users.OrderBy(x=>x.Name).ToList()
+            };
+            return View(model);
+        }
+
+
+
+
+        [HttpPost]
 		[ValidateAntiForgeryToken]
 		[Authorize(Roles = "Admin")]
 		public async Task<IActionResult> Registers(RegisterViewModel model)
@@ -261,6 +310,23 @@ namespace Yara.Areas.Admin.Controllers
 			}
 		}
 
+		[Authorize(Roles = "Admin,User")]
+		public IActionResult ChangePasswordAr(string Id)
+		{
+			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+			//vmodel.ListVwUser = iUserInformation.GetAll();
+			if (Id != null)
+			{
+				vmodel.sUser = iUserInformation.GetById(Convert.ToString(Id));
+				return View(vmodel);
+			}
+			else
+			{
+				return View(new RegisterViewModel());
+			}
+		}
+
+
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
@@ -308,6 +374,13 @@ namespace Yara.Areas.Admin.Controllers
 		{
 			return View();
 		}
+
+		[AllowAnonymous]
+		public IActionResult LoginAr(string returnUrl)
+		{
+			return View();
+		}
+
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[AllowAnonymous]

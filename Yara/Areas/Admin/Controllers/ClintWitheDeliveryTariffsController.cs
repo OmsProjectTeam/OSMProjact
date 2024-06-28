@@ -28,6 +28,13 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListViewClintWitheDeliveryTariffs = iClintWitheDeliveryTariffs.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyClintWitheDeliveryTariffsAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewClintWitheDeliveryTariffs = iClintWitheDeliveryTariffs.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddClintWitheDeliveryTariffs(int? IdClintWitheDeliveryTariffs)
 
         {
@@ -46,6 +53,26 @@ namespace Yara.Areas.Admin.Controllers
                 return View(vmodel);
             }
         }
+
+        public IActionResult AddClintWitheDeliveryTariffsAr(int? IdClintWitheDeliveryTariffs)
+
+        {
+            ViewBag.CityDeliveryTariffs = iCityDeliveryTariffs.GetAll();
+            ViewBag.Customer = iCustomer.GetAll();
+            ViewBag.Merchant = iMerchant.GetAll();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewClintWitheDeliveryTariffs = iClintWitheDeliveryTariffs.GetAll();
+            if (IdClintWitheDeliveryTariffs != null)
+            {
+                vmodel.ClintWitheDeliveryTariffs = iClintWitheDeliveryTariffs.GetById(Convert.ToInt32(IdClintWitheDeliveryTariffs));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Save(ViewmMODeElMASTER model, TBClintWitheDeliveryTariffs slider, List<IFormFile> Files, string returnUrl)

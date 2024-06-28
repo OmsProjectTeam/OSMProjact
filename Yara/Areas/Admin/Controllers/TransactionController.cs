@@ -25,6 +25,13 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListViewTransaction = iTransaction.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyTransactionAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewTransaction = iTransaction.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddTransaction(int? IdTransaction)
 
         {
@@ -42,6 +49,25 @@ namespace Yara.Areas.Admin.Controllers
                 return View(vmodel);
             }
         }
+
+        public IActionResult AddTransactionAr(int? IdTransaction)
+
+        {
+
+            ViewBag.Currenc = iCurrenciesTransactions.GetAll();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewTransaction = iTransaction.GetAll();
+            if (IdTransaction != null)
+            {
+                vmodel.Transaction = iTransaction.GetById(Convert.ToInt32(IdTransaction));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Save(ViewmMODeElMASTER model, TBTransaction slider, List<IFormFile> Files, string returnUrl)

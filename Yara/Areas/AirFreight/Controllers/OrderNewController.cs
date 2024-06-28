@@ -38,6 +38,21 @@ namespace Yara.Areas.AirFreight.Controllers
 
 
 		}
+
+		public async Task<IActionResult> MyOrderNewAr(string userId)
+		{
+			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+
+
+			var user = await _userManager.FindByIdAsync(userId);
+			if (user == null)
+				return NotFound();
+			vmodel.ListViewOrderNew = iOrderNew.GetAllDataentry(user.UserName);
+			//vmodel.ListlicationUser = (IEnumerable<ApplicationUser>)iUserInformation.GetAllByName(name).Take(1);
+			vmodel.ListlicationUser = iUserInformation.GetAllByName(user.UserName).Take(1);
+			return View(vmodel);
+		}
+
 		public IActionResult AddOrderNew(int? IdOrderNew,string name)
 		{
 			ViewBag.OrderCase = iOrderCase.GetAll();
@@ -55,7 +70,26 @@ namespace Yara.Areas.AirFreight.Controllers
 				return View(vmodel);
 			}
 		}
-		[HttpPost]
+
+        public IActionResult AddOrderNewAr(int? IdOrderNew, string name)
+        {
+            ViewBag.OrderCase = iOrderCase.GetAll();
+            ViewBag.OrderStatus = iOrderStatus.GetAll();
+            ViewBag.ClintWith = iClintWitheDeliveryTariffs.GetAll();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewOrderNew = iOrderNew.GetAll();
+            if (IdOrderNew != null)
+            {
+                vmodel.OrderNew = iOrderNew.GetById(Convert.ToInt32(IdOrderNew));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
+        [HttpPost]
 		[AutoValidateAntiforgeryToken]
 		public async Task<IActionResult> Save(ViewmMODeElMASTER model, TBOrderNew slider, List<IFormFile> Files, string returnUrl)
 		{
