@@ -10,14 +10,16 @@ namespace Yara.Areas.Admin.Controllers
         IICityDeliveryTariffs iCityDeliveryTariffs;
         IICustomer iCustomer;
         IIMerchant iMerchant;
+        IIUserInformation iUserInformation;
 
-        public ClintWitheDeliveryTariffsController(MasterDbcontext dbcontext1,IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1,IICityDeliveryTariffs iCityDeliveryTariffs1,IICustomer iCustomer1,IIMerchant iMerchant1)
+        public ClintWitheDeliveryTariffsController(MasterDbcontext dbcontext1,IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1,IICityDeliveryTariffs iCityDeliveryTariffs1,IICustomer iCustomer1,IIMerchant iMerchant1,IIUserInformation iUserInformation1)
         {
             dbcontext=  dbcontext1;
             iClintWitheDeliveryTariffs  = iClintWitheDeliveryTariffs1;
             iCityDeliveryTariffs = iCityDeliveryTariffs1;
             iCustomer = iCustomer1;
             iMerchant = iMerchant1;
+            iUserInformation= iUserInformation1;
         }
 
         public IActionResult MyClintWitheDeliveryTariffs()
@@ -30,8 +32,8 @@ namespace Yara.Areas.Admin.Controllers
 
         {
             ViewBag.CityDeliveryTariffs = iCityDeliveryTariffs.GetAll();
-            ViewBag.Customer = iCustomer.GetAll();
-            ViewBag.Merchant = iMerchant.GetAll();    
+            ViewBag.user = iUserInformation.GetAllByNameall();
+            
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewClintWitheDeliveryTariffs = iClintWitheDeliveryTariffs.GetAll();
             if (IdClintWitheDeliveryTariffs != null)

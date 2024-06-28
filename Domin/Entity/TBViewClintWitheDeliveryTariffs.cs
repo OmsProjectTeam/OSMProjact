@@ -15,7 +15,7 @@ namespace Domin.Entity
         public string? NikeNAme { get; set; }
         public decimal? ClintDelivery { get; set; }
         public string? code { get; set; }
-        public string? TitleShippingTitleShipping { get; set; }
+        public string? TitleShipping { get; set; }
         public string? IdUserIntity { get; set; }
         public string? Name { get; set; }
         public string? Email { get; set; }
@@ -26,5 +26,6 @@ namespace Domin.Entity
         public string? DescriptionClint { get; set; }
         public string? Nouts { get; set; }
         public string? TypesCompanies { get; set; }
+        public string? ImageUser { get; set; }
     }
 }
