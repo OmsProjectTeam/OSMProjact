@@ -137,17 +137,12 @@ namespace Yara.Areas.Admin.Controllers
 
 
 
-			var model = new RegisterViewModel
+			var model = new ViewmMODeElMASTER
 			{
 
-
-
-
-
-
 				NewRegister = new NewRegister(),
-				Roles = _roleManager.Roles.OrderBy(x => x.Name).ToList(),
-				Users = _context.VwUsers.OrderBy(x => x.Role).ToList() //_userManager.Users.OrderBy(x=>x.Name).ToList()
+				Roles = _roleManager.Roles.OrderBy(x => x.Name). ToList(),
+				Users = _context.VwUsers.OrderBy(x => x.Role).Where(a => a.ActiveUser==true).ToList() //_userManager.Users.OrderBy(x=>x.Name).ToList()
 			};
 			return View(model);
 		}
@@ -250,8 +245,8 @@ namespace Yara.Areas.Admin.Controllers
 			return RedirectToAction("Registers", "Accounts");
 		}
 
-		[Authorize(Roles = "Admin,User")]
-		public IActionResult ChangePassword(string Id)
+        [AllowAnonymous]
+        public IActionResult ChangePassword(string Id)
 		{
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 			//vmodel.ListVwUser = iUserInformation.GetAll();
@@ -294,10 +289,15 @@ namespace Yara.Areas.Admin.Controllers
 						// Redirect to merchant area with user ID
 						return RedirectToAction("Index", "Home", new { area = "merchantAccount", userId = user.Id });
 					}
+					if (roles.Contains("Admin"))
+					{
+						// Redirect to merchant area with user ID
+						return RedirectToAction("Index", "Home", new { area = "Admin", userId = user.Id });
+					}
 					return RedirectToAction(nameof(Registers));
 				}
 				else
-					return RedirectToAction(nameof(ChangePassword1));
+					return RedirectToAction("Index", "Home", new { area = "", userId = user.Id });
 			}
 
 			return RedirectToAction(nameof(Registers));
@@ -811,7 +811,11 @@ namespace Yara.Areas.Admin.Controllers
 					{
 						return RedirectToAction("Index", "Home", new { area = "ClintAccount", userId = user.Id});
 					}
-					return RedirectToAction("Registers");
+                    if (roles.Contains("Merchant"))
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "merchantAccount", userId = user.Id });
+                    }
+                    return RedirectToAction("Registers");
 					//var oldRole = await _userManager.GetRolesAsync(userUpdate);
 					//await _userManager.RemoveFromRolesAsync(userUpdate, oldRole);
 					//var AddRole = await _userManager.AddToRoleAsync(userUpdate, model.ruser.NewRegister.RoleName);

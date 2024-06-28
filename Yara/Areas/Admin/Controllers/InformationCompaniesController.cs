@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNetCore.Identity;
+
 namespace Yara.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -9,11 +11,19 @@ namespace Yara.Areas.Admin.Controllers
         MasterDbcontext dbcontext;
         IIInformationCompanies iInformationCompanies;
         IITypesCompanies iTypesCompanies;
-        public InformationCompaniesController(MasterDbcontext dbcontext1,IIInformationCompanies iInformationCompanies1,IITypesCompanies iTypesCompanies1)
+        IIUserInformation iUserInformation;
+        IICity iCity;
+        IIArea iArea;
+        UserManager<ApplicationUser> _userManager;
+        public InformationCompaniesController(MasterDbcontext dbcontext1,IIInformationCompanies iInformationCompanies1,IITypesCompanies iTypesCompanies1,IIUserInformation iUserInformation1,IICity iCity1,IIArea iArea1, UserManager<ApplicationUser> userManager)
         {
             dbcontext = dbcontext1;
             iInformationCompanies = iInformationCompanies1;
             iTypesCompanies = iTypesCompanies1;
+            iUserInformation = iUserInformation1;
+            iCity = iCity1;
+            iArea = iArea1;
+            _userManager= userManager;
         }
         public IActionResult MYInformationCompanies()
         {
@@ -23,7 +33,14 @@ namespace Yara.Areas.Admin.Controllers
         }
         public IActionResult AddEditInformationCompanies(int? IdInformationCompanies)
         {
+
             ViewBag.Categorie = iTypesCompanies.GetAll();
+            ViewBag.user = iUserInformation.GetAllByNameall();
+
+
+            ViewBag.City = iCity.GetAll();
+          
+            ViewBag.area = iArea.GetAll();
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewInformationCompanies = iInformationCompanies.GetAll();
             if (IdInformationCompanies != null)
@@ -59,6 +76,9 @@ namespace Yara.Areas.Admin.Controllers
             {
                 slider.IdInformationCompanies = model.InformationCompanies.IdInformationCompanies;
                 slider.IdTypesCompanies = model.InformationCompanies.IdTypesCompanies;
+                slider.IdArea = model.InformationCompanies.IdArea;
+                slider.IdCitu = model.InformationCompanies.IdCitu;
+                slider.IdUserIdentity = model.InformationCompanies.IdUserIdentity;
                 slider.CompanyName = model.InformationCompanies.CompanyName;
                 slider.PhoneCompany = model.InformationCompanies.PhoneCompany;
                 slider.PhoneCompanySecand = model.InformationCompanies.PhoneCompanySecand;
@@ -190,6 +210,13 @@ namespace Yara.Areas.Admin.Controllers
 
             }
         }
+        public JsonResult GetAreasByCity(int cityId)
+        {
+            var areas = dbcontext.ViewAreas.Where(a => a.city_id == cityId).Select(a => new { a.id, a.Description }).ToList();
+            return Json(areas);
+        }
+
+
         [Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdInformationCompanies)
         {
@@ -205,5 +232,26 @@ namespace Yara.Areas.Admin.Controllers
                 return RedirectToAction("MYInformationCompanies");
             }
         }
+
+        public JsonResult GetUserDetails(string id)
+        {
+            var user = _userManager.Users.SingleOrDefault(u => u.Id == id);
+            if (user == null)
+            {
+                return Json(null);
+            }
+
+            var userDetails = new
+            {
+                companyName = user.Name,
+                phoneCompany = user.PhoneNumber,
+                phoneCompanySecand = user.PhoneNumberConfirmed,
+                emailCompany = user.Email,
+               
+            };
+
+            return Json(userDetails);
+        }
     }
 }
+

@@ -12,6 +12,10 @@ namespace Domin.Entity
         [Key]
         public int IdInformationCompanies { get; set; }
         public int IdTypesCompanies { get; set; }
+        public string IdUserIdentity { get; set; }
+        public int IdCitu { get; set; }
+        public int IdArea { get; set; }
+
 
         [Required(ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "VlCompanyName")]
         [MaxLength(300, ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "MaxLength300")]

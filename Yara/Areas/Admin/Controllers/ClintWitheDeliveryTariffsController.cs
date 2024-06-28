@@ -10,14 +10,16 @@ namespace Yara.Areas.Admin.Controllers
         IICityDeliveryTariffs iCityDeliveryTariffs;
         IICustomer iCustomer;
         IIMerchant iMerchant;
+        IIUserInformation iUserInformation;
 
-        public ClintWitheDeliveryTariffsController(MasterDbcontext dbcontext1,IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1,IICityDeliveryTariffs iCityDeliveryTariffs1,IICustomer iCustomer1,IIMerchant iMerchant1)
+        public ClintWitheDeliveryTariffsController(MasterDbcontext dbcontext1,IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1,IICityDeliveryTariffs iCityDeliveryTariffs1,IICustomer iCustomer1,IIMerchant iMerchant1,IIUserInformation iUserInformation1)
         {
             dbcontext=  dbcontext1;
             iClintWitheDeliveryTariffs  = iClintWitheDeliveryTariffs1;
             iCityDeliveryTariffs = iCityDeliveryTariffs1;
             iCustomer = iCustomer1;
             iMerchant = iMerchant1;
+            iUserInformation= iUserInformation1;
         }
 
         public IActionResult MyClintWitheDeliveryTariffs()
@@ -30,8 +32,8 @@ namespace Yara.Areas.Admin.Controllers
 
         {
             ViewBag.CityDeliveryTariffs = iCityDeliveryTariffs.GetAll();
-            ViewBag.Customer = iCustomer.GetAll();
-            ViewBag.Merchant = iMerchant.GetAll();    
+            ViewBag.user = iUserInformation.GetAllByNameall();
+            
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewClintWitheDeliveryTariffs = iClintWitheDeliveryTariffs.GetAll();
             if (IdClintWitheDeliveryTariffs != null)
@@ -51,27 +53,26 @@ namespace Yara.Areas.Admin.Controllers
             try
             {
                 slider.IdClintWitheDeliveryTariffs = model.ClintWitheDeliveryTariffs.IdClintWitheDeliveryTariffs;
-                slider.DescriptionClint = model.ClintWitheDeliveryTariffs.DescriptionClint;
                 slider.IdCityDeliveryTariffs = model.ClintWitheDeliveryTariffs.IdCityDeliveryTariffs;
-                slider.IdCustomer = model.ClintWitheDeliveryTariffs.IdCustomer;
-                slider.IdMerchant = model.ClintWitheDeliveryTariffs.IdMerchant;          
+                slider.IdUserIntity = model.ClintWitheDeliveryTariffs.IdUserIntity;
+                slider.DescriptionClint = model.ClintWitheDeliveryTariffs.DescriptionClint;
+                slider.Nouts = model.ClintWitheDeliveryTariffs.Nouts;                          
                 slider.DataEntry = model.ClintWitheDeliveryTariffs.DataEntry;
                 slider.DateTimeEntry = model.ClintWitheDeliveryTariffs.DateTimeEntry;
-                slider.CurrentState = model.ClintWitheDeliveryTariffs.CurrentState;
-              
+                slider.CurrentState = model.ClintWitheDeliveryTariffs.CurrentState;             
                 if (slider.IdClintWitheDeliveryTariffs == 0 || slider.IdClintWitheDeliveryTariffs == null)
                 {
-                    if (dbcontext.TBClintWitheDeliveryTariffss.Where(a => a.IdCityDeliveryTariffs == slider.IdCityDeliveryTariffs).Where(a => a.IdCustomer == slider.IdCustomer).ToList().Count > 0)
-                    {
-                        TempData["Customer"] = ResourceWeb.VLCustomerDoplceted;
-                        return Redirect(returnUrl);
-                    }
-                    if (dbcontext.TBClintWitheDeliveryTariffss.Where(a => a.IdCityDeliveryTariffs == slider.IdCityDeliveryTariffs).Where(a => a.IdMerchant == slider.IdMerchant).ToList().Count > 0)
+                    //if (dbcontext.TBClintWitheDeliveryTariffss.Where(a => a.IdCityDeliveryTariffs == slider.IdCityDeliveryTariffs).Where(a => a.IdCustomer == slider.IdCustomer).ToList().Count > 0)
+                    //{
+                    //    TempData["Customer"] = ResourceWeb.VLCustomerDoplceted;
+                    //    return Redirect(returnUrl);
+                    //}
+                    //if (dbcontext.TBClintWitheDeliveryTariffss.Where(a => a.IdCityDeliveryTariffs == slider.IdCityDeliveryTariffs).Where(a => a.IdMerchant == slider.IdMerchant).ToList().Count > 0)
 
-                    {
-                        TempData["Merchant"] = ResourceWeb.VLMerchantDoplceted;
-                        return Redirect(returnUrl);
-                    }
+                    //{
+                    //    TempData["Merchant"] = ResourceWeb.VLMerchantDoplceted;
+                    //    return Redirect(returnUrl);
+                    //}
                     if (dbcontext.TBClintWitheDeliveryTariffss.Where(a => a.DescriptionClint == slider.DescriptionClint).ToList().Count > 0)
 
                     {

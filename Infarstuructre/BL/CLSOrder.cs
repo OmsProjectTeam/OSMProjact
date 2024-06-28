@@ -32,7 +32,7 @@ namespace Infarstuructre.BL
 		}
 		public List<TBViewOrder> GetAll()
 		{
-			List<TBViewOrder> MySlider = dbcontext.ViewOrder.OrderByDescending(n => n.id).Where(a => a.CurrentState == true).ToList();
+			List<TBViewOrder> MySlider = dbcontext.ViewOrder.OrderByDescending(n => n.id).Where(a=>a.CurrentState==true). ToList();
 			return MySlider;
 		}
 		public Order GetById(int id)

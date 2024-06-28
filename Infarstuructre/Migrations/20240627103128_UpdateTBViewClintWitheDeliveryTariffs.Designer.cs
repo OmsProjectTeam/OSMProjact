@@ -4,6 +4,7 @@ using Infarstuructre.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infarstuructre.Migrations
 {
     [DbContext(typeof(MasterDbcontext))]
-    partial class MasterDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20240627103128_UpdateTBViewClintWitheDeliveryTariffs")]
+    partial class UpdateTBViewClintWitheDeliveryTariffs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2545,9 +2548,6 @@ namespace Infarstuructre.Migrations
                     b.Property<int>("IdClintWitheDeliveryTariffs")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdInformationCompanies")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdorderCases")
                         .HasColumnType("int");
 
@@ -2923,9 +2923,6 @@ namespace Infarstuructre.Migrations
                     b.Property<string>("IdUserIntity")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUser")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -2938,7 +2935,7 @@ namespace Infarstuructre.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TitleShipping")
+                    b.Property<string>("TitleShippingTitleShipping")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TypesCompanies")
@@ -3545,17 +3542,24 @@ namespace Infarstuructre.Migrations
             modelBuilder.Entity("Domin.Entity.TBViewOrderNew", b =>
                 {
                     b.Property<string>("Addres")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AreaName")
-                        .IsRequired()
+                    b.Property<string>("AreaCustemor")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("ClintDelivery")
+                    b.Property<string>("AreaMersh")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CityCustemor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CityName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("ClintDelivery")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("CostPrice")
+                    b.Property<decimal?>("CostPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<bool?>("CurrentState")
@@ -3568,86 +3572,57 @@ namespace Infarstuructre.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DescriptionClint")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DescriptionOrder")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdCityDeliveryTariffs")
+                    b.Property<int?>("IdClintWitheDeliveryTariffs")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdClintWitheDeliveryTariffs")
+                    b.Property<int?>("IdOrderNew")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdOrderNew")
+                    b.Property<int?>("IdorderCases")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdorderCases")
+                    b.Property<int?>("IdorderStatus")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdorderStatus")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUser")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<string>("Merchant_name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NikeNAme")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nouts")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NoutsOrder")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly>("OrderDate")
+                    b.Property<DateOnly?>("OrderDate")
                         .HasColumnType("date");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
+                    b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("TitleShipping")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TypesCompanies")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Weight")
+                    b.Property<decimal?>("Weight")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("code")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cust_mob")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cust_name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("dorderCases")
-                        .IsRequired()
+                    b.Property<string>("merchant_mob")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("dorderStatus")
-                        .IsRequired()
+                    b.Property<string>("orderCases")
                         .HasColumnType("nvarchar(max)");
 
                     b.ToTable((string)null);

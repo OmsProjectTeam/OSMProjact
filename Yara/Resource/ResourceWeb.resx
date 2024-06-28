@@ -252,6 +252,9 @@
   <data name="lbCurrentState" xml:space="preserve">
     <value>status</value>
   </data>
+  <data name="LBCustomeronorder" xml:space="preserve">
+    <value>Customer On Order</value>
+  </data>
   <data name="LBCustomers" xml:space="preserve">
     <value>Customers</value>
   </data>
@@ -278,6 +281,9 @@
   </data>
   <data name="LbDateTimeEntry" xml:space="preserve">
     <value>Time and date of entry</value>
+  </data>
+  <data name="LBDeliveryAddress" xml:space="preserve">
+    <value>DeliveryAddress</value>
   </data>
   <data name="Lbdelivery_charges" xml:space="preserve">
     <value>Delivery Charges</value>
@@ -443,6 +449,9 @@
   </data>
   <data name="LBMyTypeSystemDelivery" xml:space="preserve">
     <value>Type System Delivery</value>
+  </data>
+  <data name="LbName" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="LbNameRols" xml:space="preserve">
     <value>NameRols</value>

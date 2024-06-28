@@ -10,20 +10,33 @@ namespace Yara.Areas.AirFreight.Controllers
 		IIOrderCase iOrderCase;
 		IIOrderStatus iOrderStatus;
 		IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs;
+		private readonly UserManager<ApplicationUser> _userManager;
 		MasterDbcontext dbcontext;
-		public OrderNewController(IIOrderNew iOrderNew1, IIOrderCase iOrderCase1, IIOrderStatus iOrderStatus1, IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1, MasterDbcontext dbcontext1)
+		IIUserInformation iUserInformation;
+		public OrderNewController(IIOrderNew iOrderNew1, IIOrderCase iOrderCase1, IIOrderStatus iOrderStatus1, IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1, UserManager<ApplicationUser> userManager, IIUser iUser, MasterDbcontext dbcontext1, IIUserInformation iUserInformation1)
 		{
 			iOrderNew = iOrderNew1;
 			iOrderCase = iOrderCase1;
 			iOrderStatus = iOrderStatus1;
 			iClintWitheDeliveryTariffs = iClintWitheDeliveryTariffs1;
 			dbcontext = dbcontext1;
+			iUserInformation= iUserInformation1;
+			_userManager=userManager;
 		}
-		public IActionResult MyOrderNew(string name)
+		public async Task<IActionResult> MyOrderNew(string userId)
 		{
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-			vmodel.ListViewOrderNew = iOrderNew.GetAllDataentry(name);
+			
+
+			var user = await _userManager.FindByIdAsync(userId);
+			if (user == null)
+				return NotFound();
+			vmodel.ListViewOrderNew = iOrderNew.GetAllDataentry(user.UserName);
+			//vmodel.ListlicationUser = (IEnumerable<ApplicationUser>)iUserInformation.GetAllByName(name).Take(1);
+			//vmodel.ListlicationUser = iUserInformation.GetAllByName(user.UserName).Take(1);
 			return View(vmodel);
+
+
 		}
 		public IActionResult AddOrderNew(int? IdOrderNew,string name)
 		{

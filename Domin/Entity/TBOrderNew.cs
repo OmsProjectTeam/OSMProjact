@@ -14,6 +14,7 @@ namespace Domin.Entity
         public int IdClintWitheDeliveryTariffs { get; set; }
         public int IdorderStatus { get; set; }
         public int IdorderCases { get; set; }
+        public int IdInformationCompanies { get; set; }
         public DateOnly OrderDate { get; set; }
         [Required(ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "VlDescriptionOrder")]
         [MaxLength(300, ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "MaxLength300")]

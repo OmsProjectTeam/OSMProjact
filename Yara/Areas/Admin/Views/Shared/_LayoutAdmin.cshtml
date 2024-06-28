@@ -1,4 +1,7 @@
-﻿
+﻿@model ViewmMODeElMASTER
+@inject UserManager<ApplicationUser> userManager
+@inject SignInManager<ApplicationUser> signInManager
+
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
 <head>
@@ -40,6 +43,8 @@
 	<link rel="stylesheet" href="~/Admin/assets/styles/style-rtl.min.css">
 
 
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
 
 
 
@@ -58,12 +63,28 @@
 <body>
 <div class="main-menu">
 	<header class="header">
-		<a href="index.html" class="logo">NinjaTeam</a>
+		<a href="index.html" class="logo">Admin Panel</a>
 		<button type="button" class="button-close fa fa-times js__menu_close"></button>
 		<div class="user">
-			<a href="#" class="avatar"><img src="http://placehold.it/80x80" alt=""><span class="status online"></span></a>
-			<h5 class="name"><a href="profile.html">Emily Stanley</a></h5>
-			<h5 class="position">Administrator</h5>
+				
+
+				@{
+					var user = await userManager.GetUserAsync(User);
+					var roles = await userManager.GetRolesAsync(user);
+					var userRole = roles.FirstOrDefault();
+				}
+
+				<a href="#" class="avatar">
+					<img src="@Helper.PathImageuser@user.ImageUser" alt="">
+					<span class="status online"></span>
+				</a>
+				<h5 class="name">
+					<a href="profile.html" style="font-size:8px">@user.Name</a>
+				</h5>
+				<h5 class="position">
+					@userRole
+				</h5>
+
 			<!-- /.name -->
 			<div class="control-wrap js__drop_down">
 				<i class="fa fa-caret-down js__drop_down_button"></i>
@@ -91,8 +112,8 @@
 				<li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-user"></i><span>@ResourceWeb.LBUsersInformationEn</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="Accounts" asp-action="Roles">@ResourceWeb.LBLbRoles</a></li>
-							<li><a asp-area="Admin" asp-controller="Accounts" asp-action="Registers">Users</a></li>
+							<li><a asp-area="Admin" asp-controller="Accounts" asp-action="Roles" asp-route-userId="@user.Id">@ResourceWeb.LBLbRoles</a></li>
+							<li><a asp-area="Admin" asp-controller="Accounts" asp-action="Registers" asp-route-userId="@user.Id">Users</a></li>
 						<li><a href="icons-material-icons.html">Material Design Icons</a></li>
 						<li><a href="icons-material-design-iconic.html">Material Design Iconic Font</a></li>
 						<li><a href="icons-themify-icons.html">Themify Icons</a></li>
@@ -102,16 +123,16 @@
 				<li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-adjust"></i><span>@ResourceWeb.LBGeneralSettings</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="TypeSystem" asp-action="MyTypeSystem">@ResourceWeb.LBMyTypeSystem</a></li>
-							<li><a asp-area="Admin" asp-controller="TypesCompanies" asp-action="MyTypesCompanies">@ResourceWeb.LBMyTypesCompanies</a></li>
-							<li><a asp-area="Admin" asp-controller="InformationCompanies" asp-action="MYInformationCompanies">@ResourceWeb.LBMYInformationCompanies</a></li>
-							<li><a asp-area="Admin" asp-controller="City" asp-action="MyCity">@ResourceWeb.LBMyCity</a></li>
-							<li><a asp-area="Admin" asp-controller="Area" asp-action="MyArea">@ResourceWeb.LBMyArea</a></li>
-							<li><a asp-area="Admin" asp-controller="TaskStatus" asp-action="MyTaskStatus">@ResourceWeb.LBMyTaskStatus</a></li>
-							<li><a asp-area="Admin" asp-controller="RolesName" asp-action="MyRolesName">@ResourceWeb.LBMyRolesName</a></li>
-							<li><a asp-area="Admin" asp-controller="OrderCase" asp-action="MyOrderCase">@ResourceWeb.LBMyOrderCase</a></li>
+							<li><a asp-area="Admin" asp-controller="TypeSystem" asp-action="MyTypeSystem" asp-route-userId="@user.Id">@ResourceWeb.LBMyTypeSystem</a></li>
+							<li><a asp-area="Admin" asp-controller="TypesCompanies" asp-action="MyTypesCompanies" asp-route-userId="@user.Id">@ResourceWeb.LBMyTypesCompanies</a></li>
+							<li><a asp-area="Admin" asp-controller="InformationCompanies" asp-action="MYInformationCompanies" asp-route-userId="@user.Id">@ResourceWeb.LBMYInformationCompanies</a></li>
+							<li><a asp-area="Admin" asp-controller="City" asp-action="MyCity" asp-route-userId="@user.Id">@ResourceWeb.LBMyCity</a></li>
+							<li><a asp-area="Admin" asp-controller="Area" asp-action="MyArea" asp-route-userId="@user.Id">@ResourceWeb.LBMyArea</a></li>
+							<li><a asp-area="Admin" asp-controller="TaskStatus" asp-action="MyTaskStatus" asp-route-userId="@user.Id">@ResourceWeb.LBMyTaskStatus</a></li>
+							<li><a asp-area="Admin" asp-controller="RolesName" asp-action="MyRolesName" asp-route-userId="@user.Id">@ResourceWeb.LBMyRolesName</a></li>
+							<li><a asp-area="Admin" asp-controller="OrderCase" asp-action="MyOrderCase" asp-route-userId="@user.Id">@ResourceWeb.LBMyOrderCase</a></li>
 
-							<li><a asp-area="Admin" asp-controller="OrderStatus" asp-action="MyOrderStatus">@ResourceWeb.LBMyOrderStatus</a></li>
+							<li><a asp-area="Admin" asp-controller="OrderStatus" asp-action="MyOrderStatus" asp-route-userId="@user.Id">@ResourceWeb.LBMyOrderStatus</a></li>
 							
 
 					
@@ -129,13 +150,13 @@
 				<li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-bar-chart"></i><span>@ResourceWeb.LBPricingSystem</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="CurrenciesExchangeRates" asp-action="MyCurrenciesExchangeRates">@ResourceWeb.LBMyCurrenciesExchangeRates</a></li>
-							<li><a asp-area="Admin" asp-controller="ExchangeRate" asp-action="MyExchangeRate">@ResourceWeb.LBMyExchangeRate</a></li>
-							<li><a asp-area="Admin" asp-controller="Transaction" asp-action="MyTransaction">@ResourceWeb.LBMyTransaction</a></li>
-							<li><a asp-area="Admin" asp-controller="ShippingPrice" asp-action="MyShippingPrice">@ResourceWeb.LBMyShippingPrice</a></li>
-							<li><a asp-area="Admin" asp-controller="TypeSystemDelivery" asp-action="MyTypeSystemDelivery">@ResourceWeb.LBMyTypeSystemDelivery</a></li>
-							<li><a asp-area="Admin" asp-controller="CityDeliveryTariffs" asp-action="MyCityDeliveryTariffs">@ResourceWeb.LBMyCityDeliveryTariffs</a></li>
-							<li><a asp-area="Admin" asp-controller="ClintWitheDeliveryTariffs" asp-action="MyClintWitheDeliveryTariffs">@ResourceWeb.LBMyClintWitheDeliveryTariffs</a></li>
+							<li><a asp-area="Admin" asp-controller="CurrenciesExchangeRates" asp-action="MyCurrenciesExchangeRates" asp-route-userId="@user.Id">@ResourceWeb.LBMyCurrenciesExchangeRates</a></li>
+							<li><a asp-area="Admin" asp-controller="ExchangeRate" asp-action="MyExchangeRate" asp-route-userId="@user.Id">@ResourceWeb.LBMyExchangeRate</a></li>
+							<li><a asp-area="Admin" asp-controller="Transaction" asp-action="MyTransaction" asp-route-userId="@user.Id">@ResourceWeb.LBMyTransaction</a></li>
+							<li><a asp-area="Admin" asp-controller="ShippingPrice" asp-action="MyShippingPrice" asp-route-userId="@user.Id">@ResourceWeb.LBMyShippingPrice</a></li>
+							<li><a asp-area="Admin" asp-controller="TypeSystemDelivery" asp-action="MyTypeSystemDelivery" asp-route-userId="@user.Id">@ResourceWeb.LBMyTypeSystemDelivery</a></li>
+							<li><a asp-area="Admin" asp-controller="CityDeliveryTariffs" asp-action="MyCityDeliveryTariffs" asp-route-userId="@user.Id">@ResourceWeb.LBMyCityDeliveryTariffs</a></li>
+							<li><a asp-area="Admin" asp-controller="ClintWitheDeliveryTariffs" asp-action="MyClintWitheDeliveryTariffs" asp-route-userId="@user.Id">@ResourceWeb.LBMyClintWitheDeliveryTariffs</a></li>
 					</ul>
 					<!-- /.sub-menu js__content -->
 				</li>
@@ -143,7 +164,7 @@
 				<li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBCustomers</span><span class="notice notice-blue">7</span></a>
 					<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="Customer" asp-action="MyCustomer">@ResourceWeb.LBMyCustomer</a></li>
+							<li><a asp-area="Admin" asp-controller="Customer" asp-action="MyCustomer" asp-route-userId="@user.Id">@ResourceWeb.LBMyCustomer</a></li>
 					
 					</ul>
 					<!-- /.sub-menu js__content -->
@@ -151,7 +172,7 @@
 					<li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBMerchants</span><span class="notice notice-blue">7</span></a>
 						<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="Merchant" asp-action="MyMerchant">@ResourceWeb.LBMyMerchant</a></li>
+							<li><a asp-area="Admin" asp-controller="Merchant" asp-action="MyMerchant" asp-route-userId="@user.Id">@ResourceWeb.LBMyMerchant</a></li>
 
 						</ul>
 						<!-- /.sub-menu js__content -->
@@ -162,11 +183,11 @@
 				<li>
 					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>order</span><span class="menu-arrow fa fa-angle-down"></span></a>
 					<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="OrderNew" asp-action="MyOrderNew">@ResourceWeb.LBMyOrderNew</a></li>
+							<li><a asp-area="Admin" asp-controller="OrderNew" asp-action="MyOrderNew" asp-route-userId="@user.Id">@ResourceWeb.LBMyOrderNew</a></li>
 
 
 
-							<li><a asp-area="Admin" asp-controller="Order" asp-action="MyOrder">@ResourceWeb.LBMyOrder</a></li>
+							<li><a asp-area="Admin" asp-controller="Order" asp-action="MyOrder" asp-route-userId="@user.Id">@ResourceWeb.LBMyOrder</a></li>
 				
 				
 					</ul>
