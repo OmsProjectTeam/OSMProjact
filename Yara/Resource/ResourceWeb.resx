@@ -195,6 +195,9 @@
   <data name="Lbbypass" xml:space="preserve">
     <value>bypass</value>
   </data>
+  <data name="LbCatchReceiptNo" xml:space="preserve">
+    <value>Catch Receipt No</value>
+  </data>
   <data name="LbCity" xml:space="preserve">
     <value>City</value>
   </data>
@@ -350,6 +353,9 @@
   </data>
   <data name="LbIsNorth" xml:space="preserve">
     <value>The South</value>
+  </data>
+  <data name="lbIsPaid" xml:space="preserve">
+    <value>Paid</value>
   </data>
   <data name="LbisPublic" xml:space="preserve">
     <value>isPublic</value>

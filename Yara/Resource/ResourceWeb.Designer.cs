@@ -295,6 +295,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Catch Receipt No.
+        /// </summary>
+        public static string LbCatchReceiptNo {
+            get {
+                return ResourceManager.GetString("LbCatchReceiptNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         public static string LbCity {
@@ -759,6 +768,15 @@ namespace Yara.Resource {
         public static string LbIsNorth {
             get {
                 return ResourceManager.GetString("LbIsNorth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paid.
+        /// </summary>
+        public static string lbIsPaid {
+            get {
+                return ResourceManager.GetString("lbIsPaid", resourceCulture);
             }
         }
         

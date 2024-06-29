@@ -279,9 +279,9 @@ namespace Domin.Resource {
         /// <summary>
         ///   Looks up a localized string similar to please inclode the Catch Receipt.
         /// </summary>
-        public static string vlCatchReceiptNo {
+        public static string VlCatchReceiptNo {
             get {
-                return ResourceManager.GetString("vlCatchReceiptNo", resourceCulture);
+                return ResourceManager.GetString("VlCatchReceiptNo", resourceCulture);
             }
         }
         

@@ -170,7 +170,9 @@
                                                 <thead>
                                                     <tr role="row">
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbId</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbPhoto</th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbDescriptionOrder</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbCatchReceiptNo</th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbOrderDate</th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbWeight</th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbAddres</th>
@@ -178,11 +180,15 @@
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDataEntry</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDateTimeEntry</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.lbCurrentState</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.lbIsPaid</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">@ResourceWeb.LbOpration</th>
                                                 <tfoot>
                                                     <tr>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbPhoto</th>
+
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbDescriptionOrder</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbCatchReceiptNo</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbOrderDate</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbWeight</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbAddres</th>
@@ -190,6 +196,7 @@
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbDataEntry</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbDateTimeEntry</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.lbCurrentState</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.lbIsPaid</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbOpration</th>
                                                 </tfoot>
                                                 <tbody>
@@ -197,7 +204,13 @@
                                                             {
                                                         <tr role="row" class="odd">
                                                             <td>@item.IdOrderNew</td>
+                                                            <td class="sorting_1">
+                                                                <img src="@string.Format("/Images/Users/{0}",item.Photo)" class="img-bordered img-circle img-circle"
+                                                                     style="width:100px; height:100px">
+                                                            </td>
+
                                                             <td>@item.DescriptionOrder</td>
+                                                            <td>@item.CatchReceiptNo</td>
                                                             <td>@item.OrderDate</td>
                                                             <td>@item.Weight</td>
                                                             <td>@item.Addres</td>
@@ -205,8 +218,12 @@
                                                             <td>@item.DataEntry</td>
                                                             <td>@item.DateTimeEntry</td>
                                                             <td>
-                                                               @*  <div class="switch primary"><input type="checkbox" checked="@item.CurrentState" IdOrderNew="switch-2" disabled><label for="switch-2">@item.CurrentState</label></div> *@
+                                                                <div class="switch primary"><input type="checkbox" checked="@item.IsPaid" IdOrderNew="switch-5" disabled><label for="switch-5">@item.IsPaid</label></div>
                                                             </td>
+                                                            <td>
+                                                                <div class="switch primary"><input type="checkbox" checked="@item.CurrentState" IdOrderNew="switch-2" disabled><label for="switch-2">@item.CurrentState</label></div>
+                                                            </td>
+
                                                             <td>
                                                                 <ul class="list-inline">
                                                                     <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="OrderNew" asp-action="AddOrderNew" asp-route-IdOrderNew="@item.IdOrderNew"><button type="button" class="btn btn-primary btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-edit"></i></button></a></li>|

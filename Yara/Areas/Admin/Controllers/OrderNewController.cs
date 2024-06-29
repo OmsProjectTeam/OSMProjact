@@ -96,46 +96,122 @@ namespace Yara.Areas.Admin.Controllers
                 slider.DataEntry = model.OrderNew.DataEntry;
                 slider.DateTimeEntry = model.OrderNew.DateTimeEntry;
                 slider.CurrentState = model.OrderNew.CurrentState;
+                var file = HttpContext.Request.Form.Files;
                 if (slider.IdOrderNew == 0 || slider.IdOrderNew == null)
                 {
-                    if (dbcontext.TBOrderNews.Where(a => a.DescriptionOrder == slider.DescriptionOrder).ToList().Count > 0)
+                    if (file.Count() > 0)
                     {
-                        TempData["DescriptionOrder"] = ResourceWeb.VLDescriptionOrderDoplceted;
+                        string Photo = Guid.NewGuid().ToString() + Path.GetExtension(file[0].FileName);
+                        var fileStream = new FileStream(Path.Combine(@"wwwroot/Images/Home", Photo), FileMode.Create);
+                        file[0].CopyTo(fileStream);
+                        slider.Photo = Photo;
+                        fileStream.Close();
+                    }
+                    else
+                    {
+                        TempData["Message"] = ResourceWeb.VLimageuplode;
                         return Redirect(returnUrl);
                     }
+                    //if (dbcontext.TBInformationCompaniess.Where(a => a.CompanyName == slider.CompanyName).ToList().Count > 0)
+                    //{
+                    //    var PhotoNAme = slider.Photo;
+                    //    var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+
+                    //    TempData["CompanyName"] = ResourceWeb.VLCompanyNameDoplceted;
+                    //    return RedirectToAction("AddEditInformationCompanies", model);
+                    //}
+
                     var reqwest = iOrderNew.saveData(slider);
                     if (reqwest == true)
                     {
                         TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
-                        return RedirectToAction("MyOrderNew");
+                        return RedirectToAction("MYInformationCompanies");
                     }
                     else
                     {
+                        var PhotoNAme = slider.Photo;
+                        var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
                         TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
                         return Redirect(returnUrl);
                     }
                 }
                 else
                 {
-                    var reqestUpdate = iOrderNew.UpdateData(slider);
-                    if (reqestUpdate == true)
+                    //var reqweistDeletPoto = iOrderNew.DELETPHOTO(slider.IdInformationCompanies);
+
+                    if (file.Count() == 0)
+
                     {
-                        TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
-                        return RedirectToAction("MyOrderNew");
+                        slider.Photo = model.OrderNew.Photo;
+                        //TempData["Message"] = ResourceWeb.VLimageuplode;
+                        var reqestUpdate2 = iOrderNew.UpdateData(slider);
+                        if (reqestUpdate2 == true)
+                        {
+                            TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+                            return RedirectToAction("MYInformationCompanies");
+                        }
+                        else
+                        {
+                            var PhotoNAme = slider.Photo;
+                            //var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+                            TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+                            return Redirect(returnUrl);
+                        }
                     }
                     else
                     {
-                        TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
-                        return Redirect(returnUrl);
+                        var reqweistDeletPoto = iOrderNew.DELETPHOTO(slider.IdInformationCompanies);
+                        var reqestUpdate2 = iOrderNew.UpdateData(slider);
+                        if (reqestUpdate2 == true)
+                        {
+                            TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+                            return RedirectToAction("MYInformationCompanies");
+                        }
+                        else
+                        {
+                            var PhotoNAme = slider.Photo;
+                            var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+                            TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+                            return Redirect(returnUrl);
+                        }
                     }
+
+                    //var reqestUpdate = iOrderNew.UpdateData(slider);
+                    //if (reqestUpdate == true)
+                    //{
+                    //	TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+                    //	return RedirectToAction("MYInformationCompanies");
+                    //}
+                    //else
+                    //{
+                    //	var PhotoNAme = slider.Photo;
+                    //	var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+                    //	TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+                    //	return Redirect(returnUrl);
+                    //}
+
                 }
             }
             catch
             {
-                TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
-                return Redirect(returnUrl);
+                var file = HttpContext.Request.Form.Files;
+                if (file.Count() == 0)
+
+                {
+                    //var PhotoNAme = slider.Photo;
+                    //var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+                    TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    var PhotoNAme = slider.Photo;
+                    var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+                    TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+                    return Redirect(returnUrl);
+                }
+                }
             }
-        }
         [Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdOrderNew)
         {

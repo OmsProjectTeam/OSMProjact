@@ -189,7 +189,7 @@
   <data name="VlBlackMarketExchangeRate" xml:space="preserve">
     <value>Please include the exchange rate in the local currency on the black market for the process to complete successfully....!</value>
   </data>
-  <data name="vlCatchReceiptNo" xml:space="preserve">
+  <data name="VlCatchReceiptNo" xml:space="preserve">
     <value>please inclode the Catch Receipt</value>
   </data>
   <data name="VlClintDelivery" xml:space="preserve">
