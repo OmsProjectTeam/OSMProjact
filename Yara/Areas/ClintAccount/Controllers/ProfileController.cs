@@ -76,20 +76,20 @@ public class ProfileController : Controller
 		}
 	}
 
-	//public IActionResult ChangePassword(string Id)
-	//{
-	//	ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-	//	//vmodel.ListVwUser = iUserInformation.GetAll();
-	//	if (userId != null)
-	//	{
-	//		vmodel.sUser = iUserInformation.GetById(Convert.ToString(userId));
-	//		return View(vmodel);
-	//	}
-	//	else
-	//	{
-	//		return View(new RegisterViewModel());
-	//	}
-	//}
+	public IActionResult ChangePassword(string Id)
+	{
+		ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+		//vmodel.ListVwUser = iUserInformation.GetAll();
+		if (userId != null)
+		{
+			vmodel.sUser = iUserInformation.GetById(Convert.ToString(userId));
+			return View(vmodel);
+		}
+		else
+		{
+			return View(new RegisterViewModel());
+		}
+	}
 
 	public IActionResult ChangePasswordAr(string Id)
 	{
