@@ -15,14 +15,20 @@ namespace Yara.Areas.Admin.Controllers
         IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs;
         MasterDbcontext dbcontext;
         IIShippingPrice iShippingPrice;
-        public OrderNewController(IIOrderNew iOrderNew1, IIOrderCase iOrderCase1, IIOrderStatus iOrderStatus1, IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1,MasterDbcontext dbcontext1,IIShippingPrice iShippingPrice1)
+        IICurrenciesExchangeRates iCurrenciesTransactions;
+        IITransaction iTransaction;
+        IIExchangeRate iExchangeRate;
+        public OrderNewController(IIExchangeRate iExchangeRate, IITransaction iTransaction, IICurrenciesExchangeRates iCurrenciesTransactions1, IIOrderNew iOrderNew1, IIOrderCase iOrderCase1, IIOrderStatus iOrderStatus1, IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1,MasterDbcontext dbcontext1,IIShippingPrice iShippingPrice1)
         {
+            iCurrenciesTransactions = iCurrenciesTransactions1;
             iOrderNew = iOrderNew1;
             iOrderCase = iOrderCase1;
             iOrderStatus = iOrderStatus1;
             iClintWitheDeliveryTariffs = iClintWitheDeliveryTariffs1;
             dbcontext = dbcontext1;
             iShippingPrice= iShippingPrice1;
+            iTransaction = iTransaction;
+            iExchangeRate = iExchangeRate;
         }
         public IActionResult MyOrderNew()
         {
@@ -43,6 +49,8 @@ namespace Yara.Areas.Admin.Controllers
             ViewBag.OrderStatus = iOrderStatus.GetAll();
             ViewBag.ClintWith = iClintWitheDeliveryTariffs.GetAll();
             ViewBag.ShippingPrice = iShippingPrice.GetAll();
+            ViewBag.Currenc = iCurrenciesTransactions.GetAll();
+
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewOrderNew = iOrderNew.GetAll();
             if (IdOrderNew != null)
@@ -232,10 +240,15 @@ namespace Yara.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetPrices(int selectedCompanyId, float weight)
+        public IActionResult GetPrices(int selectedCompanyId, float weight, int currencyId)
         {
+            var fromCurrencyId = 1;
             var prices = iShippingPrice.GetAll()
                 .FirstOrDefault(x => x.IdInformationCompanies == selectedCompanyId);
+
+            var exchangeRate = iExchangeRate.GetAll()
+                              .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == currencyId)?
+                              .Rate;
 
             if (prices != null)
             {
@@ -244,7 +257,7 @@ namespace Yara.Areas.Admin.Controllers
                     return Json(new
                     {
                         costPrice = prices.CoPricePerkgUnder10 * (decimal)weight,
-                        price = prices.CoPricePerkgAbove10 * (decimal)weight
+                        price = prices.CoPricePerkgAbove10 * (decimal)weight * exchangeRate
                     });
                 }
                 else
@@ -252,7 +265,7 @@ namespace Yara.Areas.Admin.Controllers
                     return Json(new
                     {
                         costPrice = prices.ClintPricePerkgUnder10 * (decimal)weight,
-                        price = prices.ClintPricePerkgAbove10 * (decimal)weight
+                        price = prices.ClintPricePerkgAbove10 * (decimal)weight * exchangeRate
                     });
                 }
             }
