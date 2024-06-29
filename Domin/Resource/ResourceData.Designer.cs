@@ -115,6 +115,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number of characters entered must not exceed 25 characters...!.
+        /// </summary>
+        public static string MaxLength25 {
+            get {
+                return ResourceManager.GetString("MaxLength25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The number of characters entered must not exceed 300 characters...!.
         /// </summary>
         public static string MaxLength300 {
@@ -264,6 +273,15 @@ namespace Domin.Resource {
         public static string VlBlackMarketExchangeRate {
             get {
                 return ResourceManager.GetString("VlBlackMarketExchangeRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to please inclode the Catch Receipt.
+        /// </summary>
+        public static string vlCatchReceiptNo {
+            get {
+                return ResourceManager.GetString("vlCatchReceiptNo", resourceCulture);
             }
         }
         

@@ -135,6 +135,9 @@
   <data name="MaxLength2000" xml:space="preserve">
     <value>The number of characters entered must not exceed 2000 characters...!</value>
   </data>
+  <data name="MaxLength25" xml:space="preserve">
+    <value>The number of characters entered must not exceed 25 characters...!</value>
+  </data>
   <data name="MaxLength300" xml:space="preserve">
     <value>The number of characters entered must not exceed 300 characters...!</value>
   </data>
@@ -185,6 +188,9 @@
   </data>
   <data name="VlBlackMarketExchangeRate" xml:space="preserve">
     <value>Please include the exchange rate in the local currency on the black market for the process to complete successfully....!</value>
+  </data>
+  <data name="vlCatchReceiptNo" xml:space="preserve">
+    <value>please inclode the Catch Receipt</value>
   </data>
   <data name="VlClintDelivery" xml:space="preserve">
     <value>Please include the customer's delivery price so that the process is completed successfully...!</value>

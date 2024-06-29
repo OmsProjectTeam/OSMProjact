@@ -1422,14 +1422,17 @@ namespace Infarstuructre.Data
 		   .Property(b => b.CurrentState)
 		   .HasDefaultValueSql("((1))");
 
+            builder.Entity<TBOrderNew>()
+           .Property(b => b.IsPaid)
+           .HasDefaultValueSql("((0))");
             //---------------------------------	
 
 
 
             //---------------------------------	
-        
-          
-    
+
+
+
         }
 
         public DbSet<TBAccountBox> TBAccountBoxs { get; set; }

@@ -34,13 +34,13 @@ namespace Domin.Entity
         public DateTime DateTimeEntry { get; set; }
         public bool CurrentState { get; set; }
 
+        public string Photo { get; set; }
 
-
-
-
-
-
-
+        [Required(ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "CatchReceiptNo")]
+        [MaxLength(25, ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "MaxLength25")]
+        [MinLength(3, ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "MinLength3")]
+        public string CatchReceiptNo { get; set; }
+        public bool IsPaid { get; set; }
 
     }
 }
