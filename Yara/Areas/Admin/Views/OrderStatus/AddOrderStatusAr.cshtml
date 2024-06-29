@@ -27,7 +27,7 @@
 
                     <div class="card-content">
                         <div class="row small-spacing">
-                            <div class="col-xs-6">
+                            <div class="col-12 col-sm-6">
                                 <div class="form-group ">
                                     <label asp-for="@Model.OrderStatus.Role" for="exampleInputEmail1">@ResourceWebAr.LbRolesName</label>
                                     <select class="form-control" asp-for="@Model.OrderStatus.Role" asp-items="@(new SelectList(ViewBag.RolesName,"Id","RoleName"))">
@@ -37,7 +37,7 @@
                             </div>
 
 
-                            <div class="col-xs-6">
+                            <div class="col-12 col-sm-6">
                                 <div class="form-group ">
                                     <label asp-for="@Model.OrderStatus.Description" for="exampleInputEmail1">@ResourceWebAr.LBOrderStatus</label>
                                     <input asp-for="@Model.OrderStatus.Description" type="text" placeholder="@ResourceWebAr.LBOrderStatus ...." class="form-control" maxlength="300">

@@ -20,7 +20,7 @@
 
                     <div class="card-content">
                         <div class="row small-spacing">
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="@Model.InformationCompanies.IdUserIdentity" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
                                     <select id="merchant-select" class="form-control select2_1" asp-for="@Model.InformationCompanies.IdUserIdentity" asp-items="@(new SelectList(ViewBag.user, "Id", "Name"))">
@@ -28,7 +28,7 @@
                                     <span asp-validation-for="@Model.InformationCompanies.IdUserIdentity" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="@Model.InformationCompanies.IdTypesCompanies" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
                                     <select id="merchant-select" class="form-control" asp-for="@Model.InformationCompanies.IdTypesCompanies" asp-items="@(new SelectList(ViewBag.Categorie, "IdTypesCompanies", "TypesCompanies"))">
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                         
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="@Model.InformationCompanies.CompanyName" for="exampleInputEmail1">@ResourceWeb.LbCompanyName</label>
                                     <input asp-for="@Model.InformationCompanies.CompanyName" type="text" placeholder="@ResourceWeb.LbCompanyName ...." class="form-control" maxlength="300">
@@ -45,7 +45,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="@Model.InformationCompanies.PhoneCompany" for="exampleInputEmail1">@ResourceWeb.LbPhoneCompany</label>
                                     <input asp-for="@Model.InformationCompanies.PhoneCompany" type="text" placeholder="@ResourceWeb.LbPhoneCompany ...." class="form-control" maxlength="20">
@@ -57,7 +57,7 @@
 
                     <div class="card-content">
                         <div class="row small-spacing">
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="@Model.InformationCompanies.PhoneCompanySecand" for="exampleInputEmail1">@ResourceWeb.LbPhoneCompanySecand</label>
                                     <input asp-for="@Model.InformationCompanies.PhoneCompanySecand" type="text" placeholder="@ResourceWeb.LbPhoneCompanySecand ...." class="form-control" maxlength="20">
@@ -65,7 +65,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="@Model.InformationCompanies.EmailCompany" for="exampleInputEmail1">@ResourceWeb.LbEmailCompany</label>
                                     <input asp-for="@Model.InformationCompanies.EmailCompany" type="email" placeholder="@ResourceWeb.LbEmailCompany ...." class="form-control" maxlength="300">
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="@Model.InformationCompanies.AddresCompany" for="exampleInputEmail1">@ResourceWeb.LbAddresCompany</label>
                                     <input asp-for="@Model.InformationCompanies.AddresCompany" type="text" placeholder="@ResourceWeb.LbAddresCompany ...." class="form-control" maxlength="300">
@@ -81,7 +81,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="@Model.InformationCompanies.NikeNAme" for="exampleInputEmail1">@ResourceWeb.LbNikeNAme</label>
                                     <input asp-for="@Model.InformationCompanies.NikeNAme" type="text" placeholder="@ResourceWeb.LbNikeNAme ...." class="form-control" maxlength="300">
@@ -93,7 +93,7 @@
 
                     <div class="card-content">
                         <div class="row small-spacing">
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="@Model.InformationCompanies.CompanyDescription" for="exampleInputEmail1">@ResourceWeb.LbCompanyDescription</label>
                                     <textarea asp-for="@Model.InformationCompanies.CompanyDescription" type="text" placeholder="@ResourceWeb.LbCompanyDescription ...." class="form-control" maxlength="2000" rows="5"></textarea>
@@ -101,7 +101,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="@Model.InformationCompanies.CompanyURl" for="exampleInputEmail1">@ResourceWeb.LbCompanyURl</label>
                                     <input asp-for="@Model.InformationCompanies.CompanyURl" type="text" placeholder="@ResourceWeb.LbCompanyURl ...." class="form-control" maxlength="500">
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="@Model.InformationCompanies.IdCitu" for="exampleInputEmail1">@ResourceWeb.LbCity</label>
                                     <select class="form-control" asp-for="@Model.InformationCompanies.IdCitu" asp-items="@(new SelectList(ViewBag.City, "Id", "Description"))" id="city-select"></select>
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group">
                                     <label asp-for="@Model.InformationCompanies.IdArea" for="exampleInputEmail1">@ResourceWeb.LBLbAreaName</label>
                                     <select class="form-control" asp-for="@Model.InformationCompanies.IdArea" asp-items="@(new SelectList(ViewBag.Area, "id", "Description"))" id="area-select"></select>

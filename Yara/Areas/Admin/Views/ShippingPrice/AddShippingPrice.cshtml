@@ -27,7 +27,7 @@
 
                     <div class="card-content">
                         <div class="row small-spacing">
-                            <div class="col-xs-4">
+                            <div class="col-12 col-sm-4">
                                 <div class="form-group ">
                                     <label asp-for="@Model.ShippingPrice.IdTypeSystem" for="exampleInputEmail1">@ResourceWeb.LbTypeSystem</label>
                                     <select class="form-control" asp-for="@Model.ShippingPrice.IdTypeSystem" asp-items="@(new SelectList(ViewBag.TypeSystem,"IdTypeSystem","TypeSystem"))">
@@ -35,7 +35,7 @@
                                     <span asp-validation-for="@Model.ShippingPrice.IdTypeSystem" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-12 col-sm-4">
                                 <div class="form-group ">
                                     <label asp-for="@Model.ShippingPrice.IdCurrenciesExchangeRates" for="exampleInputEmail1">@ResourceWeb.LbCountry</label>
                                     <select class="form-control" asp-for="@Model.ShippingPrice.IdCurrenciesExchangeRates" asp-items="@(new SelectList(ViewBag.Currenc,"IdCurrenciesExchangeRates","Country"))">
@@ -43,7 +43,7 @@
                                     <span asp-validation-for="@Model.ShippingPrice.IdCurrenciesExchangeRates" class="text-danger"></span>
                                 </div>
                             </div>                     
-                            <div class="col-xs-4">
+                            <div class="col-12 col-sm-4">
                                 <div class="form-group ">
                                     <label asp-for="@Model.ShippingPrice.IdInformationCompanies" for="exampleInputEmail1">@ResourceWeb.LbTypeSystem</label>
                                     <select class="form-control" asp-for="@Model.ShippingPrice.IdInformationCompanies" asp-items="@(new SelectList(ViewBag.InformationCompanies,"IdInformationCompanies","CompanyName"))">
@@ -59,7 +59,7 @@
                     </div>
                     <div class="card-content">
                         <div class="row small-spacing">
-                            <div class="col-xs-4">
+                            <div class="col-12 col-sm-4">
                                 <div class="form-group ">
                                     <label asp-for="@Model.ShippingPrice.TitleShipping" for="exampleInputEmail1">@ResourceWeb.LTitleShipping</label>
                                     <input asp-for="@Model.ShippingPrice.TitleShipping" type="text" placeholder="@ResourceWeb.LTitleShipping ...." class="form-control" maxlength="300">
@@ -67,7 +67,7 @@
                                     <span style="color:red"> <strong>@TempData["Country"]</strong></span>
                                 </div>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-12 col-sm-4">
                                 <div class="form-group ">
                                     <label asp-for="@Model.ShippingPrice.CoPricePerkgUnder10" for="exampleInputEmail1">@ResourceWeb.LbCoPricePerkgUnder10</label>
                                     <input asp-for="@Model.ShippingPrice.CoPricePerkgUnder10" type="text" placeholder="@ResourceWeb.LbCoPricePerkgUnder10 ...." class="form-control" maxlength="20">
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-4">
+                            <div class="col-12 col-sm-4">
                                 <div class="form-group ">
                                     <label asp-for="@Model.ShippingPrice.CoPricePerkgAbove10" for="exampleInputEmail1">@ResourceWeb.LbCoPricePerkgAbove10</label>
                                     <input asp-for="@Model.ShippingPrice.CoPricePerkgAbove10" type="text" placeholder="@ResourceWeb.LbCoPricePerkgAbove10 ...." class="form-control" maxlength="20">
@@ -90,14 +90,14 @@
 
                     <div class="card-content">
                         <div class="row small-spacing">
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.ShippingPrice.ClintPricePerkgUnder10" for="exampleInputEmail1">@ResourceWeb.LbClintPricePerkgUnder10</label>
                                     <input asp-for="@Model.ShippingPrice.ClintPricePerkgUnder10" type="text" placeholder="@ResourceWeb.LbClintPricePerkgUnder10 ...." class="form-control" maxlength="20">
                                     <span asp-validation-for="@Model.ShippingPrice.ClintPricePerkgUnder10" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.ShippingPrice.ClintPricePerkgAbove10" for="exampleInputEmail1">@ResourceWeb.LbClintPricePerkgAbove10</label>
                                     <input asp-for="@Model.ShippingPrice.ClintPricePerkgAbove10" type="text" placeholder="@ResourceWeb.LbClintPricePerkgAbove10 ...." class="form-control" maxlength="20">
@@ -105,7 +105,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <div class="checkbox margin-bottom-20">
                                         <div class="switch success"><input type="checkbox" asp-for="@Model.ShippingPrice.Active" id="switch-2" checked="checked"><label for="switch-2">@ResourceWeb.LbActive</label></div>

@@ -18,7 +18,7 @@
                     </div>
                     <div class="card-content">
                         <div class="row small-spacing">
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label asp-for="@Model.Transaction.FromCurrencyID" for="exampleInputEmail1">@ResourceWebAr.LbTypesCompanies</label>
                                     <select class="form-control" asp-for="@Model.Transaction.FromCurrencyID" asp-items="@(new SelectList(ViewBag.Currenc, "IdCurrenciesExchangeRates", "Country"))" id="fromCurrency">
@@ -26,7 +26,7 @@
                                     <span asp-validation-for="@Model.Transaction.FromCurrencyID" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label asp-for="@Model.Transaction.ToCurrencyID" for="exampleInputEmail1">@ResourceWebAr.LbTypesCompanies</label>
                                     <select class="form-control" asp-for="@Model.Transaction.ToCurrencyID" asp-items="@(new SelectList(ViewBag.Currenc, "IdCurrenciesExchangeRates", "Country"))" id="toCurrency">
@@ -38,21 +38,21 @@
                     </div>
                     <div class="card-content">
                         <div class="row small-spacing">
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-4">
                                 <div class="form-group">
                                     <label asp-for="@Model.Transaction.Amount" for="exampleInputEmail1">@ResourceWebAr.LbAmount</label>
                                     <input asp-for="@Model.Transaction.Amount" type="text" placeholder="@ResourceWebAr.LbAmount ...." class="form-control" maxlength="20" id="amount">
                                     <span asp-validation-for="@Model.Transaction.Amount" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-4">
                                 <div class="form-group">
                                     <label asp-for="@Model.Transaction.ConvertedAmount" for="exampleInputEmail1">@ResourceWebAr.LbConvertedAmount</label>
                                     <input asp-for="@Model.Transaction.ConvertedAmount" type="text" placeholder="@ResourceWebAr.LbConvertedAmount ...." class="form-control" maxlength="20" id="convertedAmount" readonly>
                                     <span asp-validation-for="@Model.Transaction.ConvertedAmount" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-4">
                                 <div class="form-group">
                                     <label asp-for="@Model.Transaction.ExchangeRate" for="exampleInputEmail1">@ResourceWebAr.LbExchangeRate</label>
                                     <input asp-for="@Model.Transaction.ExchangeRate" type="text" placeholder="@ResourceWebAr.LbExchangeRate ...." class="form-control" maxlength="20" id="exchangeRate" readonly>

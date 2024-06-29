@@ -27,7 +27,7 @@
 
                     <div class="card-content">
                         <div class="row small-spacing">
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.InformationCompanies.IdTypesCompanies" for="exampleInputEmail1">@ResourceWebAr.LbTypesCompanies</label>
                                     <select class="form-control" asp-for="@Model.InformationCompanies.IdTypesCompanies" asp-items="@(new SelectList(ViewBag.Categorie,"IdTypesCompanies","TypesCompanies"))">
@@ -37,7 +37,7 @@
                             </div>
 
 
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.InformationCompanies.CompanyName" for="exampleInputEmail1">@ResourceWebAr.LbCompanyName</label>
                                     <input asp-for="@Model.InformationCompanies.CompanyName" type="text" placeholder="@ResourceWebAr.LbCompanyName ...." class="form-control" maxlength="300">
@@ -47,7 +47,7 @@
                             </div>
 
 
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.InformationCompanies.PhoneCompany" for="exampleInputEmail1">@ResourceWebAr.LbPhoneCompany</label>
                                     <input asp-for="@Model.InformationCompanies.PhoneCompany" type="text" placeholder="@ResourceWebAr.LbPhoneCompany ...." class="form-control" maxlength="20">
@@ -55,7 +55,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.InformationCompanies.PhoneCompanySecand" for="exampleInputEmail1">@ResourceWebAr.LbPhoneCompanySecand</label>
                                     <input asp-for="@Model.InformationCompanies.PhoneCompanySecand" type="text" placeholder="@ResourceWebAr.LbPhoneCompanySecand ...." class="form-control" maxlength="20">
@@ -71,7 +71,7 @@
 
 
 
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.InformationCompanies.EmailCompany" for="exampleInputEmail1">@ResourceWebAr.LbEmailCompany</label>
                                     <input asp-for="@Model.InformationCompanies.EmailCompany" type="email" placeholder="@ResourceWebAr.LbEmailCompany ...." class="form-control" maxlength="300">
@@ -79,7 +79,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.InformationCompanies.AddresCompany" for="exampleInputEmail1">@ResourceWebAr.LbAddresCompany</label>
                                     <input asp-for="@Model.InformationCompanies.AddresCompany" type="text" placeholder="@ResourceWebAr.LbAddresCompany ...." class="form-control" maxlength="300">
@@ -87,7 +87,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.InformationCompanies.NikeNAme" for="exampleInputEmail1">@ResourceWebAr.LbNikeNAme</label>
                                     <input asp-for="@Model.InformationCompanies.NikeNAme" type="text" placeholder="@ResourceWebAr.LbNikeNAme ...." class="form-control" maxlength="300">
@@ -95,7 +95,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.InformationCompanies.CompanyDescription" for="exampleInputEmail1">@ResourceWebAr.LbCompanyDescription</label>
                                     <textarea asp-for="@Model.InformationCompanies.CompanyDescription" type="text" placeholder="@ResourceWebAr.LbCompanyDescription ...." class="form-control" maxlength="2000" rows="5"></textarea>
