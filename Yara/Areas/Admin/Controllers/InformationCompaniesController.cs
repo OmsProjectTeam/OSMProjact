@@ -31,6 +31,13 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListViewInformationCompanies = iInformationCompanies.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MYInformationCompaniesAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewInformationCompanies = iInformationCompanies.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddEditInformationCompanies(int? IdInformationCompanies)
         {
 
@@ -53,7 +60,40 @@ namespace Yara.Areas.Admin.Controllers
                 return View(vmodel);
             }
         }
+
+        public IActionResult AddEditInformationCompaniesAr(int? IdInformationCompanies)
+        {
+            ViewBag.Categorie = iTypesCompanies.GetAll();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewInformationCompanies = iInformationCompanies.GetAll();
+            if (IdInformationCompanies != null)
+            {
+                vmodel.InformationCompanies = iInformationCompanies.GetById(Convert.ToInt32(IdInformationCompanies));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
         public IActionResult AddEditInformationCompaniesImage(int? IdInformationCompanies)
+        {
+            ViewBag.Categorie = iTypesCompanies.GetAll();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewInformationCompanies = iInformationCompanies.GetAll();
+            if (IdInformationCompanies != null)
+            {
+                vmodel.InformationCompanies = iInformationCompanies.GetById(Convert.ToInt32(IdInformationCompanies));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
+        public IActionResult AddEditInformationCompaniesImageAr(int? IdInformationCompanies)
         {
             ViewBag.Categorie = iTypesCompanies.GetAll();
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();

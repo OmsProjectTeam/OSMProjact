@@ -31,7 +31,43 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListViewOrder = iOrder.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyOrderAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewOrder = iOrder.GetAll();
+            return View(vmodel);
+        }
+
         public IActionResult AddOrder(int? IdOrder)
+
+        {
+            ViewBag.Customer = iCustomer.GetAll();
+
+            ViewBag.OrderCase = iOrderCase.GetAll();
+            ViewBag.OrderStatus = iOrderStatus.GetAll();
+            ViewBag.Merchant = iMerchant.GetAll();
+            ViewBag.InformationCompanies = iInformationCompanies.GetAll();
+            ViewBag.TaskStatus = iTaskStatus.GetAll();
+
+
+
+
+
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewOrder = iOrder.GetAll();
+            if (IdOrder != null)
+            {
+                vmodel.Order = iOrder.GetById(Convert.ToInt32(IdOrder));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
+        public IActionResult AddOrderAr(int? IdOrder)
 
         {
             ViewBag.Customer = iCustomer.GetAll();

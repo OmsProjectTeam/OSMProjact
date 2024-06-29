@@ -19,6 +19,13 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListRolesName = iRolesName.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyRolesNameAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListRolesName = iRolesName.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddRolesName(int? Id)
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
@@ -33,6 +40,22 @@ namespace Yara.Areas.Admin.Controllers
                 return View(vmodel);
             }
         }
+
+        public IActionResult AddRolesNameAr(int? Id)
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListRolesName = iRolesName.GetAll();
+            if (Id != null)
+            {
+                vmodel.RolesName = iRolesName.GetById(Convert.ToInt32(Id));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Save(ViewmMODeElMASTER model, RolesName slider, List<IFormFile> Files, string returnUrl)

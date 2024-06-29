@@ -23,6 +23,13 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListViewExchangeRate = iExchangeRate.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyExchangeRateAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewExchangeRate = iExchangeRate.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddExchangeRate(int? IdExchangeRate)
 
         {
@@ -40,6 +47,25 @@ namespace Yara.Areas.Admin.Controllers
                 return View(vmodel);
             }
         }
+
+        public IActionResult AddExchangeRateAr(int? IdExchangeRate)
+
+        {
+
+            ViewBag.Currenc = iCurrenciesExchangeRates.GetAll();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewExchangeRate = iExchangeRate.GetAll();
+            if (IdExchangeRate != null)
+            {
+                vmodel.ExchangeRate = iExchangeRate.GetById(Convert.ToInt32(IdExchangeRate));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Save(ViewmMODeElMASTER model, TBExchangeRate slider, List<IFormFile> Files, string returnUrl)
