@@ -322,6 +322,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clint Information.
+        /// </summary>
+        public static string LBClintInformation {
+            get {
+                return ResourceManager.GetString("LBClintInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer shipping price is more than 10.
         /// </summary>
         public static string LbClintPricePerkgAbove10 {
@@ -1254,6 +1263,15 @@ namespace Yara.Resource {
         public static string LbOrderDate {
             get {
                 return ResourceManager.GetString("LbOrderDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Information.
+        /// </summary>
+        public static string LBOrderInformation {
+            get {
+                return ResourceManager.GetString("LBOrderInformation", resourceCulture);
             }
         }
         

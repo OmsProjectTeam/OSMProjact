@@ -204,6 +204,9 @@
   <data name="LbClintDelivery" xml:space="preserve">
     <value>سعر التوصيل للزبون</value>
   </data>
+  <data name="LBClintInformation" xml:space="preserve">
+    <value>معلومات العميل</value>
+  </data>
   <data name="LbClintPricePerkgAbove10" xml:space="preserve">
     <value>سعر الشحن للعملاء أكثر من 10</value>
   </data>
@@ -515,6 +518,9 @@
   </data>
   <data name="LbOrderDate" xml:space="preserve">
     <value>تاريخ الطلب</value>
+  </data>
+  <data name="LBOrderInformation" xml:space="preserve">
+    <value>معلومات الطلب</value>
   </data>
   <data name="LBOrdersSystem" xml:space="preserve">
     <value>نظام الطلبيات</value>
