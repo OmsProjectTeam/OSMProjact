@@ -41,6 +41,7 @@ namespace Yara.Areas.Admin.Controllers
 			// جلب البيانات وإعداد النموذج
 			vmodel.ListViewOrderNew = iOrderNew.GetAll();
 			var filteredOrders = vmodel.ListViewOrderNew=iOrderNew.GetAll();
+
 			ViewBag.Favorit = filteredOrders.Sum(c => c.CostPrice);
 			ViewBag.price = filteredOrders.Sum(c => c.Price);
 			ViewBag.total = ViewBag.price - ViewBag.Favorit;

@@ -204,6 +204,9 @@
   <data name="LbClintDelivery" xml:space="preserve">
     <value>Delivery price to the customer</value>
   </data>
+  <data name="LBClintInformation" xml:space="preserve">
+    <value>Clint Information</value>
+  </data>
   <data name="LbClintPricePerkgAbove10" xml:space="preserve">
     <value>Customer shipping price is more than 10</value>
   </data>
@@ -515,6 +518,9 @@
   </data>
   <data name="LbOrderDate" xml:space="preserve">
     <value>Order Date</value>
+  </data>
+  <data name="LBOrderInformation" xml:space="preserve">
+    <value>Order Information</value>
   </data>
   <data name="LBOrdersSystem" xml:space="preserve">
     <value>Orders System</value>
