@@ -41,8 +41,11 @@ namespace Domin.Entity
         public string? IdInformationCompanies { get; set; }
      
         public string? NikeNAmeShipping { get; set; }
+        public string Photo { get; set; }
+        public string CatchReceiptNo { get; set; }
+        public bool IsPaid { get; set; }
 
-  
+
 
 
     }
