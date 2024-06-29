@@ -96,6 +96,9 @@ namespace Yara.Areas.Admin.Controllers
                 slider.DataEntry = model.OrderNew.DataEntry;
                 slider.DateTimeEntry = model.OrderNew.DateTimeEntry;
                 slider.CurrentState = model.OrderNew.CurrentState;
+                slider.CatchReceiptNo = model.OrderNew.CatchReceiptNo;
+                slider.Photo = model.OrderNew.Photo;
+                slider.IsPaid = model.OrderNew.IsPaid;
                 var file = HttpContext.Request.Form.Files;
                 if (slider.IdOrderNew == 0 || slider.IdOrderNew == null)
                 {
@@ -125,7 +128,7 @@ namespace Yara.Areas.Admin.Controllers
                     if (reqwest == true)
                     {
                         TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
-                        return RedirectToAction("MYInformationCompanies");
+                        return RedirectToAction("MyOrderNewAr");
                     }
                     else
                     {
@@ -148,7 +151,7 @@ namespace Yara.Areas.Admin.Controllers
                         if (reqestUpdate2 == true)
                         {
                             TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
-                            return RedirectToAction("MYInformationCompanies");
+                            return RedirectToAction("MyOrderNewAr");
                         }
                         else
                         {
@@ -165,7 +168,7 @@ namespace Yara.Areas.Admin.Controllers
                         if (reqestUpdate2 == true)
                         {
                             TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
-                            return RedirectToAction("MYInformationCompanies");
+                            return RedirectToAction("MyOrderNewAr");
                         }
                         else
                         {
@@ -180,7 +183,7 @@ namespace Yara.Areas.Admin.Controllers
                     //if (reqestUpdate == true)
                     //{
                     //	TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
-                    //	return RedirectToAction("MYInformationCompanies");
+                    //	return RedirectToAction("MyOrderNewAr");
                     //}
                     //else
                     //{
