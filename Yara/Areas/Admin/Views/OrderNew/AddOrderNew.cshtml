@@ -259,7 +259,7 @@
 
                 $.ajax({
                     url: '@Url.Action("GetPrices", "OrderNew")',
-                    data: { selectedCompanyId: selectedCompany, weight: weight, currencyId: toCurrency },
+                    data: { selectedCompanyId: selectedCompany, weight: weight, toCurrencyId: toCurrency, fromCurrencyId: 1 },
                     success: function (data) {
                         console.log("AJAX success, data: ", data);
                         if (data) {
