@@ -642,6 +642,9 @@
   <data name="VLAreadoplceted" xml:space="preserve">
     <value>Pricing has already been added to the region. Please check and try again later...!</value>
   </data>
+  <data name="VLCatchReceiptNoDoplceted" xml:space="preserve">
+    <value>The receipt voucher number has already been entered. Please verify and try again later...!</value>
+  </data>
   <data name="VLCitydoplceted" xml:space="preserve">
     <value>The delivery price for this city has been entered. Please check and try again later...!</value>
   </data>

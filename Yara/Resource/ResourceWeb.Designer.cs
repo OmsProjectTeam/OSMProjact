@@ -1636,6 +1636,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The receipt voucher number has already been entered. Please verify and try again later...!.
+        /// </summary>
+        public static string VLCatchReceiptNoDoplceted {
+            get {
+                return ResourceManager.GetString("VLCatchReceiptNoDoplceted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The delivery price for this city has been entered. Please check and try again later...!.
         /// </summary>
         public static string VLCitydoplceted {

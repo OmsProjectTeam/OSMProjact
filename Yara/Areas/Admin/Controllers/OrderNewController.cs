@@ -179,19 +179,7 @@ namespace Yara.Areas.Admin.Controllers
                         }
                     }
 
-                    //var reqestUpdate = iOrderNew.UpdateData(slider);
-                    //if (reqestUpdate == true)
-                    //{
-                    //	TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
-                    //	return RedirectToAction("MyOrderNewAr");
-                    //}
-                    //else
-                    //{
-                    //	var PhotoNAme = slider.Photo;
-                    //	var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
-                    //	TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
-                    //	return Redirect(returnUrl);
-                    //}
+                 
 
                 }
             }
