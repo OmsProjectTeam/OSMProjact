@@ -8,156 +8,170 @@
 
 
 <div class="row small-spacing">
-    <div class="col-lg-6 col-xs-12">
-        <div class="box-content card white">
-            <h4 class="box-title">@ResourceWeb.LBAddOrderNew</h4>
-            <!-- /.box-title -->
-            <div class="card-content">
-                <form role="form" method="post" asp-controller="OrderNew" asp-action="Save" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <input type="hidden" asp-for="@Model.OrderNew.DataEntry" class="form-control" value="@User.Identity.Name">
-                        <input type="hidden" asp-for="@Model.OrderNew.IdOrderNew" class="form-control">
-                        <input type="hidden" asp-for="@Model.OrderNew.DateTimeEntry" value="@DateTime.Now">
-                        <input type="hidden" asp-for="@Model.returnUrl" id="url">
-                    </div>
-                    <div class="card-content">
-                        <div class="row small-spacing">
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.OrderNew.IdInformationCompanies" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
-                                    <select class="form-control select2_1" asp-for="@Model.OrderNew.IdInformationCompanies" asp-items="@(new SelectList(ViewBag.ShippingPrice, "IdInformationCompanies", "NikeNAme"))" id="selectedcompany">
-                                    </select>
-                                    <span asp-validation-for="@Model.OrderNew.IdInformationCompanies" class="text-danger"></span>
-                                    <span style="color:red"><strong>@TempData["Customer"]</strong></span>
-                                </div>
-                            </div>
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.OrderNew.IdClintWitheDeliveryTariffs" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
-                                    <select id="merchant-select" class="form-control select2_1" asp-for="@Model.OrderNew.IdClintWitheDeliveryTariffs" asp-items="@(new SelectList(ViewBag.ClintWith, "IdClintWitheDeliveryTariffs", "DescriptionClint"))">
-                                    </select>
-                                    <span asp-validation-for="@Model.OrderNew.IdClintWitheDeliveryTariffs" class="text-danger"></span>
-                                    <span style="color:red"><strong>@TempData["Customer"]</strong></span>
-                                </div>
-                            </div>
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.OrderNew.IdorderCases" for="exampleInputEmail1">@ResourceWeb.LbOrderCase</label>
-                                    <select id="city-delivery-tariffs" class="form-control select2_1" asp-for="@Model.OrderNew.IdorderCases" asp-items="@(new SelectList(ViewBag.OrderCase, "Id", "Description"))">
-                                    </select>
-                                    <span asp-validation-for="@Model.OrderNew.IdorderCases" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-xs-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.OrderNew.IdorderStatus" for="exampleInputEmail1">@ResourceWeb.LBOrderStatus</label>
-                                    <select id="customer-select" class="form-control select2_1" asp-for="@Model.OrderNew.IdorderStatus" asp-items="@(new SelectList(ViewBag.OrderStatus, "id", "description"))">
-                                    </select>
-                                    <span asp-validation-for="@Model.OrderNew.IdorderStatus" class="text-danger"></span>
-                                </div>
-                            </div>
+    <div class="box-content">
+        <ul class="list-inline">
+            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LBAddOrderNew</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
+            <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
+            <br>
+            <br>
+            <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
+            <br>
+            <br>
+
+        </ul>
+        <div class="col-lg-6 col-xs-12">
+            <div class="box-content card white">
+                <h4 class="box-title">@ResourceWeb.LBAddOrderNew</h4>
+                <!-- /.box-title -->
+                <div class="card-content">
+                    <form role="form" method="post" asp-controller="OrderNew" asp-action="Save" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="hidden" asp-for="@Model.OrderNew.DataEntry" class="form-control" value="@User.Identity.Name">
+                            <input type="hidden" asp-for="@Model.OrderNew.IdOrderNew" class="form-control">
+                            <input type="hidden" asp-for="@Model.OrderNew.DateTimeEntry" value="@DateTime.Now">
+                            <input type="hidden" asp-for="@Model.returnUrl" id="url">
                         </div>
-                    </div>
-
-
-
-                    <div class="card-content">
-                        <div class="row small-spacing">
-
-                            <div class="col-xs-4">
-                                <div class="form-group ">
-                                    <label asp-for="@Model.OrderNew.OrderDate" for="exampleInputEmail1">@ResourceWeb.LbOrderDate</label>
-                                    <input asp-for="@Model.OrderNew.OrderDate" type="date" placeholder="@ResourceWeb.LbEmailCompany ...." class="form-control" maxlength="300">
-                                    <span asp-validation-for="@Model.OrderNew.OrderDate" class="text-danger"></span>
+                        <div class="card-content">
+                            <div class="row small-spacing">
+                                <div class="col-xs-3">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.OrderNew.IdInformationCompanies" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
+                                        <select class="form-control select2_1" asp-for="@Model.OrderNew.IdInformationCompanies" asp-items="@(new SelectList(ViewBag.ShippingPrice, "IdInformationCompanies", "NikeNAme"))" id="selectedcompany">
+                                        </select>
+                                        <span asp-validation-for="@Model.OrderNew.IdInformationCompanies" class="text-danger"></span>
+                                        <span style="color:red"><strong>@TempData["Customer"]</strong></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-4">
-                                <div class="form-group ">
-                                    <label asp-for="@Model.OrderNew.DescriptionOrder" for="exampleInputEmail1">@ResourceWeb.LbDescriptionOrder</label>
-                                    <input asp-for="@Model.OrderNew.DescriptionOrder" type="text" placeholder="@ResourceWeb.LbDescriptionOrder ...." class="form-control" maxlength="300">
-                                    <span asp-validation-for="@Model.OrderNew.DescriptionOrder" class="text-danger"></span>
-                                    <span style="color:red"><strong>@TempData["DescriptionOrder"]</strong></span>
-
-
+                                <div class="col-xs-3">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.OrderNew.IdClintWitheDeliveryTariffs" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
+                                        <select id="merchant-select" class="form-control select2_1" asp-for="@Model.OrderNew.IdClintWitheDeliveryTariffs" asp-items="@(new SelectList(ViewBag.ClintWith, "IdClintWitheDeliveryTariffs", "DescriptionClint"))">
+                                        </select>
+                                        <span asp-validation-for="@Model.OrderNew.IdClintWitheDeliveryTariffs" class="text-danger"></span>
+                                        <span style="color:red"><strong>@TempData["Customer"]</strong></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-4">
-                                <div class="form-group ">
-                                    <label asp-for="@Model.OrderNew.Weight" for="exampleInputEmail1">@ResourceWeb.LbWeight</label>
-                                    <input asp-for="@Model.OrderNew.Weight" type="text" placeholder="@ResourceWeb.LbWeight ...." class="form-control" maxlength="300" id="weight">
-                                    <span asp-validation-for="@Model.OrderNew.Weight" class="text-danger"></span>
-
+                                <div class="col-xs-3">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.OrderNew.IdorderCases" for="exampleInputEmail1">@ResourceWeb.LbOrderCase</label>
+                                        <select id="city-delivery-tariffs" class="form-control select2_1" asp-for="@Model.OrderNew.IdorderCases" asp-items="@(new SelectList(ViewBag.OrderCase, "Id", "Description"))">
+                                        </select>
+                                        <span asp-validation-for="@Model.OrderNew.IdorderCases" class="text-danger"></span>
+                                    </div>
                                 </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <div class="card-content">
-                        <div class="row small-spacing">
-                            <div class="col-xs-3">
-                                <div class="form-group ">
-                                    <label asp-for="@Model.OrderNew.CostPrice" for="exampleInputEmail1">@ResourceWeb.LbCostPrice</label>
-                                    <input asp-for="@Model.OrderNew.CostPrice" type="text" placeholder="@ResourceWeb.LbCostPrice ...." class="form-control" maxlength="20" id="costPrice" readonly>
-                                    <span asp-validation-for="@Model.OrderNew.CostPrice" class="text-danger"></span>
-
-                                </div>
-                            </div>
-
-                            <div class="col-xs-3">
-                                <div class="form-group ">
-                                    <label asp-for="@Model.OrderNew.Price" for="exampleInputEmail1">@ResourceWeb.LbPrice</label>
-                                    <input asp-for="@Model.OrderNew.Price" type="text" placeholder="@ResourceWeb.LbPrice ...." class="form-control" maxlength="300" id="price" readonly>
-                                    <span asp-validation-for="@Model.OrderNew.Price" class="text-danger"></span>
-
-                                </div>
-                            </div>
-                            <div class="col-xs-3">
-                                <div class="form-group ">
-                                    <label asp-for="@Model.OrderNew.Addres" for="exampleInputEmail1">@ResourceWeb.LbAddres</label>
-                                    <input asp-for="@Model.OrderNew.Addres" type="text" placeholder="@ResourceWeb.LbAddres...." class="form-control" maxlength="300">
-                                    <span asp-validation-for="@Model.OrderNew.Addres" class="text-danger"></span>
-
-                                </div>
-                            </div>
-                            <div class="col-xs-3">
-                                <div class="form-group ">
-                                    <label asp-for="@Model.OrderNew.Nouts" for="exampleInputEmail1">@ResourceWeb.LbNouts</label>
-                                    <input asp-for="@Model.OrderNew.Nouts" type="text" placeholder="@ResourceWeb.LbNouts ...." class="form-control" maxlength="300">
-                                    <span asp-validation-for="@Model.OrderNew.Nouts" class="text-danger"></span>
+                                <div class="col-xs-3">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.OrderNew.IdorderStatus" for="exampleInputEmail1">@ResourceWeb.LBOrderStatus</label>
+                                        <select id="customer-select" class="form-control select2_1" asp-for="@Model.OrderNew.IdorderStatus" asp-items="@(new SelectList(ViewBag.OrderStatus, "id", "description"))">
+                                        </select>
+                                        <span asp-validation-for="@Model.OrderNew.IdorderStatus" class="text-danger"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                    </div>
-                    <div class="checkbox margin-bottom-20">
 
-                        <div class="switch success"><input type="checkbox" asp-for="@Model.OrderNew.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWeb.lbCurrentState</label></div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
-                </form>
+
+                        <div class="card-content">
+                            <div class="row small-spacing">
+
+                                <div class="col-xs-4">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.OrderNew.OrderDate" for="exampleInputEmail1">@ResourceWeb.LbOrderDate</label>
+                                        <input asp-for="@Model.OrderNew.OrderDate" type="date" placeholder="@ResourceWeb.LbEmailCompany ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="@Model.OrderNew.OrderDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.OrderNew.DescriptionOrder" for="exampleInputEmail1">@ResourceWeb.LbDescriptionOrder</label>
+                                        <input asp-for="@Model.OrderNew.DescriptionOrder" type="text" placeholder="@ResourceWeb.LbDescriptionOrder ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="@Model.OrderNew.DescriptionOrder" class="text-danger"></span>
+                                        <span style="color:red"><strong>@TempData["DescriptionOrder"]</strong></span>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.OrderNew.Weight" for="exampleInputEmail1">@ResourceWeb.LbWeight</label>
+                                        <input asp-for="@Model.OrderNew.Weight" type="text" placeholder="@ResourceWeb.LbWeight ...." class="form-control" maxlength="300" id="weight">
+                                        <span asp-validation-for="@Model.OrderNew.Weight" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="card-content">
+                            <div class="row small-spacing">
+                                <div class="col-xs-3">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.OrderNew.CostPrice" for="exampleInputEmail1">@ResourceWeb.LbCostPrice</label>
+                                        <input asp-for="@Model.OrderNew.CostPrice" type="text" placeholder="@ResourceWeb.LbCostPrice ...." class="form-control" maxlength="20" id="costPrice" readonly>
+                                        <span asp-validation-for="@Model.OrderNew.CostPrice" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-3">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.OrderNew.Price" for="exampleInputEmail1">@ResourceWeb.LbPrice</label>
+                                        <input asp-for="@Model.OrderNew.Price" type="text" placeholder="@ResourceWeb.LbPrice ...." class="form-control" maxlength="300" id="price" readonly>
+                                        <span asp-validation-for="@Model.OrderNew.Price" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.OrderNew.Addres" for="exampleInputEmail1">@ResourceWeb.LbAddres</label>
+                                        <input asp-for="@Model.OrderNew.Addres" type="text" placeholder="@ResourceWeb.LbAddres...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="@Model.OrderNew.Addres" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.OrderNew.Nouts" for="exampleInputEmail1">@ResourceWeb.LbNouts</label>
+                                        <input asp-for="@Model.OrderNew.Nouts" type="text" placeholder="@ResourceWeb.LbNouts ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="@Model.OrderNew.Nouts" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="checkbox margin-bottom-20">
+
+                            <div class="switch success"><input type="checkbox" asp-for="@Model.OrderNew.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWeb.lbCurrentState</label></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
+                    </form>
+                </div>
+                <!-- /.card-content -->
             </div>
-            <!-- /.card-content -->
+            <!-- /.box-content -->
         </div>
-        <!-- /.box-content -->
-    </div>
 
 
-    <div class="col-lg-6 col-xs-12">
-        <div class="box-content card white">
-            <h4 class="box-title">@ResourceWeb.lbOldeAndUserGide</h4>
-            <!-- /.box-title -->
-            <div class="card-content">
+        <div class="col-lg-6 col-xs-12">
+            <div class="box-content card white">
+                <h4 class="box-title">@ResourceWeb.lbOldeAndUserGide</h4>
+                <!-- /.box-title -->
+                <div class="card-content">
 
-                @*   <div class="form-group">
-                <img src="~/images/user gide/Product.png" width="1920" height="1077" />
-                </div> *@
+                    @*   <div class="form-group">
+                    <img src="~/images/user gide/Product.png" width="1920" height="1077" />
+                    </div> *@
 
 
+                </div>
+                <!-- /.card-content -->
             </div>
-            <!-- /.card-content -->
+            <!-- /.box-content -->
         </div>
-        <!-- /.box-content -->
     </div>
 </div>
 
@@ -205,8 +219,13 @@
                     data: { selectedCompanyId: selectedCompany, weight: weight },
                     success: function (data) {
                         console.log("AJAX success, data: ", data);
-                        $('#costPrice').val(data);
-                        calculatePrice();
+                        if (data) {
+                            $('#costPrice').val(data.costPrice);
+                            $('#price').val(data.price);
+                        } else {
+                            $('#costPrice').val('');
+                            $('#price').val('');
+                        }
                     },
                     error: function () {
                         alert('Error! Please try again.');
@@ -215,19 +234,19 @@
                 });
             }
 
-            function calculatePrice() {
-                const weight = parseFloat($('#weight').val());
-                const costPrice = parseFloat($('#costPrice').val());
+            // function calculatePrice() {
+            //     const weight = parseFloat($('#weight').val());
+            //     const costPrice = parseFloat($('#costPrice').val());
 
-                if (isNaN(weight) || isNaN(costPrice)) {
-                    console.log("Invalid weight or cost price");
-                    $('#price').val('');
-                    return;
-                }
+            //     if (isNaN(weight) || isNaN(costPrice)) {
+            //         console.log("Invalid weight or cost price");
+            //         $('#price').val('');
+            //         return;
+            //     }
 
-                const price = weight * costPrice;
-                $('#price').val(price);
-            }
+            //     const price = weight * costPrice;
+            //     $('#price').val(price);
+            // }
         });
     </script>
 }

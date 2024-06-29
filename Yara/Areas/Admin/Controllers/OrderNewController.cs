@@ -162,11 +162,11 @@ namespace Yara.Areas.Admin.Controllers
             {
                 if (weight <= 10)
                 {
-                    return Json(prices.CoPricePerkgUnder10);
+                    return Json(new { costPrice = prices.CoPricePerkgUnder10, price = prices.CoPricePerkgAbove10 });
                 }
                 else
                 {
-                    return Json(prices.CoPricePerkgAbove10);
+                    return Json(new { costPrice = prices.ClintPricePerkgUnder10, price = prices.ClintPricePerkgAbove10 });
                 }
             }
 
