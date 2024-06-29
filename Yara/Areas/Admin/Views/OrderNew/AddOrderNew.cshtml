@@ -249,7 +249,8 @@
                         console.log("AJAX success, data: ", data);
                         if (data) {
                             $('#costPrice').val(data.costPrice);
-                            $('#price').val(data.price);
+                            // $('#price').val(data.price);
+                            calculatePrice();
                         } else {
                             $('#costPrice').val('');
                             $('#price').val('');
@@ -262,19 +263,19 @@
                 });
             }
 
-            // function calculatePrice() {
-            //     const weight = parseFloat($('#weight').val());
-            //     const costPrice = parseFloat($('#costPrice').val());
+            function calculatePrice() {
+                const weight = parseFloat($('#weight').val());
+                const costPrice = parseFloat($('#costPrice').val());
 
-            //     if (isNaN(weight) || isNaN(costPrice)) {
-            //         console.log("Invalid weight or cost price");
-            //         $('#price').val('');
-            //         return;
-            //     }
+                if (isNaN(weight) || isNaN(costPrice)) {
+                    console.log("Invalid weight or cost price");
+                    $('#price').val('');
+                    return;
+                }
 
-            //     const price = weight * costPrice;
-            //     $('#price').val(price);
-            // }
+                const price = weight * costPrice;
+                $('#price').val(price);
+            }
         });
         var loadFile = function (event) {
             var image = document.getElementById('output');
