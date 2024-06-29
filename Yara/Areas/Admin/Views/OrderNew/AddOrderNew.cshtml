@@ -249,8 +249,8 @@
                         console.log("AJAX success, data: ", data);
                         if (data) {
                             $('#costPrice').val(data.costPrice);
-                            // $('#price').val(data.price);
-                            calculatePrice();
+                            $('#price').val(data.price);
+                            // calculatePrice();
                         } else {
                             $('#costPrice').val('');
                             $('#price').val('');
