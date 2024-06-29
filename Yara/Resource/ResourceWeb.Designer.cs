@@ -1627,11 +1627,29 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Receipt No.
+        /// </summary>
+        public static string ReceiptNo {
+            get {
+                return ResourceManager.GetString("ReceiptNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pricing has already been added to the region. Please check and try again later...!.
         /// </summary>
         public static string VLAreadoplceted {
             get {
                 return ResourceManager.GetString("VLAreadoplceted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The receipt voucher number has already been entered. Please verify and try again later...!.
+        /// </summary>
+        public static string VLCatchReceiptNoDoplceted {
+            get {
+                return ResourceManager.GetString("VLCatchReceiptNoDoplceted", resourceCulture);
             }
         }
         
@@ -1857,6 +1875,15 @@ namespace Yara.Resource {
         public static string VLMerchantNameDoplceted {
             get {
                 return ResourceManager.GetString("VLMerchantNameDoplceted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resived Mony.
+        /// </summary>
+        public static string VlResivedMony {
+            get {
+                return ResourceManager.GetString("VlResivedMony", resourceCulture);
             }
         }
         

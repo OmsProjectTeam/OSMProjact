@@ -92,9 +92,9 @@ namespace Infarstuructre.BL
             return MySlider;
         }
 
-		public List<TBViewOrderNew> GetAllDataentry(string IdOrderNew)
+		public List<TBViewOrderNew> GetAllDataentry(string DataEntry)
 		{
-			List<TBViewOrderNew> MySlider = dbcontext.ViewOrderNew.Where(a => a.DataEntry == IdOrderNew).Where(a => a.CurrentState == true).ToList();
+			List<TBViewOrderNew> MySlider = dbcontext.ViewOrderNew.Where(a => a.DataEntry == DataEntry).Where(a => a.CurrentState == true).ToList();
 			return MySlider;
 		}
 
