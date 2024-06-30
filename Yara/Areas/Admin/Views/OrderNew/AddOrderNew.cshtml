@@ -38,19 +38,22 @@
                     <div class="row small-spacing">
                         <div class="col-sm-6">
                             <div class="form-group">
+                                <label asp-for="@Model.OrderNew.DescriptionOrder">@ResourceWeb.LbDescriptionOrder</label>
+                                <input asp-for="@Model.OrderNew.DescriptionOrder" type="text" placeholder="@ResourceWeb.LbDescriptionOrder ...." class="form-control" maxlength="300">
+                                <span asp-validation-for="@Model.OrderNew.DescriptionOrder" class="text-danger"></span>
+                                <span style="color:red"><strong>@TempData["DescriptionOrder"]</strong></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
                                 <label asp-for="@Model.OrderNew.IdInformationCompanies">@ResourceWeb.LbDescriptionClint</label>
                                 <select class="form-control select2_1" asp-for="@Model.OrderNew.IdInformationCompanies" asp-items="@(new SelectList(ViewBag.ShippingPrice, "IdInformationCompanies", "NikeNAme"))" id="selectedcompany"></select>
                                 <span asp-validation-for="@Model.OrderNew.IdInformationCompanies" class="text-danger"></span>
-                                <span style="color:red"><strong>@TempData["Customer"]</strong></span>
+                           
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label asp-for="@Model.Transaction.ToCurrencyID">@ResourceWeb.LBMyCurrenciesExchangeRates</label>
-                                <select class="form-control select2_1" asp-for="@Model.Transaction.ToCurrencyID" asp-items="@(new SelectList(ViewBag.Currenc, "IdCurrenciesExchangeRates", "Country"))" id="toCurrency"></select>
-                                <span asp-validation-for="@Model.Transaction.ToCurrencyID" class="text-danger"></span>
-                            </div>
-                        </div>
+                     
                     </div>
 
                     <div class="row small-spacing">
@@ -59,20 +62,10 @@
                                 <label asp-for="@Model.OrderNew.IdClintWitheDeliveryTariffs">@ResourceWeb.LbDescriptionClint</label>
                                 <select id="merchant-select" class="form-control select2_1" asp-for="@Model.OrderNew.IdClintWitheDeliveryTariffs" asp-items="@(new SelectList(ViewBag.ClintWith, "IdClintWitheDeliveryTariffs", "DescriptionClint"))"></select>
                                 <span asp-validation-for="@Model.OrderNew.IdClintWitheDeliveryTariffs" class="text-danger"></span>
-                                <span style="color:red"><strong>@TempData["Customer"]</strong></span>
+                               
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label asp-for="@Model.OrderNew.IdorderCases">@ResourceWeb.LbOrderCase</label>
-                                <select id="city-delivery-tariffs" class="form-control select2_1" asp-for="@Model.OrderNew.IdorderCases" asp-items="@(new SelectList(ViewBag.OrderCase, "Id", "Description"))"></select>
-                                <span asp-validation-for="@Model.OrderNew.IdorderCases" class="text-danger"></span>
-                                <span style="color:red"><strong>@TempData["Customer"]</strong></span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row small-spacing">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label asp-for="@Model.OrderNew.IdorderStatus">@ResourceWeb.LBOrderStatus</label>
@@ -80,9 +73,18 @@
                                 <span asp-validation-for="@Model.OrderNew.IdorderStatus" class="text-danger"></span>
                             </div>
                         </div>
+                       
                     </div>
 
                     <div class="row small-spacing">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="@Model.OrderNew.IdorderCases">@ResourceWeb.LbOrderCase</label>
+                                <select id="city-delivery-tariffs" class="form-control select2_1" asp-for="@Model.OrderNew.IdorderCases" asp-items="@(new SelectList(ViewBag.OrderCase, "Id", "Description"))"></select>
+                                <span asp-validation-for="@Model.OrderNew.IdorderCases" class="text-danger"></span>
+                             
+                            </div>
+                        </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label asp-for="@Model.OrderNew.OrderDate">@ResourceWeb.LbOrderDate</label>
@@ -90,22 +92,34 @@
                                 <span asp-validation-for="@Model.OrderNew.OrderDate" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label asp-for="@Model.OrderNew.DescriptionOrder">@ResourceWeb.LbDescriptionOrder</label>
-                                <input asp-for="@Model.OrderNew.DescriptionOrder" type="text" placeholder="@ResourceWeb.LbDescriptionOrder ...." class="form-control" maxlength="300">
-                                <span asp-validation-for="@Model.OrderNew.DescriptionOrder" class="text-danger"></span>
-                                <span style="color:red"><strong>@TempData["DescriptionOrder"]</strong></span>
-                            </div>
-                        </div>
+
+
                     </div>
 
                     <div class="row small-spacing">
                         <div class="col-sm-6">
                             <div class="form-group">
+                                <label asp-for="@Model.Transaction.ToCurrencyID">@ResourceWeb.LBMyCurrenciesExchangeRates</label>
+                                <select class="form-control select2_1" asp-for="@Model.Transaction.ToCurrencyID" asp-items="@(new SelectList(ViewBag.Currenc, "IdCurrenciesExchangeRates", "Country"))" id="toCurrency"></select>
+                                <span asp-validation-for="@Model.Transaction.ToCurrencyID" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
                                 <label asp-for="@Model.OrderNew.Weight">@ResourceWeb.LbWeight</label>
                                 <input asp-for="@Model.OrderNew.Weight" type="text" placeholder="@ResourceWeb.LbWeight ...." class="form-control" maxlength="25" id="weight">
                                 <span asp-validation-for="@Model.OrderNew.Weight" class="text-danger"></span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="row small-spacing">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="@Model.OrderNew.Addres">@ResourceWeb.LbAddres</label>
+                                <input asp-for="@Model.OrderNew.Addres" type="text" placeholder="@ResourceWeb.LbAddres ...." class="form-control" maxlength="300">
+                                <span asp-validation-for="@Model.OrderNew.Addres" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -131,20 +145,14 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label asp-for="@Model.OrderNew.Addres">@ResourceWeb.LbAddres</label>
-                                <input asp-for="@Model.OrderNew.Addres" type="text" placeholder="@ResourceWeb.LbAddres ...." class="form-control" maxlength="300">
-                                <span asp-validation-for="@Model.OrderNew.Addres" class="text-danger"></span>
+                                <label asp-for="@Model.OrderNew.Price">Exchanged Price</label>
+                                <input asp-for="@Model.OrderNew.Price" type="text" placeholder="@ResourceWeb.LbPrice ...." class="form-control" maxlength="300" id="exchangePrice" readonly>                                <span asp-validation-for="@Model.OrderNew.Price" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
 
                     <div class="row small-spacing">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label asp-for="@Model.OrderNew.Price">Exchanged Price</label>
-                                <input asp-for="@Model.OrderNew.Price" type="text" placeholder="@ResourceWeb.LbPrice ...." class="form-control" maxlength="300" id="exchangePrice" readonly>                                <span asp-validation-for="@Model.OrderNew.Price" class="text-danger"></span>
-                            </div>
-                        </div>
+                       
                     </div>
 
                     <div class="row small-spacing">
@@ -157,9 +165,12 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label asp-for="@Model.OrderNew.CatchReceiptNo">@ResourceWebAr.LbCostPrice</label>
-                                <input asp-for="@Model.OrderNew.CatchReceiptNo" type="text" placeholder="@ResourceWebAr.LbCostPrice ...." class="form-control" maxlength="25">
+                                <label asp-for="@Model.OrderNew.CatchReceiptNo">@ResourceWeb.LbCatchReceiptNo</label>
+                                <input asp-for="@Model.OrderNew.CatchReceiptNo" type="text" placeholder="@ResourceWeb.LbCatchReceiptNo ...." class="form-control" maxlength="25">
                                 <span asp-validation-for="@Model.OrderNew.CatchReceiptNo" class="text-danger"></span>
+                                <span style="color:red"><strong>@TempData["CatchReceiptNo"]</strong></span>
+
+                             
                             </div>
                         </div>
                     </div>
@@ -188,7 +199,6 @@
             </div>
         </div>
     </div>
-
     <div class="col-lg-6 col-xs-12">
         <div class="box-content card white">
             <h4 class="box-title">@ResourceWeb.lbOldeAndUserGide</h4>

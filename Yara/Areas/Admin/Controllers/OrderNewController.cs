@@ -129,14 +129,22 @@ namespace Yara.Areas.Admin.Controllers
                         TempData["Message"] = ResourceWeb.VLimageuplode;
                         return Redirect(returnUrl);
                     }
-                    //if (dbcontext.TBInformationCompaniess.Where(a => a.CompanyName == slider.CompanyName).ToList().Count > 0)
-                    //{
-                    //    var PhotoNAme = slider.Photo;
-                    //    var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+                    if (dbcontext.TBOrderNews.Where(a => a.CatchReceiptNo == slider.CatchReceiptNo).ToList().Count > 0)
+                    {
+                        var PhotoNAme = slider.Photo;
+                        var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
 
-                    //    TempData["CompanyName"] = ResourceWeb.VLCompanyNameDoplceted;
-                    //    return RedirectToAction("AddEditInformationCompanies", model);
-                    //}
+                        TempData["CatchReceiptNo"] = ResourceWeb.VLCatchReceiptNoDoplceted;
+                        return Redirect(returnUrl);
+                    }
+                    if (dbcontext.TBOrderNews.Where(a => a.DescriptionOrder == slider.DescriptionOrder).ToList().Count > 0)
+                    {
+                        var PhotoNAme = slider.Photo;
+                        var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+
+                        TempData["DescriptionOrder"] = ResourceWeb.VLDescriptionOrderDoplceted;
+                        return Redirect(returnUrl);
+                    }
 
                     var reqwest = iOrderNew.saveData(slider);
                     if (reqwest == true)
