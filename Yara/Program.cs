@@ -124,6 +124,7 @@ builder.Services.AddScoped<IITypeSystemDelivery, CLSTBTypeSystemDelivery>();
 builder.Services.AddScoped<IIClintWitheDeliveryTariffs, CLSTBClintWitheDeliveryTariffs>();
 builder.Services.AddScoped<IIOrderNew, CLSTBOrderNew>();
 builder.Services.AddScoped<IIUser, CLSUser>();
+builder.Services.AddScoped<IIPaidings, CLSTBPaidings>();
 
 
 

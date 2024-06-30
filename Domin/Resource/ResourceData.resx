@@ -243,6 +243,12 @@
   <data name="VlPhoneCompany" xml:space="preserve">
     <value>Please include the phone number for the process to complete successfully....!</value>
   </data>
+  <data name="VlReceiptNo" xml:space="preserve">
+    <value>Please include a bond number for the process to complete successfully...!</value>
+  </data>
+  <data name="VlReceiptStatment" xml:space="preserve">
+    <value>Please include the receipt statement for the process to be completed successfully....!</value>
+  </data>
   <data name="VlTitleShipping" xml:space="preserve">
     <value>Please include the appropriate address in the shipping category for the process to complete successfully...!</value>
   </data>
