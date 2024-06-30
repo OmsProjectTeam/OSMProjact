@@ -439,6 +439,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please include a bond number for the process to complete successfully...!.
+        /// </summary>
+        public static string VlReceiptNo {
+            get {
+                return ResourceManager.GetString("VlReceiptNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please include the receipt statement for the process to be completed successfully....!.
         /// </summary>
         public static string VlReceiptStatment {

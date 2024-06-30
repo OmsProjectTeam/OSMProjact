@@ -1231,6 +1231,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nouts Order.
+        /// </summary>
+        public static string LbNoutsOrder {
+            get {
+                return ResourceManager.GetString("LbNoutsOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Old photo.
         /// </summary>
         public static string lbOldeAndUserGide {

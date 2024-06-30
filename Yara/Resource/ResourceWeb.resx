@@ -507,6 +507,9 @@
   <data name="LbNouts" xml:space="preserve">
     <value>Noute</value>
   </data>
+  <data name="LbNoutsOrder" xml:space="preserve">
+    <value>Nouts Order</value>
+  </data>
   <data name="lbOldeAndUserGide" xml:space="preserve">
     <value>Old photo</value>
   </data>

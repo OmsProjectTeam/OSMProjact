@@ -50,6 +50,10 @@ namespace Infarstuructre.BL
             {
                 dbcontext.Add<TBPaing>(savee);
                 dbcontext.SaveChanges();
+
+
+
+
                 return true;
             }
             catch (Exception)

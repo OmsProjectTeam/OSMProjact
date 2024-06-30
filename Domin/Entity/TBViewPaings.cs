@@ -17,8 +17,8 @@ namespace Domin.Entity
         public string TitleShipping { get; set; }
         public string code { get; set; }
         public decimal Price { get; set; }
-        public decimal NoutsOrder { get; set; }
-        public decimal CatchReceiptNo { get; set; }
+        public string NoutsOrder { get; set; }
+        public string CatchReceiptNo { get; set; }
         public bool IsPaid { get; set; }
         public decimal ResivedMony { get; set; }
         public string Photo { get; set; }
