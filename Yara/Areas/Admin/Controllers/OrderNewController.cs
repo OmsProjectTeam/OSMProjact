@@ -45,6 +45,8 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListViewOrderNew = iOrderNew.GetAll();
             return View(vmodel);
         }
+
+
         public IActionResult AddOrderNew(int? IdOrderNew)
         {
             ViewBag.OrderCase = iOrderCase.GetAll();
@@ -239,20 +241,14 @@ namespace Yara.Areas.Admin.Controllers
             .Rate;
             //var eeee=   exchangeRate.FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?.Rate;
 
-
             //        var clintDeliveryTariff = dbcontext.TBExchangeRates
             //.Where(t => t.IdCurrenciesExchangeRates == fromCurrencyId)?.Rate;
 
             //      var towr= dbcontext.TBExchangeRates
             //.Where(t => t.ToIdCurrenciesExchangeRates == toCurrencyId);
-
-
             //int fromCurrencyId = 1;
             var prices = iShippingPrice.GetAll()
                 .FirstOrDefault(x => x.IdInformationCompanies == selectedCompanyId);
-
-            
-
             if (prices != null)
             {
                 if (weight <= 10)
@@ -277,10 +273,5 @@ namespace Yara.Areas.Admin.Controllers
 
             return Json(null);
         }
-
-
-       
-
-
     }
 }

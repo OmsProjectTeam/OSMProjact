@@ -2586,10 +2586,13 @@ namespace Infarstuructre.Migrations
                     b.ToTable("TBOrderNews");
                 });
 
-            modelBuilder.Entity("Domin.Entity.TBPaings", b =>
+            modelBuilder.Entity("Domin.Entity.TBPaing", b =>
                 {
-                    b.Property<string>("IdPaings")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("IdPaings")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPaings"));
 
                     b.Property<bool>("CurrentState")
                         .ValueGeneratedOnAdd()
@@ -2605,27 +2608,31 @@ namespace Infarstuructre.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
 
-                    b.Property<string>("IdCustomer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("IdOrderNew")
                         .HasColumnType("int");
 
-                    b.Property<string>("ReceiptImg")
+                    b.Property<string>("Photo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("ReceiptDate")
+                        .HasColumnType("date");
 
                     b.Property<string>("ReceiptNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiptStatment")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<decimal>("ResivedMony")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("IdPaings");
 
-                    b.ToTable("Paings");
+                    b.ToTable("TBPaings");
                 });
 
             modelBuilder.Entity("Domin.Entity.TBShippingPrice", b =>

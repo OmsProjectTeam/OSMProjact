@@ -178,6 +178,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Paing.
+        /// </summary>
+        public static string LBAddPaing {
+            get {
+                return ResourceManager.GetString("LBAddPaing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string LbAddres {
@@ -1222,6 +1231,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nouts Order.
+        /// </summary>
+        public static string LbNoutsOrder {
+            get {
+                return ResourceManager.GetString("LbNoutsOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Old photo.
         /// </summary>
         public static string lbOldeAndUserGide {
@@ -1303,6 +1321,24 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Paiding Informations.
+        /// </summary>
+        public static string LBPaidingInformations {
+            get {
+                return ResourceManager.GetString("LBPaidingInformations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paidings.
+        /// </summary>
+        public static string LBPaidings {
+            get {
+                return ResourceManager.GetString("LBPaidings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to phone.
         /// </summary>
         public static string LbPhoneCompany {
@@ -1380,6 +1416,24 @@ namespace Yara.Resource {
         public static string LBreceipt_no {
             get {
                 return ResourceManager.GetString("LBreceipt_no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receipt Statment.
+        /// </summary>
+        public static string LbReceiptStatment {
+            get {
+                return ResourceManager.GetString("LbReceiptStatment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resived Money.
+        /// </summary>
+        public static string LbResivedMony {
+            get {
+                return ResourceManager.GetString("LbResivedMony", resourceCulture);
             }
         }
         
@@ -1470,6 +1524,15 @@ namespace Yara.Resource {
         public static string LbTaskStatus {
             get {
                 return ResourceManager.GetString("LbTaskStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title Shipping.
+        /// </summary>
+        public static string LbTitleShipping {
+            get {
+                return ResourceManager.GetString("LbTitleShipping", resourceCulture);
             }
         }
         
@@ -1875,6 +1938,15 @@ namespace Yara.Resource {
         public static string VLMerchantNameDoplceted {
             get {
                 return ResourceManager.GetString("VLMerchantNameDoplceted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The bond number has already been entered. Please check and try again later...!.
+        /// </summary>
+        public static string VLReceiptNoDoplceted {
+            get {
+                return ResourceManager.GetString("VLReceiptNoDoplceted", resourceCulture);
             }
         }
         

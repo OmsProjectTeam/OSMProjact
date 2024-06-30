@@ -4,150 +4,161 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<div class="row small-spacing">
-    <div class="col-lg-12 col-xs-12">
-        <div class="box-content card white">
-            <h4 class="box-title">@ResourceWeb.LBEmageSise</h4>
-
-            <div class="card-content">
-                <form role="form" method="post" asp-controller="InformationCompanies" asp-action="Save" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <input type="hidden" asp-for="@Model.InformationCompanies.DataEntry" class="form-control" value="@User.Identity.Name">
-                        <input type="hidden" asp-for="@Model.InformationCompanies.IdInformationCompanies" class="form-control">
-                        <input type="hidden" asp-for="@Model.InformationCompanies.DateTimeEntry" value="@DateTime.Now">
-                        <input type="hidden" asp-for="@Model.returnUrl" id="url">
-                    </div>
-
-                    <div class="card-content">
-                        <div class="row small-spacing">
-                            <div class="col-12 col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.InformationCompanies.IdUserIdentity" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
-                                    <select id="merchant-select" class="form-control select2_1" asp-for="@Model.InformationCompanies.IdUserIdentity" asp-items="@(new SelectList(ViewBag.user, "Id", "Name"))">
-                                    </select>
-                                    <span asp-validation-for="@Model.InformationCompanies.IdUserIdentity" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.InformationCompanies.IdTypesCompanies" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
-                                    <select id="merchant-select" class="form-control" asp-for="@Model.InformationCompanies.IdTypesCompanies" asp-items="@(new SelectList(ViewBag.Categorie, "IdTypesCompanies", "TypesCompanies"))">
-                                    </select>
-                                    <span asp-validation-for="@Model.InformationCompanies.IdTypesCompanies" class="text-danger"></span>
-                                </div>
-                            </div>
-                        
-                            <div class="col-12 col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.InformationCompanies.CompanyName" for="exampleInputEmail1">@ResourceWeb.LbCompanyName</label>
-                                    <input asp-for="@Model.InformationCompanies.CompanyName" type="text" placeholder="@ResourceWeb.LbCompanyName ...." class="form-control" maxlength="300">
-                                    <span asp-validation-for="@Model.InformationCompanies.CompanyName" class="text-danger"></span>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.InformationCompanies.PhoneCompany" for="exampleInputEmail1">@ResourceWeb.LbPhoneCompany</label>
-                                    <input asp-for="@Model.InformationCompanies.PhoneCompany" type="text" placeholder="@ResourceWeb.LbPhoneCompany ...." class="form-control" maxlength="20">
-                                    <span asp-validation-for="@Model.InformationCompanies.PhoneCompany" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<div class="col-xs-12">
+    <div class="box-content">
+        <ul class="list-inline">
+            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LbAddEditInformationCompanies</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
+            <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
+            <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
+        </ul>
+        <div class="row small-spacing">
+            <div class="col-lg-12 col-xs-12">
+                <div class="box-content card white">
+                    <h4 class="box-title">@ResourceWeb.LBEmageSise</h4>
 
                     <div class="card-content">
-                        <div class="row small-spacing">
-                            <div class="col-12 col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.InformationCompanies.PhoneCompanySecand" for="exampleInputEmail1">@ResourceWeb.LbPhoneCompanySecand</label>
-                                    <input asp-for="@Model.InformationCompanies.PhoneCompanySecand" type="text" placeholder="@ResourceWeb.LbPhoneCompanySecand ...." class="form-control" maxlength="20">
-                                    <span asp-validation-for="@Model.InformationCompanies.PhoneCompanySecand" class="text-danger"></span>
+                        <form role="form" method="post" asp-controller="InformationCompanies" asp-action="Save" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <input type="hidden" asp-for="@Model.InformationCompanies.DataEntry" class="form-control" value="@User.Identity.Name">
+                                <input type="hidden" asp-for="@Model.InformationCompanies.IdInformationCompanies" class="form-control">
+                                <input type="hidden" asp-for="@Model.InformationCompanies.DateTimeEntry" value="@DateTime.Now">
+                                <input type="hidden" asp-for="@Model.returnUrl" id="url">
+                            </div>
+
+                            <div class="card-content">
+                                <div class="row small-spacing">
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.InformationCompanies.IdUserIdentity" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
+                                            <select id="merchant-select" class="form-control select2_1" asp-for="@Model.InformationCompanies.IdUserIdentity" asp-items="@(new SelectList(ViewBag.user, "Id", "Name"))">
+                                            </select>
+                                            <span asp-validation-for="@Model.InformationCompanies.IdUserIdentity" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.InformationCompanies.IdTypesCompanies" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
+                                            <select id="merchant-select" class="form-control" asp-for="@Model.InformationCompanies.IdTypesCompanies" asp-items="@(new SelectList(ViewBag.Categorie, "IdTypesCompanies", "TypesCompanies"))">
+                                            </select>
+                                            <span asp-validation-for="@Model.InformationCompanies.IdTypesCompanies" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.InformationCompanies.CompanyName" for="exampleInputEmail1">@ResourceWeb.LbCompanyName</label>
+                                            <input asp-for="@Model.InformationCompanies.CompanyName" type="text" placeholder="@ResourceWeb.LbCompanyName ...." class="form-control" maxlength="300">
+                                            <span asp-validation-for="@Model.InformationCompanies.CompanyName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.InformationCompanies.PhoneCompany" for="exampleInputEmail1">@ResourceWeb.LbPhoneCompany</label>
+                                            <input asp-for="@Model.InformationCompanies.PhoneCompany" type="text" placeholder="@ResourceWeb.LbPhoneCompany ...." class="form-control" maxlength="20">
+                                            <span asp-validation-for="@Model.InformationCompanies.PhoneCompany" class="text-danger"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-12 col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.InformationCompanies.EmailCompany" for="exampleInputEmail1">@ResourceWeb.LbEmailCompany</label>
-                                    <input asp-for="@Model.InformationCompanies.EmailCompany" type="email" placeholder="@ResourceWeb.LbEmailCompany ...." class="form-control" maxlength="300">
-                                    <span asp-validation-for="@Model.InformationCompanies.EmailCompany" class="text-danger"></span>
+                            <div class="card-content">
+                                <div class="row small-spacing">
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.InformationCompanies.PhoneCompanySecand" for="exampleInputEmail1">@ResourceWeb.LbPhoneCompanySecand</label>
+                                            <input asp-for="@Model.InformationCompanies.PhoneCompanySecand" type="text" placeholder="@ResourceWeb.LbPhoneCompanySecand ...." class="form-control" maxlength="20">
+                                            <span asp-validation-for="@Model.InformationCompanies.PhoneCompanySecand" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.InformationCompanies.EmailCompany" for="exampleInputEmail1">@ResourceWeb.LbEmailCompany</label>
+                                            <input asp-for="@Model.InformationCompanies.EmailCompany" type="email" placeholder="@ResourceWeb.LbEmailCompany ...." class="form-control" maxlength="300">
+                                            <span asp-validation-for="@Model.InformationCompanies.EmailCompany" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.InformationCompanies.AddresCompany" for="exampleInputEmail1">@ResourceWeb.LbAddresCompany</label>
+                                            <input asp-for="@Model.InformationCompanies.AddresCompany" type="text" placeholder="@ResourceWeb.LbAddresCompany ...." class="form-control" maxlength="300">
+                                            <span asp-validation-for="@Model.InformationCompanies.AddresCompany" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.InformationCompanies.NikeNAme" for="exampleInputEmail1">@ResourceWeb.LbNikeNAme</label>
+                                            <input asp-for="@Model.InformationCompanies.NikeNAme" type="text" placeholder="@ResourceWeb.LbNikeNAme ...." class="form-control" maxlength="300">
+                                            <span asp-validation-for="@Model.InformationCompanies.NikeNAme" class="text-danger"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-12 col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.InformationCompanies.AddresCompany" for="exampleInputEmail1">@ResourceWeb.LbAddresCompany</label>
-                                    <input asp-for="@Model.InformationCompanies.AddresCompany" type="text" placeholder="@ResourceWeb.LbAddresCompany ...." class="form-control" maxlength="300">
-                                    <span asp-validation-for="@Model.InformationCompanies.AddresCompany" class="text-danger"></span>
+                            <div class="card-content">
+                                <div class="row small-spacing">
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.InformationCompanies.CompanyDescription" for="exampleInputEmail1">@ResourceWeb.LbCompanyDescription</label>
+                                            <textarea asp-for="@Model.InformationCompanies.CompanyDescription" type="text" placeholder="@ResourceWeb.LbCompanyDescription ...." class="form-control" maxlength="2000" rows="5"></textarea>
+                                            <span asp-validation-for="@Model.InformationCompanies.CompanyDescription" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.InformationCompanies.CompanyURl" for="exampleInputEmail1">@ResourceWeb.LbCompanyURl</label>
+                                            <input asp-for="@Model.InformationCompanies.CompanyURl" type="text" placeholder="@ResourceWeb.LbCompanyURl ...." class="form-control" maxlength="500">
+                                            <span asp-validation-for="@Model.InformationCompanies.CompanyURl" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.InformationCompanies.IdCitu" for="exampleInputEmail1">@ResourceWeb.LbCity</label>
+                                            <select class="form-control" asp-for="@Model.InformationCompanies.IdCitu" asp-items="@(new SelectList(ViewBag.City, "Id", "Description"))" id="city-select"></select>
+                                            <span asp-validation-for="@Model.InformationCompanies.IdCitu" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.InformationCompanies.IdArea" for="exampleInputEmail1">@ResourceWeb.LBLbAreaName</label>
+                                            <select class="form-control" asp-for="@Model.InformationCompanies.IdArea" asp-items="@(new SelectList(ViewBag.Area, "id", "Description"))" id="area-select"></select>
+                                            <span asp-validation-for="@Model.InformationCompanies.IdArea" class="text-danger"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-12 col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.InformationCompanies.NikeNAme" for="exampleInputEmail1">@ResourceWeb.LbNikeNAme</label>
-                                    <input asp-for="@Model.InformationCompanies.NikeNAme" type="text" placeholder="@ResourceWeb.LbNikeNAme ...." class="form-control" maxlength="300">
-                                    <span asp-validation-for="@Model.InformationCompanies.NikeNAme" class="text-danger"></span>
+                            <div class="card-content">
+                                <div class="row small-spacing">
+                                    <div class="col-xs-4">
+                                        <div class="checkbox margin-bottom-20">
+                                            <div class="switch success"><input type="checkbox" asp-for="@Model.InformationCompanies.Active" id="switch-2"><label for="switch-2">@ResourceWeb.LbActive</label></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                <p><input type="file" accept="image/*" name="Files" id="file" onchange="loadFile(event)" style="display: none;"></p>
+                                <p><label class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" for="file" style="cursor: pointer;" name="Files">@ResourceWeb.LBUpload_image</label></p>
+                                <p><img id="output" width="450" height="300" /></p>
+                                <span style="color:red"><strong>@TempData["Message"]</strong></span>
+                            </div>
+                            <div class="checkbox margin-bottom-20">
+                                <div class="switch success"><input type="checkbox" asp-for="@Model.InformationCompanies.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWeb.lbCurrentState</label></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
+                        </form>
                     </div>
-
-                    <div class="card-content">
-                        <div class="row small-spacing">
-                            <div class="col-12 col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.InformationCompanies.CompanyDescription" for="exampleInputEmail1">@ResourceWeb.LbCompanyDescription</label>
-                                    <textarea asp-for="@Model.InformationCompanies.CompanyDescription" type="text" placeholder="@ResourceWeb.LbCompanyDescription ...." class="form-control" maxlength="2000" rows="5"></textarea>
-                                    <span asp-validation-for="@Model.InformationCompanies.CompanyDescription" class="text-danger"></span>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.InformationCompanies.CompanyURl" for="exampleInputEmail1">@ResourceWeb.LbCompanyURl</label>
-                                    <input asp-for="@Model.InformationCompanies.CompanyURl" type="text" placeholder="@ResourceWeb.LbCompanyURl ...." class="form-control" maxlength="500">
-                                    <span asp-validation-for="@Model.InformationCompanies.CompanyURl" class="text-danger"></span>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.InformationCompanies.IdCitu" for="exampleInputEmail1">@ResourceWeb.LbCity</label>
-                                    <select class="form-control" asp-for="@Model.InformationCompanies.IdCitu" asp-items="@(new SelectList(ViewBag.City, "Id", "Description"))" id="city-select"></select>
-                                    <span asp-validation-for="@Model.InformationCompanies.IdCitu" class="text-danger"></span>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-sm-3">
-                                <div class="form-group">
-                                    <label asp-for="@Model.InformationCompanies.IdArea" for="exampleInputEmail1">@ResourceWeb.LBLbAreaName</label>
-                                    <select class="form-control" asp-for="@Model.InformationCompanies.IdArea" asp-items="@(new SelectList(ViewBag.Area, "id", "Description"))" id="area-select"></select>
-                                    <span asp-validation-for="@Model.InformationCompanies.IdArea" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-content">
-                        <div class="row small-spacing">
-                            <div class="col-xs-4">
-                                <div class="checkbox margin-bottom-20">
-                                    <div class="switch success"><input type="checkbox" asp-for="@Model.InformationCompanies.Active" id="switch-2"><label for="switch-2">@ResourceWeb.LbActive</label></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <p><input type="file" accept="image/*" name="Files" id="file" onchange="loadFile(event)" style="display: none;"></p>
-                        <p><label class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" for="file" style="cursor: pointer;" name="Files">@ResourceWeb.LBUpload_image</label></p>
-                        <p><img id="output" width="450" height="300" /></p>
-                        <span style="color:red"><strong>@TempData["Message"]</strong></span>
-                    </div>
-                    <div class="checkbox margin-bottom-20">
-                        <div class="switch success"><input type="checkbox" asp-for="@Model.InformationCompanies.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWeb.lbCurrentState</label></div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -182,7 +193,7 @@
                         $('input[name="InformationCompanies.PhoneCompany"]').val(data.phoneCompany);
                         $('input[name="InformationCompanies.PhoneCompanySecand"]').val(data.phoneCompanySecand);
                         $('input[name="InformationCompanies.EmailCompany"]').val(data.emailCompany);
-                     
+
                     });
                 }
             });
