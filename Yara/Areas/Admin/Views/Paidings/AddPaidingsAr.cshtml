@@ -1,15 +1,15 @@
 ﻿@model ViewmMODeElMASTER
 @{
     ViewData["Title"] = ResourceWebAr.LBAddPaing;
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminAr.cshtml";
 }
 
 <div class="row small-spacing">
     <div class="box-content">
         <ul class="list-inline">
             <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWebAr.LBAddPaing</button></a></li>/
-            <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="IndexAr"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
-            <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="IndexAr"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
+            <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
             <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
             <br>
             <br>
@@ -31,42 +31,53 @@
                         </div>
                         <div class="card-content">
                             <div class="row small-spacing">
-                                <div class="col-xs-4">
-                                    <div class="form-group ">
-                                        <label asp-for="@Model.Paing.IdOrderNew" for="exampleInputEmail1">@ResourceWebAr.LBMyOrder</label>
-                                        <input asp-for="@Model.Paing.IdOrderNew" type="date" placeholder="@ResourceWebAr.LBMyOrder ...." class="form-control" maxlength="300">
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Paing.IdOrderNew">@ResourceWebAr.LbDescriptionClint</label>
+                                        <select class="form-control select2_1" asp-for="@Model.Paing.IdOrderNew" asp-items="@(new SelectList(ViewBag.Order, "IdOrderNew", "DescriptionOrder"))" id="selectedcompany"></select>
                                         <span asp-validation-for="@Model.Paing.IdOrderNew" class="text-danger"></span>
+
                                     </div>
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="col-12 col-sm-4">
                                     <div class="form-group ">
                                         <label asp-for="@Model.Paing.ReceiptNo" for="exampleInputEmail1">@ResourceWebAr.LBreceipt_no</label>
                                         <input asp-for="@Model.Paing.ReceiptNo" type="text" placeholder="@ResourceWebAr.LBreceipt_no ...." class="form-control" maxlength="300">
                                         <span asp-validation-for="@Model.Paing.ReceiptNo" class="text-danger"></span>
-                                        <span style="color:red"><strong>@TempData["DescriptionOrder"]</strong></span>
+                                        <span style="color:red"><strong>@TempData["ReceiptNo"]</strong></span>
 
 
                                     </div>
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="col-12 col-sm-4">
                                     <div class="form-group ">
-                                        <label asp-for="@Model.Paing.ReceiptStatment" for="exampleInputEmail1">@ResourceWebAr.LbReceiptStatment</label>
-                                        <input asp-for="@Model.Paing.ReceiptStatment" type="text" placeholder="@ResourceWebAr.LbReceiptStatment ...." class="form-control" maxlength="25" id="weight">
-                                        <span asp-validation-for="@Model.Paing.ReceiptStatment" class="text-danger"></span>
-
+                                        <label asp-for="@Model.Paing.ReceiptDate" for="exampleInputEmail1">@ResourceWebAr.LBreceipt_dt</label>
+                                        <input asp-for="@Model.Paing.ReceiptDate" type="date" placeholder="@ResourceWebAr.LBreceipt_dt ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="@Model.Paing.ReceiptDate" class="text-danger"></span>
                                     </div>
                                 </div>
+
+
 
                             </div>
 
                         </div>
+
                         <div class="card-content">
                             <div class="row small-spacing">
-                                <div class="col-12 col-sm-3">
+                                <div class="col-12 col-sm-2">
                                     <div class="form-group ">
-                                        <label asp-for="@Model.Paing.ReceiptDate" for="exampleInputEmail1">@ResourceWebAr.LBreceipt_dt</label>
-                                        <input asp-for="@Model.Paing.ReceiptDate" type="text" placeholder="@ResourceWebAr.LBreceipt_dt ...." class="form-control" maxlength="20" id="costPrice" >
-                                        <span asp-validation-for="@Model.Paing.ReceiptDate" class="text-danger"></span>
+                                        <label asp-for="@Model.Paing.ResivedMony" for="exampleInputEmail1">@ResourceWebAr.LbResivedMony</label>
+                                        <input asp-for="@Model.Paing.ResivedMony" type="text" placeholder="@ResourceWebAr.LbResivedMony ...." class="form-control" maxlength="25" id="weight">
+                                        <span asp-validation-for="@Model.Paing.ResivedMony" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-10">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.Paing.ReceiptStatment" for="exampleInputEmail1">@ResourceWebAr.LbReceiptStatment</label>
+                                        <textarea asp-for="@Model.Paing.ReceiptStatment" placeholder="@ResourceWebAr.LbReceiptStatment ...." class="form-control" maxlength="300" id="costPrice" rows="5"></textarea>
+                                        <span asp-validation-for="@Model.Paing.ReceiptStatment" class="text-danger"></span>
 
                                     </div>
                                 </div>
@@ -84,7 +95,7 @@
                         </div>
                         <div class="checkbox margin-bottom-20">
 
-                            <div class="switch success"><input type="checkbox" asp-for="@Model.Paing.CurrentState" id="switch-2"><label for="switch-2">IsPaid</label></div>
+                            <div class="switch success"><input type="checkbox" asp-for="@Model.Paing.CurrentState" id="switch-2" checked><label for="switch-2">@ResourceWebAr.lbCurrentState</label></div>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWebAr.lbSave</button>
@@ -122,7 +133,32 @@
     <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
     <script src="~/Admin/assets/plugin/multiselect/multiselect.min.js"></script>
     <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+    <script>
+        $("#url").val(window.location.href);
+    </script>
+    <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
 
+    <!-- Multi Select -->
+    <script src="~/Admin/assets/plugin/multiselect/multiselect.min.js"></script>
+    <!-- تضمين مكتبة jQuery (إذا لم تكن مضمنة بالفعل) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- تضمين مكتبة Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2_1').select2({
+                placeholder: "Select an option",
+                allowClear: true
+            });
+        });
+    </script>
+    <script>
         var loadFile = function (event) {
             var image = document.getElementById('output');
             image.src = URL.createObjectURL(event.target.files[0]);

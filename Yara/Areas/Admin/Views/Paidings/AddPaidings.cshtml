@@ -31,7 +31,7 @@
                         </div>
                         <div class="card-content">
                             <div class="row small-spacing">
-                                <div class="col-12 col-sm-3">
+                                <div class="col-12 col-sm-4">
                                     <div class="form-group">
                                         <label asp-for="@Model.Paing.IdOrderNew">@ResourceWeb.LbDescriptionClint</label>
                                         <select class="form-control select2_1" asp-for="@Model.Paing.IdOrderNew" asp-items="@(new SelectList(ViewBag.Order, "IdOrderNew", "DescriptionOrder"))" id="selectedcompany"></select>
@@ -39,15 +39,7 @@
                                         
                                     </div>
                                 </div>
-
-                                <div class="col-12 col-sm-3">
-                                    <div class="form-group ">
-                                        <label asp-for="@Model.Paing.ReceiptDate" for="exampleInputEmail1">@ResourceWeb.LBreceipt_dt</label>
-                                        <input asp-for="@Model.Paing.ReceiptDate" type="date" placeholder="@ResourceWeb.LBreceipt_dt ...." class="form-control" maxlength="300">
-                                        <span asp-validation-for="@Model.Paing.ReceiptDate" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-3">
+                                <div class="col-12 col-sm-4">
                                     <div class="form-group ">
                                         <label asp-for="@Model.Paing.ReceiptNo" for="exampleInputEmail1">@ResourceWeb.LBreceipt_no</label>
                                         <input asp-for="@Model.Paing.ReceiptNo" type="text" placeholder="@ResourceWeb.LBreceipt_no ...." class="form-control" maxlength="300">
@@ -57,26 +49,35 @@
 
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-3">
+                                <div class="col-12 col-sm-4">
                                     <div class="form-group ">
-                                        <label asp-for="@Model.Paing.ReceiptStatment" for="exampleInputEmail1">@ResourceWeb.LbReceiptStatment</label>
-                                        <input asp-for="@Model.Paing.ReceiptStatment" type="text" placeholder="@ResourceWeb.LbReceiptStatment ...." class="form-control" maxlength="25" id="weight">
-                                        <span asp-validation-for="@Model.Paing.ReceiptStatment" class="text-danger"></span>
-
+                                        <label asp-for="@Model.Paing.ReceiptDate" for="exampleInputEmail1">@ResourceWeb.LBreceipt_dt</label>
+                                        <input asp-for="@Model.Paing.ReceiptDate" type="date" placeholder="@ResourceWeb.LBreceipt_dt ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="@Model.Paing.ReceiptDate" class="text-danger"></span>
                                     </div>
                                 </div>
+                             
+                               
 
                             </div>
 
                         </div>
-@* 
+
                         <div class="card-content">
                             <div class="row small-spacing">
-                                <div class="col-12 col-sm-3">
+                                <div class="col-12 col-sm-2">
                                     <div class="form-group ">
-                                        <label asp-for="@Model.Paing.ReceiptDate" for="exampleInputEmail1">@ResourceWeb.LBreceipt_dt</label>
-                                        <input asp-for="@Model.Paing.ReceiptDate" type="text" placeholder="@ResourceWeb.LBreceipt_dt ...." class="form-control" maxlength="20" id="costPrice" readonly>
-                                        <span asp-validation-for="@Model.Paing.ReceiptDate" class="text-danger"></span>
+                                        <label asp-for="@Model.Paing.ResivedMony" for="exampleInputEmail1">@ResourceWeb.LbResivedMony</label>
+                                        <input asp-for="@Model.Paing.ResivedMony" type="text" placeholder="@ResourceWeb.LbResivedMony ...." class="form-control" maxlength="25" id="weight">
+                                        <span asp-validation-for="@Model.Paing.ResivedMony" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-10">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.Paing.ReceiptStatment" for="exampleInputEmail1">@ResourceWeb.LbReceiptStatment</label>
+                                        <textarea asp-for="@Model.Paing.ReceiptStatment" placeholder="@ResourceWeb.LbReceiptStatment ...." class="form-control" maxlength="300" id="costPrice" rows="5"></textarea>
+                                        <span asp-validation-for="@Model.Paing.ReceiptStatment" class="text-danger"></span>
 
                                     </div>
                                 </div>
@@ -84,7 +85,7 @@
                               
                             </div>
 
-                        </div> *@
+                        </div>
       
                         <div class="form-group">
                             <p><input type="file" accept="image/*" name="Files" id="file" onchange="loadFile(event)" style="display: none;"></p>

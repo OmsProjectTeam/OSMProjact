@@ -35,41 +35,41 @@ namespace Yara.Areas.Admin.Controllers
 
 
 
-        //public IActionResult AddPaidingsImage(int? IdPaings)
-        //{
-        //    ViewBag.Order = iOrderNew.GetAll();
-          
-
-        //    ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-        //    vmodel.ListViewPaings = iPaidings.GetAll();
-        //    if (IdPaings != null)
-        //    {
-        //        vmodel.Paing = iPaidings.GetById(Convert.ToInt32(IdPaings));
-        //        return View(vmodel);
-        //    }
-        //    else
-        //    {
-        //        return View(vmodel);
-        //    }
-        //}
-
-        //public IActionResult AddPaidingsArImageAr(int? IdPaings)
-        //{
-        //    ViewBag.Order = iOrderNew.GetAll();
+        public IActionResult AddPaidingsImage(int? IdPaings)
+        {
+            ViewBag.Order = iOrderNew.GetAll();
 
 
-        //    ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-        //    vmodel.ListViewPaings = iPaidings.GetAll();
-        //    if (IdPaings != null)
-        //    {
-        //        vmodel.Paing = iPaidings.GetById(Convert.ToInt32(IdPaings));
-        //        return View(vmodel);
-        //    }
-        //    else
-        //    {
-        //        return View(vmodel);
-        //    }
-        //}
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewPaings = iPaidings.GetAll();
+            if (IdPaings != null)
+            {
+                vmodel.Paing = iPaidings.GetById(Convert.ToInt32(IdPaings));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
+        public IActionResult AddPaidingsArImageAr(int? IdPaings)
+        {
+            ViewBag.Order = iOrderNew.GetAll();
+
+
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewPaings = iPaidings.GetAll();
+            if (IdPaings != null)
+            {
+                vmodel.Paing = iPaidings.GetById(Convert.ToInt32(IdPaings));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
 
 
         public IActionResult AddPaidings(int? IdPaings)
@@ -162,7 +162,7 @@ namespace Yara.Areas.Admin.Controllers
                     if (reqwest == true)
                     {
                         TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
-                        return RedirectToAction("MyPaidingAr");
+                        return RedirectToAction("MyPaiding");
                     }
                     else
                     {
@@ -185,7 +185,7 @@ namespace Yara.Areas.Admin.Controllers
                         if (reqestUpdate2 == true)
                         {
                             TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
-                            return RedirectToAction("MyPaidingAr");
+                            return RedirectToAction("MyPaiding");
                         }
                         else
                         {
@@ -202,7 +202,7 @@ namespace Yara.Areas.Admin.Controllers
                         if (reqestUpdate2 == true)
                         {
                             TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
-                            return RedirectToAction("MyPaidingAr");
+                            return RedirectToAction("MyPaiding");
                         }
                         else
                         {

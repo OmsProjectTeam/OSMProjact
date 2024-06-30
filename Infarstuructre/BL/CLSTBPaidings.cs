@@ -44,15 +44,22 @@ namespace Infarstuructre.BL
             TBPaing sslid = dbcontext.TBPaings.FirstOrDefault(a => a.IdPaings == IdPaidings);
             return sslid;
         }
+       
+
         public bool saveData(TBPaing savee)
         {
             try
             {
                 dbcontext.Add<TBPaing>(savee);
                 dbcontext.SaveChanges();
+                TBOrderNew sslid = dbcontext.TBOrderNews.FirstOrDefault(a => a.IdOrderNew == savee.IdOrderNew);
 
 
 
+                sslid.IsPaid = true;
+                dbcontext.Entry(sslid).State = EntityState.Modified;
+                dbcontext.SaveChanges();
+               
 
                 return true;
             }
@@ -61,6 +68,7 @@ namespace Infarstuructre.BL
                 return false;
             }
         }
+
         public bool UpdateData(TBPaing update)
         {
             try

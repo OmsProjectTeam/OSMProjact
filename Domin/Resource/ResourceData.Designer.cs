@@ -457,6 +457,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please include the amount for the transaction to complete successfully..!.
+        /// </summary>
+        public static string VlResivedMony {
+            get {
+                return ResourceManager.GetString("VlResivedMony", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please include the appropriate address in the shipping category for the process to complete successfully...!.
         /// </summary>
         public static string VlTitleShipping {

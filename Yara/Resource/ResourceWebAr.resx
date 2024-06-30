@@ -507,6 +507,9 @@
   <data name="LbNouts" xml:space="preserve">
     <value>ملاحظة</value>
   </data>
+  <data name="LbNoutsOrder" xml:space="preserve">
+    <value>ملاحظات الطلب </value>
+  </data>
   <data name="lbOldeAndUserGide" xml:space="preserve">
     <value>الصورة القديمة</value>
   </data>
