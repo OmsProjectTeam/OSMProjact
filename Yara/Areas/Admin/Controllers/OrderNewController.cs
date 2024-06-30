@@ -260,7 +260,8 @@ namespace Yara.Areas.Admin.Controllers
                     return Json(new
                     {
                         costPrice = prices.CoPricePerkgUnder10 * (decimal)weight,
-                        price = prices.CoPricePerkgAbove10 * (decimal)weight * exchangeRate
+                        price = prices.CoPricePerkgAbove10 * (decimal)weight,
+                        exchangePrice = prices.CoPricePerkgAbove10 * (decimal)weight * exchangeRate
                     });
                 }
                 else
@@ -268,7 +269,8 @@ namespace Yara.Areas.Admin.Controllers
                     return Json(new
                     {
                         costPrice = prices.ClintPricePerkgUnder10 * (decimal)weight,
-                        price = prices.ClintPricePerkgAbove10 * (decimal)weight * exchangeRate
+                        price = prices.ClintPricePerkgAbove10 * (decimal)weight,
+                        exchangePrice = prices.CoPricePerkgAbove10 * (decimal)weight * exchangeRate
                     });
                 }
             }

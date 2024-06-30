@@ -121,7 +121,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label asp-for="@Model.OrderNew.Price">@ResourceWeb.LbPrice</label>
-                                <input asp-for="@Model.OrderNew.Price" type="text" placeholder="@ResourceWeb.LbPrice ...." class="form-control" maxlength="300" id="price" readonly>
+                                <input asp-for="@Model.OrderNew.Price" type="text" placeholder="@ResourceWeb.LbPrice ...." class="form-control" maxlength="300" id="exchangePrice" readonly>
                                 <span asp-validation-for="@Model.OrderNew.Price" class="text-danger"></span>
                             </div>
                         </div>
@@ -130,6 +130,16 @@
                                 <label asp-for="@Model.OrderNew.Addres">@ResourceWeb.LbAddres</label>
                                 <input asp-for="@Model.OrderNew.Addres" type="text" placeholder="@ResourceWeb.LbAddres ...." class="form-control" maxlength="300">
                                 <span asp-validation-for="@Model.OrderNew.Addres" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row small-spacing">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="@Model.OrderNew.Price">@ResourceWeb.LbPrice</label>
+                                <input asp-for="@Model.OrderNew.Price" type="text" placeholder="@ResourceWeb.LbPrice ...." class="form-control" maxlength="300" id="price" readonly>
+                                <span asp-validation-for="@Model.OrderNew.Price" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -240,9 +250,11 @@
                         if (data) {
                             $('#costPrice').val(data.costPrice);
                             $('#price').val(data.price);
+                            $('#exchangePrice').val(data.exchangePrice);
                         } else {
                             $('#costPrice').val('');
                             $('#price').val('');
+                            $('#exchangePrice').val(data.exchangePrice);
                         }
                     },
                     error: function () {
