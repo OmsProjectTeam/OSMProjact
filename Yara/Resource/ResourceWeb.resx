@@ -639,6 +639,9 @@
   <data name="LTitleShipping" xml:space="preserve">
     <value>Description of shipping validity</value>
   </data>
+  <data name="ReceiptNo" xml:space="preserve">
+    <value>Receipt No</value>
+  </data>
   <data name="VLAreadoplceted" xml:space="preserve">
     <value>Pricing has already been added to the region. Please check and try again later...!</value>
   </data>
@@ -716,6 +719,9 @@
   </data>
   <data name="VLMerchantNameDoplceted" xml:space="preserve">
     <value>The email address has already been added. Please check and try again later...!</value>
+  </data>
+  <data name="VlResivedMony" xml:space="preserve">
+    <value>Resived Mony</value>
   </data>
   <data name="VLRoleNameDoplceted" xml:space="preserve">
     <value>Validity has already been entered, please confirm and try again later...!</value>
