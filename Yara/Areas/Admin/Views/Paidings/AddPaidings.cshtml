@@ -1,0 +1,207 @@
+﻿@model ViewmMODeElMASTER
+@{
+    ViewData["Title"] = ResourceWeb.LBAddPaing;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row small-spacing">
+    <div class="box-content">
+        <ul class="list-inline">
+            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LBAddPaing</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
+            <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
+            <br>
+            <br>
+            <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
+            <br>
+            <br>
+
+        </ul>
+        <div class="col-lg-6 col-xs-12">
+            <div class="box-content card white">
+                <h4 class="box-title">@ResourceWeb.LBAddPaing</h4>
+                <!-- /.box-title -->
+                <div class="card-content">
+                    <form role="form" method="post" asp-controller="Paidings" asp-action="Save" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="hidden" asp-for="@Model.Paing.DataEntry" class="form-control" value="@User.Identity.Name">
+                            <input type="hidden" asp-for="@Model.Paing.IdPaings" class="form-control">
+                            <input type="hidden" asp-for="@Model.Paing.DateTimeEntry" value="@DateTime.Now">
+                        </div>
+                        <div class="card-content">
+                            <div class="row small-spacing">
+                                <div class="col-xs-4">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.Paing.IdOrderNew" for="exampleInputEmail1">@ResourceWeb.LBMyOrder</label>
+                                        <input asp-for="@Model.Paing.IdOrderNew" type="date" placeholder="@ResourceWeb.LBMyOrder ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="@Model.Paing.IdOrderNew" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.Paing.ReceiptNo" for="exampleInputEmail1">@ResourceWeb.LBreceipt_no</label>
+                                        <input asp-for="@Model.Paing.ReceiptNo" type="text" placeholder="@ResourceWeb.LBreceipt_no ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="@Model.Paing.ReceiptNo" class="text-danger"></span>
+                                        <span style="color:red"><strong>@TempData["DescriptionOrder"]</strong></span>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.Paing.ReceiptStatment" for="exampleInputEmail1">@ResourceWeb.LbReceiptStatment</label>
+                                        <input asp-for="@Model.Paing.ReceiptStatment" type="text" placeholder="@ResourceWeb.LbReceiptStatment ...." class="form-control" maxlength="25" id="weight">
+                                        <span asp-validation-for="@Model.Paing.ReceiptStatment" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="card-content">
+                            <div class="row small-spacing">
+                                <div class="col-12 col-sm-3">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.Paing.ReceiptDate" for="exampleInputEmail1">@ResourceWeb.LBreceipt_dt</label>
+                                        <input asp-for="@Model.Paing.ReceiptDate" type="text" placeholder="@ResourceWeb.LBreceipt_dt ...." class="form-control" maxlength="20" id="costPrice" readonly>
+                                        <span asp-validation-for="@Model.Paing.ReceiptDate" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+
+                              
+                            </div>
+
+                        </div>
+      
+                        <div class="form-group">
+                            <p><input type="file" accept="image/*" name="Files" id="file" onchange="loadFile(event)" style="display: none;"></p>
+                            <p><label class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" for="file" style="cursor: pointer;" name="Files">@ResourceWeb.LBUpload_image</label></p>
+                            <p><img id="output" width="450" height="300" /></p>
+                            <span style="color:red"><strong>@TempData["Message"]</strong></span>
+                        </div>
+                        <div class="checkbox margin-bottom-20">
+
+                            <div class="switch success"><input type="checkbox" asp-for="@Model.Paing.CurrentState" id="switch-2"><label for="switch-2">IsPaid</label></div>
+                        </div>
+    
+                        <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
+                    </form>
+                </div>
+                <!-- /.card-content -->
+            </div>
+            <!-- /.box-content -->
+        </div>
+
+
+        <div class="col-lg-6 col-xs-12">
+            <div class="box-content card white">
+                <h4 class="box-title">@ResourceWeb.lbOldeAndUserGide</h4>
+                <!-- /.box-title -->
+                <div class="card-content">
+
+                    @*   <div class="form-group">
+                    <img src="~/images/user gide/Product.png" width="1920" height="1077" />
+                    </div> *@
+
+
+                </div>
+                <!-- /.card-content -->
+            </div>
+            <!-- /.box-content -->
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
+    <script src="~/Admin/assets/plugin/multiselect/multiselect.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("Document is ready");
+            $('.select2_1').select2({
+                placeholder: "Select an option",
+                allowClear: true
+            });
+
+            // Bind change event to the selected company
+            $('#selectedcompany').change(function () {
+                console.log("Selected company changed");
+                updateCosting();
+            });
+            // Bind change event to the selected company
+            $('#toCurrency').change(function () {
+                console.log("Selected currency changed");
+                updateCosting();
+            });
+
+            // Bind input event to the weight field
+            $('#weight').on('input', function () {
+                updateCosting();
+            });
+
+            function updateCosting() {
+                const selectedCompany = $('#selectedcompany').val();
+                const weight = parseFloat($('#weight').val());
+                const toCurrency = $('#toCurrency').val();
+
+                if (isNaN(weight) || weight <= 0) {
+                    console.log("Invalid weight value");
+                    $('#costPrice').val('');
+                    $('#price').val('');
+                    return;
+                }
+
+                console.log("Selected company is: ", selectedCompany);
+                console.log("Weight is: ", weight);
+                console.log("toCurrency is: ", toCurrency);
+
+                $.ajax({
+                    url: '@Url.Action("GetPrices", "Paing")',
+                    data: { selectedCompanyId: selectedCompany, weight: weight, toCurrencyId: toCurrency, fromCurrencyId: 1 },
+                    success: function (data) {
+                        console.log("AJAX success, data: ", data);
+                        if (data) {
+                            $('#costPrice').val(data.costPrice);
+                            $('#price').val(data.price);
+                            // calculatePrice();
+                        } else {
+                            $('#costPrice').val('');
+                            $('#price').val('');
+                        }
+                    },
+                    error: function () {
+                        alert('Error! Please try again.');
+                        console.log("AJAX error");
+                    }
+                });
+            }
+
+            function calculatePrice() {
+                const weight = parseFloat($('#weight').val());
+                const costPrice = parseFloat($('#costPrice').val());
+
+                if (isNaN(weight) || isNaN(costPrice)) {
+                    console.log("Invalid weight or cost price");
+                    $('#price').val('');
+                    return;
+                }
+
+                const price = weight * costPrice;
+                $('#price').val(price);
+            }
+        });
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+}
+
+
+

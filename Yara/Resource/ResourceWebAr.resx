@@ -156,6 +156,9 @@
   <data name="LBAddOrderStatus" xml:space="preserve">
     <value>إضافة وتعديل حالة الطلب</value>
   </data>
+  <data name="LBAddPaing" xml:space="preserve">
+    <value>إضافة مدفوعات</value>
+  </data>
   <data name="LbAddres" xml:space="preserve">
     <value>العنوان</value>
   </data>
@@ -531,6 +534,12 @@
   <data name="Lboutskirts" xml:space="preserve">
     <value>ضواحي المدينة</value>
   </data>
+  <data name="LBPaidingInformations" xml:space="preserve">
+    <value>معلومات الدفع</value>
+  </data>
+  <data name="LBPaidings" xml:space="preserve">
+    <value>المدفوعات</value>
+  </data>
   <data name="LbPhoneCompany" xml:space="preserve">
     <value>رقم الهاتف</value>
   </data>
@@ -552,11 +561,17 @@
   <data name="LbRate" xml:space="preserve">
     <value>سعر الصرف</value>
   </data>
+  <data name="LbReceiptStatment" xml:space="preserve">
+    <value>بيان الاستلام</value>
+  </data>
   <data name="LBreceipt_dt" xml:space="preserve">
     <value>تاريخ الاستلام</value>
   </data>
   <data name="LBreceipt_no" xml:space="preserve">
     <value>رقم الإيصال</value>
+  </data>
+  <data name="LbResivedMony" xml:space="preserve">
+    <value>المبلغ المستلم</value>
   </data>
   <data name="Lbrole" xml:space="preserve">
     <value>الدور</value>
@@ -587,6 +602,9 @@
   </data>
   <data name="LbTaskStatus" xml:space="preserve">
     <value>حالة المهمة</value>
+  </data>
+  <data name="LbTitleShipping" xml:space="preserve">
+    <value>عنوان الشحن</value>
   </data>
   <data name="LbTypesCompanies" xml:space="preserve">
     <value>الفئة</value>

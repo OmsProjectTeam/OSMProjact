@@ -156,6 +156,9 @@
   <data name="LBAddOrderStatus" xml:space="preserve">
     <value>Adding and modifying Order Status</value>
   </data>
+  <data name="LBAddPaing" xml:space="preserve">
+    <value>Add Paing</value>
+  </data>
   <data name="LbAddres" xml:space="preserve">
     <value>Address</value>
   </data>
@@ -531,6 +534,12 @@
   <data name="Lboutskirts" xml:space="preserve">
     <value>outskirts</value>
   </data>
+  <data name="LBPaidingInformations" xml:space="preserve">
+    <value>Paiding Informations</value>
+  </data>
+  <data name="LBPaidings" xml:space="preserve">
+    <value>Paidings</value>
+  </data>
   <data name="LbPhoneCompany" xml:space="preserve">
     <value>phone</value>
   </data>
@@ -552,11 +561,17 @@
   <data name="LbRate" xml:space="preserve">
     <value>exchange rate</value>
   </data>
+  <data name="LbReceiptStatment" xml:space="preserve">
+    <value>Receipt Statment</value>
+  </data>
   <data name="LBreceipt_dt" xml:space="preserve">
     <value>Receipt Date</value>
   </data>
   <data name="LBreceipt_no" xml:space="preserve">
     <value>Receipt No</value>
+  </data>
+  <data name="LbResivedMony" xml:space="preserve">
+    <value>Resived Money</value>
   </data>
   <data name="Lbrole" xml:space="preserve">
     <value>Role</value>
@@ -587,6 +602,9 @@
   </data>
   <data name="LbTaskStatus" xml:space="preserve">
     <value>Task Status</value>
+  </data>
+  <data name="LbTitleShipping" xml:space="preserve">
+    <value>Title Shipping</value>
   </data>
   <data name="LbTypesCompanies" xml:space="preserve">
     <value>Category</value>
@@ -722,6 +740,9 @@
   </data>
   <data name="VLMerchantNameDoplceted" xml:space="preserve">
     <value>The email address has already been added. Please check and try again later...!</value>
+  </data>
+  <data name="VLReceiptNoDoplceted" xml:space="preserve">
+    <value>The bond number has already been entered. Please check and try again later...!</value>
   </data>
   <data name="VlResivedMony" xml:space="preserve">
     <value>Resived Mony</value>
