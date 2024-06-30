@@ -121,7 +121,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label asp-for="@Model.OrderNew.Price">@ResourceWeb.LbPrice</label>
-                                <input asp-for="@Model.OrderNew.Price" type="text" placeholder="@ResourceWeb.LbPrice ...." class="form-control" maxlength="300" id="price" readonly>
+                                <input asp-for="@Model.OrderNew.Price" type="text" placeholder="@ResourceWeb.LbPrice ...." class="form-control" maxlength="300" id="price" >
                                 <span asp-validation-for="@Model.OrderNew.Price" class="text-danger"></span>
                             </div>
                         </div>
