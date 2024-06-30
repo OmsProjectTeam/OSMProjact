@@ -195,6 +195,9 @@
   <data name="Lbbypass" xml:space="preserve">
     <value>التجاوز</value>
   </data>
+  <data name="LbCatchReceiptNo" xml:space="preserve">
+    <value>ايصال القبض</value>
+  </data>
   <data name="LbCity" xml:space="preserve">
     <value>المدينة</value>
   </data>
@@ -350,6 +353,9 @@
   </data>
   <data name="LbIsNorth" xml:space="preserve">
     <value>الجنوب</value>
+  </data>
+  <data name="lbIsPaid" xml:space="preserve">
+    <value>الدفع</value>
   </data>
   <data name="LbisPublic" xml:space="preserve">
     <value>عام</value>
