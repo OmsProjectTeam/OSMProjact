@@ -157,7 +157,12 @@ namespace Infarstuructre.Data
             });
 
             //************************************************************
-
+            builder.Entity<TBViewPaings>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewPaings");
+            });
+            //************************************************************
 
             builder.UseCollation("Arabic_CI_AS");
 
@@ -1422,14 +1427,22 @@ namespace Infarstuructre.Data
 		   .Property(b => b.CurrentState)
 		   .HasDefaultValueSql("((1))");
 
+            builder.Entity<TBOrderNew>()
+           .Property(b => b.IsPaid)
+           .HasDefaultValueSql("((0))");
+            //---------------------------------	 
+            //---------------------------------	
+            builder.Entity<TBPaing>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<TBPaing>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+
             //---------------------------------	
 
 
 
-            //---------------------------------	
-        
-          
-    
         }
 
         public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
@@ -1570,7 +1583,7 @@ namespace Infarstuructre.Data
 
         public virtual DbSet<Warehouse> warehouse { get; set; }
 
-
+      
 
 
         //***********************************
@@ -1600,5 +1613,10 @@ namespace Infarstuructre.Data
         public DbSet<TBOrderNew> TBOrderNews { get; set; }
         public DbSet<TBViewOrderNew> ViewOrderNew { get; set; }
         public DbSet<TBViewUsers> ViewUsers { get; set; }
+        public DbSet<TBPaing> TBPaings { get; set; }
+        public DbSet<TBViewPaings> ViewPaings { get; set; }
+        
+       
+
     }
 }

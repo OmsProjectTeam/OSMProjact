@@ -24,6 +24,13 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListViewShippingPrices = iShippingPrice.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyShippingPriceAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewShippingPrices = iShippingPrice.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddShippingPrice(int? IdShipping)
 
         {
@@ -42,6 +49,26 @@ namespace Yara.Areas.Admin.Controllers
                 return View(vmodel);
             }
         }
+
+        public IActionResult AddShippingPriceAr(int? IdShipping)
+
+        {
+            ViewBag.Currenc = iCurrenciesExchangeRates.GetAll();
+            ViewBag.TypeSystem = iTypeSystem.GetAll();
+            ViewBag.InformationCompanies = iInformationCompanies.GetAll();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewShippingPrices = iShippingPrice.GetAll();
+            if (IdShipping != null)
+            {
+                vmodel.ShippingPrice = iShippingPrice.GetById(Convert.ToInt32(IdShipping));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Save(ViewmMODeElMASTER model, TBShippingPrice slider, List<IFormFile> Files, string returnUrl)

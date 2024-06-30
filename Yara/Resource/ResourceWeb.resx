@@ -156,6 +156,9 @@
   <data name="LBAddOrderStatus" xml:space="preserve">
     <value>Adding and modifying Order Status</value>
   </data>
+  <data name="LBAddPaing" xml:space="preserve">
+    <value>Add Paing</value>
+  </data>
   <data name="LbAddres" xml:space="preserve">
     <value>Address</value>
   </data>
@@ -195,11 +198,17 @@
   <data name="Lbbypass" xml:space="preserve">
     <value>bypass</value>
   </data>
+  <data name="LbCatchReceiptNo" xml:space="preserve">
+    <value>Catch Receipt No</value>
+  </data>
   <data name="LbCity" xml:space="preserve">
     <value>City</value>
   </data>
   <data name="LbClintDelivery" xml:space="preserve">
     <value>Delivery price to the customer</value>
+  </data>
+  <data name="LBClintInformation" xml:space="preserve">
+    <value>Clint Information</value>
   </data>
   <data name="LbClintPricePerkgAbove10" xml:space="preserve">
     <value>Customer shipping price is more than 10</value>
@@ -351,6 +360,9 @@
   <data name="LbIsNorth" xml:space="preserve">
     <value>The South</value>
   </data>
+  <data name="lbIsPaid" xml:space="preserve">
+    <value>Paid</value>
+  </data>
   <data name="LbisPublic" xml:space="preserve">
     <value>isPublic</value>
   </data>
@@ -495,6 +507,9 @@
   <data name="LbNouts" xml:space="preserve">
     <value>Noute</value>
   </data>
+  <data name="LbNoutsOrder" xml:space="preserve">
+    <value>Nouts Order</value>
+  </data>
   <data name="lbOldeAndUserGide" xml:space="preserve">
     <value>Old photo</value>
   </data>
@@ -510,6 +525,9 @@
   <data name="LbOrderDate" xml:space="preserve">
     <value>Order Date</value>
   </data>
+  <data name="LBOrderInformation" xml:space="preserve">
+    <value>Order Information</value>
+  </data>
   <data name="LBOrdersSystem" xml:space="preserve">
     <value>Orders System</value>
   </data>
@@ -518,6 +536,12 @@
   </data>
   <data name="Lboutskirts" xml:space="preserve">
     <value>outskirts</value>
+  </data>
+  <data name="LBPaidingInformations" xml:space="preserve">
+    <value>Paiding Informations</value>
+  </data>
+  <data name="LBPaidings" xml:space="preserve">
+    <value>Paidings</value>
   </data>
   <data name="LbPhoneCompany" xml:space="preserve">
     <value>phone</value>
@@ -540,11 +564,17 @@
   <data name="LbRate" xml:space="preserve">
     <value>exchange rate</value>
   </data>
+  <data name="LbReceiptStatment" xml:space="preserve">
+    <value>Receipt Statment</value>
+  </data>
   <data name="LBreceipt_dt" xml:space="preserve">
     <value>Receipt Date</value>
   </data>
   <data name="LBreceipt_no" xml:space="preserve">
     <value>Receipt No</value>
+  </data>
+  <data name="LbResivedMony" xml:space="preserve">
+    <value>Resived Money</value>
   </data>
   <data name="Lbrole" xml:space="preserve">
     <value>Role</value>
@@ -575,6 +605,9 @@
   </data>
   <data name="LbTaskStatus" xml:space="preserve">
     <value>Task Status</value>
+  </data>
+  <data name="LbTitleShipping" xml:space="preserve">
+    <value>Title Shipping</value>
   </data>
   <data name="LbTypesCompanies" xml:space="preserve">
     <value>Category</value>
@@ -627,8 +660,14 @@
   <data name="LTitleShipping" xml:space="preserve">
     <value>Description of shipping validity</value>
   </data>
+  <data name="ReceiptNo" xml:space="preserve">
+    <value>Receipt No</value>
+  </data>
   <data name="VLAreadoplceted" xml:space="preserve">
     <value>Pricing has already been added to the region. Please check and try again later...!</value>
+  </data>
+  <data name="VLCatchReceiptNoDoplceted" xml:space="preserve">
+    <value>The receipt voucher number has already been entered. Please verify and try again later...!</value>
   </data>
   <data name="VLCitydoplceted" xml:space="preserve">
     <value>The delivery price for this city has been entered. Please check and try again later...!</value>
@@ -704,6 +743,12 @@
   </data>
   <data name="VLMerchantNameDoplceted" xml:space="preserve">
     <value>The email address has already been added. Please check and try again later...!</value>
+  </data>
+  <data name="VLReceiptNoDoplceted" xml:space="preserve">
+    <value>The bond number has already been entered. Please check and try again later...!</value>
+  </data>
+  <data name="VlResivedMony" xml:space="preserve">
+    <value>Resived Mony</value>
   </data>
   <data name="VLRoleNameDoplceted" xml:space="preserve">
     <value>Validity has already been entered, please confirm and try again later...!</value>

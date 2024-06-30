@@ -27,7 +27,7 @@
 
                     <div class="card-content">
                         <div class="row small-spacing">
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.ExchangeRate.IdCurrenciesExchangeRates" for="exampleInputEmail1">@ResourceWeb.LbTypesCompanies</label>
                                     <select class="form-control" asp-for="@Model.ExchangeRate.IdCurrenciesExchangeRates" asp-items="@(new SelectList(ViewBag.Currenc,"IdCurrenciesExchangeRates","Country"))">
@@ -35,7 +35,7 @@
                                     <span asp-validation-for="@Model.ExchangeRate.IdCurrenciesExchangeRates" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.ExchangeRate.ToIdCurrenciesExchangeRates" for="exampleInputEmail1">@ResourceWeb.LbTypesCompanies</label>
                                     <select class="form-control" asp-for="@Model.ExchangeRate.ToIdCurrenciesExchangeRates" asp-items="@(new SelectList(ViewBag.Currenc,"IdCurrenciesExchangeRates","Country"))">
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-3">
+                            <div class="col-12 col-sm-3">
                                 <div class="form-group ">
                                     <label asp-for="@Model.ExchangeRate.Rate" for="exampleInputEmail1">@ResourceWeb.LbCompanyName</label>
                                     <input asp-for="@Model.ExchangeRate.Rate" type="text" placeholder="@ResourceWeb.LbCompanyName ...." class="form-control" maxlength="300">

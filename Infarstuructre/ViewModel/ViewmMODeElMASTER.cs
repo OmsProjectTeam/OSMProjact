@@ -84,5 +84,7 @@ namespace Infarstuructre.ViewModel
 
         public IEnumerable<TBTypesCompanies> ListTypesCompanies { get; set; }
         public TBTypesCompanies TypesCompanies { get; set; }
+        public IEnumerable<TBViewPaings> ListViewPaings { get; set; }
+        public TBPaing Paing { get; set; }
     }
 }

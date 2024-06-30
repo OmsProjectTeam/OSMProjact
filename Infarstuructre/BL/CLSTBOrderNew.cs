@@ -22,6 +22,8 @@ namespace Infarstuructre.BL
         Task<IEnumerable<TBViewOrderNew>> GetAllOrdersNewWithConditionAsync(Expression<Func<TBViewOrderNew, bool>> condition);
         Task AddOrderNewAsync(TBOrderNew orderNew);
         Task UpdateOrderNewAsync(TBOrderNew orderNew);
+        bool DELETPHOTOWethError(string PhotoNAme);
+        bool DELETPHOTO(int IdOrderNew);
     }
     public class CLSTBOrderNew: IIOrderNew
     {
@@ -90,9 +92,9 @@ namespace Infarstuructre.BL
             return MySlider;
         }
 
-		public List<TBViewOrderNew> GetAllDataentry(string IdOrderNew)
+		public List<TBViewOrderNew> GetAllDataentry(string DataEntry)
 		{
-			List<TBViewOrderNew> MySlider = dbcontext.ViewOrderNew.Where(a => a.DataEntry == IdOrderNew).Where(a => a.CurrentState == true).ToList();
+			List<TBViewOrderNew> MySlider = dbcontext.ViewOrderNew.Where(a => a.DataEntry == DataEntry).Where(a => a.CurrentState == true).ToList();
 			return MySlider;
 		}
 
@@ -130,5 +132,74 @@ namespace Infarstuructre.BL
 		    dbcontext.Entry(orderNew).State = EntityState.Modified;
 			await dbcontext.SaveChangesAsync();
 		}
-	}
+        public bool DELETPHOTO(int IdOrderNew)
+        {
+            try
+            {
+                var catr = GetById(IdOrderNew);
+                //using (FileStream fs = new FileStream(catr.Photo, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                //{
+                if (!string.IsNullOrEmpty(catr.Photo))
+                {
+                    // إذا كان هناك صورة قديمة، قم بمسحها من الملف
+                    var oldFilePath = Path.Combine(@"wwwroot/Images/Home", catr.Photo);
+                    if (System.IO.File.Exists(oldFilePath))
+                    {
+
+
+                        // استخدم FileShare.None للسماح بحذف الملف أثناء استخدامه
+                        using (FileStream fs = new FileStream(oldFilePath, FileMode.Open, FileAccess.Read, FileShare.None))
+                        {
+                            System.Threading.Thread.Sleep(200);
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
+                        }
+
+                        System.IO.File.Delete(oldFilePath);
+                    }
+                }
+                //}
+
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+        public bool DELETPHOTOWethError(string PhotoNAme)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(PhotoNAme))
+                {
+                    // إذا كان هناك صورة قديمة، قم بمسحها من الملف
+                    var oldFilePath = Path.Combine(@"wwwroot/Images/Home", PhotoNAme);
+                    if (System.IO.File.Exists(oldFilePath))
+                    {
+
+
+                        // استخدم FileShare.None للسماح بحذف الملف أثناء استخدامه
+                        using (FileStream fs = new FileStream(oldFilePath, FileMode.Open, FileAccess.Read, FileShare.None))
+                        {
+                            System.Threading.Thread.Sleep(200);
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
+                        }
+
+                        System.IO.File.Delete(oldFilePath);
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                // يفضل ألا تترك البرنامج يتجاوز الأخطاء بصمت، يفضل تسجيل الخطأ أو إعادة رميه
+                return false;
+            }
+        }
+    }
 }

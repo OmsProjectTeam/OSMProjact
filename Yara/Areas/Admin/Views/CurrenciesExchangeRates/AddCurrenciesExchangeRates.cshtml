@@ -24,13 +24,13 @@
                     </div>
                     <div class="card-content">
                         <div class="row small-spacing">
-                            <div class="col-xs-6">
+                            <div class="col-12 col-sm-6">
                                 <label asp-for="@Model.CurrenciesExchangeRates.Country" for="exampleInputEmail1">@ResourceWeb.Lbcode</label>
                                 <input asp-for="@Model.CurrenciesExchangeRates.Country" type="text" placeholder="@ResourceWeb.LbCountry ...." class="form-control" maxlength="300">
                                 <span asp-validation-for="@Model.CurrenciesExchangeRates.Country" class="text-danger"></span>
                                 <span style="color:red"> <strong>@TempData["TitleShipping"]</strong></span>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-12 col-sm-6">
                                 <label asp-for="@Model.CurrenciesExchangeRates.code" for="exampleInputEmail1">@ResourceWeb.Lbcode</label>
                                 <input asp-for="@Model.CurrenciesExchangeRates.code" type="text" placeholder="@ResourceWeb.Lbcode ...." class="form-control" maxlength="20">
                                 <span asp-validation-for="@Model.CurrenciesExchangeRates.code" class="text-danger"></span>

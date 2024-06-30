@@ -38,10 +38,14 @@ namespace Domin.Entity
         public DateTime? DateTimeEntry { get; set; }
         public bool? CurrentState { get; set; }
         public string? ImageUser { get; set; }
-        public string? IdInformationCompanies { get; set; }
-        public string? IdUserIdentity { get; set; }
+        public int? IdInformationCompanies { get; set; }
+     
+        public string? NikeNAmeShipping { get; set; }
+        public string Photo { get; set; }
+        public string CatchReceiptNo { get; set; }
+        public bool IsPaid { get; set; }
 
-  
+
 
 
     }

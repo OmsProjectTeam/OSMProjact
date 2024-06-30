@@ -21,5 +21,22 @@ namespace Yara.Areas.merchantAccount.Controllers
 
             return View();
         }
-    }
+
+		public async Task<IActionResult> IndexAr()
+		{
+			//var user = await _userManager.GetUserAsync(User);
+			//if (user == null)
+			//    return NotFound();
+
+			//var role = await _userManager.GetRolesAsync(user);
+
+			//ViewBag.UserName = user.UserName;
+			//ViewBag.UserId = user.Id;
+			//ViewBag.UserImage = user.ImageUser;
+			//ViewBag.Name = user.Name;
+			//ViewBag.UserRole = role[0];
+			return View();
+		}
+
+	}
 }

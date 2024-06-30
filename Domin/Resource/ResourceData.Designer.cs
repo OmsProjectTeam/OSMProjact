@@ -115,6 +115,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number of characters entered must not exceed 25 characters...!.
+        /// </summary>
+        public static string MaxLength25 {
+            get {
+                return ResourceManager.GetString("MaxLength25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The number of characters entered must not exceed 300 characters...!.
         /// </summary>
         public static string MaxLength300 {
@@ -268,6 +277,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to please inclode the Catch Receipt.
+        /// </summary>
+        public static string VlCatchReceiptNo {
+            get {
+                return ResourceManager.GetString("VlCatchReceiptNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please include the customer&apos;s delivery price so that the process is completed successfully...!.
         /// </summary>
         public static string VlClintDelivery {
@@ -417,6 +435,33 @@ namespace Domin.Resource {
         public static string VlPhoneCompany {
             get {
                 return ResourceManager.GetString("VlPhoneCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please include a bond number for the process to complete successfully...!.
+        /// </summary>
+        public static string VlReceiptNo {
+            get {
+                return ResourceManager.GetString("VlReceiptNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please include the receipt statement for the process to be completed successfully....!.
+        /// </summary>
+        public static string VlReceiptStatment {
+            get {
+                return ResourceManager.GetString("VlReceiptStatment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please include the amount for the transaction to complete successfully..!.
+        /// </summary>
+        public static string VlResivedMony {
+            get {
+                return ResourceManager.GetString("VlResivedMony", resourceCulture);
             }
         }
         

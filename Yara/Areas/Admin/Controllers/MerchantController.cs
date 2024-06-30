@@ -25,7 +25,34 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListViewMerchant = iMerchant.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyMerchantAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewMerchant = iMerchant.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddMerchant(int? IdShipping)
+
+        {
+            ///////////////
+            ViewBag.Customer = iCustomer.GetAll();
+            ViewBag.Area = iArea.GetAll();
+            ViewBag.InformationCompanies = iInformationCompanies.GetAll();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewMerchant = iMerchant.GetAll();
+            if (IdShipping != null)
+            {
+                vmodel.Merchant = iMerchant.GetById(Convert.ToInt32(IdShipping));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
+        public IActionResult AddMerchantAr(int? IdShipping)
 
         {
             ///////////////

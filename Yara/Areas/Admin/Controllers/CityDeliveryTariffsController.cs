@@ -31,6 +31,13 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListViewCityDeliveryTariffs = iCityDeliveryTariffs.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyCityDeliveryTariffsAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewCityDeliveryTariffs = iCityDeliveryTariffs.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddCityDeliveryTariffs(int? IdCityDeliveryTariffs)
 
         {
@@ -51,6 +58,28 @@ namespace Yara.Areas.Admin.Controllers
                 return View(vmodel);
             }
         }
+
+        public IActionResult AddCityDeliveryTariffsAr(int? IdCityDeliveryTariffs)
+
+        {
+            ViewBag.Currenc = iCurrenciesExchangeRates.GetAll();
+            ViewBag.City = iCity.GetAll();
+            ViewBag.InformationCompanies = iInformationCompanies.GetAll();
+            ViewBag.area = iArea.GetAll();
+            ViewBag.TypeSystemDelivery = iTypeSystemDelivery.GetAll();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewCityDeliveryTariffs = iCityDeliveryTariffs.GetAll();
+            if (IdCityDeliveryTariffs != null)
+            {
+                vmodel.CityDeliveryTariffs = iCityDeliveryTariffs.GetById(Convert.ToInt32(IdCityDeliveryTariffs));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Save(ViewmMODeElMASTER model, TBCityDeliveryTariffs slider, List<IFormFile> Files, string returnUrl)

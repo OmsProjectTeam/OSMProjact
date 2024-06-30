@@ -24,7 +24,33 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListViewCustomers = iCustomer.GetAll();
             return View(vmodel);
         }
+
+        public IActionResult MyCustomerAr()
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewCustomers = iCustomer.GetAll();
+            return View(vmodel);
+        }
         public IActionResult AddCustomer(int? id)
+
+        {
+            ViewBag.City = iCity.GetAll();
+            ViewBag.Area = iArea.GetAll();
+            ViewBag.InformationCompanies = iInformationCompanies.GetAll();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListViewCustomers = iCustomer.GetAll();
+            if (id != null)
+            {
+                vmodel.Customer = iCustomer.GetById(Convert.ToInt32(id));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
+        public IActionResult AddCustomerAr(int? id)
 
         {
             ViewBag.City = iCity.GetAll();
