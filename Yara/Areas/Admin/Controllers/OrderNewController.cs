@@ -113,6 +113,7 @@ namespace Yara.Areas.Admin.Controllers
                 slider.CatchReceiptNo = model.OrderNew.CatchReceiptNo;
                 slider.Photo = model.OrderNew.Photo;
                 slider.IsPaid = model.OrderNew.IsPaid;
+                slider.ExchangedPrice = model.OrderNew.ExchangedPrice;
                 var file = HttpContext.Request.Form.Files;
                 if (slider.IdOrderNew == 0 || slider.IdOrderNew == null)
                 {

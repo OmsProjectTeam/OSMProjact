@@ -318,6 +318,9 @@
   <data name="LbEmailCompany" xml:space="preserve">
     <value>E-mail</value>
   </data>
+  <data name="LbExchangedPrice" xml:space="preserve">
+    <value>Exchanged Price</value>
+  </data>
   <data name="LbExchangeRate" xml:space="preserve">
     <value>exchange rate</value>
   </data>

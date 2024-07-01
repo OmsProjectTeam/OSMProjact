@@ -120,8 +120,9 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label asp-for="@Model.OrderNew.Price">Exchanged Price</label>
-                                            <input asp-for="@Model.OrderNew.Price" type="text" placeholder="@ResourceWebAr.LbPrice ...." class="form-control" maxlength="300" id="exchangePrice" readonly>                                <span asp-validation-for="@Model.OrderNew.Price" class="text-danger"></span>
+                                            <label asp-for="@Model.OrderNew.ExchangedPrice">Exchanged Price</label>
+                                            <input asp-for="@Model.OrderNew.ExchangedPrice" type="text" placeholder="@ResourceWeb.LbPrice ...." class="form-control" maxlength="300" id="exchangePrice">
+                                            <span asp-validation-for="@Model.OrderNew.ExchangedPrice" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>

@@ -41,6 +41,7 @@ namespace Domin.Entity
         [MinLength(3, ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "MinLength3")]
         public string CatchReceiptNo { get; set; }
         public bool IsPaid { get; set; }
+        public decimal ExchangedPrice { get; set; }
 
     }
 }
