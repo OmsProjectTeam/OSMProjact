@@ -45,6 +45,8 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListViewOrderNew = iOrderNew.GetAll();
             return View(vmodel);
         }
+
+
         public IActionResult AddOrderNew(int? IdOrderNew)
         {
             ViewBag.OrderCase = iOrderCase.GetAll();
