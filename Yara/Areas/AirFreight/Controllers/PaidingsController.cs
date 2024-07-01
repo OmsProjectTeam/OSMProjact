@@ -1,35 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Yara.Areas.Admin.Controllers
+namespace Yara.Areas.AirFreight.Controllers
 {
-
-
-    [Area("Admin")]
-    [Authorize(Roles = "Admin,ApiRoles")]
-
+    [Area("AirFreight")]
+    [Authorize(Roles = "Admin,AirFreight")]
     public class PaidingsController : Controller
     {
         IIPaidings iPaidings;
+        UserManager<ApplicationUser> userManager;
         MasterDbcontext dbcontext;
         IIOrderNew iOrderNew;
-        public PaidingsController(IIPaidings iPaidings1,MasterDbcontext dbcontext1,IIOrderNew iOrderNew1)
+        public PaidingsController(IIPaidings iPaidings1, MasterDbcontext dbcontext1, IIOrderNew iOrderNew1, UserManager<ApplicationUser> userManager)
         {
             iPaidings = iPaidings1;
             dbcontext = dbcontext1;
             iOrderNew = iOrderNew1;
+            this.userManager = userManager;
         }
 
         public IActionResult MyPaiding()
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-            vmodel.ListViewPaings = iPaidings.GetAll();
+            vmodel.userName = userManager.GetUserName(User);
+
+            vmodel.ListViewPaings = iPaidings.GetAllDataentry(vmodel.userName);
+
             return View(vmodel);
         }
 
         public IActionResult MyPaidingAr()
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-            vmodel.ListViewPaings = iPaidings.GetAll();
+            vmodel.userName = userManager.GetUserName(User);
+
+            vmodel.ListViewPaings = iPaidings.GetAllDataentry(vmodel.userName);
+
             return View(vmodel);
         }
 
@@ -37,7 +42,10 @@ namespace Yara.Areas.Admin.Controllers
 
         public IActionResult AddPaidingsImage(int? IdPaings)
         {
-            ViewBag.Order = iOrderNew.GetAll();
+            ViewmMODeElMASTER vmodell = new ViewmMODeElMASTER();
+
+            var userName = userManager.GetUserName(User);
+            ViewBag.Order = iOrderNew.GetAllDataentry(userName);
 
 
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
@@ -55,11 +63,16 @@ namespace Yara.Areas.Admin.Controllers
 
         public IActionResult AddPaidingsArImageAr(int? IdPaings)
         {
-            ViewBag.Order = iOrderNew.GetAll();
+            ViewmMODeElMASTER vmodell = new ViewmMODeElMASTER();
+
+            var userName = userManager.GetUserName(User);
+            ViewBag.Order = iOrderNew.GetAllDataentry(userName);
 
 
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-            vmodel.ListViewPaings = iPaidings.GetAll();
+            vmodel.userName = userManager.GetUserName(User);
+
+            vmodel.ListViewPaings = iPaidings.GetAllDataentry(vmodel.userName);
             if (IdPaings != null)
             {
                 vmodel.Paing = iPaidings.GetById(Convert.ToInt32(IdPaings));
@@ -74,11 +87,16 @@ namespace Yara.Areas.Admin.Controllers
 
         public IActionResult AddPaidings(int? IdPaings)
         {
-            ViewBag.Order = iOrderNew.GetAll();
+            ViewmMODeElMASTER vmodell = new ViewmMODeElMASTER();
+
+            var userName = userManager.GetUserName(User);
+            ViewBag.Order = iOrderNew.GetAllDataentry(userName);
 
 
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-            vmodel.ListViewPaings = iPaidings.GetAll();
+            vmodel.userName = userManager.GetUserName(User);
+
+            vmodel.ListViewPaings = iPaidings.GetAllDataentry(vmodel.userName);
             if (IdPaings != null)
             {
                 vmodel.Paing = iPaidings.GetById(Convert.ToInt32(IdPaings));
@@ -92,11 +110,16 @@ namespace Yara.Areas.Admin.Controllers
 
         public IActionResult AddPaidingsAr(int? IdPaings)
         {
-            ViewBag.Order = iOrderNew.GetAll();
+            ViewmMODeElMASTER vmodell = new ViewmMODeElMASTER();
+
+            var userName = userManager.GetUserName(User);
+            ViewBag.Order = iOrderNew.GetAllDataentry(userName);
 
 
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-            vmodel.ListViewPaings = iPaidings.GetAll();
+            vmodel.userName = userManager.GetUserName(User);
+
+            vmodel.ListViewPaings = iPaidings.GetAllDataentry(vmodel.userName);
             if (IdPaings != null)
             {
                 vmodel.Paing = iPaidings.GetById(Convert.ToInt32(IdPaings));
@@ -128,11 +151,11 @@ namespace Yara.Areas.Admin.Controllers
                 slider.Photo = model.Paing.Photo;
                 slider.ReceiptNo = model.Paing.ReceiptNo;
                 slider.ReceiptStatment = model.Paing.ReceiptStatment;
-                slider.ReceiptDate = model.Paing.ReceiptDate;             
+                slider.ReceiptDate = model.Paing.ReceiptDate;
                 slider.DataEntry = model.Paing.DataEntry;
                 slider.DateTimeEntry = model.Paing.DateTimeEntry;
-                slider.CurrentState = model.Paing.CurrentState;               
-                slider.Photo = model.Paing.Photo;           
+                slider.CurrentState = model.Paing.CurrentState;
+                slider.Photo = model.Paing.Photo;
                 var file = HttpContext.Request.Form.Files;
 
                 // add
@@ -272,6 +295,6 @@ namespace Yara.Areas.Admin.Controllers
             }
         }
 
-      
+
     }
 }
