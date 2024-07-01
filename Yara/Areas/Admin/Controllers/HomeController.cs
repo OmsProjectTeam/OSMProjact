@@ -13,11 +13,13 @@ namespace Yara.Areas.Admin.Controllers
 		MasterDbcontext dbcontext;
 		IIOrderNew iOrderNew;
 		IIUserInformation iUserInformation;
-		public HomeController(UserManager<ApplicationUser> userManager, IIUser iUser, MasterDbcontext dbcontext1, IIOrderNew iOrderNew1, IIUserInformation iUserInformation1)
-        {
+		IIPaidings iPaidings;
+		public HomeController(UserManager<ApplicationUser> userManager, IIUser iUser, MasterDbcontext dbcontext1, IIOrderNew iOrderNew1, IIUserInformation iUserInformation1, IIPaidings iIPaidings)
+		{
 			_userManager = userManager;
 			iOrderNew = iOrderNew1;
-			iUserInformation= iUserInformation1;
+			iUserInformation = iUserInformation1;
+			this.iPaidings = iIPaidings;
 		}
 
 
@@ -43,8 +45,15 @@ namespace Yara.Areas.Admin.Controllers
 			var filteredOrders = vmodel.ListViewOrderNew=iOrderNew.GetAll();
 
 			ViewBag.Favorit = filteredOrders.Sum(c => c.CostPrice);
+
 			ViewBag.price = filteredOrders.Sum(c => c.Price);
 			ViewBag.total = ViewBag.price - ViewBag.Favorit;
+
+			vmodel.ListViewPaings = iPaidings.GetAll();
+			var paidings = vmodel.ListViewPaings = iPaidings.GetAll();
+
+			ViewBag.paidings = paidings.Sum(p => p.ResivedMony);
+
 			// إرسال النموذج إلى العرض
 			return View(vmodel);
 		}
