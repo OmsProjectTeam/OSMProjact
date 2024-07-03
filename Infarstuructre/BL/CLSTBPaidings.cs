@@ -57,6 +57,7 @@ namespace Infarstuructre.BL
 
 
                 sslid.IsPaid = true;
+                sslid.IdorderStatus = 2037;
                 dbcontext.Entry(sslid).State = EntityState.Modified;
                 dbcontext.SaveChanges();
                

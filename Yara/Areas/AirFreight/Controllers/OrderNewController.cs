@@ -65,13 +65,24 @@ namespace Yara.Areas.AirFreight.Controllers
                 Value = t.IdInformationCompanies.ToString(), // تحويل القيمة إلى نص
                 Text = t.NikeNAme
             }).ToList();
+            var ordersttuse= dbcontext.order_status.Where(t => t.Id== 1037 ).ToList();
+
+            var order = ordersttuse.Select(t => new SelectListItem
+            {
+                Value = t.Id.ToString(), // تحويل القيمة إلى نص
+                Text = t.Description
+            }).ToList();
+
+            ViewBag.OrderStatus = new SelectList(order, "Value", "Text");
+          //  ViewBag.OrderStatus = iOrderStatus.GetAll();
+
 
             ViewBag.ShippingPrice = new SelectList(shippingPriceSelectList, "Value", "Text");
 
 
 
             ViewBag.OrderCase = iOrderCase.GetAll();
-            ViewBag.OrderStatus = iOrderStatus.GetAll();
+         
             ViewBag.ClintWith = iClintWitheDeliveryTariffs.GetAll();
           //  ViewBag.ShippingPrice = iShippingPrice.GetAll(); // قد يكون لديك خطأ هنا لأنك قمت بتعيين نفس الخاصية مرتين
             ViewBag.exch = iExchangeRate.GetAll();

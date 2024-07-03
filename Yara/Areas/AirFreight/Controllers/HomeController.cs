@@ -46,6 +46,7 @@ namespace Yara.Areas.AirFreight.Controllers
 			var filteredOrders = vmodel.ListViewOrderNew.Where(c => c.DataEntry == user.UserName).ToList();
 			ViewBag.Favorit = filteredOrders.Sum(c => c.CostPrice);
 			ViewBag.price = filteredOrders.Sum(c => c.Price);
+			ViewBag.ExchangedPrice = filteredOrders.Sum(c => c.ExchangedPrice);
 			ViewBag.total = ViewBag.price - ViewBag.Favorit;
 
             vmodel.ListViewPaings = iPaidings.GetAllDataentry(user.UserName);
