@@ -86,5 +86,7 @@ namespace Infarstuructre.ViewModel
         public TBTypesCompanies TypesCompanies { get; set; }
         public IEnumerable<TBViewPaings> ListViewPaings { get; set; }
         public TBPaing Paing { get; set; }
+        public IEnumerable<TBEmailAlartSetting> ListEmailAlartSetting { get; set; }
+        public TBEmailAlartSetting EmailAlartSetting { get; set; }
     }
 }
