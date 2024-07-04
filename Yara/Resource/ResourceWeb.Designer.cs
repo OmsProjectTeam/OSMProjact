@@ -979,6 +979,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email Alart Setting.
+        /// </summary>
+        public static string LBMyEmailAlartSetting {
+            get {
+                return ResourceManager.GetString("LBMyEmailAlartSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to exchange rate.
         /// </summary>
         public static string LBMyExchangeRate {

@@ -423,6 +423,9 @@
   <data name="LBMyCustomer" xml:space="preserve">
     <value>Individual customer data</value>
   </data>
+  <data name="LBMyEmailAlartSetting" xml:space="preserve">
+    <value>Email Alart Setting</value>
+  </data>
   <data name="LBMyExchangeRate" xml:space="preserve">
     <value>exchange rate</value>
   </data>
