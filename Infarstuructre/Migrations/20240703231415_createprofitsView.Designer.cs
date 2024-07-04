@@ -4,6 +4,7 @@ using Infarstuructre.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infarstuructre.Migrations
 {
     [DbContext(typeof(MasterDbcontext))]
-    partial class MasterDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20240703231415_createprofitsView")]
+    partial class createprofitsView
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1700,6 +1703,59 @@ namespace Infarstuructre.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("Domin.Entity.Profit", b =>
+                {
+                    b.Property<int>("IdProfit")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProfit"));
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("CurrentState")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("DataEntry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("DateTimeEntry")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("date")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<int>("IdInformationCompanies")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdOrderNew")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Photo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("ProfitAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ReceiptNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiptStatment")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.HasKey("IdProfit");
+
+                    b.ToTable("Profits");
+                });
+
             modelBuilder.Entity("Domin.Entity.RegistrationLog", b =>
                 {
                     b.Property<int>("Id")
@@ -2385,60 +2441,6 @@ namespace Infarstuructre.Migrations
                     b.ToTable("TBCurrenciesExchangeRatess");
                 });
 
-            modelBuilder.Entity("Domin.Entity.TBEmailAlartSetting", b =>
-                {
-                    b.Property<int>("IdEmailAlartSetting")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEmailAlartSetting"));
-
-                    b.Property<bool>("Active")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
-
-                    b.Property<bool>("CurrentState")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
-
-                    b.Property<string>("DataEntry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTimeEntry")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<string>("MailSender")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<string>("PasswordEmail")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
-
-                    b.Property<int>("PortServer")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SmtpServer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Ssl_validity")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
-
-                    b.HasKey("IdEmailAlartSetting");
-
-                    b.ToTable("TBEmailAlartSettings");
-                });
-
             modelBuilder.Entity("Domin.Entity.TBExchangeRate", b =>
                 {
                     b.Property<int>("IdExchangeRate")
@@ -2790,61 +2792,6 @@ namespace Infarstuructre.Migrations
                     b.HasKey("IdTransaction");
 
                     b.ToTable("TBTransactions");
-                });
-
-            modelBuilder.Entity("Domin.Entity.TBTransfer", b =>
-                {
-                    b.Property<int>("IdTransfer")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTransfer"));
-
-                    b.Property<bool>("CurrentState")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
-
-                    b.Property<string>("DataEntry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTimeEntry")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<decimal>("ExchangeAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("IdCurrency")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdOrderNew")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Photo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly>("ReceiptDate")
-                        .HasColumnType("date");
-
-                    b.Property<string>("ReceiptNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReceiptStatment")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<decimal>("TransferAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("IdTransfer");
-
-                    b.ToTable("TBTransfers");
                 });
 
             modelBuilder.Entity("Domin.Entity.TBTypeSystem", b =>
@@ -3972,6 +3919,10 @@ namespace Infarstuructre.Migrations
 
             modelBuilder.Entity("Domin.Entity.TBViewProfit", b =>
                 {
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Currency")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -3989,6 +3940,9 @@ namespace Infarstuructre.Migrations
                     b.Property<string>("DescriptionOrder")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdInformationCompanies")
+                        .HasColumnType("int");
 
                     b.Property<int>("IdOrderNew")
                         .HasColumnType("int");
@@ -4013,7 +3967,7 @@ namespace Infarstuructre.Migrations
 
                     b.ToTable((string)null);
 
-                    b.ToView("ViewProfit", (string)null);
+                    b.ToView("ViewProfits", (string)null);
                 });
 
             modelBuilder.Entity("Domin.Entity.TBViewShippingPrices", b =>

@@ -9,7 +9,7 @@
 <div class="col-xs-12">
     <div class="box-content">
         <ul class="list-inline">
-            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LbProfits</button></a></li>/
+            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LBMyTransfers</button></a></li>/
             <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
             <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
             <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
@@ -22,7 +22,7 @@
         </ul>
         <!-- /.box-title -->
         <div class="dropdown js__drop_down">
-            <a asp-area="Admin" asp-controller="Paidings" asp-action="AddPaidings"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a>
+            <a asp-area="Admin" asp-controller="Transfer" asp-action="AddTransfer"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a>
         </div>
         <!-- /.dropdown js__dropdown -->
         <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -43,7 +43,7 @@
                                     <br>
                                     <div class="navbar-inner">
                                         <ul>
-                                            <li><a href="#tab-progress-1" data-toggle="tab">@ResourceWeb.LBPaidingInformations</a></li>
+                                            <li><a href="#tab-progress-1" data-toggle="tab">@ResourceWeb.LBTransferInformations</a></li>
                                             <li><a href="#tab-progress-2" data-toggle="tab">@ResourceWeb.LBOrderInformation</a></li>
                                             @* <li><a href="#tab-progress-3" data-toggle="tab">@ResourceWeb.LbOpration</a></li> *@
                                             @*    <li><a href="#tab-progress-4" data-toggle="tab">Forth</a></li> *@
@@ -66,36 +66,33 @@
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbId</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbPhoto</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDescriptionOrder</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbOrderDate</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTitleShipping</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTransferAmount</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbExchangeAmount</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbCurrency</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbcode</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbPrice</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbNoutsOrder</th>
 
                                                 <tfoot>
                                                     <tr>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbPhoto</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbDescriptionOrder</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbOrderDate</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbTitleShipping</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbTransferAmount</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbExchangeAmount</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbCurrency</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.Lbcode</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbPrice</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbNoutsOrder</th>
                                                 </tfoot>
                                                 <tbody>
-                                                            @foreach (var item in Model.ListViewPaings)
+                                                            @foreach (var item in Model.ListViewTransfer)
                                                             {
                                                         <tr role="row" class="odd">
 
-                                                            <td>@item.IdPaings</td>
+                                                            <td>@item.IdTransfer</td>
                                                             <td class="sorting_1"> <img src="@string.Format("/Images/Home/{0}",item.Photo  )" class="img-bordered img-circle img-circle" style="width:100px; height:100px"></td>
                                                             <td class="truncate-50">@item.DescriptionOrder</td>
-                                                            <td class="truncate-50">@item.OrderDate</td>
-                                                            <td class="truncate-50">@item.TitleShipping</td>
-                                                            <td class="truncate-50">@item.code</td>
-                                                            <td class="truncate-50">@item.Price</td>
-                                                            <td class="truncate-50">@item.NoutsOrder</td>
+                                                            <td class="truncate-50">@item.TransferAmount</td>
+                                                            <td class="truncate-50">@item.ExchangeAmount</td>
+                                                            <td class="truncate-50">@item.IdCurrency</td>
+                                                            <td class="truncate-50">@item.Code</td>
                                                         </tr>
                                                             }
                                                 </tbody>
@@ -112,47 +109,30 @@
                                                     <tr role="row">
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending">@ResourceWeb.LbId</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDescriptionOrder</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LBreceipt_dt</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LBreceipt_no</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LBreceipt_dt</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbReceiptStatment</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbResivedMony</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.lbIsPaid</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.lbCurrentState</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDataEntry</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDateTimeEntry</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbOpration</th>
                                                 <tfoot>
                                                     <tr>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbDescriptionOrder</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LBreceipt_dt</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LBreceipt_no</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LBreceipt_dt</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbReceiptStatment</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbResivedMony</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.lbIsPaid</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.lbCurrentState</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbDataEntry</th>                                                                                                                                                              
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbDateTimeEntry</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbOpration</th>
                                                 </tfoot>
                                                 <tbody>
-                                                            @foreach (var item in Model.ListViewPaings)
+                                                            @foreach (var item in Model.ListViewTransfer)
                                                             {
                                                         <tr role="row" class="odd">
-                                                            <td>@item.IdPaings</td>
+                                                            <td>@item.IdTransfer</td>
                                                             <td class="truncate-50">@item.DescriptionOrder</td>
-                                                            <td class="truncate-50">@item.ReceiptDate</td>
                                                             <td class="truncate-50">@item.ReceiptNo</td>
-                                                            <td class="truncate-50">@item.ReceiptStatment</td>                                                     
-                                                            <td class="truncate-50">@item.ResivedMony</td>
-                                                            <td><div class="switch primary"><input type="checkbox" checked="@item.IsPaid" IdOrderNew="switch-2" disabled><label for="switch-2">@item.IsPaid</label></div></td>
-                                                            <td> <div class="switch primary"><input type="checkbox" checked="@item.CurrentState" IdOrderNew="switch-5" disabled><label for="switch-5">@item.CurrentState</label></div></td>
-                                                            <td class="truncate-50">@item.DataEntry</td>
-                                                            <td class="truncate-50">@item.DateTimeEntry</td>
+                                                            <td class="truncate-50">@item.ReceiptDate</td>
+                                                            <td class="truncate-50">@item.ReceiptStatment</td>
                                                             <td>
                                                                 <ul class="list-inline">
-                                                                    <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Paidings" asp-action="AddPaidingsImage" asp-route-IdPaings="@item.IdPaings"><button type="button" class="btn btn-primary btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-edit"></i></button></a></li>|
-                                                                    <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Paidings" asp-action="DeleteData" asp-route-IdPaings="@item.IdPaings"><button type="button" class="btn btn-danger btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-remove"></i></button></a></li>
+                                                                    <li class="margin-bottom-10"><a asp-area="AirFreight" asp-controller="Transfer" asp-action="AddTransferImage" asp-route-IdPaings="@item.IdTransfer"><button type="button" class="btn btn-primary btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-edit"></i></button></a></li>|
+                                                                    <li class="margin-bottom-10"><a asp-area="AirFreight" asp-controller="Transfer" asp-action="DeleteData" asp-route-IdPaings="@item.IdTransfer"><button type="button" class="btn btn-danger btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-remove"></i></button></a></li>
                                                                 </ul>
                                                             </td>
                                                         </tr>
@@ -162,7 +142,7 @@
                                         </div>
                                     </div>
                                 </div>
-                               <ul class="pager wizard">
+                                <ul class="pager wizard">
                                     <li class="previous"><a href="javascript:void(0)">Previous</a></li>
                                     <li class="next"><a href="javascript:void(0)">Next</a></li>
                                 </ul>

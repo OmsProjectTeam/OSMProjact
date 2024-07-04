@@ -187,6 +187,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to إضافة ربح.
+        /// </summary>
+        public static string LBAddProfit {
+            get {
+                return ResourceManager.GetString("LBAddProfit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to العنوان.
         /// </summary>
         public static string LbAddres {
@@ -237,6 +246,15 @@ namespace Yara.Resource {
         public static string LBAddTransaction {
             get {
                 return ResourceManager.GetString("LBAddTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to إضافة وتعديل عملية تحويل.
+        /// </summary>
+        public static string LBAddTransfer {
+            get {
+                return ResourceManager.GetString("LBAddTransfer", resourceCulture);
             }
         }
         
@@ -484,6 +502,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to العملة.
+        /// </summary>
+        public static string LbCurrency {
+            get {
+                return ResourceManager.GetString("LbCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حالة.
         /// </summary>
         public static string lbCurrentState {
@@ -660,6 +687,15 @@ namespace Yara.Resource {
         public static string LbEmailCompany {
             get {
                 return ResourceManager.GetString("LbEmailCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الصرف.
+        /// </summary>
+        public static string LbExchangeAmount {
+            get {
+                return ResourceManager.GetString("LbExchangeAmount", resourceCulture);
             }
         }
         
@@ -1078,6 +1114,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to التحويلات.
+        /// </summary>
+        public static string LBMyTransfers {
+            get {
+                return ResourceManager.GetString("LBMyTransfers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to فئات الشركات.
         /// </summary>
         public static string LBMyTypesCompanies {
@@ -1402,6 +1447,24 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to كمية الربح.
+        /// </summary>
+        public static string LbProfitAmount {
+            get {
+                return ResourceManager.GetString("LbProfitAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to معلومات الأرباح.
+        /// </summary>
+        public static string LBProfitsInformations {
+            get {
+                return ResourceManager.GetString("LBProfitsInformations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to سعر الصرف.
         /// </summary>
         public static string LbRate {
@@ -1542,6 +1605,24 @@ namespace Yara.Resource {
         public static string LbTitleShipping {
             get {
                 return ResourceManager.GetString("LbTitleShipping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المبلغ.
+        /// </summary>
+        public static string LbTransferAmount {
+            get {
+                return ResourceManager.GetString("LbTransferAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to معلومات التحويل.
+        /// </summary>
+        public static string LBTransferInformations {
+            get {
+                return ResourceManager.GetString("LBTransferInformations", resourceCulture);
             }
         }
         
