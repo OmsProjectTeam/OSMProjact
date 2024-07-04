@@ -144,6 +144,9 @@
   <data name="LbAddEditInformationCompanies" xml:space="preserve">
     <value>إضافة وتعديل بيانات الشركة</value>
   </data>
+  <data name="LBAddEmailAlartSetting" xml:space="preserve">
+    <value>إضافةو تعديل سيرفر التنبيهات </value>
+  </data>
   <data name="LBAddExchangeRate" xml:space="preserve">
     <value>إضافة وتعديل سعر الصرف</value>
   </data>
@@ -393,6 +396,9 @@
   <data name="Lblon" xml:space="preserve">
     <value>خط الطول</value>
   </data>
+  <data name="lbMailSender" xml:space="preserve">
+    <value>بريد الارسال</value>
+  </data>
   <data name="LBMerchantInformation" xml:space="preserve">
     <value>معلومات التاجر</value>
   </data>
@@ -434,6 +440,9 @@
   </data>
   <data name="LBMyCustomer" xml:space="preserve">
     <value>بيانات العملاء الفردية</value>
+  </data>
+  <data name="LBMyEmailAlartSettingAr" xml:space="preserve">
+    <value>أعدادات بريدي التنبيهات</value>
   </data>
   <data name="LBMyExchangeRate" xml:space="preserve">
     <value>سعر الصرف</value>
@@ -561,6 +570,9 @@
   <data name="LBPaidings" xml:space="preserve">
     <value>المدفوعات</value>
   </data>
+  <data name="lbPasswordEmail" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
   <data name="LbPhoneCompany" xml:space="preserve">
     <value>رقم الهاتف</value>
   </data>
@@ -569,6 +581,9 @@
   </data>
   <data name="LbPhoto" xml:space="preserve">
     <value>الصورة</value>
+  </data>
+  <data name="lbPortServer" xml:space="preserve">
+    <value>المنفذ</value>
   </data>
   <data name="LbPrice" xml:space="preserve">
     <value>السعر</value>
@@ -621,11 +636,17 @@
   <data name="Lbsms_alert" xml:space="preserve">
     <value>التنبيه عبر الرسائل القصيرة</value>
   </data>
+  <data name="lbSmtpServer" xml:space="preserve">
+    <value>سيرفر الارسال</value>
+  </data>
   <data name="Lbsorting" xml:space="preserve">
     <value>التصنيف</value>
   </data>
   <data name="LbSpec" xml:space="preserve">
     <value>مساحة</value>
+  </data>
+  <data name="lbSsl_validity" xml:space="preserve">
+    <value>صلاحية SSL</value>
   </data>
   <data name="LbTaskStatus" xml:space="preserve">
     <value>حالة المهمة</value>

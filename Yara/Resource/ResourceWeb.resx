@@ -144,6 +144,9 @@
   <data name="LbAddEditInformationCompanies" xml:space="preserve">
     <value>Add and modify company data</value>
   </data>
+  <data name="LBAddEmailAlartSetting" xml:space="preserve">
+    <value>Adding and modifying Email Alart Setting</value>
+  </data>
   <data name="LBAddExchangeRate" xml:space="preserve">
     <value>Add and modify the exchange rate</value>
   </data>
@@ -393,6 +396,9 @@
   <data name="Lblon" xml:space="preserve">
     <value>longitude</value>
   </data>
+  <data name="lbMailSender" xml:space="preserve">
+    <value>Mail Sender</value>
+  </data>
   <data name="LBMerchantInformation" xml:space="preserve">
     <value>Merchant Information</value>
   </data>
@@ -567,6 +573,9 @@
   <data name="LBPaidings" xml:space="preserve">
     <value>Paidings</value>
   </data>
+  <data name="lbPasswordEmail" xml:space="preserve">
+    <value>Password Email</value>
+  </data>
   <data name="LbPhoneCompany" xml:space="preserve">
     <value>phone</value>
   </data>
@@ -575,6 +584,9 @@
   </data>
   <data name="LbPhoto" xml:space="preserve">
     <value>Photo</value>
+  </data>
+  <data name="lbPortServer" xml:space="preserve">
+    <value>Port Server</value>
   </data>
   <data name="LbPrice" xml:space="preserve">
     <value>Price</value>
@@ -630,11 +642,17 @@
   <data name="Lbsms_alert" xml:space="preserve">
     <value> sms alert</value>
   </data>
+  <data name="lbSmtpServer" xml:space="preserve">
+    <value>Smtp Server</value>
+  </data>
   <data name="Lbsorting" xml:space="preserve">
     <value>sorting</value>
   </data>
   <data name="LbSpec" xml:space="preserve">
     <value>Space</value>
+  </data>
+  <data name="lbSsl_validity" xml:space="preserve">
+    <value>Ssl validity</value>
   </data>
   <data name="LbTaskStatus" xml:space="preserve">
     <value>Task Status</value>

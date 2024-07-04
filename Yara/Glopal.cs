@@ -15,3 +15,9 @@ global using Microsoft.EntityFrameworkCore;
 global using Microsoft.AspNetCore.Authentication.Cookies;
 global using static Infarstuructre.BL.IIRolsInformation;
 global using TaskStatus = Domin.Entity.TaskStatus;
+
+global using MimeKit;
+
+
+global using MailKit.Security;
+global using MailKit.Net.Smtp;

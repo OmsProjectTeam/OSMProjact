@@ -261,6 +261,9 @@
   <data name="VlResivedMony" xml:space="preserve">
     <value>Please include the amount for the transaction to complete successfully..!</value>
   </data>
+  <data name="VlSmtpServer" xml:space="preserve">
+    <value>Please include the Smtp Server for the process to complete successfully...!</value>
+  </data>
   <data name="VlTitleShipping" xml:space="preserve">
     <value>Please include the appropriate address in the shipping category for the process to complete successfully...!</value>
   </data>

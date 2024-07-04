@@ -493,6 +493,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please include the Smtp Server for the process to complete successfully...!.
+        /// </summary>
+        public static string VlSmtpServer {
+            get {
+                return ResourceManager.GetString("VlSmtpServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please include the appropriate address in the shipping category for the process to complete successfully...!.
         /// </summary>
         public static string VlTitleShipping {

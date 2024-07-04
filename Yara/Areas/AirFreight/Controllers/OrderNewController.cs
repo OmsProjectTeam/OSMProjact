@@ -143,7 +143,6 @@ namespace Yara.Areas.AirFreight.Controllers
                 return View(vmodel);
             }
         }
-
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Save(ViewmMODeElMASTER model, TBOrderNew slider, List<IFormFile> Files, string returnUrl)
@@ -193,12 +192,68 @@ namespace Yara.Areas.AirFreight.Controllers
                         TempData["CatchReceiptNo"] = ResourceWeb.VLCatchReceiptNoDoplceted;
                         return Redirect(returnUrl);
                     }
+                    if (dbcontext.TBOrderNews.Where(a => a.DescriptionOrder == slider.DescriptionOrder).ToList().Count > 0)
+                    {
+                        var PhotoNAme = slider.Photo;
+                        var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+
+                        TempData["DescriptionOrder"] = ResourceWeb.VLDescriptionOrderDoplceted;
+                        return Redirect(returnUrl);
+                    }
 
                     var reqwest = iOrderNew.saveData(slider);
                     if (reqwest == true)
                     {
+                        //send email
+                        var emailSetting = await dbcontext.TBEmailAlartSettings
+                           .OrderByDescending(n => n.IdEmailAlartSetting)
+                           .Where(a => a.CurrentState == true && a.Active == true)
+                           .FirstOrDefaultAsync();
+
+                        // التحقق من وجود إعدادات البريد الإلكتروني
+                        if (emailSetting != null)
+                        {
+                            var message = new MimeMessage();
+                            message.From.Add(new MailboxAddress("New Order", emailSetting.MailSender));
+                            message.To.Add(new MailboxAddress("pritom", "nohadking@hotmail.com"));
+                            message.Subject = "طلب جديد من :" + slider.DataEntry;
+                            var builder = new BodyBuilder
+                            {
+                                TextBody = $"طلب جديد\n" +
+                                           $"وصف الطلب: {slider.DescriptionOrder}\n" +
+                                           $"تاريخ الطلب: {slider.OrderDate}\n" +
+                                           $"الوزن: {slider.Weight}\n" +
+                                           $"المبلغ: {slider.CostPrice}\n" +
+                                           $"مبلغ العميل: {slider.Price}\n" +
+                                           $"سعر الصرف: {slider.ExchangedPrice}\n" +
+                                           $"رقم السند: {slider.CatchReceiptNo}"
+                            };
+
+                            // إضافة الصورة كملف مرفق إذا كانت موجودة
+                            if (!string.IsNullOrEmpty(slider.Photo))
+                            {
+                                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Home", slider.Photo);
+                                builder.Attachments.Add(imagePath);
+                            }
+
+                            message.Body = builder.ToMessageBody();
+
+                            using (var client = new SmtpClient())
+                            {
+                                await client.ConnectAsync(emailSetting.SmtpServer, emailSetting.PortServer, SecureSocketOptions.StartTls);
+                                await client.AuthenticateAsync(emailSetting.MailSender, emailSetting.PasswordEmail);
+                                await client.SendAsync(message);
+                                await client.DisconnectAsync(true);
+                            }
+                        }
+                        else
+                        {
+                            // التعامل مع الحالة التي لا توجد فيها إعدادات البريد الإلكتروني
+                            // يمكنك تسجيل خطأ أو تنفيذ إجراءات أخرى هنا
+                        }
+
                         TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
-                        return RedirectToAction("MyOrderNew");
+                        return RedirectToAction("MyOrderNewAr");
                     }
                     else
                     {
@@ -213,7 +268,6 @@ namespace Yara.Areas.AirFreight.Controllers
                     //var reqweistDeletPoto = iOrderNew.DELETPHOTO(slider.IdInformationCompanies);
 
                     if (file.Count() == 0)
-
                     {
                         slider.Photo = model.OrderNew.Photo;
                         //TempData["Message"] = ResourceWeb.VLimageuplode;
@@ -248,16 +302,12 @@ namespace Yara.Areas.AirFreight.Controllers
                             return Redirect(returnUrl);
                         }
                     }
-
-
-
                 }
             }
             catch
             {
                 var file = HttpContext.Request.Form.Files;
                 if (file.Count() == 0)
-
                 {
                     //var PhotoNAme = slider.Photo;
                     //var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
