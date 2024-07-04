@@ -125,6 +125,7 @@
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWebAr.LbWeight</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWebAr.LbCostPrice</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWebAr.LbPrice</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWebAr.LbExchangedPrice</th>
                                                 <tfoot>
                                                     <tr>
                                                         <th rowspan="1" colspan="1">@ResourceWebAr.LbId</th>
@@ -137,6 +138,7 @@
                                                         <th rowspan="1" colspan="1">@ResourceWebAr.LbWeight</th>
                                                         <th rowspan="1" colspan="1">@ResourceWebAr.LbCostPrice</th>
                                                         <th rowspan="1" colspan="1">@ResourceWebAr.LbPrice</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWebAr.LbExchangedPrice</th>
                                                 </tfoot>
                                                 <tbody>
                                                             @foreach (var item in Model.ListViewOrderNew)
@@ -152,6 +154,7 @@
                                                             <td class="truncate-50">@item.Weight</td>
                                                             <td class="truncate-50">@item.CostPrice</td>
                                                             <td class="truncate-50">@item.Price</td>
+                                                            <td class="truncate-50">@item.ExchangedPrice</td>
                                                         </tr>
                                                             }
                                                 </tbody>

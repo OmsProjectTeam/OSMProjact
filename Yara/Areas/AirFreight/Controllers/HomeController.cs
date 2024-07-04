@@ -1,4 +1,5 @@
 ﻿using Infarstuructre.BL;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -13,15 +14,15 @@ namespace Yara.Areas.AirFreight.Controllers
 		MasterDbcontext dbcontext;
 		IIOrderNew iOrderNew;
 		IIUserInformation iUserInformation;
-		public HomeController(UserManager<ApplicationUser> userManager, IIUser iUser,MasterDbcontext dbcontext1,IIOrderNew iOrderNew1,IIUserInformation iUserInformation1)
+		IIPaidings iPaidings;
+        public HomeController(UserManager<ApplicationUser> userManager, IIUser iUser, MasterDbcontext dbcontext1, IIOrderNew iOrderNew1, IIUserInformation iUserInformation1, IIPaidings iPaidings)
         {
-			_userManager = userManager;
+            _userManager = userManager;
             iOrderNew = iOrderNew1;
-			iUserInformation= iUserInformation1;
-
-
-		}
-		public async Task<IActionResult> Index(string userId)
+            iUserInformation = iUserInformation1;
+            this.iPaidings = iPaidings;
+        }
+        public async Task<IActionResult> Index(string userId)
 		{
 			
 	
@@ -29,8 +30,7 @@ namespace Yara.Areas.AirFreight.Controllers
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 			//vmodel.ListlicationUser = iUserInformation.GetAllByName(user.UserName).Take(1);
 			var userd=vmodel.sUser = iUserInformation.GetById(userId);
-
-			var user = await _userManager.GetUserAsync(User);
+            var user = await _userManager.GetUserAsync(User);
 			if (user == null)
 				return NotFound();
 			// الحصول على دور المستخدم
@@ -42,12 +42,19 @@ namespace Yara.Areas.AirFreight.Controllers
 			// جلب البيانات وإعداد النموذج
 			vmodel.ListViewOrderNew = iOrderNew.GetAllDataentry(user.UserName);
 
+			
 			var filteredOrders = vmodel.ListViewOrderNew.Where(c => c.DataEntry == user.UserName).ToList();
 			ViewBag.Favorit = filteredOrders.Sum(c => c.CostPrice);
 			ViewBag.price = filteredOrders.Sum(c => c.Price);
+			ViewBag.ExchangedPrice = filteredOrders.Sum(c => c.ExchangedPrice);
 			ViewBag.total = ViewBag.price - ViewBag.Favorit;
-			// إرسال النموذج إلى العرض
-			return View(vmodel);
+
+            vmodel.ListViewPaings = iPaidings.GetAllDataentry(user.UserName);
+
+           var pay = vmodel.ListViewPaings.ToList();
+			ViewBag.paidings = pay.Sum(p => p.ResivedMony);
+            // إرسال النموذج إلى العرض
+            return View(vmodel);
 		}
 
 		public async Task<IActionResult> IndexAr(string userId)
@@ -77,6 +84,7 @@ namespace Yara.Areas.AirFreight.Controllers
 			ViewBag.Favorit = filteredOrders.Sum(c => c.CostPrice);
 			ViewBag.price = filteredOrders.Sum(c => c.Price);
 			ViewBag.total = ViewBag.price - ViewBag.Favorit;
+			ViewBag.paidings = ViewBag.price - ViewBag.total;
 			// إرسال النموذج إلى العرض
 			return View(vmodel);
 		}

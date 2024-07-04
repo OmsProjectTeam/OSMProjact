@@ -1441,6 +1441,22 @@ namespace Infarstuructre.Data
 
             //---------------------------------	
 
+                   //---------------------------------	
+            builder.Entity<TBEmailAlartSetting>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<TBEmailAlartSetting>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+            builder.Entity<TBEmailAlartSetting>()
+		   .Property(b => b.Ssl_validity)
+		   .HasDefaultValueSql("((1))"); 
+            builder.Entity<TBEmailAlartSetting>()
+		   .Property(b => b.Active)
+		   .HasDefaultValueSql("((1))");
+
+            //---------------------------------	
+
 
 
         }
@@ -1615,6 +1631,7 @@ namespace Infarstuructre.Data
         public DbSet<TBViewUsers> ViewUsers { get; set; }
         public DbSet<TBPaing> TBPaings { get; set; }
         public DbSet<TBViewPaings> ViewPaings { get; set; }
+        public DbSet<TBEmailAlartSetting> TBEmailAlartSettings { get; set; }
         
        
 

@@ -57,6 +57,7 @@ namespace Infarstuructre.BL
 
 
                 sslid.IsPaid = true;
+                sslid.IdorderStatus = 2037;
                 dbcontext.Entry(sslid).State = EntityState.Modified;
                 dbcontext.SaveChanges();
                
@@ -182,6 +183,8 @@ namespace Infarstuructre.BL
                 return false;
             }
         }
+
+
         ///////////////// APIs /////////////////////////////////////////
         public async Task<IEnumerable<TBViewPaings>> GetAllPaidingsAsync(int pageNumber, int pageSize)
         {

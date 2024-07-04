@@ -28,11 +28,11 @@
 		<!-- /.box-content -->
 	</div> *@
 	<!-- /.col-xs-12 -->
-	<div class="col-lg-3 col-md-6 col-xs-12">
+@* 	<div class="col-lg-3 col-md-6 col-xs-12">
 		<div class="box-content">
 			<h4 class="box-title">Cost Price</h4>
 			<!-- /.box-title -->
-			<div class="dropdown js__drop_down">
+@* 			<div class="dropdown js__drop_down">
 				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
 				<ul class="sub-menu">
 					<li><a href="#">Action</a></li>
@@ -42,7 +42,7 @@
 					<li><a href="#">Separated link</a></li>
 				</ul>
 				<!-- /.sub-menu -->
-			</div>
+			</div> 
 			<!-- /.dropdown js__dropdown -->
 			<div class="content widget-stat">
 				<div class="percent bg-warning"><i class="fa fa-line-chart"></i>53%</div>
@@ -70,26 +70,13 @@
 			<!-- /.content widget-stat -->
 		</div>
 		<!-- /.box-content -->
-	</div>
+	</div> *@
 
 
 	<!-- /.col-lg-3 col-md-6 col-xs-12 -->
-	<div class="col-lg-3 col-md-6 col-xs-12">
+	<div class="col-lg-6 col-md-6 col-xs-12">
 		<div class="box-content">
-			<h4 class="box-title">price</h4>
-			<!-- /.box-title -->
-			<div class="dropdown js__drop_down">
-				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-				<ul class="sub-menu">
-					<li><a href="#">Action</a></li>
-					<li><a href="#">Another action</a></li>
-					<li><a href="#">Something else there</a></li>
-					<li class="split"></li>
-					<li><a href="#">Separated link</a></li>
-				</ul>
-				<!-- /.sub-menu -->
-			</div>
-			<!-- /.dropdown js__dropdown -->
+		
 			<div class="content widget-stat-chart">
 				<div class="c100 p76 small blue js__circle">
 					<span>76%</span>
@@ -100,9 +87,19 @@
 				</div>
 				<!-- /.c100 p58 -->
 				<div class="right-content">
-					<h2 class="counter">@ViewBag.price</h2>
+					<h4 class="box-title">Cost Price</h4>
+					<h2 class="counter"style="color:green">@ViewBag.Favorit</h2>
+					<h4 class="box-title">	price</h4>
+					<h2 class="counter" style="color:darkred">@ViewBag.price</h2>
+					<h4 class="box-title">@ResourceWeb.LbExchangedPrice</h4>
+					<h2 class="counter" style="color:blueviolet">@ViewBag.ExchangedPrice</h2>
+					<h4 class="box-title">tottal</h4>
+					<h2 class="counter" style="color:aqua">@ViewBag.total</h2>
+					<h4 class="box-title">paidings</h4>
+					<h2 class="counter" style="color:chocolate">@ViewBag.paidings</h2>
+
 					<!-- /.counter -->
-					<p class="text">Disk usage</p>
+					
 					<!-- /.text -->
 				</div>
 				<!-- /.right-content -->
@@ -111,12 +108,14 @@
 		</div>
 		<!-- /.box-content -->
 	</div>
-	<!-- /.col-lg-3 col-md-6 col-xs-12 -->
+
+
+	@* <!-- /.col-lg-3 col-md-6 col-xs-12 -->
 	<div class="col-lg-3 col-md-6 col-xs-12">
 		<div class="box-content">
 			<h4 class="box-title">tottal</h4>
 			<!-- /.box-title -->
-			<div class="dropdown js__drop_down">
+@* 			<div class="dropdown js__drop_down">
 				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
 				<ul class="sub-menu">
 					<li><a href="#">Action</a></li>
@@ -126,7 +125,7 @@
 					<li><a href="#">Separated link</a></li>
 				</ul>
 				<!-- /.sub-menu -->
-			</div>
+			</div> *
 			<!-- /.dropdown js__dropdown -->
 			<div class="content widget-stat">
 				<div class="percent bg-danger"><i class="fa fa-line-chart"></i>+40%</div>
@@ -156,7 +155,7 @@
 		<div class="box-content">
 			<h4 class="box-title">Monthly Sales</h4>
 			<!-- /.box-title -->
-			<div class="dropdown js__drop_down">
+@* 			<div class="dropdown js__drop_down">
 				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
 				<ul class="sub-menu">
 					<li><a href="#">Action</a></li>
@@ -166,7 +165,7 @@
 					<li><a href="#">Separated link</a></li>
 				</ul>
 				<!-- /.sub-menu -->
-			</div>
+			</div> 
 			<!-- /.dropdown js__dropdown -->
 			<div class="content widget-stat-chart">
 				<div class="c100 p94 small green js__circle">
@@ -178,7 +177,7 @@
 				</div>
 				<!-- /.c100 p58 -->
 				<div class="right-content">
-					<h2 class="counter">3922</h2>
+					<h2 class="counter">@ViewBag.paidings</h2>
 					<!-- /.counter -->
 					<p class="text">Sales</p>
 					<!-- /.text -->
@@ -189,19 +188,19 @@
 		</div>
 		<!-- /.box-content -->
 	</div>
-	<!-- /.col-lg-3 col-md-6 col-xs-12 -->
+	<!-- /.col-lg-3 col-md-6 col-xs-12 --> *@
 
 
 
 
-	<div class="col-lg-6 col-xs-12">
+	@* <div class="col-lg-6 col-xs-12">
 		<div class="box-content">
 			<div id="calendar-widget"></div>
 		</div>
 		<!-- /.box-content -->
-	</div>
+	</div> *@
 	<!-- /.col-lg-6 col-xs-12 -->
-	<div class="col-lg-6 col-xs-12">
+@* 	<div class="col-lg-6 col-xs-12">
 		<div class="box-content">
 			<h4 class="box-title">Purchases</h4>
 			<!-- /.box-title -->
@@ -306,7 +305,7 @@
 			<!-- /.table-responsive -->
 		</div>
 		<!-- /.box-content -->
-	</div>
+	</div> *@
 	<!-- /.col-lg-6 col-xs-12 -->
 </div>
 

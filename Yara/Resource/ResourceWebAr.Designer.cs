@@ -666,6 +666,15 @@ namespace Yara.Resource {
         /// <summary>
         ///   Looks up a localized string similar to سعر الصرف.
         /// </summary>
+        public static string LbExchangedPrice {
+            get {
+                return ResourceManager.GetString("LbExchangedPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to سعر الصرف.
+        /// </summary>
         public static string LbExchangeRate {
             get {
                 return ResourceManager.GetString("LbExchangeRate", resourceCulture);

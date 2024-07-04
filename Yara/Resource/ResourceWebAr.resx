@@ -318,6 +318,9 @@
   <data name="LbEmailCompany" xml:space="preserve">
     <value>البريد الإلكتروني</value>
   </data>
+  <data name="LbExchangedPrice" xml:space="preserve">
+    <value>سعر الصرف</value>
+  </data>
   <data name="LbExchangeRate" xml:space="preserve">
     <value>سعر الصرف</value>
   </data>

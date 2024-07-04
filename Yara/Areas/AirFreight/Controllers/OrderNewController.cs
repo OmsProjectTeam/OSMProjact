@@ -16,7 +16,9 @@ namespace Yara.Areas.AirFreight.Controllers
         MasterDbcontext dbcontext;
         IIShippingPrice iShippingPrice;
         UserManager<ApplicationUser> _userManager;
-        public OrderNewController(IIOrderNew iOrderNew1, IIOrderCase iOrderCase1, IIOrderStatus iOrderStatus1, IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1, MasterDbcontext dbcontext1, IIShippingPrice iShippingPrice1, UserManager<ApplicationUser> userManager)
+        IIExchangeRate iExchangeRate;
+        IICurrenciesExchangeRates iCurrenciesExchangeRates;
+        public OrderNewController(IIOrderNew iOrderNew1, IIOrderCase iOrderCase1, IIOrderStatus iOrderStatus1, IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1, MasterDbcontext dbcontext1, IIShippingPrice iShippingPrice1, UserManager<ApplicationUser> userManager,IIExchangeRate iExchangeRate1, IICurrenciesExchangeRates iCurrenciesTransactions1)
         {
             iOrderNew = iOrderNew1;
             iOrderCase = iOrderCase1;
@@ -25,6 +27,8 @@ namespace Yara.Areas.AirFreight.Controllers
             dbcontext = dbcontext1;
             iShippingPrice = iShippingPrice1;
             _userManager = userManager;
+            iExchangeRate= iExchangeRate1;
+            iCurrenciesExchangeRates = iCurrenciesTransactions1;
         }
         public async Task<IActionResult> MyOrderNew(string? userId)
 
@@ -56,11 +60,34 @@ namespace Yara.Areas.AirFreight.Controllers
                 .Where(t => t.EmailCompany == user.Email)
                 .ToListAsync();
 
-            ViewBag.ShippingPrice = new SelectList(clintDeliveryTariff, "IdInformationCompanies", "NikeNAme");
+            var shippingPriceSelectList = clintDeliveryTariff.Select(t => new SelectListItem
+            {
+                Value = t.IdInformationCompanies.ToString(), // تحويل القيمة إلى نص
+                Text = t.NikeNAme
+            }).ToList();
+            var ordersttuse= dbcontext.order_status.Where(t => t.Id== 1037 ).ToList();
+
+            var order = ordersttuse.Select(t => new SelectListItem
+            {
+                Value = t.Id.ToString(), // تحويل القيمة إلى نص
+                Text = t.Description
+            }).ToList();
+
+            ViewBag.OrderStatus = new SelectList(order, "Value", "Text");
+          //  ViewBag.OrderStatus = iOrderStatus.GetAll();
+
+
+            ViewBag.ShippingPrice = new SelectList(shippingPriceSelectList, "Value", "Text");
+
+
+
             ViewBag.OrderCase = iOrderCase.GetAll();
-            ViewBag.OrderStatus = iOrderStatus.GetAll();
+         
             ViewBag.ClintWith = iClintWitheDeliveryTariffs.GetAll();
-            //ViewBag.ShippingPrice = iShippingPrice.GetAll();
+          //  ViewBag.ShippingPrice = iShippingPrice.GetAll(); // قد يكون لديك خطأ هنا لأنك قمت بتعيين نفس الخاصية مرتين
+            ViewBag.exch = iExchangeRate.GetAll();
+            ViewBag.Currenc = iCurrenciesExchangeRates.GetAll();
+
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewOrderNew = iOrderNew.GetAll();
             if (IdOrderNew != null)
@@ -74,25 +101,36 @@ namespace Yara.Areas.AirFreight.Controllers
             }
         }
 
+
+
+
         public async Task<IActionResult> AddOrderNewAr(int? IdOrderNew)
         {
-
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
                 return NotFound();
 
             var clintDeliveryTariff = await dbcontext.ViewInformationCompanies
-                .Where(t => t.IdUserIdentity == user.Id)
+                .Where(t => t.EmailCompany == user.Email)
                 .ToListAsync();
 
-            ViewBag.ShippingPrice = new SelectList(clintDeliveryTariff, "IdInformationCompanies", "NikeNAme");
+            var shippingPriceSelectList = clintDeliveryTariff.Select(t => new SelectListItem
+            {
+                Value = t.IdInformationCompanies.ToString(), // تحويل القيمة إلى نص
+                Text = t.NikeNAme
+            }).ToList();
+
+            ViewBag.ShippingPrice = new SelectList(shippingPriceSelectList, "Value", "Text");
 
 
 
             ViewBag.OrderCase = iOrderCase.GetAll();
             ViewBag.OrderStatus = iOrderStatus.GetAll();
             ViewBag.ClintWith = iClintWitheDeliveryTariffs.GetAll();
-            ViewBag.ShippingPrice = iShippingPrice.GetAll();
+            //  ViewBag.ShippingPrice = iShippingPrice.GetAll(); // قد يكون لديك خطأ هنا لأنك قمت بتعيين نفس الخاصية مرتين
+            ViewBag.exch = iExchangeRate.GetAll();
+            ViewBag.Currenc = iCurrenciesExchangeRates.GetAll();
+
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewOrderNew = iOrderNew.GetAll();
             if (IdOrderNew != null)
@@ -130,6 +168,7 @@ namespace Yara.Areas.AirFreight.Controllers
                 slider.CatchReceiptNo = model.OrderNew.CatchReceiptNo;
                 slider.Photo = model.OrderNew.Photo;
                 slider.IsPaid = model.OrderNew.IsPaid;
+                slider.ExchangedPrice = model.OrderNew.ExchangedPrice;
                 var file = HttpContext.Request.Form.Files;
                 if (slider.IdOrderNew == 0 || slider.IdOrderNew == null)
                 {
@@ -251,11 +290,21 @@ namespace Yara.Areas.AirFreight.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetPrices(int selectedCompanyId, float weight)
+        public IActionResult GetPrices(int selectedCompanyId, float weight, int toCurrencyId, int fromCurrencyId)
         {
+            var exchangeRate = iExchangeRate.GetAll()
+            .LastOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
+            .Rate;
+            //var eeee=   exchangeRate.FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?.Rate;
+
+            //        var clintDeliveryTariff = dbcontext.TBExchangeRates
+            //.Where(t => t.IdCurrenciesExchangeRates == fromCurrencyId)?.Rate;
+
+            //      var towr= dbcontext.TBExchangeRates
+            //.Where(t => t.ToIdCurrenciesExchangeRates == toCurrencyId);
+            //int fromCurrencyId = 1;
             var prices = iShippingPrice.GetAll()
                 .FirstOrDefault(x => x.IdInformationCompanies == selectedCompanyId);
-
             if (prices != null)
             {
                 if (weight <= 10)
@@ -263,7 +312,8 @@ namespace Yara.Areas.AirFreight.Controllers
                     return Json(new
                     {
                         costPrice = prices.CoPricePerkgUnder10 * (decimal)weight,
-                        price = prices.CoPricePerkgAbove10 * (decimal)weight
+                        price = prices.CoPricePerkgAbove10 * (decimal)weight,
+                        exchangePrice = prices.CoPricePerkgAbove10 * (decimal)weight * exchangeRate
                     });
                 }
                 else
@@ -271,7 +321,8 @@ namespace Yara.Areas.AirFreight.Controllers
                     return Json(new
                     {
                         costPrice = prices.ClintPricePerkgUnder10 * (decimal)weight,
-                        price = prices.ClintPricePerkgAbove10 * (decimal)weight
+                        price = prices.ClintPricePerkgAbove10 * (decimal)weight,
+                        exchangePrice = prices.CoPricePerkgAbove10 * (decimal)weight * exchangeRate
                     });
                 }
             }

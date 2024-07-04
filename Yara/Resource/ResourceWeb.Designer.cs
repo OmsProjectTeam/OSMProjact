@@ -664,6 +664,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exchanged Price.
+        /// </summary>
+        public static string LbExchangedPrice {
+            get {
+                return ResourceManager.GetString("LbExchangedPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to exchange rate.
         /// </summary>
         public static string LbExchangeRate {
@@ -1848,6 +1857,15 @@ namespace Yara.Resource {
         public static string VLDescriptionOrderDoplceted {
             get {
                 return ResourceManager.GetString("VLDescriptionOrderDoplceted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your email address has already been entered, please check and try again later..!.
+        /// </summary>
+        public static string VLEmailAlartSettingDoplceted {
+            get {
+                return ResourceManager.GetString("VLEmailAlartSettingDoplceted", resourceCulture);
             }
         }
         

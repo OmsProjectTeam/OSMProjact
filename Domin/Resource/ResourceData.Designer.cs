@@ -430,6 +430,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please include the Password Email for the process to complete successfully...!.
+        /// </summary>
+        public static string VlPasswordEmail {
+            get {
+                return ResourceManager.GetString("VlPasswordEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please include the phone number for the process to complete successfully....!.
         /// </summary>
         public static string VlPhoneCompany {

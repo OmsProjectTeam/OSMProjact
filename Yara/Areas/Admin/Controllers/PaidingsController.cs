@@ -134,6 +134,8 @@ namespace Yara.Areas.Admin.Controllers
                 slider.CurrentState = model.Paing.CurrentState;               
                 slider.Photo = model.Paing.Photo;           
                 var file = HttpContext.Request.Form.Files;
+
+                // add
                 if (slider.IdPaings == 0 || slider.IdPaings == null)
                 {
                     if (file.Count() > 0)
@@ -172,6 +174,8 @@ namespace Yara.Areas.Admin.Controllers
                         return Redirect(returnUrl);
                     }
                 }
+
+                // update
                 else
                 {
                     //var reqweistDeletPoto = iPaidings.DELETPHOTO(slider.IdInformationCompanies);
@@ -249,6 +253,9 @@ namespace Yara.Areas.Admin.Controllers
                 }
             }
         }
+
+
+
         [Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdPaings)
         {
