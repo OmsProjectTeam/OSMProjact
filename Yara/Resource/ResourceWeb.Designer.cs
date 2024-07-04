@@ -1861,6 +1861,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your email address has already been entered, please check and try again later..!.
+        /// </summary>
+        public static string VLEmailAlartSettingDoplceted {
+            get {
+                return ResourceManager.GetString("VLEmailAlartSettingDoplceted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email or username already exists...!.
         /// </summary>
         public static string VLEmailOreUserOrPaswo {

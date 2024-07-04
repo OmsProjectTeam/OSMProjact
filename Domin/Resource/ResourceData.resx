@@ -240,6 +240,9 @@
   <data name="VlNikeNAme" xml:space="preserve">
     <value>Please include the nickname for the process to complete successfully..!</value>
   </data>
+  <data name="VlPasswordEmail" xml:space="preserve">
+    <value>Please include the Password Email for the process to complete successfully...!</value>
+  </data>
   <data name="VlPhoneCompany" xml:space="preserve">
     <value>Please include the phone number for the process to complete successfully....!</value>
   </data>

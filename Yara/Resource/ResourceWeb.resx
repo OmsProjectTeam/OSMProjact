@@ -717,6 +717,9 @@
   <data name="VLDescriptionOrderDoplceted" xml:space="preserve">
     <value>The order description has already been entered. Please confirm and try again later...!</value>
   </data>
+  <data name="VLEmailAlartSettingDoplceted" xml:space="preserve">
+    <value>Your email address has already been entered, please check and try again later..!</value>
+  </data>
   <data name="VLEmailOreUserOrPaswo" xml:space="preserve">
     <value>Email or username already exists...!</value>
   </data>
