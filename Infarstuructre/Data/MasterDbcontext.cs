@@ -1456,6 +1456,18 @@ namespace Infarstuructre.Data
            .Property(b => b.CurrentState)
            .HasDefaultValueSql("((1))");
 
+            //--------------------------------- 
+            //---------------------------------	
+            builder.Entity<TBEmailAlartSetting>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBEmailAlartSetting>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))"); 
+            builder.Entity<TBEmailAlartSetting>()
+           .Property(b => b.Active)
+           .HasDefaultValueSql("((1))");
+
             //---------------------------------
         }
 
@@ -1632,6 +1644,7 @@ namespace Infarstuructre.Data
         public DbSet<TBViewPaings> ViewPaings { get; set; }
         public DbSet<TBViewTransfer> ViewTransfer { get; set; }
         public DbSet<TBViewTransfer> ViewProfits { get; set; }
+        public DbSet<TBEmailAlartSetting> TBEmailAlartSettings { get; set; }
         //test
         
        
