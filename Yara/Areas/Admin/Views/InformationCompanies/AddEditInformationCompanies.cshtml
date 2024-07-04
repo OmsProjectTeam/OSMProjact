@@ -13,6 +13,7 @@
             <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
             <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
         </ul>
+
         <div class="row small-spacing">
             <div class="col-lg-12 col-xs-12">
                 <div class="box-content card white">
@@ -32,7 +33,7 @@
                                     <div class="col-12 col-sm-3">
                                         <div class="form-group">
                                             <label asp-for="@Model.InformationCompanies.IdUserIdentity" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
-                                            <select id="merchant-select" class="form-control select2_1" asp-for="@Model.InformationCompanies.IdUserIdentity" asp-items="@(new SelectList(ViewBag.user, "Id", "Name"))">
+                                            <select id="merchant-select" class="form-control" asp-for="@Model.InformationCompanies.IdUserIdentity" asp-items="@(new SelectList(ViewBag.user, "Id", "Name"))">
                                             </select>
                                             <span asp-validation-for="@Model.InformationCompanies.IdUserIdentity" class="text-danger"></span>
                                         </div>
