@@ -110,10 +110,19 @@ namespace Yara.Areas.Admin.Controllers
         public IActionResult AddPaidingsAr(int? IdPaings)
         {
             ViewBag.Order = iOrderNew.GetAll();
+            ViewBag.Currenc = iCurrenciesTransactions.GetAll();
 
 
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewPaings = iPaidings.GetAll();
+            vmodel.ListViewExchangeRate = iExchangeRate.GetAll();
+
+            // Set the default ToCurrencyID
+            vmodel.ExchangeRate = new TBExchangeRate
+            {
+                ToIdCurrenciesExchangeRates = 2 // Default value
+            };
+
             if (IdPaings != null)
             {
                 vmodel.Paing = iPaidings.GetById(Convert.ToInt32(IdPaings));
