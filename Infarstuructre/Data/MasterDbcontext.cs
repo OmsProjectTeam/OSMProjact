@@ -1632,6 +1632,7 @@ namespace Infarstuructre.Data
         public DbSet<TBViewPaings> ViewPaings { get; set; }
         public DbSet<TBViewTransfer> ViewTransfer { get; set; }
         public DbSet<TBViewTransfer> ViewProfits { get; set; }
+        //test
         
        
 
