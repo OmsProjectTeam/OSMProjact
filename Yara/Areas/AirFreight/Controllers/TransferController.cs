@@ -11,13 +11,15 @@ public class TransferController : Controller
 	IICurrenciesExchangeRates exchangeRates;
 	MasterDbcontext dbcontext;
 	UserManager<ApplicationUser> userManager;
-	public TransferController(IIOrderNew iOrderNew, IITransfer iTransfer, IICurrenciesExchangeRates exchangeRates, MasterDbcontext dbcontext, UserManager<ApplicationUser> userManager)
+    IIExchangeRate iExchangeRate;
+    public TransferController(IIOrderNew iOrderNew, IITransfer iTransfer, IICurrenciesExchangeRates exchangeRates, MasterDbcontext dbcontext, UserManager<ApplicationUser> userManager, IIExchangeRate iExchangeRate1)
 	{
 		this.iOrderNew = iOrderNew;
 		this.iTransfer = iTransfer;
 		this.exchangeRates = exchangeRates;
 		this.dbcontext = dbcontext;
 		this.userManager = userManager;
+        iExchangeRate = iExchangeRate1;
 	}
 
 	public async Task<IActionResult> MyTransfer()
@@ -42,7 +44,16 @@ public class TransferController : Controller
 
 		ViewBag.Currency = exchangeRates.GetAll();
 		ViewBag.Order = iOrderNew.GetAll();
-		var user = vmodel.sUser = await userManager.GetUserAsync(User);
+
+        vmodel.ListViewExchangeRate = iExchangeRate.GetAll();
+
+        // Set the default ToCurrencyID
+        vmodel.ExchangeRate = new TBExchangeRate
+        {
+            ToIdCurrenciesExchangeRates = 2 // Default value
+        };
+
+        var user = vmodel.sUser = await userManager.GetUserAsync(User);
 
 
 		vmodel.ListViewTransfer = iTransfer.GetAllDataentry(user.UserName);
@@ -63,7 +74,16 @@ public class TransferController : Controller
 
 		ViewBag.Currency = exchangeRates.GetAll();
 		ViewBag.Order = iOrderNew.GetAll();
-		var user = vmodel.sUser = await userManager.GetUserAsync(User);
+
+        vmodel.ListViewExchangeRate = iExchangeRate.GetAll();
+
+        // Set the default ToCurrencyID
+        vmodel.ExchangeRate = new TBExchangeRate
+        {
+            ToIdCurrenciesExchangeRates = 2 // Default value
+        };
+
+        var user = vmodel.sUser = await userManager.GetUserAsync(User);
 
 
 		vmodel.ListViewTransfer = iTransfer.GetAllDataentry(user.UserName);
@@ -164,4 +184,21 @@ public class TransferController : Controller
 			return RedirectToAction("MyTransfer");
 		}
 	}
+
+    [HttpGet]
+    public IActionResult GetExchangeRate(int fromCurrencyId, int toCurrencyId, double revisedMoney)
+    {
+        // Fetch the exchange rate from the database
+        var exchangeRate = iExchangeRate.GetAll()
+                          .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
+                          .Rate;
+
+        var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
+
+        if (exchangeRate != null)
+        {
+            return Json(exchangeRateValue);
+        }
+        return Json("N/A");
+    }
 }

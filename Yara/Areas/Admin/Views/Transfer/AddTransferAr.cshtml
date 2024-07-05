@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group">
-                                        <label asp-for="@Model.Transaction.ToCurrencyID">@ResourceWeb.LBMyCurrenciesExchangeRates</label>
+                                        <label asp-for="@Model.Transaction.ToCurrencyID">@ResourceWebAr.LBMyCurrenciesExchangeRates</label>
                                         <select class="form-control" asp-for="@Model.Transaction.ToCurrencyID" asp-items="@(new SelectList(ViewBag.Currency, "IdCurrenciesExchangeRates", "Country", Model.ExchangeRate.ToIdCurrenciesExchangeRates))" id="toCurrency"></select>
                                         <span asp-validation-for="@Model.Transaction.ToCurrencyID" class="text-danger"></span>
                                     </div>
