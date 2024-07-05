@@ -159,6 +159,9 @@
   <data name="LBAddPaing" xml:space="preserve">
     <value>Add Paing</value>
   </data>
+  <data name="LBAddProfit" xml:space="preserve">
+    <value>Add Profit</value>
+  </data>
   <data name="LbAddres" xml:space="preserve">
     <value>Address</value>
   </data>
@@ -176,6 +179,9 @@
   </data>
   <data name="LBAddTransaction" xml:space="preserve">
     <value>Add and modify currency calculator</value>
+  </data>
+  <data name="LBAddTransfer" xml:space="preserve">
+    <value>Adding and modifying Transfer</value>
   </data>
   <data name="LBAddTypesCompanies" xml:space="preserve">
     <value>Add and modify company categories</value>
@@ -258,6 +264,9 @@
   <data name="Lbcredit" xml:space="preserve">
     <value>credit</value>
   </data>
+  <data name="LbCurrency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
   <data name="lbCurrentState" xml:space="preserve">
     <value>status</value>
   </data>
@@ -317,6 +326,9 @@
   </data>
   <data name="LbEmailCompany" xml:space="preserve">
     <value>E-mail</value>
+  </data>
+  <data name="LbExchangeAmount" xml:space="preserve">
+    <value>Exchange Amount</value>
   </data>
   <data name="LbExchangedPrice" xml:space="preserve">
     <value>Exchanged Price</value>
@@ -444,6 +456,9 @@
   <data name="LBMyOrderStatus" xml:space="preserve">
     <value>Order Status</value>
   </data>
+  <data name="LBMyProfits" xml:space="preserve">
+    <value>My Profits</value>
+  </data>
   <data name="LBMyRolesName" xml:space="preserve">
     <value>Roles </value>
   </data>
@@ -455,6 +470,9 @@
   </data>
   <data name="LBMyTransaction" xml:space="preserve">
     <value>Currency calculator</value>
+  </data>
+  <data name="LBMyTransfers" xml:space="preserve">
+    <value>My Transfers</value>
   </data>
   <data name="LBMyTypesCompanies" xml:space="preserve">
     <value>Categories of companies</value>
@@ -564,6 +582,15 @@
   <data name="LBProfile" xml:space="preserve">
     <value>Profile</value>
   </data>
+  <data name="LbProfitAmount" xml:space="preserve">
+    <value>Profit Amount</value>
+  </data>
+  <data name="LbProfits" xml:space="preserve">
+    <value>Profits</value>
+  </data>
+  <data name="LBProfitsInformations" xml:space="preserve">
+    <value>Profits Informations</value>
+  </data>
   <data name="LbRate" xml:space="preserve">
     <value>exchange rate</value>
   </data>
@@ -611,6 +638,12 @@
   </data>
   <data name="LbTitleShipping" xml:space="preserve">
     <value>Title Shipping</value>
+  </data>
+  <data name="LbTransferAmount" xml:space="preserve">
+    <value>Transfer Amount</value>
+  </data>
+  <data name="LBTransferInformations" xml:space="preserve">
+    <value>Transfer Informations</value>
   </data>
   <data name="LbTypesCompanies" xml:space="preserve">
     <value>Category</value>

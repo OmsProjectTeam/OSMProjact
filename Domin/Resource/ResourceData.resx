@@ -219,6 +219,9 @@
   <data name="VlCountry" xml:space="preserve">
     <value>Please include the country for the process to complete successfully...!</value>
   </data>
+  <data name="VlCurrency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
   <data name="VlDescriptionClint" xml:space="preserve">
     <value>Please include a description of the link between the customer and the pricing. The process is completed successfully...!</value>
   </data>
@@ -245,6 +248,9 @@
   </data>
   <data name="VlPhoneCompany" xml:space="preserve">
     <value>Please include the phone number for the process to complete successfully....!</value>
+  </data>
+  <data name="VlProfitAmount" xml:space="preserve">
+    <value>Profit Amount</value>
   </data>
   <data name="VlReceiptNo" xml:space="preserve">
     <value>Please include a bond number for the process to complete successfully...!</value>

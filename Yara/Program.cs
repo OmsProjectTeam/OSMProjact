@@ -1,4 +1,5 @@
 ﻿using Domin.Entity;
+using Infarstuructre.BL;
 using LamarModa.Api.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -126,6 +127,7 @@ builder.Services.AddScoped<IIOrderNew, CLSTBOrderNew>();
 builder.Services.AddScoped<IIUser, CLSUser>();
 builder.Services.AddScoped<IIPaidings, CLSTBPaidings>();
 builder.Services.AddScoped<IIEmailAlartSetting, CLSTBEmailAlartSetting>();
+builder.Services.AddScoped<IITransfer, CLSTransfer>();
 
 
 

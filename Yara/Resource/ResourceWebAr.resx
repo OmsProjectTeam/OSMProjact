@@ -159,6 +159,9 @@
   <data name="LBAddPaing" xml:space="preserve">
     <value>إضافة مدفوعات</value>
   </data>
+  <data name="LBAddProfit" xml:space="preserve">
+    <value>إضافة ربح</value>
+  </data>
   <data name="LbAddres" xml:space="preserve">
     <value>العنوان</value>
   </data>
@@ -176,6 +179,9 @@
   </data>
   <data name="LBAddTransaction" xml:space="preserve">
     <value>إضافة وتعديل حاسبة العملات</value>
+  </data>
+  <data name="LBAddTransfer" xml:space="preserve">
+    <value>إضافة وتعديل عملية تحويل</value>
   </data>
   <data name="LBAddTypesCompanies" xml:space="preserve">
     <value>إضافة وتعديل فئات الشركة</value>
@@ -258,6 +264,9 @@
   <data name="Lbcredit" xml:space="preserve">
     <value>ائتمان</value>
   </data>
+  <data name="LbCurrency" xml:space="preserve">
+    <value>العملة</value>
+  </data>
   <data name="lbCurrentState" xml:space="preserve">
     <value>حالة</value>
   </data>
@@ -317,6 +326,9 @@
   </data>
   <data name="LbEmailCompany" xml:space="preserve">
     <value>البريد الإلكتروني</value>
+  </data>
+  <data name="LbExchangeAmount" xml:space="preserve">
+    <value>الصرف</value>
   </data>
   <data name="LbExchangedPrice" xml:space="preserve">
     <value>سعر الصرف</value>
@@ -456,6 +468,9 @@
   <data name="LBMyTransaction" xml:space="preserve">
     <value>حاسبة العملة</value>
   </data>
+  <data name="LBMyTransfers" xml:space="preserve">
+    <value>التحويلات</value>
+  </data>
   <data name="LBMyTypesCompanies" xml:space="preserve">
     <value>فئات الشركات</value>
   </data>
@@ -564,6 +579,12 @@
   <data name="LBProfile" xml:space="preserve">
     <value>الملف الشخصي</value>
   </data>
+  <data name="LbProfitAmount" xml:space="preserve">
+    <value>كمية الربح</value>
+  </data>
+  <data name="LBProfitsInformations" xml:space="preserve">
+    <value>معلومات الأرباح</value>
+  </data>
   <data name="LbRate" xml:space="preserve">
     <value>سعر الصرف</value>
   </data>
@@ -611,6 +632,12 @@
   </data>
   <data name="LbTitleShipping" xml:space="preserve">
     <value>عنوان الشحن</value>
+  </data>
+  <data name="LbTransferAmount" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="LBTransferInformations" xml:space="preserve">
+    <value>معلومات التحويل</value>
   </data>
   <data name="LbTypesCompanies" xml:space="preserve">
     <value>الفئة</value>

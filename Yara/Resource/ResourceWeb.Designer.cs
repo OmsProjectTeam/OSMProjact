@@ -187,6 +187,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Profit.
+        /// </summary>
+        public static string LBAddProfit {
+            get {
+                return ResourceManager.GetString("LBAddProfit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string LbAddres {
@@ -237,6 +246,15 @@ namespace Yara.Resource {
         public static string LBAddTransaction {
             get {
                 return ResourceManager.GetString("LBAddTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adding and modifying Transfer.
+        /// </summary>
+        public static string LBAddTransfer {
+            get {
+                return ResourceManager.GetString("LBAddTransfer", resourceCulture);
             }
         }
         
@@ -484,6 +502,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        public static string LbCurrency {
+            get {
+                return ResourceManager.GetString("LbCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to status.
         /// </summary>
         public static string lbCurrentState {
@@ -660,6 +687,15 @@ namespace Yara.Resource {
         public static string LbEmailCompany {
             get {
                 return ResourceManager.GetString("LbEmailCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exchange Amount.
+        /// </summary>
+        public static string LbExchangeAmount {
+            get {
+                return ResourceManager.GetString("LbExchangeAmount", resourceCulture);
             }
         }
         
@@ -1042,6 +1078,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My Profits.
+        /// </summary>
+        public static string LBMyProfits {
+            get {
+                return ResourceManager.GetString("LBMyProfits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Roles .
         /// </summary>
         public static string LBMyRolesName {
@@ -1074,6 +1119,15 @@ namespace Yara.Resource {
         public static string LBMyTransaction {
             get {
                 return ResourceManager.GetString("LBMyTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Transfers.
+        /// </summary>
+        public static string LBMyTransfers {
+            get {
+                return ResourceManager.GetString("LBMyTransfers", resourceCulture);
             }
         }
         
@@ -1402,6 +1456,33 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profit Amount.
+        /// </summary>
+        public static string LbProfitAmount {
+            get {
+                return ResourceManager.GetString("LbProfitAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profits.
+        /// </summary>
+        public static string LbProfits {
+            get {
+                return ResourceManager.GetString("LbProfits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profits Informations.
+        /// </summary>
+        public static string LBProfitsInformations {
+            get {
+                return ResourceManager.GetString("LBProfitsInformations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to exchange rate.
         /// </summary>
         public static string LbRate {
@@ -1542,6 +1623,24 @@ namespace Yara.Resource {
         public static string LbTitleShipping {
             get {
                 return ResourceManager.GetString("LbTitleShipping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transfer Amount.
+        /// </summary>
+        public static string LbTransferAmount {
+            get {
+                return ResourceManager.GetString("LbTransferAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transfer Informations.
+        /// </summary>
+        public static string LBTransferInformations {
+            get {
+                return ResourceManager.GetString("LBTransferInformations", resourceCulture);
             }
         }
         

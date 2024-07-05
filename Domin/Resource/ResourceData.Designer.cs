@@ -367,6 +367,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        public static string VlCurrency {
+            get {
+                return ResourceManager.GetString("VlCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please include a description of the link between the customer and the pricing. The process is completed successfully...!.
         /// </summary>
         public static string VlDescriptionClint {
@@ -444,6 +453,15 @@ namespace Domin.Resource {
         public static string VlPhoneCompany {
             get {
                 return ResourceManager.GetString("VlPhoneCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profit Amount.
+        /// </summary>
+        public static string VlProfitAmount {
+            get {
+                return ResourceManager.GetString("VlProfitAmount", resourceCulture);
             }
         }
         
