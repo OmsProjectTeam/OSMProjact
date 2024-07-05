@@ -90,5 +90,7 @@ namespace Infarstuructre.ViewModel
         public TBTransfer Transfer { get; set; }
         public IEnumerable<TBEmailAlartSetting> ListEmailAlartSetting { get; set; }
         public TBEmailAlartSetting EmailAlartSetting { get; set; }
+        public IEnumerable<TBViewShippingAddress> ListViewShippingAddress { get; set; }
+        public TBShippingAddress ShippingAddress { get; set; }
     }
 }

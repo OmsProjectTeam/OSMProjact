@@ -174,6 +174,9 @@
   <data name="LBAddRolesName" xml:space="preserve">
     <value>إضافة وتعديل الأدوار</value>
   </data>
+  <data name="LBAddShippingAddress" xml:space="preserve">
+    <value>إضافة عنوان شحن</value>
+  </data>
   <data name="LBAddShippingPrice" xml:space="preserve">
     <value>إضافة وتعديل الأسعار لأنظمة الشحن</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="Lbbranch" xml:space="preserve">
     <value>الفرع</value>
+  </data>
+  <data name="LBBuilding" xml:space="preserve">
+    <value>البناء</value>
   </data>
   <data name="Lbbypass" xml:space="preserve">
     <value>التجاوز</value>
@@ -342,6 +348,9 @@
   <data name="Lbfbid" xml:space="preserve">
     <value>fb</value>
   </data>
+  <data name="LBFloor" xml:space="preserve">
+    <value>الطابق</value>
+  </data>
   <data name="Lbfull_package" xml:space="preserve">
     <value>حزمة كاملة</value>
   </data>
@@ -370,6 +379,9 @@
     <value>معلومات العميل</value>
   </data>
   <data name="LbInformaitionco" xml:space="preserve">
+    <value>معلومات الشركة</value>
+  </data>
+  <data name="LbInformationCompany" xml:space="preserve">
     <value>معلومات الشركة</value>
   </data>
   <data name="Lbinsert_dt" xml:space="preserve">
@@ -468,6 +480,9 @@
   <data name="LBMyRolesName" xml:space="preserve">
     <value>الأدوار</value>
   </data>
+  <data name="LBMyShippingAddress" xml:space="preserve">
+    <value>عناوين الشحن</value>
+  </data>
   <data name="LBMyShippingPrice" xml:space="preserve">
     <value>أسعار أنظمة الشحن</value>
   </data>
@@ -536,6 +551,9 @@
   </data>
   <data name="LbNoutsOrder" xml:space="preserve">
     <value>ملاحظات الطلب </value>
+  </data>
+  <data name="LbOffice" xml:space="preserve">
+    <value>المكتب</value>
   </data>
   <data name="lbOldeAndUserGide" xml:space="preserve">
     <value>الصورة القديمة</value>
@@ -633,6 +651,15 @@
   <data name="LBservice_charges" xml:space="preserve">
     <value>رسوم الخدمات</value>
   </data>
+  <data name="LBShippingAddress" xml:space="preserve">
+    <value>عناوين الشحن</value>
+  </data>
+  <data name="LBShippingAddressInfo" xml:space="preserve">
+    <value>معلومات عناوين الشحن</value>
+  </data>
+  <data name="LBShippingAddressLocation" xml:space="preserve">
+    <value>موقع عناوين الشحن</value>
+  </data>
   <data name="Lbsms_alert" xml:space="preserve">
     <value>التنبيه عبر الرسائل القصيرة</value>
   </data>
@@ -648,8 +675,14 @@
   <data name="lbSsl_validity" xml:space="preserve">
     <value>صلاحية SSL</value>
   </data>
+  <data name="LBStreet" xml:space="preserve">
+    <value>الشارع</value>
+  </data>
   <data name="LbTaskStatus" xml:space="preserve">
     <value>حالة المهمة</value>
+  </data>
+  <data name="LbTitle" xml:space="preserve">
+    <value>العنوان</value>
   </data>
   <data name="LbTitleShipping" xml:space="preserve">
     <value>عنوان الشحن</value>
