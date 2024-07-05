@@ -1,0 +1,153 @@
+﻿@model ViewmMODeElMASTER
+@{
+    ViewData["Title"] = ResourceWeb.LBAddShippingAddress;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row small-spacing">
+    <div class="box-content">
+        <ul class="list-inline">
+            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LBMyShippingAddress</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
+            <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
+            <br>
+            <br>
+            <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
+            <br>
+            <br>
+
+        </ul>
+        <div class="col-lg-6 col-xs-12">
+            <div class="box-content card white">
+                <h4 class="box-title">@ResourceWeb.LBAddShippingAddress</h4>
+                <!-- /.box-title -->
+                <div class="card-content">
+                    <form role="form" method="post" asp-controller="ShippingAddress" asp-action="Save" enctype="multipart/form-data">
+                        @* عرض الأخطاء العامة هنا *@
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <input type="hidden" asp-for="ShippingAddress.DateEntry" class="form-control" value="@User.Identity.Name">
+                            <input type="hidden" asp-for="ShippingAddress.IdShippingAddress" class="form-control">
+                            <input type="hidden" asp-for="ShippingAddress.DateTimeEntry" value="@DateTime.Now">
+                            <input type="hidden" asp-for="returnUrl" id="url">
+                        </div>
+                        <div class="card-content">
+                            <div class="row small-spacing">
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="ShippingAddress.IdInformationCompany">@ResourceWeb.LbInformationCompany</label>
+                                        <select class="form-control select2_1" asp-for="ShippingAddress.IdInformationCompany" asp-items="@(new SelectList(ViewBag.Company, "IdInformationCompanies", "CompanyName"))" id="selectedcompany"></select>
+                                        <span asp-validation-for="ShippingAddress.IdInformationCompany" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="ShippingAddress.Email" for="exampleInputEmail1">@ResourceWeb.LbEmailCompany</label>
+                                        <input asp-for="ShippingAddress.Email" type="text" placeholder="@ResourceWeb.LbEmailCompany ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="ShippingAddress.Email" class="text-danger"></span>
+                                        <span style="color:red"><strong>@TempData["Email"]</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row small-spacing">
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="ShippingAddress.ShippingAddress" for="exampleInputEmail1">@ResourceWeb.LBShippingAddress</label>
+                                        <input asp-for="ShippingAddress.ShippingAddress" type="text" placeholder="@ResourceWeb.LBShippingAddress ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="ShippingAddress.ShippingAddress" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="ShippingAddress.Floor" for="exampleInputEmail1">@ResourceWeb.LBFloor</label>
+                                        <input asp-for="ShippingAddress.Floor" type="text" placeholder="@ResourceWeb.LBFloor ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="ShippingAddress.Floor" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row small-spacing">
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label asp-for="ShippingAddress.Street" for="exampleInputEmail1">@ResourceWeb.LBStreet</label>
+                                        <input asp-for="ShippingAddress.Street" type="text" placeholder="@ResourceWeb.LBStreet ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="ShippingAddress.Street" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label asp-for="ShippingAddress.Office" for="exampleInputEmail1">@ResourceWeb.LbOffice</label>
+                                        <input asp-for="ShippingAddress.Office" type="text" placeholder="@ResourceWeb.LbOffice ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="ShippingAddress.Office" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group">
+                                        <label asp-for="ShippingAddress.Description" for="exampleInputEmail1">@ResourceWeb.LbDescription</label>
+                                        <input asp-for="ShippingAddress.Description" type="text" placeholder="@ResourceWeb.LbDescription ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="ShippingAddress.Description" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row small-spacing">
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="ShippingAddress.Building" for="exampleInputEmail1">@ResourceWeb.LBBuilding</label>
+                                        <input asp-for="ShippingAddress.Building" type="text" placeholder="@ResourceWeb.LBBuilding ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="ShippingAddress.Building" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="ShippingAddress.Moblie" for="exampleInputEmail1">@ResourceWeb.LbPhoneCompany</label>
+                                        <input asp-for="ShippingAddress.Moblie" type="text" placeholder="@ResourceWeb.LbPhoneCompany ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="ShippingAddress.Moblie" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkbox margin-bottom-20">
+                                <div class="switch success">
+                                    <input type="checkbox" asp-for="ShippingAddress.CurrentState" id="switch-1" checked>
+                                    <label for="switch-1">@ResourceWeb.lbCurrentState</label>
+                                </div>
+                                <div class="switch success">
+                                    <input type="checkbox" asp-for="ShippingAddress.Active" id="switch-2" checked>
+                                    <label for="switch-2">@ResourceWeb.LbActive</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card-content -->
+            </div>
+            <!-- /.box-content -->
+        </div>
+
+        </div>
+    </div>
+
+  @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+        <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
+        <script src="~/Admin/assets/plugin/multiselect/multiselect.min.js"></script>
+        <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
+        <!-- Multi Select -->
+        <script src="~/Admin/assets/plugin/multiselect/multiselect.min.js"></script>
+        <!-- تضمين مكتبة jQuery (إذا لم تكن مضمنة بالفعل) -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- تضمين مكتبة Select2 JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.select2_1').select2({
+                    placeholder: "Select an option",
+                    allowClear: true
+                });
+            });
+        </script>     
+        }
+
+
+

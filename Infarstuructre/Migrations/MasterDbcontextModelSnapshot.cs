@@ -2427,12 +2427,11 @@ namespace Infarstuructre.Migrations
 
                     b.Property<string>("SmtpServer")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("Ssl_validity")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
+                        .HasColumnType("bit");
 
                     b.HasKey("IdEmailAlartSetting");
 
@@ -2665,6 +2664,9 @@ namespace Infarstuructre.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
 
+                    b.Property<decimal>("ExchangedPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("IdOrderNew")
                         .HasColumnType("int");
 
@@ -2690,6 +2692,86 @@ namespace Infarstuructre.Migrations
                     b.HasKey("IdPaings");
 
                     b.ToTable("TBPaings");
+                });
+
+            modelBuilder.Entity("Domin.Entity.TBShippingAddress", b =>
+                {
+                    b.Property<int>("IdShippingAddress")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdShippingAddress"));
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("Building")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<bool>("CurrentState")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("DateEntry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateTimeEntry")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("Floor")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<int>("IdInformationCompany")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Moblie")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("Office")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("ShippingAddress")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.HasKey("IdShippingAddress");
+
+                    b.ToTable("TBShippingAddresses");
                 });
 
             modelBuilder.Entity("Domin.Entity.TBShippingPrice", b =>
@@ -2790,6 +2872,61 @@ namespace Infarstuructre.Migrations
                     b.HasKey("IdTransaction");
 
                     b.ToTable("TBTransactions");
+                });
+
+            modelBuilder.Entity("Domin.Entity.TBTransfer", b =>
+                {
+                    b.Property<int>("IdTransfer")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTransfer"));
+
+                    b.Property<bool>("CurrentState")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("DataEntry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateTimeEntry")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<decimal>("ExchangeAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("IdCurrency")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdOrderNew")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Photo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("ReceiptDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("ReceiptNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiptStatment")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<decimal>("TransferAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("IdTransfer");
+
+                    b.ToTable("TBTransfers");
                 });
 
             modelBuilder.Entity("Domin.Entity.TBTypeSystem", b =>
@@ -3915,6 +4052,72 @@ namespace Infarstuructre.Migrations
                     b.ToView("ViewPaings", (string)null);
                 });
 
+            modelBuilder.Entity("Domin.Entity.TBViewShippingAddress", b =>
+                {
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Building")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("CurrentState")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("DateEntry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateTimeEntry")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Floor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdInformationCompany")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdShippingAddress")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Moblie")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Office")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShippingAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("ViewShippingAddress", (string)null);
+                });
+
             modelBuilder.Entity("Domin.Entity.TBViewShippingPrices", b =>
                 {
                     b.Property<bool>("Active")
@@ -4032,6 +4235,61 @@ namespace Infarstuructre.Migrations
                     b.ToTable((string)null);
 
                     b.ToView("ViewTransaction", (string)null);
+                });
+
+            modelBuilder.Entity("Domin.Entity.TBViewTransfer", b =>
+                {
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("CurrentState")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("DataEntry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateTimeEntry")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DescriptionOrder")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("ExchangeAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("IdCurrency")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdOrderNew")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdTransfer")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Photo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("ReceiptDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("ReceiptNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiptStatment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("TransferAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("ViewTransfer", (string)null);
                 });
 
             modelBuilder.Entity("Domin.Entity.TBViewUsers", b =>

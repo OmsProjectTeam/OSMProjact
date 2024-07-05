@@ -277,6 +277,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VlBuilding.
+        /// </summary>
+        public static string VlBuilding {
+            get {
+                return ResourceManager.GetString("VlBuilding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to please inclode the Catch Receipt.
         /// </summary>
         public static string VlCatchReceiptNo {
@@ -367,6 +376,24 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        public static string VlCurrency {
+            get {
+                return ResourceManager.GetString("VlCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter The Description.
+        /// </summary>
+        public static string VlDescription {
+            get {
+                return ResourceManager.GetString("VlDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please include a description of the link between the customer and the pricing. The process is completed successfully...!.
         /// </summary>
         public static string VlDescriptionClint {
@@ -385,11 +412,29 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please include the nickname for the process to complete successfully..!.
+        /// </summary>
+        public static string VlEmail {
+            get {
+                return ResourceManager.GetString("VlEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please include the company&apos;s email so that the process is completed successfully...!.
         /// </summary>
         public static string VlEmailCompany {
             get {
                 return ResourceManager.GetString("VlEmailCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VlFloor.
+        /// </summary>
+        public static string VlFloor {
+            get {
+                return ResourceManager.GetString("VlFloor", resourceCulture);
             }
         }
         
@@ -421,11 +466,29 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VlMoblie.
+        /// </summary>
+        public static string VlMoblie {
+            get {
+                return ResourceManager.GetString("VlMoblie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please include the nickname for the process to complete successfully..!.
         /// </summary>
         public static string VlNikeNAme {
             get {
                 return ResourceManager.GetString("VlNikeNAme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VlOffice.
+        /// </summary>
+        public static string VlOffice {
+            get {
+                return ResourceManager.GetString("VlOffice", resourceCulture);
             }
         }
         
@@ -439,11 +502,29 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter The Phone.
+        /// </summary>
+        public static string VlPhone {
+            get {
+                return ResourceManager.GetString("VlPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please include the phone number for the process to complete successfully....!.
         /// </summary>
         public static string VlPhoneCompany {
             get {
                 return ResourceManager.GetString("VlPhoneCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profit Amount.
+        /// </summary>
+        public static string VlProfitAmount {
+            get {
+                return ResourceManager.GetString("VlProfitAmount", resourceCulture);
             }
         }
         
@@ -471,6 +552,42 @@ namespace Domin.Resource {
         public static string VlResivedMony {
             get {
                 return ResourceManager.GetString("VlResivedMony", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please include the Smtp Server for the process to complete successfully...!.
+        /// </summary>
+        public static string VlSmtpServer {
+            get {
+                return ResourceManager.GetString("VlSmtpServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipping Address.
+        /// </summary>
+        public static string VlShippingAddress {
+            get {
+                return ResourceManager.GetString("VlShippingAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the Street.
+        /// </summary>
+        public static string VlStreet {
+            get {
+                return ResourceManager.GetString("VlStreet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VlTitle.
+        /// </summary>
+        public static string VlTitle {
+            get {
+                return ResourceManager.GetString("VlTitle", resourceCulture);
             }
         }
         

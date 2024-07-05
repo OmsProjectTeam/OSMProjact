@@ -36,7 +36,7 @@
 <body>
 	<div class="main-menu">
 		<header class="header">
-			<a href="index.html" class="logo">@ViewBag.UserName</a>
+			<a href="index.html" class="logo">@ViewBag.Name</a>
 			<button type="button" class="button-close fa fa-times js__menu_close"></button>
 			<div class="user">
 
@@ -102,6 +102,7 @@
 						<ul class="sub-menu js__content">
 							<li><a asp-area="AirFreight" asp-controller="OrderNew" asp-action="MyOrderNew" asp-route-userId="@user.Id">@ResourceWeb.LBMyOrderNew</a></li>
 							<li><a asp-area="AirFreight" asp-controller="Paidings" asp-action="MyPaiding" asp-route-userId="@user.Id">@ResourceWeb.LBPaidings</a></li>
+							<li><a asp-area="AirFreight" asp-controller="Transfer" asp-action="MyTransfer" asp-route-userId="@user.Id">@ResourceWeb.LBTransferInformations</a></li>
 						</ul>
 						<!-- /.sub-menu js__content -->
 					</li>

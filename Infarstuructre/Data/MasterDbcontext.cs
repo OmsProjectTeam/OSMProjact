@@ -164,6 +164,21 @@ namespace Infarstuructre.Data
             });
             //************************************************************
 
+            //************************************************************
+            builder.Entity<TBViewTransfer>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewTransfer");
+            });
+            //************************************************************
+            //************************************************************
+            builder.Entity<TBViewShippingAddress>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewShippingAddress");
+            });
+            //************************************************************
+
             builder.UseCollation("Arabic_CI_AS");
 
             builder.Entity<Account>(entity =>
@@ -1440,25 +1455,39 @@ namespace Infarstuructre.Data
 		   .HasDefaultValueSql("((1))");
 
             //---------------------------------	
-
-                   //---------------------------------	
-            builder.Entity<TBEmailAlartSetting>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<TBEmailAlartSetting>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
-            builder.Entity<TBEmailAlartSetting>()
-		   .Property(b => b.Ssl_validity)
-		   .HasDefaultValueSql("((1))"); 
-            builder.Entity<TBEmailAlartSetting>()
-		   .Property(b => b.Active)
-		   .HasDefaultValueSql("((1))");
-
             //---------------------------------	
+            builder.Entity<TBTransfer>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBTransfer>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
 
+            //--------------------------------- 
+            //---------------------------------	
+            builder.Entity<TBEmailAlartSetting>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBEmailAlartSetting>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))"); 
+            builder.Entity<TBEmailAlartSetting>()
+           .Property(b => b.Active)
+           .HasDefaultValueSql("((1))");
 
+            //---------------------------------
+            //---------------------------------	
+            builder.Entity<TBShippingAddress>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBShippingAddress>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+            builder.Entity<TBShippingAddress>()
+           .Property(b => b.Active)
+           .HasDefaultValueSql("((1))");
 
+            //---------------------------------
         }
 
         public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
@@ -1598,6 +1627,7 @@ namespace Infarstuructre.Data
         public virtual DbSet<VwMostwanted> vw_mostwanted { get; set; }
 
         public virtual DbSet<Warehouse> warehouse { get; set; }
+        public virtual DbSet<TBTransfer> TBTransfers { get; set; }
 
       
 
@@ -1631,9 +1661,14 @@ namespace Infarstuructre.Data
         public DbSet<TBViewUsers> ViewUsers { get; set; }
         public DbSet<TBPaing> TBPaings { get; set; }
         public DbSet<TBViewPaings> ViewPaings { get; set; }
+        public DbSet<TBViewTransfer> ViewTransfer { get; set; }
+        public DbSet<TBViewTransfer> ViewProfits { get; set; }
         public DbSet<TBEmailAlartSetting> TBEmailAlartSettings { get; set; }
-        
-       
+        public DbSet<TBShippingAddress> TBShippingAddresses { get; set; }
+        public DbSet<TBViewShippingAddress> ViewShippingAddress { get; set; }
+        //test
+
+
 
     }
 }

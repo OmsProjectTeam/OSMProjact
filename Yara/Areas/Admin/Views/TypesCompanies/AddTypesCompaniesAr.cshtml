@@ -11,15 +11,10 @@
             <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
             <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
             <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
-            <br>
-            <br>
             <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
-            <br>
-            <br>
-
         </ul>
         <div class="row small-spacing">
-            <div class="col-lg-6 col-xs-12">
+            <div class="col-sm-12">
                 <div class="box-content card white">
                     <h4 class="box-title">@ResourceWebAr.LBAddTypesCompanies</h4>
                     <!-- /.box-title -->
@@ -44,18 +39,13 @@
                                         <span asp-validation-for="@Model.TypesCompanies.TypesCompanies" class="text-danger"></span>
                                         <span style="color:red"> <strong>@TempData["TypesCompanies"]</strong></span>
                                     </div>
-                                    <!-- /.col-xs-3 -->
-                                    <!-- /.col-xs-4 -->
-                                    <!-- /.col-xs-5 -->
                                 </div>
 
-
-                                <!-- /.row -->
+                                <div class="checkbox margin-bottom-20">
+                                    <div class="switch success"><input type="checkbox" asp-for="@Model.TypesCompanies.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWebAr.lbCurrentState</label></div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWebAr.lbSave</button>
                             </div>
-                            <div class="checkbox margin-bottom-20">
-                                <div class="switch success"><input type="checkbox" asp-for="@Model.TypesCompanies.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWebAr.lbCurrentState</label></div>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWebAr.lbSave</button>
                         </form>
                     </div>
                     <!-- /.card-content -->

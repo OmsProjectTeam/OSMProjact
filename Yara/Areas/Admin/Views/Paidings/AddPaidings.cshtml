@@ -36,7 +36,7 @@
                                         <label asp-for="@Model.Paing.IdOrderNew">@ResourceWeb.LbDescriptionClint</label>
                                         <select class="form-control select2_1" asp-for="@Model.Paing.IdOrderNew" asp-items="@(new SelectList(ViewBag.Order, "IdOrderNew", "DescriptionOrder"))" id="selectedcompany"></select>
                                         <span asp-validation-for="@Model.Paing.IdOrderNew" class="text-danger"></span>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-4">
@@ -56,8 +56,8 @@
                                         <span asp-validation-for="@Model.Paing.ReceiptDate" class="text-danger"></span>
                                     </div>
                                 </div>
-                             
-                               
+
+
 
                             </div>
 
@@ -65,14 +65,42 @@
 
                         <div class="card-content">
                             <div class="row small-spacing">
-                                <div class="col-12 col-sm-2">
+                                <div class="col-12 col-sm-6">
                                     <div class="form-group ">
                                         <label asp-for="@Model.Paing.ResivedMony" for="exampleInputEmail1">@ResourceWeb.LbResivedMony</label>
-                                        <input asp-for="@Model.Paing.ResivedMony" type="text" placeholder="@ResourceWeb.LbResivedMony ...." class="form-control" maxlength="25" id="weight">
+                                        <input asp-for="@Model.Paing.ResivedMony" type="text" placeholder="@ResourceWeb.LbResivedMony ...." class="form-control" maxlength="25" id="revisedMoney">
                                         <span asp-validation-for="@Model.Paing.ResivedMony" class="text-danger"></span>
 
                                     </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Transaction.ToCurrencyID">@ResourceWeb.LBMyCurrenciesExchangeRates</label>
+                                        <select class="form-control select2_1" asp-for="@Model.Transaction.ToCurrencyID" asp-items="@(new SelectList(ViewBag.Currenc, "IdCurrenciesExchangeRates", "Country", Model.ExchangeRate.ToIdCurrenciesExchangeRates))" id="toCurrency"></select>
+                                        <span asp-validation-for="@Model.Transaction.ToCurrencyID" class="text-danger"></span>
+                                    </div>
+                                    </div>
+                               
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="card-content">
+                            <div class="row small-spacing">
+                           
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.Paing.ExchangedPrice" for="exampleInputEmail1">Exchanged Price</label>
+                                        <input asp-for="@Model.Paing.ExchangedPrice" type="text" placeholder="@ResourceWeb.LbResivedMony ...." class="form-control" maxlength="25" id="exchangePrice">
+                                        <span asp-validation-for="@Model.Paing.ExchangedPrice" class="text-danger"></span>
+
+                                    </div>
                                 </div>
+                                @* <div class="col-sm-6">
+
+                                </div> *@
                                 <div class="col-12 col-sm-10">
                                     <div class="form-group ">
                                         <label asp-for="@Model.Paing.ReceiptStatment" for="exampleInputEmail1">@ResourceWeb.LbReceiptStatment</label>
@@ -82,11 +110,12 @@
                                     </div>
                                 </div>
 
-                              
+
                             </div>
 
                         </div>
-      
+
+
                         <div class="form-group">
                             <p><input type="file" accept="image/*" name="Files" id="file" onchange="loadFile(event)" style="display: none;"></p>
                             <p><label class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" for="file" style="cursor: pointer;" name="Files">@ResourceWeb.LBUpload_image</label></p>
@@ -95,9 +124,9 @@
                         </div>
                         <div class="checkbox margin-bottom-20">
 
-                            <div class="switch success"><input type="checkbox" asp-for="@Model.Paing.CurrentState" id="switch-2"checked><label for="switch-2">@ResourceWeb.lbCurrentState</label></div>
+                            <div class="switch success"><input type="checkbox" asp-for="@Model.Paing.CurrentState" id="switch-2" checked><label for="switch-2">@ResourceWeb.lbCurrentState</label></div>
                         </div>
-    
+
                         <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
                     </form>
                 </div>
@@ -159,6 +188,82 @@
         });
     </script>
     <script>
+        $(document).ready(function () {
+            console.log("Document is ready");
+            $('.select2_1').select2({
+                placeholder: "Select an option",
+                allowClear: true
+            });
+
+            // Bind change event to the selected company
+            // $('#selectedcompany').change(function () {
+            //     console.log("Selected company changed");
+            //     updateCosting();
+            // });
+            // Bind change event to the selected company
+            $('#toCurrency').change(function () {
+                console.log("Selected currency changed");
+                updateCosting();
+            });
+
+            // Bind input event to the weight field
+            $('#revisedMoney').on('input', function () {
+                updateCosting();
+            });
+
+            function updateCosting() {
+                // const selectedCompany = $('#selectedcompany').val();
+                const revisedMoney = $('#revisedMoney').val();
+                const toCurrency = $('#toCurrency').val();
+
+                // if (isNaN(weight) || weight <= 0) {
+                //     console.log("Invalid weight value");
+                //     $('#costPrice').val('');
+                //     $('#price').val('');
+                //     return;
+                // }
+
+                // console.log("Selected company is: ", selectedCompany);
+                // console.log("Weight is: ", weight);
+                console.log("toCurrency is: ", toCurrency);
+
+                $.ajax({
+                    url: '@Url.Action("GetExchangeRate", "Paidings")',
+                    data: { toCurrencyId: toCurrency, fromCurrencyId: 1, revisedMoney: revisedMoney },
+                    success: function (data) {
+                        console.log("AJAX success, data: ", data);
+                        if (data) {
+                            // $('#costPrice').val(data.costPrice);
+                            // $('#price').val(data.price);
+                            $('#exchangePrice').val(data);
+                            // calculatePrice();
+                        } else {
+                            // $('#costPrice').val('');
+                            // $('#price').val('');
+                            $('#exchangePrice').val('');
+                        }
+                    },
+                    error: function () {
+                        alert('Error! Please try again.');
+                        console.log("AJAX error");
+                    }
+                });
+            }
+
+            function calculatePrice() {
+                const weight = parseFloat($('#weight').val());
+                const costPrice = parseFloat($('#costPrice').val());
+
+                if (isNaN(weight) || isNaN(costPrice)) {
+                    console.log("Invalid weight or cost price");
+                    $('#price').val('');
+                    return;
+                }
+
+                const price = weight * costPrice;
+                $('#price').val(price);
+            }
+        });
         var loadFile = function (event) {
             var image = document.getElementById('output');
             image.src = URL.createObjectURL(event.target.files[0]);

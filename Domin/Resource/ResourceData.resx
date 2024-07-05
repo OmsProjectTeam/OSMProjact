@@ -189,6 +189,9 @@
   <data name="VlBlackMarketExchangeRate" xml:space="preserve">
     <value>Please include the exchange rate in the local currency on the black market for the process to complete successfully....!</value>
   </data>
+  <data name="VlBuilding" xml:space="preserve">
+    <value>VlBuilding</value>
+  </data>
   <data name="VlCatchReceiptNo" xml:space="preserve">
     <value>please inclode the Catch Receipt</value>
   </data>
@@ -219,14 +222,26 @@
   <data name="VlCountry" xml:space="preserve">
     <value>Please include the country for the process to complete successfully...!</value>
   </data>
+  <data name="VlCurrency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="VlDescription" xml:space="preserve">
+    <value>Enter The Description</value>
+  </data>
   <data name="VlDescriptionClint" xml:space="preserve">
     <value>Please include a description of the link between the customer and the pricing. The process is completed successfully...!</value>
   </data>
   <data name="VlDescriptionOrder" xml:space="preserve">
     <value>Please include the order description for the process to complete successfully</value>
   </data>
+  <data name="VlEmail" xml:space="preserve">
+    <value>Please include the nickname for the process to complete successfully..!</value>
+  </data>
   <data name="VlEmailCompany" xml:space="preserve">
     <value>Please include the company's email so that the process is completed successfully...!</value>
+  </data>
+  <data name="VlFloor" xml:space="preserve">
+    <value>VlFloor</value>
   </data>
   <data name="VlForeignCurrency" xml:space="preserve">
     <value>Please add the exchange rate in foreign currency for the process to complete successfully...!</value>
@@ -237,14 +252,26 @@
   <data name="VllocalCurrency" xml:space="preserve">
     <value>Please include the exchange rate in the local currency for the process to complete successfully...!</value>
   </data>
+  <data name="VlMoblie" xml:space="preserve">
+    <value>VlMoblie</value>
+  </data>
   <data name="VlNikeNAme" xml:space="preserve">
     <value>Please include the nickname for the process to complete successfully..!</value>
+  </data>
+  <data name="VlOffice" xml:space="preserve">
+    <value>VlOffice</value>
   </data>
   <data name="VlPasswordEmail" xml:space="preserve">
     <value>Please include the Password Email for the process to complete successfully...!</value>
   </data>
+  <data name="VlPhone" xml:space="preserve">
+    <value>Enter The Phone</value>
+  </data>
   <data name="VlPhoneCompany" xml:space="preserve">
     <value>Please include the phone number for the process to complete successfully....!</value>
+  </data>
+  <data name="VlProfitAmount" xml:space="preserve">
+    <value>Profit Amount</value>
   </data>
   <data name="VlReceiptNo" xml:space="preserve">
     <value>Please include a bond number for the process to complete successfully...!</value>
@@ -254,6 +281,18 @@
   </data>
   <data name="VlResivedMony" xml:space="preserve">
     <value>Please include the amount for the transaction to complete successfully..!</value>
+  </data>
+  <data name="VlSmtpServer" xml:space="preserve">
+    <value>Please include the Smtp Server for the process to complete successfully...!</value>
+  </data>
+  <data name="VlShippingAddress" xml:space="preserve">
+    <value>Shipping Address</value>
+  </data>
+  <data name="VlStreet" xml:space="preserve">
+    <value>Enter the Street</value>
+  </data>
+  <data name="VlTitle" xml:space="preserve">
+    <value>VlTitle</value>
   </data>
   <data name="VlTitleShipping" xml:space="preserve">
     <value>Please include the appropriate address in the shipping category for the process to complete successfully...!</value>

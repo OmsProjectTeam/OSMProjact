@@ -144,6 +144,9 @@
   <data name="LbAddEditInformationCompanies" xml:space="preserve">
     <value>Add and modify company data</value>
   </data>
+  <data name="LBAddEmailAlartSetting" xml:space="preserve">
+    <value>Adding and modifying Email Alart Setting</value>
+  </data>
   <data name="LBAddExchangeRate" xml:space="preserve">
     <value>Add and modify the exchange rate</value>
   </data>
@@ -159,6 +162,9 @@
   <data name="LBAddPaing" xml:space="preserve">
     <value>Add Paing</value>
   </data>
+  <data name="LBAddProfit" xml:space="preserve">
+    <value>Add Profit</value>
+  </data>
   <data name="LbAddres" xml:space="preserve">
     <value>Address</value>
   </data>
@@ -168,6 +174,9 @@
   <data name="LBAddRolesName" xml:space="preserve">
     <value>Adding and modifying Roles</value>
   </data>
+  <data name="LBAddShippingAddress" xml:space="preserve">
+    <value>Add Shipping Address</value>
+  </data>
   <data name="LBAddShippingPrice" xml:space="preserve">
     <value>Adding and modifying pricing for shipping systems</value>
   </data>
@@ -176,6 +185,9 @@
   </data>
   <data name="LBAddTransaction" xml:space="preserve">
     <value>Add and modify currency calculator</value>
+  </data>
+  <data name="LBAddTransfer" xml:space="preserve">
+    <value>Adding and modifying Transfer</value>
   </data>
   <data name="LBAddTypesCompanies" xml:space="preserve">
     <value>Add and modify company categories</value>
@@ -194,6 +206,9 @@
   </data>
   <data name="Lbbranch" xml:space="preserve">
     <value>branch</value>
+  </data>
+  <data name="LBBuilding" xml:space="preserve">
+    <value>Building</value>
   </data>
   <data name="Lbbypass" xml:space="preserve">
     <value>bypass</value>
@@ -258,6 +273,9 @@
   <data name="Lbcredit" xml:space="preserve">
     <value>credit</value>
   </data>
+  <data name="LbCurrency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
   <data name="lbCurrentState" xml:space="preserve">
     <value>status</value>
   </data>
@@ -315,8 +333,14 @@
   <data name="LBEmageSise" xml:space="preserve">
     <value>Image size 150*150</value>
   </data>
+  <data name="LbEmailAlartSetting" xml:space="preserve">
+    <value>EmailAlart Setting</value>
+  </data>
   <data name="LbEmailCompany" xml:space="preserve">
     <value>E-mail</value>
+  </data>
+  <data name="LbExchangeAmount" xml:space="preserve">
+    <value>Exchange Amount</value>
   </data>
   <data name="LbExchangedPrice" xml:space="preserve">
     <value>Exchanged Price</value>
@@ -326,6 +350,9 @@
   </data>
   <data name="Lbfbid" xml:space="preserve">
     <value>fb</value>
+  </data>
+  <data name="LBFloor" xml:space="preserve">
+    <value>Floor</value>
   </data>
   <data name="Lbfull_package" xml:space="preserve">
     <value>Full package</value>
@@ -357,6 +384,9 @@
   <data name="LbInformaitionco" xml:space="preserve">
     <value>company information</value>
   </data>
+  <data name="LbInformationCompany" xml:space="preserve">
+    <value>Information Company</value>
+  </data>
   <data name="Lbinsert_dt" xml:space="preserve">
     <value>Date added</value>
   </data>
@@ -380,6 +410,9 @@
   </data>
   <data name="Lblon" xml:space="preserve">
     <value>longitude</value>
+  </data>
+  <data name="lbMailSender" xml:space="preserve">
+    <value>Mail Sender</value>
   </data>
   <data name="LBMerchantInformation" xml:space="preserve">
     <value>Merchant Information</value>
@@ -423,6 +456,9 @@
   <data name="LBMyCustomer" xml:space="preserve">
     <value>Individual customer data</value>
   </data>
+  <data name="LBMyEmailAlartSetting" xml:space="preserve">
+    <value>Email Alart Setting</value>
+  </data>
   <data name="LBMyExchangeRate" xml:space="preserve">
     <value>exchange rate</value>
   </data>
@@ -444,8 +480,14 @@
   <data name="LBMyOrderStatus" xml:space="preserve">
     <value>Order Status</value>
   </data>
+  <data name="LBMyProfits" xml:space="preserve">
+    <value>My Profits</value>
+  </data>
   <data name="LBMyRolesName" xml:space="preserve">
     <value>Roles </value>
+  </data>
+  <data name="LBMyShippingAddress" xml:space="preserve">
+    <value>MyShipping Address</value>
   </data>
   <data name="LBMyShippingPrice" xml:space="preserve">
     <value>Shipping systems pricing</value>
@@ -455,6 +497,9 @@
   </data>
   <data name="LBMyTransaction" xml:space="preserve">
     <value>Currency calculator</value>
+  </data>
+  <data name="LBMyTransfers" xml:space="preserve">
+    <value>My Transfers</value>
   </data>
   <data name="LBMyTypesCompanies" xml:space="preserve">
     <value>Categories of companies</value>
@@ -513,6 +558,9 @@
   <data name="LbNoutsOrder" xml:space="preserve">
     <value>Nouts Order</value>
   </data>
+  <data name="LbOffice" xml:space="preserve">
+    <value>Office</value>
+  </data>
   <data name="lbOldeAndUserGide" xml:space="preserve">
     <value>Old photo</value>
   </data>
@@ -546,6 +594,9 @@
   <data name="LBPaidings" xml:space="preserve">
     <value>Paidings</value>
   </data>
+  <data name="lbPasswordEmail" xml:space="preserve">
+    <value>Password Email</value>
+  </data>
   <data name="LbPhoneCompany" xml:space="preserve">
     <value>phone</value>
   </data>
@@ -555,6 +606,9 @@
   <data name="LbPhoto" xml:space="preserve">
     <value>Photo</value>
   </data>
+  <data name="lbPortServer" xml:space="preserve">
+    <value>Port Server</value>
+  </data>
   <data name="LbPrice" xml:space="preserve">
     <value>Price</value>
   </data>
@@ -563,6 +617,15 @@
   </data>
   <data name="LBProfile" xml:space="preserve">
     <value>Profile</value>
+  </data>
+  <data name="LbProfitAmount" xml:space="preserve">
+    <value>Profit Amount</value>
+  </data>
+  <data name="LbProfits" xml:space="preserve">
+    <value>Profits</value>
+  </data>
+  <data name="LBProfitsInformations" xml:space="preserve">
+    <value>Profits Informations</value>
   </data>
   <data name="LbRate" xml:space="preserve">
     <value>exchange rate</value>
@@ -597,8 +660,20 @@
   <data name="LBservice_charges" xml:space="preserve">
     <value>Service Charges</value>
   </data>
+  <data name="LBShippingAddress" xml:space="preserve">
+    <value>Shipping Address</value>
+  </data>
+  <data name="LBShippingAddressInfo" xml:space="preserve">
+    <value>Shipping Address Info</value>
+  </data>
+  <data name="LBShippingAddressLocation" xml:space="preserve">
+    <value>Shipping Address Location</value>
+  </data>
   <data name="Lbsms_alert" xml:space="preserve">
     <value> sms alert</value>
+  </data>
+  <data name="lbSmtpServer" xml:space="preserve">
+    <value>Smtp Server</value>
   </data>
   <data name="Lbsorting" xml:space="preserve">
     <value>sorting</value>
@@ -606,11 +681,26 @@
   <data name="LbSpec" xml:space="preserve">
     <value>Space</value>
   </data>
+  <data name="lbSsl_validity" xml:space="preserve">
+    <value>Ssl validity</value>
+  </data>
+  <data name="LBStreet" xml:space="preserve">
+    <value>Street</value>
+  </data>
   <data name="LbTaskStatus" xml:space="preserve">
     <value>Task Status</value>
   </data>
+  <data name="LbTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
   <data name="LbTitleShipping" xml:space="preserve">
     <value>Title Shipping</value>
+  </data>
+  <data name="LbTransferAmount" xml:space="preserve">
+    <value>Transfer Amount</value>
+  </data>
+  <data name="LBTransferInformations" xml:space="preserve">
+    <value>Transfer Informations</value>
   </data>
   <data name="LbTypesCompanies" xml:space="preserve">
     <value>Category</value>
@@ -719,6 +809,9 @@
   </data>
   <data name="VLEmailAlartSettingDoplceted" xml:space="preserve">
     <value>Your email address has already been entered, please check and try again later..!</value>
+  </data>
+  <data name="VLEmailDoplceted" xml:space="preserve">
+    <value>The shipping refund email has already been entered. Please check and try again later....!</value>
   </data>
   <data name="VLEmailOreUserOrPaswo" xml:space="preserve">
     <value>Email or username already exists...!</value>

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
 
 namespace Yara.Areas.Admin.Controllers
 {
@@ -80,6 +80,14 @@ namespace Yara.Areas.Admin.Controllers
 						TempData["EmailAlartSetting"] = ResourceWeb.VLEmailAlartSettingDoplceted;
 						return RedirectToAction("AddEmailAlartSetting", model);
 					}
+
+
+
+
+
+
+
+
 
 					var reqwest = iEmailAlartSetting.saveData(slider);
 					if (reqwest == true)

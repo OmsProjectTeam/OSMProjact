@@ -1,6 +1,6 @@
 ﻿@model ViewmMODeElMASTER
 @{
-    ViewData["Title"] = ResourceWeb.LBMyOrderNew;
+    ViewData["Title"] = ResourceWeb.LBMyProfits;
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -9,7 +9,7 @@
 <div class="col-xs-12">
     <div class="box-content">
         <ul class="list-inline">
-            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LBPaidings</button></a></li>/
+            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LbProfits</button></a></li>/
             <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
             <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
             <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
@@ -70,6 +70,7 @@
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTitleShipping</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbcode</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbPrice</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbExchangedPrice</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbNoutsOrder</th>
 
                                                 <tfoot>
@@ -81,6 +82,7 @@
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbTitleShipping</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.Lbcode</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbPrice</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbExchangedPrice</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbNoutsOrder</th>
                                                 </tfoot>
                                                 <tbody>
@@ -95,6 +97,7 @@
                                                             <td class="truncate-50">@item.TitleShipping</td>
                                                             <td class="truncate-50">@item.code</td>
                                                             <td class="truncate-50">@item.Price</td>
+                                                            <td class="truncate-50">@item.ExchangedPrice</td>
                                                             <td class="truncate-50">@item.NoutsOrder</td>
                                                         </tr>
                                                             }

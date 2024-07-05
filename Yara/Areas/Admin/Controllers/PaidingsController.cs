@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Yara.Areas.Admin.Controllers
 {
@@ -12,11 +13,15 @@ namespace Yara.Areas.Admin.Controllers
         IIPaidings iPaidings;
         MasterDbcontext dbcontext;
         IIOrderNew iOrderNew;
-        public PaidingsController(IIPaidings iPaidings1,MasterDbcontext dbcontext1,IIOrderNew iOrderNew1)
+        IICurrenciesExchangeRates iCurrenciesTransactions;
+        IIExchangeRate iExchangeRate;
+        public PaidingsController(IIPaidings iPaidings1,MasterDbcontext dbcontext1,IIOrderNew iOrderNew1, IICurrenciesExchangeRates iCurrenciesTransactions1, IIExchangeRate iExchangeRate1)
         {
+            iCurrenciesTransactions = iCurrenciesTransactions1;
             iPaidings = iPaidings1;
             dbcontext = dbcontext1;
             iOrderNew = iOrderNew1;
+            iExchangeRate = iExchangeRate1;
         }
 
         public IActionResult MyPaiding()
@@ -75,10 +80,22 @@ namespace Yara.Areas.Admin.Controllers
         public IActionResult AddPaidings(int? IdPaings)
         {
             ViewBag.Order = iOrderNew.GetAll();
+            ViewBag.Currenc = iCurrenciesTransactions.GetAll();
+
+            //var defaultCurrencyID = 1;
+            //ViewBag.Currenc = new SelectList(GetCurrenciesSelectList(defaultCurrencyID), "Value", "Text");
 
 
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewPaings = iPaidings.GetAll();
+            vmodel.ListViewExchangeRate = iExchangeRate.GetAll();
+
+            // Set the default ToCurrencyID
+            vmodel.ExchangeRate = new TBExchangeRate
+            {
+                ToIdCurrenciesExchangeRates = 2 // Default value
+            };
+
             if (IdPaings != null)
             {
                 vmodel.Paing = iPaidings.GetById(Convert.ToInt32(IdPaings));
@@ -93,10 +110,19 @@ namespace Yara.Areas.Admin.Controllers
         public IActionResult AddPaidingsAr(int? IdPaings)
         {
             ViewBag.Order = iOrderNew.GetAll();
+            ViewBag.Currenc = iCurrenciesTransactions.GetAll();
 
 
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewPaings = iPaidings.GetAll();
+            vmodel.ListViewExchangeRate = iExchangeRate.GetAll();
+
+            // Set the default ToCurrencyID
+            vmodel.ExchangeRate = new TBExchangeRate
+            {
+                ToIdCurrenciesExchangeRates = 2 // Default value
+            };
+
             if (IdPaings != null)
             {
                 vmodel.Paing = iPaidings.GetById(Convert.ToInt32(IdPaings));
@@ -133,6 +159,7 @@ namespace Yara.Areas.Admin.Controllers
                 slider.DateTimeEntry = model.Paing.DateTimeEntry;
                 slider.CurrentState = model.Paing.CurrentState;               
                 slider.Photo = model.Paing.Photo;           
+                slider.ExchangedPrice = model.Paing.ExchangedPrice;           
                 var file = HttpContext.Request.Form.Files;
 
                 // add
@@ -163,6 +190,54 @@ namespace Yara.Areas.Admin.Controllers
                     var reqwest = iPaidings.saveData(slider);
                     if (reqwest == true)
                     {
+                        //send email
+                        var emailSetting = await dbcontext.TBEmailAlartSettings
+                           .OrderByDescending(n => n.IdEmailAlartSetting)
+                           .Where(a => a.CurrentState == true && a.Active == true)
+                           .FirstOrDefaultAsync();
+
+                        // التحقق من وجود إعدادات البريد الإلكتروني
+                        if (emailSetting != null)
+                        {
+                            var message = new MimeMessage();
+                            message.From.Add(new MailboxAddress("New Order", emailSetting.MailSender));
+                            message.To.Add(new MailboxAddress("pritom", "nohadking@hotmail.com"));
+                            message.Subject = "عملية تسليم من قبل :" + slider.DataEntry;
+                            var builder = new BodyBuilder
+                            {
+                                TextBody = $"تسليم الطلب\n" +
+                                           $"رقم السند : {slider.ReceiptNo}\n" +
+                                           $"تاريخ السند: {slider.ReceiptDate}\n" +
+                                          
+                                           $"المبلغ: {slider.ResivedMony}\n" +
+                                           $"البيان : {slider.ReceiptStatment}\n" +
+                                     
+                                           $"تمت بنجاح وقد خرجت للتوصيل"                                        
+                            };
+
+                            // إضافة الصورة كملف مرفق إذا كانت موجودة
+                            if (!string.IsNullOrEmpty(slider.Photo))
+                            {
+                                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Home", slider.Photo);
+                                builder.Attachments.Add(imagePath);
+                            }
+
+                            message.Body = builder.ToMessageBody();
+
+                            using (var client = new SmtpClient())
+                            {
+                                await client.ConnectAsync(emailSetting.SmtpServer, emailSetting.PortServer, SecureSocketOptions.StartTls);
+                                await client.AuthenticateAsync(emailSetting.MailSender, emailSetting.PasswordEmail);
+                                await client.SendAsync(message);
+                                await client.DisconnectAsync(true);
+                            }
+                        }
+                        else
+                        {
+                            // التعامل مع الحالة التي لا توجد فيها إعدادات البريد الإلكتروني
+                            // يمكنك تسجيل خطأ أو تنفيذ إجراءات أخرى هنا
+                        }
+
                         TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
                         return RedirectToAction("MyPaiding");
                     }
@@ -272,6 +347,32 @@ namespace Yara.Areas.Admin.Controllers
             }
         }
 
-      
+        //public List<SelectListItem> GetCurrenciesSelectList(int defaultCurrencyID)
+        //{
+        //    var currencies = iCurrenciesTransactions.GetAll();
+        //    var selectList = currencies.Select(c => new SelectListItem
+        //    {
+        //        Value = c.IdCurrenciesExchangeRates.ToString(),
+        //        Text = c.Country,
+        //        Selected = (c.IdCurrenciesExchangeRates == defaultCurrencyID)
+        //    }).ToList();
+        //    return selectList;
+        //}
+        [HttpGet]
+        public IActionResult GetExchangeRate(int fromCurrencyId, int toCurrencyId, double revisedMoney)
+        {
+            // Fetch the exchange rate from the database
+            var exchangeRate = iExchangeRate.GetAll()
+                              .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
+                              .Rate;
+
+            var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
+
+            if (exchangeRate != null)
+            {
+                return Json(exchangeRateValue);
+            }
+            return Json("N/A");
+        }
     }
 }

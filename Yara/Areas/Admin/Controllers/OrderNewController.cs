@@ -1,9 +1,5 @@
 ﻿
 
-using Domin.Entity;
-using Infarstuructre.BL;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace Yara.Areas.Admin.Controllers
 {
@@ -20,7 +16,7 @@ namespace Yara.Areas.Admin.Controllers
         IICurrenciesExchangeRates iCurrenciesTransactions;
         IITransaction iTransaction;
         IIExchangeRate iExchangeRate;
-        public OrderNewController(IIExchangeRate iExchangeRate1, IITransaction iTransaction, IICurrenciesExchangeRates iCurrenciesTransactions1, IIOrderNew iOrderNew1, IIOrderCase iOrderCase1, IIOrderStatus iOrderStatus1, IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1,MasterDbcontext dbcontext1,IIShippingPrice iShippingPrice1)
+        public OrderNewController(IIExchangeRate iExchangeRate1, IITransaction iTransaction, IICurrenciesExchangeRates iCurrenciesTransactions1, IIOrderNew iOrderNew1, IIOrderCase iOrderCase1, IIOrderStatus iOrderStatus1, IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1, MasterDbcontext dbcontext1, IIShippingPrice iShippingPrice1)
         {
             iCurrenciesTransactions = iCurrenciesTransactions1;
             iOrderNew = iOrderNew1;
@@ -28,7 +24,7 @@ namespace Yara.Areas.Admin.Controllers
             iOrderStatus = iOrderStatus1;
             iClintWitheDeliveryTariffs = iClintWitheDeliveryTariffs1;
             dbcontext = dbcontext1;
-            iShippingPrice= iShippingPrice1;
+            iShippingPrice = iShippingPrice1;
             iTransaction = iTransaction;
             iExchangeRate = iExchangeRate1;
         }
@@ -106,7 +102,7 @@ namespace Yara.Areas.Admin.Controllers
                 slider.CostPrice = model.OrderNew.CostPrice;
                 slider.Price = model.OrderNew.Price;
                 slider.Addres = model.OrderNew.Addres;
-                slider.Nouts = model.OrderNew.Nouts;                         
+                slider.Nouts = model.OrderNew.Nouts;
                 slider.DataEntry = model.OrderNew.DataEntry;
                 slider.DateTimeEntry = model.OrderNew.DateTimeEntry;
                 slider.CurrentState = model.OrderNew.CurrentState;
@@ -150,6 +146,54 @@ namespace Yara.Areas.Admin.Controllers
                     var reqwest = iOrderNew.saveData(slider);
                     if (reqwest == true)
                     {
+                        //send email
+                        var emailSetting = await dbcontext.TBEmailAlartSettings
+                           .OrderByDescending(n => n.IdEmailAlartSetting)
+                           .Where(a => a.CurrentState == true && a.Active == true)
+                           .FirstOrDefaultAsync();
+
+                        // التحقق من وجود إعدادات البريد الإلكتروني
+                        if (emailSetting != null)
+                        {
+                            var message = new MimeMessage();
+                            message.From.Add(new MailboxAddress("New Order", emailSetting.MailSender));
+                            message.To.Add(new MailboxAddress("pritom", "nohadking@hotmail.com"));
+                            message.Subject = "طلب جديد من :" + slider.DataEntry;
+                            var builder = new BodyBuilder
+                            {
+                                TextBody = $"طلب جديد\n" +
+                                           $"وصف الطلب: {slider.DescriptionOrder}\n" +
+                                           $"تاريخ الطلب: {slider.OrderDate}\n" +
+                                           $"الوزن: {slider.Weight}\n" +
+                                           $"المبلغ: {slider.CostPrice}\n" +
+                                           $"مبلغ العميل: {slider.Price}\n" +
+                                           $"سعر الصرف: {slider.ExchangedPrice}\n" +
+                                           $"رقم السند: {slider.CatchReceiptNo}"
+                            };
+
+                            // إضافة الصورة كملف مرفق إذا كانت موجودة
+                            if (!string.IsNullOrEmpty(slider.Photo))
+                            {
+                                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Home", slider.Photo);
+                                builder.Attachments.Add(imagePath);
+                            }
+
+                            message.Body = builder.ToMessageBody();
+
+                            using (var client = new SmtpClient())
+                            {
+                                await client.ConnectAsync(emailSetting.SmtpServer, emailSetting.PortServer, SecureSocketOptions.StartTls);
+                                await client.AuthenticateAsync(emailSetting.MailSender, emailSetting.PasswordEmail);
+                                await client.SendAsync(message);
+                                await client.DisconnectAsync(true);
+                            }
+                        }
+                        else
+                        {
+                            // التعامل مع الحالة التي لا توجد فيها إعدادات البريد الإلكتروني
+                            // يمكنك تسجيل خطأ أو تنفيذ إجراءات أخرى هنا
+                        }
+
                         TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
                         return RedirectToAction("MyOrderNewAr");
                     }
@@ -166,7 +210,6 @@ namespace Yara.Areas.Admin.Controllers
                     //var reqweistDeletPoto = iOrderNew.DELETPHOTO(slider.IdInformationCompanies);
 
                     if (file.Count() == 0)
-
                     {
                         slider.Photo = model.OrderNew.Photo;
                         //TempData["Message"] = ResourceWeb.VLimageuplode;
@@ -201,16 +244,12 @@ namespace Yara.Areas.Admin.Controllers
                             return Redirect(returnUrl);
                         }
                     }
-
-                 
-
                 }
             }
             catch
             {
                 var file = HttpContext.Request.Form.Files;
                 if (file.Count() == 0)
-
                 {
                     //var PhotoNAme = slider.Photo;
                     //var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
@@ -224,8 +263,9 @@ namespace Yara.Areas.Admin.Controllers
                     TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
                     return Redirect(returnUrl);
                 }
-                }
             }
+        }
+
         [Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdOrderNew)
         {
