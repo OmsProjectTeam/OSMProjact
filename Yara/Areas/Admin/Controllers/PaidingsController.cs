@@ -159,6 +159,7 @@ namespace Yara.Areas.Admin.Controllers
                 slider.DateTimeEntry = model.Paing.DateTimeEntry;
                 slider.CurrentState = model.Paing.CurrentState;               
                 slider.Photo = model.Paing.Photo;           
+                slider.ExchangedPrice = model.Paing.ExchangedPrice;           
                 var file = HttpContext.Request.Form.Files;
 
                 // add

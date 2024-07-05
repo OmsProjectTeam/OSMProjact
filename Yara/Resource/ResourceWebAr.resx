@@ -561,6 +561,9 @@
   <data name="LbOpration" xml:space="preserve">
     <value>العمليات</value>
   </data>
+  <data name="Lborder" xml:space="preserve">
+    <value>الطلبات</value>
+  </data>
   <data name="LbOrderCase" xml:space="preserve">
     <value>الحالة</value>
   </data>

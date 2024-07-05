@@ -28,5 +28,6 @@ namespace Domin.Entity
         public string DataEntry { get; set; }
         public DateTime DateTimeEntry { get; set; }
         public bool CurrentState { get; set; }
+        public decimal ExchangedPrice { get; set; }
     }
 }

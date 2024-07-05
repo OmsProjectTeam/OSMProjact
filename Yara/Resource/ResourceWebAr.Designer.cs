@@ -1393,6 +1393,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الطلبات.
+        /// </summary>
+        public static string Lborder {
+            get {
+                return ResourceManager.GetString("Lborder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to الحالة.
         /// </summary>
         public static string LbOrderCase {
