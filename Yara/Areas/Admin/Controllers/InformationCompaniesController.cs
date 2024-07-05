@@ -250,6 +250,8 @@ namespace Yara.Areas.Admin.Controllers
 
             }
         }
+      
+        
         public JsonResult GetAreasByCity(int cityId)
         {
             var areas = dbcontext.ViewAreas.Where(a => a.city_id == cityId).Select(a => new { a.id, a.Description }).ToList();
