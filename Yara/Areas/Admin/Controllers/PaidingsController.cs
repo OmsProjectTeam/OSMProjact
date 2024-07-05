@@ -238,7 +238,7 @@ namespace Yara.Areas.Admin.Controllers
                         }
 
                         TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
-                        return RedirectToAction("MyOrderNewAr");
+                        return RedirectToAction("MyPaiding");
                     }
                     else
                     {
