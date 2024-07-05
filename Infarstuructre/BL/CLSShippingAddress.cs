@@ -10,11 +10,11 @@ namespace Infarstuructre.BL;
 public interface IIShippingAddress
 {
     List<TBViewShippingAddress> GetAll();
-    TBShippingAddress GetById(int IdShipping);
+    TBShippingAddress GetById(int IdShippingAddress);
     bool saveData(TBShippingAddress save);
     bool UpdateData(TBShippingAddress updats);
-    bool deleteData(int IdShipping);
-    List<TBViewShippingAddress> GetAllv(int IdShipping);
+    bool deleteData(int IdShippingAddress);
+    List<TBViewShippingAddress> GetAllv(int IdShippingAddress);
     public List<TBViewShippingAddress> GetAllDataentry(string user);
 }
 public class CLSShippingAddress : IIShippingAddress
@@ -24,11 +24,11 @@ public class CLSShippingAddress : IIShippingAddress
     {
         this.dbcontext = dbcontext;
     }
-    public bool deleteData(int IdShipping)
+    public bool deleteData(int IdShippingAddress)
     {
         try
         {
-            var profit = GetById(IdShipping);
+            var profit = GetById(IdShippingAddress);
             profit.CurrentState = false;
             dbcontext.Entry(profit).State = EntityState.Modified;
             dbcontext.SaveChanges();
@@ -52,15 +52,15 @@ public class CLSShippingAddress : IIShippingAddress
         return MySlider;
     }
 
-    public List<TBViewShippingAddress> GetAllv(int IdShipping)
+    public List<TBViewShippingAddress> GetAllv(int IdShippingAddress)
     {
-        List<TBViewShippingAddress> MySlider = dbcontext.ViewShippingAddress.OrderByDescending(n => n.IdShippingAddress).Where(a => a.IdShippingAddress == IdShipping).Where(a => a.CurrentState == true).ToList();
+        List<TBViewShippingAddress> MySlider = dbcontext.ViewShippingAddress.OrderByDescending(n => n.IdShippingAddress).Where(a => a.IdShippingAddress == IdShippingAddress).Where(a => a.CurrentState == true).ToList();
         return MySlider;
     }
 
-    public TBShippingAddress GetById(int IdShipping)
+    public TBShippingAddress GetById(int IdShippingAddress)
     {
-        TBShippingAddress sslid = dbcontext.TBShippingAddresses.FirstOrDefault(p => p.IdShippingAddress == IdShipping);
+        TBShippingAddress sslid = dbcontext.TBShippingAddresses.FirstOrDefault(p => p.IdShippingAddress == IdShippingAddress);
         return sslid;
     }
 

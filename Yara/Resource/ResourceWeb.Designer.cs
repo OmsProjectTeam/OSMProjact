@@ -2140,6 +2140,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The shipping refund email has already been entered. Please check and try again later....!.
+        /// </summary>
+        public static string VLEmailDoplceted {
+            get {
+                return ResourceManager.GetString("VLEmailDoplceted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email or username already exists...!.
         /// </summary>
         public static string VLEmailOreUserOrPaswo {

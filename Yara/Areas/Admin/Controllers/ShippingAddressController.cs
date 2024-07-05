@@ -32,29 +32,29 @@ namespace Yara.Areas.Admin.Controllers
             return View(vmodel);
         }
 
-        public IActionResult AddShippingAddress(int? id)
+        public IActionResult AddShippingAddress(int? IdShippingAddress)
         {
             ViewBag.Company = iInformationCompanies.GetAll();
 
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewShippingAddress = iShippingAddress.GetAll();
-            if (id != null)
+            if (IdShippingAddress != null)
             {
-                vmodel.ShippingAddress = iShippingAddress.GetById(Convert.ToInt32(id));
+                vmodel.ShippingAddress = iShippingAddress.GetById(Convert.ToInt32(IdShippingAddress));
                 return View(vmodel);
             }
             return View(vmodel);
         }
 
-        public IActionResult AddShippingAddressAr(int? id)
+        public IActionResult AddShippingAddressAr(int? IdShippingAddress)
         {
             ViewBag.Company = iInformationCompanies.GetAll();
 
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewShippingAddress = iShippingAddress.GetAll();
-            if (id != null)
+            if (IdShippingAddress != null)
             {
-                vmodel.ShippingAddress = iShippingAddress.GetById(Convert.ToInt32(id));
+                vmodel.ShippingAddress = iShippingAddress.GetById(Convert.ToInt32(IdShippingAddress));
                 return View(vmodel);
             }
             return View(vmodel);
@@ -66,27 +66,27 @@ namespace Yara.Areas.Admin.Controllers
         {
             try
             {
-                slider.Email = model.ShippingAddress.Email;
-                slider.Street = model.ShippingAddress.Street;
-                slider.Floor = model.ShippingAddress.Floor;
-                slider.CurrentState = model.ShippingAddress.CurrentState;
-                slider.DateTimeEntry = model.ShippingAddress.DateTimeEntry;
+                slider.IdShippingAddress = model.ShippingAddress.IdShippingAddress;
                 slider.IdInformationCompany = model.ShippingAddress.IdInformationCompany;
-                slider.DateEntry = model.ShippingAddress.DateEntry;
-                slider.Building = model.ShippingAddress.Building;
-                slider.Active = model.ShippingAddress.Active;
-                slider.Description = model.ShippingAddress.Description;
+                slider.Email = model.ShippingAddress.Email;
                 slider.ShippingAddress = model.ShippingAddress.ShippingAddress;
+                slider.Floor = model.ShippingAddress.Floor;
+                slider.Building = model.ShippingAddress.Building;
+                slider.Street = model.ShippingAddress.Street;
                 slider.Office = model.ShippingAddress.Office;
                 slider.Title = model.ShippingAddress.ShippingAddress + " " + model.ShippingAddress.Street + " " + model.ShippingAddress.Building
-                                + " " + model.ShippingAddress.Floor + " " + model.ShippingAddress.Office ;
+                             + " " + model.ShippingAddress.Floor + " " + model.ShippingAddress.Office;
+                slider.Description = model.ShippingAddress.Description;
                 slider.Moblie = model.ShippingAddress.Moblie;
-
+                slider.CurrentState = model.ShippingAddress.CurrentState;
+                slider.DateTimeEntry = model.ShippingAddress.DateTimeEntry;
+                slider.DateEntry = model.ShippingAddress.DateEntry;
+                slider.Active = model.ShippingAddress.Active;            
                 if (slider.IdShippingAddress == 0 || slider.IdShippingAddress == null)
                 {
-                    if (dbcontext.TBTransfers.Where(a => a.ReceiptNo == slider.ShippingAddress).ToList().Count > 0)
+                    if (dbcontext.TBShippingAddresses.Where(a => a.Email == slider.Email).ToList().Count > 0)
                     {
-                        TempData["DescriptionClint"] = ResourceWeb.VLDescriptionClintDoplceted;
+                        TempData["Email"] = ResourceWeb.VLEmailDoplceted;
                         return Redirect(returnUrl);
                     }
                     var reqwest = iShippingAddress.saveData(slider);
@@ -123,9 +123,9 @@ namespace Yara.Areas.Admin.Controllers
             }
         }
         [Authorize(Roles = "Admin")]
-        public IActionResult DeleteData(int id)
+        public IActionResult DeleteData(int IdShippingAddress)
         {
-            var reqwistDelete = iShippingAddress.deleteData(id);
+            var reqwistDelete = iShippingAddress.deleteData(IdShippingAddress);
             if (reqwistDelete == true)
             {
                 TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
