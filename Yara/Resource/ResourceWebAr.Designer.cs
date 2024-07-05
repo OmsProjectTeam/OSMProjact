@@ -232,6 +232,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to إضافة عنوان شحن.
+        /// </summary>
+        public static string LBAddShippingAddress {
+            get {
+                return ResourceManager.GetString("LBAddShippingAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to إضافة وتعديل الأسعار لأنظمة الشحن.
         /// </summary>
         public static string LBAddShippingPrice {
@@ -318,6 +327,15 @@ namespace Yara.Resource {
         public static string Lbbranch {
             get {
                 return ResourceManager.GetString("Lbbranch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to البناء.
+        /// </summary>
+        public static string LBBuilding {
+            get {
+                return ResourceManager.GetString("LBBuilding", resourceCulture);
             }
         }
         
@@ -736,6 +754,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الطابق.
+        /// </summary>
+        public static string LBFloor {
+            get {
+                return ResourceManager.GetString("LBFloor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حزمة كاملة.
         /// </summary>
         public static string Lbfull_package {
@@ -822,6 +849,15 @@ namespace Yara.Resource {
         public static string LbInformaitionco {
             get {
                 return ResourceManager.GetString("LbInformaitionco", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to معلومات الشركة.
+        /// </summary>
+        public static string LbInformationCompany {
+            get {
+                return ResourceManager.GetString("LbInformationCompany", resourceCulture);
             }
         }
         
@@ -1114,6 +1150,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to عناوين الشحن.
+        /// </summary>
+        public static string LBMyShippingAddress {
+            get {
+                return ResourceManager.GetString("LBMyShippingAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to أسعار أنظمة الشحن.
         /// </summary>
         public static string LBMyShippingPrice {
@@ -1317,6 +1362,15 @@ namespace Yara.Resource {
         public static string LbNoutsOrder {
             get {
                 return ResourceManager.GetString("LbNoutsOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المكتب.
+        /// </summary>
+        public static string LbOffice {
+            get {
+                return ResourceManager.GetString("LbOffice", resourceCulture);
             }
         }
         
@@ -1609,6 +1663,33 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to عناوين الشحن.
+        /// </summary>
+        public static string LBShippingAddress {
+            get {
+                return ResourceManager.GetString("LBShippingAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to معلومات عناوين الشحن.
+        /// </summary>
+        public static string LBShippingAddressInfo {
+            get {
+                return ResourceManager.GetString("LBShippingAddressInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to موقع عناوين الشحن.
+        /// </summary>
+        public static string LBShippingAddressLocation {
+            get {
+                return ResourceManager.GetString("LBShippingAddressLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to التنبيه عبر الرسائل القصيرة.
         /// </summary>
         public static string Lbsms_alert {
@@ -1654,11 +1735,29 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الشارع.
+        /// </summary>
+        public static string LBStreet {
+            get {
+                return ResourceManager.GetString("LBStreet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حالة المهمة.
         /// </summary>
         public static string LbTaskStatus {
             get {
                 return ResourceManager.GetString("LbTaskStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to العنوان.
+        /// </summary>
+        public static string LbTitle {
+            get {
+                return ResourceManager.GetString("LbTitle", resourceCulture);
             }
         }
         

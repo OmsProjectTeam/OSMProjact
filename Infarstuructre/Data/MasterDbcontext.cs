@@ -171,6 +171,13 @@ namespace Infarstuructre.Data
                 entity.ToView("ViewTransfer");
             });
             //************************************************************
+            //************************************************************
+            builder.Entity<TBViewShippingAddress>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewShippingAddress");
+            });
+            //************************************************************
 
             builder.UseCollation("Arabic_CI_AS");
 
@@ -1469,6 +1476,18 @@ namespace Infarstuructre.Data
            .HasDefaultValueSql("((1))");
 
             //---------------------------------
+            //---------------------------------	
+            builder.Entity<TBShippingAddress>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBShippingAddress>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+            builder.Entity<TBShippingAddress>()
+           .Property(b => b.Active)
+           .HasDefaultValueSql("((1))");
+
+            //---------------------------------
         }
 
         public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
@@ -1645,9 +1664,11 @@ namespace Infarstuructre.Data
         public DbSet<TBViewTransfer> ViewTransfer { get; set; }
         public DbSet<TBViewTransfer> ViewProfits { get; set; }
         public DbSet<TBEmailAlartSetting> TBEmailAlartSettings { get; set; }
+        public DbSet<TBShippingAddress> TBShippingAddresses { get; set; }
+        public DbSet<TBViewShippingAddress> ViewShippingAddress { get; set; }
         //test
-        
-       
+
+
 
     }
 }

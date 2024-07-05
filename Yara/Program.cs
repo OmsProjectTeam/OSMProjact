@@ -128,6 +128,7 @@ builder.Services.AddScoped<IIUser, CLSUser>();
 builder.Services.AddScoped<IIPaidings, CLSTBPaidings>();
 builder.Services.AddScoped<IIEmailAlartSetting, CLSTBEmailAlartSetting>();
 builder.Services.AddScoped<IITransfer, CLSTransfer>();
+builder.Services.AddScoped<IIShippingAddress, CLSShippingAddress>();
 
 
 
