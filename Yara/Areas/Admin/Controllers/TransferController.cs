@@ -12,12 +12,14 @@ namespace Yara.Areas.Admin.Controllers
         IIOrderNew iOrderNew;
         IICurrenciesExchangeRates exchangeRates;
         MasterDbcontext dbcontext;
-        public TransferController(IIOrderNew iOrderNew, IITransfer iTransfer, IICurrenciesExchangeRates exchangeRates, MasterDbcontext dbcontext)
+        IIExchangeRate iExchangeRate;
+        public TransferController(IIOrderNew iOrderNew, IITransfer iTransfer, IICurrenciesExchangeRates exchangeRates, MasterDbcontext dbcontext, IIExchangeRate iExchangeRate1)
         {
             this.iOrderNew = iOrderNew;
             this.iTransfer = iTransfer;
             this.exchangeRates = exchangeRates;
             this.dbcontext = dbcontext;
+            iExchangeRate = iExchangeRate1;
         }
 
         public IActionResult MyTransfer()
@@ -42,6 +44,14 @@ namespace Yara.Areas.Admin.Controllers
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 
             vmodel.ListViewTransfer = iTransfer.GetAll();
+            vmodel.ListViewExchangeRate = iExchangeRate.GetAll();
+
+            // Set the default ToCurrencyID
+            vmodel.ExchangeRate = new TBExchangeRate
+            {
+                ToIdCurrenciesExchangeRates = 2 // Default value
+            };
+
             if (IdProfit != null)
             {
                 vmodel.Transfer = iTransfer.GetById(Convert.ToInt32(IdProfit));
@@ -56,9 +66,17 @@ namespace Yara.Areas.Admin.Controllers
         public IActionResult AddTransferAr(int? IdProfit)
         {
             ViewBag.Order = iOrderNew.GetAll();
+            ViewBag.Currency = exchangeRates.GetAll();
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 
+            vmodel.ListViewExchangeRate = iExchangeRate.GetAll();
             vmodel.ListViewTransfer = iTransfer.GetAll();
+
+            // Set the default ToCurrencyID
+            vmodel.ExchangeRate = new TBExchangeRate
+            {
+                ToIdCurrenciesExchangeRates = 2 // Default value
+            };
             if (IdProfit != null)
             {
                 vmodel.Transfer = iTransfer.GetById(Convert.ToInt32(IdProfit));
@@ -155,6 +173,22 @@ namespace Yara.Areas.Admin.Controllers
                 TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
                 return RedirectToAction("MyClintWitheDeliveryTariffs");
             }
+        }
+        [HttpGet]
+        public IActionResult GetExchangeRate(int fromCurrencyId, int toCurrencyId, double revisedMoney)
+        {
+            // Fetch the exchange rate from the database
+            var exchangeRate = iExchangeRate.GetAll()
+                              .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
+                              .Rate;
+
+            var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
+
+            if (exchangeRate != null)
+            {
+                return Json(exchangeRateValue);
+            }
+            return Json("N/A");
         }
     }
 }
