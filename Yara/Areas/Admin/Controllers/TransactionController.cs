@@ -119,7 +119,61 @@ namespace Yara.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
         }
-        [Authorize(Roles = "Admin")]
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, TBTransaction slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.IdTransaction = model.Transaction.IdTransaction;
+
+				slider.FromCurrencyID = model.Transaction.FromCurrencyID;
+				slider.ToCurrencyID = model.Transaction.ToCurrencyID;
+				slider.Amount = model.Transaction.Amount;
+				slider.ConvertedAmount = model.Transaction.ConvertedAmount;
+				slider.ExchangeRate = model.Transaction.ExchangeRate;
+				slider.DataEntry = model.Transaction.DataEntry;
+				slider.DateTimeEntry = model.Transaction.DateTimeEntry;
+				slider.CurrentState = model.Transaction.CurrentState;
+				if (slider.IdTransaction == 0 || slider.IdTransaction == null)
+				{
+					var reqwest = iTransaction.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyTransactionAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iTransaction.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyTransactionAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+
+		[Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdTransaction)
         {
             var reqwistDelete = iTransaction.deleteData(IdTransaction);
@@ -139,7 +193,27 @@ namespace Yara.Areas.Admin.Controllers
 
         }
 
-        [HttpGet]
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int IdTransaction)
+		{
+			var reqwistDelete = iTransaction.deleteData(IdTransaction);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				return RedirectToAction("MyTransactionAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				return RedirectToAction("MyTransactionAr");
+
+			}
+
+
+
+		}
+
+		[HttpGet]
         public IActionResult GetExchangeRate(int fromCurrencyId, int toCurrencyId)
         {
             // Fetch the exchange rate from the database

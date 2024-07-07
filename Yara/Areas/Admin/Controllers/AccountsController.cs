@@ -1091,6 +1091,35 @@ namespace Yara.Areas.Admin.Controllers
 
 			return RedirectToAction("Registers"); // Assuming you have an Index action in UserController
 		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		public async Task<IActionResult> GetUserByPhoneNumber(string phoneNumber)
+		{
+			if (string.IsNullOrEmpty(phoneNumber))
+			{
+				return BadRequest("Phone number is required.");
+			}
+
+			var user = await _userManager.Users
+										 .Where(u => u.PhoneNumber == phoneNumber)
+										 .FirstOrDefaultAsync();
+
+			if (user == null)
+			{
+				return NotFound();
+			}
+
+			var userData = new
+			{
+				Email = user.Email,
+				UserName = user.UserName,
+				Name = user.Name,
+				Password = user.PasswordHash, // Note: You might need a different approach for passwords
+			};
+
+			return Json(userData);
+		}
 	}
 }
 

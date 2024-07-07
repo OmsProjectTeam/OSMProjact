@@ -122,7 +122,71 @@ namespace Yara.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
         }
-        [Authorize(Roles = "Admin")]
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, TBShippingAddress slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.IdShippingAddress = model.ShippingAddress.IdShippingAddress;
+				slider.IdInformationCompany = model.ShippingAddress.IdInformationCompany;
+				slider.Email = model.ShippingAddress.Email;
+				slider.ShippingAddress = model.ShippingAddress.ShippingAddress;
+				slider.Floor = model.ShippingAddress.Floor;
+				slider.Building = model.ShippingAddress.Building;
+				slider.Street = model.ShippingAddress.Street;
+				slider.Office = model.ShippingAddress.Office;
+				slider.Title = model.ShippingAddress.ShippingAddress + " " + model.ShippingAddress.Street + " " + model.ShippingAddress.Building
+							 + " " + model.ShippingAddress.Floor + " " + model.ShippingAddress.Office;
+				slider.Description = model.ShippingAddress.Description;
+				slider.Moblie = model.ShippingAddress.Moblie;
+				slider.CurrentState = model.ShippingAddress.CurrentState;
+				slider.DateTimeEntry = model.ShippingAddress.DateTimeEntry;
+				slider.DateEntry = model.ShippingAddress.DateEntry;
+				slider.Active = model.ShippingAddress.Active;
+				if (slider.IdShippingAddress == 0 || slider.IdShippingAddress == null)
+				{
+					if (dbcontext.TBShippingAddresses.Where(a => a.Email == slider.Email).ToList().Count > 0)
+					{
+						TempData["Email"] = ResourceWeb.VLEmailDoplceted;
+						return Redirect(returnUrl);
+					}
+					var reqwest = iShippingAddress.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyShippingAddressAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iShippingAddress.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyShippingAddressAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+		[Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdShippingAddress)
         {
             var reqwistDelete = iShippingAddress.deleteData(IdShippingAddress);
@@ -137,5 +201,21 @@ namespace Yara.Areas.Admin.Controllers
                 return RedirectToAction("MyShippingAddress");
             }
         }
-    }
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int IdShippingAddress)
+		{
+			var reqwistDelete = iShippingAddress.deleteData(IdShippingAddress);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				return RedirectToAction("MyShippingAddressAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				return RedirectToAction("MyShippingAddressAr");
+			}
+		}
+	}
 }

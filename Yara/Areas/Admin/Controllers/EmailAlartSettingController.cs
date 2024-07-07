@@ -122,6 +122,66 @@ namespace Yara.Areas.Admin.Controllers
 				return Redirect(returnUrl);
 			}
 		}
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, TBEmailAlartSetting slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.IdEmailAlartSetting = model.EmailAlartSetting.IdEmailAlartSetting;
+				slider.MailSender = model.EmailAlartSetting.MailSender;
+				slider.SmtpServer = model.EmailAlartSetting.SmtpServer;
+				slider.PortServer = model.EmailAlartSetting.PortServer;
+				slider.PasswordEmail = model.EmailAlartSetting.PasswordEmail;
+				slider.Ssl_validity = model.EmailAlartSetting.Ssl_validity;
+				slider.DataEntry = model.EmailAlartSetting.DataEntry;
+				slider.DateTimeEntry = model.EmailAlartSetting.DateTimeEntry;
+				slider.CurrentState = model.EmailAlartSetting.CurrentState;
+				slider.Active = model.EmailAlartSetting.Active;
+				if (slider.IdEmailAlartSetting == 0 || slider.IdEmailAlartSetting == null)
+				{
+					if (dbcontext.TBEmailAlartSettings.Where(a => a.MailSender == slider.MailSender).ToList().Count > 0)
+					{
+						TempData["EmailAlartSetting"] = ResourceWeb.VLEmailAlartSettingDoplceted;
+						return RedirectToAction("AddEmailAlartSettingAr", model);
+					}
+
+					var reqwest = iEmailAlartSetting.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyEmailAlartSettingAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iEmailAlartSetting.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyEmailAlartSettingAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+
 		[Authorize(Roles = "Admin")]
 		public IActionResult DeleteData(int IdEmailAlartSetting)
 		{
@@ -135,6 +195,27 @@ namespace Yara.Areas.Admin.Controllers
 			{
 				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
 				return RedirectToAction("MyEmailAlartSetting");
+
+			}
+			// تمرير التاسكات  من الادارة 
+			// استخدام نظام أجايا وجيرا 
+
+
+		}
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int IdEmailAlartSetting)
+		{
+			var reqwistDelete = iEmailAlartSetting.deleteData(IdEmailAlartSetting);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				return RedirectToAction("MyEmailAlartSettingAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				return RedirectToAction("MyEmailAlartSettingAr");
 
 			}
 			// تمرير التاسكات  من الادارة 
