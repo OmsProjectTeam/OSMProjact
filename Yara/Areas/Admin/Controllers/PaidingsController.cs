@@ -548,17 +548,6 @@ namespace Yara.Areas.Admin.Controllers
 			}
 		}
 
-		//public List<SelectListItem> GetCurrenciesSelectList(int defaultCurrencyID)
-		//{
-		//    var currencies = iCurrenciesTransactions.GetAll();
-		//    var selectList = currencies.Select(c => new SelectListItem
-		//    {
-		//        Value = c.IdCurrenciesExchangeRates.ToString(),
-		//        Text = c.Country,
-		//        Selected = (c.IdCurrenciesExchangeRates == defaultCurrencyID)
-		//    }).ToList();
-		//    return selectList;
-		//}
 		[HttpGet]
         public IActionResult GetExchangeRate(int fromCurrencyId, int toCurrencyId, double revisedMoney)
         {
@@ -575,5 +564,31 @@ namespace Yara.Areas.Admin.Controllers
             }
             return Json("N/A");
         }
+
+        [HttpGet]
+        public IActionResult GetOrderDetails(int orderId, int fromCurrencyId, int toCurrencyId)
+        {
+            // Fetch the exchange rate from the database
+            var exchangeRate = iExchangeRate.GetAll()
+                              .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
+                              .Rate;
+
+            var order = iOrderNew.GetById(orderId);
+            if (order != null)
+            {
+                var revisedMoney = order.CostPrice;
+                var exchangedPrice = order.ExchangedPrice;
+                var finalExchangedPrice = revisedMoney * exchangedPrice;
+
+                return Json(new
+                {
+                    revisedMoney = revisedMoney,
+                    exchangedPrice = exchangedPrice,
+                    finalExchangedPrice = finalExchangedPrice
+                });
+            }
+            return Json(null);
+        }
+
     }
 }
