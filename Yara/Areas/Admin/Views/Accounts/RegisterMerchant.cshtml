@@ -150,7 +150,7 @@
 			console.log('Phone number entered:', phoneNumber);
 			if (phoneNumber) {
 				$.ajax({
-					url: '@Url.Action("GetUserByPhoneNumber", "Accounts")',
+					url: '@Url.Action("GetUserByPhoneNumberMer", "Accounts")',
 					type: 'GET',
 					data: { phoneNumber: phoneNumber },
 					success: function (data) {
