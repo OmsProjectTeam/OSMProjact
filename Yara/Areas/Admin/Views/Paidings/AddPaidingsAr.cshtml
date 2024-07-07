@@ -11,12 +11,7 @@
             <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
             <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
             <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
-            <br>
-            <br>
             <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
-            <br>
-            <br>
-
         </ul>
         <div class="col-lg-6 col-xs-12">
             <div class="box-content card white">
@@ -29,90 +24,66 @@
                             <input type="hidden" asp-for="@Model.Paing.IdPaings" class="form-control">
                             <input type="hidden" asp-for="@Model.Paing.DateTimeEntry" value="@DateTime.Now">
                         </div>
-                        <div class="card-content">
-                            <div class="row small-spacing">
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group">
-                                        <label asp-for="@Model.Paing.IdOrderNew">@ResourceWebAr.LbDescriptionClint</label>
-                                        <select class="form-control select2_1" asp-for="@Model.Paing.IdOrderNew" asp-items="@(new SelectList(ViewBag.Order, "IdOrderNew", "DescriptionOrder"))" id="selectedcompany"></select>
-                                        <span asp-validation-for="@Model.Paing.IdOrderNew" class="text-danger"></span>
 
-                                    </div>
+                        <div class="row small-spacing">
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="@Model.Paing.IdOrderNew">@ResourceWebAr.LbDescriptionClint</label>
+                                    <select class="form-control" asp-for="@Model.Paing.IdOrderNew" asp-items="@(new SelectList(ViewBag.Order, "IdOrderNew", "DescriptionOrder"))" id="selectedcompany"></select>
+                                    <span asp-validation-for="@Model.Paing.IdOrderNew" class="text-danger"></span>
+
                                 </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group ">
-                                        <label asp-for="@Model.Paing.ReceiptNo" for="exampleInputEmail1">@ResourceWebAr.LBreceipt_no</label>
-                                        <input asp-for="@Model.Paing.ReceiptNo" type="text" placeholder="@ResourceWebAr.LBreceipt_no ...." class="form-control" maxlength="300">
-                                        <span asp-validation-for="@Model.Paing.ReceiptNo" class="text-danger"></span>
-                                        <span style="color:red"><strong>@TempData["ReceiptNo"]</strong></span>
-
-
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group ">
-                                        <label asp-for="@Model.Paing.ReceiptDate" for="exampleInputEmail1">@ResourceWebAr.LBreceipt_dt</label>
-                                        <input asp-for="@Model.Paing.ReceiptDate" type="date" placeholder="@ResourceWebAr.LBreceipt_dt ...." class="form-control" maxlength="300">
-                                        <span asp-validation-for="@Model.Paing.ReceiptDate" class="text-danger"></span>
-                                    </div>
-                                </div>
-
-
-
                             </div>
-
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.Paing.ReceiptNo" for="exampleInputEmail1">@ResourceWebAr.LBreceipt_no</label>
+                                    <input asp-for="@Model.Paing.ReceiptNo" type="text" placeholder="@ResourceWebAr.LBreceipt_no ...." class="form-control" maxlength="300">
+                                    <span asp-validation-for="@Model.Paing.ReceiptNo" class="text-danger"></span>
+                                    <span style="color:red"><strong>@TempData["ReceiptNo"]</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.Paing.ReceiptDate" for="exampleInputEmail1">@ResourceWebAr.LBreceipt_dt</label>
+                                    <input asp-for="@Model.Paing.ReceiptDate" type="date" placeholder="@ResourceWebAr.LBreceipt_dt ...." class="form-control" maxlength="300">
+                                    <span asp-validation-for="@Model.Paing.ReceiptDate" class="text-danger"></span>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="card-content">
-                            <div class="row small-spacing">
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group ">
-                                        <label asp-for="@Model.Paing.ResivedMony" for="exampleInputEmail1">@ResourceWebAr.LbResivedMony</label>
-                                        <input asp-for="@Model.Paing.ResivedMony" type="text" placeholder="@ResourceWebAr.LbResivedMony ...." class="form-control" maxlength="25" id="revisedMoney">
-                                        <span asp-validation-for="@Model.Paing.ResivedMony" class="text-danger"></span>
+                        <div class="row small-spacing">
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.Paing.ResivedMony" for="exampleInputEmail1">@ResourceWebAr.LbResivedMony</label>
+                                    <input asp-for="@Model.Paing.ResivedMony" type="text" placeholder="@ResourceWebAr.LbResivedMony ...." class="form-control" maxlength="25" id="revisedMoney">
+                                    <span asp-validation-for="@Model.Paing.ResivedMony" class="text-danger"></span>
 
-                                    </div>
                                 </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label asp-for="@Model.Transaction.ToCurrencyID">@ResourceWebAr.LBMyCurrenciesExchangeRates</label>
-                                        <select class="form-control select2_1" asp-for="@Model.Transaction.ToCurrencyID" asp-items="@(new SelectList(ViewBag.Currenc, "IdCurrenciesExchangeRates", "Country", Model.ExchangeRate.ToIdCurrenciesExchangeRates))" id="toCurrency"></select>
-                                        <span asp-validation-for="@Model.Transaction.ToCurrencyID" class="text-danger"></span>
-                                    </div>
-                                </div>
-
-
-
                             </div>
-
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="@Model.Transaction.ToCurrencyID">@ResourceWebAr.LBMyCurrenciesExchangeRates</label>
+                                    <select class="form-control" asp-for="@Model.Transaction.ToCurrencyID" asp-items="@(new SelectList(ViewBag.Currenc, "IdCurrenciesExchangeRates", "Country", Model.ExchangeRate.ToIdCurrenciesExchangeRates))" id="toCurrency"></select>
+                                    <span asp-validation-for="@Model.Transaction.ToCurrencyID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.Paing.ExchangedPrice" for="exampleInputEmail1">Exchanged Price</label>
+                                    <input asp-for="@Model.Paing.ExchangedPrice" type="text" placeholder="@ResourceWebAr.LbResivedMony ...." class="form-control" maxlength="25" id="exchangePrice">
+                                    <span asp-validation-for="@Model.Paing.ExchangedPrice" class="text-danger"></span>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="card-content">
-                            <div class="row small-spacing">
-
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group ">
-                                        <label asp-for="@Model.Paing.ExchangedPrice" for="exampleInputEmail1">Exchanged Price</label>
-                                        <input asp-for="@Model.Paing.ExchangedPrice" type="text" placeholder="@ResourceWebAr.LbResivedMony ...." class="form-control" maxlength="25" id="exchangePrice">
-                                        <span asp-validation-for="@Model.Paing.ExchangedPrice" class="text-danger"></span>
-
-                                    </div>
+                        <div class="row small-spacing">
+                            <div class="col-12">
+                                <div class="form-group ">
+                                    <label asp-for="@Model.Paing.ReceiptStatment" for="exampleInputEmail1">@ResourceWebAr.LbReceiptStatment</label>
+                                    <textarea asp-for="@Model.Paing.ReceiptStatment" placeholder="@ResourceWebAr.LbReceiptStatment ...." class="form-control" maxlength="300" id="costPrice" rows="5"></textarea>
+                                    <span asp-validation-for="@Model.Paing.ReceiptStatment" class="text-danger"></span>
                                 </div>
-                                @* <div class="col-sm-6">
-
-                                </div> *@
-                                <div class="col-12 col-sm-10">
-                                    <div class="form-group ">
-                                        <label asp-for="@Model.Paing.ReceiptStatment" for="exampleInputEmail1">@ResourceWebAr.LbReceiptStatment</label>
-                                        <textarea asp-for="@Model.Paing.ReceiptStatment" placeholder="@ResourceWebAr.LbReceiptStatment ...." class="form-control" maxlength="300" id="costPrice" rows="5"></textarea>
-                                        <span asp-validation-for="@Model.Paing.ReceiptStatment" class="text-danger"></span>
-
-                                    </div>
-                                </div>
-
-
                             </div>
-
                         </div>
 
                         <div class="form-group">
