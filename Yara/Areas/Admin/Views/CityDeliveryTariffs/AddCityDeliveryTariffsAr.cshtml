@@ -21,7 +21,7 @@
                     <h4 class="box-title">@ResourceWebAr.LBAddCityDeliveryTariffs</h4>
 
                     <div class="card-content">
-                        <form role="form" method="post" asp-controller="CityDeliveryTariffs" asp-action="Save" enctype="multipart/form-data">
+                        <form role="form" method="post" asp-controller="CityDeliveryTariffs" asp-action="SaveAr" enctype="multipart/form-data">
                             <div class="form-group">
                                 <input type="hidden" asp-for="@Model.CityDeliveryTariffs.DataEntry" class="form-control" value="@User.Identity.Name">
                                 <input type="hidden" asp-for="@Model.CityDeliveryTariffs.IdCityDeliveryTariffs" class="form-control">

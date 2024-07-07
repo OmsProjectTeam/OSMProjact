@@ -108,7 +108,61 @@ namespace Yara.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
         }
-        [Authorize(Roles = "Admin")]
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, TBTypeSystemDelivery slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.IdTypeSystemDelivery = model.TypeSystemDelivery.IdTypeSystemDelivery;
+				slider.TypeSystemDelivery = model.TypeSystemDelivery.TypeSystemDelivery;
+				slider.DataEntry = model.TypeSystemDelivery.DataEntry;
+				slider.DateTimeEntry = model.TypeSystemDelivery.DateTimeEntry;
+				slider.CurrentState = model.TypeSystemDelivery.CurrentState;
+				if (slider.IdTypeSystemDelivery == 0 || slider.IdTypeSystemDelivery == null)
+				{
+					if (dbcontext.TBTypeSystemDeliverys.Where(a => a.TypeSystemDelivery == slider.TypeSystemDelivery).ToList().Count > 0)
+					{
+						TempData["TypeSystemDelivery"] = ResourceWeb.VLTypeSystemDeliveryDoplceted;
+						return Redirect(returnUrl);
+					}
+
+					var reqwest = iTypeSystemDelivery.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyTypeSystemDeliveryAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iTypeSystemDelivery.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyTypeSystemDeliveryAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+		[Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdTypeSystemDelivery)
         {
             var reqwistDelete = iTypeSystemDelivery.deleteData(IdTypeSystemDelivery);
@@ -128,5 +182,27 @@ namespace Yara.Areas.Admin.Controllers
 
 
         }
-    }
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int IdTypeSystemDelivery)
+		{
+			var reqwistDelete = iTypeSystemDelivery.deleteData(IdTypeSystemDelivery);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				return RedirectToAction("MyTypeSystemDeliveryAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				return RedirectToAction("MyTypeSystemDeliveryAr");
+
+			}
+			// تمرير التاسكات  من الادارة 
+			// استخدام نظام أجايا وجيرا 
+
+
+		}
+
+	}
 }

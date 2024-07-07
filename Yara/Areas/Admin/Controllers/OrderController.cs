@@ -216,7 +216,132 @@ namespace Yara.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
         }
-        [Authorize(Roles = "Admin")]
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, Order slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.Id = model.Order.Id;
+				slider.OrderDt = model.Order.OrderDt;
+				slider.OrderOwner = model.Order.OrderOwner;
+				slider.WithDelivery = model.Order.WithDelivery;
+				slider.DeliveryCharges = model.Order.DeliveryCharges;
+				slider.OrderStatus = model.Order.OrderStatus;
+				slider.ReceiptNo = model.Order.ReceiptNo;
+				slider.ReceiptDt = model.Order.ReceiptDt;
+				slider.UserId = model.Order.UserId;
+				slider.BatchId = model.Order.BatchId;
+				slider.ServiceCharges = model.Order.ServiceCharges;
+				slider.Netrevenue = model.Order.Netrevenue;
+				slider.DeliveryCollectedBy = model.Order.DeliveryCollectedBy;
+				slider.AssymblyCharges = model.Order.AssymblyCharges;
+				slider.AssymblyCollectedBy = model.Order.AssymblyCollectedBy;
+				slider.DeliveryCleared = model.Order.DeliveryCleared;
+				slider.AssymblyCleared = model.Order.AssymblyCleared;
+				slider.DeliveryNotes = model.Order.DeliveryNotes;
+				slider.OrderCaseId = model.Order.OrderCaseId;
+				slider.Hxcode = model.Order.Hxcode;
+				slider.SmsnotificationDt = model.Order.SmsnotificationDt;
+				slider.TaskStatusId = model.Order.TaskStatusId;
+				slider.FinanceStatus = model.Order.FinanceStatus;
+				slider.Closed = model.Order.Closed;
+				slider.Totalqty = model.Order.Totalqty;
+				slider.NetAmount = model.Order.NetAmount;
+				slider.BookingDt = model.Order.BookingDt;
+				slider.DeliveryDt = model.Order.DeliveryDt;
+				slider.OnlineOrder = model.Order.OnlineOrder;
+				slider.FullyPackage = model.Order.FullyPackage;
+				slider.MerchantId = model.Order.MerchantId;
+				slider.BookingSource = model.Order.BookingSource;
+				slider.BonusIq = model.Order.BonusIq;
+				slider.LastBeforeStatusId = model.Order.LastBeforeStatusId;
+				slider.AdvancePayment = model.Order.AdvancePayment;
+				slider.AgentUserId = model.Order.AgentUserId;
+				slider.Collected = model.Order.Collected;
+				slider.Transferred = model.Order.Transferred;
+				slider.Source = model.Order.Source;
+				slider.FinancAdj = model.Order.FinancAdj;
+				slider.CollectedByOwner = model.Order.CollectedByOwner;
+				slider.AdminBonus = model.Order.AdminBonus;
+				slider.WithAgent = model.Order.WithAgent;
+				slider.AdminAdj = model.Order.AdminAdj;
+				slider.SortFeesAdj = model.Order.SortFeesAdj;
+				slider.CompSortAdj = model.Order.CompSortAdj;
+				slider.LocalDeliveryAdj = model.Order.LocalDeliveryAdj;
+				slider.CompDeliveryAdj = model.Order.CompDeliveryAdj;
+				slider.ActualDeliveryDt = model.Order.ActualDeliveryDt;
+				slider.Aliexbatchid = model.Order.Aliexbatchid;
+				slider.Returned = model.Order.Returned;
+				slider.WithAgentId = model.Order.WithAgentId;
+				slider.PickupDt = model.Order.PickupDt;
+				slider.TaskWithAgentId = model.Order.TaskWithAgentId;
+				slider.CollectionDt = model.Order.CollectionDt;
+				slider.CloseAcknoledgeDt = model.Order.CloseAcknoledgeDt;
+				slider.BonusDeduct = model.Order.BonusDeduct;
+				slider.DeductProgressed = model.Order.DeductProgressed;
+				slider.BranchId = model.Order.BranchId;
+				slider.ToWarehouse = model.Order.ToWarehouse;
+				slider.CityReceipt = model.Order.CityReceipt;
+				slider.PageReturnArrange = model.Order.PageReturnArrange;
+				slider.Acknoledged = model.Order.Acknoledged;
+				slider.PriceLog = model.Order.PriceLog;
+				slider.AdvOrder = model.Order.AdvOrder;
+				slider.CollectionAdjustmentDt = model.Order.CollectionAdjustmentDt;
+				slider.IsCredit = model.Order.IsCredit;
+				slider.ReturnDt = model.Order.ReturnDt;
+				slider.PreClose = model.Order.PreClose;
+				slider.CenrtralBankPrice = model.Order.CenrtralBankPrice;
+				slider.Active = model.Order.Active;
+				slider.DataEntry = model.Order.DataEntry;
+				slider.DateTimeEntry = model.Order.DateTimeEntry;
+				slider.CurrentState = model.Order.CurrentState;
+				slider.IdInformationCompanies = model.Order.IdInformationCompanies;
+				if (slider.Id == 0 || slider.Id == null)
+				{
+					if (dbcontext.orders.Where(a => a.Hxcode == slider.Hxcode).ToList().Count > 0)
+					{
+						TempData["Hxcode"] = ResourceWeb.VLHxcodedoplceted;
+						return RedirectToAction("AddOrderAr", model);
+					}
+
+					var reqwest = iOrder.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyOrderAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iOrder.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyOrderAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+
+		[Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdOrder)
         {
             var reqwistDelete = iOrder.deleteData(IdOrder);
@@ -231,5 +356,21 @@ namespace Yara.Areas.Admin.Controllers
                 return RedirectToAction("MyOrder");
             }
         }
-    }
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int IdOrder)
+		{
+			var reqwistDelete = iOrder.deleteData(IdOrder);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				return RedirectToAction("MyOrderAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				return RedirectToAction("MyOrderAr");
+			}
+		}
+	}
 }

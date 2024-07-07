@@ -109,6 +109,60 @@ namespace Yara.Areas.Admin.Controllers
 				return Redirect(returnUrl);
 			}
 		}
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, TBTypesCompanies slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.IdTypesCompanies = model.TypesCompanies.IdTypesCompanies;
+				slider.TypesCompanies = model.TypesCompanies.TypesCompanies;
+				slider.DataEntry = model.TypesCompanies.DataEntry;
+				slider.DateTimeEntry = model.TypesCompanies.DateTimeEntry;
+				slider.CurrentState = model.TypesCompanies.CurrentState;
+				if (slider.IdTypesCompanies == 0 || slider.IdTypesCompanies == null)
+				{
+					if (dbcontext.TBTypesCompaniess.Where(a => a.TypesCompanies == slider.TypesCompanies).ToList().Count > 0)
+					{
+						TempData["TypesCompanies"] = ResourceWeb.VLTypesCompaniesDoplceted;
+						return RedirectToAction("AddTypesCompaniesAr", model);
+					}
+
+					var reqwest = iTypesCompanies.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyTypesCompaniesAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iTypesCompanies.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyTypesCompaniesAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
 		[Authorize(Roles = "Admin")]
 		public IActionResult DeleteData(int IdTypesCompanies)
 		{
@@ -129,5 +183,28 @@ namespace Yara.Areas.Admin.Controllers
 
 
 		}
+
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int IdTypesCompanies)
+		{
+			var reqwistDelete = iTypesCompanies.deleteData(IdTypesCompanies);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				return RedirectToAction("MyTypesCompaniesAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				return RedirectToAction("MyTypesCompaniesAr");
+
+			}
+			// تمرير التاسكات  من الادارة 
+			// استخدام نظام أجايا وجيرا 
+
+
+		}
+
 	}
 }
