@@ -108,6 +108,60 @@ namespace Yara.Areas.Admin.Controllers
 				return Redirect(returnUrl);
 			}
 		}
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, OrderCase slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.Id = model.OrderCase.Id;
+				slider.Description = model.OrderCase.Description;
+				slider.DataEntry = model.OrderCase.DataEntry;
+				slider.DateTimeEntry = model.OrderCase.DateTimeEntry;
+				slider.CurrentState = model.OrderCase.CurrentState;
+				if (slider.Id == 0 || slider.Id == null)
+				{
+					if (dbcontext.order_cases.Where(a => a.Description == slider.Description).ToList().Count > 0)
+					{
+						TempData["Description"] = ResourceWeb.VLDescriptionDoplceted;
+						return RedirectToAction("AddOrderCaseAr", model);
+					}
+					var reqwest = iOrderCase.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyOrderCaseAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iOrderCase.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyOrderCaseAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+
 		[Authorize(Roles = "Admin")]
 		public IActionResult DeleteData(int Id)
 		{
@@ -128,5 +182,28 @@ namespace Yara.Areas.Admin.Controllers
 
 
 		}
+
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int Id)
+		{
+			var reqwistDelete = iOrderCase.deleteData(Id);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				return RedirectToAction("MyOrderCaseAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				return RedirectToAction("MyOrderCaseAr");
+
+			}
+			// تمرير التاسكات  من الادارة 
+			// استخدام نظام أجايا وجيرا 
+
+
+		}
+
 	}
 }

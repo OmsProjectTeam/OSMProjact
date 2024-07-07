@@ -23,7 +23,7 @@
                 <h4 class="box-title">@ResourceWebAr.LBAddPaing</h4>
                 <!-- /.box-title -->
                 <div class="card-content">
-                    <form role="form" method="post" asp-controller="Paidings" asp-action="Save" enctype="multipart/form-data">
+                    <form role="form" method="post" asp-controller="Paidings" asp-action="SaveAr" enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="hidden" asp-for="@Model.Paing.DataEntry" class="form-control" value="@User.Identity.Name">
                             <input type="hidden" asp-for="@Model.Paing.IdPaings" class="form-control">

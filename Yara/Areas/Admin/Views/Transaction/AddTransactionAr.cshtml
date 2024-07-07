@@ -18,7 +18,7 @@
                 <div class="box-content card white">
                     <h4 class="box-title">@ResourceWebAr.LBAddTransaction</h4>
                     <div class="card-content">
-                        <form role="form" method="post" asp-controller="Transaction" asp-action="Save" enctype="multipart/form-data">
+                        <form role="form" method="post" asp-controller="Transaction" asp-action="SaveAr" enctype="multipart/form-data">
                             <div class="form-group">
                                 <input type="hidden" asp-for="@Model.Transaction.DataEntry" class="form-control" value="@User.Identity.Name">
                                 <input type="hidden" asp-for="@Model.Transaction.IdTransaction" class="form-control">

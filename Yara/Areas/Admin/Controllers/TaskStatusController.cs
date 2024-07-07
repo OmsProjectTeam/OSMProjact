@@ -108,7 +108,61 @@ namespace Yara.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
         }
-        [Authorize(Roles = "Admin")]
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, TaskStatus slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.Id = model.TaskStatus.Id;
+				slider.Description = model.TaskStatus.Description;
+				slider.DataEntry = model.TaskStatus.DataEntry;
+				slider.DateTimeEntry = model.TaskStatus.DateTimeEntry;
+				slider.CurrentState = model.TaskStatus.CurrentState;
+				if (slider.Id == 0 || slider.Id == null)
+				{
+					if (dbcontext.task_status.Where(a => a.Description == slider.Description).ToList().Count > 0)
+					{
+						TempData["Description"] = ResourceWeb.VLDescriptionDoplceted;
+						return RedirectToAction("AddTaskStatusAr", model);
+					}
+					var reqwest = iTaskStatus.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyTaskStatusAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iTaskStatus.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyTaskStatusAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+
+		[Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int Id)
         {
             var reqwistDelete = iTaskStatus.deleteData(Id);
@@ -126,5 +180,24 @@ namespace Yara.Areas.Admin.Controllers
             // تمرير التاسكات  من الادارة 
             // استخدام نظام أجايا وجيرا 
         }
-    }
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int Id)
+		{
+			var reqwistDelete = iTaskStatus.deleteData(Id);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				return RedirectToAction("MyTaskStatusAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				return RedirectToAction("MyTaskStatusAr");
+
+			}
+			// تمرير التاسكات  من الادارة 
+			// استخدام نظام أجايا وجيرا 
+		}
+	}
 }

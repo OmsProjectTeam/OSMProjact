@@ -109,7 +109,64 @@ namespace Yara.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
         }
-        [Authorize(Roles = "Admin")]
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, RolesName slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.Id = model.RolesName.Id;
+				slider.RoleName = model.RolesName.RoleName;
+				slider.DataEntry = model.RolesName.DataEntry;
+				slider.DateTimeEntry = model.RolesName.DateTimeEntry;
+				slider.CurrentState = model.RolesName.CurrentState;
+
+				if (slider.Id == 0 || slider.Id == null)
+				{
+					if (dbcontext.RolesNames.Where(a => a.RoleName == slider.RoleName).ToList().Count > 0)
+					{
+						TempData["RoleName"] = ResourceWeb.VLRoleNameDoplceted;
+						return RedirectToAction("AddRolesNameAr", model);
+					}
+
+					var reqwest = iRolesName.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyRolesNameAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iRolesName.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyRolesNameAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+
+
+		[Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int Id)
         {
             var reqwistDelete = iRolesName.deleteData(Id);
@@ -129,5 +186,26 @@ namespace Yara.Areas.Admin.Controllers
 
 
         }
-    }
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int Id)
+		{
+			var reqwistDelete = iRolesName.deleteData(Id);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				return RedirectToAction("MyRolesNameAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				return RedirectToAction("MyRolesNameAr");
+
+			}
+			// تمرير التاسكات  من الادارة 
+			// استخدام نظام أجايا وجيرا 
+
+
+		}
+	}
 }

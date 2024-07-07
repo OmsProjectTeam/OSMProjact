@@ -250,9 +250,152 @@ namespace Yara.Areas.Admin.Controllers
 
             }
         }
-      
-        
-        public JsonResult GetAreasByCity(int cityId)
+
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, TBInformationCompanies slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.IdInformationCompanies = model.InformationCompanies.IdInformationCompanies;
+				slider.IdTypesCompanies = model.InformationCompanies.IdTypesCompanies;
+				slider.IdArea = model.InformationCompanies.IdArea;
+				slider.IdCitu = model.InformationCompanies.IdCitu;
+				slider.IdUserIdentity = model.InformationCompanies.IdUserIdentity;
+				slider.CompanyName = model.InformationCompanies.CompanyName;
+				slider.PhoneCompany = model.InformationCompanies.PhoneCompany;
+				slider.PhoneCompanySecand = model.InformationCompanies.PhoneCompanySecand;
+				slider.EmailCompany = model.InformationCompanies.EmailCompany;
+				slider.AddresCompany = model.InformationCompanies.AddresCompany;
+				slider.Photo = model.InformationCompanies.Photo;
+				slider.CompanyURl = model.InformationCompanies.CompanyURl;
+				slider.CompanyDescription = model.InformationCompanies.CompanyDescription;
+				slider.Active = model.InformationCompanies.Active;
+				slider.DateTimeEntry = model.InformationCompanies.DateTimeEntry;
+				slider.DataEntry = model.InformationCompanies.DataEntry;
+				slider.CurrentState = model.InformationCompanies.CurrentState;
+				slider.NikeNAme = model.InformationCompanies.NikeNAme;
+				var file = HttpContext.Request.Form.Files;
+
+				if (slider.IdInformationCompanies == 0 || slider.IdInformationCompanies == null)
+				{
+					if (file.Count() > 0)
+					{
+						string Photo = Guid.NewGuid().ToString() + Path.GetExtension(file[0].FileName);
+						var fileStream = new FileStream(Path.Combine(@"wwwroot/Images/Home", Photo), FileMode.Create);
+						file[0].CopyTo(fileStream);
+						slider.Photo = Photo;
+						fileStream.Close();
+					}
+					else
+					{
+						TempData["Message"] = ResourceWeb.VLimageuplode;
+						return Redirect(returnUrl);
+					}
+					if (dbcontext.TBInformationCompaniess.Where(a => a.CompanyName == slider.CompanyName).ToList().Count > 0)
+					{
+						var PhotoNAme = slider.Photo;
+						var delet = iInformationCompanies.DELETPHOTOWethError(PhotoNAme);
+
+						TempData["CompanyName"] = ResourceWeb.VLCompanyNameDoplceted;
+						return RedirectToAction("AddEditInformationCompaniesAr", model);
+					}
+
+					var reqwest = iInformationCompanies.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MYInformationCompaniesAr");
+					}
+					else
+					{
+						var PhotoNAme = slider.Photo;
+						var delet = iInformationCompanies.DELETPHOTOWethError(PhotoNAme);
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					//var reqweistDeletPoto = iInformationCompanies.DELETPHOTO(slider.IdInformationCompanies);
+
+					if (file.Count() == 0)
+
+					{
+						slider.Photo = model.InformationCompanies.Photo;
+						//TempData["Message"] = ResourceWeb.VLimageuplode;
+						var reqestUpdate2 = iInformationCompanies.UpdateData(slider);
+						if (reqestUpdate2 == true)
+						{
+							TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+							return RedirectToAction("MYInformationCompanies");
+						}
+						else
+						{
+							var PhotoNAme = slider.Photo;
+							//var delet = iInformationCompanies.DELETPHOTOWethError(PhotoNAme);
+							TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+							return Redirect(returnUrl);
+						}
+					}
+					else
+					{
+						var reqweistDeletPoto = iInformationCompanies.DELETPHOTO(slider.IdInformationCompanies);
+						var reqestUpdate2 = iInformationCompanies.UpdateData(slider);
+						if (reqestUpdate2 == true)
+						{
+							TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+							return RedirectToAction("MYInformationCompanies");
+						}
+						else
+						{
+							var PhotoNAme = slider.Photo;
+							var delet = iInformationCompanies.DELETPHOTOWethError(PhotoNAme);
+							TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+							return Redirect(returnUrl);
+						}
+					}
+
+					//var reqestUpdate = iInformationCompanies.UpdateData(slider);
+					//if (reqestUpdate == true)
+					//{
+					//	TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+					//	return RedirectToAction("MYInformationCompanies");
+					//}
+					//else
+					//{
+					//	var PhotoNAme = slider.Photo;
+					//	var delet = iInformationCompanies.DELETPHOTOWethError(PhotoNAme);
+					//	TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+					//	return Redirect(returnUrl);
+					//}
+
+				}
+			}
+			catch
+			{
+				var file = HttpContext.Request.Form.Files;
+				if (file.Count() == 0)
+
+				{
+					//var PhotoNAme = slider.Photo;
+					//var delet = iInformationCompanies.DELETPHOTOWethError(PhotoNAme);
+					TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+					return Redirect(returnUrl);
+				}
+				else
+				{
+					var PhotoNAme = slider.Photo;
+					var delet = iInformationCompanies.DELETPHOTOWethError(PhotoNAme);
+					TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+					return Redirect(returnUrl);
+				}
+
+			}
+		}
+
+		public JsonResult GetAreasByCity(int cityId)
         {
             var areas = dbcontext.ViewAreas.Where(a => a.city_id == cityId).Select(a => new { a.id, a.Description }).ToList();
             return Json(areas);
@@ -275,7 +418,24 @@ namespace Yara.Areas.Admin.Controllers
             }
         }
 
-        public JsonResult GetUserDetails(string id)
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int IdInformationCompanies)
+		{
+			var reqwistDelete = iInformationCompanies.deleteData(IdInformationCompanies);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				return RedirectToAction("MYInformationCompaniesAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				return RedirectToAction("MYInformationCompaniesAr");
+			}
+		}
+
+
+		public JsonResult GetUserDetails(string id)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.Id == id);
             if (user == null)
