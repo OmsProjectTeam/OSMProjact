@@ -201,7 +201,7 @@ namespace Yara.Areas.Admin.Controllers
                         {
                             var message = new MimeMessage();
                             message.From.Add(new MailboxAddress("New Order", emailSetting.MailSender));
-                            message.To.Add(new MailboxAddress("pritom", "nohadking@hotmail.com"));
+                            message.To.Add(new MailboxAddress("pritom", "saifaldin_s@hotmail.com"));
                             message.Subject = "عملية تسليم من قبل :" + slider.DataEntry;
                             var builder = new BodyBuilder
                             {

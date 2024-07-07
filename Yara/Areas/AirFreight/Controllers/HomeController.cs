@@ -15,18 +15,18 @@ namespace Yara.Areas.AirFreight.Controllers
 		IIOrderNew iOrderNew;
 		IIUserInformation iUserInformation;
 		IIPaidings iPaidings;
-        public HomeController(UserManager<ApplicationUser> userManager, IIUser iUser, MasterDbcontext dbcontext1, IIOrderNew iOrderNew1, IIUserInformation iUserInformation1, IIPaidings iPaidings)
+		IITransfer iTransfer;
+        public HomeController(UserManager<ApplicationUser> userManager, IIUser iUser, MasterDbcontext dbcontext1, IIOrderNew iOrderNew1, IIUserInformation iUserInformation1, IIPaidings iPaidings,IITransfer iTransfer1)
         {
             _userManager = userManager;
             iOrderNew = iOrderNew1;
             iUserInformation = iUserInformation1;
             this.iPaidings = iPaidings;
+            iTransfer= iTransfer1;
         }
         public async Task<IActionResult> Index(string userId)
 		{
 			
-	
-
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 			//vmodel.ListlicationUser = iUserInformation.GetAllByName(user.UserName).Take(1);
 			var userd=vmodel.sUser = iUserInformation.GetById(userId);
@@ -51,8 +51,20 @@ namespace Yara.Areas.AirFreight.Controllers
 
             vmodel.ListViewPaings = iPaidings.GetAllDataentry(user.UserName);
 
-           var pay = vmodel.ListViewPaings.ToList();
-			ViewBag.paidings = pay.Sum(p => p.ResivedMony);
+           var tran = vmodel.ListViewPaings.ToList();
+			ViewBag.paidings = tran.Sum(p => p.ResivedMony);
+
+
+
+
+
+			vmodel.ListViewTransfer = iTransfer.GetAllDataentry(user.UserName);
+
+           var pay = vmodel.ListViewTransfer.ToList();
+			ViewBag.Trans = pay.Sum(p => p.TransferAmount);
+
+
+
             // إرسال النموذج إلى العرض
             return View(vmodel);
 		}
