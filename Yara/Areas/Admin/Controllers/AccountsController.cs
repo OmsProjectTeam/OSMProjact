@@ -1115,7 +1115,7 @@ namespace Yara.Areas.Admin.Controllers
 				Email = user.Email,
 				UserName = user.UserName,
 				Name = user.Name,
-				Password = user.PasswordHash, // Note: You might need a different approach for passwords
+				Password = user.PasswordHash,
 			};
 
 			return Json(userData);
