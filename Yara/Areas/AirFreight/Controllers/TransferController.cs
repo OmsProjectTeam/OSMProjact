@@ -297,28 +297,63 @@ public class TransferController : Controller
         }
         return Json("N/A");
     }
+    //[HttpGet]
+    //public IActionResult GetPaidingsDetails(int paidingId, int fromCurrencyId, int toCurrencyId)
+    //{
+    //    // Fetch the exchange rate from the database
+    //    var exchangeRate = iExchangeRate.GetAll()
+    //                      .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
+    //                      .Rate;
+
+    //    var paiding = iPaidings.GetById(paidingId);
+    //    if (paiding != null)
+    //    {
+    //        var revisedMoney = paiding.ResivedMony;
+    //        var exchangedPrice = paiding.ExchangedPrice;
+    //        var finalExchangedPrice = revisedMoney * exchangedPrice;
+
+    //        return Json(new
+    //        {
+    //            revisedMoney = revisedMoney,
+    //            exchangedPrice = exchangedPrice,
+    //            finalExchangedPrice = finalExchangedPrice
+    //        });
+    //    }
+    //    return Json(null);
+    //}
     [HttpGet]
-    public IActionResult GetPaidingsDetails(int paidingId, int fromCurrencyId, int toCurrencyId)
+    public IActionResult GetOrderDetails(int paidingId, int fromCurrencyId, int toCurrencyId, double revisedMoney, bool isManual = false)
     {
         // Fetch the exchange rate from the database
         var exchangeRate = iExchangeRate.GetAll()
                           .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
                           .Rate;
 
-        var paiding = iPaidings.GetById(paidingId);
-        if (paiding != null)
-        {
-            var revisedMoney = paiding.ResivedMony;
-            var exchangedPrice = paiding.ExchangedPrice;
-            var finalExchangedPrice = revisedMoney * exchangedPrice;
+        //var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
 
+        if (isManual)
+        {
+            var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
             return Json(new
             {
-                revisedMoney = revisedMoney,
-                exchangedPrice = exchangedPrice,
-                finalExchangedPrice = finalExchangedPrice
+                exchangedPrice = exchangeRateValue
             });
         }
-        return Json(null);
+        else
+        {
+            var paiding = iPaidings.GetById(paidingId);
+            if (paiding != null)
+            {
+                var finalRevisedMoney = paiding.ResivedMony;
+                var exchangedPrice = paiding.ExchangedPrice;
+
+                return Json(new
+                {
+                    revisedMoney = finalRevisedMoney,
+                    exchangedPrice = exchangedPrice
+                });
+            }
+            return Json(null);
+        }
     }
 }

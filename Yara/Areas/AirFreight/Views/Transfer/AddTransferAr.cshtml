@@ -171,30 +171,46 @@
             });
             // Bind change event to the selected company
             $('#paidingId').change(function () {
-                updateCosting();
+                updateCosting(false);
             });
             // Bind change event to the selected company
             $('#toCurrency').change(function () {
-                updateCosting();
+                updateCosting(false);
+            });
+            // Bind change event to the revisedMoney input field
+            $('#revisedMoney').on('input', function () {
+                updateCosting(true); // Pass true to indicate manual input
             });
 
-            function updateCosting() {
+            function updateCosting(isManual) {
 
                 const paidingId = $('#paidingId').val();
                 const revisedMoney = $('#revisedMoney').val();
                 const toCurrency = $('#toCurrency').val();
 
-                console.log("toCurrency is: ", toCurrency);
-                console.log("paidingId is: ", paidingId);
+                console.log("Updating costing");
+                console.log("isManual: ", isManual);
+                console.log("paidingId: ", paidingId);
+                console.log("revisedMoney: ", revisedMoney);
+                console.log("toCurrency: ", toCurrency);
 
                 $.ajax({
-                    url: '@Url.Action("GetPaidingsDetails", "Transfer")',
-                    data: { toCurrencyId: toCurrency, fromCurrencyId: 1, revisedMoney: revisedMoney, paidingId: paidingId },
+                    url: '@Url.Action("GetOrderDetails", "Transfer")',
+                    data: {
+                        toCurrencyId: toCurrency,
+                        fromCurrencyId: 1,
+                        revisedMoney: revisedMoney,
+                        paidingId: paidingId,
+                        isManual: isManual
+                    },
                     success: function (data) {
                         console.log("AJAX success, data: ", data);
                         if (data) {
                             $('#exchangePrice').val(data.exchangedPrice);
-                            $('#revisedMoney').val(data.revisedMoney);
+                            // $('#revisedMoney').val(data.revisedMoney);
+                            if (!isManual) {
+                                $('#revisedMoney').val(data.revisedMoney);
+                            }
                         } else {
                             $('#exchangePrice').val('');
                             $('#revisedMoney').val('');
