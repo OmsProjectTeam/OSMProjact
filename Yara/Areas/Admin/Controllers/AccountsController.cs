@@ -1095,15 +1095,26 @@ namespace Yara.Areas.Admin.Controllers
 		[HttpGet]
 		[AllowAnonymous]
 		public async Task<IActionResult> GetUserByPhoneNumber(string phoneNumber)
+
+
+
+
 		{
 			if (string.IsNullOrEmpty(phoneNumber))
 			{
 				return BadRequest("Phone number is required.");
 			}
 
-			var user = await _userManager.Users
-										 .Where(u => u.PhoneNumber == phoneNumber)
+			//var user = await _userManager.Users
+			//							 .Where(u => u.PhoneNumber == phoneNumber)
+			//							 .FirstOrDefaultAsync();
+
+
+			var user = await _context.customers
+										 .Where(u => u.CustMob == phoneNumber)
 										 .FirstOrDefaultAsync();
+
+
 
 			if (user == null)
 			{
@@ -1112,14 +1123,58 @@ namespace Yara.Areas.Admin.Controllers
 
 			var userData = new
 			{
-				Email = user.Email,
-				UserName = user.UserName,
-				Name = user.Name,
-				Password = user.PasswordHash,
+				//Email = user.Email,
+				//UserName = user.UserName,
+				Name = user.CustName,
+				//Password = user.PasswordHash,
 			};
 
 			return Json(userData);
 		}
+
+
+		[HttpGet]
+		[AllowAnonymous]
+		public async Task<IActionResult> GetUserByPhoneNumberMer(string phoneNumber)
+
+
+
+
+		{
+			if (string.IsNullOrEmpty(phoneNumber))
+			{
+				return BadRequest("Phone number is required.");
+			}
+
+			//var user = await _userManager.Users
+			//							 .Where(u => u.PhoneNumber == phoneNumber)
+			//							 .FirstOrDefaultAsync();
+
+
+			var user = await _context.Merchants
+										 .Where(u => u.MerchantMob == phoneNumber)
+										 .FirstOrDefaultAsync();
+
+
+
+			if (user == null)
+			{
+				return NotFound();
+			}
+
+			var userData = new
+			{
+				//Email = user.Email,
+				//UserName = user.UserName,
+				Name = user.MerchantName,
+				//Password = user.PasswordHash,
+			};
+
+			return Json(userData);
+		}
+
+
+
 	}
 }
 
