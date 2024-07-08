@@ -574,7 +574,7 @@ namespace Yara.Areas.Admin.Controllers
                 if (order != null)
                 {
                     var finalRevisedMoney = order.CostPrice;
-                    var exchangedPrice = finalRevisedMoney * exchangeRate;
+                    var exchangedPrice = order.ExchangedPrice;
 
                     return Json(new
                     {
