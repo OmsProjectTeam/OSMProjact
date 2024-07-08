@@ -548,47 +548,42 @@ namespace Yara.Areas.Admin.Controllers
 			}
 		}
 
-		[HttpGet]
-        public IActionResult GetExchangeRate(int fromCurrencyId, int toCurrencyId, double revisedMoney)
-        {
-            // Fetch the exchange rate from the database
-            var exchangeRate = iExchangeRate.GetAll()
-                              .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
-                              .Rate;
-
-            var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
-
-            if (exchangeRate != null)
-            {
-                return Json(exchangeRateValue);
-            }
-            return Json("N/A");
-        }
+		
 
         [HttpGet]
-        public IActionResult GetOrderDetails(int orderId, int fromCurrencyId, int toCurrencyId)
+        public IActionResult GetOrderDetails(int orderId, int fromCurrencyId, int toCurrencyId, double revisedMoney, bool isManual = false)
         {
             // Fetch the exchange rate from the database
             var exchangeRate = iExchangeRate.GetAll()
                               .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
                               .Rate;
 
-            var order = iOrderNew.GetById(orderId);
-            if (order != null)
-            {
-                var revisedMoney = order.CostPrice;
-                var exchangedPrice = order.ExchangedPrice;
-                var finalExchangedPrice = revisedMoney * exchangedPrice;
+            //var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
 
+            if (isManual)
+            {
+                var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
                 return Json(new
                 {
-                    revisedMoney = revisedMoney,
-                    exchangedPrice = exchangedPrice,
-                    finalExchangedPrice = finalExchangedPrice
+                    exchangedPrice = exchangeRateValue
                 });
             }
-            return Json(null);
-        }
+            else
+            {
+                var order = iOrderNew.GetById(orderId);
+                if (order != null)
+                {
+                    var finalRevisedMoney = order.CostPrice;
+                    var exchangedPrice = finalRevisedMoney * exchangeRate;
 
+                    return Json(new
+                    {
+                        revisedMoney = finalRevisedMoney,
+                        exchangedPrice = exchangedPrice
+                    });
+                }
+                return Json(null);
+            }
+        }
     }
 }
