@@ -579,6 +579,30 @@ namespace Yara.Areas.AirFreight.Controllers
             }
             return Json("N/A");
         }
+        [HttpGet]
+        public IActionResult GetOrderDetails(int orderId, int fromCurrencyId, int toCurrencyId)
+        {
+            // Fetch the exchange rate from the database
+            var exchangeRate = iExchangeRate.GetAll()
+                              .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
+                              .Rate;
+
+            var order = iOrderNew.GetById(orderId);
+            if (order != null)
+            {
+                var revisedMoney = order.CostPrice;
+                var exchangedPrice = order.ExchangedPrice;
+                var finalExchangedPrice = revisedMoney * exchangedPrice;
+
+                return Json(new
+                {
+                    revisedMoney = revisedMoney,
+                    exchangedPrice = exchangedPrice,
+                    finalExchangedPrice = finalExchangedPrice
+                });
+            }
+            return Json(null);
+        }
 
     }
 }
