@@ -29,7 +29,7 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group">
                                         <label asp-for="@Model.Transfer.IdOrderNew">@ResourceWebAr.LbDescriptionOrder</label>
-                                        <select class="form-control" asp-for="@Model.Transfer.IdOrderNew" asp-items="@(new SelectList(ViewBag.Order, "IdOrderNew", "DescriptionOrder"))" id="selectedcompany"></select>
+                                        <select class="form-control" asp-for="@Model.Transfer.IdOrderNew" asp-items="@(new SelectList(ViewBag.Order, "IdOrderNew", "DescriptionOrder"))" id="paidingId"></select>
                                         <span asp-validation-for="@Model.Transfer.IdOrderNew" class="text-danger"></span>
 
                                     </div>
@@ -172,53 +172,35 @@
                 placeholder: "Select an option",
                 allowClear: true
             });
-
             // Bind change event to the selected company
-            // $('#selectedcompany').change(function () {
-            //     console.log("Selected company changed");
-            //     updateCosting();
-            // });
-            // Bind change event to the selected company
-            $('#toCurrency').change(function () {
-                console.log("Selected currency changed");
+            $('#paidingId').change(function () {
                 updateCosting();
             });
-
-            // Bind input event to the weight field
-            $('#revisedMoney').on('input', function () {
+            // Bind change event to the selected company
+            $('#toCurrency').change(function () {
                 updateCosting();
             });
 
             function updateCosting() {
-                // const selectedCompany = $('#selectedcompany').val();
+
+                const paidingId = $('#paidingId').val();
                 const revisedMoney = $('#revisedMoney').val();
                 const toCurrency = $('#toCurrency').val();
 
-                // if (isNaN(weight) || weight <= 0) {
-                //     console.log("Invalid weight value");
-                //     $('#costPrice').val('');
-                //     $('#price').val('');
-                //     return;
-                // }
-
-                // console.log("Selected company is: ", selectedCompany);
-                // console.log("Weight is: ", weight);
                 console.log("toCurrency is: ", toCurrency);
+                console.log("paidingId is: ", paidingId);
 
                 $.ajax({
-                    url: '@Url.Action("GetExchangeRate", "Transfer")',
-                    data: { toCurrencyId: toCurrency, fromCurrencyId: 1, revisedMoney: revisedMoney },
+                    url: '@Url.Action("GetPaidingsDetails", "Transfer")',
+                    data: { toCurrencyId: toCurrency, fromCurrencyId: 1, revisedMoney: revisedMoney, paidingId: paidingId },
                     success: function (data) {
                         console.log("AJAX success, data: ", data);
                         if (data) {
-                            // $('#costPrice').val(data.costPrice);
-                            // $('#price').val(data.price);
-                            $('#exchangePrice').val(data);
-                            // calculatePrice();
+                            $('#exchangePrice').val(data.exchangedPrice);
+                            $('#revisedMoney').val(data.revisedMoney);
                         } else {
-                            // $('#costPrice').val('');
-                            // $('#price').val('');
                             $('#exchangePrice').val('');
+                            $('#revisedMoney').val('');
                         }
                     },
                     error: function () {
@@ -226,20 +208,6 @@
                         console.log("AJAX error");
                     }
                 });
-            }
-
-            function calculatePrice() {
-                const weight = parseFloat($('#weight').val());
-                const costPrice = parseFloat($('#costPrice').val());
-
-                if (isNaN(weight) || isNaN(costPrice)) {
-                    console.log("Invalid weight or cost price");
-                    $('#price').val('');
-                    return;
-                }
-
-                const price = weight * costPrice;
-                $('#price').val(price);
             }
         });
         var loadFile = function (event) {
