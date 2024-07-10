@@ -192,6 +192,12 @@
   <data name="LBAddTypesCompanies" xml:space="preserve">
     <value>إضافة وتعديل فئات الشركة</value>
   </data>
+  <data name="LBAddTypesOfMessage" xml:space="preserve">
+    <value>أضافة وتعديل أنواع المسجات </value>
+  </data>
+  <data name="LBAddTypesOfRequest" xml:space="preserve">
+    <value>إضافة وتعديل انواع الطلبات </value>
+  </data>
   <data name="LBAddTypeSystem" xml:space="preserve">
     <value>إضافة وتعديل الأنظمة</value>
   </data>
@@ -498,6 +504,12 @@
   <data name="LBMyTypesCompanies" xml:space="preserve">
     <value>فئات الشركات</value>
   </data>
+  <data name="LBMyTypesOfMessage" xml:space="preserve">
+    <value>أنواع المسجات </value>
+  </data>
+  <data name="LBMyTypesOfRequest" xml:space="preserve">
+    <value>أنواع الطلبات</value>
+  </data>
   <data name="LBMyTypeSystem" xml:space="preserve">
     <value>الأنظمة</value>
   </data>
@@ -702,6 +714,12 @@
   <data name="LbTypesCompaniesM" xml:space="preserve">
     <value>أنواع الشركات التجارية</value>
   </data>
+  <data name="LbTypesOfMessage" xml:space="preserve">
+    <value>نوع المسج</value>
+  </data>
+  <data name="LbTypesOfRequest" xml:space="preserve">
+    <value>النوع </value>
+  </data>
   <data name="LbTypeSystem" xml:space="preserve">
     <value>النظام</value>
   </data>
@@ -836,6 +854,12 @@
   </data>
   <data name="VLTypesCompaniesDoplceted" xml:space="preserve">
     <value>لقد تم بالفعل إدخال فئة الشركة. يرجى التحقق والمحاولة مرة أخرى لاحقا...!</value>
+  </data>
+  <data name="VLTypesOfMessageDoplceted" xml:space="preserve">
+    <value>تم إدخال نوع الرسالة مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...</value>
+  </data>
+  <data name="VLTypesOfRequestDoplceted" xml:space="preserve">
+    <value>تم ادخال نوع الطلب مسبقا يرجى التأكد وإعادة المحاولة لاحقا ..!</value>
   </data>
   <data name="VLTypeSystemDeliveryDoplceted" xml:space="preserve">
     <value>نوع نظام التسليم مدرج بالفعل، يرجى التحقق والمحاولة مرة أخرى لاحقًا...!</value>

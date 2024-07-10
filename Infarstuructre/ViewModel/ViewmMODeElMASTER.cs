@@ -91,6 +91,10 @@ namespace Infarstuructre.ViewModel
         public IEnumerable<TBEmailAlartSetting> ListEmailAlartSetting { get; set; }
         public TBEmailAlartSetting EmailAlartSetting { get; set; }
         public IEnumerable<TBViewShippingAddress> ListViewShippingAddress { get; set; }
-        public TBShippingAddress ShippingAddress { get; set; }
+        public TBShippingAddress ShippingAddress { get; set; } 
+        public IEnumerable<TBTypesOfRequest> ListTypesOfRequest { get; set; }
+        public TBTypesOfRequest TypesOfRequest { get; set; } 
+        public IEnumerable<TBTypesOfMessage> ListTypesOfMessage { get; set; }
+        public TBTypesOfMessage TypesOfMessage { get; set; }
     }
 }

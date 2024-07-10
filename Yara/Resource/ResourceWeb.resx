@@ -192,6 +192,12 @@
   <data name="LBAddTypesCompanies" xml:space="preserve">
     <value>Add and modify company categories</value>
   </data>
+  <data name="LBAddTypesOfMessage" xml:space="preserve">
+    <value>Adding and modifying Types Of Message</value>
+  </data>
+  <data name="LBAddTypesOfRequest" xml:space="preserve">
+    <value>Adding and modifying Types Of Request</value>
+  </data>
   <data name="LBAddTypeSystem" xml:space="preserve">
     <value>Adding and modifying systems</value>
   </data>
@@ -504,6 +510,12 @@
   <data name="LBMyTypesCompanies" xml:space="preserve">
     <value>Categories of companies</value>
   </data>
+  <data name="LBMyTypesOfMessage" xml:space="preserve">
+    <value>Types Of Message</value>
+  </data>
+  <data name="LBMyTypesOfRequest" xml:space="preserve">
+    <value>Types Of Request</value>
+  </data>
   <data name="LBMyTypeSystem" xml:space="preserve">
     <value>Systems</value>
   </data>
@@ -708,6 +720,12 @@
   <data name="LbTypesCompaniesM" xml:space="preserve">
     <value>Merchant Types Companies</value>
   </data>
+  <data name="LbTypesOfMessage" xml:space="preserve">
+    <value>Type Message</value>
+  </data>
+  <data name="LbTypesOfRequest" xml:space="preserve">
+    <value>Types</value>
+  </data>
   <data name="LbTypeSystem" xml:space="preserve">
     <value>system</value>
   </data>
@@ -860,6 +878,12 @@
   </data>
   <data name="VLTypesCompaniesDoplceted" xml:space="preserve">
     <value>The company category has already been entered. Please check and try again later...!</value>
+  </data>
+  <data name="VLTypesOfMessageDoplceted" xml:space="preserve">
+    <value>The message type has already been entered, please check and try again later...!</value>
+  </data>
+  <data name="VLTypesOfRequestDoplceted" xml:space="preserve">
+    <value>The ordering system has already been entered. Please confirm and try again later....!</value>
   </data>
   <data name="VLTypeSystemDeliveryDoplceted" xml:space="preserve">
     <value>The delivery system type is already listed, please check and try again later...!</value>

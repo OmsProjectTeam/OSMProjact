@@ -116,6 +116,9 @@ builder.Services.AddScoped<IIPaidings, CLSTBPaidings>();
 builder.Services.AddScoped<IIEmailAlartSetting, CLSTBEmailAlartSetting>();
 builder.Services.AddScoped<IITransfer, CLSTransfer>();
 builder.Services.AddScoped<IIShippingAddress, CLSShippingAddress>();
+builder.Services.AddScoped<IITypesOfRequest, CLSTBTypesOfRequest>();
+builder.Services.AddScoped<IITypesOfMessage, CLSTBTypesOfMessage>();
+
 
 
 
@@ -127,7 +130,6 @@ builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddHttpClient();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

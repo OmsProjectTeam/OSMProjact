@@ -286,6 +286,24 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adding and modifying Types Of Message.
+        /// </summary>
+        public static string LBAddTypesOfMessage {
+            get {
+                return ResourceManager.GetString("LBAddTypesOfMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adding and modifying Types Of Request.
+        /// </summary>
+        public static string LBAddTypesOfRequest {
+            get {
+                return ResourceManager.GetString("LBAddTypesOfRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adding and modifying systems.
         /// </summary>
         public static string LBAddTypeSystem {
@@ -1222,6 +1240,24 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Types Of Message.
+        /// </summary>
+        public static string LBMyTypesOfMessage {
+            get {
+                return ResourceManager.GetString("LBMyTypesOfMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Types Of Request.
+        /// </summary>
+        public static string LBMyTypesOfRequest {
+            get {
+                return ResourceManager.GetString("LBMyTypesOfRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Systems.
         /// </summary>
         public static string LBMyTypeSystem {
@@ -1834,6 +1870,24 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type Message.
+        /// </summary>
+        public static string LbTypesOfMessage {
+            get {
+                return ResourceManager.GetString("LbTypesOfMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Types.
+        /// </summary>
+        public static string LbTypesOfRequest {
+            get {
+                return ResourceManager.GetString("LbTypesOfRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to system.
         /// </summary>
         public static string LbTypeSystem {
@@ -2289,6 +2343,24 @@ namespace Yara.Resource {
         public static string VLTypesCompaniesDoplceted {
             get {
                 return ResourceManager.GetString("VLTypesCompaniesDoplceted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The message type has already been entered, please check and try again later...!.
+        /// </summary>
+        public static string VLTypesOfMessageDoplceted {
+            get {
+                return ResourceManager.GetString("VLTypesOfMessageDoplceted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ordering system has already been entered. Please confirm and try again later....!.
+        /// </summary>
+        public static string VLTypesOfRequestDoplceted {
+            get {
+                return ResourceManager.GetString("VLTypesOfRequestDoplceted", resourceCulture);
             }
         }
         

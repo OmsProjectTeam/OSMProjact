@@ -1488,6 +1488,28 @@ namespace Infarstuructre.Data
            .HasDefaultValueSql("((1))");
 
             //---------------------------------
+            builder.Entity<TBTypesOfRequest>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBTypesOfRequest>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+            builder.Entity<TBTypesOfRequest>()
+           .Property(b => b.Active)
+           .HasDefaultValueSql("((1))");
+
+            //---------------------------------
+            builder.Entity<TBTypesOfMessage>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBTypesOfMessage>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+            builder.Entity<TBTypesOfMessage>()
+           .Property(b => b.Active)
+           .HasDefaultValueSql("((1))");
+
+            //---------------------------------
         }
 
         public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
@@ -1666,6 +1688,8 @@ namespace Infarstuructre.Data
         public DbSet<TBEmailAlartSetting> TBEmailAlartSettings { get; set; }
         public DbSet<TBShippingAddress> TBShippingAddresses { get; set; }
         public DbSet<TBViewShippingAddress> ViewShippingAddress { get; set; }
+        public DbSet<TBTypesOfRequest> TBTypesOfRequests { get; set; }
+        public DbSet<TBTypesOfMessage> TBTypesOfMessages { get; set; }
         //test
 
 

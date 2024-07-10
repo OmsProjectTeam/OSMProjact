@@ -556,20 +556,20 @@ namespace Domin.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please include the Smtp Server for the process to complete successfully...!.
-        /// </summary>
-        public static string VlSmtpServer {
-            get {
-                return ResourceManager.GetString("VlSmtpServer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Shipping Address.
         /// </summary>
         public static string VlShippingAddress {
             get {
                 return ResourceManager.GetString("VlShippingAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please include the Smtp Server for the process to complete successfully...!.
+        /// </summary>
+        public static string VlSmtpServer {
+            get {
+                return ResourceManager.GetString("VlSmtpServer", resourceCulture);
             }
         }
         
@@ -615,6 +615,24 @@ namespace Domin.Resource {
         public static string VlTypesCompanies {
             get {
                 return ResourceManager.GetString("VlTypesCompanies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please include the Types Of Message  for the process to complete successfully...!.
+        /// </summary>
+        public static string VlTypesOfMessage {
+            get {
+                return ResourceManager.GetString("VlTypesOfMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please include the Types Of Request for the process to complete successfully...!.
+        /// </summary>
+        public static string VlTypesOfRequest {
+            get {
+                return ResourceManager.GetString("VlTypesOfRequest", resourceCulture);
             }
         }
         
