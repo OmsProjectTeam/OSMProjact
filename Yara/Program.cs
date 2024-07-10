@@ -121,6 +121,7 @@ builder.Services.AddScoped<IITypesOfMessage, CLSTBTypesOfMessage>();
 builder.Services.AddScoped<IIFAQ, CLSTBFAQ>();
 builder.Services.AddScoped<IIFAQDescreption, CLSTBFAQDescreption>();
 builder.Services.AddScoped<IIFAQList, CLSTBFAQList>();
+builder.Services.AddScoped<IICustomerMessages, CLSTBCustomerMessages>();
 
 
 

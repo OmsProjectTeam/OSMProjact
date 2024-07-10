@@ -141,6 +141,9 @@
   <data name="LBAddCurrenciesExchangeRates" xml:space="preserve">
     <value>Add and modify currencies</value>
   </data>
+  <data name="LBAddCustomerMessages" xml:space="preserve">
+    <value>Add and modify the Customer Messages</value>
+  </data>
   <data name="LbAddEditInformationCompanies" xml:space="preserve">
     <value>Add and modify company data</value>
   </data>
@@ -432,6 +435,9 @@
   <data name="LbMerchant_name" xml:space="preserve">
     <value>Merchant name</value>
   </data>
+  <data name="LbMessageDescription" xml:space="preserve">
+    <value>Message Description</value>
+  </data>
   <data name="lbMsgErrorLogin" xml:space="preserve">
     <value>Error User Name Or Password.....!</value>
   </data>
@@ -461,6 +467,9 @@
   </data>
   <data name="LBMyCustomer" xml:space="preserve">
     <value>Individual customer data</value>
+  </data>
+  <data name="LBMyCustomerMessages" xml:space="preserve">
+    <value>Customer Messages</value>
   </data>
   <data name="LBMyEmailAlartSetting" xml:space="preserve">
     <value>Email Alart Setting</value>

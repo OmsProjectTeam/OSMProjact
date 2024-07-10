@@ -133,6 +133,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to أضافة وتعديل مسجات العملاء.
+        /// </summary>
+        public static string LBAddCustomerMessages {
+            get {
+                return ResourceManager.GetString("LBAddCustomerMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to إضافة وتعديل بيانات الشركة.
         /// </summary>
         public static string LbAddEditInformationCompanies {
@@ -997,6 +1006,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to رسالة العميل .
+        /// </summary>
+        public static string LbMessageDescription {
+            get {
+                return ResourceManager.GetString("LbMessageDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to خطأ في اسم المستخدم أو كلمة المرور .....!.
         /// </summary>
         public static string lbMsgErrorLogin {
@@ -1083,6 +1101,15 @@ namespace Yara.Resource {
         public static string LBMyCustomer {
             get {
                 return ResourceManager.GetString("LBMyCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to رسائل العملاء .
+        /// </summary>
+        public static string LBMyCustomerMessages {
+            get {
+                return ResourceManager.GetString("LBMyCustomerMessages", resourceCulture);
             }
         }
         

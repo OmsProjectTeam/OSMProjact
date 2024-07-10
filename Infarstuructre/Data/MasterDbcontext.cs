@@ -185,6 +185,13 @@ namespace Infarstuructre.Data
 				entity.ToView("ViewFAQDescription");
 			});
 			//************************************************************
+            //************************************************************
+			builder.Entity<TBViewCustomerMessages>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("ViewCustomerMessages");
+			});
+			//************************************************************
 
 			//************************************************************
 			builder.Entity<TBViewFAQList>(entity =>
@@ -1558,6 +1565,15 @@ namespace Infarstuructre.Data
 		   .HasDefaultValueSql("((1))");
 
 			//---------------------------------
+            //---------------------------------
+			builder.Entity<TBCustomerMessages>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<TBCustomerMessages>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+
+			//---------------------------------
 		}
 
 		public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
@@ -1743,6 +1759,8 @@ namespace Infarstuructre.Data
         public DbSet<TBFAQList> TBFAQLists { get; set; }
         public DbSet<TBViewFAQDescription> ViewFAQDescription { get; set; }
         public DbSet<TBViewFAQList> ViewFAQList { get; set; }
+        public DbSet<TBCustomerMessages> TBCustomerMessagess { get; set; }
+        public DbSet<TBViewCustomerMessages> ViewCustomerMessages { get; set; }
         //test
 
 
