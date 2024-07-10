@@ -315,4 +315,16 @@
   <data name="VlTypesOfMessage" xml:space="preserve">
     <value>Please include the Types Of Message  for the process to complete successfully...!</value>
   </data>
+  <data name="MaxLength1000" xml:space="preserve">
+    <value>The number of characters entered must not exceed 1000 characters...!</value>
+  </data>
+  <data name="VlDescreption" xml:space="preserve">
+    <value>Please include descreption for the process to complete successfully...!</value>
+  </data>
+  <data name="VlFAQ" xml:space="preserve">
+    <value>please include FAQ to complete successfully...!</value>
+  </data>
+  <data name="VlListFAQ" xml:space="preserve">
+    <value>Please include List FAQ for the process to complete successfully...!</value>
+  </data>
 </root>

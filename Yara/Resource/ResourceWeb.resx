@@ -846,6 +846,9 @@
   <data name="VLExchangeRateDoplceted" xml:space="preserve">
     <value>The currency has already been entered. Please check and try again later...!</value>
   </data>
+  <data name="VLFAQDoplceted" xml:space="preserve">
+    <value>The question has already been entered.. Please check and try again later..!</value>
+  </data>
   <data name="VLHxcodedoplceted" xml:space="preserve">
     <value>The code has already been entered, please verify and try again later...!</value>
   </data>

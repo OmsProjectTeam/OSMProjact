@@ -2248,6 +2248,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The question has already been entered.. Please check and try again later..!.
+        /// </summary>
+        public static string VLFAQDoplceted {
+            get {
+                return ResourceManager.GetString("VLFAQDoplceted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The code has already been entered, please verify and try again later...!.
         /// </summary>
         public static string VLHxcodedoplceted {

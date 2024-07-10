@@ -177,9 +177,24 @@ namespace Infarstuructre.Data
                 entity.HasNoKey();
                 entity.ToView("ViewShippingAddress");
             });
-            //************************************************************
+			//************************************************************
+			//************************************************************
+			builder.Entity<TBViewFAQDescription>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("ViewFAQDescription");
+			});
+			//************************************************************
 
-            builder.UseCollation("Arabic_CI_AS");
+			//************************************************************
+			builder.Entity<TBViewFAQList>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("ViewFAQList");
+			});
+			//************************************************************
+
+			builder.UseCollation("Arabic_CI_AS");
 
             builder.Entity<Account>(entity =>
             {
@@ -1509,10 +1524,43 @@ namespace Infarstuructre.Data
            .Property(b => b.Active)
            .HasDefaultValueSql("((1))");
 
-            //---------------------------------
-        }
+			//---------------------------------
 
-        public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
+			//---------------------------------
+			builder.Entity<TBFAQ>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<TBFAQ>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+			builder.Entity<TBFAQ>()
+		   .Property(b => b.Active)
+		   .HasDefaultValueSql("((1))");
+
+			//---------------------------------
+
+			//---------------------------------
+			builder.Entity<TBFAQDescreption>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<TBFAQDescreption>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+
+			//---------------------------------
+
+			//---------------------------------
+			builder.Entity<TBFAQList>()
+		   .Property(b => b.DateTimeEntry)
+		   .HasDefaultValueSql("getdate()");
+			builder.Entity<TBFAQList>()
+		   .Property(b => b.CurrentState)
+		   .HasDefaultValueSql("((1))");
+
+			//---------------------------------
+		}
+
+		public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
 
         public virtual DbSet<Account> accounts { get; set; }
 
@@ -1690,6 +1738,11 @@ namespace Infarstuructre.Data
         public DbSet<TBViewShippingAddress> ViewShippingAddress { get; set; }
         public DbSet<TBTypesOfRequest> TBTypesOfRequests { get; set; }
         public DbSet<TBTypesOfMessage> TBTypesOfMessages { get; set; }
+        public DbSet<TBFAQ> TBFAQs { get; set; }
+        public DbSet<TBFAQDescreption> TBFAQDescreptions { get; set; }
+        public DbSet<TBFAQList> TBFAQLists { get; set; }
+        public DbSet<TBViewFAQDescription> ViewFAQDescription { get; set; }
+        public DbSet<TBViewFAQList> ViewFAQList { get; set; }
         //test
 
 

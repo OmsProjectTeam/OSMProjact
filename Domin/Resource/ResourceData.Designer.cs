@@ -97,6 +97,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number of characters entered must not exceed 1000 characters...!.
+        /// </summary>
+        public static string MaxLength1000 {
+            get {
+                return ResourceManager.GetString("MaxLength1000", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The number of characters entered must not exceed 20 characters...!.
         /// </summary>
         public static string MaxLength20 {
@@ -385,6 +394,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please include descreption for the process to complete successfully...!.
+        /// </summary>
+        public static string VlDescreption {
+            get {
+                return ResourceManager.GetString("VlDescreption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter The Description.
         /// </summary>
         public static string VlDescription {
@@ -430,6 +448,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to please include FAQ to complete successfully...!.
+        /// </summary>
+        public static string VlFAQ {
+            get {
+                return ResourceManager.GetString("VlFAQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VlFloor.
         /// </summary>
         public static string VlFloor {
@@ -453,6 +480,15 @@ namespace Domin.Resource {
         public static string VlGlobalExchangeRate {
             get {
                 return ResourceManager.GetString("VlGlobalExchangeRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please include List FAQ for the process to complete successfully...!.
+        /// </summary>
+        public static string VlListFAQ {
+            get {
+                return ResourceManager.GetString("VlListFAQ", resourceCulture);
             }
         }
         

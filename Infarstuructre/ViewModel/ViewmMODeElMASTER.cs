@@ -96,5 +96,7 @@ namespace Infarstuructre.ViewModel
         public TBTypesOfRequest TypesOfRequest { get; set; } 
         public IEnumerable<TBTypesOfMessage> ListTypesOfMessage { get; set; }
         public TBTypesOfMessage TypesOfMessage { get; set; }
-    }
+		public IEnumerable<TBFAQ> ListFAQ { get; set; }
+		public TBFAQ FAQ { get; set; }
+	}
 }

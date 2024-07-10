@@ -118,6 +118,9 @@ builder.Services.AddScoped<IITransfer, CLSTransfer>();
 builder.Services.AddScoped<IIShippingAddress, CLSShippingAddress>();
 builder.Services.AddScoped<IITypesOfRequest, CLSTBTypesOfRequest>();
 builder.Services.AddScoped<IITypesOfMessage, CLSTBTypesOfMessage>();
+builder.Services.AddScoped<IIFAQ, CLSTBFAQ>();
+builder.Services.AddScoped<IIFAQDescreption, CLSTBFAQDescreption>();
+builder.Services.AddScoped<IIFAQList, CLSTBFAQList>();
 
 
 

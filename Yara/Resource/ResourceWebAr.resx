@@ -828,6 +828,9 @@
   <data name="VLExchangeRateDoplceted" xml:space="preserve">
     <value>تم إدخال العملة بالفعل. يرجى التحقق والمحاولة مرة أخرى لاحقا...!</value>
   </data>
+  <data name="VLFAQDoplceted" xml:space="preserve">
+    <value>تم إدخال السؤال مسبقا.. يرجى التأكد والمحاولة لاحقا..!</value>
+  </data>
   <data name="VLHxcodedoplceted" xml:space="preserve">
     <value>تم إدخال الرمز بالفعل، يرجى التحقق والمحاولة مرة أخرى لاحقًا...!</value>
   </data>
