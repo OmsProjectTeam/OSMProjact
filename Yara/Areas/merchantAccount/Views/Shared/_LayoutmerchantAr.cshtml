@@ -92,6 +92,7 @@
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-user"></i><span>User Informations</span><span class="menu-arrow fa fa-angle-down"></span></a>
 						<ul class="sub-menu js__content">
 							<li><a asp-area="merchantAccount" asp-controller="Profile" asp-action="MyProfileAr" asp-route-userId="@user.Id">@ResourceWebAr.LBProfile</a></li>
+							<li><a asp-area="merchantAccount" asp-controller="CustomerMessages" asp-action="MyCustomerMessagesAr" asp-route-userId="@user.Id">@ResourceWebAr.LBMyCustomerMessages</a></li>
 						</ul>
 						<!-- /.sub-menu js__content -->
 					</li>

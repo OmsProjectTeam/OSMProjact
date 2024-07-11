@@ -502,6 +502,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please include the Message Description for the process to complete successfully...!.
+        /// </summary>
+        public static string VlMessageDescription {
+            get {
+                return ResourceManager.GetString("VlMessageDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VlMoblie.
         /// </summary>
         public static string VlMoblie {

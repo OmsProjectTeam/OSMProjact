@@ -2385,6 +2385,50 @@ namespace Infarstuructre.Migrations
                     b.ToTable("TBCurrenciesExchangeRatess");
                 });
 
+            modelBuilder.Entity("Domin.Entity.TBCustomerMessages", b =>
+                {
+                    b.Property<int>("IdCustomerMessages")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCustomerMessages"));
+
+                    b.Property<bool>("CurrentState")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<string>("DataEntry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateTimeEntry")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<int>("IdTypesOfMessage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MessageDescription")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.HasKey("IdCustomerMessages");
+
+                    b.ToTable("TBCustomerMessagess");
+                });
+
             modelBuilder.Entity("Domin.Entity.TBEmailAlartSetting", b =>
                 {
                     b.Property<int>("IdEmailAlartSetting")
@@ -3393,6 +3437,61 @@ namespace Infarstuructre.Migrations
                     b.ToView("ViewClintWitheDeliveryTariffs", (string)null);
                 });
 
+            modelBuilder.Entity("Domin.Entity.TBViewCustomerMessages", b =>
+                {
+                    b.Property<bool>("CurrentState")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("DataEntry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateTimeEntry")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdCustomerMessages")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdTypesOfMessage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MessageDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypesOfMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("ViewCustomerMessages", (string)null);
+                });
+
             modelBuilder.Entity("Domin.Entity.TBViewCustomers", b =>
                 {
                     b.Property<bool>("Active")
@@ -3526,6 +3625,9 @@ namespace Infarstuructre.Migrations
 
             modelBuilder.Entity("Domin.Entity.TBViewFAQDescription", b =>
                 {
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("CurrentState")
                         .HasColumnType("bit");
 
@@ -3557,6 +3659,9 @@ namespace Infarstuructre.Migrations
 
             modelBuilder.Entity("Domin.Entity.TBViewFAQList", b =>
                 {
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("CurrentState")
                         .HasColumnType("bit");
 

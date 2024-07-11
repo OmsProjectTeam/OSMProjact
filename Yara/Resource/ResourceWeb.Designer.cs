@@ -61,6 +61,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FAQ Descreption.
+        /// </summary>
+        public static string IdFAQDescreption {
+            get {
+                return ResourceManager.GetString("IdFAQDescreption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dealing status.
         /// </summary>
         public static string LbActive {
@@ -133,6 +142,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add and modify the Customer Messages.
+        /// </summary>
+        public static string LBAddCustomerMessages {
+            get {
+                return ResourceManager.GetString("LBAddCustomerMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add and modify company data.
         /// </summary>
         public static string LbAddEditInformationCompanies {
@@ -156,6 +174,33 @@ namespace Yara.Resource {
         public static string LBAddExchangeRate {
             get {
                 return ResourceManager.GetString("LBAddExchangeRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add FAQ.
+        /// </summary>
+        public static string LBAddFAQ {
+            get {
+                return ResourceManager.GetString("LBAddFAQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add FAQ Descreption.
+        /// </summary>
+        public static string LBAddFAQDescreption {
+            get {
+                return ResourceManager.GetString("LBAddFAQDescreption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add FAQ List.
+        /// </summary>
+        public static string LBAddFAQList {
+            get {
+                return ResourceManager.GetString("LBAddFAQList", resourceCulture);
             }
         }
         
@@ -682,6 +727,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string LbDescription1 {
+            get {
+                return ResourceManager.GetString("LbDescription1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         public static string Lbdescriptioncity {
@@ -772,6 +826,33 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FAQ.
+        /// </summary>
+        public static string LbFAQ {
+            get {
+                return ResourceManager.GetString("LbFAQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FAQ Descreption.
+        /// </summary>
+        public static string LbFAQDescreption {
+            get {
+                return ResourceManager.GetString("LbFAQDescreption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FAQ List.
+        /// </summary>
+        public static string LbFAQList {
+            get {
+                return ResourceManager.GetString("LbFAQList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to fb.
         /// </summary>
         public static string Lbfbid {
@@ -849,6 +930,33 @@ namespace Yara.Resource {
         public static string LbId {
             get {
                 return ResourceManager.GetString("LbId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id FAQ.
+        /// </summary>
+        public static string LbIdFAQ {
+            get {
+                return ResourceManager.GetString("LbIdFAQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id FAQ Descreption.
+        /// </summary>
+        public static string LbIdFAQDescreption {
+            get {
+                return ResourceManager.GetString("LbIdFAQDescreption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id FAQ List.
+        /// </summary>
+        public static string LbIdFAQList {
+            get {
+                return ResourceManager.GetString("LbIdFAQList", resourceCulture);
             }
         }
         
@@ -952,6 +1060,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to List FAQ.
+        /// </summary>
+        public static string LbListFAQ {
+            get {
+                return ResourceManager.GetString("LbListFAQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to longitude.
         /// </summary>
         public static string Lblon {
@@ -1002,6 +1119,15 @@ namespace Yara.Resource {
         public static string LBMerchants {
             get {
                 return ResourceManager.GetString("LBMerchants", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message Description.
+        /// </summary>
+        public static string LbMessageDescription {
+            get {
+                return ResourceManager.GetString("LbMessageDescription", resourceCulture);
             }
         }
         
@@ -1096,6 +1222,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Customer Messages.
+        /// </summary>
+        public static string LBMyCustomerMessages {
+            get {
+                return ResourceManager.GetString("LBMyCustomerMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email Alart Setting.
         /// </summary>
         public static string LBMyEmailAlartSetting {
@@ -1110,6 +1245,33 @@ namespace Yara.Resource {
         public static string LBMyExchangeRate {
             get {
                 return ResourceManager.GetString("LBMyExchangeRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My FAQ.
+        /// </summary>
+        public static string LbMyFAQ {
+            get {
+                return ResourceManager.GetString("LbMyFAQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FAQ Descreption.
+        /// </summary>
+        public static string LbMyFAQDescreption {
+            get {
+                return ResourceManager.GetString("LbMyFAQDescreption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FAQ List.
+        /// </summary>
+        public static string LbMyFAQList {
+            get {
+                return ResourceManager.GetString("LbMyFAQList", resourceCulture);
             }
         }
         
@@ -1623,6 +1785,33 @@ namespace Yara.Resource {
         public static string LBProfitsInformations {
             get {
                 return ResourceManager.GetString("LBProfitsInformations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quastion.
+        /// </summary>
+        public static string LbQuastion {
+            get {
+                return ResourceManager.GetString("LbQuastion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quastion Descreption.
+        /// </summary>
+        public static string LbQuastionDesc {
+            get {
+                return ResourceManager.GetString("LbQuastionDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quastion List.
+        /// </summary>
+        public static string LbQuastionList {
+            get {
+                return ResourceManager.GetString("LbQuastionList", resourceCulture);
             }
         }
         

@@ -141,6 +141,9 @@
   <data name="LBAddCurrenciesExchangeRates" xml:space="preserve">
     <value>إضافة وتعديل العملات</value>
   </data>
+  <data name="LBAddCustomerMessages" xml:space="preserve">
+    <value>أضافة وتعديل مسجات العملاء</value>
+  </data>
   <data name="LbAddEditInformationCompanies" xml:space="preserve">
     <value>إضافة وتعديل بيانات الشركة</value>
   </data>
@@ -149,6 +152,15 @@
   </data>
   <data name="LBAddExchangeRate" xml:space="preserve">
     <value>إضافة وتعديل سعر الصرف</value>
+  </data>
+  <data name="LBAddFAQ" xml:space="preserve">
+    <value>إضافة وتعديل التعليمات</value>
+  </data>
+  <data name="LBAddFAQDescreption" xml:space="preserve">
+    <value>اضافة وصف</value>
+  </data>
+  <data name="LBAddFAQList" xml:space="preserve">
+    <value>اضافة قائمة</value>
   </data>
   <data name="LBAddOrderCase" xml:space="preserve">
     <value>إضافة وتعديل حالة الطلب</value>
@@ -324,6 +336,9 @@
   <data name="LbDescription" xml:space="preserve">
     <value>المنطقة</value>
   </data>
+  <data name="LbDescription1" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
   <data name="Lbdescriptioncity" xml:space="preserve">
     <value>المدينة</value>
   </data>
@@ -351,6 +366,15 @@
   <data name="LbExchangeRate" xml:space="preserve">
     <value>سعر الصرف</value>
   </data>
+  <data name="LbFAQ" xml:space="preserve">
+    <value>التعليمات</value>
+  </data>
+  <data name="LbFAQDescreption" xml:space="preserve">
+    <value>معرف وصف التعليمة</value>
+  </data>
+  <data name="LbFAQList" xml:space="preserve">
+    <value>قائمة السؤال</value>
+  </data>
   <data name="Lbfbid" xml:space="preserve">
     <value>fb</value>
   </data>
@@ -377,6 +401,15 @@
   </data>
   <data name="LbId" xml:space="preserve">
     <value>المعرف</value>
+  </data>
+  <data name="LbIdFAQ" xml:space="preserve">
+    <value>معرف التعليمة</value>
+  </data>
+  <data name="LbIdFAQDescreption" xml:space="preserve">
+    <value>معرف وصف السؤال</value>
+  </data>
+  <data name="LbIdFAQList" xml:space="preserve">
+    <value>معرف قائمة السؤال</value>
   </data>
   <data name="LbInformaition" xml:space="preserve">
     <value>المعلومات</value>
@@ -411,6 +444,9 @@
   <data name="LBLbRoles" xml:space="preserve">
     <value>الصلاحيات</value>
   </data>
+  <data name="LbListFAQ" xml:space="preserve">
+    <value>قائمة السؤال</value>
+  </data>
   <data name="Lblon" xml:space="preserve">
     <value>خط الطول</value>
   </data>
@@ -428,6 +464,9 @@
   </data>
   <data name="LbMerchant_name" xml:space="preserve">
     <value>اسم التاجر</value>
+  </data>
+  <data name="LbMessageDescription" xml:space="preserve">
+    <value>رسالة العميل </value>
   </data>
   <data name="lbMsgErrorLogin" xml:space="preserve">
     <value>خطأ في اسم المستخدم أو كلمة المرور .....!</value>
@@ -459,11 +498,23 @@
   <data name="LBMyCustomer" xml:space="preserve">
     <value>بيانات العملاء الفردية</value>
   </data>
+  <data name="LBMyCustomerMessages" xml:space="preserve">
+    <value>رسائل العملاء </value>
+  </data>
   <data name="LBMyEmailAlartSettingAr" xml:space="preserve">
     <value>أعدادات بريدي التنبيهات</value>
   </data>
   <data name="LBMyExchangeRate" xml:space="preserve">
     <value>سعر الصرف</value>
+  </data>
+  <data name="LbMyFAQ" xml:space="preserve">
+    <value>التعليمات</value>
+  </data>
+  <data name="LbMyFAQDescreption" xml:space="preserve">
+    <value>وصف التعليمات </value>
+  </data>
+  <data name="LbMyFAQList" xml:space="preserve">
+    <value>قائمة السؤال</value>
   </data>
   <data name="LBMYInformationCompanies" xml:space="preserve">
     <value>معلومات الشركات</value>
@@ -632,6 +683,15 @@
   </data>
   <data name="LBProfitsInformations" xml:space="preserve">
     <value>معلومات الأرباح</value>
+  </data>
+  <data name="LbQuastion" xml:space="preserve">
+    <value>السؤال</value>
+  </data>
+  <data name="LbQuastionDesc" xml:space="preserve">
+    <value>وصف السؤال</value>
+  </data>
+  <data name="LbQuastionList" xml:space="preserve">
+    <value>قائمة السؤال</value>
   </data>
   <data name="LbRate" xml:space="preserve">
     <value>سعر الصرف</value>

@@ -327,4 +327,7 @@
   <data name="VlListFAQ" xml:space="preserve">
     <value>Please include List FAQ for the process to complete successfully...!</value>
   </data>
+  <data name="VlMessageDescription" xml:space="preserve">
+    <value>Please include the Message Description for the process to complete successfully...!</value>
+  </data>
 </root>

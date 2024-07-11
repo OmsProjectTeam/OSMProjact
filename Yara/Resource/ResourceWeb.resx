@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="IdFAQDescreption" xml:space="preserve">
+    <value>FAQ Descreption</value>
+  </data>
   <data name="LbActive" xml:space="preserve">
     <value>Dealing status</value>
   </data>
@@ -141,6 +144,9 @@
   <data name="LBAddCurrenciesExchangeRates" xml:space="preserve">
     <value>Add and modify currencies</value>
   </data>
+  <data name="LBAddCustomerMessages" xml:space="preserve">
+    <value>Add and modify the Customer Messages</value>
+  </data>
   <data name="LbAddEditInformationCompanies" xml:space="preserve">
     <value>Add and modify company data</value>
   </data>
@@ -149,6 +155,15 @@
   </data>
   <data name="LBAddExchangeRate" xml:space="preserve">
     <value>Add and modify the exchange rate</value>
+  </data>
+  <data name="LBAddFAQ" xml:space="preserve">
+    <value>Add FAQ</value>
+  </data>
+  <data name="LBAddFAQDescreption" xml:space="preserve">
+    <value>Add FAQ Descreption</value>
+  </data>
+  <data name="LBAddFAQList" xml:space="preserve">
+    <value>Add FAQ List</value>
   </data>
   <data name="LBAddOrderCase" xml:space="preserve">
     <value>Adding and modifying Order Case</value>
@@ -324,6 +339,9 @@
   <data name="LbDescription" xml:space="preserve">
     <value>Region</value>
   </data>
+  <data name="LbDescription1" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="Lbdescriptioncity" xml:space="preserve">
     <value>City</value>
   </data>
@@ -354,6 +372,15 @@
   <data name="LbExchangeRate" xml:space="preserve">
     <value>exchange rate</value>
   </data>
+  <data name="LbFAQ" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
+  <data name="LbFAQDescreption" xml:space="preserve">
+    <value>FAQ Descreption</value>
+  </data>
+  <data name="LbFAQList" xml:space="preserve">
+    <value>FAQ List</value>
+  </data>
   <data name="Lbfbid" xml:space="preserve">
     <value>fb</value>
   </data>
@@ -380,6 +407,15 @@
   </data>
   <data name="LbId" xml:space="preserve">
     <value>ID</value>
+  </data>
+  <data name="LbIdFAQ" xml:space="preserve">
+    <value>Id FAQ</value>
+  </data>
+  <data name="LbIdFAQDescreption" xml:space="preserve">
+    <value>Id FAQ Descreption</value>
+  </data>
+  <data name="LbIdFAQList" xml:space="preserve">
+    <value>Id FAQ List</value>
   </data>
   <data name="LbInformaition" xml:space="preserve">
     <value>information</value>
@@ -414,6 +450,9 @@
   <data name="LBLbRoles" xml:space="preserve">
     <value>Roles</value>
   </data>
+  <data name="LbListFAQ" xml:space="preserve">
+    <value>List FAQ</value>
+  </data>
   <data name="Lblon" xml:space="preserve">
     <value>longitude</value>
   </data>
@@ -431,6 +470,9 @@
   </data>
   <data name="LbMerchant_name" xml:space="preserve">
     <value>Merchant name</value>
+  </data>
+  <data name="LbMessageDescription" xml:space="preserve">
+    <value>Message Description</value>
   </data>
   <data name="lbMsgErrorLogin" xml:space="preserve">
     <value>Error User Name Or Password.....!</value>
@@ -462,11 +504,23 @@
   <data name="LBMyCustomer" xml:space="preserve">
     <value>Individual customer data</value>
   </data>
+  <data name="LBMyCustomerMessages" xml:space="preserve">
+    <value>Customer Messages</value>
+  </data>
   <data name="LBMyEmailAlartSetting" xml:space="preserve">
     <value>Email Alart Setting</value>
   </data>
   <data name="LBMyExchangeRate" xml:space="preserve">
     <value>exchange rate</value>
+  </data>
+  <data name="LbMyFAQ" xml:space="preserve">
+    <value>My FAQ</value>
+  </data>
+  <data name="LbMyFAQDescreption" xml:space="preserve">
+    <value>FAQ Descreption</value>
+  </data>
+  <data name="LbMyFAQList" xml:space="preserve">
+    <value>FAQ List</value>
   </data>
   <data name="LBMYInformationCompanies" xml:space="preserve">
     <value>Information Companies</value>
@@ -638,6 +692,15 @@
   </data>
   <data name="LBProfitsInformations" xml:space="preserve">
     <value>Profits Informations</value>
+  </data>
+  <data name="LbQuastion" xml:space="preserve">
+    <value>Quastion</value>
+  </data>
+  <data name="LbQuastionDesc" xml:space="preserve">
+    <value>Quastion Descreption</value>
+  </data>
+  <data name="LbQuastionList" xml:space="preserve">
+    <value>Quastion List</value>
   </data>
   <data name="LbRate" xml:space="preserve">
     <value>exchange rate</value>
