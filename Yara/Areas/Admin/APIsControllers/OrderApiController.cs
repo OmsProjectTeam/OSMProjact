@@ -152,5 +152,30 @@ public class OrderApiController : ControllerBase
 
 		return Ok(_response);
 	}
+
+    [HttpPost("GetOrdersByPhone/{phoneNumber}")]
+    public async Task<ActionResult<IEnumerable<TBViewOrder>>> GetOrdersByPhone(string phoneNumber)
+    {
+        try
+        {
+            var orders = await iOrder.GetOrdersByPhoneAsync(phoneNumber);
+            if (orders == null)
+            {
+                _response.StatusCode = HttpStatusCode.BadRequest;
+            }
+
+            _response.Result = orders;
+            _response.StatusCode = HttpStatusCode.Created;
+
+            return Ok(_response);
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessage = new List<string> { ex.Message };
+        }
+        return Ok(_response);
+    }
+
 }
 

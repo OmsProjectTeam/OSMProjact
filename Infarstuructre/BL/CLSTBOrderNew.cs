@@ -24,6 +24,7 @@ namespace Infarstuructre.BL
         Task UpdateOrderNewAsync(TBOrderNew orderNew);
         bool DELETPHOTOWethError(string PhotoNAme);
         bool DELETPHOTO(int IdOrderNew);
+        Task<IEnumerable<TBViewOrderNew>> GetOrdersByPhoneAsync(string phoneNumber);
     }
     public class CLSTBOrderNew: IIOrderNew
     {
@@ -200,6 +201,14 @@ namespace Infarstuructre.BL
                 // يفضل ألا تترك البرنامج يتجاوز الأخطاء بصمت، يفضل تسجيل الخطأ أو إعادة رميه
                 return false;
             }
+        }
+        public async Task<IEnumerable<TBViewOrderNew>> GetOrdersByPhoneAsync(string phoneNumber)
+        {
+            return await dbcontext.ViewOrderNew
+                .Where(o => o.PhoneNumber == phoneNumber)
+                .OrderByDescending(o => o.IdOrderNew)
+                .Take(10)
+                .ToListAsync();
         }
     }
 }

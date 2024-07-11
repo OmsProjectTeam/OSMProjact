@@ -21,7 +21,9 @@ namespace Infarstuructre.BL
 		Task<Order> GetOrderAsync(int id);
 		Task AddOrderAsync(Order merchant);
 		Task UpdateOrderAsync(Order merchant);
-	}
+		Task<IEnumerable<TBViewOrder>> GetOrdersByPhoneAsync(string phoneNumber);
+
+    }
 	public class CLSOrder: IIOrder
 	{
 		MasterDbcontext dbcontext;
@@ -124,5 +126,14 @@ namespace Infarstuructre.BL
 			dbcontext.Entry(order).State = EntityState.Modified;
 			await dbcontext.SaveChangesAsync();
 		}
-	}	
+
+        public async Task<IEnumerable<TBViewOrder>> GetOrdersByPhoneAsync(string phoneNumber)
+        {
+            return await dbcontext.ViewOrder
+                .Where(o => o.merchant_mob == phoneNumber)
+                .OrderByDescending(o => o.merchant_id)
+                .Take(10)
+                .ToListAsync();
+        }
+    }	
 }
