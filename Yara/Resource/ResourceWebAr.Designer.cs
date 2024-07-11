@@ -169,6 +169,33 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to إضافة وتعديل التعليمات.
+        /// </summary>
+        public static string LBAddFAQ {
+            get {
+                return ResourceManager.GetString("LBAddFAQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اضافة وصف.
+        /// </summary>
+        public static string LBAddFAQDescreption {
+            get {
+                return ResourceManager.GetString("LBAddFAQDescreption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اضافة قائمة.
+        /// </summary>
+        public static string LBAddFAQList {
+            get {
+                return ResourceManager.GetString("LBAddFAQList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to إضافة وتعديل حالة الطلب.
         /// </summary>
         public static string LBAddOrderCase {
@@ -691,6 +718,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الوصف.
+        /// </summary>
+        public static string LbDescription1 {
+            get {
+                return ResourceManager.GetString("LbDescription1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to المدينة.
         /// </summary>
         public static string Lbdescriptioncity {
@@ -772,6 +808,33 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to التعليمات.
+        /// </summary>
+        public static string LbFAQ {
+            get {
+                return ResourceManager.GetString("LbFAQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to معرف وصف التعليمة.
+        /// </summary>
+        public static string LbFAQDescreption {
+            get {
+                return ResourceManager.GetString("LbFAQDescreption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to قائمة السؤال.
+        /// </summary>
+        public static string LbFAQList {
+            get {
+                return ResourceManager.GetString("LbFAQList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to fb.
         /// </summary>
         public static string Lbfbid {
@@ -849,6 +912,33 @@ namespace Yara.Resource {
         public static string LbId {
             get {
                 return ResourceManager.GetString("LbId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to معرف التعليمة.
+        /// </summary>
+        public static string LbIdFAQ {
+            get {
+                return ResourceManager.GetString("LbIdFAQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to معرف وصف السؤال.
+        /// </summary>
+        public static string LbIdFAQDescreption {
+            get {
+                return ResourceManager.GetString("LbIdFAQDescreption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to معرف قائمة السؤال.
+        /// </summary>
+        public static string LbIdFAQList {
+            get {
+                return ResourceManager.GetString("LbIdFAQList", resourceCulture);
             }
         }
         
@@ -948,6 +1038,15 @@ namespace Yara.Resource {
         public static string LBLbRoles {
             get {
                 return ResourceManager.GetString("LBLbRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to قائمة السؤال.
+        /// </summary>
+        public static string LbListFAQ {
+            get {
+                return ResourceManager.GetString("LbListFAQ", resourceCulture);
             }
         }
         
@@ -1128,6 +1227,33 @@ namespace Yara.Resource {
         public static string LBMyExchangeRate {
             get {
                 return ResourceManager.GetString("LBMyExchangeRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to التعليمات.
+        /// </summary>
+        public static string LbMyFAQ {
+            get {
+                return ResourceManager.GetString("LbMyFAQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to وصف التعليمات .
+        /// </summary>
+        public static string LbMyFAQDescreption {
+            get {
+                return ResourceManager.GetString("LbMyFAQDescreption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to قائمة السؤال.
+        /// </summary>
+        public static string LbMyFAQList {
+            get {
+                return ResourceManager.GetString("LbMyFAQList", resourceCulture);
             }
         }
         
@@ -1632,6 +1758,33 @@ namespace Yara.Resource {
         public static string LBProfitsInformations {
             get {
                 return ResourceManager.GetString("LBProfitsInformations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to السؤال.
+        /// </summary>
+        public static string LbQuastion {
+            get {
+                return ResourceManager.GetString("LbQuastion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to وصف السؤال.
+        /// </summary>
+        public static string LbQuastionDesc {
+            get {
+                return ResourceManager.GetString("LbQuastionDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to قائمة السؤال.
+        /// </summary>
+        public static string LbQuastionList {
+            get {
+                return ResourceManager.GetString("LbQuastionList", resourceCulture);
             }
         }
         

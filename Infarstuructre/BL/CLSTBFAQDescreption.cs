@@ -14,7 +14,9 @@ namespace Infarstuructre.BL
 		bool saveData(TBFAQDescreption savee);
 		bool deleteData(int IdFAQDescreption);
 		List<TBViewFAQDescription> GetAllv(int IdFAQDescreption);
-	}
+		bool UpdateData(TBFAQDescreption updatss);
+
+    }
 
 	public class CLSTBFAQDescreption : IIFAQDescreption
 	{

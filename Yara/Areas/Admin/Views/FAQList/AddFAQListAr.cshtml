@@ -1,6 +1,6 @@
 ﻿@model ViewmMODeElMASTER
 @{
-    ViewData["Title"] = "AddFAQAr";
+    ViewData["Title"] = "AddFAQListAr";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminAr.cshtml";
 }
 
@@ -15,7 +15,7 @@
                     <a asp-area="Admin" asp-controller="Home" asp-action="IndexAr"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a>
                 </li>
                 <li class="margin-bottom-10">
-                    <a asp-area="" asp-controller="Home" asp-action="IndexAr"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">الرئيسية</button></a>
+                    <a asp-area="" asp-controller="Home" asp-action="IndexAr"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a>
                 </li>
             </ul>
             <span class="text-primary"><strong>@TempData["Saved successfully"]</strong></span>
@@ -25,32 +25,32 @@
 
     <div class="col-lg-6 col-xs-12">
         <div class="box-content card white">
-            <h4 class="box-title">@ResourceWebAr.LBAddFAQ</h4>
+            <h4 class="box-title">@ResourceWebAr.LBAddFAQList</h4>
             <div class="card-content">
-                <form role="form" method="post" asp-controller="FAQ" asp-action="SaveAr" enctype="multipart/form-data">
+                <form role="form" method="post" asp-controller="FAQList" asp-action="SaveAr" enctype="multipart/form-data">
                     <div class="form-group">
-                        <input type="hidden" asp-for="@Model.FAQ.DateEntry" class="form-control" value="@User.Identity.Name">
-                        <input type="hidden" asp-for="@Model.FAQ.IdFAQ" class="form-control">
-                        <input type="hidden" asp-for="@Model.FAQ.DateTimeEntry" value="@DateTime.Now">
-                        <input type="hidden" asp-for="@Model.FAQ" id="url">
+                        <input type="hidden" asp-for="@Model.FAQList.DateEntry" class="form-control" value="@User.Identity.Name">
+                        <input type="hidden" asp-for="@Model.FAQList.IdFAQList" class="form-control">
+                        <input type="hidden" asp-for="@Model.FAQList.DateTimeEntry" value="@DateTime.Now">
+                        <input type="hidden" asp-for="@Model.returnUrl" id="url">
                     </div>
 
                     <div class="row small-spacing">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label asp-for="@Model.FAQ.FAQ">@ResourceWebAr.LbFAQ</label>
-                                <input asp-for="@Model.FAQ.FAQ" type="text" placeholder="@ResourceWebAr.LbFAQ ...." class="form-control" maxlength="300">
-                                <span asp-validation-for="@Model.FAQ.FAQ" class="text-danger"></span>
-                                <span style="color:red"><strong>@TempData["FAQ"]</strong></span>
+                                <label asp-for="@Model.FAQList.IdFAQ">Id FAQ</label>
+                                <select class="form-control select2_1" asp-for="@Model.FAQList.IdFAQ" asp-items="@(new SelectList(ViewBag.FAQ, "IdFAQ", "FAQ"))" id="SelectFAQ"></select>
+                                <span asp-validation-for="@Model.FAQList.IdFAQ" class="text-danger"></span>
+
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label asp-for="@Model.FAQ.Active">@ResourceWebAr.LbActive</label>
-                                <input asp-for="@Model.FAQ.Active" type="checkbox" checked class="form-control" maxlength="300">
-                                <span asp-validation-for="@Model.FAQ.Active" class="text-danger"></span>
-                                <span style="color:red"><strong>@TempData["Active"]</strong></span>
+                                <label asp-for="@Model.FAQList.ListFAQ">@ResourceWebAr.LbListFAQ</label>
+                                <input asp-for="@Model.FAQList.ListFAQ" type="text" checked class="form-control" maxlength="300">
+                                <span asp-validation-for="@Model.FAQList.ListFAQ" class="text-danger"></span>
+                                <span style="color:red"><strong>@TempData["List FAQ"]</strong></span>
                             </div>
                         </div>
 
@@ -68,6 +68,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
     <script src="~/Admin/assets/plugin/multiselect/multiselect.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            console.log("Document is ready");
+            $('.select2_1').select2({
+                placeholder: "Select an option",
+                allowClear: true
+            });
+
+            // Bind change event to the selected company
+            $('#SelectFAQ').change(function () {
+                console.log("Selected FAQ changed");
+                updateCosting();
+            });
+    </script>
 }
+
+
 
 

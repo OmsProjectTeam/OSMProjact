@@ -1,21 +1,21 @@
 ﻿@model ViewmMODeElMASTER
 @{
-    ViewData["Title"] = "MyFAQ";
+    ViewData["Title"] = "MyFAQListAr";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <div class="col-xs-12">
     <div class="box-content">
         <ul class="list-inline">
-            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWebAr.LbMyFAQ</button></a></li>/
-            <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="IndexAr"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">الرئيسية الآدمن</button></a></li>/
+            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWebAr.LbMyFAQList</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="IndexAr"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">القائمة الرئيسية</button></a></li>/
             <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="IndexAr"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">الرئيسية</button></a></li>
             <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
             <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
         </ul>
         <!-- /.box-title -->
         <div class="dropdown js__drop_down">
-            <a asp-area="Admin" asp-controller="FAQ" asp-action="AddFAQAr"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a>
+            <a asp-area="Admin" asp-controller="FAQList" asp-action="AddFAQListAr"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a>
         </div>
         <!-- /.dropdown js__dropdown -->
         <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -28,7 +28,7 @@
                                 <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
                                 <div class="navbar-inner">
                                     <ul>
-                                        <li><a href="#tab-progress-1" data-toggle="tab">@ResourceWebAr.LbQuastion</a></li>
+                                        <li><a href="#tab-progress-1" data-toggle="tab">@ResourceWebAr.LbQuastionList</a></li>
 
                                         <li><a href="#tab-progress-3" data-toggle="tab">@ResourceWebAr.LbInformaition</a></li>
                                         @*  <li><a href="#tab-progress-4" data-toggle="tab">Forth</a></li>
@@ -48,25 +48,23 @@
 
                                             <thead>
                                                 <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWebAr.LbId</th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWebAr.LbIdFAQList</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWebAr.LbIdFAQ</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWebAr.LbFAQ</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWebAr.LbActive</th>
                                             <tfoot>
                                                 <tr>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbId</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbIdFAQList</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbIdFAQ</th>
                                                     <th rowspan="1" colspan="1">@ResourceWebAr.LbFAQ</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbActive</th>
 
                                             </tfoot>
                                             <tbody>
-                                                        @foreach (var item in Model.ListFAQDescription)
+                                                        @foreach (var item in Model.ListFAQList)
                                                         {
                                                     <tr role="row" class="odd">
-                                                        <td>@item.IdFAQ</td>
+                                                        <td>@item.IdFAQList</td>
+                                                        <td class="truncate-50">@item.IdFAQ</td>
                                                         <td class="truncate-50">@item.FAQ</td>
-                                                        <td>
-                                                            <div class="switch primary"><input type="checkbox" checked="@item.Active" IdTypesOfMessage="switch-3" disabled><label for="switch-3">@item.Active</label></div>
-                                                        </td>
                                                     </tr>
                                                         }
                                             </tbody>
@@ -81,37 +79,45 @@
                                         <table id="example2" class="table table-striped table-bordered display dataTable table-responsive" style="width: 100%;" role="grid" aria-describedby="example_info">
                                             <thead>
                                                 <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWebAr.LbId</th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWebAr.LbIdFAQList</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWebAr.LbFAQ</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWebAr.LbFAQList</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWebAr.LbDataEntry</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWebAr.LbDateTimeEntry</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWebAr.LbActive</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWebAr.lbCurrentState</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">@ResourceWebAr.LbOpration</th>
                                             <tfoot>
                                                 <tr>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbId</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbIdFAQList</th>
                                                     <th rowspan="1" colspan="1">@ResourceWebAr.LbFAQ</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbFAQList</th>
                                                     <th rowspan="1" colspan="1">@ResourceWebAr.LbDataEntry</th>
                                                     <th rowspan="1" colspan="1">@ResourceWebAr.LbDateTimeEntry</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbActive</th>
                                                     <th rowspan="1" colspan="1">@ResourceWebAr.lbCurrentState</th>
                                                     <th rowspan="1" colspan="1">@ResourceWebAr.LbOpration</th>
+
                                             </tfoot>
                                             <tbody>
-                                                        @foreach (var item in Model.ListFAQDescription)
+                                                        @foreach (var item in Model.ListFAQList)
                                                         {
                                                     <tr role="row" class="odd">
-                                                        <td>@item.IdFAQ</td>
-
+                                                        <td>@item.IdFAQList</td>
                                                         <td>@item.FAQ</td>
+                                                        <td>@item.ListFAQ</td>
                                                         <td>@item.DateEntry</td>
                                                         <td>@item.DateTimeEntry</td>
                                                         <td>
-                                                            <div class="switch primary"><input type="checkbox" checked="@item.CurrentState" IdTypesOfMessage="switch-2" disabled><label for="switch-2">@item.CurrentState</label></div>
+                                                        <td>
+                                                            <div class="switch primary"><input type="checkbox" checked="@item.Active" IdTypesOfMessage="switch-3" disabled><label for="switch-3">@item.Active</label></div>
+                                                        </td>
+                                                        <div class="switch primary"><input type="checkbox" checked="@item.CurrentState" IdTypesOfMessage="switch-2" disabled><label for="switch-2">@item.CurrentState</label></div>
                                                         </td>
                                                         <td>
                                                             <ul class="list-inline">
-                                                                <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="FAQ" asp-action="AddFAQAr" asp-route-IdTypesOfMessage="@item.IdFAQ"><button type="button" class="btn btn-primary btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-edit"></i></button></a></li>|
-                                                                <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="FAQ" asp-action="DeleteDataAr" asp-route-IdTypesOfMessage="@item.IdFAQ"><button type="button" class="btn btn-danger btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-remove"></i></button></a></li>
+                                                                <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="FAQList" asp-action="AddFAQListAr" asp-route-IdFAQ="@item.IdFAQList"><button type="button" class="btn btn-primary btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-edit"></i></button></a></li>|
+                                                                <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="FAQList" asp-action="DeleteDataAr" asp-route-IdFAQ="@item.IdFAQList"><button type="button" class="btn btn-danger btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-remove"></i></button></a></li>
                                                             </ul>
                                                         </td>
                                                     </tr>
@@ -171,21 +177,6 @@
             });
         });
     </script>
-    <script>
-        $(function () {
-            $("#example3").DataTable().fnDestroy();
-            $('#example3').DataTable({
-                "paging": false,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-            });
-        });
-
-
-    </script>
 
     <script>
         $(document).ready(function () {
@@ -209,12 +200,4 @@
 
 
 }
-
-
-
-
-
-
-
-
 
