@@ -100,12 +100,11 @@ namespace Infarstuructre.ViewModel
 		public TBFAQ FAQ { get; set; }	
         public IEnumerable<TBViewCustomerMessages> ListViewCustomerMessages { get; set; }
 		public TBCustomerMessages CustomerMessages { get; set; }
-	}
-		public TBFAQ FAQ { get; set; }
         public IEnumerable<TBViewFAQDescription> ListFAQDescription { get; set; }
         public TBFAQDescreption FAQDescreption { get; set; }
 
         public IEnumerable<TBViewFAQList> ListFAQList { get; set; }
         public TBFAQList FAQList { get; set; }
     }
-}
+ }
+
