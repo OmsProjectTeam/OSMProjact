@@ -1,6 +1,7 @@
 ﻿using Domin.Entity;
 using Domin.Resource;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,6 +22,7 @@ namespace Infarstuructre.ViewModel
         public ApplicationUser sUser { get; set; }
         public RegisterViewModel ruser { get; set; }
         public NewRegister SNewRegister { get; set; }
+
 		public IEnumerable<RegisterViewModel> ListRegisterViewModel { get; set; }
 		public IEnumerable<NewRegister> ListNewRegister { get; set; }
 		public ChangePasswordViewModel SChangePassword { get; set; }
@@ -79,7 +81,9 @@ namespace Infarstuructre.ViewModel
 		public string userName { get; set; }
 		public string PhoneNumber { get; set; }	
 		public bool Rememberme { get; set; }
-		public List<IdentityRole> Roles { get; set; }
+        public List<SelectListItem> Roles1 { get; set; }
+        public string SelectedRoleId { get; set; }
+        public List<IdentityRole> Roles { get; set; }
 		public List<VwUser> Users { get; set; }
 
         public IEnumerable<TBTypesCompanies> ListTypesCompanies { get; set; }
