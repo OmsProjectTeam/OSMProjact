@@ -1,7 +1,7 @@
 ﻿@model ViewmMODeElMASTER
 @{
     ViewData["Title"] = ResourceWeb.LbHistory;
-    Layout = "~/Areas/merchantAccount/Views/Shared/_Layoutmerchant.cshtml";
+    Layout = "~/Areas/ClintAccount/Views/Shared/_LayoutClint.cshtml";
 }
 
 
@@ -9,7 +9,7 @@
     <div class="box-content">
         <ul class="list-inline">
             <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LbHistory</button></a></li>/
-            <li class="margin-bottom-10"><a asp-area="merchantAccount" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="ClintAccount" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
             <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
             <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
             <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
@@ -29,9 +29,9 @@
                                 <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
                                 <div class="navbar-inner">
                                     <ul>
-                                        <li><a href="#tab-progress-1" data-toggle="tab">@ResourceWebAr.LbInformaition</a></li>
+                                        <li><a href="#tab-progress-1" data-toggle="tab">@ResourceWeb.LbInformaition</a></li>
 
-                                        <li><a href="#tab-progress-3" data-toggle="tab">@ResourceWebAr.LbOpration</a></li>
+                                        <li><a href="#tab-progress-3" data-toggle="tab">@ResourceWeb.LbOpration</a></li>
                                         @*  <li><a href="#tab-progress-4" data-toggle="tab">Forth</a></li>
                                         <li><a href="#tab-progress-5" data-toggle="tab">Fifth</a></li> *@
                                     </ul>
@@ -59,14 +59,14 @@
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbMessageDescription</th>
                                             <tfoot>
                                                 <tr>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbId</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbPhoto</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbName</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbUserEmail</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbUserPhone</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.Lbcode</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbDescription</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LBLbAreaName</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbPhoto</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbName</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbUserEmail</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbUserPhone</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.Lbcode</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbDescription</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LBLbAreaName</th>
 
                                             </tfoot>
                                             <tbody>
