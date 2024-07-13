@@ -22,7 +22,7 @@
 		}
 		public List<TBFAQ> GetAll()
 		{
-			List<TBFAQ> MySlider = dbcontext.TBFAQs.OrderByDescending(n => n.IdFAQ).Where(a => a.CurrentState == true).ToList();
+			List<TBFAQ> MySlider = dbcontext.TBFAQs.Where(a => a.CurrentState == true).ToList();
 			return MySlider;
 		}
 		public List<TBFAQ> GetAllActive()
