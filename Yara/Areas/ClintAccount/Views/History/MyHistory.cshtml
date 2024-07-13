@@ -1,14 +1,15 @@
-﻿
+﻿@model ViewmMODeElMASTER
 @{
-    ViewData["Title"] = "IndexAr";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminAr.cshtml";
+    ViewData["Title"] = ResourceWeb.LbHistory;
+    Layout = "~/Areas/ClintAccount/Views/Shared/_LayoutClint.cshtml";
 }
+
 
 <div class="col-xs-12">
     <div class="box-content">
         <ul class="list-inline">
-            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LBMyCustomerMessages</button></a></li>/
-            <li class="margin-bottom-10"><a asp-area="merchantAccount" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
+            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LbHistory</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="ClintAccount" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
             <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
             <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
             <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
@@ -59,24 +60,27 @@
                                             <tfoot>
                                                 <tr>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbTypesOfMessage</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbPhoto</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbName</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbUserPhone</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbUserEmail</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbTitle</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbMessageDescription</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbUserPhone</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.Lbcode</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbDescription</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LBLbAreaName</th>
 
                                             </tfoot>
                                             <tbody>
-                                                        @foreach (var order in Model.NewOrders)
+                                                        @foreach (var item in Model.NewOrders)
                                                         {
-                                                    <tr>
-                                                        <td>@order.IdOrderNew</td> <!-- Use appropriate property names -->
-                                                        <td>@order.Price</td> <!-- Use appropriate property names -->
-                                                        <td>@order.OrderDate.ToString("MM/dd/yyyy")</td> <!-- Use appropriate property names -->
-                                                        <td>@order.dorderStatus</td> <!-- Use appropriate property names -->
-                                                        <td></td>
+                                                    <tr role="row" class="odd">
+                                                        <td>@item.IdOrderNew</td>
+                                                        <td class="sorting_1"> <img src="@string.Format("/Images/Users/{0}",item.ImageUser)" class="img-bordered img-circle img-circle" style="width:100px; height:100px"></td>
+                                                        <td class="truncate-50">@item.Name</td>
+                                                        <td class="truncate-50">@item.Email</td>
+                                                        <td class="truncate-50">@item.PhoneNumber</td>
+                                                        <td class="truncate-50">@item.code</td>
+                                                        <td class="truncate-50">@item.description</td>
+                                                        <td class="truncate-50">@item.AreaName</td>
                                                     </tr>
                                                         }
                                             </tbody>
@@ -143,4 +147,76 @@
         </div>
     </div>
 </div>
+<!-- /.box-content -->
+<span style="color:royalblue"> <strong>@TempData["Saved successfully"]</strong></span>
+<span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
+
+@* <img src="~/images/user gide/CustomerMessages.png" width="1920" height="1077" /> *@
+
+@section Scripts
+{
+    <!-- Data Tables -->
+    <script src="~/Admin/assets/plugin/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/Admin/assets/plugin/datatables/media/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Admin/assets/plugin/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Admin/assets/plugin/datatables/extensions/Responsive/js/responsive.bootstrap.min.js"></script>
+    <script src="~/Admin/assets/scripts/datatables.demo.min.js"></script>
+    <script src="~/Admin/assets/plugin/form-wizard/prettify.js"></script>
+    <script src="~/Admin/assets/plugin/form-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="~/Admin/assets/plugin/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/Admin/assets/scripts/form.wizard.init.min.js"></script>
+
+
+    <script>
+        $(function () {
+            $("#example2").DataTable().fnDestroy();
+            $('#example2').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $("#example3").DataTable().fnDestroy();
+            $('#example3').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+            });
+        });
+
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // Function to truncate text to a specified length
+            function truncateText(text, maxLength) {
+                if (text.length > maxLength) {
+                    return text.substring(0, maxLength) + '...'; // Add ellipsis if text exceeds maxLength
+                } else {
+                    return text;
+                }
+            }
+
+            // Loop through each table cell with class 'truncate-50'
+            $('.truncate-50').each(function () {
+                var text = $(this).text(); // Get the text content of the cell
+                var truncatedText = truncateText(text, 100); // Truncate the text to 50 characters
+                $(this).text(truncatedText); // Set the truncated text back to the cell
+            });
+        });
+    </script>
+
+
+}
+
 
