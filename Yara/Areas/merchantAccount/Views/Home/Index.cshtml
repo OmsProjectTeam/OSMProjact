@@ -1,10 +1,110 @@
 ﻿@model ApplicationUser
 @{
-	ViewData["Title"] = "Index";
-	Layout = "~/Areas/merchantAccount/Views/Shared/_Layoutmerchant.cshtml";
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/merchantAccount/Views/Shared/_Layoutmerchant.cshtml";
 }
 
+<div class="col-lg-6 col-xs-12">
+    <div class="box-content">
+        <h4 class="box-title">Purchases</h4>
+        <!-- /.box-title -->
+        <div class="dropdown js__drop_down">
+            <a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
+            <ul class="sub-menu">
+                <li><a href="#">Product</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else there</a></li>
+                <li class="split"></li>
+                <li><a href="#">Separated link</a></li>
+            </ul>
+            <!-- /.sub-menu -->
+        </div>
+        <!-- /.dropdown js__dropdown -->
+        <div class="table-responsive table-purchases">
+            <table class="table table-striped margin-bottom-10">
+                <thead>
+                    <tr>
+                        <th style="width:40%;">Product</th>
+                        <th>Price</th>
+                        <th>Date</th>
+                        <th>State</th>
+                        <th style="width:5%;"></th>
+                    </tr>
+                </thead>
+                <tbody id="orderTableBody">
+                    <!-- Orders will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+        <!-- /.table-responsive -->
+    </div>
+    <!-- /.box-content -->
+</div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var phoneNumber = '@ViewBag.PhoneNumber'; // Get the phone number from ViewBag
+        console.log('Logged-in User Phone Number:', phoneNumber);
 
+        // Retrieve orders via AJAX and update the table
+        if (phoneNumber) {
+            $.ajax({
+                url: '@Url.Action("GetNewOrdersByPhone", "Home", new { area = "merchantAccount" })',
+                type: 'GET',
+                data: { phoneNumber: phoneNumber },
+                success: function (newOrders) {
+                    console.log('New Orders:', newOrders);
+                    $.ajax({
+                        url: '@Url.Action("GetOldOrdersByPhone", "Home", new { area = "merchantAccount" })',
+                        type: 'GET',
+                        data: { phoneNumber: phoneNumber },
+                        success: function (oldOrders) {
+                            console.log('Old Orders:', oldOrders);
+                            updateOrderTable(newOrders, oldOrders);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Failed to retrieve old orders:', textStatus, errorThrown);
+                        }
+                    });
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error('Failed to retrieve new orders:', textStatus, errorThrown);
+                }
+            });
+        } else {
+            console.error('No phone number available for the logged-in user.');
+        }
 
+        function updateOrderTable(newOrders, oldOrders) {
+            var orderTableBody = $('#orderTableBody');
+            orderTableBody.empty();
+            var allOrders = newOrders.concat(oldOrders);
+            console.log('All Orders:', allOrders);
+            allOrders.forEach(function (order) {
+                var orderRow = '<tr>' +
+                    '<td>' + order.product + '</td>' +
+                    '<td>' + order.price + '</td>' +
+                    '<td>' + new Date(order.date).toLocaleDateString() + '</td>' +
+                    '<td class="' + getStatusClass(order.state) + '">' + order.state + '</td>' +
+                    '<td><a href="#"><i class="fa fa-plus-circle"></i></a></td>' +
+                    '</tr>';
+                orderTableBody.append(orderRow);
+                console.log('Order Row Added:', orderRow);
+            });
+        }
 
+        function getStatusClass(state) {
+            switch (state) {
+                case 'Completed':
+                    return 'text-success';
+                case 'Cancelled':
+                    return 'text-danger';
+                case 'Pending':
+                    return 'text-warning';
+                default:
+                    return '';
+            }
+        }
+    });
+</script>

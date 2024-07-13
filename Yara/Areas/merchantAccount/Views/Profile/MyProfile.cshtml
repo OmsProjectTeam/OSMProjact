@@ -258,7 +258,7 @@
                                 <!-- /.sub-menu -->
                             </div>
                             <!-- /.dropdown js__dropdown -->
-                            <div class="card-content">
+                            @* <div class="card-content">
                                 <h5>New Orders</h5>
                                 <ul class="notice-list" id="newOrdersList">
                                     <!-- New orders will be appended here by JavaScript -->
@@ -270,8 +270,8 @@
                                 <div class="text-center margin-top-20">
                                     <a href="#" class="btn btn-default">See All Activities <i class="fa fa-angle-double-right"></i></a>
                                 </div>
-                            </div>
-                            @* <div class="card-content">
+                            </div> *@
+                            <div class="card-content">
                                 <ul class="notice-list">
                                     <li>
                                         <a href="#">
@@ -316,7 +316,7 @@
                                 </ul>
                                 <!-- /.notice-list -->
                                 <div class="text-center margin-top-20"><a href="#" class="btn btn-default">See All Activities <i class="fa fa-angle-double-right"></i></a></div>
-                            </div> *@
+                            </div>
                             <!-- /.card-content -->
                         </div>
                         <!-- /.box-content card -->
@@ -389,38 +389,6 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        var phoneNumber = "123456789"; 
-
-        function fetchOrders(apiUrl, listSelector) {
-            $.ajax({
-                type: "POST",
-                url: apiUrl + phoneNumber,
-                success: function (response) {
-                    var orders = response.result;
-                    $(listSelector).empty();
-                    orders.forEach(order => {
-                        var listItem = `<li>
-                            <a href="#">
-                                <span class="name">${order.CustomerName}</span>
-                                <span class="desc">Order #${order.OrderId}</span>
-                                <span class="time">${order.OrderDate}</span>
-                            </a>
-                        </li>`;
-                        $(listSelector).append(listItem);
-                    });
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        fetchOrders("/api/OrderNewApi/GetOrdersByPhone/", "#newOrdersList");
-        fetchOrders("/api/OrderApi/GetOrdersByPhone/", "#oldOrdersList");
-    });
-</script>
 
 
 

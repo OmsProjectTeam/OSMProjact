@@ -64,9 +64,10 @@ namespace Yara.Areas.AirFreight.Controllers
 			ViewBag.Trans = pay.Sum(p => p.TransferAmount);
 
 
+			//vmodel.ListViewOrder = iOrder.GetAllDataentry(user.PhoneNumber).Take(10);
 
-            // إرسال النموذج إلى العرض
-            return View(vmodel);
+			// إرسال النموذج إلى العرض
+			return View(vmodel);
 		}
 
 		public async Task<IActionResult> IndexAr(string userId)

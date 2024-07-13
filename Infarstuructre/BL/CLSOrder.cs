@@ -130,7 +130,7 @@ namespace Infarstuructre.BL
         public async Task<IEnumerable<TBViewOrder>> GetOrdersByPhoneAsync(string phoneNumber)
         {
             return await dbcontext.ViewOrder
-                .Where(o => o.merchant_mob == phoneNumber)
+                .Where(o => o.cust_mob == phoneNumber)
                 .OrderByDescending(o => o.merchant_id)
                 .Take(10)
                 .ToListAsync();
