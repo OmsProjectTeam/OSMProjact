@@ -18,7 +18,6 @@
                 <li class="split"></li>
                 <li><a href="#">Separated link</a></li>
             </ul>
-            <!-- /.sub-menu -->
         </div>
         <!-- /.dropdown js__dropdown -->
         <div class="table-responsive table-purchases">
@@ -33,7 +32,26 @@
                     </tr>
                 </thead>
                 <tbody id="orderTableBody">
-                    <!-- Orders will be dynamically inserted here -->
+                    @foreach (var order in Model.NewOrders)
+                    {
+                        <tr>
+                            <td>@order.IdOrderNew</td> <!-- Use appropriate property names -->
+                            <td>@order.Price</td> <!-- Use appropriate property names -->
+                            <td>@order.OrderDate.ToString("MM/dd/yyyy")</td> <!-- Use appropriate property names -->
+                            <td>@order.dorderStatus</td> <!-- Use appropriate property names -->
+                            <td></td>
+                        </tr>
+                    }
+                    @foreach (var order in Model.OldOrders)
+                    {
+                        <tr>
+                            <td>@order.id</td> <!-- Use appropriate property names -->
+                            <td>@order.price_log</td> <!-- Use appropriate property names -->
+                            <td>@order.DateTimeEntry</td> <!-- Use appropriate property names -->
+                            <td>@order.order_status</td> <!-- Use appropriate property names -->
+                            <td></td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
@@ -41,71 +59,3 @@
     </div>
     <!-- /.box-content -->
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        var phoneNumber = '@ViewBag.PhoneNumber'; // Get the phone number from ViewBag
-        console.log('Logged-in User Phone Number:', phoneNumber);
-
-        // Retrieve orders via AJAX and update the table
-        if (phoneNumber) {
-            $.ajax({
-                url: '@Url.Action("GetNewOrdersByPhone", "Home", new { area = "merchantAccount" })',
-                type: 'GET',
-                data: { phoneNumber: phoneNumber },
-                success: function (newOrders) {
-                    console.log('New Orders:', newOrders);
-                    $.ajax({
-                        url: '@Url.Action("GetOldOrdersByPhone", "Home", new { area = "merchantAccount" })',
-                        type: 'GET',
-                        data: { phoneNumber: phoneNumber },
-                        success: function (oldOrders) {
-                            console.log('Old Orders:', oldOrders);
-                            updateOrderTable(newOrders, oldOrders);
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            console.error('Failed to retrieve old orders:', textStatus, errorThrown);
-                        }
-                    });
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.error('Failed to retrieve new orders:', textStatus, errorThrown);
-                }
-            });
-        } else {
-            console.error('No phone number available for the logged-in user.');
-        }
-
-        function updateOrderTable(newOrders, oldOrders) {
-            var orderTableBody = $('#orderTableBody');
-            orderTableBody.empty();
-            var allOrders = newOrders.concat(oldOrders);
-            console.log('All Orders:', allOrders);
-            allOrders.forEach(function (order) {
-                var orderRow = '<tr>' +
-                    '<td>' + order.product + '</td>' +
-                    '<td>' + order.price + '</td>' +
-                    '<td>' + new Date(order.date).toLocaleDateString() + '</td>' +
-                    '<td class="' + getStatusClass(order.state) + '">' + order.state + '</td>' +
-                    '<td><a href="#"><i class="fa fa-plus-circle"></i></a></td>' +
-                    '</tr>';
-                orderTableBody.append(orderRow);
-                console.log('Order Row Added:', orderRow);
-            });
-        }
-
-        function getStatusClass(state) {
-            switch (state) {
-                case 'Completed':
-                    return 'text-success';
-                case 'Cancelled':
-                    return 'text-danger';
-                case 'Pending':
-                    return 'text-warning';
-                default:
-                    return '';
-            }
-        }
-    });
-</script>
