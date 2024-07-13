@@ -4,143 +4,58 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminAr.cshtml";
 }
 
-<div class="col-xs-12">
+<div class="col-lg-6 col-xs-12">
     <div class="box-content">
-        <ul class="list-inline">
-            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LBMyCustomerMessages</button></a></li>/
-            <li class="margin-bottom-10"><a asp-area="merchantAccount" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
-            <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
-            <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
-            <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
-        </ul>
+        <h4 class="box-title">Orders</h4>
         <!-- /.box-title -->
         <div class="dropdown js__drop_down">
-            @* <a asp-area="merchantAccount" asp-controller="CustomerMessages" asp-action="AddCustomerMessages"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a> *@
+            <a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
+            <ul class="sub-menu">
+                <li><a href="#">Product</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else there</a></li>
+                <li class="split"></li>
+                <li><a href="#">Separated link</a></li>
+            </ul>
         </div>
         <!-- /.dropdown js__dropdown -->
-        <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div id="rootwizard-progress">
-                        <div class="tab-header">
-                            <div class="navbar">
-                                <span style="color:royalblue"> <strong>@TempData["Saved successfully"]</strong></span>
-                                <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
-                                <div class="navbar-inner">
-                                    <ul>
-                                        <li><a href="#tab-progress-1" data-toggle="tab">@ResourceWeb.LbInformaition</a></li>
-
-                                        <li><a href="#tab-progress-3" data-toggle="tab">@ResourceWeb.LbOpration</a></li>
-                                        @*  <li><a href="#tab-progress-4" data-toggle="tab">Forth</a></li>
-                                        <li><a href="#tab-progress-5" data-toggle="tab">Fifth</a></li> *@
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-content">
-                            <div id="bar" class="progress">
-                                <div class="progress-bar active progress-bar-info progress-bar-striped bar"></div>
-                            </div>
-                            <div class="tab-pane" id="tab-progress-1">
-                                <div class='table-responsive'>
-                                    <div style="overflow-x:auto;">
-                                        <table id="example" class="table table-striped table-bordered table-hover display dataTable responsive" style="width: 100%;" role="grid" aria-describedby="example_info">
-
-                                            <thead>
-                                                <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbId</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTypesOfMessage</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbPhoto</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbName</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbUserPhone</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbUserEmail</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTitle</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbMessageDescription</th>
-                                            <tfoot>
-                                                <tr>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbTypesOfMessage</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbPhoto</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbName</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbUserPhone</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbUserEmail</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbTitle</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbMessageDescription</th>
-
-                                            </tfoot>
-                                            <tbody>
-                                                        @foreach (var order in Model.NewOrders)
-                                                        {
-                                                    <tr>
-                                                        <td>@order.IdOrderNew</td> <!-- Use appropriate property names -->
-                                                        <td>@order.Price</td> <!-- Use appropriate property names -->
-                                                        <td>@order.OrderDate.ToString("MM/dd/yyyy")</td> <!-- Use appropriate property names -->
-                                                        <td>@order.dorderStatus</td> <!-- Use appropriate property names -->
-                                                        <td></td>
-                                                    </tr>
-                                                        }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane" id="tab-progress-3">
-                                <div class='table-responsive'>
-                                    <div style="overflow-x:auto;">
-                                        <table id="example2" class="table table-striped table-bordered display dataTable table-responsive" style="width: 100%;" role="grid" aria-describedby="example_info">
-                                            <thead>
-                                                <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbId</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTypesOfMessage</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbName</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTitle</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDataEntry</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDateTimeEntry</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.lbCurrentState</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">@ResourceWeb.LbOpration</th>
-                                            <tfoot>
-                                                <tr>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbTypesOfMessage</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbName</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbTitle</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbDataEntry</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbDateTimeEntry</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.lbCurrentState</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbOpration</th>
-                                            </tfoot>
-                                            <tbody>
-                                                        @foreach (var order in Model.OldOrders)
-                                                        {
-                                                    <tr>
-                                                        <td>@order.id</td> <!-- Use appropriate property names -->
-                                                        <td>@order.price_log</td> <!-- Use appropriate property names -->
-                                                        <td>@order.DateTimeEntry</td> <!-- Use appropriate property names -->
-                                                        <td>@order.order_status</td> <!-- Use appropriate property names -->
-                                                        <td></td>
-                                                    </tr>
-                                                        }
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="pager wizard">
-                                <li class="previous"><a href="javascript:void(0)">Previous</a></li>
-                                <li class="next"><a href="javascript:void(0)">Next</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="table-responsive table-purchases">
+            <table class="table table-striped margin-bottom-10">
+                <thead>
+                    <tr>
+                        <th style="width:40%;">Order No</th>
+                        <th>Price</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th style="width:5%;"></th>
+                    </tr>
+                </thead>
+                <tbody id="orderTableBody">
+                    @foreach (var order in Model.NewOrders)
+                    {
+                        <tr>
+                            <td>@order.description</td> <!-- Use appropriate property names -->
+                            <td>@order.CostPrice</td> <!-- Use appropriate property names -->
+                            <td>@order.OrderDate</td> <!-- Use appropriate property names -->
+                            <td>@order.dorderStatus</td> <!-- Use appropriate property names -->
+                            <td></td>
+                        </tr>
+                    }
+                    @foreach (var order in Model.OldOrders)
+                    {
+                        <tr>
+                            <td>@order.description</td> <!-- Use appropriate property names -->
+                            <td>@order.delivery_charges</td> <!-- Use appropriate property names -->
+                            <td>@order.order_dt</td> <!-- Use appropriate property names -->
+                            <td>@order.OrderStatus</td> <!-- Use appropriate property names -->
+                            <td></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-        <div class="row">
-            <div class="col-sm-5">
-                <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 4 of 4 entries (filtered from 57 total entries)</div>
-            </div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example_previous"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button next disabled" id="example_next"><a href="#" aria-controls="example" data-dt-idx="2" tabindex="0">Next</a></li></ul></div></div>
-        </div>
+        <!-- /.table-responsive -->
     </div>
+    <!-- /.box-content -->
 </div>
 

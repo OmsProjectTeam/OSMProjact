@@ -60,13 +60,16 @@
                                             <tfoot>
                                                 <tr>
                                                     <th rowspan="1" colspan="1">@ResourceWebAr.LbId</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbPhoto</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbName</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbUserEmail</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbUserPhone</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.Lbcode</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbDescription</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LBLbAreaName</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbDescriptionOrder</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbDescriptionClint</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbNikeNAme</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbOrderDate</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LBOrderStatus</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbOrderCase</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbWeight</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbCostPrice</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbPrice</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbExchangedPrice</th>
 
                                             </tfoot>
                                             <tbody>
@@ -74,13 +77,16 @@
                                                         {
                                                     <tr role="row" class="odd">
                                                         <td>@item.IdOrderNew</td>
-                                                        <td class="sorting_1"> <img src="@string.Format("/Images/Users/{0}",item.ImageUser)" class="img-bordered img-circle img-circle" style="width:100px; height:100px"></td>
-                                                        <td class="truncate-50">@item.Name</td>
-                                                        <td class="truncate-50">@item.Email</td>
-                                                        <td class="truncate-50">@item.PhoneNumber</td>
-                                                        <td class="truncate-50">@item.code</td>
-                                                        <td class="truncate-50">@item.description</td>
-                                                        <td class="truncate-50">@item.AreaName</td>
+                                                        <td class="truncate-50">@item.DescriptionOrder</td>
+                                                        <td class="truncate-50">@item.DescriptionClint</td>
+                                                        <td class="truncate-50">@item.NikeNAme</td>
+                                                        <td class="truncate-50">@item.OrderDate</td>
+                                                        <td class="truncate-50">@item.dorderStatus</td>
+                                                        <td class="truncate-50">@item.dorderCases</td>
+                                                        <td class="truncate-50">@item.Weight</td>
+                                                        <td class="truncate-50">@item.CostPrice</td>
+                                                        <td class="truncate-50">@item.Price</td>
+                                                        <td class="truncate-50">@item.ExchangedPrice</td>
                                                     </tr>
                                                         }
                                             </tbody>
@@ -105,24 +111,32 @@
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">@ResourceWeb.LbOpration</th>
                                             <tfoot>
                                                 <tr>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbTypesOfMessage</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbName</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbTitle</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbDataEntry</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbDateTimeEntry</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.lbCurrentState</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbOpration</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbId</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LBCustomers</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.Lbcust_mob</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.Lbcust_mob2</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbNikeNAme</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbCity</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.LbDescription</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.Lbcust_landmark</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWebAr.Lbwith_delivery</th>
                                             </tfoot>
                                             <tbody>
-                                                        @foreach (var order in Model.OldOrders)
+                                                        @foreach (var item in Model.OldOrders)
                                                         {
-                                                    <tr>
-                                                        <td>@order.id</td> <!-- Use appropriate property names -->
-                                                        <td>@order.price_log</td> <!-- Use appropriate property names -->
-                                                        <td>@order.DateTimeEntry</td> <!-- Use appropriate property names -->
-                                                        <td>@order.order_status</td> <!-- Use appropriate property names -->
-                                                        <td></td>
+                                                    <tr role="row" class="odd">
+                                                        <td>@item.id</td>
+                                                        <td class="truncate-50">@item.cust_name</td>
+
+                                                        <td class="truncate-50">@item.cust_mob</td>
+                                                        <td class="truncate-50">@item.cust_mob2</td>
+                                                        <td class="truncate-50">@item.NikeNAme</td>
+                                                        <td class="truncate-50">@item.description</td>
+                                                        <td class="truncate-50">@item.AreaName</td>
+                                                        <td class="truncate-50">@item.cust_landmark</td>
+                                                        <td class="truncate-50">@item.with_delivery</td>
+
+
                                                     </tr>
                                                         }
                                             </tbody>
