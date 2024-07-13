@@ -75,7 +75,7 @@
 		}
 		public List<TBViewFAQList> GetAllv(int IdFAQList)
 		{
-			List<TBViewFAQList> MySlIdFAQLister = dbcontext.ViewFAQList.OrderByDescending(n => n.IdFAQList == IdFAQList).Where(a => a.IdFAQList == IdFAQList).Where(a => a.CurrentState == true).ToList();
+			List<TBViewFAQList> MySlIdFAQLister = dbcontext.ViewFAQList.OrderByDescending(n => n.IdFAQ == IdFAQList).Where(a => a.IdFAQ == IdFAQList).Where(a => a.CurrentState == true).ToList();
 			return MySlIdFAQLister;
 		}
 	}

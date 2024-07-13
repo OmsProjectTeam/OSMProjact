@@ -49,13 +49,13 @@
                                             <thead>
                                                 <tr role="row">
                                                     <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbIdFAQDescreption</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbIdFAQ</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbFAQ</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDescription1</th>
                                             <tfoot>
                                                 <tr>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbIdFAQDescreption</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbIdFAQ</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbFAQ</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbDescription1</th>
 
                                             </tfoot>
                                             <tbody>
@@ -63,8 +63,8 @@
                                                         {
                                                     <tr role="row" class="odd">
                                                         <td>@item.IdFAQDescreption</td>
-                                                        <td class="truncate-50">@item.IdFAQ</td>
                                                         <td class="truncate-50">@item.FAQ</td>
+                                                        <td class="truncate-50">@item.Descreption</td>
                                                     </tr>
                                                         }
                                             </tbody>
@@ -80,7 +80,6 @@
                                             <thead>
                                                 <tr role="row">
                                                     <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbIdFAQDescreption</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbFAQ</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDataEntry</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDateTimeEntry</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbActive</th>
@@ -89,7 +88,6 @@
                                             <tfoot>
                                                 <tr>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbIdFAQDescreption</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbFAQ</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbDataEntry</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbDateTimeEntry</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbActive</th>
@@ -102,7 +100,6 @@
                                                         {
                                                     <tr role="row" class="odd">
                                                         <td>@item.IdFAQDescreption</td>
-                                                        <td>@item.FAQ</td>
                                                         <td>@item.DateEntry</td>
                                                         <td>@item.DateTimeEntry</td>
                                                         <td>

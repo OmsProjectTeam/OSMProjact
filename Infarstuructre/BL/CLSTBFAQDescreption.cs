@@ -83,7 +83,7 @@ namespace Infarstuructre.BL
 		}
 		public List<TBViewFAQDescription> GetAllv(int IdFAQDescreption)
 		{
-			List<TBViewFAQDescription> MySlIdFAQDescreptioner = dbcontext.ViewFAQDescription.OrderByDescending(n => n.IdFAQDescreption == IdFAQDescreption).Where(a => a.IdFAQDescreption == IdFAQDescreption).Where(a => a.CurrentState == true).ToList();
+			List<TBViewFAQDescription> MySlIdFAQDescreptioner = dbcontext.ViewFAQDescription.OrderByDescending(n => n.IdFAQ == IdFAQDescreption).Where(a => a.IdFAQ == IdFAQDescreption).Where(a => a.CurrentState == true).ToList();
 			return MySlIdFAQDescreptioner;
 		}
 

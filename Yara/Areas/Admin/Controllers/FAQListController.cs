@@ -202,12 +202,12 @@ namespace Yara.Areas.Admin.Controllers
             var reqwistDelete = iFAQList.deleteData(IdFAQ);
             if (reqwistDelete == true)
             {
-                TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+                TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
                 return RedirectToAction("MyFAQAr");
             }
             else
             {
-                TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+                TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
                 return RedirectToAction("MyFAQAr");
 
             }

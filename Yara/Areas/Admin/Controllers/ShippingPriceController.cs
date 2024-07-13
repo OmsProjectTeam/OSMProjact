@@ -211,12 +211,12 @@ namespace Yara.Areas.Admin.Controllers
 			var reqwistDelete = iShippingPrice.deleteData(IdShipping);
 			if (reqwistDelete == true)
 			{
-				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
 				return RedirectToAction("MyShippingPriceAr");
 			}
 			else
 			{
-				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
 				return RedirectToAction("MyShippingPriceAr");
 			}
 		}

@@ -204,12 +204,12 @@ namespace Yara.Areas.Admin.Controllers
 			var reqwistDelete = iExchangeRate.deleteData(IdExchangeRate);
 			if (reqwistDelete == true)
 			{
-				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
 				return RedirectToAction("MyExchangeRateAr");
 			}
 			else
 			{
-				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
 				return RedirectToAction("MyExchangeRateAr");
 
 			}

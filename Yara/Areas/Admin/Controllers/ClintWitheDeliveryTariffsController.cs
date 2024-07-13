@@ -230,12 +230,12 @@ namespace Yara.Areas.Admin.Controllers
 			var reqwistDelete = iClintWitheDeliveryTariffs.deleteData(IdClintWitheDeliveryTariffs);
 			if (reqwistDelete == true)
 			{
-				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
 				return RedirectToAction("MyClintWitheDeliveryTariffsAr");
 			}
 			else
 			{
-				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
 				return RedirectToAction("MyClintWitheDeliveryTariffsAr");
 			}
 		}

@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Yara.Areas.ClintAccount.Controllers
+namespace Yara.Areas.merchantAccount.Controllers
 {
-    [Area("ClintAccount")]
-    [Authorize(Roles = "Admin,Customer")]
-    public class FAQController : Controller
-    {
-
+	[Area("merchantAccount")]
+	[Authorize(Roles = "Admin,Merchant")]
+	public class FAQController : Controller
+	{
 
 		IIFAQ iFAQ;
 		IIFAQDescreption iFAQDescreption;
