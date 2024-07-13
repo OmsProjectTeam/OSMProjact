@@ -916,6 +916,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string LbHistory {
+            get {
+                return ResourceManager.GetString("LbHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hxcode.
         /// </summary>
         public static string LBhxcode {

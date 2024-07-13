@@ -402,6 +402,9 @@
   <data name="Lbhidden" xml:space="preserve">
     <value>hidden</value>
   </data>
+  <data name="LbHistory" xml:space="preserve">
+    <value />
+  </data>
   <data name="LBhxcode" xml:space="preserve">
     <value>Hxcode</value>
   </data>
