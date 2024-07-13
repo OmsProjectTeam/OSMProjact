@@ -8,7 +8,7 @@
 <div class="col-xs-12">
     <div class="box-content">
         <ul class="list-inline">
-            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LBMyCustomerMessages</button></a></li>/
+            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LbHistory</button></a></li>/
             <li class="margin-bottom-10"><a asp-area="merchantAccount" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
             <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
             <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
@@ -16,7 +16,7 @@
         </ul>
         <!-- /.box-title -->
         <div class="dropdown js__drop_down">
-            <a asp-area="merchantAccount" asp-controller="CustomerMessages" asp-action="AddCustomerMessages"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a>
+            @* <a asp-area="merchantAccount" asp-controller="CustomerMessages" asp-action="AddCustomerMessages"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a> *@
         </div>
         <!-- /.dropdown js__dropdown -->
         <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -60,24 +60,27 @@
                                             <tfoot>
                                                 <tr>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbTypesOfMessage</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbPhoto</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbName</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbUserPhone</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbUserEmail</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbTitle</th>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbMessageDescription</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbUserPhone</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.Lbcode</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbDescription</th>
+                                                    <th rowspan="1" colspan="1">@ResourceWeb.LBLbAreaName</th>
 
                                             </tfoot>
                                             <tbody>
-                                                        @foreach (var order in Model.NewOrders)
+                                                        @foreach (var item in Model.NewOrders)
                                                         {
-                                                    <tr>
-                                                        <td>@order.IdOrderNew</td> <!-- Use appropriate property names -->
-                                                        <td>@order.Price</td> <!-- Use appropriate property names -->
-                                                        <td>@order.OrderDate.ToString("MM/dd/yyyy")</td> <!-- Use appropriate property names -->
-                                                        <td>@order.dorderStatus</td> <!-- Use appropriate property names -->
-                                                        <td></td>
+                                                    <tr role="row" class="odd">
+                                                        <td>@item.IdOrderNew</td>
+                                                        <td class="sorting_1"> <img src="@string.Format("/Images/Users/{0}",item.ImageUser)" class="img-bordered img-circle img-circle" style="width:100px; height:100px"></td>
+                                                        <td class="truncate-50">@item.Name</td>
+                                                        <td class="truncate-50">@item.Email</td>
+                                                        <td class="truncate-50">@item.PhoneNumber</td>
+                                                        <td class="truncate-50">@item.code</td>
+                                                        <td class="truncate-50">@item.description</td>
+                                                        <td class="truncate-50">@item.AreaName</td>
                                                     </tr>
                                                         }
                                             </tbody>
@@ -163,7 +166,7 @@
     <script src="~/Admin/assets/plugin/jquery-validation/jquery.validate.min.js"></script>
     <script src="~/Admin/assets/scripts/form.wizard.init.min.js"></script>
 
-    
+
     <script>
         $(function () {
             $("#example2").DataTable().fnDestroy();
