@@ -32,23 +32,17 @@ public class HomeController : Controller
             return NotFound();
 
         string phoneNumber = user.PhoneNumber;
-        if (string.IsNullOrEmpty(phoneNumber))
+        if (!string.IsNullOrEmpty(phoneNumber))
         {
-            return View();
+            vmodel.NewOrders = (await iOrderNew.GetOrdersByPhoneAsync(phoneNumber)).ToList();
+            vmodel.OldOrders = (await iOrder.GetOrdersByPhoneAsync(phoneNumber)).ToList();
         }
-        var newOrders = await iOrderNew.GetOrdersByPhoneAsync(phoneNumber);
-        var oldOrders = await iOrder.GetOrdersByPhoneAsync(phoneNumber);
-
-        ViewBag.NewOrders = newOrders;
-        ViewBag.OldOrders = oldOrders;
-        ViewBag.PhoneNumber = phoneNumber;
 
         return View(vmodel);
     }
 
 	public async Task<IActionResult> IndexAr(string userId)
 	{
-
         ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
         var userd = vmodel.sUser = iUserInformation.GetById(userId);
 
@@ -58,16 +52,11 @@ public class HomeController : Controller
             return NotFound();
 
         string phoneNumber = user.PhoneNumber;
-        if (string.IsNullOrEmpty(phoneNumber))
+        if (!string.IsNullOrEmpty(phoneNumber))
         {
-            return View();
+            vmodel.NewOrders = (await iOrderNew.GetOrdersByPhoneAsync(phoneNumber)).ToList();
+            vmodel.OldOrders = (await iOrder.GetOrdersByPhoneAsync(phoneNumber)).ToList();
         }
-        var newOrders = await iOrderNew.GetOrdersByPhoneAsync(phoneNumber);
-        var oldOrders = await iOrder.GetOrdersByPhoneAsync(phoneNumber);
-
-        ViewBag.NewOrders = newOrders;
-        ViewBag.OldOrders = oldOrders;
-        ViewBag.PhoneNumber = phoneNumber;
 
         return View(vmodel);
     }

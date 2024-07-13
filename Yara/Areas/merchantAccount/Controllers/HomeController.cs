@@ -1,4 +1,5 @@
 ﻿using Azure;
+using Domin.Entity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -30,35 +31,34 @@ namespace Yara.Areas.merchantAccount.Controllers
                 return NotFound();
 
             string phoneNumber = user.PhoneNumber;
-            if (string.IsNullOrEmpty(phoneNumber))
+            if (!string.IsNullOrEmpty(phoneNumber))
             {
-                return View();
+                vmodel.NewOrders = (await iOrderNew.GetOrdersByPhoneAsync(phoneNumber)).ToList();
+                vmodel.OldOrders = (await iOrder.GetOrdersByPhoneAsync(phoneNumber)).ToList();
             }
-            var newOrders = await iOrderNew.GetOrdersByPhoneAsync(phoneNumber);
-			var oldOrders = await iOrder.GetOrdersByPhoneAsync(phoneNumber);
-
-			ViewBag.NewOrders = newOrders;
-			ViewBag.OldOrders = oldOrders;
-            ViewBag.PhoneNumber = phoneNumber;
 
             return View(vmodel);
         }
 
-		public async Task<IActionResult> IndexAr()
+		public async Task<IActionResult> IndexAr(string userId)
 		{
-			//var user = await _userManager.GetUserAsync(User);
-			//if (user == null)
-			//    return NotFound();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            var userd = vmodel.sUser = iUserInformation.GetById(userId);
 
-			//var role = await _userManager.GetRolesAsync(user);
+            var user = await _userManager.FindByIdAsync(userId);
+            //var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return NotFound();
 
-			//ViewBag.UserName = user.UserName;
-			//ViewBag.UserId = user.Id;
-			//ViewBag.UserImage = user.ImageUser;
-			//ViewBag.Name = user.Name;
-			//ViewBag.UserRole = role[0];
-			return View();
-		}
+            string phoneNumber = user.PhoneNumber;
+            if (!string.IsNullOrEmpty(phoneNumber))
+            {
+                vmodel.NewOrders = (await iOrderNew.GetOrdersByPhoneAsync(phoneNumber)).ToList();
+                vmodel.OldOrders = (await iOrder.GetOrdersByPhoneAsync(phoneNumber)).ToList();
+            }
+
+            return View(vmodel);
+        }
 
 		//[HttpPost("GetOrdersByPhone/{phoneNumber}")]
 		//public async Task<ActionResult<IEnumerable<TBViewOrderNew>>> GetNewOrdersByPhone(string phoneNumber)
