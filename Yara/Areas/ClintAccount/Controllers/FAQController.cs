@@ -20,64 +20,22 @@ namespace Yara.Areas.ClintAccount.Controllers
 		}
 		public IActionResult MyFAQ()
 		{
-			string listFaq = string.Empty;
-
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 			vmodel.ListFAQ = iFAQ.GetAll();
+			vmodel.ListFAQDescription = iFAQDescreption.GetAll();
+			vmodel.ListFAQList = iFAQList.GetAll();
 
-			foreach (var quastion in vmodel.ListFAQ)
-			{
-				var desc = iFAQDescreption.GetAllv(quastion.IdFAQ);
-				var list = iFAQList.GetAllv(quastion.IdFAQ);
-
-				foreach (var item in list)
-				{
-					listFaq = item.ListFAQ;
-					vmodel.stringFAQList.Add(listFaq);
-				}
-
-
-
-				vmodel.listFAQModel.Add(new FAQModel
-				{
-					Quastion = quastion.FAQ,
-					Description = desc.Any() ? desc.FirstOrDefault()?.Descreption : null,
-					List = vmodel.stringFAQList
-				});
-
-			}
 			return View(vmodel);
 		}
 
 
 		public IActionResult MyFAQAr()
 		{
-			string listFaq = string.Empty;
-
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 			vmodel.ListFAQ = iFAQ.GetAll();
+			vmodel.ListFAQDescription = iFAQDescreption.GetAll();
+			vmodel.ListFAQList = iFAQList.GetAll();
 
-			foreach (var quastion in vmodel.ListFAQ)
-			{
-				var desc = iFAQDescreption.GetAllv(quastion.IdFAQ);
-				var list = iFAQList.GetAllv(quastion.IdFAQ);
-
-				foreach (var item in list)
-				{
-					listFaq = item.ListFAQ;
-					vmodel.stringFAQList.Add(listFaq);
-				}
-
-
-
-				vmodel.listFAQModel.Add(new FAQModel
-				{
-					Quastion = quastion.FAQ,
-					Description = desc.Any() ? desc.FirstOrDefault()?.Descreption : null,
-					List = vmodel.stringFAQList
-				});
-
-			}
 			return View(vmodel);
 		}
 	}
