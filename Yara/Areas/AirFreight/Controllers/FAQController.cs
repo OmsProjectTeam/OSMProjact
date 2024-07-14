@@ -1,31 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Yara.Areas.ClintAccount.Controllers
+namespace Yara.Areas.AirFreight.Controllers
 {
-    [Area("ClintAccount")]
-    [Authorize(Roles = "Admin,Customer")]
-    public class FAQController : Controller
-    {
-
+	[Area("AirFreight")]
+	[Authorize(Roles = "Admin,AirFreight")]
+	public class FAQController : Controller
+	{
 
 		IIFAQ iFAQ;
 		IIFAQDescreption iFAQDescreption;
 		IIFAQList iFAQList;
 
-		public FAQController(IIFAQ iFAQ1, IIFAQDescreption iFAQDescreption1, IIFAQList iFAQList1)
-		{
-			iFAQ = iFAQ1;
-			iFAQDescreption = iFAQDescreption1;
-			iFAQList = iFAQList1;
-		}
-		public IActionResult MyFAQ()
+        public FAQController(IIFAQ iFAQ1, IIFAQDescreption iFAQDescreption1, IIFAQList iFAQList1)
+        {
+            iFAQ = iFAQ1;
+            iFAQDescreption = iFAQDescreption1;
+            iFAQList = iFAQList1;
+        }
+        public IActionResult MyFAQ()
 		{
 			string listFaq = string.Empty;
 
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-			vmodel.ListFAQ = iFAQ.GetAll();
+                vmodel.ListFAQ = iFAQ.GetAll();
 
-			foreach (var quastion in vmodel.ListFAQ)
+            foreach (var quastion in vmodel.ListFAQ)
 			{
 				var desc = iFAQDescreption.GetAllv(quastion.IdFAQ);
 				var list = iFAQList.GetAllv(quastion.IdFAQ);
@@ -35,7 +34,7 @@ namespace Yara.Areas.ClintAccount.Controllers
 					listFaq = item.ListFAQ;
 					vmodel.stringFAQList.Add(listFaq);
 				}
-
+				
 
 
 				vmodel.listFAQModel.Add(new FAQModel
@@ -45,8 +44,8 @@ namespace Yara.Areas.ClintAccount.Controllers
 					List = vmodel.stringFAQList
 				});
 
-			}
-			return View(vmodel);
+            }
+                return View(vmodel);
 		}
 
 

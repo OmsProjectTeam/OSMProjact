@@ -118,216 +118,216 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClintPricePerkgUnder10" xml:space="preserve">
-    <value>Please include the price per kilo within the customer’s category of less than 10 kilos so that the process can be completed successfully....!</value>
+    <value>يرجى إدراج السعر للكيلو ضمن فئة العميل أقل من 10 كيلو حتى تتم العملية بنجاح....!</value>
   </data>
   <data name="ComparePassword" xml:space="preserve">
-    <value>Please retype the password...!</value>
+    <value>من فضلك أعد كتابة كلمة المرور...!</value>
   </data>
   <data name="ComparePasswordcomferm" xml:space="preserve">
-    <value>Passwords must match...!</value>
+    <value>يجب أن تتطابق كلمات المرور...!</value>
   </data>
   <data name="MaxLength100" xml:space="preserve">
-    <value>The number of characters entered must not exceed 100 characters...!</value>
+    <value>عدد الأحرف المدخلة لا يجب أن يتجاوز 100 حرف...!</value>
   </data>
   <data name="MaxLength20" xml:space="preserve">
-    <value>The number of characters entered must not exceed 20 characters...!</value>
+    <value>عدد الأحرف المدخلة لا يجب أن يتجاوز 20 حرفًا...!</value>
   </data>
   <data name="MaxLength2000" xml:space="preserve">
-    <value>The number of characters entered must not exceed 2000 characters...!</value>
+    <value>عدد الأحرف المدخلة لا يجب أن يتجاوز 2000 حرفًا...!</value>
   </data>
   <data name="MaxLength25" xml:space="preserve">
-    <value>The number of characters entered must not exceed 25 characters...!</value>
+    <value>عدد الأحرف المدخلة لا يجب أن يتجاوز 25 حرفًا...!</value>
   </data>
   <data name="MaxLength300" xml:space="preserve">
-    <value>The number of characters entered must not exceed 300 characters...!</value>
+    <value>عدد الأحرف المدخلة لا يجب أن يتجاوز 300 حرفًا...!</value>
   </data>
   <data name="MaxLength500" xml:space="preserve">
-    <value>The number of characters entered must not exceed 500 characters...!</value>
+    <value>عدد الأحرف المدخلة لا يجب أن يتجاوز 500 حرفًا...!</value>
   </data>
   <data name="MinLength1" xml:space="preserve">
-    <value>The number of characters entered must not be less than one character, and the # symbol can be used to indicate the same page....!</value>
+    <value>عدد الأحرف المدخلة لا يجب أن يقل عن حرف واحد، ويمكن استخدام الرمز # للإشارة إلى نفس الصفحة....!</value>
   </data>
   <data name="MinLength3" xml:space="preserve">
-    <value>The number of characters entered must not be less than 3 characters....!</value>
+    <value>عدد الأحرف المدخلة لا يجب أن يقل عن 3 أحرف....!</value>
   </data>
   <data name="MinLength5" xml:space="preserve">
-    <value>The number of characters entered must not be less than 5 characters....!</value>
+    <value>عدد الأحرف المدخلة لا يجب أن يقل عن 5 أحرف....!</value>
   </data>
   <data name="MinLengthPassword5" xml:space="preserve">
-    <value>The minimum number of characters for the password must be at least 5 characters</value>
+    <value>يجب ألا يقل عدد الأحرف في كلمة المرور عن 5 أحرف</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Please enter the password for the process to complete successfully...!</value>
+    <value>من فضلك أدخل كلمة المرور لإتمام العملية بنجاح...!</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
-    <value>Please enter phone number...!</value>
+    <value>من فضلك أدخل رقم الهاتف...!</value>
   </data>
   <data name="RegisterEmail" xml:space="preserve">
-    <value>Please include your email..!</value>
+    <value>يرجى تضمين بريدك الإلكتروني..!</value>
   </data>
   <data name="RegisterEmailError" xml:space="preserve">
-    <value>The entered format must be the email format...!</value>
+    <value>يجب أن يكون التنسيق المدخل هو تنسيق البريد الإلكتروني...!</value>
   </data>
   <data name="RegisterEmaillogin" xml:space="preserve">
-    <value>Please enter your email...!</value>
+    <value>رجاءا أدخل بريدك الإلكتروني...!</value>
   </data>
   <data name="RegisterName" xml:space="preserve">
     <value>Please include full name.....!</value>
   </data>
   <data name="RoleName" xml:space="preserve">
-    <value>Please enter your user permission for the process to complete successfully..!</value>
+    <value>من فضلك أدخل إذن المستخدم الخاص بك لإكمال العملية بنجاح..!</value>
   </data>
   <data name="userName" xml:space="preserve">
-    <value>You must enter the user name...!</value>
+    <value>يجب عليك إدخال اسم المستخدم...!</value>
   </data>
   <data name="VlAddres" xml:space="preserve">
-    <value>Please include the address for the process to complete successfully</value>
+    <value>يرجى تضمين العنوان لإتمام العملية بنجاح</value>
   </data>
   <data name="VlAddresCompany" xml:space="preserve">
-    <value>Please include the company address for the process to complete successfully...!</value>
+    <value>يرجى تضمين عنوان الشركة لإتمام العملية بنجاح...!</value>
   </data>
   <data name="VlBlackMarketExchangeRate" xml:space="preserve">
-    <value>Please include the exchange rate in the local currency on the black market for the process to complete successfully....!</value>
+    <value>يرجى إدراج سعر الصرف بالعملة المحلية في السوق السوداء لإتمام العملية بنجاح....!</value>
   </data>
   <data name="VlBuilding" xml:space="preserve">
-    <value>VlBuilding</value>
+    <value>مبنى</value>
   </data>
   <data name="VlCatchReceiptNo" xml:space="preserve">
-    <value>please inclode the Catch Receipt</value>
+    <value>يرجى تضمين إيصال الشحن</value>
   </data>
   <data name="VlClintDelivery" xml:space="preserve">
-    <value>Please include the customer's delivery price so that the process is completed successfully...!</value>
+    <value>يرجى تضمين سعر توصيل العميل حتى تتم العملية بنجاح ...!</value>
   </data>
   <data name="VlClintPricePerkgAbove10" xml:space="preserve">
-    <value>Please include the price per kilo within the customer’s category of more than 10 kilos so that the process can be completed successfully....!</value>
+    <value>يرجى إدراج السعر للكيلو ضمن فئة العميل التي تزيد عن 10 كيلو حتى تتم العملية بنجاح....!</value>
   </data>
   <data name="Vlcode" xml:space="preserve">
-    <value>Please include the local currency code for the operation to complete successfully..!</value>
+    <value>يرجى تضمين رمز العملة المحلية لإكمال العملية بنجاح..!</value>
   </data>
   <data name="VlCompanyDelivery" xml:space="preserve">
-    <value>Please include the company's delivery price so that the process can be completed successfully...!</value>
+    <value>يرجى تضمين سعر توصيل الشركة حتى تتم العملية بنجاح...!</value>
   </data>
   <data name="VlCompanyDescription" xml:space="preserve">
-    <value>Please include the company's delivery price so that the process can be completed successfully...!</value>
+    <value>يرجى تضمين سعر توصيل الشركة حتى تتم العملية بنجاح...!</value>
   </data>
   <data name="VlCompanyName" xml:space="preserve">
-    <value>Please include the company name for the process to complete successfully...!</value>
+    <value>يرجى تضمين اسم الشركة لإكمال العملية بنجاح ...!</value>
   </data>
   <data name="VlCoPricePerkgAbove10" xml:space="preserve">
-    <value>Please include the price per kilo within the category higher than 10 kilograms received from the shipping company so that the process can be completed successfully....!</value>
+    <value>يرجى إدراج السعر للكيلو ضمن الفئة الأعلى من 10 كيلو جرام المستلمة من شركة الشحن حتى تتم العملية بنجاح....!</value>
   </data>
   <data name="VlCoPricePerkgUnder10" xml:space="preserve">
-    <value>Please include the price per kilo within the category of less than 10 kilograms received from the shipping company so that the process can be completed successfully....!</value>
+    <value>يرجى إدراج السعر للكيلو ضمن فئة أقل من 10 كيلو جرام المستلمة من شركة الشحن حتى تتم العملية بنجاح....!</value>
   </data>
   <data name="VlCountry" xml:space="preserve">
-    <value>Please include the country for the process to complete successfully...!</value>
+    <value>يرجى تضمين البلد لإكمال العملية بنجاح ...!</value>
   </data>
   <data name="VlCurrency" xml:space="preserve">
-    <value>Currency</value>
+    <value>العملة</value>
   </data>
   <data name="VlDescription" xml:space="preserve">
-    <value>Enter The Description</value>
+    <value>أدخل الوصف</value>
   </data>
   <data name="VlDescriptionClint" xml:space="preserve">
-    <value>Please include a description of the link between the customer and the pricing. The process is completed successfully...!</value>
+    <value>يرجى تضمين وصف للرابط بين العميل والتسعير. تمت العملية بنجاح...!</value>
   </data>
   <data name="VlDescriptionOrder" xml:space="preserve">
-    <value>Please include the order description for the process to complete successfully</value>
+    <value>يرجى تضمين وصف الطلب لإكمال العملية بنجاح</value>
   </data>
   <data name="VlEmail" xml:space="preserve">
-    <value>Please include the nickname for the process to complete successfully..!</value>
+    <value>يرجى تضمين اللقب لإكمال العملية بنجاح..!</value>
   </data>
   <data name="VlEmailCompany" xml:space="preserve">
-    <value>Please include the company's email so that the process is completed successfully...!</value>
+    <value>يرجى إدراج البريد الإلكتروني للشركة حتى تتم العملية بنجاح ...!</value>
   </data>
   <data name="VlFloor" xml:space="preserve">
-    <value>VlFloor</value>
+    <value>الطابق</value>
   </data>
   <data name="VlForeignCurrency" xml:space="preserve">
-    <value>Please add the exchange rate in foreign currency for the process to complete successfully...!</value>
+    <value>يرجى إضافة سعر الصرف بالعملة الأجنبية لإتمام العملية بنجاح...!</value>
   </data>
   <data name="VlGlobalExchangeRate" xml:space="preserve">
-    <value>Please include the exchange rate in the local currency for the process to complete successfully...!</value>
+    <value>يرجى تضمين سعر الصرف بالعملة المحلية لإتمام العملية بنجاح...!</value>
   </data>
   <data name="VllocalCurrency" xml:space="preserve">
-    <value>Please include the exchange rate in the local currency for the process to complete successfully...!</value>
+    <value>يرجى تضمين سعر الصرف بالعملة المحلية لإتمام العملية بنجاح...!</value>
   </data>
   <data name="VlMoblie" xml:space="preserve">
-    <value>VlMoblie</value>
+    <value>رقم الموبايل</value>
   </data>
   <data name="VlNikeNAme" xml:space="preserve">
-    <value>Please include the nickname for the process to complete successfully..!</value>
+    <value>يرجى تضمين اللقب لإكمال العملية بنجاح..!</value>
   </data>
   <data name="VlOffice" xml:space="preserve">
-    <value>VlOffice</value>
+    <value>مكتب</value>
   </data>
   <data name="VlPasswordEmail" xml:space="preserve">
-    <value>Please include the Password Email for the process to complete successfully...!</value>
+    <value>يرجى تضمين البريد الإلكتروني وكلمة المرور لإكمال العملية بنجاح ...!</value>
   </data>
   <data name="VlPhone" xml:space="preserve">
-    <value>Enter The Phone</value>
+    <value>أدخل رقم الهاتف</value>
   </data>
   <data name="VlPhoneCompany" xml:space="preserve">
-    <value>Please include the phone number for the process to complete successfully....!</value>
+    <value>يرجى تضمين رقم الهاتف لإكمال العملية بنجاح....!</value>
   </data>
   <data name="VlProfitAmount" xml:space="preserve">
-    <value>Profit Amount</value>
+    <value>المبلغ</value>
   </data>
   <data name="VlReceiptNo" xml:space="preserve">
-    <value>Please include a bond number for the process to complete successfully...!</value>
+    <value>يرجى تضمين رقم السند لإكمال العملية بنجاح...!</value>
   </data>
   <data name="VlReceiptStatment" xml:space="preserve">
-    <value>Please include the receipt statement for the process to be completed successfully....!</value>
+    <value>يرجى تضمين بيان الإيصال لإتمام العملية بنجاح....!</value>
   </data>
   <data name="VlResivedMony" xml:space="preserve">
-    <value>Please include the amount for the transaction to complete successfully..!</value>
+    <value>يرجى تضمين المبلغ لإتمام المعاملة بنجاح..!</value>
   </data>
   <data name="VlSmtpServer" xml:space="preserve">
-    <value>Please include the Smtp Server for the process to complete successfully...!</value>
+    <value>يرجى تضمين خادم Smtp لإكمال العملية بنجاح...!</value>
   </data>
   <data name="VlShippingAddress" xml:space="preserve">
-    <value>Shipping Address</value>
+    <value>عنوان الشحن</value>
   </data>
   <data name="VlStreet" xml:space="preserve">
-    <value>Enter the Street</value>
+    <value>ادخل الشارع</value>
   </data>
   <data name="VlTitle" xml:space="preserve">
-    <value>VlTitle</value>
+    <value>العنوان</value>
   </data>
   <data name="VlTitleShipping" xml:space="preserve">
-    <value>Please include the appropriate address in the shipping category for the process to complete successfully...!</value>
+    <value>يرجى تضمين العنوان المناسب في فئة الشحن لإتمام العملية بنجاح...!</value>
   </data>
   <data name="VLTypEmail" xml:space="preserve">
-    <value>The entered format must be the email format for the process to complete successfully...!</value>
+    <value>يجب أن يكون التنسيق المدخل هو تنسيق البريد الإلكتروني حتى تكتمل العملية بنجاح...!</value>
   </data>
   <data name="VlTypesCompanies" xml:space="preserve">
-    <value>Please include the nickname for the process to complete successfully..!</value>
+    <value>يرجى تضمين اللقب لإكمال العملية بنجاح..!</value>
   </data>
   <data name="VlTypeSystem" xml:space="preserve">
-    <value>Please include the system type for the process to complete successfully..!</value>
+    <value>يرجى تضمين نوع النظام لإكمال العملية بنجاح..!</value>
   </data>
   <data name="VlTypeSystemDelivery" xml:space="preserve">
-    <value>Please include the type of delivery system for the process to complete successfully...!</value>
+    <value>يرجى تضمين نوع نظام التسليم لإكمال العملية بنجاح ...!</value>
   </data>
   <data name="VlTypesOfRequest" xml:space="preserve">
-    <value>Please include the Types Of Request for the process to complete successfully...!</value>
+    <value>يرجى تضمين أنواع الطلبات لإكمال العملية بنجاح ...!</value>
   </data>
   <data name="VlTypesOfMessage" xml:space="preserve">
-    <value>Please include the Types Of Message  for the process to complete successfully...!</value>
+    <value>يرجى تضمين أنواع الرسائل لإكمال العملية بنجاح ...!</value>
   </data>
   <data name="MaxLength1000" xml:space="preserve">
-    <value>The number of characters entered must not exceed 1000 characters...!</value>
+    <value>عدد الأحرف المدخلة لا يجب أن يتجاوز 1000 حرف...!</value>
   </data>
   <data name="VlDescreption" xml:space="preserve">
-    <value>Please include descreption for the process to complete successfully...!</value>
+    <value>يرجى تضمين الوصف لإكمال العملية بنجاح ...!</value>
   </data>
   <data name="VlFAQ" xml:space="preserve">
-    <value>please include FAQ to complete successfully...!</value>
+    <value>يرجى تضمين الأسئلة الشائعة لإكمالها بنجاح...!</value>
   </data>
   <data name="VlListFAQ" xml:space="preserve">
-    <value>Please include List FAQ for the process to complete successfully...!</value>
+    <value>يرجى تضمين قائمة الأسئلة الشائعة لإكمال العملية بنجاح ...!</value>
   </data>
   <data name="VlMessageDescription" xml:space="preserve">
-    <value>Please include the Message Description for the process to complete successfully...!</value>
+    <value>يرجى تضمين وصف الرسالة لإكمال العملية بنجاح...!</value>
   </data>
 </root>

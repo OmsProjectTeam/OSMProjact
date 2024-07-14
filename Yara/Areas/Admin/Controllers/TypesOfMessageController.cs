@@ -191,12 +191,12 @@ namespace Yara.Areas.Admin.Controllers
             var reqwistDelete = iTypesOfMessage.deleteData(IdTypesOfMessage);
             if (reqwistDelete == true)
             {
-                TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+                TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
                 return RedirectToAction("MyTypesOfMessageAr");
             }
             else
             {
-                TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+                TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
                 return RedirectToAction("MyTypesOfMessageAr");
 
             }

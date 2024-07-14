@@ -230,12 +230,12 @@ namespace Yara.Areas.ClintAccount.Controllers
             var reqwistDelete = iCustomerMessages.deleteData(IdCustomerMessages);
             if (reqwistDelete == true)
             {
-                TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+                TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
                 return RedirectToAction("MyCustomerMessagesAr");
             }
             else
             {
-                TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+                TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
                 return RedirectToAction("MyCustomerMessagesAr");
             }
         }

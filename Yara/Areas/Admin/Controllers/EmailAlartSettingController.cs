@@ -209,12 +209,12 @@ namespace Yara.Areas.Admin.Controllers
 			var reqwistDelete = iEmailAlartSetting.deleteData(IdEmailAlartSetting);
 			if (reqwistDelete == true)
 			{
-				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
 				return RedirectToAction("MyEmailAlartSettingAr");
 			}
 			else
 			{
-				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
 				return RedirectToAction("MyEmailAlartSettingAr");
 
 			}

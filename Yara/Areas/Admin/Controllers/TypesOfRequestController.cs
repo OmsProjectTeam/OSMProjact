@@ -194,12 +194,12 @@ namespace Yara.Areas.Admin.Controllers
 			var reqwistDelete = iTypesOfRequest.deleteData(IdTypesOfRequest);
 			if (reqwistDelete == true)
 			{
-				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
 				return RedirectToAction("MyTypesOfRequestAr");
 			}
 			else
 			{
-				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
 				return RedirectToAction("MyTypesOfRequestAr");
 
 			}

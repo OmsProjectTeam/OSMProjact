@@ -113,5 +113,10 @@ namespace Infarstuructre.ViewModel
         public IEnumerable<TBViewOrderNew> NewOrders { get; set; }
         public IEnumerable<TBViewOrder> OldOrders { get; set; }
     }
+
+
+		public List<FAQModel> listFAQModel = new List<FAQModel>();
+		public List<string> stringFAQList = new List<string>();
+	}
  }
 
