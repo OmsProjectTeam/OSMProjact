@@ -1,4 +1,5 @@
 ﻿
+using Domin.Entity;
 using static Infarstuructre.BL.IIExchangeRate;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -122,6 +123,7 @@ builder.Services.AddScoped<IIFAQ, CLSTBFAQ>();
 builder.Services.AddScoped<IIFAQDescreption, CLSTBFAQDescreption>();
 builder.Services.AddScoped<IIFAQList, CLSTBFAQList>();
 builder.Services.AddScoped<IICustomerMessages, CLSTBCustomerMessages>();
+builder.Services.AddScoped<IIConnectAndDisconnect, CLSTBConnectAndDisconnect>();
 
 
 
@@ -134,6 +136,7 @@ builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddHttpClient();
+builder.Services.AddSignalR();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -178,10 +181,13 @@ app.MapControllerRoute(
 	pattern: "{area:exists}/{controller=Accounts}/{action=Login}/{id?}"
 );
 
-app.MapControllerRoute(
-	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}"
-);
+app.UseEndpoints(endpoints =>
+{
+	endpoints.MapControllerRoute(
+		name: "default",
+		pattern: "{controller=Home}/{action=Index}/{id?}");
+		endpoints.MapHub<ChatHub>("/chatHub");
+});
 
 app.UseSwagger();
 

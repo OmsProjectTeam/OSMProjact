@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Client View: chat-client.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+</head>
+<body>
+
+
+
+    <h2>Client Chat</h2>
+    <hr />
+    <div id="messagesList"></div>
+    <label id="userInput">@Context.User.Identity.Name;</label>
+    <input type="text" id="messageInput" placeholder="Type a message" />
+    <button onclick="sendMessage()">Send</button>
+
+    <hr />
+    <ul id="connectedUsersList"></ul>
+    <hr />
+
+
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
+
+        connection.on("ReceiveMessage", function (user, message) {
+            const msg = `${user}: ${message}`;
+            const li = document.createElement("li");
+            li.textContent = msg;
+            document.getElementById("messagesList").appendChild(li);
+        });
+
+        connection.start().catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        function sendMessage() {
+            const message = document.getElementById("messageInput").value;
+            document.getElementById("messageInput").value = "";
+            connection.invoke("SendMessageToAdmin", message).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }
+
+        connection.on("UserConnected", (userName, profileImage) => {
+            addUserToList(userName, profileImage);
+        });
+
+        function addUserToList(userName, profileImage) {
+            const userList = document.getElementById("connectedUsersList");
+
+            const listItem = document.createElement("li");
+
+            const img = document.createElement("img");
+            img.src = profileImage;
+            img.alt = `صورة ملف ${userName}`;
+            img.style.width = "50px";
+            
+            const span = document.createElement("span");
+            span.textContent = userName;
+
+            listItem.appendChild(img);
+            listItem.appendChild(span);
+
+            userList.appendChild(listItem);
+        }
+
+        connection.on("UserDisconnected", function (userName) {
+            removeUserFromList(userName);
+        });
+
+        function removeUserFromList(userName) {
+            const userList = document.getElementById("connectedUsersList");
+
+            const userElement = Array.from(connectedUsersList.children).find(li => li.textContent.includes(userName));
+
+            if (userElement) {
+                connectedUsersList.removeChild(userElement);
+            }
+        }
+    </script>
+</body>
+</html>

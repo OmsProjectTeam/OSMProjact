@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Admin View: chat-admin.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+</head>
+<body>
+
+    <h2>Admin Chat</h2>
+    <hr/>
+    <div id="messagesList">
+
+    </div>
+    <label id="userInput">@Context.User.Identity.Name;</label>
+    <input type="text" id="messageInput" placeholder="Type a message" />
+    <button onclick="sendMessage()">Send</button>
+
+    <hr />
+    <ul id="connectedUsersList"></ul>
+    <hr />
+
+
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
+
+        // when recive
+        connection.on("ReceiveMessage", function (data) {
+            const msg = `${data.UserName}: ${data.Message}`;
+            const li = document.createElement("li");
+            const img = document.createElement("img");
+            img.src = data.ProfileImageUrl;
+            li.appendChild(img);
+            li.appendChild(document.createTextNode(msg));
+            document.getElementById("messagesList").appendChild(li);
+        });
+
+        /////////////////////////////////////////////////////
+        connection.start().catch(function (err) {
+            return console.error(err.toString());
+        });
+        ///////////////////////////////////////////////////////////////////
+
+        // Send
+        function sendMessage() {
+            const user = document.getElementById("userInput").textContent;
+            const message = document.getElementById("messageInput").value;
+            connection.invoke("SendMessageToClient", user, message).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }
+        /////////////////////////////////////////////////
+
+        connection.on("UserConnected", (userName, profileImage) => {
+            addUserToList(userName, profileImage);
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
