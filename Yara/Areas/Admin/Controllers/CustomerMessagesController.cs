@@ -13,12 +13,15 @@ namespace Yara.Areas.Admin.Controllers
         IITypesOfMessage iTypesOfMessage;
         IICustomerMessages iCustomerMessages;
         IIUserInformation iUserInformation;
-        public CustomerMessagesController(UserManager<ApplicationUser> userManager,IITypesOfMessage iTypesOfMessage1,IICustomerMessages iCustomerMessages1, IIUserInformation iUserInformation1)
+        MasterDbcontext dbcontext;
+
+        public CustomerMessagesController(UserManager<ApplicationUser> userManager,IITypesOfMessage iTypesOfMessage1,IICustomerMessages iCustomerMessages1, IIUserInformation iUserInformation1,MasterDbcontext dbcontext1)
         {
             _userManager = userManager;
             iTypesOfMessage = iTypesOfMessage1;
             iCustomerMessages = iCustomerMessages1;
             iUserInformation = iUserInformation1;
+            dbcontext= dbcontext1;
         }
 
         public IActionResult MyCustomerMessages()
@@ -83,8 +86,65 @@ namespace Yara.Areas.Admin.Controllers
                     var reqwest = iCustomerMessages.saveData(slider);
                     if (reqwest == true)
                     {
+
+
+
+                        //send email
+                        var emailSetting = await dbcontext.TBEmailAlartSettings
+                           .OrderByDescending(n => n.IdEmailAlartSetting)
+                           .Where(a => a.CurrentState == true && a.Active == true)
+                           .FirstOrDefaultAsync();
+
+                        // التحقق من وجود إعدادات البريد الإلكتروني
+                        if (emailSetting != null)
+                        {
+                            var message = new MimeMessage();
+                            message.From.Add(new MailboxAddress("New new message", emailSetting.MailSender));
+                            message.To.Add(new MailboxAddress("saif aldin", "saifaldin_s@hotmail.com"));
+                            message.Subject = "رسالة جديدة  :" + slider.DataEntry;
+                            var builder = new BodyBuilder
+                            {
+                                TextBody = $"رسالة جديدة \n" +
+                                           $"العنوان: {slider.Title}\n" +
+                                           $"تاريخ : {slider.DateTimeEntry}\n" +
+                                           $"الرسالة: {slider.MessageDescription}\n" 
+                                        
+                            };
+
+                            //// إضافة الصورة كملف مرفق إذا كانت موجودة
+                            //if (!string.IsNullOrEmpty(slider.Photo))
+                            //{
+                            //    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Home", slider.Photo);
+                            //    builder.Attachments.Add(imagePath);
+                            //}
+
+                            message.Body = builder.ToMessageBody();
+
+                            using (var client = new SmtpClient())
+                            {
+                                await client.ConnectAsync(emailSetting.SmtpServer, emailSetting.PortServer, SecureSocketOptions.StartTls);
+                                await client.AuthenticateAsync(emailSetting.MailSender, emailSetting.PasswordEmail);
+                                await client.SendAsync(message);
+                                await client.DisconnectAsync(true);
+                            }
+                        }
+                        else
+                        {
+                            // التعامل مع الحالة التي لا توجد فيها إعدادات البريد الإلكتروني
+                            // يمكنك تسجيل خطأ أو تنفيذ إجراءات أخرى هنا
+                        }
+
                         TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
                         return RedirectToAction("MyCustomerMessages");
+
+
+
+
+
+
+
+
+
                     }
                     else
                     {
@@ -134,6 +194,54 @@ namespace Yara.Areas.Admin.Controllers
                     var reqwest = iCustomerMessages.saveData(slider);
                     if (reqwest == true)
                     {
+                        //send email
+                        var emailSetting = await dbcontext.TBEmailAlartSettings
+                           .OrderByDescending(n => n.IdEmailAlartSetting)
+                           .Where(a => a.CurrentState == true && a.Active == true)
+                           .FirstOrDefaultAsync();
+
+                        // التحقق من وجود إعدادات البريد الإلكتروني
+                        if (emailSetting != null)
+                        {
+                            var message = new MimeMessage();
+                            message.From.Add(new MailboxAddress("New new message", emailSetting.MailSender));
+                            message.To.Add(new MailboxAddress("saif aldin", "saifaldin_s@hotmail.com"));
+                            message.Subject = "رسالة جديدة  :" + slider.DataEntry;
+                            var builder = new BodyBuilder
+                            {
+                                TextBody = $"رسالة جديدة \n" +
+                                           $"العنوان: {slider.Title}\n" +
+                                           $"تاريخ : {slider.DateTimeEntry}\n" +
+                                           $"الرسالة: {slider.MessageDescription}\n"
+
+                            };
+
+                            //// إضافة الصورة كملف مرفق إذا كانت موجودة
+                            //if (!string.IsNullOrEmpty(slider.Photo))
+                            //{
+                            //    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Home", slider.Photo);
+                            //    builder.Attachments.Add(imagePath);
+                            //}
+
+                            message.Body = builder.ToMessageBody();
+
+                            using (var client = new SmtpClient())
+                            {
+                                await client.ConnectAsync(emailSetting.SmtpServer, emailSetting.PortServer, SecureSocketOptions.StartTls);
+                                await client.AuthenticateAsync(emailSetting.MailSender, emailSetting.PasswordEmail);
+                                await client.SendAsync(message);
+                                await client.DisconnectAsync(true);
+                            }
+                        }
+                        else
+                        {
+                            // التعامل مع الحالة التي لا توجد فيها إعدادات البريد الإلكتروني
+                            // يمكنك تسجيل خطأ أو تنفيذ إجراءات أخرى هنا
+                        }
+
+                     
+
+
                         TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
                         return RedirectToAction("MyCustomerMessagesAr");
                     }

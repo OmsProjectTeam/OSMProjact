@@ -1,5 +1,5 @@
 ﻿using Domin.Entity;
-
+using Domin.Entity.SignalR;
 using Infarstuructre.ViewModel;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -1573,6 +1573,10 @@ namespace Infarstuructre.Data
 		   .Property(b => b.CurrentState)
 		   .HasDefaultValueSql("((1))");
 
+            //--------------------------------- 
+            //---------------------------------
+            builder.Entity<TBConnectAndDisConnect>()
+            .HasNoKey();
 			//---------------------------------
 		}
 
@@ -1761,6 +1765,7 @@ namespace Infarstuructre.Data
         public DbSet<TBViewFAQList> ViewFAQList { get; set; }
         public DbSet<TBCustomerMessages> TBCustomerMessagess { get; set; }
         public DbSet<TBViewCustomerMessages> ViewCustomerMessages { get; set; }
+        public DbSet<TBConnectAndDisConnect> TBConnectAndDisConnects { get; set; }
         //test
 
 
