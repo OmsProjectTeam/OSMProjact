@@ -24,7 +24,8 @@
             <table class="table table-striped margin-bottom-10">
                 <thead>
                     <tr>
-                        <th style="width:40%;">Order No</th>
+                        <th>Order No</th>
+                        <th>Description</th>
                         <th>Price</th>
                         <th>Date</th>
                         <th>Status</th>
@@ -36,8 +37,9 @@
                     {
                         <tr>
                             <td>@order.IdOrderNew</td> <!-- Use appropriate property names -->
-                            <td>@order.Price</td> <!-- Use appropriate property names -->
-                            <td>@order.OrderDate.ToString("MM/dd/yyyy")</td> <!-- Use appropriate property names -->
+                            <td>@order.description</td> <!-- Use appropriate property names -->
+                            <td>@order.CostPrice</td> <!-- Use appropriate property names -->
+                            <td>@order.OrderDate</td> <!-- Use appropriate property names -->
                             <td>@order.dorderStatus</td> <!-- Use appropriate property names -->
                             <td></td>
                         </tr>
@@ -45,10 +47,11 @@
                     @foreach (var order in Model.OldOrders)
                     {
                         <tr>
-                            <td>@order.id</td> <!-- Use appropriate property names -->
-                            <td>@order.price_log</td> <!-- Use appropriate property names -->
-                            <td>@order.DateTimeEntry</td> <!-- Use appropriate property names -->
-                            <td>@order.order_status</td> <!-- Use appropriate property names -->
+                            <td>@order.id</td>
+                            <td>@order.description</td> <!-- Use appropriate property names -->
+                            <td>@order.delivery_charges</td> <!-- Use appropriate property names -->
+                            <td>@order.order_dt</td> <!-- Use appropriate property names -->
+                            <td>@order.OrderStatus</td> <!-- Use appropriate property names -->
                             <td></td>
                         </tr>
                     }
