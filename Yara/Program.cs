@@ -124,6 +124,7 @@ builder.Services.AddScoped<IIFAQDescreption, CLSTBFAQDescreption>();
 builder.Services.AddScoped<IIFAQList, CLSTBFAQList>();
 builder.Services.AddScoped<IICustomerMessages, CLSTBCustomerMessages>();
 builder.Services.AddScoped<IIConnectAndDisconnect, CLSTBConnectAndDisconnect>();
+builder.Services.AddScoped<IISupportTicketType, CLSTBSupportTicketType>();
 
 
 

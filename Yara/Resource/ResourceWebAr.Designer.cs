@@ -286,6 +286,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to إضافة وتعديل نوع تذاكر الدعم .
+        /// </summary>
+        public static string LBAddSupportTicketType {
+            get {
+                return ResourceManager.GetString("LBAddSupportTicketType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to إضافة وتعديل حالة المهمة.
         /// </summary>
         public static string LBAddTaskStatus {
@@ -1339,6 +1348,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to أنوع تذاكر الدعم.
+        /// </summary>
+        public static string LBMySupportTicketType {
+            get {
+                return ResourceManager.GetString("LBMySupportTicketType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حالة المهمة.
         /// </summary>
         public static string LBMyTaskStatus {
@@ -1969,6 +1987,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to النوع .
+        /// </summary>
+        public static string LbSupportTicketType {
+            get {
+                return ResourceManager.GetString("LbSupportTicketType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حالة المهمة.
         /// </summary>
         public static string LbTaskStatus {
@@ -2442,6 +2469,15 @@ namespace Yara.Resource {
         public static string VLSavedSuccessfully {
             get {
                 return ResourceManager.GetString("VLSavedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تم أضافة نوع تذكرة الدعم مسبقا يرجى التأكد وإعادة المحاولة لاحقا...!.
+        /// </summary>
+        public static string VLSupportTicketTypeDoplceted {
+            get {
+                return ResourceManager.GetString("VLSupportTicketTypeDoplceted", resourceCulture);
             }
         }
         

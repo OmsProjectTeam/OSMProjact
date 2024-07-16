@@ -113,7 +113,10 @@ namespace Infarstuructre.ViewModel
         public IEnumerable<TBViewOrderNew> NewOrders { get; set; }
         public IEnumerable<TBViewOrder> OldOrders { get; set; }
 
+        public IEnumerable<TBSupportTicketType> ListSupportTicketType { get; set; }
+        public TBSupportTicketType SupportTicketType { get; set; }
+
     }
-	}
+}
  
 

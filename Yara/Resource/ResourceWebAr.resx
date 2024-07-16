@@ -192,6 +192,9 @@
   <data name="LBAddShippingPrice" xml:space="preserve">
     <value>إضافة وتعديل الأسعار لأنظمة الشحن</value>
   </data>
+  <data name="LBAddSupportTicketType" xml:space="preserve">
+    <value>إضافة وتعديل نوع تذاكر الدعم </value>
+  </data>
   <data name="LBAddTaskStatus" xml:space="preserve">
     <value>إضافة وتعديل حالة المهمة</value>
   </data>
@@ -543,6 +546,9 @@
   <data name="LBMyShippingPrice" xml:space="preserve">
     <value>أسعار أنظمة الشحن</value>
   </data>
+  <data name="LBMySupportTicketType" xml:space="preserve">
+    <value>أنوع تذاكر الدعم</value>
+  </data>
   <data name="LBMyTaskStatus" xml:space="preserve">
     <value>حالة المهمة</value>
   </data>
@@ -753,6 +759,9 @@
   <data name="LBStreet" xml:space="preserve">
     <value>الشارع</value>
   </data>
+  <data name="LbSupportTicketType" xml:space="preserve">
+    <value>النوع </value>
+  </data>
   <data name="LbTaskStatus" xml:space="preserve">
     <value>حالة المهمة</value>
   </data>
@@ -911,6 +920,9 @@
   </data>
   <data name="VLSavedSuccessfully" xml:space="preserve">
     <value>تمت عملية الحفظ بنجاح</value>
+  </data>
+  <data name="VLSupportTicketTypeDoplceted" xml:space="preserve">
+    <value>تم أضافة نوع تذكرة الدعم مسبقا يرجى التأكد وإعادة المحاولة لاحقا...!</value>
   </data>
   <data name="VLTitleShippingoplceted" xml:space="preserve">
     <value>تم إدخال عنوان سعر الشحن. يرجى التحقق والمحاولة مرة أخرى لاحقا....!</value>

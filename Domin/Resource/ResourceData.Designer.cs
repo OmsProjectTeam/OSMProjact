@@ -628,6 +628,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to يرجى أدخال نوع تذكرة الدعم لتتم العملية بنجاح ...!.
+        /// </summary>
+        public static string VlSupportTicketType {
+            get {
+                return ResourceManager.GetString("VlSupportTicketType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to العنوان.
         /// </summary>
         public static string VlTitle {

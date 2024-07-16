@@ -330,4 +330,7 @@
   <data name="VlMessageDescription" xml:space="preserve">
     <value>يرجى تضمين وصف الرسالة لإكمال العملية بنجاح...!</value>
   </data>
+  <data name="VlSupportTicketType" xml:space="preserve">
+    <value>يرجى أدخال نوع تذكرة الدعم لتتم العملية بنجاح ...!</value>
+  </data>
 </root>

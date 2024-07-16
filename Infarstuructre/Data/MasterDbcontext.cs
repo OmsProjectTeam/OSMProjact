@@ -1577,10 +1577,18 @@ namespace Infarstuructre.Data
             //---------------------------------
             builder.Entity<TBConnectAndDisConnect>()
             .HasNoKey();
-			//---------------------------------
-		}
+            //---------------------------------
+            builder.Entity<TBSupportTicketType>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBSupportTicketType>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
 
-		public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
+            //--------------------------------- 
+        }
+
+        public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
 
         public virtual DbSet<Account> accounts { get; set; }
 
@@ -1766,6 +1774,7 @@ namespace Infarstuructre.Data
         public DbSet<TBCustomerMessages> TBCustomerMessagess { get; set; }
         public DbSet<TBViewCustomerMessages> ViewCustomerMessages { get; set; }
         public DbSet<TBConnectAndDisConnect> TBConnectAndDisConnects { get; set; }
+        public DbSet<TBSupportTicketType> TBSupportTicketTypes { get; set; }
         //test
 
 
