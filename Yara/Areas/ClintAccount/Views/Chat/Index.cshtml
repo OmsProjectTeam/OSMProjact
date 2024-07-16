@@ -1,4 +1,4 @@
-﻿
+﻿@model ViewmMODeElMASTER
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -17,26 +17,36 @@
 
     <h2>Client Chat</h2>
     <hr />
-    <div id="messagesList"></div>
+    <div id="messagesList1"></div>
+    <label id="userName">@Context.User.Identity.Name</label>
     <label id="userInput">@Context.User.Identity.Name;</label>
     <input type="text" id="messageInput" placeholder="Type a message" />
+    <input type="text" id="UserName1" placeholder="Type a Reciver" />
     <button onclick="sendMessage()">Send</button>
 
     <hr />
     <ul id="connectedUsersList"></ul>
     <hr />
 
+    <ul>
+        @{
+            foreach(var user in Model.ConnectAndDisConnect)
+            {
+                <li>@user.UserName</li>
+            }
+        }
+    </ul>
 
     <script>
         const connection = new signalR.HubConnectionBuilder()
             .withUrl("/chatHub")
             .build();
 
-        connection.on("ReceiveMessage", function (user, message) {
-            const msg = `${user}: ${message}`;
+        connection.on("ReceiveMessage", function (user, message, img, time) {
+            const msg = `${user}: ${message} ${img} (${time})`;
             const li = document.createElement("li");
             li.textContent = msg;
-            document.getElementById("messagesList").appendChild(li);
+            document.getElementById("messagesList1").appendChild(li);
         });
 
         connection.start().catch(function (err) {
@@ -45,8 +55,19 @@
 
         function sendMessage() {
             const message = document.getElementById("messageInput").value;
+            const to = document.getElementById("UserName1").value;
             document.getElementById("messageInput").value = "";
-            connection.invoke("SendMessageToAdmin", message).catch(function (err) {
+            document.getElementById("UserName1").value = "";
+
+
+            const user = document.getElementById("userName").textContent;
+            const msg = `${user}: ${message}`;
+            const li = document.createElement("li");
+            li.textContent = msg;
+            document.getElementById("messagesList1").appendChild(li);
+
+
+            connection.invoke("SendMessageToAdmin", message, to).catch(function (err) {
                 return console.error(err.toString());
             });
         }

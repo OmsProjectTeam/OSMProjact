@@ -18,6 +18,7 @@ namespace Infarstuructre.BL
 		List<ApplicationUser> GetAllByName(string name);
 		List<VwUser> GetAllbyId(string userId);
 		List<ApplicationUser> GetAllByNameall();
+		ApplicationUser GetByName(string name);
 
 
 
@@ -75,6 +76,11 @@ namespace Infarstuructre.BL
             return sslid;
         }
 
-	
-	}
+        public ApplicationUser GetByName(string name)
+        {
+            ApplicationUser MySlider = _userManager.Users.Where(x => x.UserName == name).Where(n => n.ActiveUser == true).FirstOrDefault(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
+                                                                                                                                       //List<VwUser> MySlider = dbcontext.VwUsers.OrderByDescending(n => n.Id).Where(a => a.ActiveUser == true).ToList();
+            return MySlider;
+        }
+    }
 }

@@ -9,7 +9,9 @@ namespace Infarstuructre.BL
 {
 	public interface IIConnectAndDisconnect
 	{
-		bool addConnection(TBConnectAndDisConnect save);
+		List<TBConnectAndDisConnect> GetAll();
+
+        bool addConnection(TBConnectAndDisConnect save);
 		bool RemoveConnection(string ConnectId);
 		TBConnectAndDisConnect GetById(string ConnectId);
 		TBConnectAndDisConnect GetByName(string name);
@@ -22,7 +24,14 @@ namespace Infarstuructre.BL
 			dbcontext = dbcontext1;
 		}
 
-		public TBConnectAndDisConnect GetById(string ConnectId)
+		public List<TBConnectAndDisConnect> GetAll()
+		{
+			List<TBConnectAndDisConnect> MySlider = dbcontext.TBConnectAndDisConnects.ToList();
+			return MySlider;
+
+		}
+
+         public TBConnectAndDisConnect GetById(string ConnectId)
 		{
 			TBConnectAndDisConnect sslid = dbcontext.TBConnectAndDisConnects.FirstOrDefault(a => a.ConnectId == ConnectId);
 			return sslid;
@@ -54,6 +63,7 @@ namespace Infarstuructre.BL
 			{
 				var catr = GetById(ConnectId);
 				dbcontext.Remove<TBConnectAndDisConnect>(catr);
+				dbcontext.SaveChanges();
 				return true;
 			}
 			catch

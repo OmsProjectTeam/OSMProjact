@@ -6,9 +6,22 @@ namespace Yara.Areas.ClintAccount.Controllers
 	[Authorize(Roles = "Admin,Customer")]
 	public class ChatController : Controller
 	{
-		public IActionResult Index()
+		IIConnectAndDisconnect iConnectAndDisconnect;
+        public ChatController(IIConnectAndDisconnect iConnectAndDisconnect1)
+        {
+            iConnectAndDisconnect = iConnectAndDisconnect1;
+        }
+        public IActionResult Index()
 		{
-			return View();
+			ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
+			var users = viewmMODeElMASTER.ConnectAndDisConnect = iConnectAndDisconnect.GetAll();
+
+			if(users != null)
+			{
+                return View(viewmMODeElMASTER);
+            }
+
+            return View();
 		}
 	}
 }

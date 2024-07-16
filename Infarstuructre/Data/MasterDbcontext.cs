@@ -200,6 +200,13 @@ namespace Infarstuructre.Data
 				entity.ToView("ViewFAQList");
 			});
 			//************************************************************
+            //************************************************************
+			builder.Entity<TBViewChatMessage>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("ViewChat");
+			});
+			//************************************************************
 
 			builder.UseCollation("Arabic_CI_AS");
 
@@ -1587,6 +1594,15 @@ namespace Infarstuructre.Data
 
             //--------------------------------- 
         }
+            builder.Entity<TBMessageChat>()
+           .Property(m => m.MessageeTime)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBMessageChat>()
+           .Property(m => m.CurrentState)
+           .HasDefaultValueSql("((1))");
+
+            //--------------------------------- 
+        }
 
         public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
 
@@ -1726,6 +1742,8 @@ namespace Infarstuructre.Data
 
         public virtual DbSet<Warehouse> warehouse { get; set; }
         public virtual DbSet<TBTransfer> TBTransfers { get; set; }
+        public virtual DbSet<TBMessageChat> TBMessageChats { get; set; }
+        public virtual DbSet<TBViewChatMessage> ViewChatMessage { get; set; }
 
       
 
