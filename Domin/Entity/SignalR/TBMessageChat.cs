@@ -18,6 +18,7 @@ namespace Domin.Entity.SignalR
         [Required]
         public string Message { get; set; }
         public DateTime MessageeTime { get; set; }
+        public bool IsRead { get; set; }
         public bool CurrentState { get; set; }
     }
 }

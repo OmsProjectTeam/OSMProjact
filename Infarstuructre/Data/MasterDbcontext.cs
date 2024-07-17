@@ -20,83 +20,83 @@ namespace Infarstuructre.Data
 
 		}
 
-		protected override void OnModelCreating(ModelBuilder builder)
-		{
-			base.OnModelCreating(builder);
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
 
             //***********************************************************
 
 
-			builder.Entity<VwUser>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("VwUsers");
-			});		
+            builder.Entity<VwUser>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("VwUsers");
+            });
             builder.Entity<VwMostwanted>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("vw_mostwanted");
-			});
+            {
+                entity.HasNoKey();
+                entity.ToView("vw_mostwanted");
+            });
 
-			//************************************************************
+            //************************************************************
             builder.Entity<TBViewExchangeRate>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("ViewExchangeRate");
-			});
-
-			//************************************************************
-
-				builder.Entity<TBViewInformationCompanies>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("ViewInformationCompanies");
-			});
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewExchangeRate");
+            });
 
             //************************************************************
-            	//************************************************************
 
-				builder.Entity<TBViewTransaction>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("ViewTransaction");
-			});
+            builder.Entity<TBViewInformationCompanies>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("ViewInformationCompanies");
+        });
 
             //************************************************************
-               	//************************************************************
+            //************************************************************
 
-				builder.Entity<TBViewShippingPrices>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("ViewShippingPrices");
-			});
+            builder.Entity<TBViewTransaction>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("ViewTransaction");
+        });
+
+            //************************************************************
+            //************************************************************
+
+            builder.Entity<TBViewShippingPrices>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("ViewShippingPrices");
+        });
 
             //************************************************************   
             //************************************************************
 
-				builder.Entity<TBViewAreas>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("ViewAreas");
-			});
+            builder.Entity<TBViewAreas>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("ViewAreas");
+        });
 
             //************************************************************   
             //************************************************************
 
-				builder.Entity<TBViewCityDeliveryTariffs>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("ViewCityDeliveryTariffs");
-			});
+            builder.Entity<TBViewCityDeliveryTariffs>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("ViewCityDeliveryTariffs");
+        });
 
             //************************************************************
-          
 
-				builder.Entity<TBViewCustomers>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("ViewCustomers");
-			});
+
+            builder.Entity<TBViewCustomers>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("ViewCustomers");
+        });
 
             //************************************************************
 
@@ -108,7 +108,7 @@ namespace Infarstuructre.Data
             });
 
             //************************************************************
-               //************************************************************
+            //************************************************************
 
 
             builder.Entity<TBViewOrder>(entity =>
@@ -118,7 +118,7 @@ namespace Infarstuructre.Data
             });
 
             //************************************************************
-                   //************************************************************
+            //************************************************************
 
 
             builder.Entity<TBViewOrderStatus>(entity =>
@@ -128,7 +128,7 @@ namespace Infarstuructre.Data
             });
 
             //************************************************************
-                      //************************************************************
+            //************************************************************
 
 
             builder.Entity<TBViewClintWitheDeliveryTariffs>(entity =>
@@ -148,7 +148,7 @@ namespace Infarstuructre.Data
             });
 
             //************************************************************
-            
+
 
             builder.Entity<TBViewUsers>(entity =>
             {
@@ -177,38 +177,38 @@ namespace Infarstuructre.Data
                 entity.HasNoKey();
                 entity.ToView("ViewShippingAddress");
             });
-			//************************************************************
-			//************************************************************
-			builder.Entity<TBViewFAQDescription>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("ViewFAQDescription");
-			});
-			//************************************************************
             //************************************************************
-			builder.Entity<TBViewCustomerMessages>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("ViewCustomerMessages");
-			});
-			//************************************************************
-
-			//************************************************************
-			builder.Entity<TBViewFAQList>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("ViewFAQList");
-			});
-			//************************************************************
             //************************************************************
-			builder.Entity<TBViewChatMessage>(entity =>
-			{
-				entity.HasNoKey();
-				entity.ToView("ViewChat");
-			});
-			//************************************************************
+            builder.Entity<TBViewFAQDescription>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewFAQDescription");
+            });
+            //************************************************************
+            //************************************************************
+            builder.Entity<TBViewCustomerMessages>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewCustomerMessages");
+            });
+            //************************************************************
 
-			builder.UseCollation("Arabic_CI_AS");
+            //************************************************************
+            builder.Entity<TBViewFAQList>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewFAQList");
+            });
+            //************************************************************
+            //************************************************************
+            builder.Entity<TBViewChatMessage>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewChat");
+            });
+            //************************************************************
+
+            builder.UseCollation("Arabic_CI_AS");
 
             builder.Entity<Account>(entity =>
             {
@@ -1253,7 +1253,7 @@ namespace Infarstuructre.Data
                     .HasMaxLength(150)
                     .HasColumnName("notes");
                 entity.Property(e => e.OrderNo).HasColumnName("order_no");
-            }); 
+            });
 
 
 
@@ -1265,24 +1265,24 @@ namespace Infarstuructre.Data
             //----------------------------------
 
             builder.Entity<TBTypesCompanies>()
-	       .Property(b => b.DateTimeEntry)
-	       .HasDefaultValueSql("getdate()");
-			builder.Entity<TBTypesCompanies>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
-			//---------------------------------	
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBTypesCompanies>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+            //---------------------------------	
 
-			//----------------------------------
+            //----------------------------------
 
-			builder.Entity<TBInformationCompanies>()
-	       .Property(b => b.DateTimeEntry)
-	       .HasDefaultValueSql("getdate()");
-			builder.Entity<TBInformationCompanies>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
-			builder.Entity<TBInformationCompanies>()
-		   .Property(b => b.Active)
-		   .HasDefaultValueSql("((1))");
+            builder.Entity<TBInformationCompanies>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBInformationCompanies>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+            builder.Entity<TBInformationCompanies>()
+           .Property(b => b.Active)
+           .HasDefaultValueSql("((1))");
             //---------------------------------	
 
 
@@ -1324,7 +1324,7 @@ namespace Infarstuructre.Data
            .Property(b => b.CurrentState)
            .HasDefaultValueSql("((1))");
             //---------------------------------	
-           //---------------------------------	
+            //---------------------------------	
 
 
 
@@ -1370,7 +1370,7 @@ namespace Infarstuructre.Data
            .Property(b => b.CurrentState)
            .HasDefaultValueSql("((1))");
             //---------------------------------	    //---------------------------------	
-      
+
 
 
 
@@ -1395,81 +1395,81 @@ namespace Infarstuructre.Data
             builder.Entity<Merchant>()
            .Property(b => b.Active)
            .HasDefaultValueSql("((1))");
-			//---------------------------------	
+            //---------------------------------	
 
-			//---------------------------------	
-			builder.Entity<Order>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<Order>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
-			builder.Entity<Order>()
-		   .Property(b => b.Active)
-		   .HasDefaultValueSql("((1))");
-			//---------------------------------	
             //---------------------------------	
-			builder.Entity<OrderCase>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<OrderCase>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
-		
-			//---------------------------------	
-        
-			builder.Entity<OrderStatus>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<OrderStatus>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
-		
-			//---------------------------------	
+            builder.Entity<Order>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<Order>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+            builder.Entity<Order>()
+           .Property(b => b.Active)
+           .HasDefaultValueSql("((1))");
             //---------------------------------	
-        
-			builder.Entity<RolesName>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<RolesName>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
-		
-			//---------------------------------	
             //---------------------------------	
-        
-			builder.Entity<TaskStatus>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<TaskStatus>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
-		
-			//---------------------------------	
+            builder.Entity<OrderCase>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<OrderCase>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+
+            //---------------------------------	
+
+            builder.Entity<OrderStatus>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<OrderStatus>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+
+            //---------------------------------	
+            //---------------------------------	
+
+            builder.Entity<RolesName>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<RolesName>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+
+            //---------------------------------	
+            //---------------------------------	
+
+            builder.Entity<TaskStatus>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TaskStatus>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+
+            //---------------------------------	
             builder.Entity<TBTypeSystemDelivery>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<TBTypeSystemDelivery>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
-		
-			//---------------------------------	
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBTypeSystemDelivery>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+
+            //---------------------------------	
             //---------------------------------	
             builder.Entity<TBClintWitheDeliveryTariffs>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<TBClintWitheDeliveryTariffs>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
-		
-			//---------------------------------	
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBClintWitheDeliveryTariffs>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+
+            //---------------------------------	
             //---------------------------------	
             builder.Entity<TBOrderNew>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<TBOrderNew>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBOrderNew>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
 
             builder.Entity<TBOrderNew>()
            .Property(b => b.IsPaid)
@@ -1477,11 +1477,11 @@ namespace Infarstuructre.Data
             //---------------------------------	 
             //---------------------------------	
             builder.Entity<TBPaing>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<TBPaing>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBPaing>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
 
             //---------------------------------	
             //---------------------------------	
@@ -1499,7 +1499,7 @@ namespace Infarstuructre.Data
            .HasDefaultValueSql("getdate()");
             builder.Entity<TBEmailAlartSetting>()
            .Property(b => b.CurrentState)
-           .HasDefaultValueSql("((1))"); 
+           .HasDefaultValueSql("((1))");
             builder.Entity<TBEmailAlartSetting>()
            .Property(b => b.Active)
            .HasDefaultValueSql("((1))");
@@ -1538,47 +1538,47 @@ namespace Infarstuructre.Data
            .Property(b => b.Active)
            .HasDefaultValueSql("((1))");
 
-			//---------------------------------
-
-			//---------------------------------
-			builder.Entity<TBFAQ>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<TBFAQ>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
-			builder.Entity<TBFAQ>()
-		   .Property(b => b.Active)
-		   .HasDefaultValueSql("((1))");
-
-			//---------------------------------
-
-			//---------------------------------
-			builder.Entity<TBFAQDescreption>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<TBFAQDescreption>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
-
-			//---------------------------------
-
-			//---------------------------------
-			builder.Entity<TBFAQList>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<TBFAQList>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
-
-			//---------------------------------
             //---------------------------------
-			builder.Entity<TBCustomerMessages>()
-		   .Property(b => b.DateTimeEntry)
-		   .HasDefaultValueSql("getdate()");
-			builder.Entity<TBCustomerMessages>()
-		   .Property(b => b.CurrentState)
-		   .HasDefaultValueSql("((1))");
+
+            //---------------------------------
+            builder.Entity<TBFAQ>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBFAQ>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+            builder.Entity<TBFAQ>()
+           .Property(b => b.Active)
+           .HasDefaultValueSql("((1))");
+
+            //---------------------------------
+
+            //---------------------------------
+            builder.Entity<TBFAQDescreption>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBFAQDescreption>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+
+            //---------------------------------
+
+            //---------------------------------
+            builder.Entity<TBFAQList>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBFAQList>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+
+            //---------------------------------
+            //---------------------------------
+            builder.Entity<TBCustomerMessages>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBCustomerMessages>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
 
             //--------------------------------- 
             //---------------------------------
@@ -1593,13 +1593,16 @@ namespace Infarstuructre.Data
            .HasDefaultValueSql("((1))");
 
             //--------------------------------- 
-        }
+
             builder.Entity<TBMessageChat>()
            .Property(m => m.MessageeTime)
            .HasDefaultValueSql("getdate()");
             builder.Entity<TBMessageChat>()
            .Property(m => m.CurrentState)
            .HasDefaultValueSql("((1))");
+            builder.Entity<TBMessageChat>()
+           .Property(m => m.IsRead)
+           .HasDefaultValueSql("((0))");
 
             //--------------------------------- 
         }

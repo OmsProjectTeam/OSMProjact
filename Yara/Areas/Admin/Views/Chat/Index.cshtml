@@ -9,7 +9,6 @@
 <html>
 <head>
     <title>Admin Chat</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
 </head>
 <body>
 
@@ -18,21 +17,22 @@
     <hr />
     <div id="messagesList"></div>
     <hr />
-    <label id="userName">@Context.User.Identity.Name</label>
-    <input type="text" id="messageInput1" placeholder="Type a message" />
-    <input type="text" id="sendTo" placeholder="send to ...." />
-    <button onclick="sendMessage()">Send</button>
 
+    <label id="userName">@Context.User.Identity.Name</label>
+    <br/>
+    <input type="text" id="messageInput1" placeholder="Type a message" />
+    <br />
+    <input type="text" id="sendTo" placeholder="send to ...." />
+    <br />
+    <button id="sendButton" onclick="sendMessage()">Send</button>
+    <br />
+    <br />
     <hr />
     <ul id="connectedUsersList"></ul>
     <hr />
 
 
     <script>
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/chatHub")
-            .build();
-
         connection.on("ReceiveMessage", function (user, message, time) {
             const msg = `${user}: ${message} (${time}) `;
             const li = document.createElement("li");
@@ -40,11 +40,8 @@
             document.getElementById("messagesList").appendChild(li);
         });
 
-        connection.start().catch(function (err) {
-            return console.error(err.toString());
-        });
 
-        function sendMessage() {
+        function sendMessage(){
             const message = document.getElementById("messageInput1").value;
             const to = document.getElementById("sendTo").value;
             document.getElementById("messageInput1").value = "";
@@ -55,8 +52,6 @@
             const li = document.createElement("li");
             li.textContent = msg;
             document.getElementById("messagesList").appendChild(li);
-
-
 
             connection.invoke("SendMessageToClients", message, to).catch(function (err) {
                 return console.error(err.toString());
@@ -99,6 +94,15 @@
                 connectedUsersList.removeChild(userElement);
             }
         }
+
+        window.onload = function() {
+            const user = document.getElementById("userName").textContent;
+            connection.invoke("MarkMessagesAsRead", user).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }
+
+
     </script>
 </body>
 </html>

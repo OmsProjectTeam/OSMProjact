@@ -1,7 +1,7 @@
 ﻿@model ViewmMODeElMASTER
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "Chat";
+    Layout = "~/Areas/ClintAccount/Views/Shared/_LayoutClint.cshtml";
 }
 
 <!-- Client View: chat-client.html -->
@@ -19,11 +19,12 @@
     <hr />
     <div id="messagesList1"></div>
     <label id="userName">@Context.User.Identity.Name</label>
-    <label id="userInput">@Context.User.Identity.Name;</label>
-    <input type="text" id="messageInput" placeholder="Type a message" />
+    <br />
+    <input type="text" id="messageInput1" placeholder="Type a message" />
+    <br />
     <input type="text" id="UserName1" placeholder="Type a Reciver" />
-    <button onclick="sendMessage()">Send</button>
-
+    <br />
+    <button id="sendButton" onclick="sendMessage1()">Send</button>
     <hr />
     <ul id="connectedUsersList"></ul>
     <hr />
@@ -38,10 +39,6 @@
     </ul>
 
     <script>
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/chatHub")
-            .build();
-
         connection.on("ReceiveMessage", function (user, message, img, time) {
             const msg = `${user}: ${message} ${img} (${time})`;
             const li = document.createElement("li");
@@ -49,16 +46,11 @@
             document.getElementById("messagesList1").appendChild(li);
         });
 
-        connection.start().catch(function (err) {
-            return console.error(err.toString());
-        });
-
-        function sendMessage() {
-            const message = document.getElementById("messageInput").value;
+        function sendMessage1() {
+            const message = document.getElementById("messageInput1").value;
             const to = document.getElementById("UserName1").value;
-            document.getElementById("messageInput").value = "";
+            document.getElementById("messageInput1").value = "";
             document.getElementById("UserName1").value = "";
-
 
             const user = document.getElementById("userName").textContent;
             const msg = `${user}: ${message}`;
@@ -66,11 +58,11 @@
             li.textContent = msg;
             document.getElementById("messagesList1").appendChild(li);
 
-
             connection.invoke("SendMessageToAdmin", message, to).catch(function (err) {
-                return console.error(err.toString());
+                console.error(err.toString());
             });
         }
+
 
         connection.on("UserConnected", (userName, profileImage) => {
             addUserToList(userName, profileImage);
@@ -108,6 +100,14 @@
                 connectedUsersList.removeChild(userElement);
             }
         }
+
+        window.onload = function () {
+            const user = document.getElementById("userName").textContent;
+            connection.invoke("MarkMessagesAsRead", user).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }
+
     </script>
 </body>
 </html>

@@ -3,6 +3,7 @@ using Domin.Entity.SignalR;
 using Infarstuructre.BL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -25,8 +26,6 @@ namespace Infarstuructre.ViewModel
 			iConnectAndDisconnect = iConnectAndDisconnect1;
 
 		}
-
-		private readonly IDictionary<string, string> _connectedUsers = new Dictionary<string, string>();
 
         // connection & Disconnection Logic
         public override async Task OnConnectedAsync()
@@ -51,14 +50,17 @@ namespace Infarstuructre.ViewModel
                 iConnectAndDisconnect.addConnection(connect);
                 await Clients.All.SendAsync("UserConnected", user.UserName, profileImageUrl);
             }
+            CheckUnreadMessages(user.UserName);
             await base.OnConnectedAsync();
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
             var connectId = Context.ConnectionId;
-			var user = iConnectAndDisconnect.GetById(connectId);
+			var user1 = iConnectAndDisconnect.GetById(connectId);
             iConnectAndDisconnect.RemoveConnection(connectId);
+
+            var user = Context.User.Identity.Name;
             await base.OnDisconnectedAsync(exception);
         }
 
@@ -76,7 +78,10 @@ namespace Infarstuructre.ViewModel
             {
                 Message = message,
                 ReciverId = reciverId,
-                SenderId = senderId
+                SenderId = senderId,
+                IsRead = false,
+                MessageeTime = DateTime.Now,
+                CurrentState = true,
             };
             iMessageChat.saveData(chatMsg);
 
@@ -97,17 +102,27 @@ namespace Infarstuructre.ViewModel
             {
                 Message = message,
                 ReciverId = reciverId,
-                SenderId = senderId
+                SenderId = senderId,
+                IsRead = false,
+                MessageeTime = DateTime.Now,
+                CurrentState = true,
             };
             iMessageChat.saveData(chatMsg);
 
-            var user = iConnectAndDisconnect.GetByName(to);
-            if (user != null)
+            var currentUserName = Context.User.Identity.Name;
+            var currentUserProfileImage = GetProfileImageFromDatabase(currentUserName);
+            var rec = iConnectAndDisconnect.GetByName(to);
+
+            if (rec != null) 
             {
-                var currentUserName = Context.User.Identity.Name;
-                var currentUserProfileImage = GetProfileImageFromDatabase(currentUserName);
                 await Clients.All.SendAsync("ReceiveMessage", currentUserName, message, DateTime.Now.ToString("HH:mm"));
+                var unreadCount = await dbcontext.TBMessageChats
+               .CountAsync(m => m.ReciverId == to && !m.IsRead);
+
+                await Clients.User(rec.ConnectId).SendAsync("UnreadMessagesNotification", unreadCount);
             }
+
+
 
         }
 
@@ -158,5 +173,39 @@ namespace Infarstuructre.ViewModel
             }
             return false;
 		}
-	}
+
+        public async Task MarkMessagesAsRead(string user)
+        {
+            ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
+            var user1 = viewmMODeElMASTER.sUser = iUserInformation.GetByName(user);
+
+            var unreadMessages = dbcontext.TBMessageChats
+                .Where(m => m.ReciverId == user1.Id && m.IsRead == false)
+                .ToList();
+
+            foreach (var unreadMessage in unreadMessages)
+            {
+                unreadMessage.IsRead = true;
+                dbcontext.Update(unreadMessage);
+                dbcontext.SaveChanges();
+            }
+        }
+
+        public async Task CheckUnreadMessages(string user)
+        {
+            ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
+            var reciver = viewmMODeElMASTER.sUser = iUserInformation.GetByName(user);
+
+            var unreadCount = dbcontext.TBMessageChats.Where( m => m.ReciverId == reciver.Id)
+                .Count(m => m.IsRead == false);
+
+            var x = unreadCount;
+
+            if (unreadCount > 0)
+            {
+                await Clients.All.SendAsync("UnreadMessagesNotification", unreadCount);
+            }
+        }
+
+    }
 }
