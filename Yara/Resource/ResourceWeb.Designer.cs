@@ -295,6 +295,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adding and modifying Support Ticket Status.
+        /// </summary>
+        public static string LBAddSupportTicketStatus {
+            get {
+                return ResourceManager.GetString("LBAddSupportTicketStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adding and modifying Support Ticket Type.
         /// </summary>
         public static string LBAddSupportTicketType {
@@ -1384,6 +1393,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Support Ticket Status.
+        /// </summary>
+        public static string lbMySupportTicketStatus {
+            get {
+                return ResourceManager.GetString("lbMySupportTicketStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Support Ticket Type.
         /// </summary>
         public static string LBMySupportTicketType {
@@ -2023,6 +2041,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string LbSupportTicketStatus {
+            get {
+                return ResourceManager.GetString("LbSupportTicketStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  Type.
         /// </summary>
         public static string LbSupportTicketType {
@@ -2559,6 +2586,15 @@ namespace Yara.Resource {
         public static string VLSavedSuccessfully {
             get {
                 return ResourceManager.GetString("VLSavedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ticket status has already been entered. Please check and try again later...!.
+        /// </summary>
+        public static string VLSupportTicketStatusDoplceted {
+            get {
+                return ResourceManager.GetString("VLSupportTicketStatusDoplceted", resourceCulture);
             }
         }
         

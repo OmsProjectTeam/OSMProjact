@@ -195,6 +195,9 @@
   <data name="LBAddShippingPrice" xml:space="preserve">
     <value>Adding and modifying pricing for shipping systems</value>
   </data>
+  <data name="LBAddSupportTicketStatus" xml:space="preserve">
+    <value>Adding and modifying Support Ticket Status</value>
+  </data>
   <data name="LBAddSupportTicketType" xml:space="preserve">
     <value>Adding and modifying Support Ticket Type</value>
   </data>
@@ -558,6 +561,9 @@
   <data name="LBMyShippingPrice" xml:space="preserve">
     <value>Shipping systems pricing</value>
   </data>
+  <data name="lbMySupportTicketStatus" xml:space="preserve">
+    <value>Support Ticket Status</value>
+  </data>
   <data name="LBMySupportTicketType" xml:space="preserve">
     <value>Support Ticket Type</value>
   </data>
@@ -771,6 +777,9 @@
   <data name="LBStreet" xml:space="preserve">
     <value>Street</value>
   </data>
+  <data name="LbSupportTicketStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="LbSupportTicketType" xml:space="preserve">
     <value> Type</value>
   </data>
@@ -950,6 +959,9 @@
   </data>
   <data name="VLSavedSuccessfully" xml:space="preserve">
     <value>The saving process was completed successfully</value>
+  </data>
+  <data name="VLSupportTicketStatusDoplceted" xml:space="preserve">
+    <value>The ticket status has already been entered. Please check and try again later...!</value>
   </data>
   <data name="VLSupportTicketTypeDoplceted" xml:space="preserve">
     <value>The support ticket type has already been added, please check and try again later...!</value>
