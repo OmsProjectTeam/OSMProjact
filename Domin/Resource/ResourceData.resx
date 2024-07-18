@@ -339,4 +339,7 @@
   <data name="VlTitel" xml:space="preserve">
     <value>يرجى أدخال عنوان تذكرة الدعم لتتم العملية بنجاح ....!</value>
   </data>
+  <data name="VlFollowUpMail" xml:space="preserve">
+    <value>يرجى أدراج بريد المتابعة لتتم العملية بنجاح ....!</value>
+  </data>
 </root>

@@ -466,6 +466,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to يرجى أدراج بريد المتابعة لتتم العملية بنجاح ....!.
+        /// </summary>
+        public static string VlFollowUpMail {
+            get {
+                return ResourceManager.GetString("VlFollowUpMail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to يرجى إضافة سعر الصرف بالعملة الأجنبية لإتمام العملية بنجاح...!.
         /// </summary>
         public static string VlForeignCurrency {
