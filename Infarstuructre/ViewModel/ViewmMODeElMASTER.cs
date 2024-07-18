@@ -1,5 +1,7 @@
 ﻿using Domin.Entity;
+using Domin.Entity.SignalR;
 using Domin.Resource;
+using Infarstuructre.BL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -112,6 +114,9 @@ namespace Infarstuructre.ViewModel
 
         public IEnumerable<TBViewOrderNew> NewOrders { get; set; }
         public IEnumerable<TBViewOrder> OldOrders { get; set; }
+        public IEnumerable<TBConnectAndDisConnect> ConnectAndDisConnect { get; set; }
+        public TBMessageChat TBMessageChat { get; set; }
+        public IEnumerable<TBViewChatMessage> ViewChatMessage { get; set; }
 
         public IEnumerable<TBSupportTicketType> ListSupportTicketType { get; set; }
         public TBSupportTicketType SupportTicketType { get; set; }   

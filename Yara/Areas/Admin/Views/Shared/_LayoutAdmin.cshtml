@@ -44,9 +44,21 @@
 
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
+
+        connection.start().catch(function (err) {
+            return console.error(err.toString());
+        });
+
+    </script>
 </head>
 
 <body>
+
     <div class="main-menu">
         <header class="header">
             <a href="index.html" class="logo">Admin Panel</a>
@@ -198,9 +210,10 @@
                         <!-- /.sub-menu js__content -->
                     </li>
                     <li>
+                        <div id="notification" style="display: none; color: red;"></div>
                         <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>Chat</span><span class="menu-arrow fa fa-angle-down"></span></a>
                         <ul class="sub-menu js__content">
-                            <li><a asp-area="Admin" asp-controller="Chat" asp-action="Index" asp-route-userId="@user.Id">@ResourceWeb.LbMyFAQ</a></li>
+                            <li><a asp-area="Admin" asp-controller="Chat" asp-action="Index" asp-route-userId="@user.Id">My Chat</a></li>
                         </ul>
                         <!-- /.sub-menu js__content -->
                     </li>
@@ -514,8 +527,25 @@
     <script src="~/Admin/assets/scripts/main.min.js"></script>
 
 
+    <script>
+        connection.on("UserConnected", (userName, profileImage) => {
+            addUserToList(userName, profileImage);
+        });
+        connection.on("UserDisconnected", function (userName) {
+            removeUserFromList(userName);
+        });
 
-
+        connection.on("UnreadMessagesNotification", function (unreadCount) {
+            const notification = document.getElementById("notification");
+            if (unreadCount > 0) {
+                notification.style.display = "block";
+                notification.style.backgroundColor = "green";
+                notification.textContent = `${unreadCount}`;
+            } else {
+                notification.style.display = "none";
+            }
+        });
+    </script>
 
 
 

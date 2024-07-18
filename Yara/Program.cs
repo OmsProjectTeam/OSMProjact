@@ -125,6 +125,7 @@ builder.Services.AddScoped<IIFAQList, CLSTBFAQList>();
 builder.Services.AddScoped<IICustomerMessages, CLSTBCustomerMessages>();
 builder.Services.AddScoped<IIConnectAndDisconnect, CLSTBConnectAndDisconnect>();
 builder.Services.AddScoped<IISupportTicketType, CLSTBSupportTicketType>();
+builder.Services.AddScoped<IIMessageChat, CLSTBMessageChat>();
 builder.Services.AddScoped<IISupportTicketStatus, CLSTBSupportTicketStatus>();
 builder.Services.AddScoped<IISupportTicket, CLSTBSupportTicket>();
 
