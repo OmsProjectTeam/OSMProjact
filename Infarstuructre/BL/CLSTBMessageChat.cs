@@ -15,7 +15,9 @@ namespace Infarstuructre.BL
         List<TBViewChatMessage> GetBySenderId(string id);
         List<TBViewChatMessage> GetByReciverId(string id);
         List<TBViewChatMessage> GetBySenderIdAndReciverId(string senderId, string reciverId);
-        bool saveData(TBMessageChat savee);
+        TBViewChatMessage GetByReciverIdLast(string id);
+
+		bool saveData(TBMessageChat savee);
         bool UpdateData(TBMessageChat updatss);
         bool deleteData(int id);
     }
@@ -65,7 +67,14 @@ namespace Infarstuructre.BL
             return MySlider;
         }
 
-        public List<TBViewChatMessage> GetBySenderId(string id)
+		public TBViewChatMessage GetByReciverIdLast(string id)
+		{
+			TBViewChatMessage MySlider = dbcontext.ViewChatMessage.OrderByDescending(n => n.MessageeTime).Where(a => a.CurrentState == true)
+				.Where(m => m.ReciverId == id).FirstOrDefault();
+			return MySlider;
+		}
+
+		public List<TBViewChatMessage> GetBySenderId(string id)
         {
             List<TBViewChatMessage> MySlider = dbcontext.ViewChatMessage.OrderByDescending(n => n.MessageeTime).Where(a => a.CurrentState == true)
                 .Where(m => m.SenderId == id)

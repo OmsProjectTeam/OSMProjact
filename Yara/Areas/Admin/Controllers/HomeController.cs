@@ -14,17 +14,15 @@ namespace Yara.Areas.Admin.Controllers
 		IIOrderNew iOrderNew;
 		IIUserInformation iUserInformation;
 		IIPaidings iPaidings;
-		public HomeController(UserManager<ApplicationUser> userManager, IIUser iUser, MasterDbcontext dbcontext1, IIOrderNew iOrderNew1, IIUserInformation iUserInformation1, IIPaidings iIPaidings)
+		IIMessageChat iMessageChat;
+		public HomeController(UserManager<ApplicationUser> userManager, IIUser iUser, MasterDbcontext dbcontext1, IIOrderNew iOrderNew1, IIUserInformation iUserInformation1, IIPaidings iIPaidings, IIMessageChat iMessageChat1)
 		{
 			_userManager = userManager;
 			iOrderNew = iOrderNew1;
 			iUserInformation = iUserInformation1;
 			this.iPaidings = iIPaidings;
+			iMessageChat = iMessageChat1;
 		}
-
-
-
-
 
 		public async Task<IActionResult> Index(string userId)
 		{
@@ -54,8 +52,10 @@ namespace Yara.Areas.Admin.Controllers
 
 			ViewBag.paidings = paidings.Sum(p => p.ResivedMony);
 
-			// إرسال النموذج إلى العرض
-			return View(vmodel);
+            vmodel.ViewChatMessage = iMessageChat.GetByReciverId(userId);
+
+            // إرسال النموذج إلى العرض
+            return View(vmodel);
 		}
 
 		public async Task<IActionResult> IndexAr(string userId)

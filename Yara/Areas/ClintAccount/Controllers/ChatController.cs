@@ -20,18 +20,34 @@ namespace Yara.Areas.ClintAccount.Controllers
 		}
         public async Task<IActionResult> Index()
 		{
-			ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
-			var users = viewmMODeElMASTER.ConnectAndDisConnect = iConnectAndDisconnect.GetAll();
+            ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
+            var currentUserId = iUserManager.GetUserId(User);
 
-			var currentUserId = iUserManager.GetUserId(User);
+            viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
 
-			var secundUser = await iUserManager.FindByNameAsync("a@a.com");
-			var secundUserId = secundUser.Id;
+            return View(viewmMODeElMASTER);
+        }
 
-			var IamSender = viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetBySenderIdAndReciverId(currentUserId, secundUserId);
-			var IamReciver = viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetBySenderIdAndReciverId(secundUserId, currentUserId);
+        public async Task<IActionResult> OwnChat(string anotherId)
+        {
+            ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
+            var users = viewmMODeElMASTER.ConnectAndDisConnect = iConnectAndDisconnect.GetAll();
 
-                return View(viewmMODeElMASTER);
-		}
-	}
+            var currentUserId = iUserManager.GetUserId(User);
+
+            var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
+            var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
+
+            foreach (var item in IamReciver)
+            {
+                IamSender.Add(item);
+            }
+
+            viewmMODeElMASTER.ViewChatMessage = IamSender;
+
+            viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
+
+            return View(viewmMODeElMASTER);
+        }
+    }
 }

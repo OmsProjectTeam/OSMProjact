@@ -1,0 +1,117 @@
+﻿@model ViewmMODeElMASTER
+@{
+    ViewData["Title"] = "Chat";
+    Layout = "~/Areas/ClintAccount/Views/Shared/_LayoutClint.cshtml";
+}
+
+<!-- Client View: chat-client.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+</head>
+<body>
+
+
+
+    <h2>Client Chat</h2>
+    <hr />
+    <div id="messagesList1">
+        @{
+            foreach (var item in Model.ViewChatMessage)
+            {
+                <li>@item.Message : @item.MessageeTime </li>
+            }
+        }
+    </div>
+    <label id="userName">@Context.User.Identity.Name</label>
+    <br />
+    <input type="text" id="messageInput1" placeholder="Type a message" />
+    <br />
+    <input type="text" id="UserName1" placeholder="Type a Reciver" />
+    <br />
+    <button id="sendButton" onclick="sendMessage1()">Send</button>
+    <hr />
+
+    <ul id="connectedUsersList">
+    </ul>
+    <hr />
+
+
+
+    <script>
+        connection.on("ReceiveMessage", function (user, message, img, time) {
+            const msg = `${user}: ${message} ${img} (${time})`;
+            const li = document.createElement("li");
+            li.textContent = msg;
+            document.getElementById("messagesList1").appendChild(li);
+        });
+
+        function sendMessage1() {
+            const message = document.getElementById("messageInput1").value;
+            const to = document.getElementById("UserName1").value;
+            document.getElementById("messageInput1").value = "";
+            document.getElementById("UserName1").value = "";
+
+            const user = document.getElementById("userName").textContent;
+            const msg = `${user}: ${message}`;
+            const li = document.createElement("li");
+            li.textContent = msg;
+            document.getElementById("messagesList1").appendChild(li);
+
+            connection.invoke("SendMessageToAdmin", message, to).catch(function (err) {
+                console.error(err.toString());
+            });
+        }
+
+
+        connection.on("UserConnected", (userName, profileImage) => {
+            addUserToList(userName, profileImage);
+        });
+
+        function addUserToList(userName, profileImage) {
+            const userList = document.getElementById("connectedUsersList");
+
+            const listItem = document.createElement("li");
+
+            const img = document.createElement("img");
+            img.src = profileImage;
+            img.alt = `صورة ملف ${userName}`;
+            img.style.width = "50px";
+
+            const span = document.createElement("span");
+            span.textContent = userName;
+
+            listItem.appendChild(img);
+            listItem.appendChild(span);
+
+            userList.appendChild(listItem);
+        }
+
+        connection.on("UserDisconnected", function (userName) {
+            removeUserFromList(userName);
+        });
+
+        function removeUserFromList(userName) {
+            const userList = document.getElementById("connectedUsersList");
+
+            const userElement = Array.from(connectedUsersList.children).find(li => li.textContent.includes(userName));
+
+            if (userElement) {
+                connectedUsersList.removeChild(userElement);
+            }
+        }
+
+        window.onload = function () {
+            const user = document.getElementById("userName").textContent;
+            connection.invoke("MarkMessagesAsRead", user).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }
+
+    </script>
+</body>
+</html>
+
+

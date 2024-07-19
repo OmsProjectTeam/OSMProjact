@@ -1594,10 +1594,7 @@ namespace Infarstuructre.Data
            .HasDefaultValueSql("((1))");
 
             //--------------------------------- 
-            //---------------------------------
-            builder.Entity<TBConnectAndDisConnect>()
-            .HasNoKey();
-            //---------------------------------
+         
             builder.Entity<TBSupportTicketType>()
            .Property(b => b.DateTimeEntry)
            .HasDefaultValueSql("getdate()");
@@ -1826,7 +1823,7 @@ namespace Infarstuructre.Data
         public DbSet<TBViewFAQList> ViewFAQList { get; set; }
         public DbSet<TBCustomerMessages> TBCustomerMessagess { get; set; }
         public DbSet<TBViewCustomerMessages> ViewCustomerMessages { get; set; }
-        public DbSet<TBConnectAndDisConnect> TBConnectAndDisConnects { get; set; }
+       public DbSet<TBConnectAndDisConnect> TBConnectAndDisConnects { get; set; }
         public DbSet<TBSupportTicketType> TBSupportTicketTypes { get; set; }
         public DbSet<TBSupportTicketStatus> TBSupportTicketStatuss { get; set; }
         public DbSet<TBSupportTicket> TBSupportTickets { get; set; }

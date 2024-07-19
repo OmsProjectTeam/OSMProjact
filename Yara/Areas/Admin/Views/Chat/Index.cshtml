@@ -1,108 +1,37 @@
-﻿
+﻿@model ViewmMODeElMASTER
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<!-- Admin View: chat-admin.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Chat</title>
-</head>
-<body>
 
-    <h2>Admin Chat</h2>
-
-    <hr />
-    <div id="messagesList"></div>
-    <hr />
-
-    <label id="userName">@Context.User.Identity.Name</label>
-    <br/>
-    <input type="text" id="messageInput1" placeholder="Type a message" />
-    <br />
-    <input type="text" id="sendTo" placeholder="send to ...." />
-    <br />
-    <button id="sendButton" onclick="sendMessage()">Send</button>
-    <br />
-    <br />
-    <hr />
-    <ul id="connectedUsersList"></ul>
-    <hr />
-
-
-    <script>
-        connection.on("ReceiveMessage", function (user, message, time) {
-            const msg = `${user}: ${message} (${time}) `;
-            const li = document.createElement("li");
-            li.textContent = msg;
-            document.getElementById("messagesList").appendChild(li);
-        });
-
-
-        function sendMessage(){
-            const message = document.getElementById("messageInput1").value;
-            const to = document.getElementById("sendTo").value;
-            document.getElementById("messageInput1").value = "";
-            document.getElementById("sendTo").value = "";
-
-            const user = document.getElementById("userName").textContent;
-            const msg = `${user}: ${message}`;
-            const li = document.createElement("li");
-            li.textContent = msg;
-            document.getElementById("messagesList").appendChild(li);
-
-            connection.invoke("SendMessageToClients", message, to).catch(function (err) {
-                return console.error(err.toString());
-            });
+<ul>
+    @{
+        foreach(var item in Model.ViewChatMessage.GroupBy(m => m.SenderId).Select(m => m.OrderByDescending(m => m.MessageeTime).LastOrDefault()))
+        {
+            <li>
+                <a asp-area="Admin" asp-controller="Chat" asp-action="OwnChat" asp-route-anotherId="@item.SenderId" />
+                <div style="display:flex; flex-direction: row; justify-content:space-between">
+                    <img style="width:50px; height:50px; border-radius: 50%;" src="@Helper.PathImageuser@item.SenderImage" alt="" />
+                    <div style="display:flex; flex-direction:column">
+                        <h3>@item.SenderName</h3>
+                        <h3>@item.Message</h3>
+                    </div>
+                    <h4>@item.MessageeTime.ToString()</h4>
+                </div>
+            </li>
         }
-
-        connection.on("UserConnected", (userName, profileImage) => {
-            addUserToList(userName, profileImage);
-        });
-
-        function addUserToList(userName, profileImage) {
-            const userList = document.getElementById("connectedUsersList");
-
-            const listItem = document.createElement("li");
-
-            const img = document.createElement("img");
-            img.src = profileImage;
-            img.alt = `صورة ملف ${userName}`;
-            img.style.width = "50px";
-
-            const span = document.createElement("span");
-            span.textContent = userName;
-
-            listItem.appendChild(img);
-            listItem.appendChild(span);
-
-            userList.appendChild(listItem);
-        }
-
-        connection.on("UserDisconnected", function (userName) {
-            removeUserFromList(userName);
-        });
-
-        function removeUserFromList(userName) {
-            const userList = document.getElementById("connectedUsersList");
-
-            const userElement = Array.from(connectedUsersList.children).find(li => li.textContent.includes(userName));
-
-            if (userElement) {
-                connectedUsersList.removeChild(userElement);
-            }
-        }
-
-        window.onload = function() {
-            const user = document.getElementById("userName").textContent;
-            connection.invoke("MarkMessagesAsRead", user).catch(function (err) {
-                return console.error(err.toString());
-            });
-        }
+    }
+</ul>
 
 
-    </script>
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+

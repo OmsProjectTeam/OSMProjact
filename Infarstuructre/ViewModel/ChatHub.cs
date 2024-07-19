@@ -154,7 +154,8 @@ namespace Infarstuructre.ViewModel
             var user = iUserInformation.GetAllByName(userName).FirstOrDefault();
             if (user != null)
             {
-                var photo = $"{Helper.PathImageuser}/{user.ImageUser}";
+                var photo = user.ImageUser;
+
                 return photo;
             }
 
