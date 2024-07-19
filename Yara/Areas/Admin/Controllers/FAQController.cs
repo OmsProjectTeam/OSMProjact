@@ -1,21 +1,36 @@
-﻿namespace Yara.Areas.Admin.Controllers
+﻿using Domin.Entity;
+using Infarstuructre.BL;
+using Microsoft.AspNetCore.Identity;
+
+namespace Yara.Areas.Admin.Controllers
 {
 	[Area("Admin")]
 	[Authorize(Roles = "Admin")]
 	public class FAQController : Controller
 	{
 		IIFAQ iFAQ;
+		IIMessageChat iMessageChat;
 		MasterDbcontext dbcontext;
-		public FAQController(IIFAQ iFAQ1, MasterDbcontext dbcontext1)
+		IIUserInformation iUserInformation;
+		UserManager<ApplicationUser> _userManager;
+
+        public FAQController(IIFAQ iFAQ1, MasterDbcontext dbcontext1, IIMessageChat iMessageChat1, IIUserInformation iUserInformation, UserManager<ApplicationUser> _userManager1)
 		{
 			iFAQ = iFAQ1;
 			dbcontext = dbcontext1;
-		}
-		public IActionResult MyFAQ()
+            iMessageChat = iMessageChat1;
+			_userManager = _userManager1;
+
+        }
+		public async Task<IActionResult> MyFAQ()
 		{
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-			vmodel.ListFAQ = iFAQ.GetAll();
-			return View(vmodel);
+
+            var user = await _userManager.GetUserAsync(User);
+            vmodel.ListFAQ = iFAQ.GetAll();
+            vmodel.ViewChatMessage = iMessageChat.GetByReciverId(user.Id);
+
+            return View(vmodel);
 		}
 
 		public IActionResult MyFAQAr()
