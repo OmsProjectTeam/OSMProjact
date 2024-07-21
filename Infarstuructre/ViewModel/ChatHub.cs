@@ -37,7 +37,7 @@ namespace Infarstuructre.ViewModel
             {
                 await Groups.AddToGroupAsync(Context.ConnectionId, "Admins");
             }
-            var profileImageUrl = GetProfileImageFromDatabase(user.ImageUser) ?? "No img";
+            var profileImageUrl = GetProfileImageFromDatabase(user.UserName) ?? "No img";
             if (!string.IsNullOrEmpty(user.UserName))
             {
                 var connect = new TBConnectAndDisConnect
@@ -48,6 +48,7 @@ namespace Infarstuructre.ViewModel
                 };
 
                 iConnectAndDisconnect.addConnection(connect);
+
                 await Clients.All.SendAsync("UserConnected", user.UserName, profileImageUrl);
             }
             CheckUnreadMessages(user.UserName);
@@ -154,7 +155,8 @@ namespace Infarstuructre.ViewModel
             var user = iUserInformation.GetAllByName(userName).FirstOrDefault();
             if (user != null)
             {
-                var photo = user.ImageUser;
+                var photo = $"{Helper.PathImageuser}{user.ImageUser}";
+
 
                 return photo;
             }

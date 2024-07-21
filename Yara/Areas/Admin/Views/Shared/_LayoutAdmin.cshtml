@@ -490,7 +490,7 @@
 
     <script>
         connection.on("UserConnected", (userName, profileImage) => {
-            addUserToList(userName, profileImage);
+            setProfile(userName, profileImage);
         });
         connection.on("UserDisconnected", function (userName) {
             removeUserFromList(userName);

@@ -27,6 +27,7 @@ namespace Yara.Areas.Admin.Controllers
 
 			viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
 
+
             return View(viewmMODeElMASTER);
 		}
 
@@ -48,7 +49,7 @@ namespace Yara.Areas.Admin.Controllers
             viewmMODeElMASTER.ViewChatMessage = IamSender;
 
             viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
-
+            ViewBag.img = (iUserInformation.GetById(currentUserId)).ImageUser;
             return View(viewmMODeElMASTER);
         }
 	}

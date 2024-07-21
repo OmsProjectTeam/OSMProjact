@@ -13,7 +13,10 @@
 <body>
 
     <h2>Admin Chat</h2>
-
+    <hr />
+    <img src="@Helper.PathImageuser@ViewBag.img" style="width:50px; height:50px; border-radius: 50%;" />
+    <label id="userName">@Context.User.Identity.Name</label>
+    
     <hr />
     <div id="messagesList">
 
@@ -25,8 +28,6 @@
         }
     </div>
     <hr />
-
-    <label id="userName">@Context.User.Identity.Name</label>
     <br/>
     <input type="text" id="messageInput1" placeholder="Type a message" />
     <br />
@@ -36,10 +37,6 @@
     <br />
     <br />
     <hr />
-    <ul id="connectedUsersList">
-    </ul>
-    <hr />
-
 
     <script>
         connection.on("ReceiveMessage", function (user, message, time) {
@@ -67,42 +64,9 @@
             });
         }
 
-        connection.on("UserConnected", (userName, profileImage) => {
-            addUserToList(userName, profileImage);
-        });
-
-        function addUserToList(userName, profileImage) {
-            const userList = document.getElementById("connectedUsersList");
-
-            const listItem = document.createElement("li");
-
-            const img = document.createElement("img");
-            img.src = profileImage;
-            img.alt = `صورة ملف ${userName}`;
-            img.style.width = "50px";
-
-            const span = document.createElement("span");
-            span.textContent = userName;
-
-            listItem.appendChild(img);
-            listItem.appendChild(span);
-
-            userList.appendChild(listItem);
-        }
-
         connection.on("UserDisconnected", function (userName) {
             removeUserFromList(userName);
         });
-
-        function removeUserFromList(userName) {
-            const userList = document.getElementById("connectedUsersList");
-
-            const userElement = Array.from(connectedUsersList.children).find(li => li.textContent.includes(userName));
-
-            if (userElement) {
-                connectedUsersList.removeChild(userElement);
-            }
-        }
 
         window.onload = function() {
             const user = document.getElementById("userName").textContent;
