@@ -1,4 +1,5 @@
-﻿@model ViewmMODeElMASTER
+﻿@using Domin.Entity.SignalR
+@model ViewmMODeElMASTER
 @inject UserManager<ApplicationUser> userManager
 @inject SignInManager<ApplicationUser> signInManager
 
@@ -412,17 +413,22 @@
             <ul class="notice-list">
                 
                 @{
-                    foreach(var item in Model.ViewChatMessage.Where(m => m.IsRead == false))
+                    if (ViewData["ViewChatMessage"] != null)
                     {
-                        <li>
-                            <div style="display:flex; flex-direction: row; justify-content:space-between">
-                                <h3>@item.Message</h3>
-                                <h3>@item.SenderName</h3>
-                                <img style="width:10px; height:10px; border-radius: 50%;" src="@Helper.PathImageuser@item.SenderImage" alt="" />
-                                <h4>@item.MessageeTime.ToString()</h4>
-                            </div>
-                        </li>
+                        var messages = ViewData["ViewChatMessage"] as List<TBViewChatMessage>;
+                        foreach (var item in messages.Where(m => m.IsRead == false))
+                        {
+                            <li>
+                                <div style="display:flex; flex-direction: row; justify-content:space-between">
+                                    <h3>@item.Message</h3>
+                                    <h3>@item.SenderName</h3>
+                                    <img style="width:10px; height:10px; border-radius: 50%;" src="@Helper.PathImageuser@item.SenderImage" alt="" />
+                                    <h4>@item.MessageeTime.ToString()</h4>
+                                </div>
+                            </li>
+                        }
                     }
+                    
                 }
                    
             </ul>

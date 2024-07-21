@@ -1,5 +1,6 @@
 ﻿
 using Domin.Entity;
+using Yara.Areas.Admin.Controllers;
 using static Infarstuructre.BL.IIExchangeRate;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<ViewmMODeElMASTER>();
 
 // إضافة خدمات إلى الحاوية
-builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<UserChatFilter>();
+});
+
+
 builder.Services.AddDbContext<MasterDbcontext>(options => {
 	options.UseSqlServer(
 		builder.Configuration.GetConnectionString("MasterConnection"),
@@ -89,6 +97,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 	options.SlidingExpiration = true;
 });
 
+builder.Services.AddScoped<UserChatFilter>();
 builder.Services.AddScoped<IIUserInformation, CLSUserInformation>();
 builder.Services.AddScoped<IIRolsInformation, CLSRolsInformation>();
 builder.Services.AddScoped<IITypesCompanies, CLSTBTypesCompanies>();
