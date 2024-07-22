@@ -6,8 +6,21 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Chat</title>
+    @section Scripts1 {
+    <script src="~/js/signalr.min.js"></script>
+    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script> *@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    }
+</head>
+<body>
 
-    <h2>Admin Chat</h2>
+    <h2>Client Chat</h2>
     <hr />
     <img src="@Helper.PathImageuser@ViewBag.img" style="width:50px; height:50px; border-radius: 50%;" />
     <label id="userName">@Context.User.Identity.Name</label>
@@ -22,7 +35,7 @@
 
                     <li style="display: flex;  @(item.SenderId == ViewBag.UserId ? "justify-content:flex-end; background-color:white;" :
                         "justify-content:flex-start; background-color:gray; color:white;");
-                                 border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
+                                     border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
                         <img src="@(item.SenderId == ViewBag.UserId ? Helper.PathImageuser + item.SenderImage : Helper.PathImageuser + item.SenderImage)" style="width:50px; height:50px; border-radius: 50%;" />
                         @item.Message :
                         @item.MessageeTime.ToString("HH:mm")
@@ -45,11 +58,9 @@
     <br />
     <br />
     <hr />
-
     @section Scripts {
-    <script src="~/js/signalr.min.js"></script>
-    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script> *@
     <script type="text/javascript">
+        const connection = new signalR.HubConnectionBuilder().withUrl("/yourHubUrl").build();
 
         connection.start().then(function () {
             console.log("Connected to SignalR hub");
@@ -58,10 +69,7 @@
         });
 
         connection.on("ReceiveMessage", function (user, message, time) {
-            const msg = `${user}: ${message} (${time}) `;
-            const li = document.createElement("li");
-            li.textContent = msg;
-            document.getElementById("messagesList").appendChild(li);
+            refreshMessagesList();
         });
 
         function sendMessage() {
@@ -77,12 +85,7 @@
             document.getElementById("sendTo").value = "";
 
             const user = document.getElementById("userName").textContent;
-            const msg = `${user}: ${message}`;
-            const li = document.createElement("li");
-            li.textContent = msg;
-            document.getElementById("messagesList").appendChild(li);
-
-            connection.invoke("SendMessageToClients", message, to).catch(function (err) {
+            connection.invoke("SendMessageToClients", user, message, to).catch(function (err) {
                 console.error("Error sending message:", err.toString());
             });
         }
@@ -96,9 +99,30 @@
             connection.invoke("MarkMessagesAsRead", user).catch(function (err) {
                 console.error("Error marking messages as read:", err.toString());
             });
+            refreshMessagesList();
+        }
+
+        function refreshMessagesList() {
+            $.ajax({
+                url: '/YourController/GetMessages', // استبدل بعنوان الإجراء الذي يجلب الرسائل
+                type: 'GET',
+                success: function (data) {
+                    $('#messagesList').empty();
+                    data.forEach(function (message) {
+                        const li = document.createElement("li");
+                        li.textContent = `${message.user}: ${message.message} (${message.time})`;
+                        document.getElementById("messagesList").appendChild(li);
+                    });
+                },
+                error: function (err) {
+                    console.error("Error fetching messages:", err.toString());
+                }
+            });
         }
     </script>
-
     }
+</body>
+</html>
+
 
 
