@@ -20,34 +20,39 @@ namespace Yara.Areas.ClintAccount.Controllers
 		}
         public async Task<IActionResult> Index()
 		{
-            ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
-            var currentUserId = iUserManager.GetUserId(User);
 
-            viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
+			ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
+			var currentUserId = iUserManager.GetUserId(User);
 
-            return View(viewmMODeElMASTER);
-        }
+			viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
+
+
+			return View(viewmMODeElMASTER);
+		}
 
         public async Task<IActionResult> OwnChat(string anotherId)
         {
-            ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
-            var users = viewmMODeElMASTER.ConnectAndDisConnect = iConnectAndDisconnect.GetAll();
+			ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
 
-            var currentUserId = iUserManager.GetUserId(User);
+			var currentUserId = iUserManager.GetUserId(User);
 
-            var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
-            var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
+			var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
+			var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
 
-            foreach (var item in IamReciver)
-            {
-                IamSender.Add(item);
-            }
 
-            viewmMODeElMASTER.ViewChatMessage = IamSender;
+			foreach (var item in IamReciver)
+			{
+				IamSender.Add(item);
+			}
 
-            viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
+			viewmMODeElMASTER.ViewChatMessage = IamSender;
+			ViewBag.another = (iUserInformation.GetById(anotherId)).UserName;
 
-            return View(viewmMODeElMASTER);
-        }
+			//viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
+			ViewBag.img = (iUserInformation.GetById(currentUserId)).ImageUser;
+			ViewBag.UserId = currentUserId;
+
+			return View(viewmMODeElMASTER);
+		}
     }
 }

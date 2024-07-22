@@ -7,7 +7,7 @@
 
 <ul>
     @{
-        foreach(var item in Model.ViewChatMessage.GroupBy(m => m.SenderId).Select(m => m.OrderByDescending(m => m.MessageeTime).LastOrDefault()))
+        foreach(var item in Model.ViewChatMessage.GroupBy(m => m.SenderId).Select(m => m.OrderBy(m => m.MessageeTime).LastOrDefault()))
         {
             <li>
                 <a asp-area="Admin" asp-controller="Chat" asp-action="OwnChat" asp-route-anotherId="@item.SenderId" />
