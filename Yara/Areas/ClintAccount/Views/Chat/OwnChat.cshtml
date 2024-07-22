@@ -3,50 +3,24 @@
     ViewData["Title"] = "Chat";
     Layout = "~/Areas/ClintAccount/Views/Shared/_LayoutClint.cshtml";
 }
-
-    <h2>Client Chat</h2>
-    <hr />
-    <img src="@Helper.PathImageuser@ViewBag.img" style="width:50px; height:50px; border-radius: 50%;" />
-    <label id="userName">@Context.User.Identity.Name</label>
-
-    <hr />
-    <div id="messagesList">
-        @{
-            foreach (var item in Model.ViewChatMessage.OrderBy(m => m.MessageeTime))
-            {
-                <div style="display: flex; @(item.SenderId == ViewBag.UserId ? "justify-content:flex-start; max-width: 80%;" :
-                        "justify-content:flex-end; max-width: 80%;");">
-
-                    <li style="display: flex;  @(item.SenderId == ViewBag.UserId ? "justify-content:flex-end; background-color:white;" :
-                        "justify-content:flex-start; background-color:gray; color:white;");
-                                 border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
-                        <img src="@(item.SenderId == ViewBag.UserId ? Helper.PathImageuser + item.SenderImage : Helper.PathImageuser + item.SenderImage)" style="width:50px; height:50px; border-radius: 50%;" />
-                        @item.Message :
-                        @item.MessageeTime.ToString("HH:mm")
-                    </li>
-                </div>
-            }
-        }
-    </div>
-    <hr />
-    <br />
-
-    <div style="position: fixed; bottom: 10px; border-top: 1px solid #ccc; background-color: #f1f1f1; padding: 10px; display: flex;">
-        <input type="text" id="messageInput1" placeholder="Type a message" />
-        <br />
-        <input type="text" id="sendTo" value="@ViewBag.another" placeholder="send to ...." />
-        <br />
-        <button id="sendButton" onclick="sendMessage()">Send</button>
-    </div>
-
-    <br />
-    <br />
-    <hr />
-
-    @section Scripts {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Chat</title>
     <script src="~/js/signalr.min.js"></script>
     @* <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script> *@
+</head>
+<body>
+    <div id="userName" style="display:none;">UserName</div>
+    <input type="text" id="messageInput1" placeholder="Type your message here..." />
+    <input type="text" id="sendTo" placeholder="Send to..." />
+    <button onclick="sendMessage()">Send</button>
+    <ul id="messagesList"></ul>
+
     <script type="text/javascript">
+        const connection = new signalR.HubConnectionBuilder().withUrl("/yourHubUrl").build();
 
         connection.start().then(function () {
             console.log("Connected to SignalR hub");
@@ -71,15 +45,10 @@
             }
 
             document.getElementById("messageInput1").value = "";
-            document.getElementById("sendTo").value = "";
+            // document.getElementById("sendTo").value = "";
 
             const user = document.getElementById("userName").textContent;
-            const msg = `${user}: ${message}`;
-            const li = document.createElement("li");
-            li.textContent = msg;
-            document.getElementById("messagesList").appendChild(li);
-
-            connection.invoke("SendMessageToAdmin", message, to).catch(function (err) {
+            connection.invoke("SendMessageToAdmin", user, message, to).catch(function (err) {
                 console.error("Error sending message:", err.toString());
             });
         }
@@ -95,6 +64,7 @@
             });
         }
     </script>
+</body>
+</html>
 
-    }
 
