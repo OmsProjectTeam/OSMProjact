@@ -13,6 +13,18 @@
 
 	<title>Home - Ninja Admin Template</title>
 
+	<script src="~/js/signalr.min.js"></script>
+
+	<script>
+				var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+				connection.start().then(function () {
+					console.log("Connection established.");
+				}).catch(function (err) {
+					return console.error(err.toString());
+				});
+	</script>
+
 	<!-- Main Styles -->
 	<link rel="stylesheet" href="~/Admin/assets/styles/style.min.css">
 
@@ -41,6 +53,8 @@
 	<link rel="stylesheet" href="~/Admin/assets/styles/style-dark.min.css">
 	<!-- RTL -->
 	<link rel="stylesheet" href="~/Admin/assets/styles/style-rtl.min.css">
+
+
 
 	@await RenderSectionAsync("Scripts1", required: false)
 
@@ -486,16 +500,7 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 
 
-    <script src="~/js/signalr.min.js"></script>
 
-	<script>
-		var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
-
-		connection.start().then(function () {
-			console.log("Connection established.");
-		}).catch(function (err) {
-			return console.error(err.toString());
-		});
 	</script>
 	<script src="~/Admin/assets/scripts/jquery.min.js"></script>
 	<script src="~/Admin/assets/scripts/modernizr.min.js"></script>

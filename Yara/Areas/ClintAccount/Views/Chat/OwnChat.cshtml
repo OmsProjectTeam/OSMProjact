@@ -58,13 +58,14 @@
     <hr />
     @section Scripts {
         <script type="text/javascript">
-            const connection = new signalR.HubConnectionBuilder().withUrl("/ChatHub").build();
 
-            connection.start().then(function () {
-                console.log("Connected to SignalR hub");
-            }).catch(function (err) {
-                console.error("Error connecting to SignalR hub:", err.toString());
-            });
+            // const connection = new signalR.HubConnectionBuilder().withUrl("/ChatHub").build();
+
+            // connection.start().then(function () {
+            //     console.log("Connected to SignalR hub");
+            // }).catch(function (err) {
+            //     console.error("Error connecting to SignalR hub:", err.toString());
+            // });
 
             connection.on("ReceiveMessage", function (user, message, time) {
                 refreshMessagesList();
