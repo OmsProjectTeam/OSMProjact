@@ -58,7 +58,7 @@
     <hr />
     @section Scripts {
         <script type="text/javascript">
-            const connection = new signalR.HubConnectionBuilder().withUrl("/yourHubUrl").build();
+            const connection = new signalR.HubConnectionBuilder().withUrl("/ChatHub").build();
 
             connection.start().then(function () {
                 console.log("Connected to SignalR hub");
@@ -80,7 +80,7 @@
                 }
 
                 document.getElementById("messageInput1").value = "";
-                document.getElementById("sendTo").value = "";
+                // document.getElementById("sendTo").value = "";
 
                 const user = document.getElementById("userName").textContent;
                 connection.invoke("SendMessageToAdmin", user, message, to).catch(function (err) {
@@ -102,7 +102,7 @@
 
             function refreshMessagesList() {
                 $.ajax({
-                    url: '/YourController/GetMessages', // استبدل بعنوان الإجراء الذي يجلب الرسائل
+                    url: '/Chat/OwnChat', // استبدل بعنوان الإجراء الذي يجلب الرسائل
                     type: 'GET',
                     success: function (data) {
                         $('#messagesList').empty();
