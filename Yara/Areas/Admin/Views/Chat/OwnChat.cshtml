@@ -100,7 +100,6 @@
             connection.invoke("MarkMessagesAsRead", user).catch(function (err) {
                 console.error("Error marking messages as read:", err.toString());
             });
-            refreshMessagesList();
         }
 
             function refreshMessagesList() {
