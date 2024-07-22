@@ -48,6 +48,7 @@ namespace Yara.Areas.Admin.Controllers
 
             viewmMODeElMASTER.ViewChatMessage = IamSender;
             ViewBag.another = (iUserInformation.GetById(anotherId)).UserName;
+            ViewBag.anotherId = (iUserInformation.GetById(anotherId)).Id;
             //viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
             ViewBag.img = (iUserInformation.GetById(currentUserId)).ImageUser;
             ViewBag.UserId = currentUserId;
