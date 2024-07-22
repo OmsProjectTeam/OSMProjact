@@ -45,17 +45,7 @@
 
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
-    <script>
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/chatHub")
-            .build();
-
-        connection.start().catch(function (err) {
-            return console.error(err.toString());
-        });
-
-    </script>
+  
 </head>
 
 <body>
@@ -461,6 +451,18 @@
     <!--
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="~/js/signalr.min.js"></script>
+
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        connection.start().then(function () {
+            console.log("Connection established.");
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+    </script>
     <script src="~/Admin/assets/scripts/jquery.min.js"></script>
     <script src="~/Admin/assets/scripts/modernizr.min.js"></script>
     <script src="~/Admin/assets/plugin/bootstrap/js/bootstrap.min.js"></script>

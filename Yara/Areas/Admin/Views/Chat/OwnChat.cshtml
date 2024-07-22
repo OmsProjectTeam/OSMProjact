@@ -1,111 +1,4 @@
-﻿@* @model ViewmMODeElMASTER
-@{
-    ViewData["Title"] = "OwnChat";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-}
-
-<!-- Admin View: chat-admin.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Chat</title>
-</head>
-<body style="position:relative;">
-
-    <h2>Admin Chat</h2>
-    <hr />
-    <img src="@Helper.PathImageuser@ViewBag.img" style="width:50px; height:50px; border-radius: 50%;" />
-    <label id="userName">@Context.User.Identity.Name</label>
-    
-    <hr />
-    <div id="messagesList" >
-
-        @{
-            foreach(var item in Model.ViewChatMessage.OrderBy(m => m.MessageeTime))
-            {
-                <div style="display: flex; @(item.SenderId == ViewBag.UserId ? "justify-content:flex-start; max-width: 80%;" :
-                        "justify-content:flex-end; max-width: 80%;");">
-
-                    <li style="display: flex;  @(item.SenderId == ViewBag.UserId ? "justify-content:flex-end; background-Color:white;" :
-                        "justify-content:flex-start; background-Color:gray; Color:white;");
-                             border: groove 1px black; margin-bottom: 3px;border-radius: 10px; height: auto; padding: 10px;">
-
-
-
-                        <img src="@(ViewBag.UserId == item.SenderId ? Helper.PathImageuser + item.SenderImage : Helper.PathImageuser + item.ReciverImage)" style="width:50px; height:50px; border-radius: 50%;" />
-                        <img src="@(item.SenderId == ViewBag.UserId ? Helper.PathImageuser + item.SenderImage : Helper.PathImageuser + item.SenderImage)" style="width:50px; height:50px; border-radius: 50%;" />
-
-                       
-                         @item.Message : 
-                        @item.MessageeTime.ToString("HH:mm")
-                    </li>
-                </div>
-
-            }
-        }
-    </div>
-    <hr />
-    <br/>
-
-    <div style="position: fixed; bottom: 10; border-top: 1px solid #ccc; background-color: #f1f1f1; padding: 10px; display: flex;">
-        <input type="text" id="messageInput1" placeholder="Type a message" />
-        <br />
-        <input type="text" id="sendTo" value="@ViewBag.another" placeholder="send to ...." />
-        <br />
-        <button id="sendButton" onclick="sendMessage()">Send</button>
-    </div>
-
-    <br />
-    <br />
-    <hr />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
-    <script type="text/javascript">
-        // const connection = new signalR.HubConnectionBuilder()
-        //     .withUrl("/chathub")
-        //     .build();
-
-        connection.start().catch(err => console.error(err.toString()));
-
-        connection.on("ReceiveMessage", function (user, message, time) {
-            const msg = `${user}: ${message} (${time}) `;
-            const li = document.createElement("li");
-            li.textContent = msg;
-            document.getElementById("messagesList").appendChild(li);
-        });
-
-
-        function sendMessage(){
-            const message = document.getElementById("messageInput1").value;
-            const to = document.getElementById("sendTo").value;
-            document.getElementById("messageInput1").value = "";
-
-            const user = document.getElementById("userName").textContent;
-            const msg = `${user}: ${message}`;
-            const li = document.createElement("li");
-            li.textContent = msg;
-            document.getElementById("messagesList").appendChild(li);
-
-            connection.invoke("SendMessageToClients", message, to).catch(function (err) {
-                return console.error(err.toString());
-            });
-        }
-
-        connection.on("UserDisconnected", function (userName) {
-            removeUserFromList(userName);
-        });
-
-        window.onload = function() {
-            const user = document.getElementById("userName").textContent;
-            connection.invoke("MarkMessagesAsRead", user).catch(function (err) {
-                return console.error(err.toString());
-            });
-        }
-
-
-    </script>
-</body>
-</html> *@
-
+﻿
 
 @model ViewmMODeElMASTER
 @{
@@ -113,12 +6,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Chat</title>
-</head>
-<body style="position:relative;">
 
     <h2>Admin Chat</h2>
     <hr />
@@ -158,7 +45,10 @@
     <br />
     <br />
     <hr />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
+
+    @section Scripts {
+    <script src="~/js/signalr.min.js"></script>
+    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script> *@
     <script type="text/javascript">
 
         connection.start().then(function () {
@@ -208,6 +98,7 @@
             });
         }
     </script>
-</body>
-</html>
+
+    }
+
 
