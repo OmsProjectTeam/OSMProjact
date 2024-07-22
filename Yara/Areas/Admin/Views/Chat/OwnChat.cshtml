@@ -105,7 +105,7 @@
 
         function refreshMessagesList() {
             $.ajax({
-                    url: '/Chat/OwnChat', // استبدل بعنوان الإجراء الذي يجلب الرسائل
+                    url: '/Admin/Chat/OwnChat', // استبدل بعنوان الإجراء الذي يجلب الرسائل
                 type: 'GET',
                 success: function (data) {
                     $('#messagesList').empty();
