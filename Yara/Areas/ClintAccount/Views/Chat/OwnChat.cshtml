@@ -104,6 +104,7 @@
                 $.ajax({
                     url: '/ClintAccount/Chat/OwnChat/', // استبدل بعنوان الإجراء الذي يجلب الرسائل
                     type: 'GET',
+                    data: { userId: userId },
                     success: function (data) {
                         $('#messagesList').empty();
                         data.forEach(function (message) {
