@@ -69,7 +69,7 @@
         //     console.error("Error connecting to SignalR hub:", err.toString());
         // });
 
-        connection.on("ReceiveMessage", function (user, message, time) {
+        connection.on("ReceiveMessage", function (user, message, img, time) {
             refreshMessagesList();
         });
 
@@ -86,7 +86,7 @@
                 // document.getElementById("sendTo").value = "";
 
             const user = document.getElementById("userName").textContent;
-            connection.invoke("SendMessageToClients", user, message, to).catch(function (err) {
+            connection.invoke("SendMessageToClients", message, to).catch(function (err) {
                 console.error("Error sending message:", err.toString());
             });
         }

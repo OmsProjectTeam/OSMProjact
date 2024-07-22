@@ -83,8 +83,7 @@
                 document.getElementById("messageInput1").value = "";
                 // document.getElementById("sendTo").value = "";
 
-                const user = document.getElementById("userName").textContent;
-                connection.invoke("SendMessageToAdmin", user, message, to).catch(function (err) {
+                connection.invoke("SendMessageToAdmin", message, to).catch(function (err) {
                     console.error("Error sending message:", err.toString());
                 });
             }
