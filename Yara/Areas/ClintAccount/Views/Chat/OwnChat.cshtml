@@ -103,21 +103,16 @@
                 $.ajax({
                     url: '/ClintAccount/Chat/OwnChat/', // استبدل بعنوان الإجراء الذي يجلب الرسائل
                     type: 'GET',
-                    data: { anotherId: '@ViewBag.anotherId' }
-                    // success: function (message) {
-                    //     $('#messagesList').empty();
-                    //     Console.log(message)
-                    //     data.forEach(function (message) {
-                    //         const li = document.createElement("li");
-                    //         li.textContent = `${message.user}: ${message.message} (${message.time})`;
-                    //         document.getElementById("messagesList").appendChild(li);
-                    //     });
-                    // },
-                    // error: function (err) {
-                    //     console.error("Error fetching messages:", err.toString());
-                    // }
+                    data: { anotherId: '@ViewBag.anotherId' },
+                    success: function () {
+                        location.reload(); // إعادة تحميل الصفحة بالكامل
+                    },
+                    error: function (err) {
+                        console.error("Error fetching messages:", err.toString());
+                    }
                 });
             }
+           
         </script>
     }
 </body>
