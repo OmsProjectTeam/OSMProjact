@@ -33,7 +33,7 @@
 
 
                         <img src="@(ViewBag.UserId == item.SenderId ? Helper.PathImageuser + item.SenderImage : Helper.PathImageuser + item.ReciverImage)" style="width:50px; height:50px; border-radius: 50%;" />
-
+                        <img src="@(item.SenderId == ViewBag.UserId ? Helper.PathImageuser + item.SenderImage : Helper.PathImageuser + item.SenderImage)" style="width:50px; height:50px; border-radius: 50%;" />
 
                        
                          @item.Message : 
@@ -60,9 +60,10 @@
     <hr />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
     <script type="text/javascript">
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/chathub")
-            .build();
+        // const connection = new signalR.HubConnectionBuilder()
+        //     .withUrl("/chathub")
+        //     .build();
+
         connection.start().catch(err => console.error(err.toString()));
 
         connection.on("ReceiveMessage", function (user, message, time) {
@@ -77,7 +78,6 @@
             const message = document.getElementById("messageInput1").value;
             const to = document.getElementById("sendTo").value;
             document.getElementById("messageInput1").value = "";
-            document.getElementById("sendTo").value = "";
 
             const user = document.getElementById("userName").textContent;
             const msg = `${user}: ${message}`;
@@ -160,9 +160,6 @@
     <hr />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
     <script type="text/javascript">
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/chathub")
-            .build();
 
         connection.start().then(function () {
             console.log("Connected to SignalR hub");
