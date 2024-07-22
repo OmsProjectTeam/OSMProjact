@@ -10,7 +10,7 @@
 <head>
     <title>Admin Chat</title>
 </head>
-<body>
+<body style="position:relative;">
 
     <h2>Admin Chat</h2>
     <hr />
@@ -18,22 +18,43 @@
     <label id="userName">@Context.User.Identity.Name</label>
     
     <hr />
-    <div id="messagesList">
+    <div id="messagesList" >
 
         @{
-            foreach(var item in Model.ViewChatMessage)
+            foreach(var item in Model.ViewChatMessage.OrderByDescending(m => m.MessageeTime))
             {
-                <li>@item.Message : @item.MessageeTime </li>
+                <div style="display: flex; @(item.SenderId == ViewBag.UserId ? "justify-content:flex-start; max-width: 80%;" :
+                        "justify-content:flex-end; max-width: 80%;");">
+
+                    <li style="display: flex;  @(item.SenderId == ViewBag.UserId ? "justify-content:flex-end; background-Color:white;" :
+                        "justify-content:flex-start; background-Color:gray; Color:white;");
+                             border: groove 1px black; margin-bottom: 3px;border-radius: 10px; height: auto; padding: 10px;">
+
+
+
+                        <img src="@(ViewBag.UserId == item.SenderId ? Helper.PathImageuser + item.SenderImage : Helper.PathImageuser + item.ReciverImage)" style="width:50px; height:50px; border-radius: 50%;" />
+
+
+                       
+                         @item.Message : 
+                        @item.MessageeTime.ToString("HH:mm")
+                    </li>
+                </div>
+
             }
         }
     </div>
     <hr />
     <br/>
-    <input type="text" id="messageInput1" placeholder="Type a message" />
-    <br />
-    <input type="text" id="sendTo" placeholder="send to ...." />
-    <br />
-    <button id="sendButton" onclick="sendMessage()">Send</button>
+
+    <div style="position: fixed; bottom: 10; border-top: 1px solid #ccc; background-color: #f1f1f1; padding: 10px; display: flex;">
+        <input type="text" id="messageInput1" placeholder="Type a message" />
+        <br />
+        <input type="text" id="sendTo" placeholder="send to ...." />
+        <br />
+        <button id="sendButton" onclick="sendMessage()">Send</button>
+    </div>
+
     <br />
     <br />
     <hr />
