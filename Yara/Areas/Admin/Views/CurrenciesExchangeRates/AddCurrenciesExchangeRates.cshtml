@@ -14,7 +14,7 @@
             <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
         </ul>
         <div class="row small-spacing">
-            <div class="col-lg-6 col-xs-12">
+            <div class="col-xs-12">
                 <div class="box-content card white">
                     <h4 class="box-title">@ResourceWeb.LBAddCurrenciesExchangeRates</h4>
                     <div class="card-content">
@@ -27,35 +27,28 @@
                                 <span style="color:royalblue"> <strong>@TempData["Saved successfully"]</strong></span>
                                 <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
                             </div>
-                            <div class="card-content">
-                                <div class="row small-spacing">
-                                    <div class="col-12 col-sm-6">
-                                        <label asp-for="@Model.CurrenciesExchangeRates.Country" for="exampleInputEmail1">@ResourceWeb.Lbcode</label>
-                                        <input asp-for="@Model.CurrenciesExchangeRates.Country" type="text" placeholder="@ResourceWeb.LbCountry ...." class="form-control" maxlength="300">
-                                        <span asp-validation-for="@Model.CurrenciesExchangeRates.Country" class="text-danger"></span>
-                                        <span style="color:red"> <strong>@TempData["TitleShipping"]</strong></span>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <label asp-for="@Model.CurrenciesExchangeRates.code" for="exampleInputEmail1">@ResourceWeb.Lbcode</label>
-                                        <input asp-for="@Model.CurrenciesExchangeRates.code" type="text" placeholder="@ResourceWeb.Lbcode ...." class="form-control" maxlength="20">
-                                        <span asp-validation-for="@Model.CurrenciesExchangeRates.code" class="text-danger"></span>
-
-                                    </div>
-                                    <!-- /.col-xs-3 -->
-                                    <!-- /.col-xs-4 -->
-                                    <!-- /.col-xs-5 -->
+                            <div class="row small-spacing">
+                                <div class="col-12 col-sm-6">
+                                    <label asp-for="@Model.CurrenciesExchangeRates.Country" for="exampleInputEmail1">@ResourceWeb.Lbcode</label>
+                                    <input asp-for="@Model.CurrenciesExchangeRates.Country" type="text" placeholder="@ResourceWeb.LbCountry ...." class="form-control" maxlength="300">
+                                    <span asp-validation-for="@Model.CurrenciesExchangeRates.Country" class="text-danger"></span>
+                                    <span style="color:red"> <strong>@TempData["TitleShipping"]</strong></span>
                                 </div>
-
-
-                                <!-- /.row -->
+                                <div class="col-12 col-sm-6">
+                                    <label asp-for="@Model.CurrenciesExchangeRates.code" for="exampleInputEmail1">@ResourceWeb.Lbcode</label>
+                                    <input asp-for="@Model.CurrenciesExchangeRates.code" type="text" placeholder="@ResourceWeb.Lbcode ...." class="form-control" maxlength="20">
+                                    <span asp-validation-for="@Model.CurrenciesExchangeRates.code" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="checkbox margin-bottom-20">
+                                        <div class="switch success"><input type="checkbox" asp-for="@Model.CurrenciesExchangeRates.Active" id="switch-2"><label for="switch-2">@ResourceWeb.LbActive</label></div>
+                                    </div>
+                                    <div class="checkbox margin-bottom-20">
+                                        <div class="switch success"><input type="checkbox" asp-for="@Model.CurrenciesExchangeRates.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWeb.lbCurrentState</label></div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
+                                </div>
                             </div>
-                            <div class="checkbox margin-bottom-20">
-                                <div class="switch success"><input type="checkbox" asp-for="@Model.CurrenciesExchangeRates.Active" id="switch-2"><label for="switch-2">@ResourceWeb.LbActive</label></div>
-                            </div>
-                            <div class="checkbox margin-bottom-20">
-                                <div class="switch success"><input type="checkbox" asp-for="@Model.CurrenciesExchangeRates.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWeb.lbCurrentState</label></div>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
                         </form>
                     </div>
                     <!-- /.card-content -->

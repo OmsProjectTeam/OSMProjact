@@ -22,7 +22,7 @@
 
 
                     <div class="card-content">
-                        <form role="form" method="post" asp-controller="RolesName" asp-action="Save" enctype="multipart/form-data">
+                        <form role="form" method="post" asp-controller="RolesName" asp-action="SaveAr" enctype="multipart/form-data">
                             <div class="form-group">
                                 <input type="hidden" asp-for="@Model.RolesName.DataEntry" class="form-control" value="@User.Identity.Name">
                                 <input type="hidden" asp-for="@Model.RolesName.Id" class="form-control">

@@ -99,7 +99,5 @@ namespace Domin.Entity
 		public DateTime? DateTimeEntry { get; set; }
 		public int? IdInformationCompanies { get; set; }
 		public string? NikeNAme { get; set; }
-
-
 	}
 }

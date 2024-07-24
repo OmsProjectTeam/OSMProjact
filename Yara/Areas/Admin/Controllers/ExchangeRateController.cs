@@ -120,7 +120,64 @@ namespace Yara.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
         }
-        [Authorize(Roles = "Admin")]
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, TBExchangeRate slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.IdExchangeRate = model.ExchangeRate.IdExchangeRate;
+				slider.IdCurrenciesExchangeRates = model.ExchangeRate.IdCurrenciesExchangeRates;
+				slider.ToIdCurrenciesExchangeRates = model.ExchangeRate.ToIdCurrenciesExchangeRates;
+				slider.Rate = model.ExchangeRate.Rate;
+				slider.DataEntry = model.ExchangeRate.DataEntry;
+				slider.DateTimeEntry = model.ExchangeRate.DateTimeEntry;
+				slider.CurrentState = model.ExchangeRate.CurrentState;
+				if (slider.IdExchangeRate == 0 || slider.IdExchangeRate == null)
+				{
+					if (dbcontext.TBExchangeRates.Where(a => a.IdCurrenciesExchangeRates == slider.IdCurrenciesExchangeRates).Where(a => a.ToIdCurrenciesExchangeRates == slider.ToIdCurrenciesExchangeRates).ToList().Count > 0)
+					{
+						TempData["ExchangeRate"] = ResourceWeb.VLExchangeRateDoplceted;
+						return RedirectToAction("AddExchangeRateAr", model);
+					}
+
+					var reqwest = iExchangeRate.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyExchangeRateAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iExchangeRate.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyExchangeRateAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+
+		[Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdExchangeRate)
         {
             var reqwistDelete = iExchangeRate.deleteData(IdExchangeRate);
@@ -140,5 +197,26 @@ namespace Yara.Areas.Admin.Controllers
 
 
         }
-    }
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int IdExchangeRate)
+		{
+			var reqwistDelete = iExchangeRate.deleteData(IdExchangeRate);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
+				return RedirectToAction("MyExchangeRateAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
+				return RedirectToAction("MyExchangeRateAr");
+
+			}
+			// تمرير التاسكات  من الادارة 
+			// استخدام نظام أجايا وجيرا 
+
+
+		}
+	}
 }

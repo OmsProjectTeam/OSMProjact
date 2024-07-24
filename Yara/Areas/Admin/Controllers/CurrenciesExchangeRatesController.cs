@@ -19,7 +19,15 @@ namespace Yara.Areas.Admin.Controllers
             vmodel.ListCurrenciesExchangeRates = iCurrenciesExchangeRates.GetAll();
             return View(vmodel);
         }
-        public IActionResult AddCurrenciesExchangeRates(int? IdCurrenciesExchangeRates)
+
+		public IActionResult MyCurrenciesExchangeRatesAr()
+		{
+			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+			vmodel.ListCurrenciesExchangeRates = iCurrenciesExchangeRates.GetAll();
+			return View(vmodel);
+		}
+
+		public IActionResult AddCurrenciesExchangeRates(int? IdCurrenciesExchangeRates)
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListCurrenciesExchangeRates = iCurrenciesExchangeRates.GetAll();
@@ -90,7 +98,66 @@ namespace Yara.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
         }
-        [Authorize(Roles = "Admin")]
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, TBCurrenciesExchangeRates slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.IdCurrenciesExchangeRates = model.CurrenciesExchangeRates.IdCurrenciesExchangeRates;
+
+				slider.Country = model.CurrenciesExchangeRates.Country;
+
+				slider.code = model.CurrenciesExchangeRates.code;
+
+				slider.Active = model.CurrenciesExchangeRates.Active;
+				slider.DataEntry = model.CurrenciesExchangeRates.DataEntry;
+				slider.DateTimeEntry = model.CurrenciesExchangeRates.DateTimeEntry;
+				slider.CurrentState = model.CurrenciesExchangeRates.CurrentState;
+				if (slider.IdCurrenciesExchangeRates == 0 || slider.IdCurrenciesExchangeRates == null)
+				{
+					if (dbcontext.TBCurrenciesExchangeRatess.Where(a => a.Country == slider.Country).ToList().Count > 0)
+					{
+						TempData["Country"] = ResourceWeb.VLCountryDoplceted;
+						return RedirectToAction("AddCurrenciesExchangeRatesAr", model);
+					}
+
+					var reqwest = iCurrenciesExchangeRates.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyCurrenciesExchangeRatesAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iCurrenciesExchangeRates.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyCurrenciesExchangeRatesAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+		[Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdCurrenciesExchangeRates)
         {
             var reqwistDelete = iCurrenciesExchangeRates.deleteData(IdCurrenciesExchangeRates);
@@ -110,5 +177,26 @@ namespace Yara.Areas.Admin.Controllers
 
 
         }
-    }
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int IdCurrenciesExchangeRates)
+		{
+			var reqwistDelete = iCurrenciesExchangeRates.deleteData(IdCurrenciesExchangeRates);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
+				return RedirectToAction("MyCurrenciesExchangeRatesAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
+				return RedirectToAction("MyCurrenciesExchangeRatesAr");
+
+			}
+			// تمرير التاسكات  من الادارة 
+			// استخدام نظام أجايا وجيرا 
+
+
+		}
+	}
 }

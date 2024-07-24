@@ -22,7 +22,7 @@
 
 
                     <div class="card-content">
-                        <form role="form" method="post" asp-controller="OrderCase" asp-action="Save" enctype="multipart/form-data">
+                        <form role="form" method="post" asp-controller="OrderCase" asp-action="SaveAr" enctype="multipart/form-data">
                             <div class="form-group">
                                 <input type="hidden" asp-for="@Model.OrderCase.DataEntry" class="form-control" value="@User.Identity.Name">
                                 <input type="hidden" asp-for="@Model.OrderCase.Id" class="form-control">

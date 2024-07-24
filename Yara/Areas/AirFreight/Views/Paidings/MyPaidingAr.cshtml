@@ -7,8 +7,8 @@
     <div class="box-content">
         <ul class="list-inline">
             <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWebAr.LBPaidings</button></a></li>/
-            <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
-            <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
+            <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="IndexAr"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="IndexAr"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
             <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
             <br>
             <br>
@@ -147,7 +147,7 @@
                                                             <td>
                                                                 <ul class="list-inline">
                                                                     <li class="margin-bottom-10"><a asp-area="AirFreight" asp-controller="Paidings" asp-action="AddPaidingsArImageAr" asp-route-IdPaings="@item.IdPaings"><button type="button" class="btn btn-primary btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-edit"></i></button></a></li>|
-                                                                    <li class="margin-bottom-10"><a asp-area="AirFreight" asp-controller="Paidings" asp-action="DeleteData" asp-route-IdPaings="@item.IdPaings"><button type="button" class="btn btn-danger btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-remove"></i></button></a></li>
+                                                                    <li class="margin-bottom-10"><a asp-area="AirFreight" asp-controller="Paidings" asp-action="DeleteDataAr" asp-route-IdPaings="@item.IdPaings"><button type="button" class="btn btn-danger btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-remove"></i></button></a></li>
                                                                 </ul>
                                                             </td>
                                                         </tr>
@@ -195,7 +195,7 @@
     <script src="~/Admin/assets/plugin/form-wizard/jquery.bootstrap.wizard.min.js"></script>
     <script src="~/Admin/assets/plugin/jquery-validation/jquery.validate.min.js"></script>
     <script src="~/Admin/assets/scripts/form.wizard.init.min.js"></script>
-    <script src="~/Admin/assets/scripts/main.min.js"></script>
+    
     <script>
         $(function () {
             $("#example2").DataTable().fnDestroy();

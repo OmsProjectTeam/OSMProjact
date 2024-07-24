@@ -34,40 +34,40 @@
 				<span style="color:red"> <strong>@TempData["Message2"]</strong></span>
 				<input type="hidden" asp-for="NewRegister.returnUrl" id="url">
 				<div class="frm-input">
-					<input asp-for="NewRegister.Email" type="email" placeholder="Email" class="frm-inp">
+					<input asp-for="NewRegister.Email" type="email" placeholder="Email" class="frm-inp" id="email">
 					<i class="fa fa-envelope frm-ico">
 					</i>
 					<span asp-validation-for="NewRegister.Email"></span>
 				</div>
 				<!-- /.frm-input -->
 				<div class="frm-input">
-					<input asp-for="NewRegister.userName" type="text" placeholder="Username" class="frm-inp">
+					<input asp-for="NewRegister.userName" type="text" placeholder="Username" class="frm-inp" id="userName">
 					<i class="fa fa-user frm-ico">
 					</i>
 					<span asp-validation-for="NewRegister.userName"></span>
 				</div>
 
 				<div class="frm-input">
-					<input asp-for="NewRegister.Name" type="text" placeholder="full Name" class="frm-inp">
+					<input asp-for="NewRegister.Name" type="text" placeholder="full Name" class="frm-inp" id="name">
 					<i class="fa fa-user-plus frm-ico">
 					</i>
 					<span asp-validation-for="NewRegister.Name"></span>
 				</div>
 				<div class="frm-input">
-					<input asp-for="NewRegister.PhoneNumber" type="tel" placeholder="Phone Number" class="frm-inp">
+					<input asp-for="NewRegister.PhoneNumber" type="tel" placeholder="Phone Number" class="frm-inp" id="phoneNumber">
 					<i class="fa fa-phone frm-ico">
 					</i>
 					<span asp-validation-for="NewRegister.PhoneNumber"></span>
 				</div>
 				<!-- /.frm-input -->
 				<div class="frm-input">
-					<input asp-for="NewRegister.Password" type="password" placeholder="Password" class="frm-inp">
+					<input asp-for="NewRegister.Password" type="password" placeholder="Password" class="frm-inp" id="password">
 					<i class="fa fa-lock frm-ico">
 					</i>
 					<span asp-validation-for="NewRegister.Password"></span>
 				</div>
 				<div class="frm-input">
-					<input asp-for="NewRegister.ComparePassword" type="password" placeholder="Compare Password" class="frm-inp">
+					<input asp-for="NewRegister.ComparePassword" type="password" placeholder="Compare Password" class="frm-inp" id="comparePassword">
 					<i class="fa fa-key frm-ico">
 					</i>
 					<span asp-validation-for="NewRegister.ComparePassword"></span>
@@ -144,6 +144,35 @@
 	<script src="~/Admin/assets/scripts/main.min.js"></script>
 	<script>
 		$("#url").val(window.location.href);
+
+		$('#phoneNumber').on('blur', function () {
+			var phoneNumber = $(this).val();
+			console.log('Phone number entered:', phoneNumber);
+			if (phoneNumber) {
+				$.ajax({
+					url: '@Url.Action("GetUserByPhoneNumberMer", "Accounts")',
+					type: 'GET',
+					data: { phoneNumber: phoneNumber },
+					success: function (data) {
+						console.log("User found", data)
+						if (data) {
+							$('#email').val(data.email);
+							$('#userName').val(data.userName);
+							$('#name').val(data.name);
+							$('#password').val(data.password);
+							$('#comparePassword').val(data.password);
+						}
+					},
+					error: function () {
+						console.log('User not found or error occurred');
+					}
+				});
+			}
+		});
+		var loadFile = function (event) {
+			var image = document.getElementById('output');
+			image.src = URL.createObjectURL(event.target.files[0]);
+		};
 	</script>
 </body>
 </html>

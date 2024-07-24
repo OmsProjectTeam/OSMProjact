@@ -1,4 +1,5 @@
-﻿@model ViewmMODeElMASTER
+﻿@using Domin.Entity.SignalR
+@model ViewmMODeElMASTER
 @inject UserManager<ApplicationUser> userManager
 @inject SignInManager<ApplicationUser> signInManager
 
@@ -42,25 +43,44 @@
     <!-- RTL -->
     <link rel="stylesheet" href="~/Admin/assets/styles/style-rtl.min.css">
 
+    <script src="~/js/signalr.min.js"></script>
+
+    <script>
+        var connection;
+
+        // دالة لإنشاء الاتصال
+        function createConnection() {
+            connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+            connection.start().then(function () {
+                console.log("SignalR connected");
+                // حفظ حالة الاتصال في Local Storage
+                localStorage.setItem('signalRConnected', 'true');
+            }).catch(function (err) {
+                console.error(err.toString());
+            });
+
+            // جعل الاتصال متاحاً عالمياً
+            window.signalRConnection = connection;
+        }
+
+        // تحقق مما إذا كان الاتصال موجودًا بالفعل في Local Storage
+        if (!localStorage.getItem('signalRConnected')) {
+            createConnection();
+        } else {
+            console.log("SignalR connection already exists");
+            // إعادة استخدام الاتصال الحالي
+            createConnection();
+        }
+    </script>
+
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @await RenderSectionAsync("Scripts1", required: false)
 </head>
 
 <body>
+
     <div class="main-menu">
         <header class="header">
             <a href="index.html" class="logo">Admin Panel</a>
@@ -134,6 +154,10 @@
                             <li><a asp-area="Admin" asp-controller="OrderStatus" asp-action="MyOrderStatus" asp-route-userId="@user.Id">@ResourceWeb.LBMyOrderStatus</a></li>
                             <li><a asp-area="Admin" asp-controller="EmailAlartSetting" asp-action="MyEmailAlartSetting" asp-route-userId="@user.Id">@ResourceWeb.LBMyEmailAlartSetting</a></li>
                             <li><a asp-area="Admin" asp-controller="ShippingAddress" asp-action="MyShippingAddress" asp-route-userId="@user.Id">@ResourceWeb.LBShippingAddress</a></li>
+                            <li><a asp-area="Admin" asp-controller="TypesOfRequest" asp-action="MyTypesOfRequest" asp-route-userId="@user.Id">@ResourceWeb.LBMyTypesOfRequest</a></li>
+                            <li><a asp-area="Admin" asp-controller="SupportTicketType" asp-action="MySupportTicketType" asp-route-userId="@user.Id">@ResourceWeb.LBMySupportTicketType</a></li>
+                            <li><a asp-area="Admin" asp-controller="SupportTicketStatus" asp-action="MySupportTicketStatus" asp-route-userId="@user.Id">@ResourceWeb.lbMySupportTicketStatus</a></li>
+                            <li><a asp-area="Admin" asp-controller="HtmlAgility" asp-action="myLodeHtml" asp-route-userId="@user.Id">إختبار عنوان </a></li>
 
 
 
@@ -171,6 +195,7 @@
 				<li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBCustomers</span></a>
 					<ul class="sub-menu js__content">
+                            <li><a asp-area="Admin" asp-controller="CustomerMessages" asp-action="MyCustomerMessages" asp-route-userId="@user.Id">@ResourceWeb.LBMyCustomerMessages</a></li>
 							<li><a asp-area="Admin" asp-controller="Customer" asp-action="MyCustomer" asp-route-userId="@user.Id">@ResourceWeb.LBMyCustomer</a></li>
 					
 					</ul>
@@ -195,6 +220,25 @@
                             <li><a asp-area="Admin" asp-controller="Paidings" asp-action="MyPaiding" asp-route-userId="@user.Id">@ResourceWeb.LBPaidings</a></li>
                             <li><a asp-area="Admin" asp-controller="Transfer" asp-action="MyTransfer" asp-route-userId="@user.Id">@ResourceWeb.LBTransferInformations</a></li>
                             <li><a asp-area="Admin" asp-controller="Order" asp-action="MyOrder" asp-route-userId="@user.Id">@ResourceWeb.LBMyOrder</a></li>
+                        </ul>
+                        <!-- /.sub-menu js__content -->
+                    </li>
+                    <li>
+                        <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>FAQ</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                        <ul class="sub-menu js__content">
+                            <li><a asp-area="Admin" asp-controller="SupportTicket" asp-action="MYSupportTicket" asp-route-userId="@user.Id">@ResourceWeb.LBMYSupportTicket</a></li>
+
+                            <li><a asp-area="Admin" asp-controller="FAQ" asp-action="MyFAQ" asp-route-userId="@user.Id">@ResourceWeb.LbMyFAQ</a></li>
+                            <li><a asp-area="Admin" asp-controller="FAQDescreption" asp-action="MyFAQDescreption" asp-route-userId="@user.Id">@ResourceWeb.LbMyFAQDescreption</a></li>
+                            <li><a asp-area="Admin" asp-controller="FAQList" asp-action="MyFAQList" asp-route-userId="@user.Id">@ResourceWeb.LbMyFAQList</a></li>
+                        </ul>
+                        <!-- /.sub-menu js__content -->
+                    </li>
+                    <li>
+                        
+                        <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>Chat</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                        <ul class="sub-menu js__content">
+                            <li><a asp-area="Admin" asp-controller="Chat" asp-action="Index" asp-route-userId="@user.Id">My Chat</a></li>
                         </ul>
                         <!-- /.sub-menu js__content -->
                     </li>
@@ -281,7 +325,9 @@
                 <!-- /.toggle-content -->
             </div>
             <!-- /.ico-item -->
-            <a href="#" class="ico-item fa fa-envelope notice-alarm js__toggle_open" data-target="#message-popup"></a>
+            <a href="#" class="ico-item fa fa-envelope notice-alarm js__toggle_open" data-target="#message-popup">
+                <div id="notification" style="display: none; color: red;"></div>
+            </a>
             <a href="#" class="ico-item pulse"><span class="ico-item fa fa-bell notice-alarm js__toggle_open" data-target="#notification-popup"></span></a>
             <a href="#" class="ico-item fa fa-power-off js__logout"></a>
         </div>
@@ -387,70 +433,26 @@
         <!-- /.popup-title -->
         <div class="content">
             <ul class="notice-list">
-                <li>
-                    <a href="#">
-                        <span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-                        <span class="name">John Doe</span>
-                        <span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-                        <span class="time">10 min</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-                        <span class="name">Harry Halen</span>
-                        <span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-                        <span class="time">15 min</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-                        <span class="name">Thomas Taylor</span>
-                        <span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-                        <span class="time">30 min</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="avatar"><img src="http://placehold.it/128x128" alt=""></span>
-                        <span class="name">Jennifer</span>
-                        <span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-                        <span class="time">45 min</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="avatar"><img src="http://placehold.it/80x80" alt=""></span>
-                        <span class="name">Helen Candy</span>
-                        <span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-                        <span class="time">45 min</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="avatar"><img src="http://placehold.it/128x128" alt=""></span>
-                        <span class="name">Anna Cavan</span>
-                        <span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-                        <span class="time">1 hour ago</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="avatar bg-success"><i class="fa fa-user"></i></span>
-                        <span class="name">Jenny Betty</span>
-                        <span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-                        <span class="time">1 day ago</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="avatar"><img src="http://placehold.it/128x128" alt=""></span>
-                        <span class="name">Denise Peterson</span>
-                        <span class="desc">Amet odio neque nobis consequuntur consequatur a quae, impedit facere repellat voluptates.</span>
-                        <span class="time">1 year ago</span>
-                    </a>
-                </li>
+                
+                @{
+                    if (ViewData["ViewChatMessage"] != null)
+                    {
+                        var messages = ViewData["ViewChatMessage"] as List<TBViewChatMessage>;
+                        foreach (var item in messages.Where(m => m.IsRead == false))
+                        {
+                            <li>
+                                <div style="display:flex; flex-direction: row; justify-content:space-between">
+                                    <h3>@item.Message</h3>
+                                    <h3>@item.SenderName</h3>
+                                    <img style="width:10px; height:10px; border-radius: 50%;" src="@Helper.PathImageuser@item.SenderImage" alt="" />
+                                    <h4>@item.MessageeTime.ToString()</h4>
+                                </div>
+                            </li>
+                        }
+                    }
+                    
+                }
+                   
             </ul>
             <!-- /.notice-list -->
             <a href="#" class="notice-read-more">See more messages <i class="fa fa-angle-down"></i></a>
@@ -481,6 +483,9 @@
     <!--
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+
+   
+
     <script src="~/Admin/assets/scripts/jquery.min.js"></script>
     <script src="~/Admin/assets/scripts/modernizr.min.js"></script>
     <script src="~/Admin/assets/plugin/bootstrap/js/bootstrap.min.js"></script>
@@ -508,8 +513,29 @@
     <script src="~/Admin/assets/scripts/main.min.js"></script>
 
 
+    <script>
+        connection.on("UserConnected", (userName, profileImage) => {
+            setProfile(userName, profileImage);
+        });
+        connection.on("UserDisconnected", function (userName) {
+            removeUserFromList(userName);
+        });
 
-
+        connection.on("UnreadMessagesNotification", function (unreadCount) {
+            const notification = document.getElementById("notification");
+            if (unreadCount > 0) {
+                notification.style.display = "block";
+                notification.style.backgroundColor = "green";
+                notification.style.width = "5px";
+                notification.style.height = "5px";
+                notification.style.margin = "0px";
+                notification.style.padding = "0px";
+                notification.style.borderRadius = "50%";
+            } else {
+                notification.style.display = "none";
+            }
+        });
+    </script>
 
 
 

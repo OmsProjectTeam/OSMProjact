@@ -26,7 +26,7 @@
 
 
                     <div class="card-content">
-                        <form role="form" method="post" asp-controller="ShippingPrice" asp-action="Save" enctype="multipart/form-data">
+                        <form role="form" method="post" asp-controller="ShippingPrice" asp-action="SaveAr" enctype="multipart/form-data">
                             <div class="form-group">
                                 <input type="hidden" asp-for="@Model.ShippingPrice.DataEntry" class="form-control" value="@User.Identity.Name">
                                 <input type="hidden" asp-for="@Model.ShippingPrice.IdShipping" class="form-control">
@@ -35,109 +35,87 @@
 
                             </div>
 
-                            <div class="card-content">
-                                <div class="row small-spacing">
-                                    <div class="col-12 col-sm-4">
-                                        <div class="form-group ">
-                                            <label asp-for="@Model.ShippingPrice.IdTypeSystem" for="exampleInputEmail1">@ResourceWebAr.LbTypeSystem</label>
-                                            <select class="form-control" asp-for="@Model.ShippingPrice.IdTypeSystem" asp-items="@(new SelectList(ViewBag.TypeSystem,"IdTypeSystem","TypeSystem"))">
-                                            </select>
-                                            <span asp-validation-for="@Model.ShippingPrice.IdTypeSystem" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-4">
-                                        <div class="form-group ">
-                                            <label asp-for="@Model.ShippingPrice.IdCurrenciesExchangeRates" for="exampleInputEmail1">@ResourceWebAr.LbCountry</label>
-                                            <select class="form-control" asp-for="@Model.ShippingPrice.IdCurrenciesExchangeRates" asp-items="@(new SelectList(ViewBag.Currenc,"IdCurrenciesExchangeRates","Country"))">
-                                            </select>
-                                            <span asp-validation-for="@Model.ShippingPrice.IdCurrenciesExchangeRates" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-4">
-                                        <div class="form-group ">
-                                            <label asp-for="@Model.ShippingPrice.IdInformationCompanies" for="exampleInputEmail1">@ResourceWebAr.LbTypeSystem</label>
-                                            <select class="form-control" asp-for="@Model.ShippingPrice.IdInformationCompanies" asp-items="@(new SelectList(ViewBag.InformationCompanies,"IdInformationCompanies","CompanyName"))">
-                                            </select>
-                                            <span asp-validation-for="@Model.ShippingPrice.IdInformationCompanies" class="text-danger"></span>
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-
-                            </div>
-                            <div class="card-content">
-                                <div class="row small-spacing">
-                                    <div class="col-12 col-sm-4">
-                                        <div class="form-group ">
-                                            <label asp-for="@Model.ShippingPrice.TitleShipping" for="exampleInputEmail1">@ResourceWebAr.LTitleShipping</label>
-                                            <input asp-for="@Model.ShippingPrice.TitleShipping" type="text" placeholder="@ResourceWebAr.LTitleShipping ...." class="form-control" maxlength="300">
-                                            <span asp-validation-for="@Model.ShippingPrice.TitleShipping" class="text-danger"></span>
-                                            <span style="color:red"> <strong>@TempData["Country"]</strong></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-4">
-                                        <div class="form-group ">
-                                            <label asp-for="@Model.ShippingPrice.CoPricePerkgUnder10" for="exampleInputEmail1">@ResourceWebAr.LbCoPricePerkgUnder10</label>
-                                            <input asp-for="@Model.ShippingPrice.CoPricePerkgUnder10" type="text" placeholder="@ResourceWebAr.LbCoPricePerkgUnder10 ...." class="form-control" maxlength="20">
-                                            <span asp-validation-for="@Model.ShippingPrice.CoPricePerkgUnder10" class="text-danger"></span>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-sm-4">
-                                        <div class="form-group ">
-                                            <label asp-for="@Model.ShippingPrice.CoPricePerkgAbove10" for="exampleInputEmail1">@ResourceWebAr.LbCoPricePerkgAbove10</label>
-                                            <input asp-for="@Model.ShippingPrice.CoPricePerkgAbove10" type="text" placeholder="@ResourceWebAr.LbCoPricePerkgAbove10 ...." class="form-control" maxlength="20">
-                                            <span asp-validation-for="@Model.ShippingPrice.CoPricePerkgAbove10" class="text-danger"></span>
-
-                                        </div>
+                            <div class="row small-spacing">
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.ShippingPrice.IdTypeSystem" for="exampleInputEmail1">@ResourceWebAr.LbTypeSystem</label>
+                                        <select class="form-control" asp-for="@Model.ShippingPrice.IdTypeSystem" asp-items="@(new SelectList(ViewBag.TypeSystem,"IdTypeSystem","TypeSystem"))">
+                                        </select>
+                                        <span asp-validation-for="@Model.ShippingPrice.IdTypeSystem" class="text-danger"></span>
                                     </div>
                                 </div>
-
-                            </div>
-
-                            <div class="card-content">
-                                <div class="row small-spacing">
-                                    <div class="col-12 col-sm-3">
-                                        <div class="form-group ">
-                                            <label asp-for="@Model.ShippingPrice.ClintPricePerkgUnder10" for="exampleInputEmail1">@ResourceWebAr.LbClintPricePerkgUnder10</label>
-                                            <input asp-for="@Model.ShippingPrice.ClintPricePerkgUnder10" type="text" placeholder="@ResourceWebAr.LbClintPricePerkgUnder10 ...." class="form-control" maxlength="20">
-                                            <span asp-validation-for="@Model.ShippingPrice.ClintPricePerkgUnder10" class="text-danger"></span>
-                                        </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.ShippingPrice.IdCurrenciesExchangeRates" for="exampleInputEmail1">@ResourceWebAr.LbCountry</label>
+                                        <select class="form-control" asp-for="@Model.ShippingPrice.IdCurrenciesExchangeRates" asp-items="@(new SelectList(ViewBag.Currenc,"IdCurrenciesExchangeRates","Country"))">
+                                        </select>
+                                        <span asp-validation-for="@Model.ShippingPrice.IdCurrenciesExchangeRates" class="text-danger"></span>
                                     </div>
-                                    <div class="col-12 col-sm-3">
-                                        <div class="form-group ">
-                                            <label asp-for="@Model.ShippingPrice.ClintPricePerkgAbove10" for="exampleInputEmail1">@ResourceWebAr.LbClintPricePerkgAbove10</label>
-                                            <input asp-for="@Model.ShippingPrice.ClintPricePerkgAbove10" type="text" placeholder="@ResourceWebAr.LbClintPricePerkgAbove10 ...." class="form-control" maxlength="20">
-                                            <span asp-validation-for="@Model.ShippingPrice.ClintPricePerkgAbove10" class="text-danger"></span>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-3">
-                                        <div class="form-group ">
-                                            <div class="checkbox margin-bottom-20">
-                                                <div class="switch success"><input type="checkbox" asp-for="@Model.ShippingPrice.Active" id="switch-2" checked="checked"><label for="switch-2">@ResourceWebAr.LbActive</label></div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
                                 </div>
-
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.ShippingPrice.IdInformationCompanies" for="exampleInputEmail1">@ResourceWebAr.LbTypeSystem</label>
+                                        <select class="form-control" asp-for="@Model.ShippingPrice.IdInformationCompanies" asp-items="@(new SelectList(ViewBag.InformationCompanies,"IdInformationCompanies","CompanyName"))">
+                                        </select>
+                                        <span asp-validation-for="@Model.ShippingPrice.IdInformationCompanies" class="text-danger"></span>
+                                    </div>
+                                </div>
                             </div>
 
+                            <div class="row small-spacing">
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.ShippingPrice.TitleShipping" for="exampleInputEmail1">@ResourceWebAr.LTitleShipping</label>
+                                        <input asp-for="@Model.ShippingPrice.TitleShipping" type="text" placeholder="@ResourceWebAr.LTitleShipping ...." class="form-control" maxlength="300">
+                                        <span asp-validation-for="@Model.ShippingPrice.TitleShipping" class="text-danger"></span>
+                                        <span style="color:red"> <strong>@TempData["Country"]</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.ShippingPrice.CoPricePerkgUnder10" for="exampleInputEmail1">@ResourceWebAr.LbCoPricePerkgUnder10</label>
+                                        <input asp-for="@Model.ShippingPrice.CoPricePerkgUnder10" type="text" placeholder="@ResourceWebAr.LbCoPricePerkgUnder10 ...." class="form-control" maxlength="20">
+                                        <span asp-validation-for="@Model.ShippingPrice.CoPricePerkgUnder10" class="text-danger"></span>
 
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.ShippingPrice.CoPricePerkgAbove10" for="exampleInputEmail1">@ResourceWebAr.LbCoPricePerkgAbove10</label>
+                                        <input asp-for="@Model.ShippingPrice.CoPricePerkgAbove10" type="text" placeholder="@ResourceWebAr.LbCoPricePerkgAbove10 ...." class="form-control" maxlength="20">
+                                        <span asp-validation-for="@Model.ShippingPrice.CoPricePerkgAbove10" class="text-danger"></span>
 
-
-
-
-
-                            <div class="checkbox margin-bottom-20">
-                                <div class="switch success"><input type="checkbox" asp-for="@Model.ShippingPrice.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWebAr.lbCurrentState</label></div>
+                                    </div>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWebAr.lbSave</button>
+
+                            <div class="row small-spacing">
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.ShippingPrice.ClintPricePerkgUnder10" for="exampleInputEmail1">@ResourceWebAr.LbClintPricePerkgUnder10</label>
+                                        <input asp-for="@Model.ShippingPrice.ClintPricePerkgUnder10" type="text" placeholder="@ResourceWebAr.LbClintPricePerkgUnder10 ...." class="form-control" maxlength="20">
+                                        <span asp-validation-for="@Model.ShippingPrice.ClintPricePerkgUnder10" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group ">
+                                        <label asp-for="@Model.ShippingPrice.ClintPricePerkgAbove10" for="exampleInputEmail1">@ResourceWebAr.LbClintPricePerkgAbove10</label>
+                                        <input asp-for="@Model.ShippingPrice.ClintPricePerkgAbove10" type="text" placeholder="@ResourceWebAr.LbClintPricePerkgAbove10 ...." class="form-control" maxlength="20">
+                                        <span asp-validation-for="@Model.ShippingPrice.ClintPricePerkgAbove10" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <div class="checkbox margin-bottom-20">
+                                    <div class="switch success"><input type="checkbox" asp-for="@Model.ShippingPrice.Active" id="switch-2" checked="checked"><label for="switch-2">@ResourceWebAr.LbActive</label></div>
+                                </div>
+                                <div class="checkbox margin-bottom-20">
+                                    <div class="switch success"><input type="checkbox" asp-for="@Model.ShippingPrice.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWebAr.lbCurrentState</label></div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWebAr.lbSave</button>
+                            </div>
                         </form>
                     </div>
                     <!-- /.card-content -->

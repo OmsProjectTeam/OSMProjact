@@ -109,7 +109,63 @@ namespace Yara.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
         }
-        [Authorize(Roles = "Admin")]
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, TBTypeSystem slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.IdTypeSystem = model.TypeSystem.IdTypeSystem;
+				slider.TypeSystem = model.TypeSystem.TypeSystem;
+				slider.Active = model.TypeSystem.Active;
+				slider.DataEntry = model.TypeSystem.DataEntry;
+				slider.DateTimeEntry = model.TypeSystem.DateTimeEntry;
+				slider.CurrentState = model.TypeSystem.CurrentState;
+				if (slider.IdTypeSystem == 0 || slider.IdTypeSystem == null)
+				{
+					if (dbcontext.TBTypeSystems.Where(a => a.TypeSystem == slider.TypeSystem).ToList().Count > 0)
+					{
+						TempData["TypeSystem"] = ResourceWeb.VLTypeSystemDoplceted;
+						return RedirectToAction("AddTypeSystemAr", model);
+					}
+
+					var reqwest = iTypeSystem.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyTypeSystemAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iTypeSystem.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyTypeSystemAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+
+		[Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdTypeSystem)
         {
             var reqwistDelete = iTypeSystem.deleteData(IdTypeSystem);
@@ -129,5 +185,26 @@ namespace Yara.Areas.Admin.Controllers
 
 
         }
-    }
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int IdTypeSystem)
+		{
+			var reqwistDelete = iTypeSystem.deleteData(IdTypeSystem);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
+				return RedirectToAction("MyTypeSystemAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
+				return RedirectToAction("MyTypeSystemAr");
+
+			}
+			// تمرير التاسكات  من الادارة 
+			// استخدام نظام أجايا وجيرا 
+
+
+		}
+	}
 }

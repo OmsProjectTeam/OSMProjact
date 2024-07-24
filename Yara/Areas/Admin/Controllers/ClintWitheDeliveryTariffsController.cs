@@ -139,7 +139,76 @@ namespace Yara.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
         }
-        [Authorize(Roles = "Admin")]
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, TBClintWitheDeliveryTariffs slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.IdClintWitheDeliveryTariffs = model.ClintWitheDeliveryTariffs.IdClintWitheDeliveryTariffs;
+				slider.IdCityDeliveryTariffs = model.ClintWitheDeliveryTariffs.IdCityDeliveryTariffs;
+				slider.IdUserIntity = model.ClintWitheDeliveryTariffs.IdUserIntity;
+				slider.DescriptionClint = model.ClintWitheDeliveryTariffs.DescriptionClint;
+				slider.Nouts = model.ClintWitheDeliveryTariffs.Nouts;
+				slider.DataEntry = model.ClintWitheDeliveryTariffs.DataEntry;
+				slider.DateTimeEntry = model.ClintWitheDeliveryTariffs.DateTimeEntry;
+				slider.CurrentState = model.ClintWitheDeliveryTariffs.CurrentState;
+				if (slider.IdClintWitheDeliveryTariffs == 0 || slider.IdClintWitheDeliveryTariffs == null)
+				{
+					//if (dbcontext.TBClintWitheDeliveryTariffss.Where(a => a.IdCityDeliveryTariffs == slider.IdCityDeliveryTariffs).Where(a => a.IdCustomer == slider.IdCustomer).ToList().Count > 0)
+					//{
+					//    TempData["Customer"] = ResourceWeb.VLCustomerDoplceted;
+					//    return Redirect(returnUrl);
+					//}
+					//if (dbcontext.TBClintWitheDeliveryTariffss.Where(a => a.IdCityDeliveryTariffs == slider.IdCityDeliveryTariffs).Where(a => a.IdMerchant == slider.IdMerchant).ToList().Count > 0)
+
+					//{
+					//    TempData["Merchant"] = ResourceWeb.VLMerchantDoplceted;
+					//    return Redirect(returnUrl);
+					//}
+					if (dbcontext.TBClintWitheDeliveryTariffss.Where(a => a.DescriptionClint == slider.DescriptionClint).ToList().Count > 0)
+
+					{
+						TempData["DescriptionClint"] = ResourceWeb.VLDescriptionClintDoplceted;
+						return Redirect(returnUrl);
+					}
+					var reqwest = iClintWitheDeliveryTariffs.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyClintWitheDeliveryTariffsAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iClintWitheDeliveryTariffs.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyClintWitheDeliveryTariffsAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+
+		[Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdClintWitheDeliveryTariffs)
         {
             var reqwistDelete = iClintWitheDeliveryTariffs.deleteData(IdClintWitheDeliveryTariffs);
@@ -154,5 +223,21 @@ namespace Yara.Areas.Admin.Controllers
                 return RedirectToAction("MyClintWitheDeliveryTariffs");
             }
         }
-    }
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int IdClintWitheDeliveryTariffs)
+		{
+			var reqwistDelete = iClintWitheDeliveryTariffs.deleteData(IdClintWitheDeliveryTariffs);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
+				return RedirectToAction("MyClintWitheDeliveryTariffsAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
+				return RedirectToAction("MyClintWitheDeliveryTariffsAr");
+			}
+		}
+	}
 }

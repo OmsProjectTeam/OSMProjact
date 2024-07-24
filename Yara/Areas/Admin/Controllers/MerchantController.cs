@@ -145,7 +145,84 @@ namespace Yara.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
         }
-        [Authorize(Roles = "Admin")]
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, Merchant slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+
+				slider.Id = model.Merchant.Id;
+				slider.MerchantName = model.Merchant.MerchantName;
+				slider.MerchantMob = model.Merchant.MerchantMob;
+				slider.SmsAlert = model.Merchant.SmsAlert;
+				slider.UsDelivery = model.Merchant.UsDelivery;
+				slider.IsPublic = model.Merchant.IsPublic;
+				slider.CityId = model.Merchant.CityId;
+				slider.Bgw = model.Merchant.Bgw;
+				slider.Cities = model.Merchant.Cities;
+				slider.Hidden = model.Merchant.Hidden;
+				slider.CustomerId = model.Merchant.CustomerId;
+				slider.Outskirts = model.Merchant.Outskirts;
+				slider.Branch = model.Merchant.Branch;
+				slider.Sorting = model.Merchant.Sorting;
+				slider.Credit = model.Merchant.Credit;
+				slider.Bypass = model.Merchant.Bypass;
+				slider.UserId = model.Merchant.UserId;
+				slider.IdInformationCompanies = model.Merchant.IdInformationCompanies;
+				slider.Active = model.Merchant.Active;
+				slider.DataEntry = model.Merchant.DataEntry;
+				slider.DateTimeEntry = model.Merchant.DateTimeEntry;
+				slider.CurrentState = model.Merchant.CurrentState;
+				if (slider.Id == 0 || slider.Id == null)
+				{
+					if (dbcontext.Merchants.Where(a => a.MerchantName == slider.MerchantName).ToList().Count > 0)
+					{
+						TempData["MerchantName"] = ResourceWeb.VLMerchantNameDoplceted;
+						return RedirectToAction("AddMerchantAr", model);
+					}
+					if (dbcontext.Merchants.Where(a => a.MerchantMob == slider.MerchantMob).ToList().Count > 0)
+					{
+						TempData["MerchantMob"] = ResourceWeb.VLMerchantMobDoplceted;
+						return RedirectToAction("AddMerchantAr", model);
+					}
+					var reqwest = iMerchant.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyMerchantAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iMerchant.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyMerchantAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+
+		[Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdShipping)
         {
             var reqwistDelete = iMerchant.deleteData(IdShipping);
@@ -160,5 +237,21 @@ namespace Yara.Areas.Admin.Controllers
                 return RedirectToAction("MyMerchant");
             }
         }
-    }
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int IdShipping)
+		{
+			var reqwistDelete = iMerchant.deleteData(IdShipping);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
+				return RedirectToAction("MyMerchantAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
+				return RedirectToAction("MyMerchantAr");
+			}
+		}
+	}
 }

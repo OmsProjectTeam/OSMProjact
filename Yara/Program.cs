@@ -1,14 +1,23 @@
-﻿
+﻿  
+using Domin.Entity;
+using Yara.Areas.Admin.Controllers;
 using static Infarstuructre.BL.IIExchangeRate;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddSignalR();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<ViewmMODeElMASTER>();
 
 // إضافة خدمات إلى الحاوية
-builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<UserChatFilter>();
+});
+
+
 builder.Services.AddDbContext<MasterDbcontext>(options => {
 	options.UseSqlServer(
 		builder.Configuration.GetConnectionString("MasterConnection"),
@@ -35,6 +44,20 @@ builder.Services.AddAuthentication(options =>
 		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
 	};
 });
+
+builder.Services.AddCors(
+	c =>
+	{
+		c.AddPolicy("Allow",
+			policy =>
+			{
+				policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+			});
+	}
+
+);
+
+
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -88,6 +111,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 	options.SlidingExpiration = true;
 });
 
+builder.Services.AddScoped<UserChatFilter>();
 builder.Services.AddScoped<IIUserInformation, CLSUserInformation>();
 builder.Services.AddScoped<IIRolsInformation, CLSRolsInformation>();
 builder.Services.AddScoped<IITypesCompanies, CLSTBTypesCompanies>();
@@ -116,8 +140,31 @@ builder.Services.AddScoped<IIPaidings, CLSTBPaidings>();
 builder.Services.AddScoped<IIEmailAlartSetting, CLSTBEmailAlartSetting>();
 builder.Services.AddScoped<IITransfer, CLSTransfer>();
 builder.Services.AddScoped<IIShippingAddress, CLSShippingAddress>();
+builder.Services.AddScoped<IITypesOfRequest, CLSTBTypesOfRequest>();
+builder.Services.AddScoped<IITypesOfMessage, CLSTBTypesOfMessage>();
+builder.Services.AddScoped<IIFAQ, CLSTBFAQ>();
+builder.Services.AddScoped<IIFAQDescreption, CLSTBFAQDescreption>();
+builder.Services.AddScoped<IIFAQList, CLSTBFAQList>();
+builder.Services.AddScoped<IICustomerMessages, CLSTBCustomerMessages>();
+builder.Services.AddScoped<IIConnectAndDisconnect, CLSTBConnectAndDisconnect>();
+builder.Services.AddScoped<IISupportTicketType, CLSTBSupportTicketType>();
+builder.Services.AddScoped<IIMessageChat, CLSTBMessageChat>();
+builder.Services.AddScoped<IISupportTicketStatus, CLSTBSupportTicketStatus>();
+builder.Services.AddScoped<IISupportTicket, CLSTBSupportTicket>();
+builder.Services.AddTransient<ExternalDataService>();
 
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
 
 
 
@@ -171,18 +218,22 @@ app.MapControllerRoute(
 	name: "areas",
 	pattern: "{area:exists}/{controller=Accounts}/{action=Login}/{id?}"
 );
-
-app.MapControllerRoute(
-	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}"
-);
+app.UseCors(); 
+app.UseEndpoints(endpoints =>
+{
+	endpoints.MapControllerRoute(
+		name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
 
 app.UseSwagger();
-
+app.UseCors();
 app.UseSwaggerUI(c =>
 {
 	c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Shipping System V1");
 	c.RoutePrefix = "api-docs";
 });
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();

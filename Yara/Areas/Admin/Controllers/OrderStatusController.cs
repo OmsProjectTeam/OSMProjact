@@ -116,7 +116,62 @@ namespace Yara.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
         }
-        [Authorize(Roles = "Admin")]
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, OrderStatus slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.Id = model.OrderStatus.Id;
+				slider.Description = model.OrderStatus.Description;
+				slider.Role = model.OrderStatus.Role;
+				slider.DataEntry = model.OrderStatus.DataEntry;
+				slider.DateTimeEntry = model.OrderStatus.DateTimeEntry;
+				slider.CurrentState = model.OrderStatus.CurrentState;
+				if (slider.Id == 0 || slider.Id == null)
+				{
+					if (dbcontext.order_status.Where(a => a.Description == slider.Description).ToList().Count > 0)
+					{
+						TempData["Description"] = ResourceWeb.VLDescriptiondplceted;
+						return RedirectToAction("AddOrderStatusAr", model);
+					}
+
+					var reqwest = iOrderStatus.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyOrderStatusAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iOrderStatus.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyOrderStatusAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+		[Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int Id)
         {
             var reqwistDelete = iOrderStatus.deleteData(Id);
@@ -131,5 +186,22 @@ namespace Yara.Areas.Admin.Controllers
                 return RedirectToAction("MyOrderStatus");
             }
         }
-    }
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int Id)
+		{
+			var reqwistDelete = iOrderStatus.deleteData(Id);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
+				return RedirectToAction("MyOrderStatusAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
+				return RedirectToAction("MyOrderStatusAr");
+			}
+		}
+
+	}
 }

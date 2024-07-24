@@ -993,105 +993,189 @@ namespace Yara.Areas.Admin.Controllers
 		}
 
 
-		[Authorize(Roles = "Admin")]
+	
+
 		[HttpGet]
-		public async Task<IActionResult> AddEditRolesUser(string id)
+		[AllowAnonymous]
+		public async Task<IActionResult> GetUserByPhoneNumber(string phoneNumber)
+
+
+
+
 		{
-			var user = await _userManager.FindByIdAsync(id);
+			if (string.IsNullOrEmpty(phoneNumber))
+			{
+				return BadRequest("Phone number is required.");
+			}
+
+			//var user = await _userManager.Users
+			//							 .Where(u => u.PhoneNumber == phoneNumber)
+			//							 .FirstOrDefaultAsync();
+
+
+			var user = await _context.customers
+										 .Where(u => u.CustMob == phoneNumber)
+										 .FirstOrDefaultAsync();
+
+
+
 			if (user == null)
 			{
 				return NotFound();
 			}
 
-			var userRoles = await _userManager.GetRolesAsync(user);
-			var roles = _roleManager.Roles.ToList();
-
-			var model = new UserChingRole
+			var userData = new
 			{
-				UserId = user.Id,
-				UserName = user.UserName,
-				Roles = roles.Select(r => new SelectListItem
-				{
-					Value = r.Id,
-					Text = r.Name,
-					Selected = userRoles.Contains(r.Name)
-				}).ToList()
+				//Email = user.Email,
+				//UserName = user.UserName,
+				Name = user.CustName,
+				//Password = user.PasswordHash,
 			};
 
-			return View(model);
+			return Json(userData);
 		}
 
 
-		[HttpPost]
-		[Authorize(Roles = "Admin")]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> AddEditRolesUser(UserChingRole model)
+		[HttpGet]
+		[AllowAnonymous]
+		public async Task<IActionResult> GetUserByPhoneNumberMer(string phoneNumber)
+
+
+
+
 		{
-			if (ModelState.IsValid)
+			if (string.IsNullOrEmpty(phoneNumber))
 			{
-				var roles = _roleManager.Roles.ToList();
-				model.Roles = roles.Select(r => new SelectListItem
-				{
-					Value = r.Id,
-					Text = r.Name,
-					Selected = r.Id == model.SelectedRoleId
-				}).ToList();
-				return View("AddEditRolesUser", model);
+				return BadRequest("Phone number is required.");
 			}
 
-			var user = await _userManager.FindByIdAsync(model.UserId);
+			//var user = await _userManager.Users
+			//							 .Where(u => u.PhoneNumber == phoneNumber)
+			//							 .FirstOrDefaultAsync();
+
+
+			var user = await _context.Merchants
+										 .Where(u => u.MerchantMob == phoneNumber)
+										 .FirstOrDefaultAsync();
+
+
+
 			if (user == null)
 			{
 				return NotFound();
 			}
 
-			var userRoles = await _userManager.GetRolesAsync(user);
-			var selectedRole = await _roleManager.FindByIdAsync(model.SelectedRoleId);
-
-			if (selectedRole == null)
+			var userData = new
 			{
-				ModelState.AddModelError(string.Empty, "Role not found");
-				var roles = _roleManager.Roles.ToList();
-				model.Roles = roles.Select(r => new SelectListItem
-				{
-					Value = r.Id,
-					Text = r.Name,
-					Selected = r.Id == model.SelectedRoleId
-				}).ToList();
-				return View("AddEditRolesUser", model);
-			}
+				//Email = user.Email,
+				//UserName = user.UserName,
+				Name = user.MerchantName,
+				//Password = user.PasswordHash,
+			};
 
-			var removeResult = await _userManager.RemoveFromRolesAsync(user, userRoles);
-			if (!removeResult.Succeeded)
-			{
-				ModelState.AddModelError(string.Empty, "Failed to remove user roles");
-				var roles = _roleManager.Roles.ToList();
-				model.Roles = roles.Select(r => new SelectListItem
-				{
-					Value = r.Id,
-					Text = r.Name,
-					Selected = r.Id == model.SelectedRoleId
-				}).ToList();
-				return View("AddEditRolesUser", model);
-			}
-
-			var addResult = await _userManager.AddToRoleAsync(user, selectedRole.Name);
-			if (!addResult.Succeeded)
-			{
-				ModelState.AddModelError(string.Empty, "Failed to add user to the new role");
-				var roles = _roleManager.Roles.ToList();
-				model.Roles = roles.Select(r => new SelectListItem
-				{
-					Value = r.Id,
-					Text = r.Name,
-					Selected = r.Id == model.SelectedRoleId
-				}).ToList();
-				return View("AddEditRolesUser", model);
-			}
-
-			return RedirectToAction("Registers"); // Assuming you have an Index action in UserController
+			return Json(userData);
 		}
-	}
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> AddEditRolesUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var roles = _roleManager.Roles.ToList();
+
+            var model = new ViewmMODeElMASTER
+            {
+                UserId = user.Id,
+                UserName = user.UserName,
+                Roles1 = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = userRoles.Contains(r.Name)
+                }).ToList()
+            };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddEditRolesUser(ViewmMODeElMASTER model)
+        {
+            if (ModelState.IsValid)
+            {
+                var roles = _roleManager.Roles.ToList();
+                model.Roles1 = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = r.Id == model.SelectedRoleId
+                }).ToList();
+                return View("AddEditRolesUser", model);
+            }
+
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var selectedRole = await _roleManager.FindByIdAsync(model.SelectedRoleId);
+
+            if (selectedRole == null)
+            {
+                ModelState.AddModelError(string.Empty, "Role not found");
+                var roles = _roleManager.Roles.ToList();
+                model.Roles1 = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = r.Id == model.SelectedRoleId
+                }).ToList();
+                return View("AddEditRolesUser", model);
+            }
+
+            var removeResult = await _userManager.RemoveFromRolesAsync(user, userRoles);
+            if (!removeResult.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Failed to remove user roles");
+                var roles = _roleManager.Roles.ToList();
+                model.Roles1 = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = r.Id == model.SelectedRoleId
+                }).ToList();
+                return View("AddEditRolesUser", model);
+            }
+
+            var addResult = await _userManager.AddToRoleAsync(user, selectedRole.Name);
+            if (!addResult.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Failed to add user to the new role");
+                var roles = _roleManager.Roles.ToList();
+                model.Roles1 = roles.Select(r => new SelectListItem
+                {
+                    Value = r.Id,
+                    Text = r.Name,
+                    Selected = r.Id == model.SelectedRoleId
+                }).ToList();
+                return View("AddEditRolesUser", model);
+            }
+
+            return RedirectToAction("Registers"); // Assuming you have an Index action in UserController
+        }
+
+    }
 }
 
 

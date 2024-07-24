@@ -128,7 +128,68 @@ namespace Yara.Areas.Admin.Controllers
                 return Redirect(returnUrl);
             }
         }
-        [Authorize(Roles = "Admin")]
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> SaveAr(ViewmMODeElMASTER model, TBShippingPrice slider, List<IFormFile> Files, string returnUrl)
+		{
+			try
+			{
+				slider.IdShipping = model.ShippingPrice.IdShipping;
+				slider.IdTypeSystem = model.ShippingPrice.IdTypeSystem;
+				slider.IdInformationCompanies = model.ShippingPrice.IdInformationCompanies;
+				slider.IdCurrenciesExchangeRates = model.ShippingPrice.IdCurrenciesExchangeRates;
+				slider.TitleShipping = model.ShippingPrice.TitleShipping;
+				slider.CoPricePerkgUnder10 = model.ShippingPrice.CoPricePerkgUnder10;
+				slider.CoPricePerkgAbove10 = model.ShippingPrice.CoPricePerkgAbove10;
+				slider.ClintPricePerkgUnder10 = model.ShippingPrice.ClintPricePerkgUnder10;
+				slider.ClintPricePerkgAbove10 = model.ShippingPrice.ClintPricePerkgAbove10;
+				slider.Active = model.ShippingPrice.Active;
+				slider.DataEntry = model.ShippingPrice.DataEntry;
+				slider.DateTimeEntry = model.ShippingPrice.DateTimeEntry;
+				slider.CurrentState = model.ShippingPrice.CurrentState;
+				if (slider.IdShipping == 0 || slider.IdShipping == null)
+				{
+					if (dbcontext.TBShippingPrices.Where(a => a.TitleShipping == slider.TitleShipping).ToList().Count > 0)
+					{
+						TempData["TitleShipping"] = ResourceWeb.VLTitleShippingoplceted;
+						return RedirectToAction("AddShippingPriceAr", model);
+					}
+					var reqwest = iShippingPrice.saveData(slider);
+					if (reqwest == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyShippingPriceAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+				else
+				{
+					var reqestUpdate = iShippingPrice.UpdateData(slider);
+					if (reqestUpdate == true)
+					{
+						TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyShippingPriceAr");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
+			{
+				TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
+		}
+
+		[Authorize(Roles = "Admin")]
         public IActionResult DeleteData(int IdShipping)
         {
             var reqwistDelete = iShippingPrice.deleteData(IdShipping);
@@ -143,5 +204,21 @@ namespace Yara.Areas.Admin.Controllers
                 return RedirectToAction("MyShippingPrice");
             }
         }
-    }
+
+		[Authorize(Roles = "Admin")]
+		public IActionResult DeleteDataAr(int IdShipping)
+		{
+			var reqwistDelete = iShippingPrice.deleteData(IdShipping);
+			if (reqwistDelete == true)
+			{
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
+				return RedirectToAction("MyShippingPriceAr");
+			}
+			else
+			{
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
+				return RedirectToAction("MyShippingPriceAr");
+			}
+		}
+	}
 }
