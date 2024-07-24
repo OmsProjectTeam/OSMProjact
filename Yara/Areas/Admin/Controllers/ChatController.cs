@@ -57,7 +57,8 @@ namespace Yara.Areas.Admin.Controllers
                 return View(viewmMODeElMASTER);
             }
 			else { return View(null); }
-           
+
+            return View(viewmMODeElMASTER);
         }
 	}
 }
