@@ -157,7 +157,7 @@ namespace Yara.Areas.Admin.Controllers
                         {
                             var message = new MimeMessage();
                             message.From.Add(new MailboxAddress("New Order", emailSetting.MailSender));
-                            message.To.Add(new MailboxAddress("pritom", "saifaldin_s@hotmail.com"));
+                            message.To.Add(new MailboxAddress("saif aldin", "saifaldin_s@hotmail.com"));
                             message.Subject = "طلب جديد من :" + slider.DataEntry;
                             var builder = new BodyBuilder
                             {
@@ -338,7 +338,7 @@ namespace Yara.Areas.Admin.Controllers
 						{
 							var message = new MimeMessage();
 							message.From.Add(new MailboxAddress("New Order", emailSetting.MailSender));
-							message.To.Add(new MailboxAddress("pritom", "nohadking@hotmail.com"));
+							message.To.Add(new MailboxAddress("saif aldin", "nohadking@hotmail.com"));
 							message.Subject = "طلب جديد من :" + slider.DataEntry;
 							var builder = new BodyBuilder
 							{
@@ -469,12 +469,12 @@ namespace Yara.Areas.Admin.Controllers
 			var reqwistDelete = iOrderNew.deleteData(IdOrderNew);
 			if (reqwistDelete == true)
 			{
-				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
 				return RedirectToAction("MyOrderNewAr");
 			}
 			else
 			{
-				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
 				return RedirectToAction("MyOrderNewAr");
 			}
 		}

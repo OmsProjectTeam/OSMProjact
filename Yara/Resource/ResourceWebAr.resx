@@ -141,14 +141,29 @@
   <data name="LBAddCurrenciesExchangeRates" xml:space="preserve">
     <value>إضافة وتعديل العملات</value>
   </data>
+  <data name="LBAddCustomerMessages" xml:space="preserve">
+    <value>أضافة وتعديل مسجات العملاء</value>
+  </data>
   <data name="LbAddEditInformationCompanies" xml:space="preserve">
     <value>إضافة وتعديل بيانات الشركة</value>
+  </data>
+  <data name="LBAddEditSupportTicket" xml:space="preserve">
+    <value>إضافة وتعديل تذاكر الدعم </value>
   </data>
   <data name="LBAddEmailAlartSetting" xml:space="preserve">
     <value>إضافةو تعديل سيرفر التنبيهات </value>
   </data>
   <data name="LBAddExchangeRate" xml:space="preserve">
     <value>إضافة وتعديل سعر الصرف</value>
+  </data>
+  <data name="LBAddFAQ" xml:space="preserve">
+    <value>إضافة وتعديل التعليمات</value>
+  </data>
+  <data name="LBAddFAQDescreption" xml:space="preserve">
+    <value>اضافة وصف</value>
+  </data>
+  <data name="LBAddFAQList" xml:space="preserve">
+    <value>اضافة قائمة</value>
   </data>
   <data name="LBAddOrderCase" xml:space="preserve">
     <value>إضافة وتعديل حالة الطلب</value>
@@ -180,6 +195,12 @@
   <data name="LBAddShippingPrice" xml:space="preserve">
     <value>إضافة وتعديل الأسعار لأنظمة الشحن</value>
   </data>
+  <data name="LBAddSupportTicketStatus" xml:space="preserve">
+    <value>إضافة وتعديل حالة تذكرة الدعم </value>
+  </data>
+  <data name="LBAddSupportTicketType" xml:space="preserve">
+    <value>إضافة وتعديل نوع تذاكر الدعم </value>
+  </data>
   <data name="LBAddTaskStatus" xml:space="preserve">
     <value>إضافة وتعديل حالة المهمة</value>
   </data>
@@ -191,6 +212,12 @@
   </data>
   <data name="LBAddTypesCompanies" xml:space="preserve">
     <value>إضافة وتعديل فئات الشركة</value>
+  </data>
+  <data name="LBAddTypesOfMessage" xml:space="preserve">
+    <value>أضافة وتعديل أنواع المسجات </value>
+  </data>
+  <data name="LBAddTypesOfRequest" xml:space="preserve">
+    <value>إضافة وتعديل انواع الطلبات </value>
   </data>
   <data name="LBAddTypeSystem" xml:space="preserve">
     <value>إضافة وتعديل الأنظمة</value>
@@ -318,11 +345,17 @@
   <data name="LbDescription" xml:space="preserve">
     <value>المنطقة</value>
   </data>
+  <data name="LbDescription1" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
   <data name="Lbdescriptioncity" xml:space="preserve">
     <value>المدينة</value>
   </data>
   <data name="LbDescriptionClint" xml:space="preserve">
     <value>وصف العميل</value>
+  </data>
+  <data name="LbDescriptionen" xml:space="preserve">
+    <value>الوصف</value>
   </data>
   <data name="LbDescriptionOrder" xml:space="preserve">
     <value>وصف الطلب</value>
@@ -345,11 +378,23 @@
   <data name="LbExchangeRate" xml:space="preserve">
     <value>سعر الصرف</value>
   </data>
+  <data name="LbFAQ" xml:space="preserve">
+    <value>التعليمات</value>
+  </data>
+  <data name="LbFAQDescreption" xml:space="preserve">
+    <value>معرف وصف التعليمة</value>
+  </data>
+  <data name="LbFAQList" xml:space="preserve">
+    <value>قائمة السؤال</value>
+  </data>
   <data name="Lbfbid" xml:space="preserve">
     <value>fb</value>
   </data>
   <data name="LBFloor" xml:space="preserve">
     <value>الطابق</value>
+  </data>
+  <data name="LbFollowUpMail" xml:space="preserve">
+    <value>أميل المتابعة</value>
   </data>
   <data name="Lbfull_package" xml:space="preserve">
     <value>حزمة كاملة</value>
@@ -371,6 +416,15 @@
   </data>
   <data name="LbId" xml:space="preserve">
     <value>المعرف</value>
+  </data>
+  <data name="LbIdFAQ" xml:space="preserve">
+    <value>معرف التعليمة</value>
+  </data>
+  <data name="LbIdFAQDescreption" xml:space="preserve">
+    <value>معرف وصف السؤال</value>
+  </data>
+  <data name="LbIdFAQList" xml:space="preserve">
+    <value>معرف قائمة السؤال</value>
   </data>
   <data name="LbInformaition" xml:space="preserve">
     <value>المعلومات</value>
@@ -405,6 +459,9 @@
   <data name="LBLbRoles" xml:space="preserve">
     <value>الصلاحيات</value>
   </data>
+  <data name="LbListFAQ" xml:space="preserve">
+    <value>قائمة السؤال</value>
+  </data>
   <data name="Lblon" xml:space="preserve">
     <value>خط الطول</value>
   </data>
@@ -422,6 +479,9 @@
   </data>
   <data name="LbMerchant_name" xml:space="preserve">
     <value>اسم التاجر</value>
+  </data>
+  <data name="LbMessageDescription" xml:space="preserve">
+    <value>رسالة العميل </value>
   </data>
   <data name="lbMsgErrorLogin" xml:space="preserve">
     <value>خطأ في اسم المستخدم أو كلمة المرور .....!</value>
@@ -453,11 +513,23 @@
   <data name="LBMyCustomer" xml:space="preserve">
     <value>بيانات العملاء الفردية</value>
   </data>
+  <data name="LBMyCustomerMessages" xml:space="preserve">
+    <value>رسائل العملاء </value>
+  </data>
   <data name="LBMyEmailAlartSettingAr" xml:space="preserve">
     <value>أعدادات بريدي التنبيهات</value>
   </data>
   <data name="LBMyExchangeRate" xml:space="preserve">
     <value>سعر الصرف</value>
+  </data>
+  <data name="LbMyFAQ" xml:space="preserve">
+    <value>التعليمات</value>
+  </data>
+  <data name="LbMyFAQDescreption" xml:space="preserve">
+    <value>وصف التعليمات </value>
+  </data>
+  <data name="LbMyFAQList" xml:space="preserve">
+    <value>قائمة السؤال</value>
   </data>
   <data name="LBMYInformationCompanies" xml:space="preserve">
     <value>معلومات الشركات</value>
@@ -486,6 +558,15 @@
   <data name="LBMyShippingPrice" xml:space="preserve">
     <value>أسعار أنظمة الشحن</value>
   </data>
+  <data name="LBMYSupportTicket" xml:space="preserve">
+    <value>تذاكر الدعم</value>
+  </data>
+  <data name="lbMySupportTicketStatus" xml:space="preserve">
+    <value>حالة تذاكر الدعم </value>
+  </data>
+  <data name="LBMySupportTicketType" xml:space="preserve">
+    <value>أنوع تذاكر الدعم</value>
+  </data>
   <data name="LBMyTaskStatus" xml:space="preserve">
     <value>حالة المهمة</value>
   </data>
@@ -497,6 +578,12 @@
   </data>
   <data name="LBMyTypesCompanies" xml:space="preserve">
     <value>فئات الشركات</value>
+  </data>
+  <data name="LBMyTypesOfMessage" xml:space="preserve">
+    <value>أنواع المسجات </value>
+  </data>
+  <data name="LBMyTypesOfRequest" xml:space="preserve">
+    <value>أنواع الطلبات</value>
   </data>
   <data name="LBMyTypeSystem" xml:space="preserve">
     <value>الأنظمة</value>
@@ -621,6 +708,15 @@
   <data name="LBProfitsInformations" xml:space="preserve">
     <value>معلومات الأرباح</value>
   </data>
+  <data name="LbQuastion" xml:space="preserve">
+    <value>السؤال</value>
+  </data>
+  <data name="LbQuastionDesc" xml:space="preserve">
+    <value>وصف السؤال</value>
+  </data>
+  <data name="LbQuastionList" xml:space="preserve">
+    <value>قائمة السؤال</value>
+  </data>
   <data name="LbRate" xml:space="preserve">
     <value>سعر الصرف</value>
   </data>
@@ -681,8 +777,20 @@
   <data name="LBStreet" xml:space="preserve">
     <value>الشارع</value>
   </data>
+  <data name="LbSupportTicketNo" xml:space="preserve">
+    <value>رقم التذكرة</value>
+  </data>
+  <data name="LbSupportTicketStatus" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="LbSupportTicketType" xml:space="preserve">
+    <value>النوع </value>
+  </data>
   <data name="LbTaskStatus" xml:space="preserve">
     <value>حالة المهمة</value>
+  </data>
+  <data name="LbTicketDate" xml:space="preserve">
+    <value>تاريخ التذكرة</value>
   </data>
   <data name="LbTitle" xml:space="preserve">
     <value>العنوان</value>
@@ -701,6 +809,12 @@
   </data>
   <data name="LbTypesCompaniesM" xml:space="preserve">
     <value>أنواع الشركات التجارية</value>
+  </data>
+  <data name="LbTypesOfMessage" xml:space="preserve">
+    <value>نوع المسج</value>
+  </data>
+  <data name="LbTypesOfRequest" xml:space="preserve">
+    <value>النوع </value>
   </data>
   <data name="LbTypeSystem" xml:space="preserve">
     <value>النظام</value>
@@ -810,6 +924,9 @@
   <data name="VLExchangeRateDoplceted" xml:space="preserve">
     <value>تم إدخال العملة بالفعل. يرجى التحقق والمحاولة مرة أخرى لاحقا...!</value>
   </data>
+  <data name="VLFAQDoplceted" xml:space="preserve">
+    <value>تم إدخال السؤال مسبقا.. يرجى التأكد والمحاولة لاحقا..!</value>
+  </data>
   <data name="VLHxcodedoplceted" xml:space="preserve">
     <value>تم إدخال الرمز بالفعل، يرجى التحقق والمحاولة مرة أخرى لاحقًا...!</value>
   </data>
@@ -831,11 +948,23 @@
   <data name="VLSavedSuccessfully" xml:space="preserve">
     <value>تمت عملية الحفظ بنجاح</value>
   </data>
+  <data name="VLSupportTicketStatusDoplceted" xml:space="preserve">
+    <value>تم إدخال حالة التذكرة مسبقا يرجى التأكد وإعادة المحاولة  لاحقا ...!</value>
+  </data>
+  <data name="VLSupportTicketTypeDoplceted" xml:space="preserve">
+    <value>تم أضافة نوع تذكرة الدعم مسبقا يرجى التأكد وإعادة المحاولة لاحقا...!</value>
+  </data>
   <data name="VLTitleShippingoplceted" xml:space="preserve">
     <value>تم إدخال عنوان سعر الشحن. يرجى التحقق والمحاولة مرة أخرى لاحقا....!</value>
   </data>
   <data name="VLTypesCompaniesDoplceted" xml:space="preserve">
     <value>لقد تم بالفعل إدخال فئة الشركة. يرجى التحقق والمحاولة مرة أخرى لاحقا...!</value>
+  </data>
+  <data name="VLTypesOfMessageDoplceted" xml:space="preserve">
+    <value>تم إدخال نوع الرسالة مسبقا يرجى التأكد وإعادة المحاولة لاحقا ...</value>
+  </data>
+  <data name="VLTypesOfRequestDoplceted" xml:space="preserve">
+    <value>تم ادخال نوع الطلب مسبقا يرجى التأكد وإعادة المحاولة لاحقا ..!</value>
   </data>
   <data name="VLTypeSystemDeliveryDoplceted" xml:space="preserve">
     <value>نوع نظام التسليم مدرج بالفعل، يرجى التحقق والمحاولة مرة أخرى لاحقًا...!</value>

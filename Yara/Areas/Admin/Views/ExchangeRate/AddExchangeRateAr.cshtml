@@ -32,62 +32,30 @@
                                 <input type="hidden" asp-for="@Model.returnUrl" id="url">
 
                             </div>
-
-                            <div class="card-content">
-                                <div class="row small-spacing">
-                                    <div class="col-12 col-sm-3">
-                                        <div class="form-group ">
-                                            <label asp-for="@Model.ExchangeRate.IdCurrenciesExchangeRates" for="exampleInputEmail1">@ResourceWebAr.LbTypesCompanies</label>
-                                            <select class="form-control" asp-for="@Model.ExchangeRate.IdCurrenciesExchangeRates" asp-items="@(new SelectList(ViewBag.Currenc,"IdCurrenciesExchangeRates","Country"))">
-                                            </select>
-                                            <span asp-validation-for="@Model.ExchangeRate.IdCurrenciesExchangeRates" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-3">
-                                        <div class="form-group ">
-                                            <label asp-for="@Model.ExchangeRate.ToIdCurrenciesExchangeRates" for="exampleInputEmail1">@ResourceWebAr.LbTypesCompanies</label>
-                                            <select class="form-control" asp-for="@Model.ExchangeRate.ToIdCurrenciesExchangeRates" asp-items="@(new SelectList(ViewBag.Currenc,"IdCurrenciesExchangeRates","Country"))">
-                                            </select>
-                                            <span asp-validation-for="@Model.ExchangeRate.ToIdCurrenciesExchangeRates" class="text-danger"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-sm-3">
-                                        <div class="form-group ">
-                                            <label asp-for="@Model.ExchangeRate.Rate" for="exampleInputEmail1">@ResourceWebAr.LbCompanyName</label>
-                                            <input asp-for="@Model.ExchangeRate.Rate" type="text" placeholder="@ResourceWebAr.LbCompanyName ...." class="form-control" maxlength="300">
-                                            <span asp-validation-for="@Model.ExchangeRate.Rate" class="text-danger"></span>
-                                            <span style="color:red"> <strong>@TempData["ExchangeRate"]</strong></span>
-                                        </div>
-                                    </div>
-
-
-
+                            <div class="form-group ">
+                                <label asp-for="@Model.ExchangeRate.IdCurrenciesExchangeRates" for="exampleInputEmail1">@ResourceWebAr.LbTypesCompanies</label>
+                                <select class="form-control" asp-for="@Model.ExchangeRate.IdCurrenciesExchangeRates" asp-items="@(new SelectList(ViewBag.Currenc,"IdCurrenciesExchangeRates","Country"))">
+                                </select>
+                                <span asp-validation-for="@Model.ExchangeRate.IdCurrenciesExchangeRates" class="text-danger"></span>
+                            </div>
+                            <div class="form-group ">
+                                <label asp-for="@Model.ExchangeRate.ToIdCurrenciesExchangeRates" for="exampleInputEmail1">@ResourceWebAr.LbTypesCompanies</label>
+                                <select class="form-control" asp-for="@Model.ExchangeRate.ToIdCurrenciesExchangeRates" asp-items="@(new SelectList(ViewBag.Currenc,"IdCurrenciesExchangeRates","Country"))">
+                                </select>
+                                <span asp-validation-for="@Model.ExchangeRate.ToIdCurrenciesExchangeRates" class="text-danger"></span>
+                            </div>
+                            <div class="form-group ">
+                                <label asp-for="@Model.ExchangeRate.Rate" for="exampleInputEmail1">@ResourceWebAr.LbCompanyName</label>
+                                <input asp-for="@Model.ExchangeRate.Rate" type="text" placeholder="@ResourceWebAr.LbCompanyName ...." class="form-control" maxlength="300">
+                                <span asp-validation-for="@Model.ExchangeRate.Rate" class="text-danger"></span>
+                                <span style="color:red"> <strong>@TempData["ExchangeRate"]</strong></span>
+                            </div>
+                            <div class="form-group ">
+                                <div class="checkbox margin-bottom-20">
+                                    <div class="switch success"><input type="checkbox" asp-for="@Model.ExchangeRate.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWebAr.lbCurrentState</label></div>
                                 </div>
-
+                                <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWebAr.lbSave</button>
                             </div>
-
-
-
-
-
-
-
-                            <div class="card-content">
-                                <div class="row small-spacing">
-
-                                    <!-- /.col-xs-3 -->
-                                    <!-- /.col-xs-4 -->
-                                    <!-- /.col-xs-5 -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-
-
-                            <div class="checkbox margin-bottom-20">
-                                <div class="switch success"><input type="checkbox" asp-for="@Model.ExchangeRate.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWebAr.lbCurrentState</label></div>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWebAr.lbSave</button>
                         </form>
                     </div>
                     <!-- /.card-content -->

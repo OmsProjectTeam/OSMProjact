@@ -538,42 +538,52 @@ namespace Yara.Areas.Admin.Controllers
 			var reqwistDelete = iPaidings.deleteData(IdPaings);
 			if (reqwistDelete == true)
 			{
-				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
 				return RedirectToAction("MyPaidingAr");
 			}
 			else
 			{
-				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
 				return RedirectToAction("MyPaidingAr");
 			}
 		}
 
-		//public List<SelectListItem> GetCurrenciesSelectList(int defaultCurrencyID)
-		//{
-		//    var currencies = iCurrenciesTransactions.GetAll();
-		//    var selectList = currencies.Select(c => new SelectListItem
-		//    {
-		//        Value = c.IdCurrenciesExchangeRates.ToString(),
-		//        Text = c.Country,
-		//        Selected = (c.IdCurrenciesExchangeRates == defaultCurrencyID)
-		//    }).ToList();
-		//    return selectList;
-		//}
-		[HttpGet]
-        public IActionResult GetExchangeRate(int fromCurrencyId, int toCurrencyId, double revisedMoney)
+		
+
+        [HttpGet]
+        public IActionResult GetOrderDetails(int orderId, int fromCurrencyId, int toCurrencyId, double revisedMoney, bool isManual = false)
         {
             // Fetch the exchange rate from the database
             var exchangeRate = iExchangeRate.GetAll()
                               .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
                               .Rate;
 
-            var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
+            //var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
 
-            if (exchangeRate != null)
+            if (isManual)
             {
-                return Json(exchangeRateValue);
+                var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
+                return Json(new
+                {
+                    exchangedPrice = exchangeRateValue
+                });
             }
-            return Json("N/A");
+            else
+            {
+                var order = iOrderNew.GetById(orderId);
+                if (order != null)
+                {
+                    var finalRevisedMoney = order.CostPrice;
+                    var exchangedPrice = order.ExchangedPrice;
+
+                    return Json(new
+                    {
+                        revisedMoney = finalRevisedMoney,
+                        exchangedPrice = exchangedPrice
+                    });
+                }
+                return Json(null);
+            }
         }
     }
 }

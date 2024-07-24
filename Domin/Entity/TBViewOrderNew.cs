@@ -45,9 +45,5 @@ namespace Domin.Entity
         public string CatchReceiptNo { get; set; }
         public bool IsPaid { get; set; }
         public decimal ExchangedPrice { get; set; }
-
-
-
-
     }
 }

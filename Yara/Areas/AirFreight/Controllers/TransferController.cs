@@ -12,7 +12,8 @@ public class TransferController : Controller
 	MasterDbcontext dbcontext;
 	UserManager<ApplicationUser> userManager;
     IIExchangeRate iExchangeRate;
-    public TransferController(IIOrderNew iOrderNew, IITransfer iTransfer, IICurrenciesExchangeRates exchangeRates, MasterDbcontext dbcontext, UserManager<ApplicationUser> userManager, IIExchangeRate iExchangeRate1)
+	IIPaidings iPaidings;
+    public TransferController(IIOrderNew iOrderNew, IITransfer iTransfer, IICurrenciesExchangeRates exchangeRates, MasterDbcontext dbcontext, UserManager<ApplicationUser> userManager, IIExchangeRate iExchangeRate1, IIPaidings iPaidings1)
 	{
 		this.iOrderNew = iOrderNew;
 		this.iTransfer = iTransfer;
@@ -20,7 +21,8 @@ public class TransferController : Controller
 		this.dbcontext = dbcontext;
 		this.userManager = userManager;
         iExchangeRate = iExchangeRate1;
-	}
+        iPaidings = iPaidings1;
+    }
 
 	public async Task<IActionResult> MyTransfer()
 	{
@@ -44,8 +46,10 @@ public class TransferController : Controller
 
 		ViewBag.Currency = exchangeRates.GetAll();
 		ViewBag.Order = iOrderNew.GetAll();
+        ViewBag.Paidings = iPaidings.GetAll();
 
         vmodel.ListViewExchangeRate = iExchangeRate.GetAll();
+        vmodel.ListViewPaings = iPaidings.GetAll();
 
         // Set the default ToCurrencyID
         vmodel.ExchangeRate = new TBExchangeRate
@@ -74,8 +78,10 @@ public class TransferController : Controller
 
 		ViewBag.Currency = exchangeRates.GetAll();
 		ViewBag.Order = iOrderNew.GetAll();
+        ViewBag.Paidings = iPaidings.GetAll();
 
         vmodel.ListViewExchangeRate = iExchangeRate.GetAll();
+        vmodel.ListViewPaings = iPaidings.GetAll();
 
         // Set the default ToCurrencyID
         vmodel.ExchangeRate = new TBExchangeRate
@@ -264,12 +270,12 @@ public class TransferController : Controller
 		var reqwistDelete = iTransfer.deleteData(id);
 		if (reqwistDelete == true)
 		{
-			TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+			TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
 			return RedirectToAction("MyTransferAr");
 		}
 		else
 		{
-			TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+			TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
 			return RedirectToAction("MyTransferAr");
 		}
 	}
@@ -290,5 +296,64 @@ public class TransferController : Controller
             return Json(exchangeRateValue);
         }
         return Json("N/A");
+    }
+    //[HttpGet]
+    //public IActionResult GetPaidingsDetails(int paidingId, int fromCurrencyId, int toCurrencyId)
+    //{
+    //    // Fetch the exchange rate from the database
+    //    var exchangeRate = iExchangeRate.GetAll()
+    //                      .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
+    //                      .Rate;
+
+    //    var paiding = iPaidings.GetById(paidingId);
+    //    if (paiding != null)
+    //    {
+    //        var revisedMoney = paiding.ResivedMony;
+    //        var exchangedPrice = paiding.ExchangedPrice;
+    //        var finalExchangedPrice = revisedMoney * exchangedPrice;
+
+    //        return Json(new
+    //        {
+    //            revisedMoney = revisedMoney,
+    //            exchangedPrice = exchangedPrice,
+    //            finalExchangedPrice = finalExchangedPrice
+    //        });
+    //    }
+    //    return Json(null);
+    //}
+    [HttpGet]
+    public IActionResult GetOrderDetails(int paidingId, int fromCurrencyId, int toCurrencyId, double revisedMoney, bool isManual = false)
+    {
+        // Fetch the exchange rate from the database
+        var exchangeRate = iExchangeRate.GetAll()
+                          .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
+                          .Rate;
+
+        //var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
+
+        if (isManual)
+        {
+            var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
+            return Json(new
+            {
+                exchangedPrice = exchangeRateValue
+            });
+        }
+        else
+        {
+            var paiding = iPaidings.GetById(paidingId);
+            if (paiding != null)
+            {
+                var finalRevisedMoney = paiding.ResivedMony;
+                var exchangedPrice = paiding.ExchangedPrice;
+
+                return Json(new
+                {
+                    revisedMoney = finalRevisedMoney,
+                    exchangedPrice = exchangedPrice
+                });
+            }
+            return Json(null);
+        }
     }
 }

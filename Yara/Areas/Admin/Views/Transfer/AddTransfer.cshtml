@@ -29,9 +29,9 @@
                             <div class="row small-spacing">
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group">
-                                        <label asp-for="@Model.Transfer.IdOrderNew">@ResourceWeb.LbDescriptionOrder</label>
-                                        <select class="form-control" asp-for="@Model.Transfer.IdOrderNew" asp-items="@(new SelectList(ViewBag.Order, "IdOrderNew", "DescriptionOrder"))" id="selectedcompany"></select>
-                                        <span asp-validation-for="@Model.Transfer.IdOrderNew" class="text-danger"></span>
+                                        <label asp-for="@Model.Paing.IdPaings">@ResourceWeb.LbDescriptionOrder</label>
+                                        <select class="form-control" asp-for="@Model.Paing.IdPaings" asp-items="@(new SelectList(ViewBag.Paidings, "IdPaings", "DescriptionOrder"))" id="paidingId"></select>
+                                        <span asp-validation-for="@Model.Paing.IdPaings" class="text-danger"></span>
 
                                     </div>
                                 </div>
@@ -93,12 +93,6 @@
                             </div>
 
                         </div>
-                        @* <div class="card-content">
-                            <div class="row small-spacing">
-                                
-                            </div>
-
-                        </div> *@
 
                         <div class="form-group">
                             <p><input type="file" accept="image/*" name="Files" id="file" onchange="loadFile(event)" style="display: none;"></p>
@@ -165,13 +159,71 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
+            console.log("Document is ready");
             $('.select2_1').select2({
                 placeholder: "Select an option",
                 allowClear: true
             });
+            // Bind change event to the selected company
+            $('#paidingId').change(function () {
+                updateCosting(false);
+            });
+            // Bind change event to the selected company
+            $('#toCurrency').change(function () {
+                updateCosting(false);
+            });
+            // Bind change event to the revisedMoney input field
+            $('#revisedMoney').on('input', function () {
+                updateCosting(true); // Pass true to indicate manual input
+            });
+
+            function updateCosting(isManual) {
+
+                const paidingId = $('#paidingId').val();
+                const revisedMoney = $('#revisedMoney').val();
+                const toCurrency = $('#toCurrency').val();
+
+                console.log("Updating costing");
+                console.log("isManual: ", isManual);
+                console.log("paidingId: ", paidingId);
+                console.log("revisedMoney: ", revisedMoney);
+                console.log("toCurrency: ", toCurrency);
+
+                $.ajax({
+                    url: '@Url.Action("GetOrderDetails", "Transfer")',
+                    data: {
+                        toCurrencyId: toCurrency,
+                        fromCurrencyId: 1,
+                        revisedMoney: revisedMoney,
+                        paidingId: paidingId,
+                        isManual: isManual
+                    },
+                    success: function (data) {
+                        console.log("AJAX success, data: ", data);
+                        if (data) {
+                            $('#exchangePrice').val(data.exchangedPrice);
+                            // $('#revisedMoney').val(data.revisedMoney);
+                            if (!isManual) {
+                                $('#revisedMoney').val(data.revisedMoney);
+                            }
+                        } else {
+                            $('#exchangePrice').val('');
+                            $('#revisedMoney').val('');
+                        }
+                    },
+                    error: function () {
+                        alert('Error! Please try again.');
+                        console.log("AJAX error");
+                    }
+                });
+            }
         });
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
     </script>
-    <script>
+    @* <script>
         $(document).ready(function () {
             console.log("Document is ready");
             $('.select2_1').select2({
@@ -252,7 +304,57 @@
             var image = document.getElementById('output');
             image.src = URL.createObjectURL(event.target.files[0]);
         };
-    </script>
+    </script> *@
+    @* <script>
+        $(document).ready(function () {
+            console.log("Document is ready");
+            $('.select2_1').select2({
+                placeholder: "Select an option",
+                allowClear: true
+            });
+            // Bind change event to the selected company
+            $('#paidingId').change(function () {
+                updateCosting();
+            });
+            // Bind change event to the selected company
+            $('#toCurrency').change(function () {
+                updateCosting();
+            });
+
+            function updateCosting() {
+
+                const paidingId = $('#paidingId').val();
+                const revisedMoney = $('#revisedMoney').val();
+                const toCurrency = $('#toCurrency').val();
+
+                console.log("toCurrency is: ", toCurrency);
+                console.log("paidingId is: ", paidingId);
+
+                $.ajax({
+                    url: '@Url.Action("GetPaidingsDetails", "Transfer")',
+                    data: { toCurrencyId: toCurrency, fromCurrencyId: 1, revisedMoney: revisedMoney, paidingId: paidingId },
+                    success: function (data) {
+                        console.log("AJAX success, data: ", data);
+                        if (data) {
+                            $('#exchangePrice').val(data.exchangedPrice);
+                            $('#revisedMoney').val(data.revisedMoney);
+                        } else {
+                            $('#exchangePrice').val('');
+                            $('#revisedMoney').val('');
+                        }
+                    },
+                    error: function () {
+                        alert('Error! Please try again.');
+                        console.log("AJAX error");
+                    }
+                });
+            }
+        });
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script> *@
 }
 
 

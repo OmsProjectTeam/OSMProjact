@@ -553,12 +553,12 @@ namespace Yara.Areas.AirFreight.Controllers
 			var reqwistDelete = iPaidings.deleteData(IdPaings);
 			if (reqwistDelete == true)
 			{
-				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
 				return RedirectToAction("MyPaidingAr");
 			}
 			else
 			{
-				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
 				return RedirectToAction("MyPaidingAr");
 			}
 		}
@@ -578,6 +578,66 @@ namespace Yara.Areas.AirFreight.Controllers
                 return Json(exchangeRateValue);
             }
             return Json("N/A");
+        }
+        //[HttpGet]
+        //public IActionResult GetOrderDetails(int orderId, int fromCurrencyId, int toCurrencyId)
+        //{
+        //    // Fetch the exchange rate from the database
+        //    var exchangeRate = iExchangeRate.GetAll()
+        //                      .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
+        //                      .Rate;
+
+        //    var order = iOrderNew.GetById(orderId);
+        //    if (order != null)
+        //    {
+        //        var revisedMoney = order.CostPrice;
+        //        var exchangedPrice = order.ExchangedPrice;
+        //        var finalExchangedPrice = revisedMoney * exchangedPrice;
+
+        //        return Json(new
+        //        {
+        //            revisedMoney = revisedMoney,
+        //            exchangedPrice = exchangedPrice,
+        //            finalExchangedPrice = finalExchangedPrice
+        //        });
+        //    }
+        //    return Json(null);
+        //}
+
+        [HttpGet]
+        public IActionResult GetOrderDetails(int orderId, int fromCurrencyId, int toCurrencyId, double revisedMoney, bool isManual = false)
+        {
+            // Fetch the exchange rate from the database
+            var exchangeRate = iExchangeRate.GetAll()
+                              .FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
+                              .Rate;
+
+            //var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
+
+            if (isManual)
+            {
+                var exchangeRateValue = exchangeRate * (decimal)revisedMoney;
+                return Json(new
+                {
+                    exchangedPrice = exchangeRateValue
+                });
+            }
+            else
+            {
+                var order = iOrderNew.GetById(orderId);
+                if (order != null)
+                {
+                    var finalRevisedMoney = order.CostPrice;
+                    var exchangedPrice = order.ExchangedPrice;
+
+                    return Json(new
+                    {
+                        revisedMoney = finalRevisedMoney,
+                        exchangedPrice = exchangedPrice
+                    });
+                }
+                return Json(null);
+            }
         }
 
     }

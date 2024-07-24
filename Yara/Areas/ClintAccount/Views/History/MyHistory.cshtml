@@ -1,0 +1,210 @@
+﻿@model ViewmMODeElMASTER
+@{
+    ViewData["Title"] = ResourceWeb.LbHistory;
+    Layout = "~/Areas/ClintAccount/Views/Shared/_LayoutClint.cshtml";
+}
+
+
+<div class="col-xs-12">
+    <div class="box-content">
+        <ul class="list-inline">
+            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LbHistory</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="ClintAccount" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
+            <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
+            <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
+        </ul>
+        <!-- /.box-title -->
+        <div class="dropdown js__drop_down">
+            @* <a asp-area="merchantAccount" asp-controller="CustomerMessages" asp-action="AddCustomerMessages"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a> *@
+        </div>
+        <!-- /.dropdown js__dropdown -->
+        <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="rootwizard-progress">
+                        <div class="tab-header">
+                            <div class="navbar">
+                                <span style="color:royalblue"> <strong>@TempData["Saved successfully"]</strong></span>
+                                <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
+                                <div class="navbar-inner">
+                                    <ul>
+                                        <li><a href="#tab-progress-1" data-toggle="tab">@ResourceWeb.LbInformaition</a></li>
+
+                                        <li><a href="#tab-progress-3" data-toggle="tab">@ResourceWeb.LbOpration</a></li>
+                                        @*  <li><a href="#tab-progress-4" data-toggle="tab">Forth</a></li>
+                                        <li><a href="#tab-progress-5" data-toggle="tab">Fifth</a></li> *@
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content">
+                            <div id="bar" class="progress">
+                                <div class="progress-bar active progress-bar-info progress-bar-striped bar"></div>
+                            </div>
+                            <div class="tab-pane" id="tab-progress-1">
+                                <div class="table-responsive">
+                                    <div style="overflow-x:auto;">
+                                        <table id="example" class="table table-striped table-bordered table-hover display dataTable responsive" style="width: 100%;" role="grid" aria-describedby="example_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th>@ResourceWeb.LbId</th>
+                                                    <th>@ResourceWeb.LbDescriptionOrder</th>
+                                                    <th>@ResourceWeb.LbDescriptionClint</th>
+                                                    <th>@ResourceWeb.LbNikeNAme</th>
+                                                    <th>@ResourceWeb.LbOrderDate</th>
+                                                    <th>@ResourceWeb.LBOrderStatus</th>
+                                                    <th>@ResourceWeb.LbWeight</th>
+                                                    <th>@ResourceWeb.LbCostPrice</th>
+                                                    <th>@ResourceWeb.LbPrice</th>
+                                                    <th>@ResourceWeb.LbExchangedPrice</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.NewOrders)
+                                                {
+                                                    <tr role="row" class="odd">
+                                                        <td>@item.IdOrderNew</td>
+                                                        <td class="truncate-50">@item.DescriptionOrder</td>
+                                                        <td class="truncate-50">@item.DescriptionClint</td>
+                                                        <td class="truncate-50">@item.NikeNAme</td>
+                                                        <td class="truncate-50">@item.OrderDate</td>
+                                                        <td class="truncate-50">@item.dorderStatus</td>
+                                                        <td class="truncate-50">@item.Weight</td>
+                                                        <td class="truncate-50">@item.CostPrice</td>
+                                                        <td class="truncate-50">@item.Price</td>
+                                                        <td class="truncate-50">@item.ExchangedPrice</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="tab-progress-3">
+                                <div class="table-responsive">
+                                    <div style="overflow-x:auto;">
+                                        <table id="example2" class="table table-striped table-bordered display dataTable table-responsive" style="width: 100%;" role="grid" aria-describedby="example_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th>@ResourceWeb.LbId</th>
+                                                    <th>@ResourceWeb.LBCustomers</th>
+                                                    <th>@ResourceWeb.Lbcust_mob</th>
+                                                    @* <th>@ResourceWeb.Lbcust_mob2</th> *@
+                                                    <th>@ResourceWeb.LbNikeNAme</th>
+                                                    <th>@ResourceWeb.LbDescription</th>
+                                                    <th>@ResourceWeb.LbCity</th>
+                                                    <th>@ResourceWeb.Lbcust_landmark</th>
+                                                    <th>@ResourceWeb.Lbwith_delivery</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.OldOrders)
+                                                {
+                                                    <tr role="row" class="odd">
+                                                        <td>@item.id</td>
+                                                        <td class="truncate-50">@item.cust_name</td>
+                                                        <td class="truncate-50">@item.cust_mob</td>
+                                                        @* <td class="truncate-50">@item.cust_mob2</td> *@
+                                                        <td class="truncate-50">@item.NikeNAme</td>
+                                                        <td class="truncate-50">@item.description</td>
+                                                        <td class="truncate-50">@item.AreaName</td>
+                                                        <td class="truncate-50">@item.cust_landmark</td>
+                                                        <td class="truncate-50">@item.with_delivery</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="pager wizard">
+                                <li class="previous"><a href="javascript:void(0)">Previous</a></li>
+                                <li class="next"><a href="javascript:void(0)">Next</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 4 of 4 entries (filtered from 57 total entries)</div>
+            </div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example_previous"><a href="#" aria-controls="example" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button next disabled" id="example_next"><a href="#" aria-controls="example" data-dt-idx="2" tabindex="0">Next</a></li></ul></div></div>
+        </div>
+    </div>
+</div>
+<!-- /.box-content -->
+<span style="color:royalblue"> <strong>@TempData["Saved successfully"]</strong></span>
+<span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
+
+@* <img src="~/images/user gide/CustomerMessages.png" width="1920" height="1077" /> *@
+
+@section Scripts
+{
+    <!-- Data Tables -->
+    <script src="~/Admin/assets/plugin/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/Admin/assets/plugin/datatables/media/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Admin/assets/plugin/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Admin/assets/plugin/datatables/extensions/Responsive/js/responsive.bootstrap.min.js"></script>
+    <script src="~/Admin/assets/scripts/datatables.demo.min.js"></script>
+    <script src="~/Admin/assets/plugin/form-wizard/prettify.js"></script>
+    <script src="~/Admin/assets/plugin/form-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="~/Admin/assets/plugin/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/Admin/assets/scripts/form.wizard.init.min.js"></script>
+
+
+    <script>
+        $(function () {
+            $("#example2").DataTable().fnDestroy();
+            $('#example2').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $("#example3").DataTable().fnDestroy();
+            $('#example3').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+            });
+        });
+
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // Function to truncate text to a specified length
+            function truncateText(text, maxLength) {
+                if (text.length > maxLength) {
+                    return text.substring(0, maxLength) + '...'; // Add ellipsis if text exceeds maxLength
+                } else {
+                    return text;
+                }
+            }
+
+            // Loop through each table cell with class 'truncate-50'
+            $('.truncate-50').each(function () {
+                var text = $(this).text(); // Get the text content of the cell
+                var truncatedText = truncateText(text, 100); // Truncate the text to 50 characters
+                $(this).text(truncatedText); // Set the truncated text back to the cell
+            });
+        });
+    </script>
+
+
+}
+
+

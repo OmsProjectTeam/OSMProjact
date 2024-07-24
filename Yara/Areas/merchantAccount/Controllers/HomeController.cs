@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure;
+using Domin.Entity;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Yara.Areas.merchantAccount.Controllers
 {
@@ -8,35 +11,67 @@ namespace Yara.Areas.merchantAccount.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         IIUserInformation iUserInformation;
-
-        public HomeController(UserManager<ApplicationUser> userManager, IIUser iUser, IIUserInformation iUserInformation1)
+		private readonly IIOrder iOrder;
+		private readonly IIOrderNew iOrderNew;
+		public HomeController(UserManager<ApplicationUser> userManager, IIUser iUser, IIUserInformation iUserInformation1, IIOrder iOrder, IIOrderNew iOrderNew)
         {
             _userManager = userManager;
             iUserInformation = iUserInformation1;
-        }
+			this.iOrder = iOrder;
+			this.iOrderNew = iOrderNew;
+		}
         public async Task<IActionResult> Index(string userId)
         {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            var userd = vmodel.sUser = iUserInformation.GetById(userId);
 
+            var user = await _userManager.FindByIdAsync(userId);
+            //var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return NotFound();
 
+            string phoneNumber = user.PhoneNumber;
+            if (!string.IsNullOrEmpty(phoneNumber))
+            {
+                vmodel.NewOrders = (await iOrderNew.GetOrdersByPhoneAsync(phoneNumber)).ToList();
+                vmodel.OldOrders = (await iOrder.GetOrdersByPhoneAsync(phoneNumber)).ToList();
+            }
 
-            return View();
+            return View(vmodel);
         }
 
-		public async Task<IActionResult> IndexAr()
+		public async Task<IActionResult> IndexAr(string userId)
 		{
-			//var user = await _userManager.GetUserAsync(User);
-			//if (user == null)
-			//    return NotFound();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            var userd = vmodel.sUser = iUserInformation.GetById(userId);
 
-			//var role = await _userManager.GetRolesAsync(user);
+            var user = await _userManager.FindByIdAsync(userId);
+            //var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return NotFound();
 
-			//ViewBag.UserName = user.UserName;
-			//ViewBag.UserId = user.Id;
-			//ViewBag.UserImage = user.ImageUser;
-			//ViewBag.Name = user.Name;
-			//ViewBag.UserRole = role[0];
-			return View();
-		}
+            string phoneNumber = user.PhoneNumber;
+            if (!string.IsNullOrEmpty(phoneNumber))
+            {
+                vmodel.NewOrders = (await iOrderNew.GetOrdersByPhoneAsync(phoneNumber)).ToList();
+                vmodel.OldOrders = (await iOrder.GetOrdersByPhoneAsync(phoneNumber)).ToList();
+            }
 
+            return View(vmodel);
+        }
+
+		//[HttpPost("GetOrdersByPhone/{phoneNumber}")]
+		//public async Task<ActionResult<IEnumerable<TBViewOrderNew>>> GetNewOrdersByPhone(string phoneNumber)
+		//{
+		//		var orders = await iOrderNew.GetOrdersByPhoneAsync(phoneNumber);
+				
+		//		return Ok(orders);
+		//}
+		//public async Task<ActionResult<IEnumerable<TBViewOrder>>> GetOldOrdersByPhone(string phoneNumber)
+		//{
+		//	var orders = await iOrder.GetOrdersByPhoneAsync(phoneNumber);
+
+		//	return Ok(orders);
+		//}
 	}
 }

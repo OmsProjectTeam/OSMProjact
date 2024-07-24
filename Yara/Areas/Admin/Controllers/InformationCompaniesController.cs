@@ -424,12 +424,12 @@ namespace Yara.Areas.Admin.Controllers
 			var reqwistDelete = iInformationCompanies.deleteData(IdInformationCompanies);
 			if (reqwistDelete == true)
 			{
-				TempData["Saved successfully"] = ResourceWeb.VLdELETESuccessfully;
+				TempData["Saved successfully"] = ResourceWebAr.VLdELETESuccessfully;
 				return RedirectToAction("MYInformationCompaniesAr");
 			}
 			else
 			{
-				TempData["ErrorSave"] = ResourceWeb.VLErrorDeleteData;
+				TempData["ErrorSave"] = ResourceWebAr.VLErrorDeleteData;
 				return RedirectToAction("MYInformationCompaniesAr");
 			}
 		}
