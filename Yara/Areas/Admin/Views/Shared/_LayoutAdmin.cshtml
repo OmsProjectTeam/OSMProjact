@@ -46,13 +46,32 @@
     <script src="~/js/signalr.min.js"></script>
 
     <script>
-        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+        var connection;
 
-        connection.start().then(function () {
-            console.log("Connection established.");
-        }).catch(function (err) {
-            return console.error(err.toString());
-        });
+        // دالة لإنشاء الاتصال
+        function createConnection() {
+            connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+            connection.start().then(function () {
+                console.log("SignalR connected");
+                // حفظ حالة الاتصال في Local Storage
+                localStorage.setItem('signalRConnected', 'true');
+            }).catch(function (err) {
+                console.error(err.toString());
+            });
+
+            // جعل الاتصال متاحاً عالمياً
+            window.signalRConnection = connection;
+        }
+
+        // تحقق مما إذا كان الاتصال موجودًا بالفعل في Local Storage
+        if (!localStorage.getItem('signalRConnected')) {
+            createConnection();
+        } else {
+            console.log("SignalR connection already exists");
+            // إعادة استخدام الاتصال الحالي
+            createConnection();
+        }
     </script>
 
 
@@ -464,6 +483,8 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
+   
+
     <script src="~/Admin/assets/scripts/jquery.min.js"></script>
     <script src="~/Admin/assets/scripts/modernizr.min.js"></script>
     <script src="~/Admin/assets/plugin/bootstrap/js/bootstrap.min.js"></script>
@@ -506,8 +527,9 @@
                 notification.style.backgroundColor = "green";
                 notification.style.width = "5px";
                 notification.style.height = "5px";
+                notification.style.margin = "0px";
+                notification.style.padding = "0px";
                 notification.style.borderRadius = "50%";
-                notification.textContent = `${unreadCount}`;
             } else {
                 notification.style.display = "none";
             }

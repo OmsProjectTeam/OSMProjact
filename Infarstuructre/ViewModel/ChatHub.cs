@@ -75,6 +75,10 @@ namespace Infarstuructre.ViewModel
             var reciverId = userd.Id;
             var senderId = Context.UserIdentifier;
 
+            var currentUserName = Context.User.Identity.Name;
+            var currentUserProfileImage = GetProfileImageFromDatabase(currentUserName);
+			await Clients.Group("Admins").SendAsync("ReceiveMessage", currentUserName, message, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
+
             var chatMsg = new TBMessageChat
             {
                 Message = message,
@@ -85,10 +89,6 @@ namespace Infarstuructre.ViewModel
                 CurrentState = true,
             };
             iMessageChat.saveData(chatMsg);
-
-            var currentUserName = Context.User.Identity.Name;
-            var currentUserProfileImage = GetProfileImageFromDatabase(currentUserName);
-			await Clients.Group("Admins").SendAsync("ReceiveMessage", currentUserName, message, currentUserProfileImage, DateTime.Now.ToString("HH:mm"));
         }
 
         public async Task SendMessageToClients(string message, string to)
@@ -99,28 +99,28 @@ namespace Infarstuructre.ViewModel
             var reciverId = userd.Id;
             var senderId = Context.UserIdentifier;
 
-            var chatMsg = new TBMessageChat
-            {
-                Message = message,
-                ReciverId = reciverId,
-                SenderId = senderId,
-                IsRead = false,
-                MessageeTime = DateTime.Now,
-                CurrentState = true,
-            };
-            iMessageChat.saveData(chatMsg);
-
             var currentUserName = Context.User.Identity.Name;
             var currentUserProfileImage = GetProfileImageFromDatabase(currentUserName);
             var rec = iConnectAndDisconnect.GetByName(to);
 
             if (rec != null) 
             {
-                await Clients.All.SendAsync("ReceiveMessage", currentUserName, message, DateTime.Now.ToString("HH:mm"));
+                await Clients.All.SendAsync("ReceiveMessage", currentUserName, message, DateTime.UtcNow.ToString("HH:mm"));
                 var unreadCount = await dbcontext.TBMessageChats
                .CountAsync(m => m.ReciverId == to && !m.IsRead);
 
                 await Clients.User(rec.ConnectId).SendAsync("UnreadMessagesNotification", unreadCount);
+
+                var chatMsg = new TBMessageChat
+                {
+                    Message = message,
+                    ReciverId = reciverId,
+                    SenderId = senderId,
+                    IsRead = false,
+                    MessageeTime = DateTime.Now,
+                    CurrentState = true,
+                };
+                iMessageChat.saveData(chatMsg);
             }
 
 

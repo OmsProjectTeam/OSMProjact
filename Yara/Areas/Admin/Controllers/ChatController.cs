@@ -26,7 +26,7 @@ namespace Yara.Areas.Admin.Controllers
             var currentUserId = iUserManager.GetUserId(User);
 
 			viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
-
+			
 
             return View(viewmMODeElMASTER);
 		}

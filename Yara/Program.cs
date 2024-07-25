@@ -4,7 +4,7 @@ using Yara.Areas.Admin.Controllers;
 using static Infarstuructre.BL.IIExchangeRate;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddSignalR();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<ViewmMODeElMASTER>();
@@ -44,6 +44,20 @@ builder.Services.AddAuthentication(options =>
 		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
 	};
 });
+
+builder.Services.AddCors(
+	c =>
+	{
+		c.AddPolicy("Allow",
+			policy =>
+			{
+				policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+			});
+	}
+
+);
+
+
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -140,6 +154,16 @@ builder.Services.AddScoped<IISupportTicket, CLSTBSupportTicket>();
 
 
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
 
 
 
@@ -149,7 +173,7 @@ builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddHttpClient();
-builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -193,21 +217,22 @@ app.MapControllerRoute(
 	name: "areas",
 	pattern: "{area:exists}/{controller=Accounts}/{action=Login}/{id?}"
 );
-
+app.UseCors(); 
 app.UseEndpoints(endpoints =>
 {
 	endpoints.MapControllerRoute(
 		name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
-		endpoints.MapHub<ChatHub>("/chatHub");
 });
 
 app.UseSwagger();
-
+app.UseCors();
 app.UseSwaggerUI(c =>
 {
 	c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Shipping System V1");
 	c.RoutePrefix = "api-docs";
 });
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();

@@ -10,14 +10,20 @@ namespace Yara.Areas.ClintAccount.Controllers
 		IIUserInformation iUserInformation;
 		IIMessageChat iMessageChat;
 		UserManager<ApplicationUser> iUserManager;
-        public ChatController(IIConnectAndDisconnect iConnectAndDisconnect1, IIMessageChat iMessageChat1, IIUserInformation iUserInformation1, UserManager<ApplicationUser> iUserManager1)
+		IIFAQ iFAQ;
+		IIFAQList iFAQList;
+		IIFAQDescreption iFAQDescreption;
+        public ChatController(IIConnectAndDisconnect iConnectAndDisconnect1, IIMessageChat iMessageChat1, IIUserInformation iUserInformation1, UserManager<ApplicationUser> iUserManager1, IIFAQ iFAQ1, IIFAQDescreption iFAQDescreption1, IIFAQList iFAQList1)
         {
             iConnectAndDisconnect = iConnectAndDisconnect1;
 			iMessageChat = iMessageChat1;
 			iUserInformation = iUserInformation1;
 			iUserManager = iUserManager1;
+			iFAQ = iFAQ1;
+            iFAQDescreption = iFAQDescreption1;
+			iFAQList = iFAQList1;
 
-		}
+        }
         public async Task<IActionResult> Index()
 		{
 
@@ -26,8 +32,12 @@ namespace Yara.Areas.ClintAccount.Controllers
 
 			viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
 
+            viewmMODeElMASTER.Users = iUserInformation.GetAllbyRole();
+			viewmMODeElMASTER.ListFAQ = iFAQ.GetAll();
+			viewmMODeElMASTER.ListFAQDescription = iFAQDescreption.GetAll();
+			viewmMODeElMASTER.ListFAQList = iFAQList.GetAll();
 
-			return View(viewmMODeElMASTER);
+            return View(viewmMODeElMASTER);
 		}
 
         public async Task<IActionResult> OwnChat(string anotherId)

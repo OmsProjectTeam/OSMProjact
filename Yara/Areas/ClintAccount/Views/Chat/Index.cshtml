@@ -1,30 +1,127 @@
-﻿@model ViewmMODeElMASTER
+﻿@using Newtonsoft.Json
+@model ViewmMODeElMASTER
 @{
     ViewData["Title"] = "Chat";
     Layout = "~/Areas/ClintAccount/Views/Shared/_LayoutClint.cshtml";
 }
 
-
-
-<ul>
-    @{
-        foreach (var item in Model.ViewChatMessage.GroupBy(m => m.SenderId).Select(m => m.OrderBy(m => m.MessageeTime).LastOrDefault()))
+<div style="display:flex; flex-direction:row; width: 100%; margin: 10px;">
+    <div class="col-lg-6 col-xs-12" style="width:25%">
+        @foreach (var item in Model.ListFAQ)
         {
-            <li>
-                <a asp-area="ClintAccount" asp-controller="Chat" asp-action="OwnChat" asp-route-anotherId="@item.SenderId" />
-                <div style="display:flex; flex-direction: row; justify-content:space-between">
-                    <img style="width:50px; height:50px; border-radius: 50%;" src="@Helper.PathImageuser@item.SenderImage" alt="" />
-                    <div style="display:flex; flex-direction:column">
-                        <h3>@item.SenderName</h3>
-                        <h3>@item.Message</h3>
-                    </div>
-                    <h4>@item.MessageeTime.ToString()</h4>
-                </div>
-            </li>
+            var description = Model.ListFAQDescription.Where(a => a.IdFAQ == item.IdFAQ).Select(a => new { a.IdFAQ, a.Descreption }).ToArray();
+
+            var list1 = Model.ListFAQList.OrderByDescending(n => n.IdFAQ).Where(a => a.IdFAQ == item.IdFAQ).ToList();
+
+            var jsonDescription = JsonConvert.SerializeObject(description);
+            var jsonList1 = JsonConvert.SerializeObject(list1);
+
+            var escapedJsonDescription = jsonDescription.Replace("\"", "\\\"");
+            var escapedJsonList1 = jsonList1.Replace("\"", "\\\"");
+
+            <h3 id="question@(item.IdFAQ)"
+                onclick='sendQuestion("@item.IdFAQ", "@escapedJsonDescription", "@escapedJsonList1")'
+                style="cursor: pointer; margin: 15px 0; padding: 10px; border-radius: 8px; background-color: #f0f8ff; color: #333; font-weight: bold; text-align: right; direction: rtl; border: 1px solid #ddd; overflow: visible;
+               white-space: normal;">
+                @item.FAQ
+            </h3>
+
+
+        }
+    </div>
+
+    <div id="chatContainer" style="z-index:99; border: 1px solid #ddd; padding: 10px; margin:auto; border-radius: 10px; width:500px; height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+    </div>
+</div>
+
+@{
+    var item1 = Model.Users.OrderBy(u => u.Id).FirstOrDefault();
+
+    <div style="position:fixed; background-color:burlywood; z-index:1000; bottom:5px; display:flex;  width:50%; flex-direction:row; justify-content:center; margin:5px 5px; border:groove 1px gray; border-radius:8px; padding:5px;">
+        <a asp-area="ClintAccount" asp-controller="Chat" asp-action="OwnChat" asp-route-anotherId="@item1?.Id" />
+        <h4 id="Help" style="text-align:center;">Help</h4>
+    </div>
+}
+
+
+<script>
+
+    function sendQuestion(id, descriptionJson, list1Json) {
+        try {
+            // تحويل JSON string إلى كائن JavaScript
+            const description = JSON.parse(descriptionJson);
+            const list1 = JSON.parse(list1Json);
+
+            if (!Array.isArray(description)) {
+                console.error('description is not an array');
+                return;
+            }
+
+            if (!Array.isArray(list1)) {
+                console.error('list1 is not an array');
+                return;
+            }
+
+            const msg = document.getElementById(`question${id}`).textContent;
+
+            const chatContainer = document.getElementById("chatContainer");
+
+            function addElementWithDelay(element, delay) {
+                setTimeout(() => {
+                    chatContainer.appendChild(element);
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                }, delay);
+            }
+
+            const msgElement = document.createElement("div");
+            msgElement.textContent = msg;
+            msgElement.style.backgroundColor = "#d1f7d6";
+            msgElement.style.padding = "10px";
+            msgElement.style.margin = "5px 0";
+            msgElement.style.borderRadius = "5px";
+            msgElement.style.maxWidth = "70%";
+            msgElement.style.alignSelf = "flex-start";
+            msgElement.style.wordBreak = "break-word";
+            addElementWithDelay(msgElement, 0);
+
+            // إنشاء عنصر الوصف
+            const descriptionElement = document.createElement("div");
+            descriptionElement.style.backgroundColor = "#f1f1f1";
+            descriptionElement.style.padding = "10px";
+            descriptionElement.style.margin = "5px 0";
+            descriptionElement.style.borderRadius = "5px";
+            descriptionElement.style.maxWidth = "70%";
+            descriptionElement.style.alignSelf = "flex-end";
+            descriptionElement.style.wordBreak = "break-word";
+
+            description.forEach(item => {
+                const p = document.createElement("p");
+                p.textContent = item.Descreption;
+                descriptionElement.appendChild(p);
+            });
+
+            addElementWithDelay(descriptionElement, 500);
+
+            const list1Element = document.createElement("div");
+            list1Element.style.backgroundColor = "#e6e6e6";
+            list1Element.style.padding = "10px";
+            list1Element.style.margin = "5px 0";
+            list1Element.style.borderRadius = "5px";
+            list1Element.style.maxWidth = "70%";
+            list1Element.style.alignSelf = "flex-end";
+            list1Element.style.borderLeft = "5px solid #007bff";
+            list1Element.style.wordBreak = "break-word";
+
+            list1.forEach(item => {
+                const li = document.createElement("div");
+                li.textContent = item.ListFAQ;
+                list1Element.appendChild(li);
+            });
+
+            addElementWithDelay(list1Element, 1000);
+
+        } catch (error) {
+            console.error('Failed to parse description or list1:', error);
         }
     }
-</ul>
-
-
-
-
+</script>

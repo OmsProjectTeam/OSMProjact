@@ -25,7 +25,7 @@ namespace Yara.Areas.ClintAccount.Controllers
 			vmodel.ListFAQDescription = iFAQDescreption.GetAll();
 			vmodel.ListFAQList = iFAQList.GetAll();
 
-			return View(vmodel);
+			return PartialView(vmodel);
 		}
 
 

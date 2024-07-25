@@ -60,7 +60,7 @@
 
 </head>
 
-<body>
+<body style="position:relative;">
 	<div class="main-menu">
 		<header class="header">
 			<a href="index.html" class="logo">@ViewBag.Name</a>
@@ -546,7 +546,7 @@
 				notification.style.width = "5px";
 				notification.style.height = "5px";
 				notification.style.borderRadius = "50%";
-				notification.textContent = `You have ${unreadCount} Un Read Messages`;
+			
 			} else {
 				notification.style.display = "none";
 			}
