@@ -120,6 +120,8 @@ namespace Infarstuructre.ViewModel
 
         public IEnumerable<TBSupportTicketType> ListSupportTicketType { get; set; }
         public TBSupportTicketType SupportTicketType { get; set; }
+        public TBEmailNewsletter EmailNewsletter { get; set; }
+        public List<TBEmailNewsletter> ListEmailNewsletters { get; set; }
 
     }
 }

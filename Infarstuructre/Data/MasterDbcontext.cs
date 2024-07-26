@@ -26,6 +26,8 @@ namespace Infarstuructre.Data
 
             //***********************************************************
 
+         
+
 
             builder.Entity<VwUser>(entity =>
             {
@@ -205,6 +207,18 @@ namespace Infarstuructre.Data
             {
                 entity.HasNoKey();
                 entity.ToView("ViewChat");
+            });
+            //************************************************************
+            builder.Entity<TBViewEmailNewsletter>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewEmailNewsletter");
+            });
+            //************************************************************
+            builder.Entity<TBViewNewsLetterSender>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewNewsLetterSender");
             });
             //************************************************************
 
@@ -1592,6 +1606,24 @@ namespace Infarstuructre.Data
            .Property(b => b.CurrentState)
            .HasDefaultValueSql("((1))");
 
+            //---------------------------------  
+            //---------------------------------
+            builder.Entity<TBEmailNewsletter>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBEmailNewsletter>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+
+            //--------------------------------- 
+            //---------------------------------
+            builder.Entity<TBNewsLetterSender>()
+           .Property(b => b.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBNewsLetterSender>()
+           .Property(b => b.CurrentState)
+           .HasDefaultValueSql("((1))");
+
             //--------------------------------- 
 
             builder.Entity<TBMessageChat>()
@@ -1606,6 +1638,7 @@ namespace Infarstuructre.Data
 
             //--------------------------------- 
         }
+
 
         public DbSet<TBAccountBox> TBAccountBoxs { get; set; }
 
@@ -1796,6 +1829,11 @@ namespace Infarstuructre.Data
         public DbSet<TBViewCustomerMessages> ViewCustomerMessages { get; set; }
         public DbSet<TBConnectAndDisConnect> TBConnectAndDisConnects { get; set; }
         public DbSet<TBSupportTicketType> TBSupportTicketTypes { get; set; }
+        public DbSet<TBEmailNewsletter> TBEmailNewsletters { get; set; }
+        public DbSet<TBNewsLetterSender> TBNewsLetterSenders { get; set; }
+        public DbSet<TBViewEmailNewsletter> ViewEmailNewsletter { get; set; }
+        public DbSet<TBViewNewsLetterSender> ViewNewsLetterSender { get; set; }
+
         //test
 
 

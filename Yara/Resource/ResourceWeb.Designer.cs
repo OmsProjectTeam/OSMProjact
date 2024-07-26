@@ -1258,6 +1258,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Newsletter.
+        /// </summary>
+        public static string LBMyEmailNewsletter {
+            get {
+                return ResourceManager.GetString("LBMyEmailNewsletter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to exchange rate.
         /// </summary>
         public static string LBMyExchangeRate {
