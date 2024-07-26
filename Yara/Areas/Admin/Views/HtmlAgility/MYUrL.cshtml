@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "عرض المعلومات";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; // قم بتعديل المسار إذا لزم الأمر
+}
+
+
+
+
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red;">Error: @ViewBag.Error</p>
+}
+
+@if (ViewBag.ImageUrls != null && ViewBag.ImageUrls.Count > 0)
+{
+    <div>
+        @foreach (var imageUrl in ViewBag.ImageUrls)
+        {
+            <img src="@imageUrl" alt="Product Image" style="height: 250px; width: 250px;" />
+        }
+    </div>
+}
+else
+{
+    <p>No images found.</p>
+}
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red;">Error: @ViewBag.Error</p>
+}
+@if (ViewBag.html != null)
+{
+    <ul>
+        @foreach (var item in ViewBag.html)
+        {
+            <li>@item</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No data found.</p>
+}
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red;">Error: @ViewBag.Error</p>
+}
+
+
+
+
+

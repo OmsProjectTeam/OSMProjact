@@ -119,6 +119,11 @@ namespace Infarstuructre.ViewModel
         public IEnumerable<TBViewChatMessage> ViewChatMessage { get; set; }
 
         public IEnumerable<TBSupportTicketType> ListSupportTicketType { get; set; }
+        public TBSupportTicketType SupportTicketType { get; set; }   
+        public IEnumerable<TBSupportTicketStatus> ListSupportTicketStatus { get; set; }
+        public TBSupportTicketStatus SupportTicketStatus { get; set; }    
+        public IEnumerable<TBViewSupportTicket> ListViewSupportTicket { get; set; }
+        public TBSupportTicket SupportTicket { get; set; }
         public TBSupportTicketType SupportTicketType { get; set; }
         public TBEmailNewsletter EmailNewsletter { get; set; }
         public List<TBEmailNewsletter> ListEmailNewsletters { get; set; }

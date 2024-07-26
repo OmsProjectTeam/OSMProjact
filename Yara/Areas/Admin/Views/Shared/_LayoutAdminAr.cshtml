@@ -135,6 +135,7 @@
 							<li><a asp-area="Admin" asp-controller="TypesOfRequest" asp-action="MyTypesOfRequestAr" asp-route-userId="@user.Id">@ResourceWebAr.LBMyTypesOfRequest</a></li>
 							<li><a asp-area="Admin" asp-controller="TypesOfMessage" asp-action="MyTypesOfMessageAr" asp-route-userId="@user.Id">@ResourceWebAr.LBMyTypesOfMessage</a></li>
 							<li><a asp-area="Admin" asp-controller="SupportTicketType" asp-action="MySupportTicketTypeAr" asp-route-userId="@user.Id">@ResourceWebAr.LBMySupportTicketType</a></li>
+							<li><a asp-area="Admin" asp-controller="SupportTicketStatus" asp-action="MySupportTicketStatusAr" asp-route-userId="@user.Id">@ResourceWebAr.lbMySupportTicketStatus</a></li>
 
 
 
@@ -200,6 +201,8 @@
 					<li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>FAQ</span><span class="menu-arrow fa fa-angle-down"></span></a>
 						<ul class="sub-menu js__content">
+							<li><a asp-area="Admin" asp-controller="SupportTicket" asp-action="MYSupportTicketAr" asp-route-userId="@user.Id">@ResourceWebAr.LBMYSupportTicket</a></li>
+
 							<li><a asp-area="Admin" asp-controller="FAQ" asp-action="MyFAQAr" asp-route-userId="@user.Id">@ResourceWebAr.LbMyFAQ</a></li>
 							<li><a asp-area="Admin" asp-controller="FAQDescreption" asp-action="MyFAQDescreptionAr" asp-route-userId="@user.Id">@ResourceWebAr.LbMyFAQDescreption</a></li>
 							<li><a asp-area="Admin" asp-controller="FAQList" asp-action="MyFAQListAr" asp-route-userId="@user.Id">@ResourceWebAr.LbMyFAQList</a></li>

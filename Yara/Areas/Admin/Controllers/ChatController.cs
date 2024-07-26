@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Domin.Entity.SignalR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Yara.Areas.Admin.Controllers
@@ -21,18 +22,43 @@ namespace Yara.Areas.Admin.Controllers
 		}
 		public async Task<IActionResult> Index()
 		{
-			ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
-			var users = viewmMODeElMASTER.ConnectAndDisConnect = iConnectAndDisconnect.GetAll();
+            ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
+            var currentUserId = iUserManager.GetUserId(User);
 
-			var currentUserId = iUserManager.GetUserId(User);
+			viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
+			
 
-			var secundUser = await iUserManager.FindByNameAsync("a@a.com");
-			var secundUserId = secundUser.Id;
-
-			var IamSender = viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetBySenderIdAndReciverId(currentUserId, secundUserId);
-			var IamReciver = viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetBySenderIdAndReciverId(secundUserId, currentUserId);
-
-			return View(viewmMODeElMASTER);
+            return View(viewmMODeElMASTER);
 		}
+
+		public async Task<IActionResult> OwnChat(string anotherId) 
+		{
+            ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
+            var users = viewmMODeElMASTER.ConnectAndDisConnect = iConnectAndDisconnect.GetAll();
+
+            var currentUserId = iUserManager.GetUserId(User);
+
+            var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
+            var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
+
+            foreach (var item in IamReciver)
+            {
+                IamSender.Add(item);
+            }
+
+            viewmMODeElMASTER.ViewChatMessage = IamSender;
+            ViewBag.another = (iUserInformation.GetById(anotherId)).UserName;
+            ViewBag.anotherId = (iUserInformation.GetById(anotherId)).Id;
+            //viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
+            ViewBag.img = (iUserInformation.GetById(currentUserId)).ImageUser;
+            ViewBag.UserId = currentUserId;
+			if (viewmMODeElMASTER!=null)
+			{
+                return View(viewmMODeElMASTER);
+            }
+			else { return View(null); }
+
+            return View(viewmMODeElMASTER);
+        }
 	}
 }

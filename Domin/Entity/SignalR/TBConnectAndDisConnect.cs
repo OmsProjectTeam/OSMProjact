@@ -16,5 +16,6 @@ namespace Domin.Entity.SignalR
         [Required]
         public string UserName { get; set; }
         public string UserImg { get; set; }
+      
     }
 }

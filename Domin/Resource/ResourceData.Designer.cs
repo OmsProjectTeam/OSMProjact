@@ -466,6 +466,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to يرجى أدراج بريد المتابعة لتتم العملية بنجاح ....!.
+        /// </summary>
+        public static string VlFollowUpMail {
+            get {
+                return ResourceManager.GetString("VlFollowUpMail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to يرجى إضافة سعر الصرف بالعملة الأجنبية لإتمام العملية بنجاح...!.
         /// </summary>
         public static string VlForeignCurrency {
@@ -628,11 +637,29 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to يرجى أدراج حالة تذكرة الدعم لتتم العملية بنجاح ...!.
+        /// </summary>
+        public static string VlSupportTicketStatus {
+            get {
+                return ResourceManager.GetString("VlSupportTicketStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to يرجى أدخال نوع تذكرة الدعم لتتم العملية بنجاح ...!.
         /// </summary>
         public static string VlSupportTicketType {
             get {
                 return ResourceManager.GetString("VlSupportTicketType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to يرجى أدخال عنوان تذكرة الدعم لتتم العملية بنجاح ....!.
+        /// </summary>
+        public static string VlTitel {
+            get {
+                return ResourceManager.GetString("VlTitel", resourceCulture);
             }
         }
         

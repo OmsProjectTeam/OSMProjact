@@ -333,4 +333,13 @@
   <data name="VlSupportTicketType" xml:space="preserve">
     <value>يرجى أدخال نوع تذكرة الدعم لتتم العملية بنجاح ...!</value>
   </data>
+  <data name="VlSupportTicketStatus" xml:space="preserve">
+    <value>يرجى أدراج حالة تذكرة الدعم لتتم العملية بنجاح ...!</value>
+  </data>
+  <data name="VlTitel" xml:space="preserve">
+    <value>يرجى أدخال عنوان تذكرة الدعم لتتم العملية بنجاح ....!</value>
+  </data>
+  <data name="VlFollowUpMail" xml:space="preserve">
+    <value>يرجى أدراج بريد المتابعة لتتم العملية بنجاح ....!</value>
+  </data>
 </root>
