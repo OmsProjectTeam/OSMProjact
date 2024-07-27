@@ -32,8 +32,21 @@ namespace Yara.Areas.ClintAccount.Controllers
 
 			viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
 
-            viewmMODeElMASTER.Users = iUserInformation.GetAllbyRole();
-			viewmMODeElMASTER.ListFAQ = iFAQ.GetAll();
+            var admins = iUserInformation.GetAllbyRole();
+            var support = iUserInformation.GetActiveSupport();
+
+			List<VwUser> avilable = new List<VwUser>();
+			avilable = admins;
+
+            foreach (var item in support)
+			{
+                avilable.Add(item);
+            } 
+
+			viewmMODeElMASTER.Users = avilable;
+
+
+            viewmMODeElMASTER.ListFAQ = iFAQ.GetAll();
 			viewmMODeElMASTER.ListFAQDescription = iFAQDescreption.GetAll();
 			viewmMODeElMASTER.ListFAQList = iFAQList.GetAll();
 

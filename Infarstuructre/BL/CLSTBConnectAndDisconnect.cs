@@ -14,7 +14,7 @@ namespace Infarstuructre.BL
         bool addConnection(TBConnectAndDisConnect save);
 		bool RemoveConnection(string ConnectId);
 		TBConnectAndDisConnect GetById(string ConnectId);
-		TBConnectAndDisConnect GetByName(string name);
+        TBConnectAndDisConnect GetByName(string name);
 	}
 	public class CLSTBConnectAndDisconnect : IIConnectAndDisconnect
 	{
@@ -39,7 +39,7 @@ namespace Infarstuructre.BL
 
 		public TBConnectAndDisConnect GetByName(string name)
 		{
-			TBConnectAndDisConnect sslid = dbcontext.TBConnectAndDisConnects.FirstOrDefault(a => a.UserName == name);
+			TBConnectAndDisConnect sslid = dbcontext.TBConnectAndDisConnects.Last(a => a.UserName == name);
 			return sslid;
 		}
 

@@ -28,6 +28,7 @@
 
 
         }
+
     </div>
 
     <div id="chatContainer" style="z-index:99; border: 1px solid #ddd; padding: 10px; margin:auto; border-radius: 10px; width:500px; height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
@@ -37,18 +38,45 @@
 @{
     var item1 = Model.Users.OrderBy(u => u.Id).FirstOrDefault();
 
-    <div style="position:fixed; background-color:burlywood; z-index:1000; bottom:5px; display:flex;  width:50%; flex-direction:row; justify-content:center; margin:5px 5px; border:groove 1px gray; border-radius:8px; padding:5px;">
-        <a asp-area="ClintAccount" asp-controller="Chat" asp-action="OwnChat" asp-route-anotherId="@item1?.Id" />
-        <h4 id="Help" style="text-align:center;">Help</h4>
-    </div>
+            <div style="position:fixed; bottom: 2px; background-color:burlywood; z-index:1000; bottom:5px; display:flex;  width:50%; flex-direction:row; justify-content:center; margin:5px 5px; border:groove 1px gray; border-radius:8px; padding:5px;">
+                 <a href="javascript:void(0);" onclick="toAdmin('@Url.Action("OwnChat", "Chat", new { area = "ClintAccount", anotherId = item1?.Id })')">تحويل إلى الادمن</a>
+                 
+            </div>
 }
 
 
 <script>
 
+    function toAdmin(url) {
+        const chatContainer1 = document.getElementById("chatContainer");
+        const chatContent = chatContainer1.innerHTML;
+        localStorage.setItem("chatContent", chatContent);
+
+        function addElementWithDelay(element, delay) {
+            setTimeout(() => {
+                chatContainer.appendChild(element);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, delay);
+        }
+        const chatAdmin = document.createElement("div");
+        chatAdmin.textContent = "جار تحويل الدردشة الى الادمن...";
+        chatAdmin.style.backgroundColor = "#d1f7d6";
+        chatAdmin.style.padding = "10px";
+        chatAdmin.style.margin = "5px 0";
+        chatAdmin.style.borderRadius = "5px";
+        chatAdmin.style.maxWidth = "70%";
+        chatAdmin.style.alignSelf = "flex-end";
+        chatAdmin.style.wordBreak = "break-word";
+
+        addElementWithDelay(chatAdmin, 500);
+
+        setTimeout(() => {
+            window.location.href = url;
+        }, 600);
+    }
+
     function sendQuestion(id, descriptionJson, list1Json) {
         try {
-            // تحويل JSON string إلى كائن JavaScript
             const description = JSON.parse(descriptionJson);
             const list1 = JSON.parse(list1Json);
 
@@ -62,9 +90,11 @@
                 return;
             }
 
-            const msg = document.getElementById(`question${id}`).textContent;
 
+            const msg = document.getElementById(`question${id}`).textContent;
             const chatContainer = document.getElementById("chatContainer");
+
+
 
             function addElementWithDelay(element, delay) {
                 setTimeout(() => {
@@ -72,6 +102,21 @@
                     chatContainer.scrollTop = chatContainer.scrollHeight;
                 }, delay);
             }
+
+
+            if (chatContainer.children.length <= 0) {
+                const hello = document.createElement("li");
+                hello.textContent = "اهلا بكم ...";
+                hello.style.backgroundColor = "#f1f1f1";
+                hello.style.padding = "10px";
+                hello.style.margin = "5px 0";
+                hello.style.borderRadius = "5px";
+                hello.style.maxWidth = "70%";
+                hello.style.alignSelf = "flex-end";
+                hello.style.wordBreak = "break-word";
+                addElementWithDelay(hello, 210);
+            }
+
 
             const msgElement = document.createElement("div");
             msgElement.textContent = msg;
@@ -82,9 +127,8 @@
             msgElement.style.maxWidth = "70%";
             msgElement.style.alignSelf = "flex-start";
             msgElement.style.wordBreak = "break-word";
-            addElementWithDelay(msgElement, 0);
+            addElementWithDelay(msgElement, 200);
 
-            // إنشاء عنصر الوصف
             const descriptionElement = document.createElement("div");
             descriptionElement.style.backgroundColor = "#f1f1f1";
             descriptionElement.style.padding = "10px";
@@ -100,7 +144,7 @@
                 descriptionElement.appendChild(p);
             });
 
-            addElementWithDelay(descriptionElement, 500);
+            addElementWithDelay(descriptionElement, 700);
 
             const list1Element = document.createElement("div");
             list1Element.style.backgroundColor = "#e6e6e6";

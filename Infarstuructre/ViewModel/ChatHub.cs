@@ -37,6 +37,11 @@ namespace Infarstuructre.ViewModel
             {
                 await Groups.AddToGroupAsync(Context.ConnectionId, "Admins");
             }
+            if (user != null && await _userManager.IsInRoleAsync(user, "Admin"))
+            {
+                await Groups.AddToGroupAsync(Context.ConnectionId, "Supports");
+            }
+
             var profileImageUrl = GetProfileImageFromDatabase(user.UserName) ?? "No img";
             if (!string.IsNullOrEmpty(user.UserName))
             {
@@ -78,6 +83,7 @@ namespace Infarstuructre.ViewModel
             var currentUserName = Context.User.Identity.Name;
             var currentUserProfileImage = GetProfileImageFromDatabase(currentUserName);
 			await Clients.Group("Admins").SendAsync("ReceiveMessage", currentUserName, message, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
+			await Clients.Group("Supports").SendAsync("ReceiveMessage", currentUserName, message, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
 
             var chatMsg = new TBMessageChat
             {
