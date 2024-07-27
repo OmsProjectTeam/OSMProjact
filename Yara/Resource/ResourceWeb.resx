@@ -156,6 +156,9 @@
   <data name="LBAddEmailAlartSetting" xml:space="preserve">
     <value>Adding and modifying Email Alart Setting</value>
   </data>
+  <data name="LBAddEmailNewsletter" xml:space="preserve">
+    <value>Add Email Newsletter</value>
+  </data>
   <data name="LBAddExchangeRate" xml:space="preserve">
     <value>Add and modify the exchange rate</value>
   </data>

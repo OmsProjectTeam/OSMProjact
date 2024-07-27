@@ -1857,11 +1857,13 @@ namespace Infarstuructre.Data
         public DbSet<TBViewCustomerMessages> ViewCustomerMessages { get; set; }
        public DbSet<TBConnectAndDisConnect> TBConnectAndDisConnects { get; set; }
         public DbSet<TBSupportTicketType> TBSupportTicketTypes { get; set; }
+        public DbSet<TBSupportTicketStatus> TBSupportTicketStatuss { get; set; }
+		public DbSet<TBViewSupportTicket> ViewSupportTicket { get; set; }
+		public DbSet<TBSupportTicket> TBSupportTickets { get; set; }
         public DbSet<TBEmailNewsletter> TBEmailNewsletters { get; set; }
         public DbSet<TBNewsLetterSender> TBNewsLetterSenders { get; set; }
         public DbSet<TBViewEmailNewsletter> ViewEmailNewsletter { get; set; }
         public DbSet<TBViewNewsLetterSender> ViewNewsLetterSender { get; set; }
-
         //test
 
 

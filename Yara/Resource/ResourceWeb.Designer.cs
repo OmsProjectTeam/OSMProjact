@@ -178,6 +178,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Email Newsletter.
+        /// </summary>
+        public static string LBAddEmailNewsletter {
+            get {
+                return ResourceManager.GetString("LBAddEmailNewsletter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add and modify the exchange rate.
         /// </summary>
         public static string LBAddExchangeRate {

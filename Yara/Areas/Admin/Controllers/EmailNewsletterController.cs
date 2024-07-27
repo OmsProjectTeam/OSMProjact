@@ -1,7 +1,4 @@
-﻿using System.Net.Mail;
-using System.Net;
-
-namespace Yara.Areas.Admin.Controllers
+﻿namespace Yara.Areas.Admin.Controllers
 {
 	[Area("Admin")]
 	[Authorize(Roles = "Admin")]
@@ -64,159 +61,77 @@ namespace Yara.Areas.Admin.Controllers
                 slider.DateEntry = model.EmailNewsletter.DateEntry;
                 slider.DateTimeEntry = model.EmailNewsletter.DateTimeEntry;
                 var file = HttpContext.Request.Form.Files;
+
                 if (slider.IdEmailNewsletter == 0 || slider.IdEmailNewsletter == null)
                 {
-                    //if (file.Count() > 0)
-                    //{
-                    //    string Photo = Guid.NewGuid().ToString() + Path.GetExtension(file[0].FileName);
-                    //    var fileStream = new FileStream(Path.Combine(@"wwwroot/Images/Home", Photo), FileMode.Create);
-                    //    file[0].CopyTo(fileStream);
-                    //    slider.Photo = Photo;
-                    //    fileStream.Close();
-                    //}
-                    //else
-                    //{
-                    //    TempData["Message"] = ResourceWeb.VLimageuplode;
-                    //    return Redirect(returnUrl);
-                    //}
-                    //if (dbcontext.TBOrderNews.Where(a => a.CatchReceiptNo == slider.CatchReceiptNo).ToList().Count > 0)
-                    //{
-                    //    var PhotoNAme = slider.Photo;
-                    //    var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
-
-                    //    TempData["CatchReceiptNo"] = ResourceWeb.VLCatchReceiptNoDoplceted;
-                    //    return Redirect(returnUrl);
-                    //}
-                    //if (dbcontext.TBOrderNews.Where(a => a.DescriptionOrder == slider.DescriptionOrder).ToList().Count > 0)
-                    //{
-                    //    var PhotoNAme = slider.Photo;
-                    //    var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
-
-                    //    TempData["DescriptionOrder"] = ResourceWeb.VLDescriptionOrderDoplceted;
-                    //    return Redirect(returnUrl);
-                    //}
-
                     var reqwest = iEmailNewsletter.saveData(slider);
                     if (reqwest == true)
                     {
                         //send email
-                        var emailSetting = await dbcontext.TBEmailAlartSettings
-                           .OrderByDescending(n => n.IdEmailAlartSetting)
-                           .Where(a => a.CurrentState == true && a.Active == true)
+                        var emailNewsletter = await dbcontext.TBEmailNewsletters
+                           .OrderByDescending(n => n.IdEmailNewsletter)
+                           .Where(a => a.CurrentState == true && a.IsSubscribed == true)
                            .FirstOrDefaultAsync();
 
-                        // التحقق من وجود إعدادات البريد الإلكتروني
-                        if (emailSetting != null)
+						// Check if newsletter exist
+						if (emailNewsletter != null)
                         {
                             var message = new MimeMessage();
-                            message.From.Add(new MailboxAddress("New Order", emailSetting.MailSender));
+                            message.From.Add(new MailboxAddress("Newsletter", emailNewsletter.MailSender));
                             message.To.Add(new MailboxAddress("saif aldin", "saifaldin_s@hotmail.com"));
-                            message.Subject = "طلب جديد من :" + slider.DataEntry;
+                            message.Subject = "Newsletter Subscription Confirmation" + slider.DateEntry;
                             var builder = new BodyBuilder
                             {
-                                TextBody = $"طلب جديد\n" +
-                                           $"وصف الطلب: {slider.DescriptionOrder}\n" +
-                                           $"تاريخ الطلب: {slider.OrderDate}\n" +
-                                           $"الوزن: {slider.Weight}\n" +
-                                           $"المبلغ: {slider.CostPrice}\n" +
-                                           $"مبلغ العميل: {slider.Price}\n" +
-                                           $"سعر الصرف: {slider.ExchangedPrice}\n" +
-                                           $"رقم السند: {slider.CatchReceiptNo}"
-                            };
-
-                            // إضافة الصورة كملف مرفق إذا كانت موجودة
-                            if (!string.IsNullOrEmpty(slider.Photo))
-                            {
-                                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Home", slider.Photo);
-                                builder.Attachments.Add(imagePath);
-                            }
+                                TextBody = $"Thank you for subscribing to our newsletter!\n\n" +
+										   $"Subscription Date: {emailNewsletter.SubscriptionDate}\n" +
+							               $"Data Entry: {emailNewsletter.DateEntry}\n" +
+							               $"Is Subscribed: {emailNewsletter.IsSubscribed}"
+							};
 
                             message.Body = builder.ToMessageBody();
 
                             using (var client = new SmtpClient())
                             {
-                                await client.ConnectAsync(emailSetting.SmtpServer, emailSetting.PortServer, SecureSocketOptions.StartTls);
-                                await client.AuthenticateAsync(emailSetting.MailSender, emailSetting.PasswordEmail);
+                                await client.ConnectAsync(emailNewsletter.SmtpServer, emailNewsletter.PortServer, SecureSocketOptions.StartTls);
+                                await client.AuthenticateAsync(emailNewsletter.MailSender, emailNewsletter.PasswordEmail);
                                 await client.SendAsync(message);
                                 await client.DisconnectAsync(true);
                             }
-                        }
-                        else
-                        {
-                            // التعامل مع الحالة التي لا توجد فيها إعدادات البريد الإلكتروني
-                            // يمكنك تسجيل خطأ أو تنفيذ إجراءات أخرى هنا
+
                         }
 
                         TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
-                        return RedirectToAction("MyOrderNewAr");
+                        return RedirectToAction("MyEmailNewsletter");
                     }
                     else
                     {
-                        var PhotoNAme = slider.Photo;
-                        var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+                        //var PhotoNAme = slider.Photo;
+                        //var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
                         TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
                         return Redirect(returnUrl);
                     }
                 }
-                else
-                {
-                    //var reqweistDeletPoto = iOrderNew.DELETPHOTO(slider.IdInformationCompanies);
-
-                    if (file.Count() == 0)
-                    {
-                        slider.Photo = model.OrderNew.Photo;
-                        //TempData["Message"] = ResourceWeb.VLimageuplode;
-                        var reqestUpdate2 = iOrderNew.UpdateData(slider);
-                        if (reqestUpdate2 == true)
-                        {
-                            TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
-                            return RedirectToAction("MyOrderNewAr");
-                        }
-                        else
-                        {
-                            var PhotoNAme = slider.Photo;
-                            //var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
-                            TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
-                            return Redirect(returnUrl);
-                        }
-                    }
-                    else
-                    {
-                        var reqweistDeletPoto = iOrderNew.DELETPHOTO(slider.IdInformationCompanies);
-                        var reqestUpdate2 = iOrderNew.UpdateData(slider);
-                        if (reqestUpdate2 == true)
-                        {
-                            TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
-                            return RedirectToAction("MyOrderNewAr");
-                        }
-                        else
-                        {
-                            var PhotoNAme = slider.Photo;
-                            var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
-                            TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
-                            return Redirect(returnUrl);
-                        }
-                    }
-                }
-            }
-            catch
+				else
+				{
+					// Update logic if needed
+					var reqwest = iEmailNewsletter.UpdateData(slider);
+					if (reqwest == true)
+					{
+						TempData["Updated successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+						return RedirectToAction("MyEmailNewsletter");
+					}
+					else
+					{
+						TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+						return Redirect(returnUrl);
+					}
+				}
+			}
+			catch
             {
-                var file = HttpContext.Request.Form.Files;
-                if (file.Count() == 0)
-                {
-                    //var PhotoNAme = slider.Photo;
-                    //var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
-                    TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
-                    return Redirect(returnUrl);
-                }
-                else
-                {
-                    var PhotoNAme = slider.Photo;
-                    var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
-                    TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
-                    return Redirect(returnUrl);
-                }
-            }
+                TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+				return Redirect(returnUrl);
+			}
         }
 
         //[HttpPost]
@@ -358,9 +273,9 @@ namespace Yara.Areas.Admin.Controllers
         //}
 
         [Authorize(Roles = "Admin")]
-		public IActionResult Delete(int id)
+		public IActionResult Delete(int IdEmailNewsletter)
 		{
-			var result = iEmailNewsletter.DeleteData(id);
+			var result = iEmailNewsletter.DeleteData(IdEmailNewsletter);
 			if (result)
 			{
 				TempData["DeletedSuccessfully"] = "Deleted successfully!";
