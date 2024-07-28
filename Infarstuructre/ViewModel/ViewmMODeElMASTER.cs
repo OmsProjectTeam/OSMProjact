@@ -126,7 +126,7 @@ namespace Infarstuructre.ViewModel
         public TBSupportTicket SupportTicket { get; set; }
         //public TBSupportTicketType SupportTicketType { get; set; }
         public TBEmailNewsletter EmailNewsletter { get; set; }
-        public List<TBEmailNewsletter> ListEmailNewsletters { get; set; }
+        public IEnumerable<TBEmailNewsletter> ListEmailNewsletters { get; set; }
 
     }
 }

@@ -18,7 +18,6 @@ namespace Domin.Entity
         public string Title { get; set; }
         [Required(ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "VlTitle")]
         public string AdsHtml { get; set; }
-
         public DateOnly dateSend { get; set; }
         public DateTime DateTimeEntry { get; set; }
         public string DateEntry { get; set; }

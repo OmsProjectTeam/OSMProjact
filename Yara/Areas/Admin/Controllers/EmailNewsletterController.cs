@@ -29,23 +29,25 @@
 
 		public IActionResult AddEmailNewsletter(int? IdEmailNewsletter)
 		{
-			var model = new ViewmMODeElMASTER();
-			if (IdEmailNewsletter != null)
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+			vmodel.ListEmailNewsletters = iEmailNewsletter.GetAll();
+            if (IdEmailNewsletter != null)
 			{
-				model.EmailNewsletter = iEmailNewsletter.GetById(IdEmailNewsletter.Value);
-			}
-			return View(model);
+                vmodel.EmailNewsletter = iEmailNewsletter.GetById(Convert.ToInt32(IdEmailNewsletter));
+            }
+			return View(vmodel);
 		}
 
 		public IActionResult AddEmailNewsletterAr(int? IdEmailNewsletter)
 		{
-			var model = new ViewmMODeElMASTER();
-			if (IdEmailNewsletter != null)
-			{
-				model.EmailNewsletter = iEmailNewsletter.GetById(IdEmailNewsletter.Value);
-			}
-			return View(model);
-		}
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListEmailNewsletters = iEmailNewsletter.GetAll();
+            if (IdEmailNewsletter != null)
+            {
+                vmodel.EmailNewsletter = iEmailNewsletter.GetById(Convert.ToInt32(IdEmailNewsletter));
+            }
+            return View(vmodel);
+        }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
@@ -67,41 +69,48 @@
                     var reqwest = iEmailNewsletter.saveData(slider);
                     if (reqwest == true)
                     {
-                        //send email
-                        var emailNewsletter = await dbcontext.TBEmailNewsletters
-                           .OrderByDescending(n => n.IdEmailNewsletter)
-                           .Where(a => a.CurrentState == true && a.IsSubscribed == true)
-                           .FirstOrDefaultAsync();
+						var emailSetting = await dbcontext.TBEmailAlartSettings
+						  .OrderByDescending(n => n.IdEmailAlartSetting)
+						  .Where(a => a.CurrentState == true && a.Active == true)
+						  .FirstOrDefaultAsync();
+						// التحقق من وجود إعدادات البريد الإلكتروني
+						if (emailSetting != null)
+						{
+							var message = new MimeMessage();
+							message.From.Add(new MailboxAddress("New new message", emailSetting.MailSender));
+							message.To.Add(new MailboxAddress("Hi", slider.MailSender));
+                            message.Subject = "أهلا بك بالنشرة البريدية";
+							var builder = new BodyBuilder
+							{
+								TextBody = $"اهلا بك بين عائلتنا  \n" +
+										   $"ستكون على اطلاع دائم  بكل العروض واحدث الخصوم\n" +
+										   $"تاريخ : {slider.DateTimeEntry}\n" +
+										   $"سيتم أعتماد هذا البريد لتظل على إطلاع دائم : {slider.MailSender}\n"
 
-						// Check if newsletter exist
-						if (emailNewsletter != null)
-                        {
-                            var message = new MimeMessage();
-                            message.From.Add(new MailboxAddress("Newsletter", emailNewsletter.MailSender));
-                            message.To.Add(new MailboxAddress("saif aldin", "saifaldin_s@hotmail.com"));
-                            message.Subject = "Newsletter Subscription Confirmation" + slider.DateEntry;
-                            var builder = new BodyBuilder
-                            {
-                                TextBody = $"Thank you for subscribing to our newsletter!\n\n" +
-										   $"Subscription Date: {emailNewsletter.SubscriptionDate}\n" +
-							               $"Data Entry: {emailNewsletter.DateEntry}\n" +
-							               $"Is Subscribed: {emailNewsletter.IsSubscribed}"
 							};
 
-                            message.Body = builder.ToMessageBody();
+							
 
-                            using (var client = new SmtpClient())
-                            {
-                                await client.ConnectAsync(emailNewsletter.SmtpServer, emailNewsletter.PortServer, SecureSocketOptions.StartTls);
-                                await client.AuthenticateAsync(emailNewsletter.MailSender, emailNewsletter.PasswordEmail);
-                                await client.SendAsync(message);
-                                await client.DisconnectAsync(true);
-                            }
+							message.Body = builder.ToMessageBody();
 
-                        }
+							using (var client = new SmtpClient())
+							{
+								await client.ConnectAsync(emailSetting.SmtpServer, emailSetting.PortServer, SecureSocketOptions.StartTls);
+								await client.AuthenticateAsync(emailSetting.MailSender, emailSetting.PasswordEmail);
+								await client.SendAsync(message);
+								await client.DisconnectAsync(true);
+							}
+						}
+						else
+						{
+							// التعامل مع الحالة التي لا توجد فيها إعدادات البريد الإلكتروني
+							// يمكنك تسجيل خطأ أو تنفيذ إجراءات أخرى هنا
+						}
 
-                        TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
-                        return RedirectToAction("MyEmailNewsletter");
+						TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+						return RedirectToAction("MyEmailNewsletter");
+						
+                        
                     }
                     else
                     {
@@ -133,144 +142,6 @@
 				return Redirect(returnUrl);
 			}
         }
-
-        //[HttpPost]
-        //[AutoValidateAntiforgeryToken]
-        //public async Task<IActionResult> Save(ViewmMODeElMASTER model, TBEmailNewsletter slider, List<IFormFile> Files, string returnUrl)
-        //{
-        //	try
-        //	{
-        //		if (slider.IdEmailNewsletter == 0 || slider.IdEmailNewsletter == null)
-        //		{
-        //			if (dbcontext.TBEmailNewsletters.Any(e => e.IdUser == slider.IdUser))
-        //			{
-        //				TempData["EmailNewsletter"] = "Duplicate entry detected!";
-        //				return RedirectToAction("AddEmailNewsletter", model);
-        //			}
-
-        //			var result = iEmailNewsletter.SaveData(slider);
-        //                  if (result == true)
-        //                  {
-        //                      //send email
-        //                      var emailSetting = await dbcontext.TBEmailNewsletters
-        //                         .OrderByDescending(n => n.IdEmailNewsletter)
-        //                         .Where(a => a.CurrentState == true && a.IsSubscribed == true)
-        //                         .FirstOrDefaultAsync();
-
-        //                      // التحقق من وجود إعدادات البريد الإلكتروني
-        //                      if (emailSetting != null)
-        //                      {
-        //                          var message = new MimeMessage();
-        //                          message.From.Add(new MailboxAddress("New Order", emailSetting.MailSender));
-        //                          message.To.Add(new MailboxAddress("saif aldin", "saifaldin_s@hotmail.com"));
-        //                          message.Subject = "طلب جديد من :" + slider.DateEntry;
-        //                          var builder = new BodyBuilder
-        //                          {
-        //                              TextBody = $"طلب جديد\n" +
-        //                                         $"وصف الطلب: {slider.DescriptionOrder}\n" +
-        //                                         $"تاريخ الطلب: {slider.OrderDate}\n" +
-        //                                         $"الوزن: {slider.Weight}\n" +
-        //                                         $"المبلغ: {slider.CostPrice}\n" +
-        //                                         $"مبلغ العميل: {slider.Price}\n" +
-        //                                         $"سعر الصرف: {slider.ExchangedPrice}\n" +
-        //                                         $"رقم السند: {slider.CatchReceiptNo}"
-        //                          };
-
-        //                          // إضافة الصورة كملف مرفق إذا كانت موجودة
-        //                          if (!string.IsNullOrEmpty(slider.Photo))
-        //                          {
-        //                              var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Home", slider.Photo);
-        //                              builder.Attachments.Add(imagePath);
-        //                          }
-
-        //                          message.Body = builder.ToMessageBody();
-
-        //                          using (var client = new SmtpClient())
-        //                          {
-        //                              await client.ConnectAsync(emailSetting.SmtpServer, emailSetting.PortServer, SecureSocketOptions.StartTls);
-        //                              await client.AuthenticateAsync(emailSetting.MailSender, emailSetting.PasswordEmail);
-        //                              await client.SendAsync(message);
-        //                              await client.DisconnectAsync(true);
-        //                          }
-        //                      }
-        //                      else
-        //                      {
-        //                          // التعامل مع الحالة التي لا توجد فيها إعدادات البريد الإلكتروني
-        //                          // يمكنك تسجيل خطأ أو تنفيذ إجراءات أخرى هنا
-        //                      }
-
-        //                      TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
-        //                      return RedirectToAction("MyOrderNewAr");
-        //                  }
-        //                  else
-        //                  {
-        //                      var PhotoNAme = slider.Photo;
-        //                      var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
-        //                      TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
-        //                      return Redirect(returnUrl);`
-        //                  }
-        //   //               if (result)
-        //			//{
-        //			//	//SendEmail(slider);
-        //			//	TempData["SavedSuccessfully"] = "Saved and sent successfully!";
-        //			//	return RedirectToAction("MyEmailNewsletter");
-        //			//}
-        //			//else
-        //			//{
-        //			//	TempData["ErrorSave"] = "Error saving data!";
-        //			//	return Redirect(returnUrl);
-        //			//}
-        //		}
-        //		else
-        //		{
-        //			var result = iEmailNewsletter.UpdateData(slider);
-        //			if (result)
-        //			{
-        //				//SendEmail(slider);
-        //				TempData["SavedSuccessfully"] = "Updated and sent successfully!";
-        //				return RedirectToAction("MyEmailNewsletter");
-        //			}
-        //			else
-        //			{
-        //				TempData["ErrorSave"] = "Error updating data!";
-        //				return Redirect(returnUrl);
-        //			}
-        //		}
-        //	}
-        //	catch
-        //	{
-        //		TempData["ErrorSave"] = "Error saving data!";
-        //		return Redirect(returnUrl);
-        //	}
-        //}
-
-        //private void SendEmail(TBEmailNewsletter emailNewsletter)
-        //{
-        //	var fromAddress = new MailAddress("your-email@example.com", "Your Name");
-        //	var toAddress = new MailAddress(emailNewsletter.IdUser, emailNewsletter.IdUser);
-        //	const string fromPassword = "your-email-password";
-        //	string subject = emailNewsletter.Title;
-        //	string body = emailNewsletter.Content;
-
-        //	var smtp = new SmtpClient
-        //	{
-        //		Host = "smtp.example.com",
-        //		Port = 587,
-        //		EnableSsl = true,
-        //		DeliveryMethod = SmtpDeliveryMethod.Network,
-        //		UseDefaultCredentials = false,
-        //		Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-        //	};
-        //	using (var message = new MailMessage(fromAddress, toAddress)
-        //	{
-        //		Subject = subject,
-        //		Body = body,
-        //		IsBodyHtml = true
-        //	})
-        //	{
-        //		smtp.Send(message);
-        //	}
-        //}
 
         [Authorize(Roles = "Admin")]
 		public IActionResult Delete(int IdEmailNewsletter)

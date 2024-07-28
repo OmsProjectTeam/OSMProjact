@@ -35,16 +35,16 @@
 									<span asp-validation-for="@Model.EmailNewsletter.MailSender" class="text-danger"></span>
 									<span style="color:red"> <strong>@TempData["EmailAlartSetting"]</strong></span>
 								</div>
-								<div class="col-12 col-sm-6">
+								@* <div class="col-12 col-sm-6">
 									<label asp-for="@Model.EmailNewsletter.SmtpServer" for="exampleInputEmail1">@ResourceWeb.lbSmtpServer</label>
 									<input asp-for="@Model.EmailNewsletter.SmtpServer" type="text" placeholder="@ResourceWeb.lbSmtpServer ...." class="form-control" maxlength="100">
 									<span asp-validation-for="@Model.EmailNewsletter.SmtpServer" class="text-danger"></span>
 
-								</div>
+								</div> *@
 							</div>
 
 						</div>
-						<div class="card-content">
+						@* <div class="card-content">
 							<div class="row small-spacing">
 								<div class="col-12 col-sm-6">
 									<label asp-for="@Model.EmailNewsletter.PortServer" for="exampleInputEmail1">@ResourceWeb.lbPortServer</label>
@@ -60,11 +60,12 @@
 								</div>
 							</div>
 
-						</div>
+						</div> *@
 
-						<div class="checkbox margin-bottom-20">
+						@* <div class="checkbox margin-bottom-20">
 							<div class="switch success"><input type="checkbox" asp-for="@Model.EmailNewsletter.Ssl_validity" id="switch-3"><label for="switch-3">@ResourceWeb.lbSsl_validity</label></div>
-						</div> <div class="checkbox margin-bottom-20">
+						</div> *@ 
+						<div class="checkbox margin-bottom-20">
 							<div class="switch success"><input type="checkbox" asp-for="@Model.EmailNewsletter.IsSubscribed" id="switch-2"><label for="switch-2">@ResourceWeb.LbActive</label></div>
 						</div>
 						<div class="checkbox margin-bottom-20">
