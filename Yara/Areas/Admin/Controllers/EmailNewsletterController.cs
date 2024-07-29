@@ -1,36 +1,54 @@
-﻿namespace Yara.Areas.Admin.Controllers
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace Yara.Areas.Admin.Controllers
 {
 	[Area("Admin")]
 	[Authorize(Roles = "Admin")]
 	public class EmailNewsletterController : Controller
 	{
-		MasterDbcontext dbcontext;
+        UserManager<ApplicationUser> _userManager;
+        MasterDbcontext dbcontext;
 		IIEmailNewsletter iEmailNewsletter;
 
-		public EmailNewsletterController(MasterDbcontext dbcontext1, IIEmailNewsletter iEmailNewsletter1)
+		public EmailNewsletterController(UserManager<ApplicationUser> userManager, MasterDbcontext dbcontext1, IIEmailNewsletter iEmailNewsletter1)
 		{
-			dbcontext = dbcontext1;
+            _userManager = userManager;
+            dbcontext = dbcontext1;
 			iEmailNewsletter = iEmailNewsletter1;
 		}
 
-		public IActionResult MyEmailNewsletter()
+		public async Task<IActionResult> MyEmailNewsletter()
 		{
-			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-			vmodel.ListEmailNewsletters = iEmailNewsletter.GetAll();
-			return View(vmodel);
-		}
-
-		public IActionResult MyEmailNewsletterAr()
-		{
-			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-			vmodel.ListEmailNewsletters = iEmailNewsletter.GetAll();
-			return View(vmodel);
-		}
-
-		public IActionResult AddEmailNewsletter(int? IdEmailNewsletter)
-		{
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return NotFound();
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 			vmodel.ListEmailNewsletters = iEmailNewsletter.GetAll();
+			return View(vmodel);
+		}
+
+		public async Task<IActionResult> MyEmailNewsletterAr()
+		{
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return NotFound();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListEmailNewsletters = iEmailNewsletter.GetAll();
+            return View(vmodel);
+        }
+
+		public async Task<IActionResult> AddEmailNewsletter(int? IdEmailNewsletter)
+		{
+
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListEmailNewsletters = iEmailNewsletter.GetAll();
+            var user = await _userManager.GetUserAsync(User);
+			ViewBag.user = user.Id;
+
+            if (user == null)
+				return NotFound(vmodel);
+
+           
             if (IdEmailNewsletter != null)
 			{
                 vmodel.EmailNewsletter = iEmailNewsletter.GetById(Convert.ToInt32(IdEmailNewsletter));

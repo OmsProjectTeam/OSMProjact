@@ -20,6 +20,7 @@
                     <form role="form" method="post" asp-controller="EmailNewsletter" asp-action="Save" enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="hidden" asp-for="@Model.EmailNewsletter.DateEntry" class="form-control" value="@User.Identity.Name">
+                            <input type="hidden" asp-for="@Model.EmailNewsletter.IdUser" class="form-control" value="@ViewBag.user">
                             <input type="hidden" asp-for="@Model.EmailNewsletter.IdEmailNewsletter" class="form-control" >
                             <input type="hidden" asp-for="@Model.EmailNewsletter.DateTimeEntry" value="@DateTime.Now">
                             <input type="hidden" asp-for="@Model.returnUrl" id="url">
