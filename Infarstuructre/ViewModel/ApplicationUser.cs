@@ -12,5 +12,6 @@ namespace Infarstuructre.ViewModel
         public string Name { get; set; }
         public string ImageUser { get; set; }
         public bool ActiveUser { get; set; }
+        public bool IsOnline { get; set; }
     }
 }

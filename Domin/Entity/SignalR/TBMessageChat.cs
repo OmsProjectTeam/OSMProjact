@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace Domin.Entity.SignalR
         public string ReciverId { get; set; }
         [Required]
         public string Message { get; set; }
+        [Required]
+        public string? ImgMsg { get; set; }
         public DateTime MessageeTime { get; set; }
         public bool IsRead { get; set; }
         public bool CurrentState { get; set; }

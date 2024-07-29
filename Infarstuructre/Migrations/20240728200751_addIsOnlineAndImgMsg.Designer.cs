@@ -4,6 +4,7 @@ using Infarstuructre.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infarstuructre.Migrations
 {
     [DbContext(typeof(MasterDbcontext))]
-    partial class MasterDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20240728200751_addIsOnlineAndImgMsg")]
+    partial class addIsOnlineAndImgMsg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2092,11 +2095,6 @@ namespace Infarstuructre.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("TimeConnection")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
                     b.Property<string>("UserImg")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -2162,10 +2160,6 @@ namespace Infarstuructre.Migrations
                     b.Property<int>("IdMessageChat")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImgMsg")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
 
@@ -2175,12 +2169,6 @@ namespace Infarstuructre.Migrations
 
                     b.Property<DateTime>("MessageeTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("OnLineRec")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("OnLineSen")
-                        .HasColumnType("bit");
 
                     b.Property<string>("ReciverId")
                         .IsRequired()
@@ -2613,48 +2601,6 @@ namespace Infarstuructre.Migrations
                     b.ToTable("TBEmailAlartSettings");
                 });
 
-            modelBuilder.Entity("Domin.Entity.TBEmailNewsletter", b =>
-                {
-                    b.Property<int>("IdEmailNewsletter")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEmailNewsletter"));
-
-                    b.Property<bool>("CurrentState")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
-
-                    b.Property<string>("DateEntry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTimeEntry")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<string>("IdUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsSubscribed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MailSender")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<DateOnly>("SubscriptionDate")
-                        .HasColumnType("date");
-
-                    b.HasKey("IdEmailNewsletter");
-
-                    b.ToTable("TBEmailNewsletters");
-                });
-
             modelBuilder.Entity("Domin.Entity.TBExchangeRate", b =>
                 {
                     b.Property<int>("IdExchangeRate")
@@ -2882,48 +2828,6 @@ namespace Infarstuructre.Migrations
                     b.HasKey("IdInformationCompanies");
 
                     b.ToTable("TBInformationCompaniess");
-                });
-
-            modelBuilder.Entity("Domin.Entity.TBNewsLetterSender", b =>
-                {
-                    b.Property<int>("IdNewsLetterSender")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdNewsLetterSender"));
-
-                    b.Property<string>("AdsHtml")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("CurrentState")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((1))");
-
-                    b.Property<string>("DateEntry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTimeEntry")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<int>("IdEmailNewsletter")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<DateOnly>("dateSend")
-                        .HasColumnType("date");
-
-                    b.HasKey("IdNewsLetterSender");
-
-                    b.ToTable("TBNewsLetterSenders");
                 });
 
             modelBuilder.Entity("Domin.Entity.TBOrderNew", b =>
@@ -3918,52 +3822,6 @@ namespace Infarstuructre.Migrations
                     b.ToView("ViewCustomers", (string)null);
                 });
 
-            modelBuilder.Entity("Domin.Entity.TBViewEmailNewsletter", b =>
-                {
-                    b.Property<bool>("CurrentState")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("DateEntry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTimeEntry")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdEmailNewsletter")
-                        .HasColumnType("int");
-
-                    b.Property<string>("IdUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsSubscribed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly>("SubscriptionDate")
-                        .HasColumnType("date");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("ViewEmailNewsletter", (string)null);
-                });
-
             modelBuilder.Entity("Domin.Entity.TBViewExchangeRate", b =>
                 {
                     b.Property<string>("Country")
@@ -4272,62 +4130,6 @@ namespace Infarstuructre.Migrations
                     b.ToTable((string)null);
 
                     b.ToView("ViewMerchant", (string)null);
-                });
-
-            modelBuilder.Entity("Domin.Entity.TBViewNewsLetterSender", b =>
-                {
-                    b.Property<string>("AdsHtml")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("CurrentState")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("DateEntry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTimeEntry")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdEmailNewsletter")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdNewsLetterSender")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsSubscribed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly>("SubscriptionDate")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly>("dateSend")
-                        .HasColumnType("date");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("ViewNewsLetterSender", (string)null);
                 });
 
             modelBuilder.Entity("Domin.Entity.TBViewOrder", b =>
@@ -5687,9 +5489,6 @@ namespace Infarstuructre.Migrations
                     b.Property<string>("ImageUser")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsOnline")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()

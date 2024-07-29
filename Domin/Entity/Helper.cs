@@ -12,6 +12,7 @@ namespace Domin.Entity
         public const string PathImageuser = "/Images/Users/";
         public const string PathImageCateegooryph = "/Images/Cateegooryph/";
         public const string Pathvidoslider = "/Images/vido/";
+        public const string PathImgs = "/Images/Home/";
 
         public const string PathSaveImageuser = "Images/Users";
 

@@ -35,15 +35,28 @@
     </div>
 </div>
 
-@{
-    var item1 = Model.Users.OrderBy(u => u.Id).FirstOrDefault();
 
-            <div style="position:fixed; bottom: 2px; background-color:burlywood; z-index:1000; bottom:5px; display:flex;  width:50%; flex-direction:row; justify-content:center; margin:5px 5px; border:groove 1px gray; border-radius:8px; padding:5px;">
-                 <a href="javascript:void(0);" onclick="toAdmin('@Url.Action("OwnChat", "Chat", new { area = "ClintAccount", anotherId = item1?.Id })')">تحويل إلى الادمن</a>
-                 
-            </div>
-}
+<div style="display:flex; flex-direction:row; width: 100%; margin: 10px;">
+    @{
+        var item1 = Model.Users.OrderBy(u => u.Id).FirstOrDefault();
 
+        <div style="position:fixed; bottom: 2px; background-color:burlywood; z-index:1000; bottom:5px; display:flex;  width:50%; flex-direction:row; justify-content:center; margin:5px 5px; border:groove 1px gray; border-radius:8px; padding:5px;">
+            <a href="javascript:void(0);" onclick="toAdmin('@Url.Action("OwnChat", "Chat", new { area = "ClintAccount", anotherId = item1?.Id })')">تحويل إلى الادمن</a>
+
+        </div>
+    }
+
+@*     @{
+        var item2 = ViewBag.Supports as List<VwUser>;
+
+        var support = item2.OrderBy(u => u.Id).Where(u => u.IsOnline == true).FirstOrDefault();
+
+        <div style="position:fixed; bottom: 2px; background-color:burlywood; z-index:1000; bottom:5px; display:flex;  width:50%; flex-direction:row; justify-content:center; margin:5px 5px; border:groove 1px gray; border-radius:8px; padding:5px;">
+            <a href="javascript:void(0);" onclick="toAdmin('@Url.Action("OwnChat", "Chat", new { area = "ClintAccount", anotherId = support?.Id })')">تحويل إلى الدعم</a>
+
+        </div>
+    } *@
+</div>
 
 <script>
 
