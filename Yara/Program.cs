@@ -220,13 +220,29 @@ app.MapControllerRoute(
 	pattern: "{area:exists}/{controller=Accounts}/{action=Login}/{id?}"
 );
 app.UseCors(); 
-app.UseEndpoints(endpoints =>
-{
-	endpoints.MapControllerRoute(
-		name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-    endpoints.MapHub<ChatHub>("/chatHub");
-});
+//app.UseEndpoints(endpoints =>
+//{
+//	endpoints.MapControllerRoute(
+//		name: "default",
+//        pattern: "{controller=Home}/{action=Index}/{id?}");
+//    endpoints.MapHub<ChatHub>("/chatHub");
+//});
+
+
+
+
+
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapHub<ChatHub>("/chatHub");
+
+
+
+
+
 
 app.UseSwagger();
 app.UseCors();
