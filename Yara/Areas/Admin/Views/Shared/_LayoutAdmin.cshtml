@@ -46,6 +46,67 @@
     <script src="~/js/signalr.min.js"></script>
 
     <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        connection.start().catch(function (err) {
+            console.error(err.toString());
+        });
+
+        connection.on("ReceiveMessage", function (user, message, pathImg, profileImage, time) {
+            var msgList = document.getElementById("messagesList");
+            var msgDiv = document.createElement("div");
+            msgDiv.innerHTML = `<div style="display: flex; justify-content: ${user === '@Context.User.Identity.Name' ? 'flex-end' : 'flex-start'};">
+                                            <li style="display: flex; ${user === '@Context.User.Identity.Name' ? 'background-color:white;' : 'background-color:gray; color:white;'};
+                                                border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
+                                                <img src="${profileImage}" style="width:50px; height:50px; border-radius: 50%;" />
+                                                <div style="display: flex; flex-direction:column; gap:5px;">
+                                                    ${pathImg ? `<img src="${pathImg}" style="width:150px; height:200px; border-radius: 150%;" />` : ''}
+                                                    <p>${message} :</p>
+                                                </div>
+                                                ${time}
+                                            </li>
+                                        </div>`;
+            msgList.appendChild(msgDiv);
+            msgList.scrollTop = msgList.scrollHeight;
+        });
+
+        async function sendMessage() {
+            var message = document.getElementById("messageInput1").value;
+            var to = document.getElementById("sendTo").value;
+            var fileInput = document.getElementById("ImgSend");
+            var file = fileInput.files[0];
+
+            var filePath = null;
+            if (file) {
+                var formData = new FormData();
+                formData.append("file", file);
+
+                await fetch("/Admin/chat/uploadFile", {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        filePath = data.filePath;
+                        sendSignalRMessage(message, to, filePath);
+                    })
+                    .catch(error => console.error("Error uploading file:", error));
+            } else {
+                sendSignalRMessage(message, to, null);
+            }
+
+            document.getElementById("messageInput1").value = "";
+            fileInput.value = "";
+        }
+
+        function sendSignalRMessage(message, to, filePath) {
+            connection.invoke("SendMessageToAdmin", message, to, filePath).catch(function (err) {
+                console.error("Error sending message:", err.toString());
+            });
+        }
+    </script>
+
+    @* <script>
         var connection;
 
         // دالة لإنشاء الاتصال
@@ -72,7 +133,7 @@
             // إعادة استخدام الاتصال الحالي
             createConnection();
         }
-    </script>
+    </script> *@
 
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />

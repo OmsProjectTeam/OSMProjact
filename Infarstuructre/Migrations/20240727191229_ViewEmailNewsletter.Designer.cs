@@ -4,6 +4,7 @@ using Infarstuructre.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infarstuructre.Migrations
 {
     [DbContext(typeof(MasterDbcontext))]
-    partial class MasterDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20240727191229_ViewEmailNewsletter")]
+    partial class ViewEmailNewsletter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2092,11 +2095,6 @@ namespace Infarstuructre.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("TimeConnection")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
                     b.Property<string>("UserImg")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -2122,10 +2120,6 @@ namespace Infarstuructre.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValueSql("((1))");
-
-                    b.Property<string>("ImgMsg")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsRead")
                         .ValueGeneratedOnAdd()
@@ -2162,10 +2156,6 @@ namespace Infarstuructre.Migrations
                     b.Property<int>("IdMessageChat")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImgMsg")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
 
@@ -2175,12 +2165,6 @@ namespace Infarstuructre.Migrations
 
                     b.Property<DateTime>("MessageeTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("OnLineRec")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("OnLineSen")
-                        .HasColumnType("bit");
 
                     b.Property<string>("ReciverId")
                         .IsRequired()
@@ -5688,9 +5672,6 @@ namespace Infarstuructre.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsOnline")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -5781,9 +5762,6 @@ namespace Infarstuructre.Migrations
                     b.Property<string>("ImageUser")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsOnline")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");

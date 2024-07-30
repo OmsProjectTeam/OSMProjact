@@ -16,8 +16,11 @@ namespace Domin.Entity.SignalR
         public string ReciverName { get; set; }
         public string ReciverImage { get; set; }
         public string Message { get; set; }
+        public string ImgMsg { get; set; }
         public DateTime MessageeTime { get; set; }
         public bool CurrentState { get; set; }
         public bool IsRead { get; set; }
+        public bool OnLineRec { get; set; }
+        public bool OnLineSen { get; set; }
     }
 }

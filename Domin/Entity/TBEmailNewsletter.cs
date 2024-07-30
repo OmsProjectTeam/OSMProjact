@@ -16,18 +16,8 @@ namespace Domin.Entity
         [MaxLength(300, ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "MaxLength300")]
         [DataType(DataType.EmailAddress, ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "VLTypEmail")]
         public string MailSender { get; set; }
-		[Required(ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "VlSmtpServer")]
-		[MaxLength(100, ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "MaxLength100")]
-		[MinLength(3, ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "MinLength3")]
-		public string SmtpServer { get; set; }
-		public int PortServer { get; set; }
-		[Required(ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "VlPasswordEmail")]
-		[MaxLength(25, ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "MaxLength25")]
-		[MinLength(3, ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "MinLength3")]
-		public string PasswordEmail { get; set; }
-		public bool Ssl_validity { get; set; }
-		public DateOnly SubscriptionDate { get; set; } 
-        public bool IsSubscribed { get; set; }
+		public DateOnly SubscriptionDate { get; set; }
+        public bool IsSubscribed { get; set; } = true;
         public DateTime DateTimeEntry { get; set; }
         public string DateEntry { get; set; }
         public bool CurrentState { get; set; }

@@ -2,11 +2,12 @@
 @{
     ViewData["Title"] = "Chat";
     Layout = "~/Areas/ClintAccount/Views/Shared/_LayoutClint.cshtml";
-} 
-@* <h4>Client Chat</h4> *@
-<img src="@Helper.PathImageuser@ViewBag.img" style="width:30px; height:30px; border-radius: 50%;" />
-<label id="userName">@Context.User.Identity.Name</label>
-<div style="margin:5px; width:100vw;">
+}
+<div class="Container m-4">
+    <h2>Client Chat</h2>
+    <img src="@Helper.PathImageuser@ViewBag.img" style="width:30px; height:30px; border-radius: 50%;" />
+    <label id="userName">@Context.User.Identity.Name</label>
+    <hr />
     <div id="messagesList" style="width: 70%; max-height: 400px; padding:5px; border: groove 1px black; border-radius: 8px; overflow-y: auto;">
         @{
             foreach (var item in Model.ViewChatMessage.OrderBy(m => m.MessageeTime))
@@ -16,9 +17,21 @@
 
                     <li style="display: flex;  @(item.SenderId == ViewBag.UserId ? "justify-content:flex-end; background-color:white;" :
                     "justify-content:flex-start; background-color:gray; color:white;");
-                                        border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
+                                                    border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
                         <img src="@(item.SenderId == ViewBag.UserId ? Helper.PathImageuser + item.SenderImage : Helper.PathImageuser + item.SenderImage)" style="width:50px; height:50px; border-radius: 50%;" />
-                        @item.Message :
+                        @{
+                            if (item.ImgMsg.Contains("Images/"))
+                            {
+                                <div style="display: flex; flex-direction:column; gap:5px;">
+                                    <img src="@item.ImgMsg" style="width:150px; height:200px; border-radius: 150%;" />
+                                    <p> @item.Message :</p>
+                                </div>
+                            }
+                            else
+                            {
+                                <p>@item.Message :</p>
+                            }
+                        }
                         @item.MessageeTime.ToString("HH:mm")
                     </li>
                 </div>
@@ -26,97 +39,160 @@
         }
     </div>
     <hr />
+    <br />
 
-    <div class="row" style="width:90%; border-radius:8px; border-top: 1px solid #ccc; background-color: #f1f1f1; padding: 10px; display: flex; flex-direction:row;">
-        <input type="text" style="border-radius:8px; width:80%; margin-left:10px" id="messageInput1" placeholder="Type a message" />
-        <br />
-        <input type="text" style="display:none;" hidden id="sendTo" value="@ViewBag.another" placeholder="send to ...." />
-        <br />
-        <button style="background-color:aqua; border-radius:50%; width:40px;" id="sendButton" onclick="sendMessage()"><</button>
+    <div>
+        <div style="position: fixed; bottom: 10px; border-top: 1px solid #ccc; background-color: #f1f1f1; padding: 10px; display: flex;">
+            <input type="text" id="messageInput1" placeholder="Type a message" />
+            <br />
+            <input type="file" style="border-radius:50%; width:30px; height:100%; margin-left:10px" id="ImgSend" placeholder="Type a message" />
+            <input type="text" hidden id="sendTo" value="@ViewBag.another" placeholder="send to ...." />
+            <br />
+            <button id="sendButton" onclick="sendMessage()">Send</button>
+        </div>
     </div>
 </div>
 
-
-
-@section Scripts1 {
-    <script src="~/js/signalr.min.js"></script>
-    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script> *@
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-}
-
 @section Scripts {
+    <script src="~/js/signalr.min.js"></script>
     <script type="text/javascript">
+        let connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+        async function start() {
+            try {
+                await connection.start();
+                console.log("SignalR connected");
+            } catch (err) {
+                console.log("Error connecting to SignalR:", err.toString());
+                setTimeout(start, 5000); // Retry connection after 5 seconds
+            }
+        }
+
+        connection.on("ReceiveMessage", function (user, message, pathImg, profileImage, time) {
+            console.log("Message received:", { user, message, pathImg, profileImage, time });
+            appendMessage(user, message, pathImg, profileImage, time);
+        });
+
+        async function sendMessage() {
+            const message = document.getElementById("messageInput1").value;
+            const to = document.getElementById("sendTo").value;
+            const fileInput = document.getElementById("ImgSend");
+            const file = fileInput.files[0];
+
+            let filePath = null;
+            if (file) {
+                try {
+                    filePath = await uploadFile(file);
+                } catch (error) {
+                    console.error("Error uploading file:", error);
+                    return;
+                }
+            }
+
+            document.getElementById("messageInput1").value = "";
+            fileInput.value = "";
+
+            connection.invoke("SendMessageToClients", message, to, filePath).then(function () {
+                console.log("Message sent:", { message, to, filePath });
+                appendMessage(document.getElementById("userName").textContent, message, filePath, "path/to/profile/image", new Date().toLocaleTimeString());
+            }).catch(function (err) {
+                console.error("Error sending message:", err.toString());
+            });
+        }
+
+        async function uploadFile(file) {
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const response = await fetch("/ClintAccount/Chat/UploadFile", {
+                method: "POST",
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                return data.filePath;
+            } else {
+                throw new Error("File upload failed");
+            }
+        }
+
+        function appendMessage(user, message, pathImg, profileImage, time) {
+            const messageList = document.getElementById("messagesList");
+
+            const messageItem = document.createElement("div");
+            messageItem.style.display = "flex";
+            messageItem.style.justifyContent = user === document.getElementById("userName").textContent ? "flex-start" : "flex-end";
+            messageItem.style.maxWidth = "80%";
+
+            const messageContent = document.createElement("li");
+            messageContent.style.display = "flex";
+            messageContent.style.backgroundColor = user === document.getElementById("userName").textContent ? "white" : "gray";
+            messageContent.style.color = user === document.getElementById("userName").textContent ? "black" : "white";
+            messageContent.style.border = "groove 1px black";
+            messageContent.style.marginBottom = "3px";
+            messageContent.style.borderRadius = "10px";
+            messageContent.style.height = "auto";
+            messageContent.style.padding = "10px";
+
+            const userImg = document.createElement("img");
+            userImg.src = profileImage;
+            userImg.style.width = "50px";
+            userImg.style.height = "50px";
+            userImg.style.borderRadius = "50%";
+            messageContent.appendChild(userImg);
+
+            if (pathImg && pathImg.includes("Images/")) {
+                const imgContainer = document.createElement("div");
+                imgContainer.style.display = "flex";
+                imgContainer.style.flexDirection = "column";
+                imgContainer.style.gap = "5px";
+
+                const messageImg = document.createElement("img");
+                messageImg.src = pathImg;
+                messageImg.style.width = "150px";
+                messageImg.style.height = "200px";
+                messageImg.style.borderRadius = "150%";
+
+                const messageText = document.createElement("p");
+                messageText.textContent = `${message} :`;
+
+                imgContainer.appendChild(messageImg);
+                imgContainer.appendChild(messageText);
+                messageContent.appendChild(imgContainer);
+            } else {
+                const messageText = document.createElement("p");
+                messageText.textContent = `${message} :`;
+                messageContent.appendChild(messageText);
+            }
+
+            const messageTime = document.createElement("span");
+            messageTime.textContent = time;
+            messageContent.appendChild(messageTime);
+
+            messageItem.appendChild(messageContent);
+            messageList.appendChild(messageItem);
+            scrollToBottom();
+        }
 
         function scrollToBottom() {
             const messagesList = document.getElementById("messagesList");
             messagesList.scrollTop = messagesList.scrollHeight;
         }
 
-        // const connection = new signalR.HubConnectionBuilder().withUrl("/ChatHub").build();
-
-        // connection.start().then(function () {
-        //     console.log("Connected to SignalR hub");
-        // }).catch(function (err) {
-        //     console.error("Error connecting to SignalR hub:", err.toString());
-        // });
-
-        connection.on("ReceiveMessage", function (user, message, time) {
-            refreshMessagesList();
-        });
-
-        function sendMessage() {
-            const message = document.getElementById("messageInput1").value;
-            const to = document.getElementById("sendTo").value;
-
-            if (!message || !to) {
-                console.log("Message or recipient is empty");
-                return;
-            }
-
-            document.getElementById("messageInput1").value = "";
-            // document.getElementById("sendTo").value = "";
-            refreshMessagesList();
-            connection.invoke("SendMessageToAdmin", message, to).catch(function (err) {
-                console.error("Error sending message:", err.toString());
-            });
-        }
-
-        connection.on("UserDisconnected", function (userName) {
-            console.log(`${userName} disconnected`);
-        });
-
         window.onload = function () {
+            scrollToBottom();
             const user = document.getElementById("userName").textContent;
             connection.invoke("MarkMessagesAsRead", user).catch(function (err) {
                 console.error("Error marking messages as read:", err.toString());
             });
         }
-        function refreshMessagesList() {
-            $.ajax({
-                url: '/ClintAccount/Chat/OwnChat/',
-                type: 'GET',
-                data: { anotherId: '@ViewBag.anotherId' },
-                success: function () {
-                    location.reload(); 
-                },
-                error: function (err) {
-                    console.error("Error fetching messages:", err.toString());
-                }
-            });
-        }
 
-        function loadChatFromLocalStorage() {
-            const chatContainer = document.getElementById("messagesList");
-            const chatContent = localStorage.getItem("chatContent");
-            if (chatContent) {
-                chatContainer.innerHTML = chatContainer.innerHTML +  chatContent;
-            }
-        }
+        connection.onclose(async () => {
+            await start();
+        });
 
-        window.onload = loadChatFromLocalStorage;
-        window.onload = scrollToBottom();
+        start();
     </script>
 }
 

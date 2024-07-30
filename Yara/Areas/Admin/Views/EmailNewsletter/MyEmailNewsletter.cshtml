@@ -28,7 +28,7 @@
                                 <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
                                 <div class="navbar-inner">
                                     <ul>
-                                        <li><a href="#tab-progress-1" data-toggle="tab">@ResourceWeb.LbQuastion</a></li>
+                                        <li><a href="#tab-progress-1" data-toggle="tab">@ResourceWeb.LBAddEmailNewsletter</a></li>
 
                                         <li><a href="#tab-progress-3" data-toggle="tab">@ResourceWeb.LbInformaition</a></li>
                                         @*  <li><a href="#tab-progress-4" data-toggle="tab">Forth</a></li>
@@ -49,23 +49,17 @@
                                             <thead>
                                                 <tr role="row">
                                                     <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">@ResourceWeb.LbId</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTitle</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTitle</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbActive</th>
-                                            <tfoot>
-                                                <tr>
-                                                    <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
-                                                    <th rowspan="1" colspan="1">User Id</th>
-                                                    <th rowspan="1" colspan="1">Subscription Date</th>
-                                                    <th rowspan="1" colspan="1">Subscribed</th>
-
-                                            </tfoot>
+                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">Mail Sender</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">Subscription Date</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">Subscription Status</th>
+                                            @* <tfoot>
+                                            </tfoot> *@
                                             <tbody>
                                                         @foreach (var item in Model.ListEmailNewsletters)
                                                         {
                                                     <tr role="row" class="odd">
                                                         <td>@item.IdEmailNewsletter</td>
-                                                        <td>@item.IdUser</td>
+                                                        <td>@item.MailSender</td>
                                                         <td>@item.SubscriptionDate.ToShortDateString()</td>
                                                         <td>
                                                             <div class="switch primary"><input type="checkbox" checked="@item.IsSubscribed" IdTypesOfMessage="switch-3" disabled><label for="switch-3">@item.IsSubscribed</label></div>
@@ -89,14 +83,14 @@
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbDateTimeEntry</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.lbCurrentState</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">@ResourceWeb.LbOpration</th>
-                                            <tfoot>
+                                            @* <tfoot>
                                                 <tr>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbDataEntry</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbDateTimeEntry</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.lbCurrentState</th>
                                                     <th rowspan="1" colspan="1">@ResourceWeb.LbOpration</th>
-                                            </tfoot>
+                                            </tfoot> *@
                                             <tbody>
                                                         @foreach (var item in Model.ListEmailNewsletters)
                                                         {
@@ -208,106 +202,3 @@
 
 
 }
-@* <div class="row small-spacing">
-	<div class="col-xs-12">
-		<div class="box-content">
-			<h4 class="box-title">Email Newsletters</h4>
-			<div class="dropdown js__drop_down">
-				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-				<ul class="sub-menu">
-					<li><a href="@Url.Action("AddEmailNewsletter", "EmailNewsletter", new { area = "Admin" })">Add New</a></li>
-				</ul>
-			</div>
-			@if (Model.ListEmailNewsletters != null && Model.ListEmailNewsletters.Any())
-			{
-				<table class="table">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>User ID</th>
-							<th>Subscription Date</th>
-							<th>Subscribed</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach (var newsletter in Model.ListEmailNewsletters)
-						{
-							<tr>
-								<td>@newsletter.IdEmailNewsletter</td>
-								<td>@newsletter.IdUser</td>
-								<td>@newsletter.SubscriptionDate.ToShortDateString()</td>
-								<td>@newsletter.IsSubscribed</td>
-								<td>
-									<a href="@Url.Action("AddEmailNewsletter", "EmailNewsletter", new { area = "Admin", id = newsletter.IdEmailNewsletter })">Edit</a> |
-									<a href="@Url.Action("Delete", "EmailNewsletter", new { area = "Admin", id = newsletter.IdEmailNewsletter })" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
-								</td>
-							</tr>
-						}
-					</tbody>
-				</table>
-			}
-			else
-			{
-				<p>No email newsletters found.</p>
-			}
-		</div>
-	</div>
-</div> *@
-@* <div class="row small-spacing">
-	<div class="col-xs-12">
-		<div class="box-content">
-			<h4 class="box-title">Default</h4>
-			<!-- /.box-title -->
-			<div class="dropdown js__drop_down">
-				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-				<ul class="sub-menu">
-					<li><a href="#">Action</a></li>
-					<li><a href="#">Another action</a></li>
-					<li><a href="#">Something else there</a></li>
-					<li class="split"></li>
-					<li><a href="#">Separated link</a></li>
-				</ul>
-				<!-- /.sub-menu -->
-			</div>
-			<!-- /.dropdown js__dropdown -->
-			<div id="mceu_15" class="mce-tinymce mce-container mce-panel" hidefocus="1" tabindex="-1" role="application" style="visibility: hidden; border-width: 1px;"><div id="mceu_15-body" class="mce-container-body mce-stack-layout"><div id="mceu_16" class="mce-container mce-menubar mce-toolbar mce-stack-layout-item mce-first" role="menubar" style="border-width: 0px 0px 1px;"><div id="mceu_16-body" class="mce-container-body mce-flow-layout"><div id="mceu_17" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-first mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_17" role="menuitem" aria-haspopup="true"><button id="mceu_17-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">File</span> <i class="mce-caret"></i></button></div><div id="mceu_18" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_18" role="menuitem" aria-haspopup="true"><button id="mceu_18-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Edit</span> <i class="mce-caret"></i></button></div><div id="mceu_19" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_19" role="menuitem" aria-haspopup="true"><button id="mceu_19-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Insert</span> <i class="mce-caret"></i></button></div><div id="mceu_20" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_20" role="menuitem" aria-haspopup="true"><button id="mceu_20-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">View</span> <i class="mce-caret"></i></button></div><div id="mceu_21" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_21" role="menuitem" aria-haspopup="true"><button id="mceu_21-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Format</span> <i class="mce-caret"></i></button></div><div id="mceu_22" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_22" role="menuitem" aria-haspopup="true"><button id="mceu_22-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Table</span> <i class="mce-caret"></i></button></div><div id="mceu_23" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-last mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_23" role="menuitem" aria-haspopup="true"><button id="mceu_23-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Tools</span> <i class="mce-caret"></i></button></div></div></div><div id="mceu_24" class="mce-toolbar-grp mce-container mce-panel mce-stack-layout-item" hidefocus="1" tabindex="-1" role="group"><div id="mceu_24-body" class="mce-container-body mce-stack-layout"><div id="mceu_25" class="mce-container mce-toolbar mce-stack-layout-item mce-first mce-last" role="toolbar"><div id="mceu_25-body" class="mce-container-body mce-flow-layout"><div id="mceu_26" class="mce-container mce-flow-layout-item mce-first mce-btn-group" role="group"><div id="mceu_26-body"><div id="mceu_0" class="mce-widget mce-btn mce-first mce-disabled" tabindex="-1" aria-labelledby="mceu_0" role="button" aria-label="Undo" aria-disabled="true"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-undo"></i></button></div><div id="mceu_1" class="mce-widget mce-btn mce-last mce-disabled" tabindex="-1" aria-labelledby="mceu_1" role="button" aria-label="Redo" aria-disabled="true"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-redo"></i></button></div></div></div><div id="mceu_27" class="mce-container mce-flow-layout-item mce-btn-group" role="group"><div id="mceu_27-body"><div id="mceu_2" class="mce-widget mce-btn mce-menubtn mce-first mce-last mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_2" role="button" aria-haspopup="true"><button id="mceu_2-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Formats</span> <i class="mce-caret"></i></button></div></div></div><div id="mceu_28" class="mce-container mce-flow-layout-item mce-btn-group" role="group"><div id="mceu_28-body"><div id="mceu_3" class="mce-widget mce-btn mce-first" tabindex="-1" aria-labelledby="mceu_3" role="button" aria-label="Bold"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-bold"></i></button></div><div id="mceu_4" class="mce-widget mce-btn mce-last" tabindex="-1" aria-labelledby="mceu_4" role="button" aria-label="Italic"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-italic"></i></button></div></div></div><div id="mceu_29" class="mce-container mce-flow-layout-item mce-btn-group" role="group"><div id="mceu_29-body"><div id="mceu_5" class="mce-widget mce-btn mce-first" tabindex="-1" aria-labelledby="mceu_5" role="button" aria-label="Align left"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-alignleft"></i></button></div><div id="mceu_6" class="mce-widget mce-btn" tabindex="-1" aria-labelledby="mceu_6" role="button" aria-label="Align center"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-aligncenter"></i></button></div><div id="mceu_7" class="mce-widget mce-btn" tabindex="-1" aria-labelledby="mceu_7" role="button" aria-label="Align right"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-alignright"></i></button></div><div id="mceu_8" class="mce-widget mce-btn mce-last" tabindex="-1" aria-labelledby="mceu_8" role="button" aria-label="Justify"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-alignjustify"></i></button></div></div></div><div id="mceu_30" class="mce-container mce-flow-layout-item mce-btn-group" role="group"><div id="mceu_30-body"><div id="mceu_9" class="mce-widget mce-btn mce-splitbtn mce-menubtn mce-first" role="button" tabindex="-1" aria-label="Bullet list" aria-haspopup="true"><button type="button" hidefocus="1" tabindex="-1"><i class="mce-ico mce-i-bullist"></i></button><button type="button" class="mce-open" hidefocus="1" tabindex="-1"> <i class="mce-caret"></i></button></div><div id="mceu_10" class="mce-widget mce-btn mce-splitbtn mce-menubtn" role="button" tabindex="-1" aria-label="Numbered list" aria-haspopup="true"><button type="button" hidefocus="1" tabindex="-1"><i class="mce-ico mce-i-numlist"></i></button><button type="button" class="mce-open" hidefocus="1" tabindex="-1"> <i class="mce-caret"></i></button></div><div id="mceu_11" class="mce-widget mce-btn" tabindex="-1" aria-labelledby="mceu_11" role="button" aria-label="Decrease indent"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-outdent"></i></button></div><div id="mceu_12" class="mce-widget mce-btn mce-last" tabindex="-1" aria-labelledby="mceu_12" role="button" aria-label="Increase indent"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-indent"></i></button></div></div></div><div id="mceu_31" class="mce-container mce-flow-layout-item mce-last mce-btn-group" role="group"><div id="mceu_31-body"><div id="mceu_13" class="mce-widget mce-btn mce-first" tabindex="-1" aria-labelledby="mceu_13" role="button" aria-label="Insert/edit link"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-link"></i></button></div><div id="mceu_14" class="mce-widget mce-btn mce-last" tabindex="-1" aria-labelledby="mceu_14" role="button" aria-label="Insert/edit image"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-image"></i></button></div></div></div></div></div></div></div><div id="mceu_32" class="mce-edit-area mce-container mce-panel mce-stack-layout-item" hidefocus="1" tabindex="-1" role="group" style="border-width: 1px 0px 0px;"><iframe id="tinymce_ifr" frameborder="0" allowtransparency="true" title="Rich Text Area. Press ALT-F9 for menu. Press ALT-F10 for toolbar. Press ALT-0 for help" src="javascript:&quot;&quot;" style="width: 100%; height: 500px; display: block;"></iframe></div><div id="mceu_33" class="mce-statusbar mce-container mce-panel mce-stack-layout-item mce-last" hidefocus="1" tabindex="-1" role="group" style="border-width: 1px 0px 0px;"><div id="mceu_33-body" class="mce-container-body mce-flow-layout"><div id="mceu_34" class="mce-path mce-flow-layout-item mce-first"><div role="button" class="mce-path-item mce-last" data-index="0" tabindex="-1" id="mceu_34-0" aria-level="0">p</div></div><div id="mceu_35" class="mce-flow-layout-item mce-last mce-resizehandle"><i class="mce-ico mce-i-resize"></i></div></div></div></div></div><textarea id="tinymce" aria-hidden="true" style="display: none;">						&lt;img src="http://placehold.it/80x80" alt=""&gt;
-						&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ad consequatur illum unde! Sapiente accusantium, officiis ab velit sunt, perspiciatis ducimus expedita voluptates corrupti hic eligendi iusto ad error id!&lt;/p&gt;
-						&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab sapiente ratione quidem aut rerum asperiores tenetur, minus eveniet porro! Quo, quos harum accusamus sapiente perspiciatis dicta ratione tempore officia.&lt;/p&gt;
-						&lt;ul&gt;
-							&lt;li&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit.&lt;/li&gt;
-							&lt;li&gt;Culpa ad consequatur illum unde! Sapiente accusantium.&lt;/li&gt;
-							&lt;li&gt;A ab sapiente ratione quidem aut rerum asperiores tenetur&lt;/li&gt;
-							&lt;li&gt;Quo, quos harum accusamus sapiente perspiciatis&lt;/li&gt;
-							&lt;li&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit.&lt;/li&gt;
-						&lt;/ul&gt;
-					</textarea>
-		</div>
-		<!-- /.box-content -->
-	</div>
-	<!-- /.col-xs-12 -->
-
-	<div class="col-xs-12">
-		<div class="box-content">
-			<h4 class="box-title">Inline</h4>
-			<!-- /.box-title -->
-			<div class="dropdown js__drop_down">
-				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-				<ul class="sub-menu">
-					<li><a href="#">Action</a></li>
-					<li><a href="#">Another action</a></li>
-					<li><a href="#">Something else there</a></li>
-					<li class="split"></li>
-					<li><a href="#">Separated link</a></li>
-				</ul>
-				<!-- /.sub-menu -->
-			</div>
-			<!-- /.dropdown js__dropdown -->
-			<h2 class="editable mce-content-body" id="mce_0" contenteditable="true" style="position: relative;" spellcheck="false" dir="rtl">Editable header</h2>
-
-			<div class="editable mce-content-body" id="mce_1" contenteditable="true" style="position: relative;" spellcheck="false" dir="rtl"><p>This is an editable div element.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt est ac dolor condimentum vitae laoreet ante accumsan. Nullam tincidunt tincidunt ante tempus commodo. Duis rutrum, magna non lacinia tincidunt, risus lacus tempus ipsum, sit amet euismod justo metus ut metus. Donec feugiat urna non leo laoreet in tincidunt lectus gravida. Sed semper ante sed dui consectetur eget commodo eros imperdiet. Mauris magna diam, scelerisque at ornare vel, dignissim ac sem. Fusce id congue lacus. Duis sit amet tellus erat. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus mattis facilisis pretium. In in nibh eu urna ornare semper. Sed imperdiet felis vitae nibh sagittis eu pulvinar metus facilisis. Sed dolor orci, aliquet sagittis auctor id, faucibus at justo.</p><p>Vestibulum vestibulum velit nec magna lobortis elementum. Ut egestas ultrices tincidunt. Sed vestibulum mi vitae dui interdum eget rhoncus neque faucibus. Ut nec leo tellus. Nunc in metus sit amet purus bibendum dignissim pulvinar quis erat. Quisque vel ultricies nisi. Vestibulum eu ante risus. In ultrices dignissim massa, vel luctus dui consequat quis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dui nulla, venenatis at porttitor nec, sagittis et urna. Nulla facilisi. Integer bibendum porta urna porta suscipit. In condimentum quam quis justo accumsan molestie. Fusce accumsan vulputate mattis. Sed pharetra volutpat erat at convallis. Etiam tempus, est ac tincidunt scelerisque, mi elit pretium nulla, sit amet viverra nisl enim id lorem. Suspendisse ut enim ullamcorper tellus eleifend sagittis. Aenean mollis turpis eu nisl viverra laoreet. Mauris ante purus, tempor ut viverra eu, vestibulum eget tellus. Morbi vitae dolor tellus. Mauris sodales rutrum nunc, a imperdiet augue egestas vel. Nulla facilisi. Nulla venenatis tristique nisi ut blandit. Phasellus suscipit arcu adipiscing velit posuere nec lacinia urna mattis.</p><p>Nulla ullamcorper magna sit amet leo porta blandit. Aliquam sed nulla ac arcu vehicula feugiat. Fusce eget accumsan dui. Vestibulum vel leo tellus. Sed dignissim justo in nunc interdum tempor vehicula neque egestas. Fusce lacinia turpis sit amet leo consequat laoreet. Cras nec erat ac purus volutpat consequat. Vestibulum iaculis tincidunt purus eget blandit. Cras consectetur tellus libero. Vestibulum eros orci, volutpat vitae lobortis sit amet, porta quis felis. In a lacus ac neque luctus mollis. Nulla elementum nunc ac ante porttitor id venenatis augue venenatis. In aliquam magna non dolor convallis consequat.</p></div>
-		</div>
-		<!-- /.box-content -->
-	</div>
-	<!-- /.col-xs-12 -->
-</div> *@

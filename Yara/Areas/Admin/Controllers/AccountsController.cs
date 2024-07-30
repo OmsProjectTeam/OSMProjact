@@ -4,6 +4,7 @@
 using Domin.Entity;
 using Infarstuructre.BL;
 using LamarModa.Api.Auth;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Common;
@@ -388,12 +389,16 @@ namespace Yara.Areas.Admin.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				var user = await _userManager.FindByEmailAsync(model.Eamil);
+				ApplicationUser user = await _userManager.FindByEmailAsync(model.Eamil);
 				var Result = await _signInManager.PasswordSignInAsync(model.Eamil,
 					model.Password, model.RememberMy, false);
 				if (Result.Succeeded)
 				{
-					var roles = await _userManager.GetRolesAsync(user);
+					bool x = user.IsOnline;
+                    user.IsOnline = true;
+                    await _userManager.UpdateAsync(user);
+                    await _context.SaveChangesAsync();
+                    var roles = await _userManager.GetRolesAsync(user);
 					var token = _tokenService.GenerateToken(user, roles);
 
                     // Check if user has the role "Merchant"
@@ -438,7 +443,12 @@ namespace Yara.Areas.Admin.Controllers
 		[AllowAnonymous]
 		public async Task<IActionResult> Logout1()
 		{
-			await _signInManager.SignOutAsync();
+			var user = await _userManager.GetUserAsync(User);
+            bool x = user.IsOnline;
+            user.IsOnline = false;
+            await _userManager.UpdateAsync(user);
+            await _context.SaveChangesAsync();
+            await _signInManager.SignOutAsync();
 			return RedirectToAction("Index", "Home", new { area = "" });
 		}
 		private void SessionMsg(string MsgType, string Title, string Msg)

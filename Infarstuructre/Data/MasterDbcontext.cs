@@ -1665,6 +1665,12 @@ namespace Infarstuructre.Data
            .HasDefaultValueSql("((0))");
 
             //--------------------------------- 
+            //--------------------------------- 
+
+            builder.Entity<TBConnectAndDisConnect>()
+           .Property(m => m.TimeConnection)
+           .HasDefaultValueSql("getdate()");
+            //--------------------------------- 
         }
 
 

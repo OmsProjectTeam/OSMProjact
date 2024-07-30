@@ -39,8 +39,8 @@ namespace Infarstuructre.BL
 
 		public TBConnectAndDisConnect GetByName(string name)
 		{
-			TBConnectAndDisConnect sslid = dbcontext.TBConnectAndDisConnects.Last(a => a.UserName == name);
-			return sslid;
+            TBConnectAndDisConnect sslid = dbcontext.TBConnectAndDisConnects.OrderBy(a => a.TimeConnection).Where(a => a.UserName == name).LastOrDefault();
+            return sslid;
 		}
 
 		public bool addConnection(TBConnectAndDisConnect save)
