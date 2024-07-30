@@ -38,6 +38,7 @@ namespace Yara.Areas.AirFreight.Controllers
                 return NotFound();
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewOrderNew = iOrderNew.GetAllDataentry(user.UserName);
+           
             return View(vmodel);
         }
 
