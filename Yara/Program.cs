@@ -225,6 +225,7 @@ app.UseEndpoints(endpoints =>
 	endpoints.MapControllerRoute(
 		name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapHub<ChatHub>("/chatHub");
 });
 
 app.UseSwagger();
@@ -235,6 +236,6 @@ app.UseSwaggerUI(c =>
 	c.RoutePrefix = "api-docs";
 });
 
-app.MapHub<ChatHub>("/chatHub");
+//app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
