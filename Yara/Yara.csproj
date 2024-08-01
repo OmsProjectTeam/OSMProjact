@@ -33,6 +33,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\Admin\" />
     <Folder Include="wwwroot\Images\Home\" />
+    <Folder Include="wwwroot\Images\Chat\" />
     <Folder Include="wwwroot\Images\Users\" />
     <Folder Include="wwwroot\Web\" />
   </ItemGroup>
