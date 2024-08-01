@@ -15,29 +15,29 @@
         @{
             foreach (var item in Model.ViewChatMessage.OrderBy(m => m.MessageeTime))
             {
-                <div style="display: flex; @(item.SenderId == ViewBag.UserId ? "justify-content:flex-start; max-width: 80%;" :
+                    <div style="display: flex; @(item.SenderId == ViewBag.UserId ? "justify-content:flex-start; max-width: 80%;" :
                 "justify-content:flex-end; max-width: 80%;");">
 
-                    <li style="display: flex;  @(item.SenderId == ViewBag.UserId ? "justify-content:flex-end; background-color:white;" :
+                        <li style="display: flex;  @(item.SenderId == ViewBag.UserId ? "justify-content:flex-end; background-color:white;" :
                 "justify-content:flex-start; background-color:gray; color:white;");
-                                            border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
-                        <img src="@(item.SenderId == ViewBag.UserId ? Helper.PathImageuser + item.SenderImage : Helper.PathImageuser + item.SenderImage)" style="width:50px; height:50px; border-radius: 50%;" />
-                        @{
+                                                border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
+                            <img src="@(item.SenderId == ViewBag.UserId ? Helper.PathImageuser + item.SenderImage : Helper.PathImageuser + item.SenderImage)" style="width:50px; height:50px; border-radius: 50%;" />
+                            @{
                             if (item.ImgMsg.Contains("Images/"))
                             {
-                                <div style="display: flex; flex-direction:column; gap:5px;">
-                                    <img src="@item.ImgMsg" style="width:150px; height:200px; border-radius: 150%;" />
-                                    <p> @item.Message :</p>
-                                </div>
+                                        <div style="display: flex; flex-direction:column; gap:5px;">
+                                            <img src="@item.ImgMsg" style="width:150px; height:200px; border-radius: 150%;" />
+                                            <p> @item.Message :</p>
+                                        </div>
                             }
                             else
                             {
-                                <p>@item.Message :</p>
+                                        <p>@item.Message :</p>
                             }
-                        }
-                        @item.MessageeTime.ToString("HH:mm")
-                    </li>
-                </div>
+                            }
+                            @item.MessageeTime.ToString("HH:mm")
+                        </li>
+                    </div>
             }
         }
     </div>
@@ -58,7 +58,8 @@
 
 @section Scripts {
     <script type="text/javascript">
-        let connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+        // let connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+        let connection;
 
         async function start() {
             try {
