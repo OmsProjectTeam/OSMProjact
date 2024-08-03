@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Yara.Areas.ClintAccount.Controllers
 {
@@ -84,16 +85,18 @@ namespace Yara.Areas.ClintAccount.Controllers
             return View(viewModel);
         }
 
-        [HttpGet]
+        [HttpGet("OwnChat")]
         [Route("/ClintAccount/Chat/OwnChat/{anotherId}")]
         public async Task<IActionResult> OwnChat(string anotherId)
         {
             var viewModel = new ViewmMODeElMASTER();
             var currentUserId = iUserManager.GetUserId(User);
 
+            ViewBag.MyId = currentUserId;
+
+
             var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
-            var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
-            IamSender.AddRange(IamReciver);
+			var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
 
             viewModel.ViewChatMessage = IamSender.OrderBy(m => m.MessageeTime).ToList();
             ViewBag.another = iUserInformation.GetById(anotherId).UserName;
@@ -101,8 +104,66 @@ namespace Yara.Areas.ClintAccount.Controllers
             ViewBag.img = iUserInformation.GetById(currentUserId).ImageUser;
             ViewBag.UserId = currentUserId;
 
-            return View(viewModel);
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///
+            ////For Send Email
+            //var anotherUser = await iUserManager.FindByIdAsync(anotherId);
+            //var user = await iUserManager.GetUserAsync(User);
+            /////////////////////////////////////////////////////////////
+            //var emailSetting = await dbcontext.TBEmailAlartSettings
+            //              .OrderByDescending(n => n.IdEmailAlartSetting)
+            //              .Where(a => a.CurrentState == true && a.Active == true)
+            //              .FirstOrDefaultAsync(); 
+
+            //if (emailSetting != null)
+            //{
+            //    var message = new MimeMessage();
+            //    message.From.Add(new MailboxAddress("New Order", emailSetting.MailSender));
+            //    message.To.Add(new MailboxAddress("saif aldin", "saifaldin_s@hotmail.com"));
+            //    message.Subject = "محادثة جديدة";
+            //    var builder = new BodyBuilder
+            //    {
+            //        TextBody = $"تجري محادثة حاليا بين {anotherUser.Name}  و {user.Name}"
+            //    };
+
+            //    message.Body = builder.ToMessageBody();
+
+            //    using (var client = new SmtpClient())
+            //    {
+            //        await client.ConnectAsync(emailSetting.SmtpServer, emailSetting.PortServer, SecureSocketOptions.StartTls);
+            //        await client.AuthenticateAsync(emailSetting.MailSender, emailSetting.PasswordEmail);
+            //        await client.SendAsync(message);
+            //        await client.DisconnectAsync(true);
+            //    }
+            //}
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///
+            return View(viewmMODeElMASTER);
+		}
+
+        [HttpGet("Refresh/{anotherId}")]
+        [Route("/ClintAccount/Chat/Refresh/{anotherId}")]
+        public async Task<IActionResult> Refresh(string anotherId)
+        {
+            ViewmMODeElMASTER viewmMODeElMASTER1 = new ViewmMODeElMASTER();
+
+            var currentUserId = iUserManager.GetUserId(User);
+            var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
+            var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
+
+            foreach (var item in IamReciver)
+            {
+                IamSender.Add(item);
+            }
+
+            viewmMODeElMASTER1.ViewChatMessage = IamSender;
+            ViewBag.UserId = currentUserId;
+
+            return PartialView("RefreshCl", viewmMODeElMASTER1);
         }
+
+
+
 
         [HttpPost]
         [Route("ClintAccount/Chat/UploadFile")]

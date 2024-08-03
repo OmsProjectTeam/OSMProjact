@@ -33,12 +33,14 @@ namespace Yara.Areas.Admin.Controllers
             return View(viewmMODeElMASTER);
 		}
 
-		[HttpGet]
-		[Route("/Admin/Chat/OwnChat/{anotherId}")]
-		public async Task<IActionResult> OwnChat(string anotherId)
+        [AllowAnonymous]
+        [HttpGet("OwnChat/{anotherId}")]
+        [Route("/Admin/Chat/OwnChat/{anotherId}")]
+        public async Task<IActionResult> OwnChat(string anotherId) 
 		{
             var viewModel = new ViewmMODeElMASTER();
             var currentUserId = iUserManager.GetUserId(User);
+            ViewBag.MyId1 = currentUserId;
 
             var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
             var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
@@ -98,14 +100,35 @@ namespace Yara.Areas.Admin.Controllers
 		//              await file.CopyToAsync(stream);
 		//          }
 
-		//          return Ok(new { filePath = $"/Images/Home/{file.FileName}" });
-		//      }
-		[HttpPost]
-		[Route("/Admin/chat/uploadFile")]
-		public async Task<IActionResult> UploadFile(IFormFile file)
-		{
-			if (file == null || file.Length == 0)
-				return Ok("null");
+        [HttpGet("Refresh/{anotherId}")]
+        [Route("/Admin/Chat/Refresh/{anotherId}")]
+        public async Task<IActionResult> Refresh(string anotherId)
+        {
+            ViewmMODeElMASTER viewmMODeElMASTER1 = new ViewmMODeElMASTER();
+
+            var currentUserId = iUserManager.GetUserId(User);
+            var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
+            var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
+
+            foreach (var item in IamReciver)
+            {
+                IamSender.Add(item);
+            }
+
+            viewmMODeElMASTER1.ViewChatMessage = IamSender;
+            ViewBag.UserId = currentUserId;
+
+            return PartialView("Refresh", viewmMODeElMASTER1);
+        }
+
+
+
+        [HttpPost]
+        [Route("/Admin/chat/uploadFile")]
+        public async Task<IActionResult> UploadFile(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return Ok("null");
 
 			string fileName = Guid.NewGuid().ToString();
 			var filePath = Path.Combine("wwwroot/Images/Home/", fileName + file.FileName);

@@ -7,39 +7,42 @@
     <h2>Client Chat</h2>
     <img src="@Helper.PathImageuser@ViewBag.img" style="width:30px; height:30px; border-radius: 50%;" />
     <label id="userName">@Context.User.Identity.Name</label>
-    <hr />
-    <div id="messagesList" style="width: 70%; max-height: 400px; padding:5px; border: groove 1px black; border-radius: 8px; overflow-y: auto;">
-        @{
-            foreach (var item in Model.ViewChatMessage.OrderBy(m => m.MessageeTime))
-            {
-                <div style="display: flex; @(item.SenderId == ViewBag.UserId ? "justify-content:flex-start; max-width: 80%;" :
+    <div class="col-xs-12" style="margin:5px; width:100vw;">
+@*         <div id="messagesList" style="width: 70%; max-height: 400px; padding:5px; border: groove 1px black; border-radius: 8px; overflow-y: auto;">
+            @{
+                foreach (var item in Model.ViewChatMessage.OrderBy(m => m.MessageeTime))
+                {
+                    <div style="display: flex; @(item.SenderId == ViewBag.UserId ? "justify-content:flex-start; max-width: 80%;" :
                     "justify-content:flex-end; max-width: 80%;");">
 
                     <li style="display: flex;  @(item.SenderId == ViewBag.UserId ? "justify-content:flex-end; background-color:white;" :
                     "justify-content:flex-start; background-color:gray; color:white;");
-                                                    border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
-                        <img src="@(item.SenderId == ViewBag.UserId ? Helper.PathImageuser + item.SenderImage : Helper.PathImageuser + item.SenderImage)" style="width:50px; height:50px; border-radius: 50%;" />
-                        @{
-                            if (item.ImgMsg.Contains("Images/"))
-                            {
-                                <div style="display: flex; flex-direction:column; gap:5px;">
-                                    <img src="@item.ImgMsg" style="width:150px; height:200px; border-radius: 150%;" />
-                                    <p> @item.Message :</p>
-                                </div>
+                                            border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
+                            <img src="@(item.SenderId == ViewBag.UserId ? Helper.PathImageuser + item.SenderImage : Helper.PathImageuser + item.SenderImage)" style="width:50px; height:50px; border-radius: 50%;" />
+                            @{
+                                if (item.ImgMsg.Contains("Images/"))
+                                {
+                                    <div style="display: flex; flex-direction:column; gap:5px;">
+                                        <img src="@item.ImgMsg" style="width:150px; height:200px; border-radius: 150%;" />
+                                        <p> @item.Message :</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <p>@item.Message :</p>
+                                }
                             }
-                            else
-                            {
-                                <p>@item.Message :</p>
-                            }
-                        }
-                        @item.MessageeTime.ToString("HH:mm")
-                    </li>
-                </div>
+                            @item.MessageeTime.ToString("HH:mm")
+                        </li>
+                    </div>
+                }
             }
-        }
+        </div> *@
+
+    <div id="messagesList" style="width: 70%; max-height: 400px; padding:5px; border: groove 1px black; border-radius: 8px; overflow-y: auto;">
+        @Html.Partial("RefreshCl", Model)
     </div>
-    <hr />
-    <br />
+        <hr />
 
     <div>
         <div style="position: fixed; bottom: 10px; border-top: 1px solid #ccc; background-color: #f1f1f1; padding: 10px; display: flex;">
@@ -58,19 +61,21 @@
     <script type="text/javascript">
         let connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
-        async function start() {
-            try {
-                await connection.start();
-                console.log("SignalR connected");
-            } catch (err) {
-                console.log("Error connecting to SignalR:", err.toString());
-                setTimeout(start, 5000); // Retry connection after 5 seconds
-            }
-        }
 
-        connection.on("ReceiveMessage", function (user, message, pathImg, profileImage, time) {
-            console.log("Message received:", { user, message, pathImg, profileImage, time });
-            appendMessage(user, message, pathImg, profileImage, time);
+
+        // const connection = new signalR.HubConnectionBuilder().withUrl("/ChatHub").build();
+
+        // connection.start().then(function () {
+        //     console.log("Connected to SignalR hub");
+        // }).catch(function (err) {
+        //     console.error("Error connecting to SignalR hub:", err.toString());
+        // });
+        connection.start().catch(err => console.error(err.toString()));
+
+        connection.on("ReceiveMessageFromAdmin", function (user, message, pathImg, time) {
+            console.log("done...in admin sent a Message");
+            refreshMessagesListForAdmin();
+            refreshMessagesList();
         });
 
         async function sendMessage() {
@@ -91,10 +96,11 @@
 
             document.getElementById("messageInput1").value = "";
             fileInput.value = "";
-
-            connection.invoke("SendMessageToClients", message, to, filePath).then(function () {
-                console.log("Message sent:", { message, to, filePath });
-                appendMessage(document.getElementById("userName").textContent, message, filePath, "path/to/profile/image", new Date().toLocaleTimeString());
+            connection.invoke("SendMessageToAdmin", message, to, filePath)
+            .then(function () {
+                    console.log("Send Message To Admin successfully");
+                    refreshMessagesList();
+                    scrollToBottom();
             }).catch(function (err) {
                 console.error("Error sending message:", err.toString());
             });
@@ -188,9 +194,58 @@
             });
         }
 
-        connection.onclose(async () => {
-            await start();
-        });
+        async function refreshMessagesList() {
+            const anotherId = '@ViewBag.anotherId';
+
+            try {
+                const response = await fetch(`/ClintAccount/Chat/Refresh/${anotherId}`, {
+                    method: 'GET'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+
+                const html = await response.text();
+                console.log(html);
+                document.getElementById('messagesList').innerHTML = html;
+            } catch (error) {
+                console.error("Error fetching messages:", error);
+            }
+        }
+
+        async function refreshMessagesListForAdmin() {
+            const MyId = '@ViewBag.MyId';
+
+            try {
+                const response = await fetch(`/Admin/Chat/OwnChat/?anotherId=${MyId}`, {
+                    method: 'GET'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+
+                const data = await response.text();
+                location.reload(); // إعادة تحميل الصفحة بالكامل
+            } catch (error) {
+                console.error("Error fetching messages:", error);
+            }
+        }
+
+
+        function loadChatFromLocalStorage() {
+            const chatContainer = document.getElementById("messagesList");
+            const chatContent = localStorage.getItem("chatContent");
+            if (chatContent) {
+                chatContainer.innerHTML = chatContainer.innerHTML +  chatContent;
+            }
+        }
+
+        function scrollToBottom() {
+            const messagesList = document.getElementById("messagesList");
+            messagesList.scrollTop = messagesList.scrollHeight;
+        }
 
         start();
     </script>
