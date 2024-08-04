@@ -12,8 +12,8 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Infarstuructre.ViewModel
 {
-	public class ChatHub : Hub
-	{
+    public class ChatHub : Hub
+    {
         IIUserInformation iUserInformation;
         IIMessageChat iMessageChat;
         IIConnectAndDisconnect iConnectAndDisconnect;
@@ -23,12 +23,12 @@ namespace Infarstuructre.ViewModel
         public ChatHub(UserManager<ApplicationUser> _userManager1, IIUserInformation iUserInformation1, MasterDbcontext dbcontext1, IIConnectAndDisconnect iConnectAndDisconnect1, IIMessageChat iMessageChat1)
         {
             _userManager = _userManager1;
-            iUserInformation = iUserInformation1;   
+            iUserInformation = iUserInformation1;
             dbcontext = dbcontext1;
             iMessageChat = iMessageChat1;
-			iConnectAndDisconnect = iConnectAndDisconnect1;
+            iConnectAndDisconnect = iConnectAndDisconnect1;
 
-		}
+        }
 
         // connection & Disconnection Logic
         public override async Task OnConnectedAsync()
@@ -36,18 +36,18 @@ namespace Infarstuructre.ViewModel
             var userId = Context.UserIdentifier;
             var user = await _userManager.FindByIdAsync(userId);
 
-            if (user != null)
+            if (user != null && await _userManager.IsInRoleAsync(user, "Admin"))
             {
-                if (await _userManager.IsInRoleAsync(user, "Admin"))
-                {
-                    await Groups.AddToGroupAsync(Context.ConnectionId, "Admins");
-                }
-                if (await _userManager.IsInRoleAsync(user, "Support"))
-                {
-                    await Groups.AddToGroupAsync(Context.ConnectionId, "Supports");
-                }
+                await Groups.AddToGroupAsync(Context.ConnectionId, "Admins");
+            }
+            if (user != null && await _userManager.IsInRoleAsync(user, "Support"))
+            {
+                await Groups.AddToGroupAsync(Context.ConnectionId, "Supports");
+            }
 
-                var profileImageUrl = GetProfileImageFromDatabase(user.UserName) ?? "No img";
+            var profileImageUrl = GetProfileImageFromDatabase(user.UserName) ?? "No img";
+            if (!string.IsNullOrEmpty(user.UserName))
+            {
                 var connect = new TBConnectAndDisConnect
                 {
                     ConnectId = Context.ConnectionId,
@@ -56,41 +56,17 @@ namespace Infarstuructre.ViewModel
                 };
 
                 iConnectAndDisconnect.addConnection(connect);
+
                 await Clients.All.SendAsync("UserConnected", user.UserName, profileImageUrl);
-                CheckUnreadMessages(user.UserName);
             }
-
-            //if (user != null && await _userManager.IsInRoleAsync(user, "Admin"))
-            //{
-            //    await Groups.AddToGroupAsync(Context.ConnectionId, "Admins");
-            //}
-            //if (user != null && await _userManager.IsInRoleAsync(user, "Support"))
-            //{
-            //    await Groups.AddToGroupAsync(Context.ConnectionId, "Supports");
-            //}
-
-            //var profileImageUrl = GetProfileImageFromDatabase(user.UserName) ?? "No img";
-            //if (!string.IsNullOrEmpty(user.UserName))
-            //{
-            //    var connect = new TBConnectAndDisConnect
-            //    {
-            //        ConnectId = Context.ConnectionId,
-            //        UserImg = profileImageUrl,
-            //        UserName = user.UserName
-            //    };
-
-            //    iConnectAndDisconnect.addConnection(connect);
-
-            //    await Clients.All.SendAsync("UserConnected", user.UserName, profileImageUrl);
-            //}
-            //CheckUnreadMessages(user.UserName);
+            CheckUnreadMessages(user.UserName);
             await base.OnConnectedAsync();
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
             var connectId = Context.ConnectionId;
-			var user1 = iConnectAndDisconnect.GetById(connectId);
+            var user1 = iConnectAndDisconnect.GetById(connectId);
             iConnectAndDisconnect.RemoveConnection(connectId);
 
             var user = Context.User.Identity.Name;
@@ -118,8 +94,8 @@ namespace Infarstuructre.ViewModel
 
             var currentUserName = Context.User.Identity.Name;
             var currentUserProfileImage = GetProfileImageFromDatabase(currentUserName);
-			await Clients.Group("Admins").SendAsync("ReceiveMessageFromClient", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
-			await Clients.Group("Supports").SendAsync("ReceiveMessageFromClient", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
+            await Clients.Group("Admins").SendAsync("ReceiveMessageFromClient", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
+            await Clients.Group("Supports").SendAsync("ReceiveMessageFromClient", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
             var unreadCount = await dbcontext.TBMessageChats.CountAsync(m => m.ReciverId == to && !m.IsRead);
             await Clients.Group("Admins").SendAsync("UnreadMessagesNotification", unreadCount);
             await Clients.Group("Supports").SendAsync("UnreadMessagesNotification", unreadCount);
@@ -142,61 +118,48 @@ namespace Infarstuructre.ViewModel
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 
+            try
+            {
+                rec = iConnectAndDisconnect.GetByName(to);
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+            }
+
             var userd = vmodel.sUser = iUserInformation.GetByName(to);
             var reciverId = userd.Id;
             var senderId = Context.UserIdentifier;
-
+            var currentUserName = Context.User.Identity.Name;
+            var currentUserProfileImage = GetProfileImageFromDatabase(currentUserName);
             var img = string.Empty;
             if (filePath != null)
             {
                 img = filePath;
             }
-            else 
+            else
             {
                 img = "Null";
             }
-            var currentUserName = Context.User.Identity.Name;
-            var currentUserProfileImage = GetProfileImageFromDatabase(currentUserName);
 
-            if (rec != null) 
+            if (rec != null)
             {
                 await Clients.All.SendAsync("ReceiveMessageFromAdmin", currentUserName, message, filePath, DateTime.UtcNow.ToString("HH:mm"));
                 var unreadCount = await dbcontext.TBMessageChats.CountAsync(m => m.ReciverId == to && !m.IsRead);
                 await Clients.User(rec.ConnectId).SendAsync("UnreadMessagesNotification", unreadCount);
 
-            var chatMsg = new TBMessageChat
-            {
-                Message = message,
-                ReciverId = reciverId,
-                SenderId = senderId,
-                ImgMsg = img,
-                IsRead = false,
-                MessageeTime = DateTime.Now,
-                CurrentState = true,
-            };
-
-            iMessageChat.saveData(chatMsg);
-
-            var unreadCount = await dbcontext.TBMessageChats.CountAsync(m => m.ReciverId == reciverId && !m.IsRead);
-            await Clients.User(reciverId).SendAsync("UnreadMessagesNotification", unreadCount);
-            //if (rec != null) 
-            //{
-            //    await Clients.User(rec.ConnectId).SendAsync("ReceiveMessage", currentUserName, message, filePath, DateTime.UtcNow.ToString("HH:mm"));
-            //    var unreadCount = await dbcontext.TBMessageChats.CountAsync(m => m.ReciverId == to && !m.IsRead);
-            //    await Clients.User(rec.ConnectId).SendAsync("UnreadMessagesNotification", unreadCount);
-
-            //    var chatMsg = new TBMessageChat
-            //    {
-            //        Message = message,
-            //        ReciverId = reciverId,
-            //        SenderId = senderId,
-            //        ImgMsg = img,
-            //        IsRead = false,
-            //        MessageeTime = DateTime.Now,
-            //        CurrentState = true,
-            //    };
-            //    iMessageChat.saveData(chatMsg);
-            //}
+                var chatMsg = new TBMessageChat
+                {
+                    Message = message,
+                    ReciverId = reciverId,
+                    SenderId = senderId,
+                    ImgMsg = img,
+                    IsRead = false,
+                    MessageeTime = DateTime.Now,
+                    CurrentState = true,
+                };
+                iMessageChat.saveData(chatMsg);
+            }
         }
 
 
@@ -236,18 +199,18 @@ namespace Infarstuructre.ViewModel
             return null;
         }
 
-		private async Task<bool> CheckIfUserIsAdmin(string userId)
-		{
+        private async Task<bool> CheckIfUserIsAdmin(string userId)
+        {
             var user = await _userManager.FindByIdAsync(userId);
-            if(user != null)
+            if (user != null)
             {
-                if(await _userManager.IsInRoleAsync(user, "Admin"))
+                if (await _userManager.IsInRoleAsync(user, "Admin"))
                 {
                     return true;
                 }
             }
             return false;
-		}
+        }
 
         public async Task MarkMessagesAsRead(string user)
         {
@@ -274,7 +237,7 @@ namespace Infarstuructre.ViewModel
             ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
             var reciver = viewmMODeElMASTER.sUser = iUserInformation.GetByName(user);
 
-            var unreadCount = dbcontext.TBMessageChats.Where( m => m.ReciverId == reciver.Id)
+            var unreadCount = dbcontext.TBMessageChats.Where(m => m.ReciverId == reciver.Id)
                 .Count(m => m.IsRead == false);
 
             var x = unreadCount;

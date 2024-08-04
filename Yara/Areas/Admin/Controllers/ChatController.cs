@@ -100,6 +100,7 @@ namespace Yara.Areas.Admin.Controllers
 		//              await file.CopyToAsync(stream);
 		//          }
 
+
         [HttpGet("Refresh/{anotherId}")]
         [Route("/Admin/Chat/Refresh/{anotherId}")]
         public async Task<IActionResult> Refresh(string anotherId)
