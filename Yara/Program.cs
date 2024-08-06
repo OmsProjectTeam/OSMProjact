@@ -45,17 +45,17 @@ builder.Services.AddAuthentication(options =>
 	};
 });
 
-builder.Services.AddCors(
-	c =>
-	{
-		c.AddPolicy("Allow",
-			policy =>
-			{
-				policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-			});
-	}
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        builder => builder
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .SetIsOriginAllowed((host) => true)
+            .AllowCredentials());
+});
 
-);
+builder.Services.AddSignalR();
 
 
 
@@ -154,23 +154,6 @@ builder.Services.AddScoped<IISupportTicket, CLSTBSupportTicket>();
 builder.Services.AddTransient<ExternalDataService>();
 builder.Services.AddScoped<IIEmailNewsletter, CLSTBEmailNewsletter>();
 
-
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowSpecificOrigin",
-        builder =>
-        {
-            builder.AllowAnyOrigin()
-                   .AllowAnyHeader()
-                   .AllowAnyMethod();
-        });
-});
-
-
-
-
-
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
@@ -235,7 +218,5 @@ app.UseSwaggerUI(c =>
 	c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Shipping System V1");
 	c.RoutePrefix = "api-docs";
 });
-
-//app.MapHub<ChatHub>("/chatHub");
 
 app.Run();

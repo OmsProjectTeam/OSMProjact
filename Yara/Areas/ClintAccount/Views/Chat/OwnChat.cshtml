@@ -378,15 +378,8 @@
     <script type="text/javascript">
         let connection;
 
-        async function start() {
-            try {
-                await connection.start();
-                console.log("SignalR connected");
-            } catch (err) {
-                console.log("Error connecting to SignalR:", err.toString());
-                setTimeout(start, 5000); // Retry connection after 5 seconds
-            }
-        }
+
+}
 
         // connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
@@ -445,75 +438,68 @@
             }
         }
 
-        function appendMessage(user, message, pathImg, profileImage, time) {
-            const messageList = document.getElementById("messagesList");
+        connection.on("UserDisconnected", function (userName) {
+            console.log(`${userName} disconnected`);
+        });
 
-            const messageItem = document.createElement("div");
-            messageItem.style.display = "flex";
-            messageItem.style.justifyContent = user === document.getElementById("userName").textContent ? "flex-start" : "flex-end";
-            messageItem.style.maxWidth = "80%";
+        window.onload = function () {
+            const user = document.getElementById("userName").textContent;
+            connection.invoke("MarkMessagesAsRead", user).catch(function (err) {
+                console.error("Error marking messages as read:", err.toString());
+            });
+        }
 
-            const messageContent = document.createElement("li");
-            messageContent.style.display = "flex";
-            messageContent.style.backgroundColor = user === document.getElementById("userName").textContent ? "white" : "gray";
-            messageContent.style.color = user === document.getElementById("userName").textContent ? "black" : "white";
-            messageContent.style.border = "groove 1px black";
-            messageContent.style.marginBottom = "3px";
-            messageContent.style.borderRadius = "10px";
-            messageContent.style.height = "auto";
-            messageContent.style.padding = "10px";
+        async function refreshMessagesList() {
+            const anotherId = '@ViewBag.anotherId';
 
-            const userImg = document.createElement("img");
-            userImg.src = profileImage;
-            userImg.style.width = "50px";
-            userImg.style.height = "50px";
-            userImg.style.borderRadius = "50%";
-            messageContent.appendChild(userImg);
+            try {
+                const response = await fetch(`/ClintAccount/Chat/Refresh/${anotherId}`, {
+                    method: 'GET'
+                });
 
-            if (pathImg && pathImg.includes("Images/")) {
-                const imgContainer = document.createElement("div");
-                imgContainer.style.display = "flex";
-                imgContainer.style.flexDirection = "column";
-                imgContainer.style.gap = "5px";
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
 
-                const messageImg = document.createElement("img");
-                messageImg.src = pathImg;
-                messageImg.style.width = "150px";
-                messageImg.style.height = "200px";
-                messageImg.style.borderRadius = "150%";
-
-                const messageText = document.createElement("p");
-                messageText.textContent = `${message} :`;
-
-                imgContainer.appendChild(messageImg);
-                imgContainer.appendChild(messageText);
-                messageContent.appendChild(imgContainer);
-            } else {
-                const messageText = document.createElement("p");
-                messageText.textContent = `${message} :`;
-                messageContent.appendChild(messageText);
+                const html = await response.text();
+                console.log(html);
+                document.getElementById('messagesList').innerHTML = html;
+            } catch (error) {
+                console.error("Error fetching messages:", error);
             }
+        }
 
-            const messageTime = document.createElement("span");
-            messageTime.textContent = time;
-            messageContent.appendChild(messageTime);
+        async function refreshMessagesListForAdmin() {
+            const MyId = '@ViewBag.MyId';
 
-            messageItem.appendChild(messageContent);
-            messageList.appendChild(messageItem);
-            scrollToBottom();
+            try {
+                const response = await fetch(`/Admin/Chat/OwnChat/?anotherId=${MyId}`, {
+                    method: 'GET'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+
+                const data = await response.text();
+                location.reload();
+            } catch (error) {
+                console.error("Error fetching messages:", error);
+            }
+        }
+
+
+        function loadChatFromLocalStorage() {
+            const chatContainer = document.getElementById("messagesList");
+            const chatContent = localStorage.getItem("chatContent");
+            if (chatContent) {
+                chatContainer.innerHTML = chatContainer.innerHTML + chatContent;
+            }
         }
 
         function scrollToBottom() {
             const messagesList = document.getElementById("messagesList");
             messagesList.scrollTop = messagesList.scrollHeight;
-        }
-
-        window.onload = function () {
-            scrollToBottom();
-            const user = document.getElementById("userName").textContent;
-            connection.invoke("MarkMessagesAsRead", user).catch(function (err) {
-                console.error("Error marking messages as read:", err.toString());
-            });
         }
 
         function refreshMessagesList() {
