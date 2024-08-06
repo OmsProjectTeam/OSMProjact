@@ -45,17 +45,17 @@ builder.Services.AddAuthentication(options =>
 	};
 });
 
-builder.Services.AddCors(
-	c =>
-	{
-		c.AddPolicy("Allow",
-			policy =>
-			{
-				policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-			});
-	}
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        builder => builder
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .SetIsOriginAllowed((host) => true)
+            .AllowCredentials());
+});
 
-);
+builder.Services.AddSignalR();
 
 
 
@@ -219,30 +219,14 @@ app.MapControllerRoute(
 	name: "areas",
 	pattern: "{area:exists}/{controller=Accounts}/{action=Login}/{id?}"
 );
-app.UseCors(); 
-//app.UseEndpoints(endpoints =>
-//{
-//	endpoints.MapControllerRoute(
-//		name: "default",
-//        pattern: "{controller=Home}/{action=Index}/{id?}");
-//    endpoints.MapHub<ChatHub>("/chatHub");
-//});
 
-
-
-
-
+app.UseCors("CorsPolicy");
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapHub<ChatHub>("/chatHub");
-
-
-
-
-
 
 app.UseSwagger();
 app.UseCors();
@@ -251,7 +235,5 @@ app.UseSwaggerUI(c =>
 	c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Shipping System V1");
 	c.RoutePrefix = "api-docs";
 });
-
-//app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
