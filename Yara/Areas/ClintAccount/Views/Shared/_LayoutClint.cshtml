@@ -15,74 +15,29 @@
 
 	<script src="~/js/signalr.min.js"></script>
 
-	@* <script>
-				var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
-
-				connection.start().then(function () {
-			console.log("SignalR connected");
-				}).catch(function (err) {
-			console.error("SignalR connection error: ", err.toString());
-				});
-	</script> *@
 	<script>
-		var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+		const connection = new signalR.HubConnectionBuilder()
+			.withUrl("/chatHub")
+			.build();
 
-		connection.start().catch(function (err) {
-			console.error(err.toString());
-		});
+		async function startConnection() {
+			try {
+				// تحقق من حالة الاتصال الحالية
+				if (connection.state !== signalR.HubConnectionState.Disconnected) {
+					await connection.stop(); // أوقف الاتصال الحالي إذا لم يكن في حالة منفصلة
+				}
 
-		connection.on("ReceiveMessage", function (user, message, pathImg, profileImage, time) {
-			var msgList = document.getElementById("messagesList");
-			var msgDiv = document.createElement("div");
-			msgDiv.innerHTML = `<div style="display: flex; justify-content: ${user === '@Context.User.Identity.Name' ? 'flex-end' : 'flex-start'};">
-											<li style="display: flex; ${user === '@Context.User.Identity.Name' ? 'background-color:white;' : 'background-color:gray; color:white;'};
-												border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
-												<img src="${profileImage}" style="width:50px; height:50px; border-radius: 50%;" />
-												<div style="display: flex; flex-direction:column; gap:5px;">
-													${pathImg ? `<img src="${pathImg}" style="width:150px; height:200px; border-radius: 150%;" />` : ''}
-													<p>${message} :</p>
-												</div>
-												${time}
-											</li>
-										</div>`;
-			msgList.appendChild(msgDiv);
-			msgList.scrollTop = msgList.scrollHeight;
-		});
-
-		async function sendMessage() {
-			var message = document.getElementById("messageInput1").value;
-			var to = document.getElementById("sendTo").value;
-			var fileInput = document.getElementById("ImgSend");
-			var file = fileInput.files[0];
-
-			var filePath = null;
-			if (file) {
-				var formData = new FormData();
-				formData.append("file", file);
-
-				await fetch("/ClintAccount/Chat/UploadFile", {
-					method: "POST",
-					body: formData
-				})
-					.then(response => response.json())
-					.then(data => {
-						filePath = data.filePath;
-						sendSignalRMessage(message, to, filePath);
-					})
-					.catch(error => console.error("Error uploading file:", error));
-			} else {
-				sendSignalRMessage(message, to, null);
+				await connection.start();
+				console.log("Connected!");
+			} catch (err) {
+				console.error("Connection failed: ", err);
 			}
-
-			document.getElementById("messageInput1").value = "";
-			fileInput.value = "";
 		}
 
-		function sendSignalRMessage(message, to, filePath) {
-			connection.invoke("SendMessageToAdmin", message, to, filePath).catch(function (err) {
-				console.error("Error sending message:", err.toString());
-			});
-		}
+		// بدء الاتصال عند تحميل الصفحة أو عند الحاجة
+		startConnection();
+
+
 	</script>
 
 	<!-- Main Styles -->
@@ -175,7 +130,7 @@
 						</ul>
 						<!-- /.sub-menu js__content -->
 					</li>
-	
+
 					<li>
 						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-user"></i><span>FAQ</span><span class="menu-arrow fa fa-angle-down"></span></a>
 						<ul class="sub-menu js__content">
@@ -221,123 +176,123 @@
 
 
 
-@* 					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-adjust"></i><span>@ResourceWeb.LBGeneralSettings</span><span class="menu-arrow fa fa-angle-down"></span></a>
-						<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="TypeSystem" asp-action="MyTypeSystem">@ResourceWeb.LBMyTypeSystem</a></li>
-							<li><a asp-area="Admin" asp-controller="TypesCompanies" asp-action="MyTypesCompanies">@ResourceWeb.LBMyTypesCompanies</a></li>
-							<li><a asp-area="Admin" asp-controller="InformationCompanies" asp-action="MYInformationCompanies">@ResourceWeb.LBMYInformationCompanies</a></li>
-							<li><a asp-area="Admin" asp-controller="City" asp-action="MyCity">@ResourceWeb.LBMyCity</a></li>
-							<li><a asp-area="Admin" asp-controller="Area" asp-action="MyArea">@ResourceWeb.LBMyArea</a></li>
-							<li><a asp-area="Admin" asp-controller="TaskStatus" asp-action="MyTaskStatus">@ResourceWeb.LBMyTaskStatus</a></li>
-							<li><a asp-area="Admin" asp-controller="RolesName" asp-action="MyRolesName">@ResourceWeb.LBMyRolesName</a></li>
-							<li><a asp-area="Admin" asp-controller="OrderCase" asp-action="MyOrderCase">@ResourceWeb.LBMyOrderCase</a></li>
+					@* 					<li>
+					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-adjust"></i><span>@ResourceWeb.LBGeneralSettings</span><span class="menu-arrow fa fa-angle-down"></span></a>
+					<ul class="sub-menu js__content">
+					<li><a asp-area="Admin" asp-controller="TypeSystem" asp-action="MyTypeSystem">@ResourceWeb.LBMyTypeSystem</a></li>
+					<li><a asp-area="Admin" asp-controller="TypesCompanies" asp-action="MyTypesCompanies">@ResourceWeb.LBMyTypesCompanies</a></li>
+					<li><a asp-area="Admin" asp-controller="InformationCompanies" asp-action="MYInformationCompanies">@ResourceWeb.LBMYInformationCompanies</a></li>
+					<li><a asp-area="Admin" asp-controller="City" asp-action="MyCity">@ResourceWeb.LBMyCity</a></li>
+					<li><a asp-area="Admin" asp-controller="Area" asp-action="MyArea">@ResourceWeb.LBMyArea</a></li>
+					<li><a asp-area="Admin" asp-controller="TaskStatus" asp-action="MyTaskStatus">@ResourceWeb.LBMyTaskStatus</a></li>
+					<li><a asp-area="Admin" asp-controller="RolesName" asp-action="MyRolesName">@ResourceWeb.LBMyRolesName</a></li>
+					<li><a asp-area="Admin" asp-controller="OrderCase" asp-action="MyOrderCase">@ResourceWeb.LBMyOrderCase</a></li>
 
-							<li><a asp-area="Admin" asp-controller="OrderStatus" asp-action="MyOrderStatus">@ResourceWeb.LBMyOrderStatus</a></li>
+					<li><a asp-area="Admin" asp-controller="OrderStatus" asp-action="MyOrderStatus">@ResourceWeb.LBMyOrderStatus</a></li>
 
 
 
-						</ul>
-						<!-- /.sub-menu js__content -->
+					</ul>
+					<!-- /.sub-menu js__content -->
 					</li>
 					<li>
-						<a class="waves-effect" href="widgets.html"><i class="menu-icon fa fa-code"></i><span>Widgets</span><span class="notice notice-yellow">6</span></a>
+					<a class="waves-effect" href="widgets.html"><i class="menu-icon fa fa-code"></i><span>Widgets</span><span class="notice notice-yellow">6</span></a>
 					</li> *@
 				</ul>
 
 
 				<!-- /.menu js__accordion -->
-@* 				<h5 class="title">Components</h5>
+				@* 				<h5 class="title">Components</h5>
 				<!-- /.title -->
 				<ul class="menu js__accordion">
-					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-bar-chart"></i><span>@ResourceWeb.LBPricingSystem</span><span class="menu-arrow fa fa-angle-down"></span></a>
-						<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="CurrenciesExchangeRates" asp-action="MyCurrenciesExchangeRates">@ResourceWeb.LBMyCurrenciesExchangeRates</a></li>
-							<li><a asp-area="Admin" asp-controller="ExchangeRate" asp-action="MyExchangeRate">@ResourceWeb.LBMyExchangeRate</a></li>
-							<li><a asp-area="Admin" asp-controller="Transaction" asp-action="MyTransaction">@ResourceWeb.LBMyTransaction</a></li>
-							<li><a asp-area="Admin" asp-controller="ShippingPrice" asp-action="MyShippingPrice">@ResourceWeb.LBMyShippingPrice</a></li>
-							<li><a asp-area="Admin" asp-controller="TypeSystemDelivery" asp-action="MyTypeSystemDelivery">@ResourceWeb.LBMyTypeSystemDelivery</a></li>
-							<li><a asp-area="Admin" asp-controller="CityDeliveryTariffs" asp-action="MyCityDeliveryTariffs">@ResourceWeb.LBMyCityDeliveryTariffs</a></li>
-							<li><a asp-area="Admin" asp-controller="ClintWitheDeliveryTariffs" asp-action="MyClintWitheDeliveryTariffs">@ResourceWeb.LBMyClintWitheDeliveryTariffs</a></li>
-						</ul>
-						<!-- /.sub-menu js__content -->
-					</li>
+				<li>
+				<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-bar-chart"></i><span>@ResourceWeb.LBPricingSystem</span><span class="menu-arrow fa fa-angle-down"></span></a>
+				<ul class="sub-menu js__content">
+				<li><a asp-area="Admin" asp-controller="CurrenciesExchangeRates" asp-action="MyCurrenciesExchangeRates">@ResourceWeb.LBMyCurrenciesExchangeRates</a></li>
+				<li><a asp-area="Admin" asp-controller="ExchangeRate" asp-action="MyExchangeRate">@ResourceWeb.LBMyExchangeRate</a></li>
+				<li><a asp-area="Admin" asp-controller="Transaction" asp-action="MyTransaction">@ResourceWeb.LBMyTransaction</a></li>
+				<li><a asp-area="Admin" asp-controller="ShippingPrice" asp-action="MyShippingPrice">@ResourceWeb.LBMyShippingPrice</a></li>
+				<li><a asp-area="Admin" asp-controller="TypeSystemDelivery" asp-action="MyTypeSystemDelivery">@ResourceWeb.LBMyTypeSystemDelivery</a></li>
+				<li><a asp-area="Admin" asp-controller="CityDeliveryTariffs" asp-action="MyCityDeliveryTariffs">@ResourceWeb.LBMyCityDeliveryTariffs</a></li>
+				<li><a asp-area="Admin" asp-controller="ClintWitheDeliveryTariffs" asp-action="MyClintWitheDeliveryTariffs">@ResourceWeb.LBMyClintWitheDeliveryTariffs</a></li>
+				</ul>
+				<!-- /.sub-menu js__content -->
+				</li>
 
-					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBCustomers</span><span class="notice notice-blue">7</span></a>
-						<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="Customer" asp-action="MyCustomer">@ResourceWeb.LBMyCustomer</a></li>
+				<li>
+				<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBCustomers</span><span class="notice notice-blue">7</span></a>
+				<ul class="sub-menu js__content">
+				<li><a asp-area="Admin" asp-controller="Customer" asp-action="MyCustomer">@ResourceWeb.LBMyCustomer</a></li>
 
-						</ul>
-						<!-- /.sub-menu js__content -->
-					</li>
-					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBMerchants</span><span class="notice notice-blue">7</span></a>
-						<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="Merchant" asp-action="MyMerchant">@ResourceWeb.LBMyMerchant</a></li>
+				</ul>
+				<!-- /.sub-menu js__content -->
+				</li>
+				<li>
+				<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBMerchants</span><span class="notice notice-blue">7</span></a>
+				<ul class="sub-menu js__content">
+				<li><a asp-area="Admin" asp-controller="Merchant" asp-action="MyMerchant">@ResourceWeb.LBMyMerchant</a></li>
 
-						</ul>
-						<!-- /.sub-menu js__content -->
-					</li>
-					<li>
-						<a class="waves-effect" href="calendar.html"><i class="menu-icon fa fa-calendar"></i><span>Calendar</span></a>
-					</li>
-					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>order</span><span class="menu-arrow fa fa-angle-down"></span></a>
-						<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="OrderNew" asp-action="MyOrderNew">@ResourceWeb.LBMyOrderNew</a></li>
-
-
-
-							<li><a asp-area="Admin" asp-controller="Order" asp-action="MyOrder">@ResourceWeb.LBMyOrder</a></li>
+				</ul>
+				<!-- /.sub-menu js__content -->
+				</li>
+				<li>
+				<a class="waves-effect" href="calendar.html"><i class="menu-icon fa fa-calendar"></i><span>Calendar</span></a>
+				</li>
+				<li>
+				<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>order</span><span class="menu-arrow fa fa-angle-down"></span></a>
+				<ul class="sub-menu js__content">
+				<li><a asp-area="Admin" asp-controller="OrderNew" asp-action="MyOrderNew">@ResourceWeb.LBMyOrderNew</a></li>
 
 
-						</ul>
-						<!-- /.sub-menu js__content -->
-					</li>
+
+				<li><a asp-area="Admin" asp-controller="Order" asp-action="MyOrder">@ResourceWeb.LBMyOrder</a></li>
+
+
+				</ul>
+				<!-- /.sub-menu js__content -->
+				</li>
 				</ul>
 				<!-- /.menu js__accordion -->
 				<h5 class="title">Additions</h5>
 				<!-- /.title -->
 				<ul class="menu js__accordion">
-					<li>
-						<a class="waves-effect" href="profile.html"><i class="menu-icon fa fa-user"></i><span>Profile</span></a>
-					</li>
-					<li>
-						<a class="waves-effect" href="inbox.html"><i class="menu-icon fa fa-envelope"></i><span>Mail</span><span class="notice notice-danger">New</span></a>
-					</li>
-					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-file-text"></i><span>Page</span><span class="menu-arrow fa fa-angle-down"></span></a>
-						<ul class="sub-menu js__content">
-							<li><a href="page-starter.html">Starter Page</a></li>
-							<li><a href="page-login.html">Login</a></li>
-							<li><a href="page-register.html">Register</a></li>
-							<li><a href="page-recoverpw.html">Recover Password</a></li>
-							<li><a href="page-lock-screen.html">Lock Screen</a></li>
-							<li><a href="page-confirm-mail.html">Confirm Mail</a></li>
-							<li><a href="page-404.html">Error 404</a></li>
-							<li><a href="page-500.html">Error 500</a></li>
-						</ul>
-						<!-- /.sub-menu js__content -->
-					</li>
-					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-folder-open"></i><span>Extra Pages</span><span class="menu-arrow fa fa-angle-down"></span></a>
-						<ul class="sub-menu js__content">
-							<li><a href="extras-contact.html">Contact list</a></li>
-							<li><a href="extras-email-template.html">Email template</a></li>
-							<li><a href="extras-faq.html">FAQ</a></li>
-							<li><a href="extras-gallery.html">Gallery</a></li>
-							<li><a href="extras-invoice.html">Invoice</a></li>
-							<li><a href="extras-maps.html">Maps</a></li>
-							<li><a href="extras-pricing.html">Pricing</a></li>
-							<li><a href="extras-projects.html">Projects</a></li>
-							<li><a href="extras-taskboard.html">Taskboard</a></li>
-							<li><a href="extras-timeline.html">Timeline</a></li>
-							<li><a href="extras-tour.html">Tour</a></li>
-						</ul>
-						<!-- /.sub-menu js__content -->
-					</li>
+				<li>
+				<a class="waves-effect" href="profile.html"><i class="menu-icon fa fa-user"></i><span>Profile</span></a>
+				</li>
+				<li>
+				<a class="waves-effect" href="inbox.html"><i class="menu-icon fa fa-envelope"></i><span>Mail</span><span class="notice notice-danger">New</span></a>
+				</li>
+				<li>
+				<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-file-text"></i><span>Page</span><span class="menu-arrow fa fa-angle-down"></span></a>
+				<ul class="sub-menu js__content">
+				<li><a href="page-starter.html">Starter Page</a></li>
+				<li><a href="page-login.html">Login</a></li>
+				<li><a href="page-register.html">Register</a></li>
+				<li><a href="page-recoverpw.html">Recover Password</a></li>
+				<li><a href="page-lock-screen.html">Lock Screen</a></li>
+				<li><a href="page-confirm-mail.html">Confirm Mail</a></li>
+				<li><a href="page-404.html">Error 404</a></li>
+				<li><a href="page-500.html">Error 500</a></li>
+				</ul>
+				<!-- /.sub-menu js__content -->
+				</li>
+				<li>
+				<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-folder-open"></i><span>Extra Pages</span><span class="menu-arrow fa fa-angle-down"></span></a>
+				<ul class="sub-menu js__content">
+				<li><a href="extras-contact.html">Contact list</a></li>
+				<li><a href="extras-email-template.html">Email template</a></li>
+				<li><a href="extras-faq.html">FAQ</a></li>
+				<li><a href="extras-gallery.html">Gallery</a></li>
+				<li><a href="extras-invoice.html">Invoice</a></li>
+				<li><a href="extras-maps.html">Maps</a></li>
+				<li><a href="extras-pricing.html">Pricing</a></li>
+				<li><a href="extras-projects.html">Projects</a></li>
+				<li><a href="extras-taskboard.html">Taskboard</a></li>
+				<li><a href="extras-timeline.html">Timeline</a></li>
+				<li><a href="extras-tour.html">Tour</a></li>
+				</ul>
+				<!-- /.sub-menu js__content -->
+				</li>
 				</ul> *@
 				<!-- /.menu js__accordion -->
 			</div>
@@ -558,9 +513,6 @@
 	<!--
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-
-
-
 	</script>
 	<script src="~/Admin/assets/scripts/jquery.min.js"></script>
 	<script src="~/Admin/assets/scripts/modernizr.min.js"></script>
@@ -587,9 +539,6 @@
 	<script src="~/Admin/assets/plugin/fullcalendar/fullcalendar.min.js"></script>
 	<script src="~/Admin/assets/scripts/fullcalendar.init.js"></script>
 	<script src="~/Admin/assets/scripts/main.min.js"></script>
-	@* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
-	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
 	<script>
 
@@ -609,7 +558,7 @@
 				notification.style.width = "5px";
 				notification.style.height = "5px";
 				notification.style.borderRadius = "50%";
-			
+
 			} else {
 				notification.style.display = "none";
 			}

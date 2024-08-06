@@ -46,94 +46,29 @@
     <script src="~/js/signalr.min.js"></script>
 
     <script>
-        var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
 
-        connection.start().catch(function (err) {
-            console.error(err.toString());
-        });
+        async function startConnection() {
+            try {
+                // تحقق من حالة الاتصال الحالية
+                if (connection.state !== signalR.HubConnectionState.Disconnected) {
+                    await connection.stop(); // أوقف الاتصال الحالي إذا لم يكن في حالة منفصلة
+                }
 
-        connection.on("ReceiveMessage", function (user, message, pathImg, profileImage, time) {
-            var msgList = document.getElementById("messagesList");
-            var msgDiv = document.createElement("div");
-            msgDiv.innerHTML = `<div style="display: flex; justify-content: ${user === '@Context.User.Identity.Name' ? 'flex-end' : 'flex-start'};">
-                                            <li style="display: flex; ${user === '@Context.User.Identity.Name' ? 'background-color:white;' : 'background-color:gray; color:white;'};
-                                                border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
-                                                <img src="${profileImage}" style="width:50px; height:50px; border-radius: 50%;" />
-                                                <div style="display: flex; flex-direction:column; gap:5px;">
-                                                    ${pathImg ? `<img src="${pathImg}" style="width:150px; height:200px; border-radius: 150%;" />` : ''}
-                                                    <p>${message} :</p>
-                                                </div>
-                                                ${time}
-                                            </li>
-                                        </div>`;
-            msgList.appendChild(msgDiv);
-            msgList.scrollTop = msgList.scrollHeight;
-        });
-
-        async function sendMessage() {
-            var message = document.getElementById("messageInput1").value;
-            var to = document.getElementById("sendTo").value;
-            var fileInput = document.getElementById("ImgSend");
-            var file = fileInput.files[0];
-
-            var filePath = null;
-            if (file) {
-                var formData = new FormData();
-                formData.append("file", file);
-
-                await fetch("/Admin/chat/uploadFile", {
-                    method: "POST",
-                    body: formData
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        filePath = data.filePath;
-                        sendSignalRMessage(message, to, filePath);
-                    })
-                    .catch(error => console.error("Error uploading file:", error));
-            } else {
-                sendSignalRMessage(message, to, null);
+                await connection.start();
+                console.log("Connected!");
+            } catch (err) {
+                console.error("Connection failed: ", err);
             }
-
-            document.getElementById("messageInput1").value = "";
-            fileInput.value = "";
         }
 
-        function sendSignalRMessage(message, to, filePath) {
-            connection.invoke("SendMessageToAdmin", message, to, filePath).catch(function (err) {
-                console.error("Error sending message:", err.toString());
-            });
-        }
+        // بدء الاتصال عند تحميل الصفحة أو عند الحاجة
+        startConnection();
+
+
     </script>
-
-    @* <script>
-        var connection;
-
-        // دالة لإنشاء الاتصال
-        function createConnection() {
-            connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
-
-            connection.start().then(function () {
-                console.log("SignalR connected");
-                // حفظ حالة الاتصال في Local Storage
-                localStorage.setItem('signalRConnected', 'true');
-            }).catch(function (err) {
-                console.error(err.toString());
-            });
-
-            // جعل الاتصال متاحاً عالمياً
-            window.signalRConnection = connection;
-        }
-
-        // تحقق مما إذا كان الاتصال موجودًا بالفعل في Local Storage
-        if (!localStorage.getItem('signalRConnected')) {
-            createConnection();
-        } else {
-            console.log("SignalR connection already exists");
-            // إعادة استخدام الاتصال الحالي
-            createConnection();
-        }
-    </script> *@
 
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -183,35 +118,35 @@
         <!-- /.header -->
         <div class="content">
 
-		<div class="navigation">
-			<h5 class="title">Navigation</h5>
-			<!-- /.title -->
-			<ul class="menu js__accordion">
-				<li class="current">
-					<a class="waves-effect" href="index.html"><i class="menu-icon fa fa-home"></i><span>Dashboard</span></a>
-				</li>
-				<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-user"></i><span>@ResourceWeb.LBUsersInformationEn</span><span class="menu-arrow fa fa-angle-down"></span></a>
-					<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="Accounts" asp-action="Roles" asp-route-userId="@user.Id">@ResourceWeb.LBLbRoles</a></li>
-							<li><a asp-area="Admin" asp-controller="Accounts" asp-action="Registers" asp-route-userId="@user.Id">Users</a></li>
-						@* <li><a href="icons-material-icons.html">Material Design Icons</a></li>
-						<li><a href="icons-material-design-iconic.html">Material Design Iconic Font</a></li>
-						<li><a href="icons-themify-icons.html">Themify Icons</a></li> *@
-					</ul>
-					<!-- /.sub-menu js__content -->
-				</li>
-				<li>
-					<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-adjust"></i><span>@ResourceWeb.LBGeneralSettings</span><span class="menu-arrow fa fa-angle-down"></span></a>
-					<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="TypeSystem" asp-action="MyTypeSystem" asp-route-userId="@user.Id">@ResourceWeb.LBMyTypeSystem</a></li>
-							<li><a asp-area="Admin" asp-controller="TypesCompanies" asp-action="MyTypesCompanies" asp-route-userId="@user.Id">@ResourceWeb.LBMyTypesCompanies</a></li>
-							<li><a asp-area="Admin" asp-controller="InformationCompanies" asp-action="MYInformationCompanies" asp-route-userId="@user.Id">@ResourceWeb.LBMYInformationCompanies</a></li>
-							<li><a asp-area="Admin" asp-controller="City" asp-action="MyCity" asp-route-userId="@user.Id">@ResourceWeb.LBMyCity</a></li>
-							<li><a asp-area="Admin" asp-controller="Area" asp-action="MyArea" asp-route-userId="@user.Id">@ResourceWeb.LBMyArea</a></li>
-							<li><a asp-area="Admin" asp-controller="TaskStatus" asp-action="MyTaskStatus" asp-route-userId="@user.Id">@ResourceWeb.LBMyTaskStatus</a></li>
-							<li><a asp-area="Admin" asp-controller="RolesName" asp-action="MyRolesName" asp-route-userId="@user.Id">@ResourceWeb.LBMyRolesName</a></li>
-							<li><a asp-area="Admin" asp-controller="OrderCase" asp-action="MyOrderCase" asp-route-userId="@user.Id">@ResourceWeb.LBMyOrderCase</a></li>
+            <div class="navigation">
+                <h5 class="title">Navigation</h5>
+                <!-- /.title -->
+                <ul class="menu js__accordion">
+                    <li class="current">
+                        <a class="waves-effect" href="index.html"><i class="menu-icon fa fa-home"></i><span>Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-user"></i><span>@ResourceWeb.LBUsersInformationEn</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                        <ul class="sub-menu js__content">
+                            <li><a asp-area="Admin" asp-controller="Accounts" asp-action="Roles" asp-route-userId="@user.Id">@ResourceWeb.LBLbRoles</a></li>
+                            <li><a asp-area="Admin" asp-controller="Accounts" asp-action="Registers" asp-route-userId="@user.Id">Users</a></li>
+                            @* <li><a href="icons-material-icons.html">Material Design Icons</a></li>
+                            <li><a href="icons-material-design-iconic.html">Material Design Iconic Font</a></li>
+                            <li><a href="icons-themify-icons.html">Themify Icons</a></li> *@
+                        </ul>
+                        <!-- /.sub-menu js__content -->
+                    </li>
+                    <li>
+                        <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-adjust"></i><span>@ResourceWeb.LBGeneralSettings</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                        <ul class="sub-menu js__content">
+                            <li><a asp-area="Admin" asp-controller="TypeSystem" asp-action="MyTypeSystem" asp-route-userId="@user.Id">@ResourceWeb.LBMyTypeSystem</a></li>
+                            <li><a asp-area="Admin" asp-controller="TypesCompanies" asp-action="MyTypesCompanies" asp-route-userId="@user.Id">@ResourceWeb.LBMyTypesCompanies</a></li>
+                            <li><a asp-area="Admin" asp-controller="InformationCompanies" asp-action="MYInformationCompanies" asp-route-userId="@user.Id">@ResourceWeb.LBMYInformationCompanies</a></li>
+                            <li><a asp-area="Admin" asp-controller="City" asp-action="MyCity" asp-route-userId="@user.Id">@ResourceWeb.LBMyCity</a></li>
+                            <li><a asp-area="Admin" asp-controller="Area" asp-action="MyArea" asp-route-userId="@user.Id">@ResourceWeb.LBMyArea</a></li>
+                            <li><a asp-area="Admin" asp-controller="TaskStatus" asp-action="MyTaskStatus" asp-route-userId="@user.Id">@ResourceWeb.LBMyTaskStatus</a></li>
+                            <li><a asp-area="Admin" asp-controller="RolesName" asp-action="MyRolesName" asp-route-userId="@user.Id">@ResourceWeb.LBMyRolesName</a></li>
+                            <li><a asp-area="Admin" asp-controller="OrderCase" asp-action="MyOrderCase" asp-route-userId="@user.Id">@ResourceWeb.LBMyOrderCase</a></li>
                             <li><a asp-area="Admin" asp-controller="OrderStatus" asp-action="MyOrderStatus" asp-route-userId="@user.Id">@ResourceWeb.LBMyOrderStatus</a></li>
                             <li><a asp-area="Admin" asp-controller="EmailAlartSetting" asp-action="MyEmailAlartSetting" asp-route-userId="@user.Id">@ResourceWeb.LBMyEmailAlartSetting</a></li>
                             <li><a asp-area="Admin" asp-controller="ShippingAddress" asp-action="MyShippingAddress" asp-route-userId="@user.Id">@ResourceWeb.LBShippingAddress</a></li>
@@ -222,57 +157,57 @@
 
 
 
-					
-					</ul>
-					<!-- /.sub-menu js__content -->
-				</li>
+
+                        </ul>
+                        <!-- /.sub-menu js__content -->
+                    </li>
 
 
-					
 
 
-				@* <li>
-					<a class="waves-effect" href="widgets.html"><i class="menu-icon fa fa-code"></i><span>Widgets</span><span class="notice notice-yellow">6</span></a>
-				</li> *@
-			</ul>
-			<!-- /.menu js__accordion -->
-			<h5 class="title">Components</h5>
-			<!-- /.title -->
-			<ul class="menu js__accordion">
-				<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-bar-chart"></i><span>@ResourceWeb.LBPricingSystem</span><span class="menu-arrow fa fa-angle-down"></span></a>
-					<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="CurrenciesExchangeRates" asp-action="MyCurrenciesExchangeRates" asp-route-userId="@user.Id">@ResourceWeb.LBMyCurrenciesExchangeRates</a></li>
-							<li><a asp-area="Admin" asp-controller="ExchangeRate" asp-action="MyExchangeRate" asp-route-userId="@user.Id">@ResourceWeb.LBMyExchangeRate</a></li>
-							<li><a asp-area="Admin" asp-controller="Transaction" asp-action="MyTransaction" asp-route-userId="@user.Id">@ResourceWeb.LBMyTransaction</a></li>
-							<li><a asp-area="Admin" asp-controller="ShippingPrice" asp-action="MyShippingPrice" asp-route-userId="@user.Id">@ResourceWeb.LBMyShippingPrice</a></li>
-							<li><a asp-area="Admin" asp-controller="TypeSystemDelivery" asp-action="MyTypeSystemDelivery" asp-route-userId="@user.Id">@ResourceWeb.LBMyTypeSystemDelivery</a></li>
-							<li><a asp-area="Admin" asp-controller="CityDeliveryTariffs" asp-action="MyCityDeliveryTariffs" asp-route-userId="@user.Id">@ResourceWeb.LBMyCityDeliveryTariffs</a></li>
-							<li><a asp-area="Admin" asp-controller="ClintWitheDeliveryTariffs" asp-action="MyClintWitheDeliveryTariffs" asp-route-userId="@user.Id">@ResourceWeb.LBMyClintWitheDeliveryTariffs</a></li>
-					</ul>
-					<!-- /.sub-menu js__content -->
-				</li>
-			
-				<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBCustomers</span></a>
-					<ul class="sub-menu js__content">
+
+                    @* <li>
+                    <a class="waves-effect" href="widgets.html"><i class="menu-icon fa fa-code"></i><span>Widgets</span><span class="notice notice-yellow">6</span></a>
+                    </li> *@
+                </ul>
+                <!-- /.menu js__accordion -->
+                <h5 class="title">Components</h5>
+                <!-- /.title -->
+                <ul class="menu js__accordion">
+                    <li>
+                        <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-bar-chart"></i><span>@ResourceWeb.LBPricingSystem</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                        <ul class="sub-menu js__content">
+                            <li><a asp-area="Admin" asp-controller="CurrenciesExchangeRates" asp-action="MyCurrenciesExchangeRates" asp-route-userId="@user.Id">@ResourceWeb.LBMyCurrenciesExchangeRates</a></li>
+                            <li><a asp-area="Admin" asp-controller="ExchangeRate" asp-action="MyExchangeRate" asp-route-userId="@user.Id">@ResourceWeb.LBMyExchangeRate</a></li>
+                            <li><a asp-area="Admin" asp-controller="Transaction" asp-action="MyTransaction" asp-route-userId="@user.Id">@ResourceWeb.LBMyTransaction</a></li>
+                            <li><a asp-area="Admin" asp-controller="ShippingPrice" asp-action="MyShippingPrice" asp-route-userId="@user.Id">@ResourceWeb.LBMyShippingPrice</a></li>
+                            <li><a asp-area="Admin" asp-controller="TypeSystemDelivery" asp-action="MyTypeSystemDelivery" asp-route-userId="@user.Id">@ResourceWeb.LBMyTypeSystemDelivery</a></li>
+                            <li><a asp-area="Admin" asp-controller="CityDeliveryTariffs" asp-action="MyCityDeliveryTariffs" asp-route-userId="@user.Id">@ResourceWeb.LBMyCityDeliveryTariffs</a></li>
+                            <li><a asp-area="Admin" asp-controller="ClintWitheDeliveryTariffs" asp-action="MyClintWitheDeliveryTariffs" asp-route-userId="@user.Id">@ResourceWeb.LBMyClintWitheDeliveryTariffs</a></li>
+                        </ul>
+                        <!-- /.sub-menu js__content -->
+                    </li>
+
+                    <li>
+                        <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBCustomers</span></a>
+                        <ul class="sub-menu js__content">
                             <li><a asp-area="Admin" asp-controller="CustomerMessages" asp-action="MyCustomerMessages" asp-route-userId="@user.Id">@ResourceWeb.LBMyCustomerMessages</a></li>
-							<li><a asp-area="Admin" asp-controller="Customer" asp-action="MyCustomer" asp-route-userId="@user.Id">@ResourceWeb.LBMyCustomer</a></li>
-					
-					</ul>
-					<!-- /.sub-menu js__content -->
-				</li>
-                 
-					<li>
-						<a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBMerchants</span></a>
-						<ul class="sub-menu js__content">
-							<li><a asp-area="Admin" asp-controller="Merchant" asp-action="MyMerchant" asp-route-userId="@user.Id">@ResourceWeb.LBMyMerchant</a></li>
+                            <li><a asp-area="Admin" asp-controller="Customer" asp-action="MyCustomer" asp-route-userId="@user.Id">@ResourceWeb.LBMyCustomer</a></li>
+
+                        </ul>
+                        <!-- /.sub-menu js__content -->
+                    </li>
+
+                    <li>
+                        <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBMerchants</span></a>
+                        <ul class="sub-menu js__content">
+                            <li><a asp-area="Admin" asp-controller="Merchant" asp-action="MyMerchant" asp-route-userId="@user.Id">@ResourceWeb.LBMyMerchant</a></li>
 
                         </ul>
                         <!-- /.sub-menu js__content -->
                     </li>
                     @* <li>
-                        <a class="waves-effect" href="calendar.html"><i class="menu-icon fa fa-calendar"></i><span>Calendar</span></a>
+                    <a class="waves-effect" href="calendar.html"><i class="menu-icon fa fa-calendar"></i><span>Calendar</span></a>
                     </li> *@
                     <li>
                         <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>order</span><span class="menu-arrow fa fa-angle-down"></span></a>
@@ -284,7 +219,7 @@
                         </ul>
                         <!-- /.sub-menu js__content -->
                     </li>
-                    
+
                     <li>
                         <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>FAQ</span><span class="menu-arrow fa fa-angle-down"></span></a>
                         <ul class="sub-menu js__content">
@@ -297,7 +232,7 @@
                         <!-- /.sub-menu js__content -->
                     </li>
                     <li>
-                        
+
                         <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-table"></i><span>Newsletter</span><span class="menu-arrow fa fa-angle-down"></span></a>
                         <ul class="sub-menu js__content">
                             <li><a asp-area="Admin" asp-controller="EmailNewsletter" asp-action="MyEmailNewsletter" asp-route-userId="@user.Id">@ResourceWeb.LBMyEmailNewsletter</a></li>
@@ -320,41 +255,41 @@
                 <!-- /.title -->
                 <ul class="menu js__accordion">
                     @* <li>
-                        <a class="waves-effect" href="profile.html"><i class="menu-icon fa fa-user"></i><span>Profile</span></a>
+                    <a class="waves-effect" href="profile.html"><i class="menu-icon fa fa-user"></i><span>Profile</span></a>
                     </li>
                     <li>
-                        <a class="waves-effect" href="inbox.html"><i class="menu-icon fa fa-envelope"></i><span>Mail</span><span class="notice notice-danger">New</span></a>
+                    <a class="waves-effect" href="inbox.html"><i class="menu-icon fa fa-envelope"></i><span>Mail</span><span class="notice notice-danger">New</span></a>
                     </li> *@
                     @* <li>
-                        <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-file-text"></i><span>Page</span><span class="menu-arrow fa fa-angle-down"></span></a>
-                        <ul class="sub-menu js__content">
-                            <li><a href="page-starter.html">Starter Page</a></li>
-                            <li><a href="page-login.html">Login</a></li>
-                            <li><a href="page-register.html">Register</a></li>
-                            <li><a href="page-recoverpw.html">Recover Password</a></li>
-                            <li><a href="page-lock-screen.html">Lock Screen</a></li>
-                            <li><a href="page-confirm-mail.html">Confirm Mail</a></li>
-                            <li><a href="page-404.html">Error 404</a></li>
-                            <li><a href="page-500.html">Error 500</a></li>
-                        </ul>
-                        <!-- /.sub-menu js__content -->
+                    <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-file-text"></i><span>Page</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                    <ul class="sub-menu js__content">
+                    <li><a href="page-starter.html">Starter Page</a></li>
+                    <li><a href="page-login.html">Login</a></li>
+                    <li><a href="page-register.html">Register</a></li>
+                    <li><a href="page-recoverpw.html">Recover Password</a></li>
+                    <li><a href="page-lock-screen.html">Lock Screen</a></li>
+                    <li><a href="page-confirm-mail.html">Confirm Mail</a></li>
+                    <li><a href="page-404.html">Error 404</a></li>
+                    <li><a href="page-500.html">Error 500</a></li>
+                    </ul>
+                    <!-- /.sub-menu js__content -->
                     </li> *@
                     @* <li>
-                        <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-folder-open"></i><span>Extra Pages</span><span class="menu-arrow fa fa-angle-down"></span></a>
-                        <ul class="sub-menu js__content">
-                            <li><a href="extras-contact.html">Contact list</a></li>
-                            <li><a href="extras-email-template.html">Email template</a></li>
-                            <li><a href="extras-faq.html">FAQ</a></li>
-                            <li><a href="extras-gallery.html">Gallery</a></li>
-                            <li><a href="extras-invoice.html">Invoice</a></li>
-                            <li><a href="extras-maps.html">Maps</a></li>
-                            <li><a href="extras-pricing.html">Pricing</a></li>
-                            <li><a href="extras-projects.html">Projects</a></li>
-                            <li><a href="extras-taskboard.html">Taskboard</a></li>
-                            <li><a href="extras-timeline.html">Timeline</a></li>
-                            <li><a href="extras-tour.html">Tour</a></li>
-                        </ul>
-                        <!-- /.sub-menu js__content -->
+                    <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-folder-open"></i><span>Extra Pages</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                    <ul class="sub-menu js__content">
+                    <li><a href="extras-contact.html">Contact list</a></li>
+                    <li><a href="extras-email-template.html">Email template</a></li>
+                    <li><a href="extras-faq.html">FAQ</a></li>
+                    <li><a href="extras-gallery.html">Gallery</a></li>
+                    <li><a href="extras-invoice.html">Invoice</a></li>
+                    <li><a href="extras-maps.html">Maps</a></li>
+                    <li><a href="extras-pricing.html">Pricing</a></li>
+                    <li><a href="extras-projects.html">Projects</a></li>
+                    <li><a href="extras-taskboard.html">Taskboard</a></li>
+                    <li><a href="extras-timeline.html">Timeline</a></li>
+                    <li><a href="extras-tour.html">Tour</a></li>
+                    </ul>
+                    <!-- /.sub-menu js__content -->
                     </li> *@
                 </ul>
                 <!-- /.menu js__accordion -->
@@ -505,7 +440,7 @@
         <!-- /.popup-title -->
         <div class="content">
             <ul class="notice-list">
-                
+
                 @{
                     if (ViewData["ViewChatMessage"] != null)
                     {
@@ -522,9 +457,9 @@
                             </li>
                         }
                     }
-                    
+
                 }
-                   
+
             </ul>
             <!-- /.notice-list -->
             <a href="#" class="notice-read-more">See more messages <i class="fa fa-angle-down"></i></a>
@@ -556,7 +491,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
-   
+
 
     <script src="~/Admin/assets/scripts/jquery.min.js"></script>
     <script src="~/Admin/assets/scripts/modernizr.min.js"></script>
@@ -583,9 +518,7 @@
     <script src="~/Admin/assets/plugin/fullcalendar/fullcalendar.min.js"></script>
     <script src="~/Admin/assets/scripts/fullcalendar.init.js"></script>
     <script src="~/Admin/assets/scripts/main.min.js"></script>
- @*    <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
 
     <script>
         connection.on("UserConnected", (userName, profileImage) => {

@@ -9,41 +9,6 @@
     <hr />
     <img src="@Helper.PathImageuser@ViewBag.img" style="width:50px; height:50px; border-radius: 50%;" />
     <label id="userName">@Context.User.Identity.Name</label>
-
-    <hr />
-    @* <div id="messagesList" style="width: 70%; max-height: 400px; padding:5px; border: groove 1px black; border-radius: 8px; overflow-y: auto;">
-    @{
-    foreach (var item in Model.ViewChatMessage.OrderBy(m => m.MessageeTime))
-    {
-    <div style="display: flex; @(item.SenderId == ViewBag.UserId ? "justify-content:flex-start; max-width: 80%;" :
-    "justify-content:flex-end; max-width: 80%;");">
-
-    <li style="display: flex;  @(item.SenderId == ViewBag.UserId ? "justify-content:flex-end; background-color:white;" :
-    "justify-content:flex-start; background-color:gray; color:white;");
-    border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
-    <img src="@(item.SenderId == ViewBag.UserId ? Helper.PathImageuser + item.SenderImage : Helper.PathImageuser + item.SenderImage)" style="width:50px; height:50px; border-radius: 50%;" />
-    @{
-    if (item.ImgMsg.Contains("Images/"))
-    {
-    <div style="display: flex; flex-direction:column; gap:5px;">
-    <img src="@item.ImgMsg" style="width:150px; height:200px; border-radius: 150%;" />
-    <p> @item.Message :</p>
-    </div>
-    }
-    else
-    {
-    <p>@item.Message :</p>
-    }
-    }
-    @item.MessageeTime.ToString("HH:mm")
-    </li>
-    </div>
-    }
-    }
-    </div> *@
-
-
-
     <div id="messagesList" style="width: 70%; max-height: 400px; padding:5px; border: groove 1px black; border-radius: 8px; overflow-y: auto;">
         @Html.Partial("Refresh", Model)
     </div>
@@ -66,37 +31,12 @@
 @section Scripts {
     <script type="text/javascript">
 
-        connection.start().catch(err => console.error(err.toString()));
-
         connection.on("ReceiveMessageFromClient", function (user, message, pathImg, img, time) {
             console.log("done...Client sent a Message");
             refreshMessagesList();
 
         });
 
-        // function sendMessage() {
-        //     const message = document.getElementById("messageInput1").value;
-        //         const to = document.getElementById("sendTo").value;
-
-        //     if (!message || !to) {
-        //         console.log("Message or recipient is empty");
-        //         return;
-        //     }
-
-        //     document.getElementById("messageInput1").value = "";
-        //         // document.getElementById("sendTo").value = "";
-
-        //     const user = document.getElementById("userName").textContent;
-        //     connection.invoke("SendMessageToClients", message, to).catch(function (err) {
-        //         console.error("Error sending message:", err.toString());
-        //     });
-        // }
-
-        // connection.on("UserDisconnected", function (userName) {
-        //     console.log(`${userName} disconnected`);
-        // });
-
-        //////////////////////////////////////////////////////////
         async function sendMessage() {
             const message = document.getElementById("messageInput1").value;
             const to = document.getElementById("sendTo").value;
@@ -116,8 +56,6 @@
             document.getElementById("messageInput1").value = "";
             fileInput.value = "";
 
-            //AddtoAdminList(message, to, filePath);
-
             connection.invoke("SendMessageToClients", message, to, filePath)
                 .then(function () {
                     console.log("Send Message To Clients successfully");
@@ -128,17 +66,6 @@
                     console.error("Error sending message:", err.toString());
                 });
         }
-
-        // function AddtoAdminList(msg, to, path) {
-        //     console.log("AddtoAdminList");
-        //     const ul = document.getElementById("messagesList");
-        //     const li = document.createElement("li");
-        //     li.textContent = msg;
-        //     li.style.display= flex;
-        //     ul.appendChild(li);
-        //     scrollToBottom();
-        // }
-
 
         async function refreshMessagesList() {
             const anotherId = '@ViewBag.anotherId';
@@ -160,12 +87,6 @@
             }
         }
 
-
-
-
-
-
-
         async function uploadFile(file) {
             const formData = new FormData();
             formData.append("file", file);
@@ -177,12 +98,11 @@
 
             if (response.ok) {
                 const data = await response.json();
-                return data.filePath; // Assume the API returns the file path
+                return data.filePath; 
             } else {
                 throw new Error("File upload failed");
             }
         }
-        //////////////////////////////////////////////////////////////////
 
         window.onload = function () {
             const user = document.getElementById("userName").textContent;
@@ -190,46 +110,6 @@
                 console.error("Error marking messages as read:", err.toString());
             });
         }
-
-        // async function refreshMessagesList() {
-        //     const anotherId = '@ViewBag.anotherId';
-
-        //     try {
-        //         const response = await fetch(`/Admin/Chat/OwnChat/${anotherId}`, {
-        //             method: 'GET'
-        //         });
-
-        //         if (!response.ok) {
-        //             throw new Error('Network response was not ok ' + response.statusText);
-        //         }
-
-        //         const data = await response.text();
-        //         location.reload(); // إعادة تحميل الصفحة بالكامل
-        //     } catch (error) {
-        //         console.error("Error fetching messages:", error);
-        //     }
-        // }
-
-        // async function refreshMessagesListForClient() {
-        //     const MyId1 = '@ViewBag.MyId1';
-
-        //     try {
-        //         const response = await fetch(`/Admin/Chat/OwnChat/${MyId1}`, {
-        //             method: 'GET'
-        //         });
-
-        //         if (!response.ok) {
-        //             throw new Error('Network response was not ok ' + response.statusText);
-        //         }
-
-        //         const data = await response.text();
-        //         location.reload(); // إعادة تحميل الصفحة بالكامل
-        //     } catch (error) {
-        //         console.error("Error fetching messages:", error);
-        //     }
-        // }
-
-
 
         async function scrollToBottom() {
             const messagesList = document.getElementById("messagesList");
@@ -240,15 +120,6 @@
 }
 @section Scripts1 {
     <script src="~/js/signalr.min.js"></script>
-    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script> *@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 }
 
-
-
-@* @{
-    if (item.Message.EndsWith(".jpg") || item.Message.EndsWith(".png"))
-    {
-        <img src="@Helper.PathImgs + @item.Message" style="width:200px; height:150px;" />
-    }
-} *@

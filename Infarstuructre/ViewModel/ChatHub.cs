@@ -199,7 +199,7 @@ namespace Infarstuructre.ViewModel
             return null;
         }
 
-        private async Task<bool> CheckIfUserIsAdmin(string userId)
+        public async Task<bool> CheckIfUserIsAdmin(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user != null)
