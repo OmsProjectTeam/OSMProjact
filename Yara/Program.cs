@@ -154,23 +154,6 @@ builder.Services.AddScoped<IISupportTicket, CLSTBSupportTicket>();
 builder.Services.AddTransient<ExternalDataService>();
 builder.Services.AddScoped<IIEmailNewsletter, CLSTBEmailNewsletter>();
 
-
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowSpecificOrigin",
-        builder =>
-        {
-            builder.AllowAnyOrigin()
-                   .AllowAnyHeader()
-                   .AllowAnyMethod();
-        });
-});
-
-
-
-
-
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
