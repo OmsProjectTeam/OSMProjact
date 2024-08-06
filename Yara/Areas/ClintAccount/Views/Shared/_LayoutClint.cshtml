@@ -14,6 +14,7 @@
 	<title>Home - Ninja Admin Template</title>
 
 	<script src="~/js/signalr.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	@* <script>
 				var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
@@ -31,22 +32,25 @@
 			console.error(err.toString());
 		});
 
+		// connection.on("ReceiveMessage", function (user, message, pathImg, profileImage, time) {
+		// 	var msgList = document.getElementById("messagesList");
+		// 	var msgDiv = document.createElement("div");
+		// 	msgDiv.innerHTML = `<div style="display: flex; justify-content: ${user === '@Context.User.Identity.Name' ? 'flex-end' : 'flex-start'};">
+		// 									<li style="display: flex; ${user === '@Context.User.Identity.Name' ? 'background-color:white;' : 'background-color:gray; color:white;'};
+		// 										border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
+		// 										<img src="${profileImage}" style="width:50px; height:50px; border-radius: 50%;" />
+		// 										<div style="display: flex; flex-direction:column; gap:5px;">
+		// 											${pathImg ? `<img src="${pathImg}" style="width:150px; height:200px; border-radius: 150%;" />` : ''}
+		// 											<p>${message} :</p>
+		// 										</div>
+		// 										${time}
+		// 									</li>
+		// 								</div>`;
+		// 	msgList.appendChild(msgDiv);
+		// 	msgList.scrollTop = msgList.scrollHeight;
+		// });
 		connection.on("ReceiveMessage", function (user, message, pathImg, profileImage, time) {
-			var msgList = document.getElementById("messagesList");
-			var msgDiv = document.createElement("div");
-			msgDiv.innerHTML = `<div style="display: flex; justify-content: ${user === '@Context.User.Identity.Name' ? 'flex-end' : 'flex-start'};">
-											<li style="display: flex; ${user === '@Context.User.Identity.Name' ? 'background-color:white;' : 'background-color:gray; color:white;'};
-												border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
-												<img src="${profileImage}" style="width:50px; height:50px; border-radius: 50%;" />
-												<div style="display: flex; flex-direction:column; gap:5px;">
-													${pathImg ? `<img src="${pathImg}" style="width:150px; height:200px; border-radius: 150%;" />` : ''}
-													<p>${message} :</p>
-												</div>
-												${time}
-											</li>
-										</div>`;
-			msgList.appendChild(msgDiv);
-			msgList.scrollTop = msgList.scrollHeight;
+			appendMessage(user, message, pathImg, profileImage, time);
 		});
 
 		async function sendMessage() {
@@ -78,11 +82,43 @@
 			fileInput.value = "";
 		}
 
+		// function sendSignalRMessage(message, to, filePath) {
+		// 	connection.invoke("SendMessageToAdmin", message, to, filePath).catch(function (err) {
+		// 		console.error("Error sending message:", err.toString());
+		// 	});
+		// }
+		// function sendSignalRMessage(message, to, filePath) {
+		// 	connection.invoke("SendMessageToAdmin", message, to, filePath).then(function () {
+		// 		appendMessage(document.getElementById("userName").textContent, message, filePath, ViewBag.img, new Date().toLocaleTimeString());
+		// 	}).catch(function (err) {
+		// 		console.error("Error sending message:", err.toString());
+		// 	});
+		// }
 		function sendSignalRMessage(message, to, filePath) {
 			connection.invoke("SendMessageToAdmin", message, to, filePath).catch(function (err) {
 				console.error("Error sending message:", err.toString());
 			});
+			appendMessage(document.getElementById("userName").textContent, message, filePath, ViewBag.img, new Date().toLocaleTimeString());
 		}
+
+		function appendMessage(user, message, pathImg, profileImage, time) {
+			var msgList = document.getElementById("messagesList");
+			var msgDiv = document.createElement("div");
+			msgDiv.innerHTML = `<div style="display: flex; justify-content: ${user === '@Context.User.Identity.Name' ? 'flex-end' : 'flex-start'};">
+													<li style="display: flex; ${user === '@Context.User.Identity.Name' ? 'background-color:white;' : 'background-color:gray; color:white;'};
+														border: groove 1px black; margin-bottom: 3px; border-radius: 10px; height: auto; padding: 10px;">
+														<img src="${profileImage}" style="width:50px; height:50px; border-radius: 50%;" />
+														<div style="display: flex; flex-direction:column; gap:5px;">
+															${pathImg ? `<img src="${pathImg}" style="width:150px; height:200px; border-radius: 150%;" />` : ''}
+															<p>${message} :</p>
+														</div>
+														${time}
+													</li>
+												</div>`;
+			msgList.appendChild(msgDiv);
+			msgList.scrollTop = msgList.scrollHeight;
+		}
+
 	</script>
 
 	<!-- Main Styles -->
@@ -589,8 +625,6 @@
 	<script src="~/Admin/assets/scripts/main.min.js"></script>
 
 	<script>
-
-
 		connection.on("UserConnected", (userName, profileImage) => {
 			addUserToList(userName, profileImage);
 		});

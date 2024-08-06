@@ -110,12 +110,12 @@ namespace Infarstuructre.ViewModel
             var currentUserName = Context.User.Identity.Name;
             var currentUserProfileImage = GetProfileImageFromDatabase(currentUserName);
 
-			await Clients.Group("Admins").SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
-			await Clients.Group("Supports").SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
+			await Clients.User("reciverId").SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
+			//await Clients.Group("Supports").SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
 
             var unreadCount = await dbcontext.TBMessageChats.CountAsync(m => m.ReciverId == to && !m.IsRead);
-            await Clients.Group("Admins").SendAsync("UnreadMessagesNotification", unreadCount);
-            await Clients.Group("Supports").SendAsync("UnreadMessagesNotification", unreadCount);
+            await Clients.User("reciverId").SendAsync("UnreadMessagesNotification", unreadCount);
+            //await Clients.Group("Supports").SendAsync("UnreadMessagesNotification", unreadCount);
 
             var chatMsg = new TBMessageChat
             {
@@ -129,6 +129,7 @@ namespace Infarstuructre.ViewModel
             };
 
             iMessageChat.saveData(chatMsg);
+            await Clients.Group("Admins").SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
         }
 
         public async Task SendMessageToClients(string message, string to, string? filePath)
@@ -142,9 +143,16 @@ namespace Infarstuructre.ViewModel
             var currentUserName = Context.User.Identity.Name;
             var currentUserProfileImage = GetProfileImageFromDatabase(currentUserName);
 
-            var unreadCount = await dbcontext.TBMessageChats.CountAsync(m => m.ReciverId == reciverId && !m.IsRead);
+            // Sending message to the specific client user
             await Clients.User(reciverId).SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
+
+            // Update the unread message count
+            var unreadCount = await dbcontext.TBMessageChats.CountAsync(m => m.ReciverId == reciverId && !m.IsRead);
             await Clients.User(reciverId).SendAsync("UnreadMessagesNotification", unreadCount);
+
+            //var unreadCount = await dbcontext.TBMessageChats.CountAsync(m => m.ReciverId == reciverId && !m.IsRead);
+            //await Clients.User(reciverId).SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
+            //await Clients.User(reciverId).SendAsync("UnreadMessagesNotification", unreadCount);
 
             var chatMsg = new TBMessageChat
             {
@@ -158,6 +166,8 @@ namespace Infarstuructre.ViewModel
             };
 
             iMessageChat.saveData(chatMsg);
+            // Additionally notify the admin group if needed
+            await Clients.Group("Admins").SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
             //if (rec != null) 
             //{
             //    await Clients.User(rec.ConnectId).SendAsync("ReceiveMessage", currentUserName, message, filePath, DateTime.UtcNow.ToString("HH:mm"));
