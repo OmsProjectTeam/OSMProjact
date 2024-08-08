@@ -33,60 +33,73 @@ namespace Yara.Areas.Admin.Controllers
             return View(viewmMODeElMASTER);
         }
 
-        [AllowAnonymous]
-        [HttpGet("OwnChat/{anotherId}")]
+        [HttpGet]
         [Route("/Admin/Chat/OwnChat/{anotherId}")]
         public async Task<IActionResult> OwnChat(string anotherId)
         {
-            ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
-            var users = viewmMODeElMASTER.ConnectAndDisConnect = iConnectAndDisconnect.GetAll();
-
+            var viewModel = new ViewmMODeElMASTER();
             var currentUserId = iUserManager.GetUserId(User);
-            ViewBag.MyId1 = currentUserId;
 
             var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
             var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
-            ///////////////////////////////////////////////////////////////////////////////////////////
+            IamSender.AddRange(IamReciver);
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            foreach (var item in IamReciver)
-            {
-                IamSender.Add(item);
-            }
-
-            viewmMODeElMASTER.ViewChatMessage = IamSender;
-            ViewBag.another = (iUserInformation.GetById(anotherId)).UserName;
-            ViewBag.anotherId = (iUserInformation.GetById(anotherId)).Id;
-            //viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
-            ViewBag.img = (iUserInformation.GetById(currentUserId)).ImageUser;
+            viewModel.ViewChatMessage = IamSender.OrderBy(m => m.MessageeTime).ToList();
+            ViewBag.another = iUserInformation.GetById(anotherId).UserName;
+            ViewBag.anotherId = anotherId;
+            ViewBag.img = iUserInformation.GetById(currentUserId).ImageUser;
             ViewBag.UserId = currentUserId;
 
-            return View(viewmMODeElMASTER);
+            return View(viewModel);
         }
+        //      [HttpGet]
+        //      [Route("/Admin/Chat/OwnChat/{anotherId}")]
+        //      public async Task<IActionResult> OwnChat(string anotherId) 
+        //{
+        //          ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
+        //          var users = viewmMODeElMASTER.ConnectAndDisConnect = iConnectAndDisconnect.GetAll();
 
-        [HttpGet("Refresh/{anotherId}")]
-        [Route("/Admin/Chat/Refresh/{anotherId}")]
-        public async Task<IActionResult> Refresh(string anotherId)
-        {
-            ViewmMODeElMASTER viewmMODeElMASTER1 = new ViewmMODeElMASTER();
+        //          var currentUserId = iUserManager.GetUserId(User);
 
-            var currentUserId = iUserManager.GetUserId(User);
-            var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
-            var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
+        //          var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
+        //          var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
+        //          ///////////////////////////////////////////////////////////////////////////////////////////
 
-            foreach (var item in IamReciver)
-            {
-                IamSender.Add(item);
-            }
+        //          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //          foreach (var item in IamReciver)
+        //          {
+        //              IamSender.Add(item);
+        //          }
 
-            viewmMODeElMASTER1.ViewChatMessage = IamSender;
-            ViewBag.UserId = currentUserId;
+        //          viewmMODeElMASTER.ViewChatMessage = IamSender;
+        //          ViewBag.another = (iUserInformation.GetById(anotherId)).UserName;
+        //          ViewBag.anotherId = (iUserInformation.GetById(anotherId)).Id;
+        //          //viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
+        //          ViewBag.img = (iUserInformation.GetById(currentUserId)).ImageUser;
+        //          ViewBag.UserId = currentUserId;
 
-            return PartialView("Refresh", viewmMODeElMASTER1);
-        }
+        //          return View(viewmMODeElMASTER);
+        //      }
 
+        // =============================================================================
 
+        //[HttpPost]
+        //      [Route("/Admin/chat/uploadFile")]
+        //      public async Task<IActionResult> UploadFile(IFormFile file)
+        //      {
+        //          if (file == null || file.Length == 0)
+        //              return Ok("null");
 
+        //          string fileName = Guid.NewGuid().ToString();
+        //          var filePath = Path.Combine("wwwroot/Images/Home/", fileName + file.FileName);
+
+        //          using (var stream = new FileStream(filePath, FileMode.Create))
+        //          {
+        //              await file.CopyToAsync(stream);
+        //          }
+
+        //          return Ok(new { filePath = $"/Images/Home/{file.FileName}" });
+        //      }
         [HttpPost]
         [Route("/Admin/chat/uploadFile")]
         public async Task<IActionResult> UploadFile(IFormFile file)
@@ -103,6 +116,28 @@ namespace Yara.Areas.Admin.Controllers
             }
 
             return Ok(new { filePath = $"/Images/Home/{file.FileName}" });
+        }
+
+        [HttpGet]
+        [Route("/Admin/Chat/GetMessages")]
+        public async Task<IActionResult> GetMessages(string anotherId)
+        {
+            var currentUserId = iUserManager.GetUserId(User);
+
+            var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
+            var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
+            IamSender.AddRange(IamReciver);
+
+            var messages = IamSender.OrderBy(m => m.MessageeTime).Select(m => new
+            {
+                m.Message,
+                m.SenderId,
+                m.ReciverId,
+                m.ImgMsg,
+                m.MessageeTime
+            }).ToList();
+
+            return Json(messages);
         }
     }
 }

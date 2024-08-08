@@ -129,9 +129,9 @@
         transition: background-color 0.3s ease;
     }
 
-    .chat-send-button:hover {
-        background-color: #0056b3;
-    }
+        .chat-send-button:hover {
+            background-color: #0056b3;
+        }
 
     /* Additional styles for better UI */
     .chat-messages::-webkit-scrollbar {
@@ -143,9 +143,9 @@
         border-radius: 10px;
     }
 
-    .chat-messages::-webkit-scrollbar-thumb:hover {
-        background-color: #999;
-    }
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background-color: #999;
+        }
 
     .chat-footer input[type="file"] {
         display: none;
@@ -160,9 +160,9 @@
         font-size: 18px;
     }
 
-    .chat-attach-button:hover {
-        color: #0056b3;
-    }
+        .chat-attach-button:hover {
+            color: #0056b3;
+        }
 </style>
 
 <div class="col-xs-12">
@@ -177,19 +177,19 @@
                 @{
                     foreach (var item in Model.ViewChatMessage.OrderBy(m => m.MessageeTime))
                     {
-                                <div class="@(item.SenderId == ViewBag.UserId ? "chat-message chat-message-sent" : "chat-message chat-message-received")">
-                                    <img src="@(Helper.PathImageuser + item.SenderImage)" class="chat-message-img" />
-                                    <div class="chat-message-content">
+                        <div class="@(item.SenderId == ViewBag.UserId ? "chat-message chat-message-sent" : "chat-message chat-message-received")">
+                            <img src="@(Helper.PathImageuser + item.SenderImage)" class="chat-message-img" />
+                            <div class="chat-message-content">
                                 @{
                                     if (item.ImgMsg.Contains("Images/"))
                                     {
-                                                        <img src="@item.ImgMsg" class="chat-message-img-msg" />
+                                        <img src="@item.ImgMsg" class="chat-message-img-msg" />
                                     }
                                 }
-                                        <p class="chat-message-text">@item.Message</p>
-                                        <span class="chat-message-time">@item.MessageeTime.ToString("HH:mm")</span>
-                                    </div>
-                                </div>
+                                <p class="chat-message-text">@item.Message</p>
+                                <span class="chat-message-time">@item.MessageeTime.ToString("HH:mm")</span>
+                            </div>
+                        </div>
                     }
                 }
             </div>
@@ -257,10 +257,19 @@
     <script type="text/javascript">
         let connection;
 
-        connection.on("ReceiveMessageFromClient", function (user, message, pathImg, img, time) {
-            console.log("done...Client sent a Message");
-            refreshMessagesList();
+        async function start() {
+            try {
+                await connection.start();
+                console.log("SignalR connected");
+            } catch (err) {
+                console.log("Error connecting to SignalR:", err.toString());
+                setTimeout(start, 5000); // Retry connection after 5 seconds
+            }
+        }
 
+        connection.on("ReceiveMessage", function (user, message, pathImg, img, time) {
+            console.log("Message received:", { user, message, pathImg, img, time });
+            appendMessage(user, message, pathImg, img, time);
         });
 
         async function sendMessage() {
@@ -282,70 +291,129 @@
             document.getElementById("messageInput1").value = "";
             fileInput.value = "";
 
-            connection.invoke("SendMessageToClients", message, to, filePath)
-                .then(function () {
-                    console.log("Send Message To Clients successfully");
-                    refreshMessagesList();
-                    scrollToBottom();
-                })
-                .catch(function (err) {
-                    console.error("Error sending message:", err.toString());
-                });
-        }
-
-        async function refreshMessagesList() {
-            const anotherId = '@ViewBag.anotherId';
-
-            try {
-                const response = await fetch(`/Admin/Chat/Refresh/${anotherId}`, {
-                    method: 'GET'
-                });
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-
-                const html = await response.text();
-                console.log(html);
-                document.getElementById('messagesList').innerHTML = html;
-            } catch (error) {
-                console.error("Error fetching messages:", error);
-            }
+            connection.invoke("SendMessageToClients", message, to, filePath).then(function () {
+                console.log("Message sent:", { message, to, filePath });
+                appendMessage(document.getElementById("userName").textContent, message, filePath, ViewBag.img, new Date().toLocaleTimeString());
+            }).catch(function (err) {
+                console.error("Error sending message:", err.toString());
+            });
         }
 
         async function uploadFile(file) {
             const formData = new FormData();
             formData.append("file", file);
 
-            const response = await fetch("/Admin/chat/uploadFile", {
+            const response = await fetch("/Admin/Chat/UploadFile", {
                 method: "POST",
                 body: formData
             });
 
             if (response.ok) {
                 const data = await response.json();
-                return data.filePath; 
+                return data.filePath;
             } else {
                 throw new Error("File upload failed");
             }
         }
 
+        function appendMessage(user, message, pathImg, img, time) {
+            const messageList = document.getElementById("messagesList");
+
+            const messageItem = document.createElement("div");
+            messageItem.style.display = "flex";
+            messageItem.style.justifyContent = user === document.getElementById("userName").textContent ? "flex-start" : "flex-end";
+            messageItem.style.maxWidth = "80%";
+
+            const messageContent = document.createElement("li");
+            messageContent.style.display = "flex";
+            messageContent.style.backgroundColor = user === document.getElementById("userName").textContent ? "white" : "gray";
+            messageContent.style.color = user === document.getElementById("userName").textContent ? "black" : "white";
+            messageContent.style.border = "groove 1px black";
+            messageContent.style.marginBottom = "3px";
+            messageContent.style.borderRadius = "10px";
+            messageContent.style.height = "auto";
+            messageContent.style.padding = "10px";
+
+            const userImg = document.createElement("img");
+            userImg.src = img;
+            userImg.style.width = "50px";
+            userImg.style.height = "50px";
+            userImg.style.borderRadius = "50%";
+            messageContent.appendChild(userImg);
+
+            if (pathImg && pathImg.includes("Images/")) {
+                const imgContainer = document.createElement("div");
+                imgContainer.style.display = "flex";
+                imgContainer.style.flexDirection = "column";
+                imgContainer.style.gap = "5px";
+
+                const messageImg = document.createElement("img");
+                messageImg.src = pathImg;
+                messageImg.style.width = "150px";
+                messageImg.style.height = "200px";
+                messageImg.style.borderRadius = "150%";
+
+                const messageText = document.createElement("p");
+                messageText.textContent = `${message} :`;
+
+                imgContainer.appendChild(messageImg);
+                imgContainer.appendChild(messageText);
+                messageContent.appendChild(imgContainer);
+            } else {
+                const messageText = document.createElement("p");
+                messageText.textContent = `${message} :`;
+                messageContent.appendChild(messageText);
+            }
+
+            const messageTime = document.createElement("span");
+            messageTime.textContent = time;
+            messageContent.appendChild(messageTime);
+
+            messageItem.appendChild(messageContent);
+            messageList.appendChild(messageItem);
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            const messagesList = document.getElementById("messagesList");
+            messagesList.scrollTop = messagesList.scrollHeight;
+        }
+
         window.onload = function () {
+            scrollToBottom();
             const user = document.getElementById("userName").textContent;
             connection.invoke("MarkMessagesAsRead", user).catch(function (err) {
                 console.error("Error marking messages as read:", err.toString());
             });
         }
 
-        async function scrollToBottom() {
-            const messagesList = document.getElementById("messagesList");
-            messagesList.scrollTop = await messagesList.scrollHeight;
+        function refreshMessagesList() {
+            const anotherId = document.getElementById("sendTo").value;
+            $.ajax({
+                url: '/Admin/Chat/GetMessages',
+                type: 'GET',
+                data: { anotherId: anotherId },
+                success: function (data) {
+                    console.log("Messages fetched successfully", data);
+                    const messageList = document.getElementById("messagesList");
+                    messageList.innerHTML = ""; // Clear the current messages
+                    data.forEach(message => {
+                        appendMessage(message.SenderId, message.Message, message.ImgMsg, message.SenderId === document.getElementById("userName").textContent ? ViewBag.img : "", message.MessageeTime);
+                    });
+                },
+                error: function (err) {
+                    console.error("Error fetching messages:", err);
+                    if (err.responseText) {
+                        console.error("Error details:", err.responseText);
+                    }
+                }
+            });
         }
-        window.onload = scrollToBottom();
+
+        connection.onclose(async () => {
+            await start();
+        });
+
+        start();
     </script>
 }
-@section Scripts1 {
-    <script src="~/js/signalr.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-}
-

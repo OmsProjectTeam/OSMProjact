@@ -4,311 +4,174 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/AirFreight/Views/Shared/_LayoutAirFreight.cshtml";
 }
+<link rel="stylesheet" href="~/css/home.css">
 
 <div class="row small-spacing">
-	@* <div class="col-xs-12">
-		<div class="box-content">
-			<h4 class="box-title">Activity</h4>
-			<!-- /.box-title -->
-			<div class="dropdown js__drop_down">
-				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-				<ul class="sub-menu">
-					<li><a href="#">Action</a></li>
-					<li><a href="#">Another action</a></li>
-					<li><a href="#">Something else there</a></li>
-					<li class="split"></li>
-					<li><a href="#">Separated link</a></li>
-				</ul>
-				<!-- /.sub-menu -->
-			</div>
-			<!-- /.dropdown js__dropdown -->
-			<div id="smil-animation-index-chartist-chart" class="chartist-chart" style="height: 320px"></div>
-			<!-- /#smil-animation-chartist-chart.chartist-chart -->
-		</div>
-		<!-- /.box-content -->
-	</div> *@
-	<!-- /.col-xs-12 -->
-@* 	<div class="col-lg-3 col-md-6 col-xs-12">
-		<div class="box-content">
-			<h4 class="box-title">Cost Price</h4>
-			<!-- /.box-title -->
-@* 			<div class="dropdown js__drop_down">
-				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-				<ul class="sub-menu">
-					<li><a href="#">Action</a></li>
-					<li><a href="#">Another action</a></li>
-					<li><a href="#">Something else there</a></li>
-					<li class="split"></li>
-					<li><a href="#">Separated link</a></li>
-				</ul>
-				<!-- /.sub-menu -->
-			</div> 
-			<!-- /.dropdown js__dropdown -->
-			<div class="content widget-stat">
-				<div class="percent bg-warning"><i class="fa fa-line-chart"></i>53%</div>
-				<!-- /.percent -->
-				<div class="right-content">
-					<h2 class="counter">@ViewBag.Favorit</h2>
-					<!-- /.counter -->
-					@foreach (var item in Model.ListViewOrderNew.Take(1))
-					{
-						<p class="text">@item.PhoneNumber </p>
-					}
-					
-					<!-- /.text -->
-				</div>
-				<!-- /.right-content -->
-				<div class="clear"></div>
-				<!-- /.clear -->
-				<div class="process-bar">
-					<div class="bar-bg bg-warning"></div>
-					<div class="bar js__width bg-warning" data-width="70%"></div>
-					<!-- /.bar js__width bg-success -->
-				</div>
-				<!-- /.process-bar -->
-			</div>
-			<!-- /.content widget-stat -->
-		</div>
-		<!-- /.box-content -->
-	</div> *@
+    <!-- /.col-lg-3 col-md-6 col-xs-12 -->
+    <div class="col-lg-6 col-md-6 col-xs-12">
+        <div class="box-content">
 
+            <div class="content widget-stat-chart">
+                <div class="c100 p76 small blue js__circle">
+                    <span>76%</span>
+                    <div class="slice">
+                        <div class="bar"></div>
+                        <div class="fill"></div>
+                    </div>
+                </div>
+                <!-- /.c100 p58 -->
+                <div class="right-content">
+                    <h4 class="box-title">Cost Price</h4>
+                    <h2 class="counter" style="color:green">@ViewBag.Favorit</h2>
+                    <h4 class="box-title">	price</h4>
+                    <h2 class="counter" style="color:darkred">@ViewBag.price</h2>
+                    <h4 class="box-title">@ResourceWeb.LbExchangedPrice</h4>
+                    <h2 class="counter" style="color:blueviolet">@ViewBag.ExchangedPrice</h2>
+                    <h4 class="box-title">tottal</h4>
+                    <h2 class="counter" style="color:aqua">@ViewBag.total</h2>
+                    <h4 class="box-title">paidings</h4>
+                    <h2 class="counter" style="color:chocolate">@ViewBag.paidings</h2>
+                    <h4 class="box-title">Transfer</h4>
+                    <h2 class="counter" style="color:darkgreen">@ViewBag.Trans</h2>
 
-	<!-- /.col-lg-3 col-md-6 col-xs-12 -->
-	<div class="col-lg-6 col-md-6 col-xs-12">
-		<div class="box-content">
-		
-			<div class="content widget-stat-chart">
-				<div class="c100 p76 small blue js__circle">
-					<span>76%</span>
-					<div class="slice">
-						<div class="bar"></div>
-						<div class="fill"></div>
-					</div>
-				</div>
-				<!-- /.c100 p58 -->
-				<div class="right-content">
-					<h4 class="box-title">Cost Price</h4>
-					<h2 class="counter"style="color:green">@ViewBag.Favorit</h2>
-					<h4 class="box-title">	price</h4>
-					<h2 class="counter" style="color:darkred">@ViewBag.price</h2>
-					<h4 class="box-title">@ResourceWeb.LbExchangedPrice</h4>
-					<h2 class="counter" style="color:blueviolet">@ViewBag.ExchangedPrice</h2>
-					<h4 class="box-title">tottal</h4>
-					<h2 class="counter" style="color:aqua">@ViewBag.total</h2>
-					<h4 class="box-title">paidings</h4>
-					<h2 class="counter" style="color:chocolate">@ViewBag.paidings</h2>
-					<h4 class="box-title">Transfer</h4>
-					<h2 class="counter" style="color:darkgreen">@ViewBag.Trans</h2>
-
-					<!-- /.counter -->
-					
-					<!-- /.text -->
-				</div>
-				<!-- /.right-content -->
-			</div>
-			<!-- /.content -->
-		</div>
-		<!-- /.box-content -->
-	</div>
-
-
-	@* <!-- /.col-lg-3 col-md-6 col-xs-12 -->
-	<div class="col-lg-3 col-md-6 col-xs-12">
-		<div class="box-content">
-			<h4 class="box-title">tottal</h4>
-			<!-- /.box-title -->
-@* 			<div class="dropdown js__drop_down">
-				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-				<ul class="sub-menu">
-					<li><a href="#">Action</a></li>
-					<li><a href="#">Another action</a></li>
-					<li><a href="#">Something else there</a></li>
-					<li class="split"></li>
-					<li><a href="#">Separated link</a></li>
-				</ul>
-				<!-- /.sub-menu -->
-			</div> *
-			<!-- /.dropdown js__dropdown -->
-			<div class="content widget-stat">
-				<div class="percent bg-danger"><i class="fa fa-line-chart"></i>+40%</div>
-				<!-- /.percent -->
-				<div class="right-content">
-					<h2 class="counter">@ViewBag.total</h2>
-					<!-- /.counter -->
-					<p class="text">Visitors today</p>
-					<!-- /.text -->
-				</div>
-				<!-- /.right-content -->
-				<div class="clear"></div>
-				<!-- /.clear -->
-				<div class="process-bar">
-					<div class="bar-bg bg-danger"></div>
-					<div class="bar js__width bg-danger" data-width="70%"></div>
-					<!-- /.bar js__width bg-success -->
-				</div>
-				<!-- /.process-bar -->
-			</div>
-			<!-- /.content widget-stat -->
-		</div>
-		<!-- /.box-content -->
-	</div>
-	<!-- /.col-lg-3 col-md-6 col-xs-12 -->
-	<div class="col-lg-3 col-md-6 col-xs-12">
-		<div class="box-content">
-			<h4 class="box-title">Monthly Sales</h4>
-			<!-- /.box-title -->
-@* 			<div class="dropdown js__drop_down">
-				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-				<ul class="sub-menu">
-					<li><a href="#">Action</a></li>
-					<li><a href="#">Another action</a></li>
-					<li><a href="#">Something else there</a></li>
-					<li class="split"></li>
-					<li><a href="#">Separated link</a></li>
-				</ul>
-				<!-- /.sub-menu -->
-			</div> 
-			<!-- /.dropdown js__dropdown -->
-			<div class="content widget-stat-chart">
-				<div class="c100 p94 small green js__circle">
-					<span>94%</span>
-					<div class="slice">
-						<div class="bar"></div>
-						<div class="fill"></div>
-					</div>
-				</div>
-				<!-- /.c100 p58 -->
-				<div class="right-content">
-					<h2 class="counter">@ViewBag.paidings</h2>
-					<!-- /.counter -->
-					<p class="text">Sales</p>
-					<!-- /.text -->
-				</div>
-				<!-- /.right-content -->
-			</div>
-			<!-- /.content -->
-		</div>
-		<!-- /.box-content -->
-	</div>
-	<!-- /.col-lg-3 col-md-6 col-xs-12 --> *@
-
-
-
-
-	@* <div class="col-lg-6 col-xs-12">
-		<div class="box-content">
-			<div id="calendar-widget"></div>
-		</div>
-		<!-- /.box-content -->
-	</div> *@
-	<!-- /.col-lg-6 col-xs-12 -->
-@* 	<div class="col-lg-6 col-xs-12">
-		<div class="box-content">
-			<h4 class="box-title">Purchases</h4>
-			<!-- /.box-title -->
-			<div class="dropdown js__drop_down">
-				<a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
-				<ul class="sub-menu">
-					<li><a href="#">Product</a></li>
-					<li><a href="#">Another action</a></li>
-					<li><a href="#">Something else there</a></li>
-					<li class="split"></li>
-					<li><a href="#">Separated link</a></li>
-				</ul>
-				<!-- /.sub-menu -->
-			</div>
-			<!-- /.dropdown js__dropdown -->
-			<div class="table-responsive table-purchases">
-				<table class="table table-striped margin-bottom-10">
-					<thead>
-						<tr>
-							<th style="width:40%;">Product</th>
-							<th>Price</th>
-							<th>Date</th>
-							<th>State</th>
-							<th style="width:5%;"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Amaza Themes</td>
-							<td>$71</td>
-							<td>Nov 12,2016</td>
-							<td class="text-success">Completed</td>
-							<td><a href="#"><i class="fa fa-plus-circle"></i></a></td>
-						</tr>
-						<tr>
-							<td>Macbook</td>
-							<td>$142</td>
-							<td>Nov 10,2016</td>
-							<td class="text-danger">Cancelled</td>
-							<td><a href="#"><i class="fa fa-plus-circle"></i></a></td>
-						</tr>
-						<tr>
-							<td>Samsung TV</td>
-							<td>$200</td>
-							<td>Nov 01,2016</td>
-							<td class="text-warning">Pending</td>
-							<td><a href="#"><i class="fa fa-plus-circle"></i></a></td>
-						</tr>
-						<tr>
-							<td>Ninja Admin</td>
-							<td>$200</td>
-							<td>Oct 28,2016</td>
-							<td class="text-warning">Pending</td>
-							<td><a href="#"><i class="fa fa-plus-circle"></i></a></td>
-						</tr>
-						<tr>
-							<td>Galaxy Note 5</td>
-							<td>$200</td>
-							<td>Oct 28,2016</td>
-							<td class="text-success">Completed</td>
-							<td><a href="#"><i class="fa fa-plus-circle"></i></a></td>
-						</tr>
-						<tr>
-							<td>CleanUp Themes</td>
-							<td>$71</td>
-							<td>Oct 22,2016</td>
-							<td class="text-success">Completed</td>
-							<td><a href="#"><i class="fa fa-plus-circle"></i></a></td>
-						</tr>
-						<tr>
-							<td>Facebook WP Plugin</td>
-							<td>$10</td>
-							<td>Oct 15,2016</td>
-							<td class="text-success">Completed</td>
-							<td><a href="#"><i class="fa fa-plus-circle"></i></a></td>
-						</tr>
-						<tr>
-							<td>Iphone 7</td>
-							<td>$100</td>
-							<td>Oct 12,2016</td>
-							<td class="text-warning">Pending</td>
-							<td><a href="#"><i class="fa fa-plus-circle"></i></a></td>
-						</tr>
-						<tr>
-							<td>Nova House</td>
-							<td>$100</td>
-							<td>Oct 12,2016</td>
-							<td class="text-warning">Pending</td>
-							<td><a href="#"><i class="fa fa-plus-circle"></i></a></td>
-						</tr>
-						<tr>
-							<td>Repair Cars</td>
-							<td>$35</td>
-							<td>Oct 12,2016</td>
-							<td class="text-warning">Pending</td>
-							<td><a href="#"><i class="fa fa-plus-circle"></i></a></td>
-						</tr>
-					</tbody>
-				</table>
-				<!-- /.table -->
-			</div>
-			<!-- /.table-responsive -->
-		</div>
-		<!-- /.box-content -->
-	</div> *@
-	<!-- /.col-lg-6 col-xs-12 -->
+                    <!-- /.counter -->
+                    <!-- /.text -->
+                </div>
+                <!-- /.right-content -->
+            </div>
+            <!-- /.content -->
+        </div>
+        <!-- /.box-content -->
+    </div>
+    <div class="col-lg-6 col-md-6 col-xs-12">
+        <div class="box-content">
+            <div class="row">
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-shopping-cart"></i>
+                            <h4>Marketplace</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-star"></i>
+                            <h4>Premium</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-user"></i>
+                            <h4>Profile</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-users"></i>
+                            <h4>Friends</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-group"></i>
+                            <h4>Groups</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-archive"></i>
+                            <h4>Inventory</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-envelope"></i>
+                            <h4>Messages</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-pencil"></i>
+                            <h4>Create</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-book"></i>
+                            <h4>Blog</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-gift"></i>
+                            <h4>Gift Cards</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-shopping-cart"></i>
+                            <h4>Official Store</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-cog"></i>
+                            <h4>Settings</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-info-circle"></i>
+                            <h4>About</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-life-ring"></i>
+                            <h4>Help & Safety</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a href="#" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-sign-in"></i>
+                            <h4>Quick Sign In</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="logout-button-container">
+                <a href="#" class="logout-button">Log Out</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 

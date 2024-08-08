@@ -202,13 +202,13 @@ app.MapControllerRoute(
 	name: "areas",
 	pattern: "{area:exists}/{controller=Accounts}/{action=Login}/{id?}"
 );
-app.UseCors(); 
+app.UseCors();
 app.UseEndpoints(endpoints =>
 {
-	endpoints.MapControllerRoute(
-		name: "default",
+    endpoints.MapControllerRoute(
+        name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
-	//endpoints.MapHub<ChatHub>("/chatHub");
+	endpoints.MapHub<ChatHub>("/chatHub");
 });
 
 app.UseSwagger();
@@ -218,5 +218,7 @@ app.UseSwaggerUI(c =>
 	c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Shipping System V1");
 	c.RoutePrefix = "api-docs";
 });
+
+//app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
