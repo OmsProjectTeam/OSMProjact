@@ -22,16 +22,6 @@ namespace Yara.Areas.Admin.Controllers
             iUserManager = iUserManager1;
             this.db = db;
         }
-        //public async Task<IActionResult> Index()
-        //{
-        //    ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
-        //    var currentUserId = iUserManager.GetUserId(User);
-
-        //    viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
-
-
-        //    return View(viewmMODeElMASTER);
-        //}
         public async Task<IActionResult> Index(string anotherId)
         {
             var viewModel = new ViewmMODeElMASTER();
@@ -79,54 +69,6 @@ namespace Yara.Areas.Admin.Controllers
 
             return RedirectToAction("Index", new { anotherId });
         }
-        //      [HttpGet]
-        //      [Route("/Admin/Chat/OwnChat/{anotherId}")]
-        //      public async Task<IActionResult> OwnChat(string anotherId) 
-        //{
-        //          ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
-        //          var users = viewmMODeElMASTER.ConnectAndDisConnect = iConnectAndDisconnect.GetAll();
-
-        //          var currentUserId = iUserManager.GetUserId(User);
-
-        //          var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
-        //          var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
-        //          ///////////////////////////////////////////////////////////////////////////////////////////
-
-        //          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //          foreach (var item in IamReciver)
-        //          {
-        //              IamSender.Add(item);
-        //          }
-
-        //          viewmMODeElMASTER.ViewChatMessage = IamSender;
-        //          ViewBag.another = (iUserInformation.GetById(anotherId)).UserName;
-        //          ViewBag.anotherId = (iUserInformation.GetById(anotherId)).Id;
-        //          //viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
-        //          ViewBag.img = (iUserInformation.GetById(currentUserId)).ImageUser;
-        //          ViewBag.UserId = currentUserId;
-
-        //          return View(viewmMODeElMASTER);
-        //      }
-
-        // =============================================================================
-
-        //[HttpPost]
-        //      [Route("/Admin/chat/uploadFile")]
-        //      public async Task<IActionResult> UploadFile(IFormFile file)
-        //      {
-        //          if (file == null || file.Length == 0)
-        //              return Ok("null");
-
-        //          string fileName = Guid.NewGuid().ToString();
-        //          var filePath = Path.Combine("wwwroot/Images/Home/", fileName + file.FileName);
-
-        //          using (var stream = new FileStream(filePath, FileMode.Create))
-        //          {
-        //              await file.CopyToAsync(stream);
-        //          }
-
-        //          return Ok(new { filePath = $"/Images/Home/{file.FileName}" });
-        //      }
         [HttpPost]
         [Route("/Admin/chat/uploadFile")]
         public async Task<IActionResult> UploadFile(IFormFile file)
