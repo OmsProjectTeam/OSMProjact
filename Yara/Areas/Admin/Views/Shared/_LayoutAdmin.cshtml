@@ -47,7 +47,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
+    @* <script>
         var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
         connection.start().catch(function (err) {
@@ -112,7 +112,7 @@
                 console.error("Error sending message:", err.toString());
             });
         }
-    </script>
+    </script> *@
 
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -564,7 +564,7 @@
     <script src="~/Admin/assets/scripts/main.min.js"></script>
 
 
-    <script>
+    @* <script>
         connection.on("UserConnected", (userName, profileImage) => {
             setProfile(userName, profileImage);
         });
@@ -586,7 +586,7 @@
                 notification.style.display = "none";
             }
         });
-    </script>
+    </script> *@
 
 
 

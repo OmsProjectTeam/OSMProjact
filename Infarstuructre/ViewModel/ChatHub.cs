@@ -101,26 +101,30 @@ namespace Infarstuructre.ViewModel
         // Send and recive messages from and to clients with admin
         public async Task SendMessageToAdmin(string message, string to, string? filePath)
         {
-            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
-
-            var userd = vmodel.sUser = iUserInformation.GetByName(to);
-            var reciverId = userd.Id;
+            // Get the receiver's details
+            var receiverUser = iUserInformation.GetByName(to);
+            var receiverId = receiverUser?.Id;
             var senderId = Context.UserIdentifier;
+
+            if (receiverId == null)
+            {
+                // Handle case where receiver is not found
+                return;
+            }
+
+            // Prepare the message details
             var img = filePath ?? "Null";
             var currentUserName = Context.User.Identity.Name;
             var currentUserProfileImage = GetProfileImageFromDatabase(currentUserName);
 
-            await Clients.User("reciverId").SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
-            //await Clients.Group("Supports").SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
+            // Send the message to the specific receiver
+            await Clients.User(receiverId).SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
 
-            var unreadCount = await dbcontext.TBMessageChats.CountAsync(m => m.ReciverId == to && !m.IsRead);
-            await Clients.User("reciverId").SendAsync("UnreadMessagesNotification", unreadCount);
-            //await Clients.Group("Supports").SendAsync("UnreadMessagesNotification", unreadCount);
-
+            // Store the message in the database
             var chatMsg = new TBMessageChat
             {
                 Message = message,
-                ReciverId = reciverId,
+                ReciverId = receiverId,
                 SenderId = senderId,
                 ImgMsg = img,
                 IsRead = false,
@@ -129,8 +133,51 @@ namespace Infarstuructre.ViewModel
             };
 
             iMessageChat.saveData(chatMsg);
-            await Clients.Group("Admins").SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
+
+            // Notify the admin group only if the current user is not an admin (to prevent double notification)
+            if (!(await CheckIfUserIsAdmin(senderId)))
+            {
+                await Clients.Group("Admins").SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
+            }
+
+            // Update unread message count
+            var unreadCount = await dbcontext.TBMessageChats.CountAsync(m => m.ReciverId == receiverId && !m.IsRead);
+            await Clients.User(receiverId).SendAsync("UnreadMessagesNotification", unreadCount);
         }
+
+        //public async Task SendMessageToAdmin(string message, string to, string? filePath)
+        //{
+        //    ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+
+        //    var userd = vmodel.sUser = iUserInformation.GetByName(to);
+        //    var reciverId = userd.Id;
+        //    var senderId = Context.UserIdentifier;
+        //    var img = filePath ?? "Null";
+        //    var currentUserName = Context.User.Identity.Name;
+        //    var currentUserProfileImage = GetProfileImageFromDatabase(currentUserName);
+
+        //    // Sending message to the specific client user
+        //    await Clients.User(reciverId).SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
+
+        //    // Update the unread message count
+        //    var unreadCount = await dbcontext.TBMessageChats.CountAsync(m => m.ReciverId == reciverId && !m.IsRead);
+        //    await Clients.User(reciverId).SendAsync("UnreadMessagesNotification", unreadCount);
+
+        //    var chatMsg = new TBMessageChat
+        //    {
+        //        Message = message,
+        //        ReciverId = reciverId,
+        //        SenderId = senderId,
+        //        ImgMsg = img,
+        //        IsRead = false,
+        //        MessageeTime = DateTime.Now,
+        //        CurrentState = true,
+        //    };
+
+        //    iMessageChat.saveData(chatMsg);
+        //    // Additionally notify the admin group if needed
+        //    await Clients.Group("Admins").SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
+        //}
 
         public async Task SendMessageToClients(string message, string to, string? filePath)
         {
@@ -149,10 +196,6 @@ namespace Infarstuructre.ViewModel
             // Update the unread message count
             var unreadCount = await dbcontext.TBMessageChats.CountAsync(m => m.ReciverId == reciverId && !m.IsRead);
             await Clients.User(reciverId).SendAsync("UnreadMessagesNotification", unreadCount);
-
-            //var unreadCount = await dbcontext.TBMessageChats.CountAsync(m => m.ReciverId == reciverId && !m.IsRead);
-            //await Clients.User(reciverId).SendAsync("ReceiveMessage", currentUserName, message, filePath, currentUserProfileImage, DateTime.UtcNow.ToString("HH:mm"));
-            //await Clients.User(reciverId).SendAsync("UnreadMessagesNotification", unreadCount);
 
             var chatMsg = new TBMessageChat
             {

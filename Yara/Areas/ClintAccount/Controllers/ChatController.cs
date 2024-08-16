@@ -56,30 +56,30 @@ namespace Yara.Areas.ClintAccount.Controllers
         //          return View(viewmMODeElMASTER);
         //}
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string anotherId)
         {
-            ViewmMODeElMASTER viewModel = new ViewmMODeElMASTER();
+            var viewModel = new ViewmMODeElMASTER();
             var currentUserId = iUserManager.GetUserId(User);
 
-            viewModel.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
-
-            var admins = iUserInformation.GetAllbyRole();
-            var support = iUserInformation.GetActiveSupport();
-
-            List<VwUser> avilable = new List<VwUser>();
-            avilable = admins;
-
-            foreach (var item in support)
+            // Retrieve the messages for the selected chat
+            if (!string.IsNullOrEmpty(anotherId))
             {
-                avilable.Add(item);
+                var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
+                var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
+                IamSender.AddRange(IamReciver);
+
+                viewModel.ViewChatMessage = IamSender.OrderBy(m => m.MessageeTime).ToList();
+
+                // Set the ViewBag properties
+                ViewBag.another = iUserInformation.GetById(anotherId)?.UserName;
+                ViewBag.anotherId = anotherId;
+                ViewBag.img = iUserInformation.GetById(currentUserId)?.ImageUser;
+                ViewBag.UserId = currentUserId;
+                //ViewBag.LastSeen = iConnectAndDisconnect.GetById(anotherId)?.LastSeen;
             }
 
-            viewModel.Users = avilable;
-            ViewBag.Supports = support;
-
-            viewModel.ListFAQ = iFAQ.GetAll();
-            viewModel.ListFAQDescription = iFAQDescreption.GetAll();
-            viewModel.ListFAQList = iFAQList.GetAll();
+            // Fetching all messages received by the current user (for the contacts list)
+            viewModel.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
 
             return View(viewModel);
         }
@@ -101,8 +101,56 @@ namespace Yara.Areas.ClintAccount.Controllers
             ViewBag.img = iUserInformation.GetById(currentUserId).ImageUser;
             ViewBag.UserId = currentUserId;
 
-            return View(viewModel);
+            return RedirectToAction("Index", new { anotherId });
         }
+
+        //public async Task<IActionResult> Index()
+        //{
+        //    ViewmMODeElMASTER viewModel = new ViewmMODeElMASTER();
+        //    var currentUserId = iUserManager.GetUserId(User);
+
+        //    viewModel.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
+
+        //    var admins = iUserInformation.GetAllbyRole();
+        //    var support = iUserInformation.GetActiveSupport();
+
+        //    List<VwUser> avilable = new List<VwUser>();
+        //    avilable = admins;
+
+        //    foreach (var item in support)
+        //    {
+        //        avilable.Add(item);
+        //    }
+
+        //    viewModel.Users = avilable;
+        //    ViewBag.Supports = support;
+
+        //    viewModel.ListFAQ = iFAQ.GetAll();
+        //    viewModel.ListFAQDescription = iFAQDescreption.GetAll();
+        //    viewModel.ListFAQList = iFAQList.GetAll();
+
+        //    return View(viewModel);
+        //}
+
+        //[HttpGet]
+        //[Route("/ClintAccount/Chat/OwnChat/{anotherId}")]
+        //public async Task<IActionResult> OwnChat(string anotherId)
+        //{
+        //    var viewModel = new ViewmMODeElMASTER();
+        //    var currentUserId = iUserManager.GetUserId(User);
+
+        //    var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
+        //    var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
+        //    IamSender.AddRange(IamReciver);
+
+        //    viewModel.ViewChatMessage = IamSender.OrderBy(m => m.MessageeTime).ToList();
+        //    ViewBag.another = iUserInformation.GetById(anotherId).UserName;
+        //    ViewBag.anotherId = anotherId;
+        //    ViewBag.img = iUserInformation.GetById(currentUserId).ImageUser;
+        //    ViewBag.UserId = currentUserId;
+
+        //    return View(viewModel);
+        //}
 
         [HttpPost]
         [Route("ClintAccount/Chat/UploadFile")]

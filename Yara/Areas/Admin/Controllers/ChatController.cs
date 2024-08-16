@@ -22,15 +22,42 @@ namespace Yara.Areas.Admin.Controllers
             iUserManager = iUserManager1;
             this.db = db;
         }
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
+        //    var currentUserId = iUserManager.GetUserId(User);
+
+        //    viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
+
+
+        //    return View(viewmMODeElMASTER);
+        //}
+        public async Task<IActionResult> Index(string anotherId)
         {
-            ViewmMODeElMASTER viewmMODeElMASTER = new ViewmMODeElMASTER();
+            var viewModel = new ViewmMODeElMASTER();
             var currentUserId = iUserManager.GetUserId(User);
 
-            viewmMODeElMASTER.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
+            // Retrieve the messages for the selected chat
+            if (!string.IsNullOrEmpty(anotherId))
+            {
+                var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
+                var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
+                IamSender.AddRange(IamReciver);
 
+                viewModel.ViewChatMessage = IamSender.OrderBy(m => m.MessageeTime).ToList();
 
-            return View(viewmMODeElMASTER);
+                // Set the ViewBag properties
+                ViewBag.another = iUserInformation.GetById(anotherId)?.UserName;
+                ViewBag.anotherId = anotherId;
+                ViewBag.img = iUserInformation.GetById(currentUserId)?.ImageUser;
+                ViewBag.UserId = currentUserId;
+                //ViewBag.LastSeen = iConnectAndDisconnect.GetById(anotherId)?.LastSeen;
+            }
+
+            // Fetching all messages received by the current user (for the contacts list)
+            viewModel.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
+
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -50,7 +77,7 @@ namespace Yara.Areas.Admin.Controllers
             ViewBag.img = iUserInformation.GetById(currentUserId).ImageUser;
             ViewBag.UserId = currentUserId;
 
-            return View(viewModel);
+            return RedirectToAction("Index", new { anotherId });
         }
         //      [HttpGet]
         //      [Route("/Admin/Chat/OwnChat/{anotherId}")]

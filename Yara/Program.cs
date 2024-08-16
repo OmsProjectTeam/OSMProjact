@@ -55,7 +55,10 @@ builder.Services.AddCors(options =>
             .AllowCredentials());
 });
 
-builder.Services.AddSignalR();
+builder.Services.AddSignalR(options =>
+{
+	options.EnableDetailedErrors = true;
+});
 
 
 
@@ -177,6 +180,7 @@ else
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
