@@ -128,6 +128,10 @@ namespace Infarstuructre.ViewModel
         public TBEmailNewsletter EmailNewsletter { get; set; }
         public IEnumerable<TBEmailNewsletter> ListEmailNewsletters { get; set; }
 
+        public IEnumerable<TBViewShippingAddresseClint> ListViewShippingAddresseClint { get; set; }
+
+        public TBShippingAddresseClint ShippingAddresseClint { get; set; }
+
     }
 }
  

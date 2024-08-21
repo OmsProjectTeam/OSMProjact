@@ -24,21 +24,7 @@ public class CLSShippingAddress : IIShippingAddress
     {
         this.dbcontext = dbcontext;
     }
-    public bool deleteData(int IdShippingAddress)
-    {
-        try
-        {
-            var profit = GetById(IdShippingAddress);
-            profit.CurrentState = false;
-            dbcontext.Entry(profit).State = EntityState.Modified;
-            dbcontext.SaveChanges();
-            return true;
-        }
-        catch (Exception)
-        {
-            return false;
-        }
-    }
+  
 
     public List<TBViewShippingAddress> GetAll()
     {
@@ -84,6 +70,21 @@ public class CLSShippingAddress : IIShippingAddress
         try
         {
             dbcontext.Entry(updats).State = EntityState.Modified;
+            dbcontext.SaveChanges();
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+    public bool deleteData(int IdShippingAddress)
+    {
+        try
+        {
+            var profit = GetById(IdShippingAddress);
+            profit.CurrentState = false;
+            dbcontext.Entry(profit).State = EntityState.Modified;
             dbcontext.SaveChanges();
             return true;
         }

@@ -412,6 +412,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to يرجى أدراج الوصف العام الكامل لتتم العملية بنجاح .....!.
+        /// </summary>
+        public static string VlDescriptionAll {
+            get {
+                return ResourceManager.GetString("VlDescriptionAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to يرجى تضمين وصف للرابط بين العميل والتسعير. تمت العملية بنجاح...!.
         /// </summary>
         public static string VlDescriptionClint {
@@ -525,6 +534,15 @@ namespace Domin.Resource {
         public static string VlMoblie {
             get {
                 return ResourceManager.GetString("VlMoblie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to يرجى إضافة أقرب معلم لتتم العملية بنجاح ....!.
+        /// </summary>
+        public static string VlNearestLandmark {
+            get {
+                return ResourceManager.GetString("VlNearestLandmark", resourceCulture);
             }
         }
         

@@ -233,6 +233,13 @@ namespace Infarstuructre.Data
                 entity.HasNoKey();
                 entity.ToView("ViewNewsLetterSender");
             });
+            //************************************************************  
+            //************************************************************
+            builder.Entity<TBViewShippingAddresseClint>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("ViewShippingAddresseClint");
+            });
             //************************************************************
 
             builder.UseCollation("Arabic_CI_AS");
@@ -1671,6 +1678,21 @@ namespace Infarstuructre.Data
            .Property(m => m.TimeConnection)
            .HasDefaultValueSql("getdate()");
             //--------------------------------- 
+
+
+            //--------------------------------- 
+
+            builder.Entity<TBShippingAddresseClint>()
+           .Property(m => m.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBShippingAddresseClint>()
+           .Property(m => m.CurrentState)
+           .HasDefaultValueSql("((1))");
+            builder.Entity<TBShippingAddresseClint>()
+           .Property(m => m.Active)
+           .HasDefaultValueSql("((1))");
+
+            //--------------------------------- 
         }
 
 
@@ -1870,6 +1892,8 @@ namespace Infarstuructre.Data
         public DbSet<TBNewsLetterSender> TBNewsLetterSenders { get; set; }
         public DbSet<TBViewEmailNewsletter> ViewEmailNewsletter { get; set; }
         public DbSet<TBViewNewsLetterSender> ViewNewsLetterSender { get; set; }
+        public DbSet<TBShippingAddresseClint> TBShippingAddresseClints { get; set; }
+        public DbSet<TBViewShippingAddresseClint> ViewShippingAddresseClint { get; set; }
         //test
 
 

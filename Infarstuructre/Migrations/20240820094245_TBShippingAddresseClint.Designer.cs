@@ -4,6 +4,7 @@ using Infarstuructre.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infarstuructre.Migrations
 {
     [DbContext(typeof(MasterDbcontext))]
-    partial class MasterDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20240820094245_TBShippingAddresseClint")]
+    partial class TBShippingAddresseClint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -4985,137 +4988,6 @@ namespace Infarstuructre.Migrations
                     b.ToTable((string)null);
 
                     b.ToView("ViewShippingAddress", (string)null);
-                });
-
-            modelBuilder.Entity("Domin.Entity.TBViewShippingAddresseClint", b =>
-                {
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("AreaName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CityName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("ClintPricePerkgAbove")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("ClintPricePerkgAbove10")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("ClintPricePerkgUnder")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("ClintPricePerkgUnder10")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("CoPricePerkgAbove10")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("CoPricePerkgUnder10")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CurrencyCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CurrencyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("CurrentState")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("DataEntry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTimeEntry")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeliveryPriceClint")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DeliveryPriceCompany")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdArea")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdCity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdCityDeliveryTariffs")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdCurrenciesExchangeRates")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdShippingAddresseClint")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdShippingPrices")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdTypeSystemDelivery")
-                        .HasColumnType("int");
-
-                    b.Property<string>("IdUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NearestLandmark")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NikeNAme")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleShipping")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TypeSystemDelivery")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable((string)null);
-
-                    b.ToView("ViewShippingAddresseClint", (string)null);
                 });
 
             modelBuilder.Entity("Domin.Entity.TBViewShippingPrices", b =>

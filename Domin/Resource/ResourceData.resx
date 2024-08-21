@@ -342,4 +342,10 @@
   <data name="VlFollowUpMail" xml:space="preserve">
     <value>يرجى أدراج بريد المتابعة لتتم العملية بنجاح ....!</value>
   </data>
+  <data name="VlNearestLandmark" xml:space="preserve">
+    <value>يرجى إضافة أقرب معلم لتتم العملية بنجاح ....!</value>
+  </data>
+  <data name="VlDescriptionAll" xml:space="preserve">
+    <value>يرجى أدراج الوصف العام الكامل لتتم العملية بنجاح .....!</value>
+  </data>
 </root>

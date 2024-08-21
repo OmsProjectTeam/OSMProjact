@@ -156,6 +156,7 @@ builder.Services.AddScoped<IISupportTicketStatus, CLSTBSupportTicketStatus>();
 builder.Services.AddScoped<IISupportTicket, CLSTBSupportTicket>();
 builder.Services.AddTransient<ExternalDataService>();
 builder.Services.AddScoped<IIEmailNewsletter, CLSTBEmailNewsletter>();
+builder.Services.AddScoped<IIShippingAddresseClint, CLSTBShippingAddresseClint>();
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();

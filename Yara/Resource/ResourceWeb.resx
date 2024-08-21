@@ -345,6 +345,12 @@
   <data name="LBDeliveryAddress" xml:space="preserve">
     <value>DeliveryAddress</value>
   </data>
+  <data name="lbDeliveryPriceClint" xml:space="preserve">
+    <value>Delivery Price Clint</value>
+  </data>
+  <data name="lbDeliveryPriceCompany" xml:space="preserve">
+    <value>Delivery Price Company</value>
+  </data>
   <data name="Lbdelivery_charges" xml:space="preserve">
     <value>Delivery Charges</value>
   </data>
@@ -352,6 +358,9 @@
     <value>Region</value>
   </data>
   <data name="LbDescription1" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="LBDescriptionAll" xml:space="preserve">
     <value>Description</value>
   </data>
   <data name="Lbdescriptioncity" xml:space="preserve">
@@ -449,6 +458,9 @@
   </data>
   <data name="LbInformationCompany" xml:space="preserve">
     <value>Information Company</value>
+  </data>
+  <data name="LBinformationUser" xml:space="preserve">
+    <value>Information Users</value>
   </data>
   <data name="Lbinsert_dt" xml:space="preserve">
     <value>Date added</value>
@@ -573,6 +585,12 @@
   <data name="LBMyShippingAddress" xml:space="preserve">
     <value>MyShipping Address</value>
   </data>
+  <data name="LBMyShippingAddresseClint" xml:space="preserve">
+    <value>Shipping Addresse Clint</value>
+  </data>
+  <data name="LBMyShippingInformation" xml:space="preserve">
+    <value>Shipping Information</value>
+  </data>
   <data name="LBMyShippingPrice" xml:space="preserve">
     <value>Shipping systems pricing</value>
   </data>
@@ -614,6 +632,9 @@
   </data>
   <data name="LbNameRols" xml:space="preserve">
     <value>NameRols</value>
+  </data>
+  <data name="LBNearestLandmark" xml:space="preserve">
+    <value>Landmark</value>
   </data>
   <data name="LbNikeNAme" xml:space="preserve">
     <value>Nick name</value>
@@ -803,6 +824,9 @@
   </data>
   <data name="LbSupportTicketType" xml:space="preserve">
     <value> Type</value>
+  </data>
+  <data name="LbSystemDelivery" xml:space="preserve">
+    <value>System Delivery Information </value>
   </data>
   <data name="LbTaskStatus" xml:space="preserve">
     <value>Task Status</value>
