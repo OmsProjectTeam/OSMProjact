@@ -226,5 +226,38 @@
                 return RedirectToAction("MyShippingAddresseClintAr");
             }
         }
+        public JsonResult GetAreasByCity(int cityId)
+        {
+            var areas = iArea.GetAllByCityId(cityId); // Fetching areas by city ID
+            return Json(areas.Select(a => new { id = a.id, description = a.Description }));
+        }
+        [HttpGet]
+        public JsonResult GetShippingPricesByNikeName(int shippingPriceId)
+        {
+            var shippingPrice = iShippingPrice.GetById(shippingPriceId);
+            if (shippingPrice != null)
+            {
+                return Json(new
+                {
+                    CoPricePerkgUnder10 = shippingPrice.CoPricePerkgUnder10,
+                    CoPricePerkgAbove10 = shippingPrice.CoPricePerkgAbove10
+                });
+            }
+            return Json(null);
+        }
+        public JsonResult GetDeliveryDetailsByTypeSystem(int typeSystemId)
+        {
+            var deliveryTariffs = iCityDeliveryTariffs.GetById(typeSystemId);
+            if (deliveryTariffs != null)
+            {
+                return Json(new
+                {
+                    DeliveryPriceClint = deliveryTariffs.ClintDelivery,
+                    CompanyPricing = deliveryTariffs.CompanyDelivery // Assuming you have this field
+                });
+            }
+            return Json(null);
+        }
+
     }
 }
