@@ -144,7 +144,7 @@
                                     <div class="col-12 col-sm-3">
                                         <div class="form-group">
                                             <label asp-for="@Model.ShippingAddresseClint.IdCityDeliveryTariffs" for="exampleInputEmail1">@ResourceWeb.LbdescriptioncityType</label>
-                                            <select id="delivery-tarrif-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdCityDeliveryTariffs" asp-items="@(new SelectList(ViewBag.CityDeliveryTariffs, "IdCityDeliveryTariffs", "description"))">
+                                            <select id="delivery-tarrif-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdCityDeliveryTariffs" asp-items="@(new SelectList(ViewBag.CityDeliveryTariffs, "IdCityDeliveryTariffs", "TitleShipping"))">
                                                 <option value="">-- Select --</option>
                                             </select>
                                             <span asp-validation-for="@Model.ShippingAddresseClint.IdCityDeliveryTariffs" class="text-danger"></span>
@@ -183,7 +183,7 @@
                                     <div class="col-12 col-sm-12">
                                         <div class="form-group">
                                             <label asp-for="@Model.ShippingAddresseClint.Description" for="exampleInputEmail1">@ResourceWeb.LbClintDelivery</label>
-                                            <input id="delivery-price-clint" asp-for="@Model.ShippingAddresseClint.Description" type="text" placeholder="@ResourceWeb.LbClintDelivery ...." class="form-control" maxlength="300" readonly>
+                                            <textarea id="delivery-price-clint" asp-for="@Model.ShippingAddresseClint.Description" type="text" placeholder="@ResourceWeb.LbClintDelivery ...." class="form-control"rows="8"></textarea>
                                             <span asp-validation-for="@Model.ShippingAddresseClint.Description" class="text-danger"></span>
                                         </div>
                                     </div>
