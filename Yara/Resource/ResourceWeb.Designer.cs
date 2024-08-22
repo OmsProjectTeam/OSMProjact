@@ -304,6 +304,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adding and modifying Shipping Addresse Clint.
+        /// </summary>
+        public static string LBAddShippingAddresseClint {
+            get {
+                return ResourceManager.GetString("LBAddShippingAddresseClint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adding and modifying pricing for shipping systems.
         /// </summary>
         public static string LBAddShippingPrice {
@@ -574,7 +583,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The company&apos;s shipping price is more than 10.
+        ///   Looks up a localized string similar to shipping price is more than 10.
         /// </summary>
         public static string LbCoPricePerkgAbove10 {
             get {
@@ -583,7 +592,7 @@ namespace Yara.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The company&apos;s shipping price is less than 10.
+        ///   Looks up a localized string similar to shipping price is less than 10.
         /// </summary>
         public static string LbCoPricePerkgUnder10 {
             get {
@@ -804,6 +813,15 @@ namespace Yara.Resource {
         public static string Lbdescriptioncity {
             get {
                 return ResourceManager.GetString("Lbdescriptioncity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description of the local delivery system.
+        /// </summary>
+        public static string LbdescriptioncityType {
+            get {
+                return ResourceManager.GetString("LbdescriptioncityType", resourceCulture);
             }
         }
         

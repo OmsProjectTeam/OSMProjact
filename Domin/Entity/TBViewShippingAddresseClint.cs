@@ -36,7 +36,7 @@ namespace Domin.Entity
         public string TypeSystemDelivery { get; set; }
         public int IdCityDeliveryTariffs { get; set; }
         public string TitleShipping { get; set; }
-        public string DeliveryPriceCompany { get; set; }
+  
         public string DeliveryPriceClint { get; set; }
         public string Description { get; set; }
         public string DataEntry { get; set; }

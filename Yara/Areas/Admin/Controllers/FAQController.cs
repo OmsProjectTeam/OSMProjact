@@ -195,10 +195,7 @@ namespace Yara.Areas.Admin.Controllers
 			}
 			// تمرير التاسكات  من الادارة 
 			// استخدام نظام أجايا وجيرا 
-
-
 		}
-
 		[Authorize(Roles = "Admin")]
 		public IActionResult DeleteDataAr(int IdFAQ)
 		{
@@ -216,8 +213,6 @@ namespace Yara.Areas.Admin.Controllers
 			}
 			// تمرير التاسكات  من الادارة 
 			// استخدام نظام أجايا وجيرا 
-
-
 		}
 	}
 }

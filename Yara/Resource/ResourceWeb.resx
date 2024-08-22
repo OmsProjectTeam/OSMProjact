@@ -198,6 +198,9 @@
   <data name="LBAddShippingAddress" xml:space="preserve">
     <value>Add Shipping Address</value>
   </data>
+  <data name="LBAddShippingAddresseClint" xml:space="preserve">
+    <value>Adding and modifying Shipping Addresse Clint</value>
+  </data>
   <data name="LBAddShippingPrice" xml:space="preserve">
     <value>Adding and modifying pricing for shipping systems</value>
   </data>
@@ -289,10 +292,10 @@
     <value>المبلغ المحول</value>
   </data>
   <data name="LbCoPricePerkgAbove10" xml:space="preserve">
-    <value>The company's shipping price is more than 10</value>
+    <value>shipping price is more than 10</value>
   </data>
   <data name="LbCoPricePerkgUnder10" xml:space="preserve">
-    <value>The company's shipping price is less than 10</value>
+    <value>shipping price is less than 10</value>
   </data>
   <data name="LbCostPrice" xml:space="preserve">
     <value>Cost Price</value>
@@ -365,6 +368,9 @@
   </data>
   <data name="Lbdescriptioncity" xml:space="preserve">
     <value>City</value>
+  </data>
+  <data name="LbdescriptioncityType" xml:space="preserve">
+    <value>Description of the local delivery system</value>
   </data>
   <data name="LbDescriptionClint" xml:space="preserve">
     <value>Description Clint</value>

@@ -26,8 +26,7 @@ namespace Domin.Entity
         public decimal ClintPricePerkgAbove10 { get; set; }
         public int IdTypeSystemDelivery { get; set; }
         public int IdCityDeliveryTariffs { get; set; }
-        [Required(ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "VlCoPricePerkgAbove10")]
-        public decimal DeliveryPriceCompany { get; set; }
+       
         [Required(ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "VlClintPricePerkgAbove10")]
         public decimal DeliveryPriceClint { get; set; }
         [Required(ErrorMessageResourceType = typeof(Resource.ResourceData), ErrorMessageResourceName = "VlDescriptionAll")]

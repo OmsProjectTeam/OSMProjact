@@ -95,7 +95,7 @@
                 slider.ClintPricePerkgAbove10 = model.ShippingAddresseClint.ClintPricePerkgAbove10;
                 slider.IdTypeSystemDelivery = model.ShippingAddresseClint.IdTypeSystemDelivery;
                 slider.IdCityDeliveryTariffs = model.ShippingAddresseClint.IdCityDeliveryTariffs;
-                slider.DeliveryPriceCompany = model.ShippingAddresseClint.DeliveryPriceCompany;
+              
                 slider.DeliveryPriceClint = model.ShippingAddresseClint.DeliveryPriceClint;
                 slider.Description = model.ShippingAddresseClint.Description;
                 slider.Active = model.ShippingAddresseClint.Active;                  
@@ -154,7 +154,7 @@
                 slider.ClintPricePerkgAbove10 = model.ShippingAddresseClint.ClintPricePerkgAbove10;
                 slider.IdTypeSystemDelivery = model.ShippingAddresseClint.IdTypeSystemDelivery;
                 slider.IdCityDeliveryTariffs = model.ShippingAddresseClint.IdCityDeliveryTariffs;
-                slider.DeliveryPriceCompany = model.ShippingAddresseClint.DeliveryPriceCompany;
+             
                 slider.DeliveryPriceClint = model.ShippingAddresseClint.DeliveryPriceClint;
                 slider.Description = model.ShippingAddresseClint.Description;
                 slider.Active = model.ShippingAddresseClint.Active;
