@@ -257,26 +257,6 @@
         };
 
         $("#url").val(window.location.href);
-        // JavaScript لتحميل الضواحي عند تغيير المدينة
-        // $(document).ready(function () {
-        //     $('#city-select').change(function () {
-        //         var cityId = $(this).val();
-        //         if (cityId) {
-        //             $.getJSON('@Url.Action("GetAreasByCity", "CityDeliveryTariffs")', { cityId: cityId }, function (data) {
-        //                 var $areaSelect = $('#area-select');
-        //                 $areaSelect.empty();
-        //                 $.each(data, function (index, item) {
-        //                     $areaSelect.append($('<option>', {
-        //                         value: item.id,
-        //                         text: item.description
-        //                     }));
-        //                 });
-        //             });
-        //         } else {
-        //             $('#area-select').empty();
-        //         }
-        //     });
-        // });
         $(document).ready(function () {
             $('#city-select').change(function () {
                 var cityId = $(this).val();
@@ -352,22 +332,48 @@
                 }
             });
         });
+        // $(document).ready(function () {
+        //     function updateDeliveryPriceClint() {
+        //         var description = $('#description').val();
+        //         var city = $('#city-select option:selected').text();
+        //         var area = $('#area-select option:selected').text();
+        //         var landmark = $('#landmark').val();
+        //         var nikeName = $('#nike-name-select option:selected').text();
+        //         var under10 = $('#price-under-10').val();
+        //         var above10 = $('#price-above-10').val();
+        //         var system = $('#type-system-select option:selected').text();
+        //         var localDescription = $('#local-delivery-description').val();
+        //         var combined = `${description} ${city} ${area} ${landmark} ${nikeName} ${under10} ${above10} ${system} ${localDescription}`;
+        //         $('#delivery-price-clint').val(combined);
+        //     }
+        //     $('#city-select, #area-select, #nike-name-select, #type-system-select').change(updateDeliveryPriceClint);
+        //     $('#description, #landmark, #price-under-10, #price-above-10, #local-delivery-description').on('input', updateDeliveryPriceClint);
+        // });
         $(document).ready(function () {
             function updateDeliveryPriceClint() {
-                var description = $('#description').val();
-                var city = $('#city-select option:selected').text();
-                var area = $('#area-select option:selected').text();
-                var landmark = $('#landmark').val();
-                var nikeName = $('#nike-name-select option:selected').text();
-                var under10 = $('#price-under-10').val();
-                var above10 = $('#price-above-10').val();
-                var system = $('#type-system-select option:selected').text();
-                var localDescription = $('#local-delivery-description').val();
-                var combined = `${description} ${city} ${area} ${landmark} ${nikeName} ${under10} ${above10} ${system} ${localDescription}`;
+                // Clear the existing value before updating
+                $('#delivery-price-clint').val('');
+
+                var clintName = $('#description').val() || 'N/A';
+                var city = $('#city-select option:selected').text() || 'N/A';
+                var area = $('#area-select option:selected').text() || 'N/A';
+                var landmark = $('#landmark').val() || 'N/A';
+                var nikeName = $('#nike-name-select option:selected').text() || 'N/A';
+                var under10 = $('#price-under-10').val() || 'N/A';
+                var above10 = $('#price-above-10').val() || 'N/A';
+                var system = $('#type-system-select option:selected').text() || 'N/A';
+                var localDescription = $('#local-delivery-description').val() || 'N/A';
+                var deliveryPriceClint = ''; // Start with an empty string
+
+                var combined = `Clint Name: ${clintName} -- City Name: ${city} -- Area Name: ${area} -- Landmark: ${landmark} -- Nick name: ${nikeName} -- Customer shipping price is less than 10: ${under10} -- Customer shipping price is more than 10: ${above10} -- System: ${system} -- Description of the local delivery system: ${localDescription} -- Delivery price to the customer: ${deliveryPriceClint}`;
+
                 $('#delivery-price-clint').val(combined);
             }
+
             $('#city-select, #area-select, #nike-name-select, #type-system-select').change(updateDeliveryPriceClint);
             $('#description, #landmark, #price-under-10, #price-above-10, #local-delivery-description').on('input', updateDeliveryPriceClint);
         });
+
+
     </script>
 }
