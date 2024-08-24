@@ -286,6 +286,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to إضافة وتعديل عناوين الشحن للعملاء .
+        /// </summary>
+        public static string LBAddShippingAddresseClint {
+            get {
+                return ResourceManager.GetString("LBAddShippingAddresseClint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to إضافة وتعديل الأسعار لأنظمة الشحن.
         /// </summary>
         public static string LBAddShippingPrice {
@@ -777,6 +786,15 @@ namespace Yara.Resource {
         public static string Lbdescriptioncity {
             get {
                 return ResourceManager.GetString("Lbdescriptioncity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عنوان التوصيل المعرف.
+        /// </summary>
+        public static string LbdescriptioncityType {
+            get {
+                return ResourceManager.GetString("LbdescriptioncityType", resourceCulture);
             }
         }
         

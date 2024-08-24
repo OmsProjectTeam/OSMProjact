@@ -3,9 +3,6 @@
     ViewData["Title"] = ResourceWebAr.LBMyShippingAddresseClint;
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminAr.cshtml";
 }
-
-
-
 <div class="col-xs-12">
     <div class="box-content">
         <ul class="list-inline">
@@ -15,21 +12,16 @@
         </ul>
         <!-- /.box-title -->
         <div class="dropdown js__drop_down">
-            <a asp-area="Admin" asp-controller="ShippingAddresseClint" asp-action="AddShippingAddresseClint"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a>
+            <a asp-area="Admin" asp-controller="ShippingAddresseClint" asp-action="AddShippingAddresseClintAr"><button type="button" class="btn btn-violet btn-rounded btn-bordered waves-effect waves-light" style="margin-bottom:20px">Add</button></a>
         </div>
         <!-- /.dropdown js__dropdown -->
         <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
             <div class="row">
                 <div class="col-sm-12">
-
                     <div class="box-content">
-
                         <div id="rootwizard-progress">
                             <div class="tab-header">
                                 <div class="navbar">
-
-
-
                                     <div class="navbar-inner">
                                         <ul>
                                             <li><a href="#tab-progress-1" data-toggle="tab">@ResourceWebAr.LBinformationUser</a></li>
@@ -88,7 +80,6 @@
                                                             <td class="truncate-50">@item.Name</td>
                                                             <td class="truncate-50">@item.PhoneNumber</td>
                                                             <td class="truncate-50">@item.Email</td>
-
                                                             <td class="truncate-50">@item.CityName</td>
                                                             <td class="truncate-50">@item.AreaName</td>
                                                             <td class="truncate-50">@item.NearestLandmark</td>
@@ -265,7 +256,7 @@
                                                             </td>
                                                             <td>
                                                                 <ul class="list-inline">
-                                                                    <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="ShippingAddresseClint" asp-action="AddShippingAddresseClint" asp-route-IdShippingAddresseClint="@item.IdShippingAddresseClint"><button type="button" class="btn btn-primary btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-edit"></i></button></a></li>|
+                                                                    <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="ShippingAddresseClint" asp-action="AddShippingAddresseClintAr" asp-route-IdShippingAddresseClint="@item.IdShippingAddresseClint"><button type="button" class="btn btn-primary btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-edit"></i></button></a></li>|
                                                                     <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="ShippingAddresseClint" asp-action="DeleteData" asp-route-IdShippingAddresseClint="@item.IdShippingAddresseClint"><button type="button" class="btn btn-danger btn-circle btn-lg waves-effect waves-light"><i class="ico fa fa-remove"></i></button></a></li>
                                                                 </ul>
                                                             </td>
