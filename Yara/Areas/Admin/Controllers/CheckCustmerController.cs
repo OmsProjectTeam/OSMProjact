@@ -15,38 +15,23 @@ namespace Yara.Areas.Admin.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> GitPhouneNumber(string PhoneNumber)
         {
-            // البحث عن رقم الهاتف في جدول VwUsers
-            var user = await _context.ViewShippingAddresseClint.FirstOrDefaultAsync(u => u.PhoneNumber == PhoneNumber);
+            // Search for the phone number in ViewShippingAddresseClint
+            var phoneNo = await _context.ViewShippingAddresseClint
+                                     .FirstOrDefaultAsync(u => u.PhoneNumber == PhoneNumber);
 
-            if (user != null)
+            if (phoneNo != null)
             {
-
-                ViewBag.name=user.Name;
-
-
-                TempData["FAQ"] = "Rayhan Please show all information with the Add New Address button. ";
-                return RedirectToAction("MyCheckCustmer" );
+                return Json(new
+                {
+                    Success = true,
+                    Name = phoneNo.Name,
+                    Description = phoneNo.Description
+                });
             }
-
-
-
-            ////////////
-
-            // البحث عن رقم الهاتف في جدول customers
-            var customer = await _context.customers.FirstOrDefaultAsync(c => c.CustMob == PhoneNumber || c.CustMob2 == PhoneNumber);
-
-            if (customer != null)
-            {
-                // إذا تم العثور على العميل، عرض صفحة التفاصيل
-                return View("CustomerDetailsView", customer);
-            }
-
-            // إذا لم يتم العثور على الرقم في أي من الجداول، عرض نموذج التسجيل
-            return View("RegisterView");
+            return Json(null);
         }
     }
 }
