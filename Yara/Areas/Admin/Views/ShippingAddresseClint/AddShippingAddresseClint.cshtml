@@ -107,7 +107,7 @@
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label asp-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" for="exampleInputEmail1">@ResourceWeb.LbClintPricePerkgUnder10</label>
-                                            <input asp-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" type="text" placeholder="@ResourceWeb.LbClintPricePerkgUnder10 ...." class="form-control" maxlength="300">
+                                            <input id="shipping-under-10" asp-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" type="text" placeholder="@ResourceWeb.LbClintPricePerkgUnder10 ...." class="form-control" maxlength="300">
                                             <span asp-validation-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" class="text-danger"></span>
 
                                         </div>
@@ -116,7 +116,7 @@
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label asp-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" for="exampleInputEmail1">@ResourceWeb.LbClintPricePerkgAbove10</label>
-                                            <input asp-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" type="text" placeholder="@ResourceWeb.LbClintPricePerkgAbove10 ...." class="form-control" maxlength="300">
+                                            <input id="shipping-above-10" asp-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" type="text" placeholder="@ResourceWeb.LbClintPricePerkgAbove10 ...." class="form-control" maxlength="300">
                                             <span asp-validation-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -168,7 +168,7 @@
                                     <div class="col-12 col-sm-3">
                                         <div class="form-group">
                                             <label asp-for="@Model.ShippingAddresseClint.DeliveryPriceClint" for="exampleInputEmail1">@ResourceWeb.LbClintDelivery</label>
-                                            <input asp-for="@Model.ShippingAddresseClint.DeliveryPriceClint" type="text" placeholder="@ResourceWeb.LbClintDelivery ...." class="form-control" maxlength="300">
+                                            <input id="delivery-customer" asp-for="@Model.ShippingAddresseClint.DeliveryPriceClint" type="text" placeholder="@ResourceWeb.LbClintDelivery ...." class="form-control" maxlength="300">
                                             <span asp-validation-for="@Model.ShippingAddresseClint.DeliveryPriceClint" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -202,7 +202,7 @@
                                 </div>
                             </div>
                             <div class="checkbox margin-bottom-20">
-                                <div class="switch success"><input type="checkbox" asp-for="@Model.ShippingAddresseClint.Active" id="switch-2" checked="checked"><label for="switch-2">@ResourceWeb.LbActive</label></div>
+                                <div class="switch success"><input id="dealing-status" type="checkbox" asp-for="@Model.ShippingAddresseClint.Active" id="switch-2" checked="checked"><label for="switch-2">@ResourceWeb.LbActive</label></div>
                             </div>
                             <div class="checkbox margin-bottom-20">
                                 <div class="switch success"><input type="checkbox" asp-for="@Model.ShippingAddresseClint.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWeb.lbCurrentState</label></div>
@@ -360,13 +360,16 @@
                 var area = $('#area-select option:selected').text() || 'N/A';
                 var landmark = $('#landmark').val() || 'N/A';
                 var nikeName = $('#nike-name-select option:selected').text() || 'N/A';
-                var under10 = $('#price-under-10').val() || 'N/A';
-                var above10 = $('#price-above-10').val() || 'N/A';
+                var under10 = $('#shipping-under-10').val() || 'N/A';
+                var above10 = $('#shipping-above-10').val() || 'N/A';
                 var system = $('#type-system-select option:selected').text() || 'N/A';
                 var localDescription = $('#local-delivery-description').val() || 'N/A';
+                var dealingStatus = $('#dealing-status').val() || 'N/A';
+                var deliveryCustomer = $('#delivery-customer').val() || 'N/A';
+                var exchangePrice = $('#type-system-select').val() || 'N/A';
 
                 // Combine the values in the correct order
-                var combined = `Clint Name: ${clintName} -- City Name: ${city} -- Area Name: ${area} -- Landmark: ${landmark} -- Nick name: ${nikeName} -- System: ${system}`;
+                var combined = `Clint Name: ${clintName} -- City Name: ${city} -- Area Name: ${area} -- Landmark: ${landmark} -- Customer shipping price is less than 10: ${under10} -- Customer shipping price is more than 10: ${above10} -- Nick name: ${nikeName} -- System: ${system} -- Delivery price to the customer: ${deliveryCustomer} -- exchange: ${exchangePrice} -- Dealing status: ${dealingStatus}`;
 
                 // Set the combined string to the delivery price field
                 $('#delivery-price-clint').val(combined);
@@ -374,7 +377,7 @@
 
             // Attach the function to the change and input events
             $('#clintName, #city-select, #area-select, #nike-name-select, #type-system-select').change(updateDeliveryPriceClint);
-            $('#description, #landmark, #price-under-10, #price-above-10, #local-delivery-description').on('input', updateDeliveryPriceClint);
+            $('#description, #landmark, #price-under-10, #price-above-10, #local-delivery-description, #dealingStatus, #deliveryCustomer, #exchangePrice').on('input', updateDeliveryPriceClint);
         });
 
     </script>
