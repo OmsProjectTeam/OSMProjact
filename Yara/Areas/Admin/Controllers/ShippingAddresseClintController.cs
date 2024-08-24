@@ -259,5 +259,65 @@
             return Json(null);
         }
 
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> SaveModal(ViewmMODeElMASTER model, TBShippingAddresseClint slider, List<IFormFile> Files, string returnUrl)
+        {
+            try
+            {
+                slider.IdShippingAddresseClint = model.ShippingAddresseClint.IdShippingAddresseClint;
+                slider.IdUser = model.ShippingAddresseClint.IdUser;
+                slider.IdCity = model.ShippingAddresseClint.IdCity;
+                slider.IdArea = model.ShippingAddresseClint.IdArea;
+                slider.IdShippingPrices = model.ShippingAddresseClint.IdShippingPrices;
+                slider.IdCurrenciesExchangeRates = model.ShippingAddresseClint.IdCurrenciesExchangeRates;
+                slider.NearestLandmark = model.ShippingAddresseClint.NearestLandmark;
+                slider.ClintPricePerkgUnder10 = model.ShippingAddresseClint.ClintPricePerkgUnder10;
+                slider.ClintPricePerkgAbove10 = model.ShippingAddresseClint.ClintPricePerkgAbove10;
+                slider.IdTypeSystemDelivery = model.ShippingAddresseClint.IdTypeSystemDelivery;
+                slider.IdCityDeliveryTariffs = model.ShippingAddresseClint.IdCityDeliveryTariffs;
+
+                slider.DeliveryPriceClint = model.ShippingAddresseClint.DeliveryPriceClint;
+                slider.Description = model.ShippingAddresseClint.Description;
+                slider.Active = model.ShippingAddresseClint.Active;
+                slider.DataEntry = model.ShippingAddresseClint.DataEntry;
+                slider.DateTimeEntry = model.ShippingAddresseClint.DateTimeEntry;
+                slider.CurrentState = model.ShippingAddresseClint.CurrentState;
+                if (slider.IdShippingAddresseClint == 0 || slider.IdShippingAddresseClint == null)
+                {
+                    var reqwest = iShippingAddresseClint.saveData(slider);
+                    if (reqwest == true)
+                    {
+                        TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+                        return RedirectToAction("MyShippingAddresseClint");
+                    }
+                    else
+                    {
+                        TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+                        return RedirectToAction("AddShippingAddresseClint");
+                    }
+                }
+                else
+                {
+                    var reqestUpdate = iShippingAddresseClint.UpdateData(slider);
+                    if (reqestUpdate == true)
+                    {
+                        TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+                        return RedirectToAction("MyShippingAddresseClint");
+                    }
+                    else
+                    {
+                        TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+                        return RedirectToAction("AddShippingAddresseClint");
+                    }
+                }
+            }
+            catch
+            {
+                TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+                return RedirectToAction("AddShippingAddresseClint");
+            }
+        }
+
     }
 }

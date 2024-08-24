@@ -4,6 +4,70 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<style>
+    /* Modal container */
+    .custom-modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1000; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+    }
+
+    /* Modal content box */
+    .custom-modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+        max-width: 600px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+    }
+
+    /* Modal header */
+    .custom-modal-header {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Modal body */
+    .custom-modal-body {
+        padding: 20px 10px;
+    }
+
+    /* Modal footer */
+    .custom-modal-footer {
+        padding: 10px;
+        border-top: 1px solid #ddd;
+        text-align: right;
+    }
+
+    /* Close button */
+    .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .close-modal:hover,
+        .close-modal:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+</style>
 
 
 <div class="row small-spacing">
@@ -61,6 +125,205 @@
             </div>
         </div>
     </div>
+
+    <div id="customModal" class="custom-modal">
+        <div class="custom-modal-content">
+            <div class="custom-modal-header">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <h2>Add New Product</h2>
+            </div>
+            <div class="custom-modal-body">
+                <form role="form" method="post" asp-controller="ShippingAddresseClint" asp-action="Save" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="@Model.ShippingAddresseClint.DataEntry" class="form-control" value="@User.Identity.Name">
+                        <input type="hidden" asp-for="@Model.ShippingAddresseClint.IdShippingAddresseClint" class="form-control">
+                        <input type="hidden" asp-for="@Model.ShippingAddresseClint.DateTimeEntry" value="@DateTime.Now">
+                        <input type="hidden" asp-for="@Model.returnUrl" id="url">
+                    </div>
+
+                    <div class="card-content">
+                        <div class="row small-spacing">
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="@Model.ShippingAddresseClint.IdUser" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
+                                    <select id="clintName" class="form-control" asp-for="@Model.ShippingAddresseClint.IdUser" asp-items="@(new SelectList(ViewBag.user, "Id", "Name"))">
+                                    </select>
+                                    <span asp-validation-for="@Model.ShippingAddresseClint.IdUser" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="@Model.ShippingAddresseClint.IdCity" for="exampleInputEmail1">@ResourceWeb.LbCity</label>
+                                    <select id="city-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdCity" asp-items="@(new SelectList(ViewBag.City, "Id", "Description"))">
+                                    </select>
+                                    <span asp-validation-for="@Model.ShippingAddresseClint.IdCity" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="@Model.ShippingAddresseClint.IdArea" for="exampleInputEmail1">@ResourceWeb.LBLbAreaName</label>
+                                    <select id="area-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdArea" asp-items="@(new SelectList(ViewBag.Area, "id", "Description"))">
+                                    </select>
+                                    <span asp-validation-for="@Model.ShippingAddresseClint.IdArea" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="row small-spacing">
+
+                            <div class="col-12 col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="@Model.ShippingAddresseClint.NearestLandmark" for="exampleInputEmail1">@ResourceWeb.LBNearestLandmark</label>
+                                    <input id="landmark" asp-for="@Model.ShippingAddresseClint.NearestLandmark" type="text" placeholder="@ResourceWeb.LBNearestLandmark ...." class="form-control" maxlength="300">
+                                    <span asp-validation-for="@Model.ShippingAddresseClint.NearestLandmark" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="row small-spacing">
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="@Model.ShippingAddresseClint.IdShippingPrices" for="exampleInputEmail1">@ResourceWeb.LbNikeNAme</label>
+                                    <select id="nike-name-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdShippingPrices" asp-items="@(new SelectList(ViewBag.ShippingPrice, "IdShipping", "NikeNAme"))">
+                                        <option value="">-- Select Nickname --</option>
+                                    </select>
+                                    <span asp-validation-for="@Model.ShippingAddresseClint.IdShippingPrices" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">@ResourceWeb.LbCoPricePerkgUnder10</label>
+                                    <input id="price-under-10" type="text" placeholder="@ResourceWeb.LbCoPricePerkgUnder10 ...." class="form-control" maxlength="300" readonly>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">@ResourceWeb.LbCoPricePerkgAbove10</label>
+                                    <input id="price-above-10" type="text" placeholder="@ResourceWeb.LbCoPricePerkgAbove10 ...." class="form-control" maxlength="300" readonly>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="row small-spacing">
+
+
+
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" for="exampleInputEmail1">@ResourceWeb.LbClintPricePerkgUnder10</label>
+                                    <input id="shipping-under-10" asp-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" type="text" placeholder="@ResourceWeb.LbClintPricePerkgUnder10 ...." class="form-control" maxlength="300">
+                                    <span asp-validation-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" for="exampleInputEmail1">@ResourceWeb.LbClintPricePerkgAbove10</label>
+                                    <input id="shipping-above-10" asp-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" type="text" placeholder="@ResourceWeb.LbClintPricePerkgAbove10 ...." class="form-control" maxlength="300">
+                                    <span asp-validation-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="row small-spacing">
+
+                            <div class="col-12 col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="@Model.ShippingAddresseClint.IdTypeSystemDelivery" for="exampleInputEmail1">@ResourceWeb.LbTypeSystem</label>
+                                    <select id="type-system-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdTypeSystemDelivery" asp-items="@(new SelectList(ViewBag.TypeSystemDelivery, "IdTypeSystemDelivery", "TypeSystemDelivery"))">
+                                    </select>
+                                    <span asp-validation-for="@Model.ShippingAddresseClint.IdTypeSystemDelivery" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="row small-spacing">
+                            <div class="col-12 col-sm-3">
+                                <div class="form-group">
+                                    <label asp-for="@Model.ShippingAddresseClint.IdCityDeliveryTariffs" for="exampleInputEmail1">@ResourceWeb.LbdescriptioncityType</label>
+                                    <select id="delivery-tarrif-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdCityDeliveryTariffs" asp-items="@(new SelectList(ViewBag.CityDeliveryTariffs, "IdCityDeliveryTariffs", "TitleShipping"))">
+                                        <option value="">-- Select --</option>
+                                    </select>
+                                    <span asp-validation-for="@Model.ShippingAddresseClint.IdCityDeliveryTariffs" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-3">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">@ResourceWeb.LbCompanyDelivery</label>
+                                    <input id="delivery-company" type="text" placeholder="@ResourceWeb.LbCompanyDelivery ...." class="form-control" maxlength="300" readonly>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-3">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">@ResourceWeb.LbClintDelivery</label>
+                                    <input id="delivery-client" type="text" placeholder="@ResourceWeb.LbClintDelivery ...." class="form-control" maxlength="300" readonly>
+                                    <span class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="col-12 col-sm-3">
+                                <div class="form-group">
+                                    <label asp-for="@Model.ShippingAddresseClint.DeliveryPriceClint" for="exampleInputEmail1">@ResourceWeb.LbClintDelivery</label>
+                                    <input id="delivery-customer" asp-for="@Model.ShippingAddresseClint.DeliveryPriceClint" type="text" placeholder="@ResourceWeb.LbClintDelivery ...." class="form-control" maxlength="300">
+                                    <span asp-validation-for="@Model.ShippingAddresseClint.DeliveryPriceClint" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="row small-spacing">
+
+                            <div class="col-12 col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="@Model.ShippingAddresseClint.IdCurrenciesExchangeRates" for="exampleInputEmail1">@ResourceWeb.LbCountry</label>
+                                    <select id="type-system-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdCurrenciesExchangeRates" asp-items="@(new SelectList(ViewBag.Currenc, "IdCurrenciesExchangeRates", "Country"))">
+                                    </select>
+                                    <span asp-validation-for="@Model.ShippingAddresseClint.IdCurrenciesExchangeRates" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="row small-spacing">
+
+                            <div class="col-12 col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="@Model.ShippingAddresseClint.Description" for="exampleInputEmail1">@ResourceWeb.LBDescriptionAll</label>
+                                    <textarea id="delivery-price-clint" asp-for="@Model.ShippingAddresseClint.Description" type="text" placeholder="@ResourceWeb.LbDescription ...." class="form-control" rows="8"></textarea>
+                                    <span asp-validation-for="@Model.ShippingAddresseClint.Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkbox margin-bottom-20">
+                        <div class="switch success"><input id="dealing-status" type="checkbox" asp-for="@Model.ShippingAddresseClint.Active" id="switch-2" checked="checked"><label for="switch-2">@ResourceWeb.LbActive</label></div>
+                    </div>
+                    <div class="checkbox margin-bottom-20">
+                        <div class="switch success"><input type="checkbox" asp-for="@Model.ShippingAddresseClint.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWeb.lbCurrentState</label></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
+                </form>
+            </div>
+        </div>
 </div>
 
 @section Scripts {
@@ -68,36 +331,193 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
     <script src="~/Admin/assets/plugin/multiselect/multiselect.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <script>
-        $(document).ready(function () {
-            $('#phoneSearchForm').on('submit', function (e) {
-                e.preventDefault(); // Prevent default form submission
+        // $(document).ready(function () {
+        //     $('#phoneSearchForm').on('submit', function (e) {
+        //         e.preventDefault(); // Prevent default form submission
 
-                var phoneNumber = $('#phoneNo').val();
-                $.ajax({
-                    url: '@Url.Action("GitPhouneNumber", "CheckCustmer", new { area = "Admin" })',
-                    type: 'POST',
-                    data: { PhoneNumber: phoneNumber },
-                    success: function (response) {
-                        console.log('Response Received:', response);
+        //         var phoneNumber = $('#phoneNo').val();
+        //         $.ajax({
+        //             url: '@Url.Action("GitPhouneNumber", "CheckCustmer", new { area = "Admin" })',
+        //             type: 'POST',
+        //             data: { PhoneNumber: phoneNumber },
+        //             success: function (response) {
+        //                 console.log('Response Received:', response);
 
-                        if (response.success) {
-                            const description = response.description || 'No description available';
-                            $('#shippingDescription').val(description);
-                            $('#shippingDescription').closest('.col-lg-6').show(); // Display the textarea
-                            $('#errorMessage').text('');
-                        } else {
-                            $('#shippingDescription').closest('.col-lg-6').hide(); // Hide the textarea if the phone number is not found
-                            $('#errorMessage').text(response.message || 'Phone number not found');
+        //                 if (response.success) {
+        //                     const description = response.description || 'No description available';
+        //                     $('#shippingDescription').val(description);
+        //                     $('#shippingDescription').closest('.col-lg-6').show(); // Display the textarea
+        //                     $('#errorMessage').text('');
+        //                 } else {
+        //                     $('#shippingDescription').closest('.col-lg-6').hide(); // Hide the textarea if the phone number is not found
+        //                     $('#errorMessage').text(response.message || 'Phone number not found');
+        //                 }
+        //             },
+        //             error: function () {
+        //                 $('#shippingDescription').closest('.col-lg-6').hide(); // Hide the textarea if there was an error
+        //                 $('#errorMessage').text('An error occurred while processing your request.');
+        //             }
+        //         });
+        //     });
+        // });
+
+            $(document).ready(function () {
+                $('#phoneSearchForm').on('submit', function (e) {
+                    e.preventDefault(); // Prevent default form submission
+
+                    var phoneNumber = $('#phoneNo').val();
+                    $.ajax({
+                        url: '@Url.Action("GitPhouneNumber", "CheckCustmer", new { area = "Admin" })',
+                        type: 'POST',
+                        data: { PhoneNumber: phoneNumber },
+                        success: function (response) {
+                            console.log('Response Received:', response);
+
+                            if (response && response.success) {
+                                const description = response.description || 'No description available';
+                                $('#shippingDescription').val(description);
+                                $('#shippingDescription').closest('.col-lg-6').show(); // Display the textarea
+                                $('#errorMessage').text('');
+                            } else {
+                                // SweetAlert for description not found
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'No Description Found',
+                                    text: 'No description found for this phone number. Please add a new one.',
+                                    showConfirmButton: false,
+                                    timer: 1000 // 2 seconds delay
+                                }).then(() => {
+                                    // Open the modal after the SweetAlert
+                                    $('#customModal').show();
+                                });
+                            }
+                        },
+                        error: function () {
+                            $('#shippingDescription').closest('.col-lg-6').hide(); // Hide the textarea if there was an error
+                            $('#errorMessage').text('An error occurred while processing your request.');
                         }
-                    },
-                    error: function () {
-                        $('#shippingDescription').closest('.col-lg-6').hide(); // Hide the textarea if there was an error
-                        $('#errorMessage').text('An error occurred while processing your request.');
+                    });
+                });
+
+                // Function to close the modal
+                function closeModal() {
+                    $('#customModal').hide();
+                }
+
+                // Attach the closeModal function to the close button
+                $('.close-modal').on('click', closeModal);
+            });
+
+            $("#url").val(window.location.href);
+            $(document).ready(function () {
+                $('#city-select').change(function () {
+                    var cityId = $(this).val();
+                    if (cityId) {
+                        $.getJSON('@Url.Action("GetAreasByCity", "ShippingAddresseClint")', { cityId: cityId }, function (data) {
+                            var $areaSelect = $('#area-select');
+                            $areaSelect.empty();
+                            $.each(data, function (index, item) {
+                                $areaSelect.append($('<option>', {
+                                    value: item.id,
+                                    text: item.description
+                                }));
+                            });
+                        });
+                    } else {
+                        $('#area-select').empty();
                     }
                 });
             });
-        });
+            $(document).ready(function () {
+                $('#nike-name-select').change(function () {
+                    console.log('Nike name changed');  // Check if the event is firing
+
+                    var shippingPriceId = $(this).val();
+                    console.log('Selected Shipping Price ID:', shippingPriceId);  // Log the selected ID
+
+                    if (shippingPriceId) {
+                        var url = '@Url.Action("GetShippingPricesByNikeName", "ShippingAddresseClint", new { area = "Admin" })';
+                        console.log('Request URL:', url);  // Log the request URL
+
+                        $.getJSON(url, { shippingPriceId: shippingPriceId }, function (data) {
+                            console.log('Received Data:', data);  // Log the received data
+
+                            if (data) {
+                                $('#price-under-10').val(data.coPricePerkgUnder10);
+                                $('#price-above-10').val(data.coPricePerkgAbove10);
+                            } else {
+                                console.log('No data received or data is null');
+                            }
+                        }).fail(function (jqxhr, textStatus, error) {  // Handle errors
+                            console.error('Request Failed:', textStatus, error);
+                        });
+                    } else {
+                        console.log('No Shipping Price ID selected');
+                    }
+                });
+            });
+            $(document).ready(function () {
+                $('#delivery-tarrif-select').change(function () {
+                    console.log('Delivery name changed');  // Check if the event is firing
+
+                    var typeSystemId = $(this).val();
+                    console.log('Selected Shipping Price ID:', typeSystemId);  // Log the selected ID
+
+                    if (typeSystemId) {
+                        var url = '@Url.Action("GetDeliveryDetailsByTypeSystem", "ShippingAddresseClint", new { area = "Admin" })';
+                        console.log('Request URL:', url);  // Log the request URL
+
+                        $.getJSON(url, { typeSystemId: typeSystemId }, function (data) {
+                            console.log('Received Data:', data);  // Log the received data
+
+                            if (data) {
+                                $('#delivery-company').val(data.companyPricing);
+                                $('#delivery-client').val(data.deliveryPriceClint);
+                            } else {
+                                console.log('No data received or data is null');
+                            }
+                        }).fail(function (jqxhr, textStatus, error) {  // Handle errors
+                            console.error('Request Failed:', textStatus, error);
+                        });
+                    } else {
+                        console.log('No Shipping Price ID selected');
+                    }
+                });
+            });
+            $(document).ready(function () {
+                function updateDeliveryPriceClint() {
+                    // Clear the existing value before updating
+                    $('#delivery-price-clint').val('');
+
+                    // Get the text of the selected option for Clint Name
+                    var clintName = $('#clintName option:selected').text() || 'N/A';
+                    var city = $('#city-select option:selected').text() || 'N/A';
+                    var area = $('#area-select option:selected').text() || 'N/A';
+                    var landmark = $('#landmark').val() || 'N/A';
+                    var nikeName = $('#nike-name-select option:selected').text() || 'N/A';
+                    var under10 = $('#shipping-under-10').val() || 'N/A';
+                    var above10 = $('#shipping-above-10').val() || 'N/A';
+                    var system = $('#type-system-select option:selected').text() || 'N/A';
+                    var localDescription = $('#local-delivery-description').val() || 'N/A';
+                    var dealingStatus = $('#dealing-status').val() || 'N/A';
+                    var deliveryCustomer = $('#delivery-customer').val() || 'N/A';
+                    var exchangePrice = $('#type-system-select option:selected').val() || 'N/A';
+
+                    // Combine the values in the correct order
+                    var combined = `Clint Name: ${clintName} -- City Name: ${city} -- Area Name: ${area} -- Landmark: ${landmark} -- Customer shipping price is less than 10: ${under10} -- Customer shipping price is more than 10: ${above10} -- Nick name: ${nikeName} -- System: ${system} -- Delivery price to the customer: ${deliveryCustomer} -- exchange: ${exchangePrice} -- Dealing status: ${dealingStatus}`;
+
+                    // Set the combined string to the delivery price field
+                    $('#delivery-price-clint').val(combined);
+                }
+
+                // Attach the function to the change and input events
+                $('#clintName, #city-select, #area-select, #nike-name-select, #type-system-select').change(updateDeliveryPriceClint);
+                $('#description, #landmark, #price-under-10, #price-above-10, #local-delivery-description, #dealingStatus, #deliveryCustomer, #exchangePrice').on('input', updateDeliveryPriceClint);
+            });
+
     </script>
 }
