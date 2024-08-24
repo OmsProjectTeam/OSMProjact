@@ -33,7 +33,7 @@
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group">
                                             <label asp-for="@Model.ShippingAddresseClint.IdUser" for="exampleInputEmail1">@ResourceWeb.LbDescriptionClint</label>
-                                            <select id="merchant-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdUser" asp-items="@(new SelectList(ViewBag.user, "Id", "Name"))">
+                                            <select id="clintName" class="form-control" asp-for="@Model.ShippingAddresseClint.IdUser" asp-items="@(new SelectList(ViewBag.user, "Id", "Name"))">
                                             </select>
                                             <span asp-validation-for="@Model.ShippingAddresseClint.IdUser" class="text-danger"></span>
                                         </div>
@@ -62,7 +62,7 @@
                                     <div class="col-12 col-sm-12">
                                         <div class="form-group">
                                             <label asp-for="@Model.ShippingAddresseClint.NearestLandmark" for="exampleInputEmail1">@ResourceWeb.LBNearestLandmark</label>
-                                            <input asp-for="@Model.ShippingAddresseClint.NearestLandmark" type="text" placeholder="@ResourceWeb.LBNearestLandmark ...." class="form-control" maxlength="300">
+                                            <input id="landmark" asp-for="@Model.ShippingAddresseClint.NearestLandmark" type="text" placeholder="@ResourceWeb.LBNearestLandmark ...." class="form-control" maxlength="300">
                                             <span asp-validation-for="@Model.ShippingAddresseClint.NearestLandmark" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -354,7 +354,8 @@
                 // Clear the existing value before updating
                 $('#delivery-price-clint').val('');
 
-                var clintName = $('#description').val() || 'N/A';
+                // Get the text of the selected option for Clint Name
+                var clintName = $('#clintName option:selected').text() || 'N/A';
                 var city = $('#city-select option:selected').text() || 'N/A';
                 var area = $('#area-select option:selected').text() || 'N/A';
                 var landmark = $('#landmark').val() || 'N/A';
@@ -363,17 +364,18 @@
                 var above10 = $('#price-above-10').val() || 'N/A';
                 var system = $('#type-system-select option:selected').text() || 'N/A';
                 var localDescription = $('#local-delivery-description').val() || 'N/A';
-                var deliveryPriceClint = ''; // Start with an empty string
 
-                var combined = `Clint Name: ${clintName} -- City Name: ${city} -- Area Name: ${area} -- Landmark: ${landmark} -- Nick name: ${nikeName} -- Customer shipping price is less than 10: ${under10} -- Customer shipping price is more than 10: ${above10} -- System: ${system} -- Description of the local delivery system: ${localDescription} -- Delivery price to the customer: ${deliveryPriceClint}`;
+                // Combine the values in the correct order
+                var combined = `Clint Name: ${clintName} -- City Name: ${city} -- Area Name: ${area} -- Landmark: ${landmark} -- Nick name: ${nikeName} -- System: ${system}`;
 
+                // Set the combined string to the delivery price field
                 $('#delivery-price-clint').val(combined);
             }
 
-            $('#city-select, #area-select, #nike-name-select, #type-system-select').change(updateDeliveryPriceClint);
+            // Attach the function to the change and input events
+            $('#clintName, #city-select, #area-select, #nike-name-select, #type-system-select').change(updateDeliveryPriceClint);
             $('#description, #landmark, #price-under-10, #price-above-10, #local-delivery-description').on('input', updateDeliveryPriceClint);
         });
-
 
     </script>
 }
