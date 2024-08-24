@@ -9,8 +9,8 @@
     <div class="box-content">
         <ul class="list-inline">
             <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWebAr.LBAddShippingAddresseClint</button></a></li>/
-            <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="IndexAr"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">لوحة التحكم</button></a></li>/
-            <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="IndexAr"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">الرئيسية</button></a></li>
+            <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
             <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
             <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
         </ul>
@@ -21,7 +21,7 @@
                     <h4 class="box-title">@ResourceWebAr.LBEmageSise</h4>
 
                     <div class="card-content">
-                        <form role="form" method="post" asp-controller="ShippingAddresseClint" asp-action="SaveAr" enctype="multipart/form-data">
+                        <form role="form" method="post" asp-controller="ShippingAddresseClint" asp-action="Save" enctype="multipart/form-data">
                             <div class="form-group">
                                 <input type="hidden" asp-for="@Model.ShippingAddresseClint.DataEntry" class="form-control" value="@User.Identity.Name">
                                 <input type="hidden" asp-for="@Model.ShippingAddresseClint.IdShippingAddresseClint" class="form-control">
@@ -34,7 +34,7 @@
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group">
                                             <label asp-for="@Model.ShippingAddresseClint.IdUser" for="exampleInputEmail1">@ResourceWebAr.LbDescriptionClint</label>
-                                            <select id="merchant-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdUser" asp-items="@(new SelectList(ViewBag.user, "Id", "Name"))">
+                                            <select id="clintName" class="form-control" asp-for="@Model.ShippingAddresseClint.IdUser" asp-items="@(new SelectList(ViewBag.user, "Id", "Name"))">
                                             </select>
                                             <span asp-validation-for="@Model.ShippingAddresseClint.IdUser" class="text-danger"></span>
                                         </div>
@@ -63,7 +63,7 @@
                                     <div class="col-12 col-sm-12">
                                         <div class="form-group">
                                             <label asp-for="@Model.ShippingAddresseClint.NearestLandmark" for="exampleInputEmail1">@ResourceWebAr.LBNearestLandmark</label>
-                                            <input asp-for="@Model.ShippingAddresseClint.NearestLandmark" type="text" placeholder="@ResourceWebAr.LBNearestLandmark ...." class="form-control" maxlength="300">
+                                            <input id="landmark" asp-for="@Model.ShippingAddresseClint.NearestLandmark" type="text" placeholder="@ResourceWebAr.LBNearestLandmark ...." class="form-control" maxlength="300">
                                             <span asp-validation-for="@Model.ShippingAddresseClint.NearestLandmark" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -108,7 +108,7 @@
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label asp-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" for="exampleInputEmail1">@ResourceWebAr.LbClintPricePerkgUnder10</label>
-                                            <input asp-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" type="text" placeholder="@ResourceWebAr.LbClintPricePerkgUnder10 ...." class="form-control" maxlength="300">
+                                            <input id="shipping-under-10" asp-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" type="text" placeholder="@ResourceWebAr.LbClintPricePerkgUnder10 ...." class="form-control" maxlength="300">
                                             <span asp-validation-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" class="text-danger"></span>
 
                                         </div>
@@ -117,7 +117,7 @@
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label asp-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" for="exampleInputEmail1">@ResourceWebAr.LbClintPricePerkgAbove10</label>
-                                            <input asp-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" type="text" placeholder="@ResourceWebAr.LbClintPricePerkgAbove10 ...." class="form-control" maxlength="300">
+                                            <input id="shipping-above-10" asp-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" type="text" placeholder="@ResourceWebAr.LbClintPricePerkgAbove10 ...." class="form-control" maxlength="300">
                                             <span asp-validation-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -169,7 +169,7 @@
                                     <div class="col-12 col-sm-3">
                                         <div class="form-group">
                                             <label asp-for="@Model.ShippingAddresseClint.DeliveryPriceClint" for="exampleInputEmail1">@ResourceWebAr.LbClintDelivery</label>
-                                            <input asp-for="@Model.ShippingAddresseClint.DeliveryPriceClint" type="text" placeholder="@ResourceWebAr.LbClintDelivery ...." class="form-control" maxlength="300">
+                                            <input id="delivery-customer" asp-for="@Model.ShippingAddresseClint.DeliveryPriceClint" type="text" placeholder="@ResourceWebAr.LbClintDelivery ...." class="form-control" maxlength="300">
                                             <span asp-validation-for="@Model.ShippingAddresseClint.DeliveryPriceClint" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -203,7 +203,7 @@
                                 </div>
                             </div>
                             <div class="checkbox margin-bottom-20">
-                                <div class="switch success"><input type="checkbox" asp-for="@Model.ShippingAddresseClint.Active" id="switch-2" checked="checked"><label for="switch-2">@ResourceWebAr.LbActive</label></div>
+                                <div class="switch success"><input id="dealing-status" type="checkbox" asp-for="@Model.ShippingAddresseClint.Active" id="switch-2" checked="checked"><label for="switch-2">@ResourceWebAr.LbActive</label></div>
                             </div>
                             <div class="checkbox margin-bottom-20">
                                 <div class="switch success"><input type="checkbox" asp-for="@Model.ShippingAddresseClint.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWebAr.lbCurrentState</label></div>
@@ -258,26 +258,6 @@
         };
 
         $("#url").val(window.location.href);
-        // JavaScript لتحميل الضواحي عند تغيير المدينة
-        // $(document).ready(function () {
-        //     $('#city-select').change(function () {
-        //         var cityId = $(this).val();
-        //         if (cityId) {
-        //             $.getJSON('@Url.Action("GetAreasByCity", "CityDeliveryTariffs")', { cityId: cityId }, function (data) {
-        //                 var $areaSelect = $('#area-select');
-        //                 $areaSelect.empty();
-        //                 $.each(data, function (index, item) {
-        //                     $areaSelect.append($('<option>', {
-        //                         value: item.id,
-        //                         text: item.description
-        //                     }));
-        //                 });
-        //             });
-        //         } else {
-        //             $('#area-select').empty();
-        //         }
-        //     });
-        // });
         $(document).ready(function () {
             $('#city-select').change(function () {
                 var cityId = $(this).val();
@@ -355,20 +335,34 @@
         });
         $(document).ready(function () {
             function updateDeliveryPriceClint() {
-                var description = $('#description').val();
-                var city = $('#city-select option:selected').text();
-                var area = $('#area-select option:selected').text();
-                var landmark = $('#landmark').val();
-                var nikeName = $('#nike-name-select option:selected').text();
-                var under10 = $('#price-under-10').val();
-                var above10 = $('#price-above-10').val();
-                var system = $('#type-system-select option:selected').text();
-                var localDescription = $('#local-delivery-description').val();
-                var combined = `${description} ${city} ${area} ${landmark} ${nikeName} ${under10} ${above10} ${system} ${localDescription}`;
+                // Clear the existing value before updating
+                $('#delivery-price-clint').val('');
+
+                // Get the text of the selected option for Clint Name
+                var clintName = $('#clintName option:selected').text() || 'N/A';
+                var city = $('#city-select option:selected').text() || 'N/A';
+                var area = $('#area-select option:selected').text() || 'N/A';
+                var landmark = $('#landmark').val() || 'N/A';
+                var nikeName = $('#nike-name-select option:selected').text() || 'N/A';
+                var under10 = $('#shipping-under-10').val() || 'N/A';
+                var above10 = $('#shipping-above-10').val() || 'N/A';
+                var system = $('#type-system-select option:selected').text() || 'N/A';
+                var localDescription = $('#local-delivery-description').val() || 'N/A';
+                var dealingStatus = $('#dealing-status').val() || 'N/A';
+                var deliveryCustomer = $('#delivery-customer').val() || 'N/A';
+                var exchangePrice = $('#type-system-select option:selected').val() || 'N/A';
+
+                // Combine the values in the correct order
+                var combined = `Clint Name: ${clintName} -- City Name: ${city} -- Area Name: ${area} -- Landmark: ${landmark} -- Customer shipping price is less than 10: ${under10} -- Customer shipping price is more than 10: ${above10} -- Nick name: ${nikeName} -- System: ${system} -- Delivery price to the customer: ${deliveryCustomer} -- exchange: ${exchangePrice} -- Dealing status: ${dealingStatus}`;
+
+                // Set the combined string to the delivery price field
                 $('#delivery-price-clint').val(combined);
             }
-            $('#city-select, #area-select, #nike-name-select, #type-system-select').change(updateDeliveryPriceClint);
-            $('#description, #landmark, #price-under-10, #price-above-10, #local-delivery-description').on('input', updateDeliveryPriceClint);
+
+            // Attach the function to the change and input events
+            $('#clintName, #city-select, #area-select, #nike-name-select, #type-system-select').change(updateDeliveryPriceClint);
+            $('#description, #landmark, #price-under-10, #price-above-10, #local-delivery-description, #dealingStatus, #deliveryCustomer, #exchangePrice').on('input', updateDeliveryPriceClint);
         });
+
     </script>
 }
