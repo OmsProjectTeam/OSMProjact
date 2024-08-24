@@ -118,7 +118,6 @@
                                             <label asp-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" for="exampleInputEmail1">@ResourceWeb.LbClintPricePerkgAbove10</label>
                                             <input asp-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" type="text" placeholder="@ResourceWeb.LbClintPricePerkgAbove10 ...." class="form-control" maxlength="300">
                                             <span asp-validation-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" class="text-danger"></span>
-
                                         </div>
                                     </div>
 
@@ -175,30 +174,36 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="card-content">
                                 <div class="row small-spacing">
 
                                     <div class="col-12 col-sm-12">
                                         <div class="form-group">
-                                            <label asp-for="@Model.ShippingAddresseClint.Description" for="exampleInputEmail1">@ResourceWeb.LbClintDelivery</label>
-                                            <textarea id="delivery-price-clint" asp-for="@Model.ShippingAddresseClint.Description" type="text" placeholder="@ResourceWeb.LbClintDelivery ...." class="form-control"rows="8"></textarea>
+                                            <label asp-for="@Model.ShippingAddresseClint.IdCurrenciesExchangeRates" for="exampleInputEmail1">@ResourceWeb.LbCountry</label>
+                                            <select id="type-system-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdCurrenciesExchangeRates" asp-items="@(new SelectList(ViewBag.Currenc, "IdCurrenciesExchangeRates", "Country"))">
+                                            </select>
+                                            <span asp-validation-for="@Model.ShippingAddresseClint.IdCurrenciesExchangeRates" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="row small-spacing">
+
+                                    <div class="col-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.ShippingAddresseClint.Description" for="exampleInputEmail1">@ResourceWeb.LBDescriptionAll</label>
+                                            <textarea id="delivery-price-clint" asp-for="@Model.ShippingAddresseClint.Description" type="text" placeholder="@ResourceWeb.LbDescription ...." class="form-control" rows="8"></textarea>
                                             <span asp-validation-for="@Model.ShippingAddresseClint.Description" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-
-
                             <div class="checkbox margin-bottom-20">
                                 <div class="switch success"><input type="checkbox" asp-for="@Model.ShippingAddresseClint.Active" id="switch-2" checked="checked"><label for="switch-2">@ResourceWeb.LbActive</label></div>
                             </div>
-
-
-
                             <div class="checkbox margin-bottom-20">
                                 <div class="switch success"><input type="checkbox" asp-for="@Model.ShippingAddresseClint.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWeb.lbCurrentState</label></div>
                             </div>
@@ -210,7 +215,6 @@
         </div>
     </div>
 </div>
-
 @section Scripts {
     <script>
         var loadFile = function (event) {
@@ -253,7 +257,6 @@
         };
 
         $("#url").val(window.location.href);
-
         // JavaScript لتحميل الضواحي عند تغيير المدينة
         // $(document).ready(function () {
         //     $('#city-select').change(function () {
@@ -293,7 +296,6 @@
                 }
             });
         });
-
         $(document).ready(function () {
             $('#nike-name-select').change(function () {
                 console.log('Nike name changed');  // Check if the event is firing
@@ -322,7 +324,6 @@
                 }
             });
         });
-
         $(document).ready(function () {
             $('#delivery-tarrif-select').change(function () {
                 console.log('Delivery name changed');  // Check if the event is firing
@@ -351,8 +352,6 @@
                 }
             });
         });
-
-
         $(document).ready(function () {
             function updateDeliveryPriceClint() {
                 var description = $('#description').val();
@@ -364,12 +363,9 @@
                 var above10 = $('#price-above-10').val();
                 var system = $('#type-system-select option:selected').text();
                 var localDescription = $('#local-delivery-description').val();
-
                 var combined = `${description} ${city} ${area} ${landmark} ${nikeName} ${under10} ${above10} ${system} ${localDescription}`;
-
                 $('#delivery-price-clint').val(combined);
             }
-
             $('#city-select, #area-select, #nike-name-select, #type-system-select').change(updateDeliveryPriceClint);
             $('#description, #landmark, #price-under-10, #price-above-10, #local-delivery-description').on('input', updateDeliveryPriceClint);
         });

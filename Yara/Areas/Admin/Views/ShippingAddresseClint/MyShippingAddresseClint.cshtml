@@ -89,8 +89,9 @@
                                                                      style="width:100px; height:100px">
                                                             </td>
                                                             <td class="truncate-50">@item.Name</td>
-                                                            <td class="truncate-50">@item.Email</td>
                                                             <td class="truncate-50">@item.PhoneNumber</td>
+                                                            <td class="truncate-50">@item.Email</td>
+                                                           
                                                             <td class="truncate-50">@item.CityName</td>
                                                             <td class="truncate-50">@item.AreaName</td>
                                                             <td class="truncate-50">@item.NearestLandmark</td>
@@ -170,26 +171,24 @@
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbPhoto</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbName</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTypeSystem</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTitleShipping</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbCountry</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.Lbcode</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbCoPricePerkgUnder10</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbCoPricePerkgAbove10</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbTitleShipping</th>
-                                                        
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.lbDeliveryPriceClint</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbCompanydeliveryprice</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbLbDefaultdeliveryprice</th>                                                       
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.lbPrivatedeliveryprice</th>
                                                 <tfoot>
                                                     <tr>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbPhoto</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbName</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbTypeSystem</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbTitleShipping</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbCountry</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.Lbcode</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbCoPricePerkgUnder10</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbCoPricePerkgAbove10</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbTitleShipping</th>
-                                                    
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.lbDeliveryPriceClint</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbCompanydeliveryprice</th>
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbLbDefaultdeliveryprice</th>                                                                                                    
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.lbPrivatedeliveryprice</th>
                                                 </tfoot>
                                                 <tbody>
                                                             @foreach (var item in Model.ListViewShippingAddresseClint)
@@ -203,14 +202,12 @@
                                                             </td>
                                                             <td class="truncate-50">@item.Name</td>
                                                             <td class="truncate-50">@item.TypeSystemDelivery</td>
-                                                            <td class="truncate-50">@item.CurrencyName</td>
-                                                            <td class="truncate-50">@item.CurrencyCode</td>
-                                                            <td class="truncate-50">@item.ClintPricePerkgUnder</td>
-                                                            <td class="truncate-50">@item.ClintPricePerkgAbove</td>
                                                             <td class="truncate-50">@item.TitleShipping</td>
-                                                            
-                                                            <td class="truncate-50">@item.DeliveryPriceClint</td>
-                                                           
+                                                            <td class="truncate-50">@item.CurrencyNameDelvry</td>
+                                                            <td class="truncate-50">@item.CodeNameDelnry</td>
+                                                            <td class="truncate-50">@item.CompanyDelivery</td>
+                                                            <td class="truncate-50">@item.ClintDelivery</td>                                                                                                                     
+                                                            <td class="truncate-50">@item.DeliveryPriceClint</td>                                                          
                                                         </tr>
                                                             }
                                                 </tbody>

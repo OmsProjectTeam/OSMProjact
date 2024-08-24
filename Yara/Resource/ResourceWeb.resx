@@ -276,6 +276,9 @@
   <data name="LbCompanyDelivery" xml:space="preserve">
     <value>Delivery company pricing</value>
   </data>
+  <data name="LbCompanydeliveryprice" xml:space="preserve">
+    <value>Company delivery price</value>
+  </data>
   <data name="LbCompanyDescription" xml:space="preserve">
     <value>Company description</value>
   </data>
@@ -485,6 +488,9 @@
   </data>
   <data name="LBLbAreaName" xml:space="preserve">
     <value>Area Name</value>
+  </data>
+  <data name="LbLbDefaultdeliveryprice" xml:space="preserve">
+    <value>Default delivery price</value>
   </data>
   <data name="LBLbRoles" xml:space="preserve">
     <value>Roles</value>
@@ -740,6 +746,9 @@
   </data>
   <data name="LBPricingSystem" xml:space="preserve">
     <value>Pricing System</value>
+  </data>
+  <data name="lbPrivatedeliveryprice" xml:space="preserve">
+    <value>Private delivery price</value>
   </data>
   <data name="LBProfile" xml:space="preserve">
     <value>Profile</value>
