@@ -335,36 +335,6 @@
 
 
     <script>
-        // $(document).ready(function () {
-        //     $('#phoneSearchForm').on('submit', function (e) {
-        //         e.preventDefault(); // Prevent default form submission
-
-        //         var phoneNumber = $('#phoneNo').val();
-        //         $.ajax({
-        //             url: '@Url.Action("GitPhouneNumber", "CheckCustmer", new { area = "Admin" })',
-        //             type: 'POST',
-        //             data: { PhoneNumber: phoneNumber },
-        //             success: function (response) {
-        //                 console.log('Response Received:', response);
-
-        //                 if (response.success) {
-        //                     const description = response.description || 'No description available';
-        //                     $('#shippingDescription').val(description);
-        //                     $('#shippingDescription').closest('.col-lg-6').show(); // Display the textarea
-        //                     $('#errorMessage').text('');
-        //                 } else {
-        //                     $('#shippingDescription').closest('.col-lg-6').hide(); // Hide the textarea if the phone number is not found
-        //                     $('#errorMessage').text(response.message || 'Phone number not found');
-        //                 }
-        //             },
-        //             error: function () {
-        //                 $('#shippingDescription').closest('.col-lg-6').hide(); // Hide the textarea if there was an error
-        //                 $('#errorMessage').text('An error occurred while processing your request.');
-        //             }
-        //         });
-        //     });
-        // });
-
             $(document).ready(function () {
                 $('#phoneSearchForm').on('submit', function (e) {
                     e.preventDefault(); // Prevent default form submission
@@ -412,6 +382,7 @@
                 $('.close-modal').on('click', closeModal);
             });
 
+            // script for handle modal form
             $("#url").val(window.location.href);
             $(document).ready(function () {
                 $('#city-select').change(function () {
