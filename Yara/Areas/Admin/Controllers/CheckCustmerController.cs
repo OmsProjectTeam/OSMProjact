@@ -20,13 +20,21 @@ namespace Yara.Areas.Admin.Controllers
         public async Task<IActionResult> GitPhouneNumber(string PhoneNumber)
         {
             // البحث عن رقم الهاتف في جدول VwUsers
-            var user = await _context.VwUsers.FirstOrDefaultAsync(u => u.PhoneNumber == PhoneNumber);
+            var user = await _context.ViewShippingAddresseClint.FirstOrDefaultAsync(u => u.PhoneNumber == PhoneNumber);
 
             if (user != null)
             {
-                TempData["FAQ"] = "العميل متوفر سيتم توجيهك لصفحة تثبيت العنوان ";
+
+                ViewBag.name=user.Name;
+
+
+                TempData["FAQ"] = "Rayhan Please show all information with the Add New Address button. ";
                 return RedirectToAction("MyCheckCustmer" );
             }
+
+
+
+            ////////////
 
             // البحث عن رقم الهاتف في جدول customers
             var customer = await _context.customers.FirstOrDefaultAsync(c => c.CustMob == PhoneNumber || c.CustMob2 == PhoneNumber);
