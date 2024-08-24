@@ -89,7 +89,38 @@
             </div>
         </div>
 
-    <div class="col-lg-6 col-xs-12">
+    <div class="row small-spacing">
+        <!-- Phone Number Search Box -->
+        <div class="col-lg-6 col-xs-12">
+            <div class="box-content card white">
+                <div class="card-content">
+                    <form role="form" method="post" asp-controller="CheckCustmer" asp-action="GitPhouneNumber" enctype="multipart/form-data" id="phoneSearchForm" data-ajax="true" data-ajax-method="POST" data-ajax-success="onSuccess" data-ajax-failure="onFailure">
+                        <div class="form-group">
+                            <label for="phoneNo" class="control-label">Search Phone Number</label>
+                            <input id="phoneNo" type="text" asp-for="PhoneNumber" placeholder="Enter phone number..." class="form-control" maxlength="15">
+                            <span class="text-danger" id="errorMessage"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Description Box -->
+        <div class="col-lg-6 col-xs-12" id="descriptionBox" style="display: none;">
+            <div class="box-content card white">
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="shippingDescription" class="control-label">@ResourceWeb.LBDescriptionAll</label>
+                        <textarea id="shippingDescription" asp-for="@Model.ShippingAddresseClint.Description" class="form-control" placeholder="@ResourceWeb.LbDescription ...." rows="8"></textarea>
+                        <span asp-validation-for="@Model.ShippingAddresseClint.Description" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">Add New Address</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* <div class="col-lg-6 col-xs-12">
         <div class="box-content card white">
             <div class="card-content">
                 <form role="form" method="post" asp-controller="CheckCustmer" asp-action="GitPhouneNumber" enctype="multipart/form-data" id="phoneSearchForm" data-ajax="true" data-ajax-method="POST" data-ajax-success="onSuccess" data-ajax-failure="onFailure">
@@ -124,13 +155,13 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> *@
 
     <div id="customModal" class="custom-modal">
         <div class="custom-modal-content">
             <div class="custom-modal-header">
                 <span class="close-modal" onclick="closeModal()">&times;</span>
-                <h2>Add New Product</h2>
+                <h2>Add New Customer</h2>
             </div>
             <div class="custom-modal-body">
                 <form role="form" method="post" asp-controller="ShippingAddresseClint" asp-action="Save" enctype="multipart/form-data">
