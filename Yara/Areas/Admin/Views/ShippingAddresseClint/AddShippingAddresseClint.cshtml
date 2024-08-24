@@ -366,7 +366,7 @@
                 var localDescription = $('#local-delivery-description').val() || 'N/A';
                 var dealingStatus = $('#dealing-status').val() || 'N/A';
                 var deliveryCustomer = $('#delivery-customer').val() || 'N/A';
-                var exchangePrice = $('#type-system-select').val() || 'N/A';
+                var exchangePrice = $('#type-system-select option:selected').val() || 'N/A';
 
                 // Combine the values in the correct order
                 var combined = `Clint Name: ${clintName} -- City Name: ${city} -- Area Name: ${area} -- Landmark: ${landmark} -- Customer shipping price is less than 10: ${under10} -- Customer shipping price is more than 10: ${above10} -- Nick name: ${nikeName} -- System: ${system} -- Delivery price to the customer: ${deliveryCustomer} -- exchange: ${exchangePrice} -- Dealing status: ${dealingStatus}`;
