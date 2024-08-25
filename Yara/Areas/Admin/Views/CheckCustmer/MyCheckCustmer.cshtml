@@ -115,47 +115,11 @@
                         <textarea id="shippingDescription" asp-for="@Model.ShippingAddresseClint.Description" class="form-control" placeholder="@ResourceWeb.LbDescription ...." rows="8"></textarea>
                         <span asp-validation-for="@Model.ShippingAddresseClint.Description" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">Add New Address</button>
+                    <button id="addNewAddressButton" type="submit" class="btn btn-primary btn-sm waves-effect waves-light">Add New Address</button>
                 </div>
             </div>
         </div>
     </div>
-    @* <div class="col-lg-6 col-xs-12">
-        <div class="box-content card white">
-            <div class="card-content">
-                <form role="form" method="post" asp-controller="CheckCustmer" asp-action="GitPhouneNumber" enctype="multipart/form-data" id="phoneSearchForm" data-ajax="true" data-ajax-method="POST" data-ajax-success="onSuccess" data-ajax-failure="onFailure">
-                    <div class="row small-spacing">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Search Phone Number</label>
-                                <input id="phoneNo" type="text" asp-for="PhoneNumber" placeholder="Enter phone number..." class="form-control" maxlength="15">
-                                <span class="text-danger"></span>
-                                <span style="color:red"><strong id="errorMessage"></strong></span>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">Search</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-6 col-xs-12" style="display: none;">
-        <div class="box-content card white">
-            <div class="card-content">
-                <div class="row small-spacing">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label asp-for="@Model.ShippingAddresseClint.Description" for="exampleInputEmail1">@ResourceWeb.LBDescriptionAll</label>
-                            <textarea id="shippingDescription" asp-for="@Model.ShippingAddresseClint.Description" type="text" placeholder="@ResourceWeb.LbDescription ...." class="form-control" rows="8"></textarea>
-                            <span asp-validation-for="@Model.ShippingAddresseClint.Description" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">Add New Address</button>
-                </div>
-            </div>
-        </div>
-    </div> *@
 
     <div id="customModal" class="custom-modal">
         <div class="custom-modal-content">
@@ -362,7 +326,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
     <script src="~/Admin/assets/plugin/multiselect/multiselect.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <script>
@@ -388,12 +352,15 @@
                                 Swal.fire({
                                     icon: 'warning',
                                     title: 'No Description Found',
-                                    text: 'No description found for this phone number. Please add a new one.',
-                                    showConfirmButton: false,
-                                    timer: 1000 // 2 seconds delay
-                                }).then(() => {
-                                    // Open the modal after the SweetAlert
-                                    $('#customModal').show();
+                                    text: 'Do you want to add a new address?',
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Yes, add address',
+                                    cancelButtonText: 'No',
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // The user wants to add a new address, open the modal
+                                        $('#customModal').show();
+                                    }
                                 });
                             }
                         },
@@ -411,7 +378,59 @@
 
                 // Attach the closeModal function to the close button
                 $('.close-modal').on('click', closeModal);
+
+                // Open the modal when "Add New Address" button is clicked
+                $('#addNewAddressButton').on('click', function () {
+                    $('#customModal').show();
+                });
             });
+
+            // $(document).ready(function () {
+            //     $('#phoneSearchForm').on('submit', function (e) {
+            //         e.preventDefault(); // Prevent default form submission
+
+            //         var phoneNumber = $('#phoneNo').val();
+            //         $.ajax({
+            //             url: '@Url.Action("GitPhouneNumber", "CheckCustmer", new { area = "Admin" })',
+            //             type: 'POST',
+            //             data: { PhoneNumber: phoneNumber },
+            //             success: function (response) {
+            //                 console.log('Response Received:', response);
+
+            //                 if (response && response.success) {
+            //                     const description = response.description || 'No description available';
+            //                     $('#shippingDescription').val(description);
+            //                     $('#shippingDescription').closest('.col-lg-6').show(); // Display the textarea
+            //                     $('#errorMessage').text('');
+            //                 } else {
+            //                     // SweetAlert for description not found
+            //                     Swal.fire({
+            //                         icon: 'warning',
+            //                         title: 'No Description Found',
+            //                         text: 'No description found for this phone number. Please add a new one.',
+            //                         showConfirmButton: false,
+            //                         timer: 1000 // 2 seconds delay
+            //                     }).then(() => {
+            //                         // Open the modal after the SweetAlert
+            //                         $('#customModal').show();
+            //                     });
+            //                 }
+            //             },
+            //             error: function () {
+            //                 $('#shippingDescription').closest('.col-lg-6').hide(); // Hide the textarea if there was an error
+            //                 $('#errorMessage').text('An error occurred while processing your request.');
+            //             }
+            //         });
+            //     });
+
+            //     // Function to close the modal
+            //     function closeModal() {
+            //         $('#customModal').hide();
+            //     }
+
+            //     // Attach the closeModal function to the close button
+            //     $('.close-modal').on('click', closeModal);
+            // });
 
             // script for handle modal form
             $("#url").val(window.location.href);
