@@ -540,5 +540,27 @@
                 $('#description, #landmark, #price-under-10, #price-above-10, #local-delivery-description, #dealingStatus, #deliveryCustomer, #exchangePrice').on('input', updateDeliveryPriceClint);
             });
 
+            $(document).ready(function () {
+                // Function to open modal and populate client name
+                function openModalWithClientName() {
+                    var clientName = '@TempData["ClientName"]';
+                    if (clientName) {
+                        $('#clintName').val(clientName);
+                    }
+                    $('#customModal').show();
+                }
+
+                // Attach the function to the event when "Add New Address" button is clicked
+                $('#addNewAddressButton').on('click', openModalWithClientName);
+
+                // Function to close the modal
+                function closeModal() {
+                    $('#customModal').hide();
+                }
+
+                // Attach the closeModal function to the close button
+                $('.close-modal').on('click', closeModal);
+            });
+
     </script>
 }

@@ -68,6 +68,8 @@
             ViewBag.user = iUserInformation.GetAllByNameall();
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
             vmodel.ListViewShippingAddresseClint = iShippingAddresseClint.GetAll();
+
+
             if (IdShippingAddresseClint != null)
             {
                 vmodel.ShippingAddresseClint = iShippingAddresseClint.GetById(Convert.ToInt32(IdShippingAddresseClint));
