@@ -67,6 +67,49 @@
             cursor: pointer;
         }
 
+    /* Custom container for description section */
+    .description-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    /* Custom styling for buttons in description */
+    .description-button {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        padding: 8px 12px;
+        text-align: center;
+        font-size: 14px;
+        border-radius: 4px;
+        width: 180px; /* Fixed width for the button */
+        flex-shrink: 0; /* Prevent buttons from shrinking */
+    }
+
+    /* Custom styling for readonly input fields */
+    .description-input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+        margin-left: 10px; /* Space between button and input */
+    }
+
+    /* Align buttons and inputs nicely in rows */
+    .description-row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start; /* Align items to the start of the row */
+        gap: 10px; /* Space between button and input */
+    }
+
+        /* Ensure consistent height */
+        .description-row > * {
+            height: 40px;
+        }
 </style>
 
 
@@ -110,7 +153,7 @@
         <div class="col-lg-6 col-xs-12" id="descriptionBox" style="display: none;">
             <div class="box-content card white">
                 <div class="card-content">
-                    <div class="form-group">
+                    <div class="description-container" id="descriptionContent">
                         <label for="shippingDescription" class="control-label">@ResourceWeb.LBDescriptionAll</label>
                         <textarea id="shippingDescription" asp-for="@Model.ShippingAddresseClint.Description" class="form-control" placeholder="@ResourceWeb.LbDescription ...." rows="8"></textarea>
                         <span asp-validation-for="@Model.ShippingAddresseClint.Description" class="text-danger"></span>
@@ -348,15 +391,36 @@
                             // Split the description by ' -- ' to get each key-value pair
                             let descriptionParts = description.split(' -- ');
 
-                            // Format the description for display
-                            let formattedDescription = descriptionParts.map(part => {
+                            $('#descriptionContent').empty();
+
+                            // Loop through each part and create the button and input
+                            descriptionParts.forEach(part => {
                                 let [label, value] = part.split(':').map(s => s.trim());
-                                return `${label}: ${value}`;
-                            }).join('\n');
+
+                                // Create button element for the label
+                                let labelButton = `<button type="button" class="description-button">${label}</button>`;
+
+                                // Create read-only input field for the value
+                                let valueInput = `<input type="text" class="description-input" value="${value}" readonly style="margin-left: 10px; margin-bottom: 10px;">`;
+
+                                // Append the button and input to the description box
+                                $('#descriptionBox').append(`<div class="description-row">${labelButton}${valueInput}</div>`);
+                            });
+
+                            $('#descriptionBox').show();
+
+                            // Format the description for display
+                            // let formattedDescription = descriptionParts.map(part => {
+                            //     let [label, value] = part.split(':').map(s => s.trim());
+                            //     return `${label}: ${value}`;
+                            // }).join('\n');
+
 
                             // Set the formatted description in the textarea
-                            $('#shippingDescription').val(formattedDescription);
-                            $('#descriptionBox').show(); // Display the textarea
+                            // $('#shippingDescription').val(formattedDescription);
+                            // $('#descriptionBox').show(); // Display the textarea
+
+
                             // $('#shippingDescription').val(description);
                             // $('#shippingDescription').closest('.col-lg-6').show(); // Display the textarea
                             // $('#errorMessage').text('');
