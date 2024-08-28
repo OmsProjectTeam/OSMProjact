@@ -97,6 +97,12 @@
                     Description = phoneNo.Description
                 });
             }
+            else
+            {
+                // func check data custmer 
+                // register py phne nmber in bac ground 
+                //then open nwe address  model 
+            }
             return Json(null);
         }
 
