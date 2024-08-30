@@ -574,6 +574,8 @@
                                             showConfirmButton: false,
                                             timer: 2000 // Auto-close after 2 seconds
                                         }).then(() => {
+                                            // Add the new client to the client dropdown
+                                            $('#clintName').append(new Option(response.name, response.userId, true, true));
                                             // Open the modal after the success message
                                             setTimeout(() => {
                                                 $('#customModal').show();

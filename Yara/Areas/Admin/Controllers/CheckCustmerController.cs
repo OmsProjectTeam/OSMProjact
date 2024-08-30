@@ -256,7 +256,8 @@ namespace Yara.Areas.Admin.Controllers
                 Email = email,
                 Name = fullName,
                 PhoneNumber = PhoneNumber,
-                ImageUser = "default-image-path.jpg"
+                ImageUser = "default-image-path.jpg",
+                ActiveUser = true
             };
 
             try
@@ -275,6 +276,7 @@ namespace Yara.Areas.Admin.Controllers
                         Email = newUser.Email,
                         UserName = newUser.UserName,
                         PhoneNumber = newUser.PhoneNumber,
+                        UserId = newUser.Id,
                         Message = "New customer registered successfully!"
                     });
                 }
