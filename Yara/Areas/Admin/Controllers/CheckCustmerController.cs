@@ -50,7 +50,6 @@ namespace Yara.Areas.Admin.Controllers
             // Search for the phone number in ViewShippingAddresseClint
             var phoneNo = await _context.ViewShippingAddresseClint
                                          .FirstOrDefaultAsync(u => u.PhoneNumber == PhoneNumber);
-
             if (phoneNo != null)
             {
                 // Return the existing data from ViewShippingAddresseClint
@@ -70,20 +69,16 @@ namespace Yara.Areas.Admin.Controllers
                     Currency = phoneNo.CurrencyName,
                     CityDeliveryTariff = phoneNo.IdCityDeliveryTariffs,
                     DealingStatus = phoneNo.CurrentState,
-
                 });
             }
-
             // Search the AspNetUsers table for the phone number
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == PhoneNumber);
-
             if (user != null)
             {
                 // Check if other data is already available
                 bool isDataComplete = !string.IsNullOrEmpty(user.Email) &&
                                       !string.IsNullOrEmpty(user.UserName) &&
                                       !string.IsNullOrEmpty(user.Name);
-
                 if (isDataComplete)
                 {
                     // Data is complete, return the existing user data
@@ -103,9 +98,7 @@ namespace Yara.Areas.Admin.Controllers
                     user.Email = user.Email ?? $"{PhoneNumber}@{PhoneNumber}";
                     user.UserName = user.UserName ?? PhoneNumber;
                     user.Name = user.Name ?? PhoneNumber;
-                    user.ImageUser = user.ImageUser ?? "default-image-path.jpg";
-                   
-
+                    user.ImageUser = user.ImageUser ?? "default-image-path.jpg";                   
                     var updateResult = await _userManager.UpdateAsync(user);
                     if (updateResult.Succeeded)
                     {
@@ -146,7 +139,6 @@ namespace Yara.Areas.Admin.Controllers
                 ImageUser = "default-image-path.jpg",
                 ActiveUser = true
             };
-
             try
             {
                 var createResult = await _userManager.CreateAsync(newUser, password);
