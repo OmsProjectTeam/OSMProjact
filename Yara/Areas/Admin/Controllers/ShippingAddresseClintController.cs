@@ -291,7 +291,7 @@
                     if (reqwest == true)
                     {
                         TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
-                        return RedirectToAction("MyShippingAddresseClint");
+                        return RedirectToAction("MyCheckCustmer");
                     }
                     else
                     {
@@ -305,7 +305,7 @@
                     if (reqestUpdate == true)
                     {
                         TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
-                        return RedirectToAction("MyShippingAddresseClint");
+                        return RedirectToAction("MyCheckCustmer");
                     }
                     else
                     {

@@ -7,7 +7,7 @@ namespace Yara.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class CheckCustmerController : Controller
     {
-        MasterDbcontext _context;
+        MasterDbcontext dbcontext;
 
         private readonly UserManager<ApplicationUser> _userManager;
         IIUserInformation iUserInformation;
@@ -18,9 +18,19 @@ namespace Yara.Areas.Admin.Controllers
         IITypeSystemDelivery iTypeSystemDelivery;
         IICityDeliveryTariffs iCityDeliveryTariffs;
         IIShippingAddresseClint iShippingAddresseClint;
-        public CheckCustmerController(MasterDbcontext dbcontext1, IIUserInformation iUserInformation1, IICity iCity1, IIArea iArea1, IIShippingPrice iShippingPrice1, IICurrenciesExchangeRates iCurrenciesExchangeRates1, IITypeSystemDelivery iTypeSystemDelivery1, IICityDeliveryTariffs iCityDeliveryTariffs1, IIShippingAddresseClint iShippingAddresseClint1, UserManager<ApplicationUser> userManager)
+
+        IIOrderNew iOrderNew;
+        IIOrderCase iOrderCase;
+        IIOrderStatus iOrderStatus;
+        IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs;
+        IICurrenciesExchangeRates iCurrenciesTransactions;
+
+        IITransaction iTransaction;
+        IIExchangeRate iExchangeRate;
+        public CheckCustmerController(IIExchangeRate iExchangeRate1, IITransaction iTransaction, MasterDbcontext dbcontext1, IIUserInformation iUserInformation1, IICity iCity1, IIArea iArea1, IIShippingPrice iShippingPrice1, IICurrenciesExchangeRates iCurrenciesExchangeRates1, IITypeSystemDelivery iTypeSystemDelivery1, 
+            IICityDeliveryTariffs iCityDeliveryTariffs1, IIShippingAddresseClint iShippingAddresseClint1, UserManager<ApplicationUser> userManager, IICurrenciesExchangeRates iCurrenciesTransactions1, IIOrderNew iOrderNew1, IIOrderCase iOrderCase1, IIOrderStatus iOrderStatus1, IIClintWitheDeliveryTariffs iClintWitheDeliveryTariffs1)
         {
-            _context = dbcontext1;
+            dbcontext = dbcontext1;
             iUserInformation = iUserInformation1;
             iCity = iCity1;
             iArea = iArea1;
@@ -30,6 +40,13 @@ namespace Yara.Areas.Admin.Controllers
             iCityDeliveryTariffs = iCityDeliveryTariffs1;
             iShippingAddresseClint = iShippingAddresseClint1;
             _userManager = userManager;
+            iCurrenciesTransactions = iCurrenciesTransactions1;
+            iOrderNew = iOrderNew1;
+            iOrderCase = iOrderCase1;
+            iOrderStatus = iOrderStatus1;
+            iClintWitheDeliveryTariffs = iClintWitheDeliveryTariffs1;
+            iTransaction = iTransaction;
+            iExchangeRate = iExchangeRate1;
         }
         public IActionResult MyCheckCustmer()
         {
@@ -41,6 +58,12 @@ namespace Yara.Areas.Admin.Controllers
             ViewBag.CityDeliveryTariffs = iCityDeliveryTariffs.GetAll();
             ViewBag.user = iUserInformation.GetAllByNameall();
 
+            ViewBag.OrderCase = iOrderCase.GetAll();
+            ViewBag.OrderStatus = iOrderStatus.GetAll();
+            ViewBag.ClintWith = iClintWitheDeliveryTariffs.GetAll();
+            ViewBag.ShippingPrice = iShippingPrice.GetAll();
+            ViewBag.Currenc = iCurrenciesTransactions.GetAll();
+
             return View();
         }
         
@@ -48,7 +71,7 @@ namespace Yara.Areas.Admin.Controllers
         public async Task<IActionResult> GitPhouneNumber(string PhoneNumber)
         {
             // Search for the phone number in ViewShippingAddresseClint
-            var phoneNo = await _context.ViewShippingAddresseClint
+            var phoneNo = await dbcontext.ViewShippingAddresseClint
                                          .FirstOrDefaultAsync(u => u.PhoneNumber == PhoneNumber);
             if (phoneNo != null)
             {
@@ -65,10 +88,11 @@ namespace Yara.Areas.Admin.Controllers
                     NikeName = phoneNo.NikeNAme,
                     CustPriceOver10 = phoneNo.ClintPricePerkgUnder10,
                     CustPriceUnder10 = phoneNo.ClintPricePerkgAbove10,
-                    System = phoneNo.IdTypeSystemDelivery,
+                    System = phoneNo.TypeSystemDelivery,
                     Currency = phoneNo.CurrencyName,
                     CityDeliveryTariff = phoneNo.IdCityDeliveryTariffs,
                     DealingStatus = phoneNo.CurrentState,
+                    PhoneNumber = phoneNo.PhoneNumber
                 });
             }
             // Search the AspNetUsers table for the phone number
@@ -191,6 +215,288 @@ namespace Yara.Areas.Admin.Controllers
                     Message = $"An error occurred while registering the new user: {ex.Message}"
                 });
             }
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> SaveModal(ViewmMODeElMASTER model, TBShippingAddresseClint slider, List<IFormFile> Files, string returnUrl)
+        {
+            try
+            {
+                slider.IdShippingAddresseClint = model.ShippingAddresseClint.IdShippingAddresseClint;
+                slider.IdUser = model.ShippingAddresseClint.IdUser;
+                slider.IdCity = model.ShippingAddresseClint.IdCity;
+                slider.IdArea = model.ShippingAddresseClint.IdArea;
+                slider.IdShippingPrices = model.ShippingAddresseClint.IdShippingPrices;
+                slider.IdCurrenciesExchangeRates = model.ShippingAddresseClint.IdCurrenciesExchangeRates;
+                slider.NearestLandmark = model.ShippingAddresseClint.NearestLandmark;
+                slider.ClintPricePerkgUnder10 = model.ShippingAddresseClint.ClintPricePerkgUnder10;
+                slider.ClintPricePerkgAbove10 = model.ShippingAddresseClint.ClintPricePerkgAbove10;
+                slider.IdTypeSystemDelivery = model.ShippingAddresseClint.IdTypeSystemDelivery;
+                slider.IdCityDeliveryTariffs = model.ShippingAddresseClint.IdCityDeliveryTariffs;
+
+                slider.DeliveryPriceClint = model.ShippingAddresseClint.DeliveryPriceClint;
+                slider.Description = model.ShippingAddresseClint.Description;
+                slider.Active = model.ShippingAddresseClint.Active;
+                slider.DataEntry = model.ShippingAddresseClint.DataEntry;
+                slider.DateTimeEntry = model.ShippingAddresseClint.DateTimeEntry;
+                slider.CurrentState = model.ShippingAddresseClint.CurrentState;
+                if (slider.IdShippingAddresseClint == 0 || slider.IdShippingAddresseClint == null)
+                {
+                    var reqwest = iShippingAddresseClint.saveData(slider);
+                    if (reqwest == true)
+                    {
+                        TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+                        return RedirectToAction("MyCheckCustmer");
+                    }
+                    else
+                    {
+                        TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+                        return RedirectToAction("MyCheckCustmer");
+                    }
+                }
+                else
+                {
+                    var reqestUpdate = iShippingAddresseClint.UpdateData(slider);
+                    if (reqestUpdate == true)
+                    {
+                        TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+                        return RedirectToAction("MyCheckCustmer");
+                    }
+                    else
+                    {
+                        TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+                        return RedirectToAction("MyCheckCustmer");
+                    }
+                }
+            }
+            catch
+            {
+                TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+                return RedirectToAction("MyCheckCustmer");
+            }
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> CheckCustomerModalSave(ViewmMODeElMASTER model, TBOrderNew slider, List<IFormFile> Files, string returnUrl)
+        {
+            try
+            {
+                slider.IdOrderNew = model.OrderNew.IdOrderNew;
+                slider.IdClintWitheDeliveryTariffs = model.OrderNew.IdClintWitheDeliveryTariffs;
+                slider.IdInformationCompanies = model.OrderNew.IdInformationCompanies;
+                slider.IdorderStatus = model.OrderNew.IdorderStatus;
+                slider.IdorderCases = model.OrderNew.IdorderCases;
+                slider.OrderDate = model.OrderNew.OrderDate;
+                slider.DescriptionOrder = model.OrderNew.DescriptionOrder;
+                slider.Weight = model.OrderNew.Weight;
+                slider.CostPrice = model.OrderNew.CostPrice;
+                slider.Price = model.OrderNew.Price;
+                slider.Addres = model.OrderNew.Addres;
+                slider.Nouts = model.OrderNew.Nouts;
+                slider.DataEntry = model.OrderNew.DataEntry;
+                slider.DateTimeEntry = model.OrderNew.DateTimeEntry;
+                slider.CurrentState = model.OrderNew.CurrentState;
+                slider.CatchReceiptNo = model.OrderNew.CatchReceiptNo;
+                slider.Photo = model.OrderNew.Photo;
+                slider.IsPaid = model.OrderNew.IsPaid;
+                slider.ExchangedPrice = model.OrderNew.ExchangedPrice;
+                var file = HttpContext.Request.Form.Files;
+                if (slider.IdOrderNew == 0 || slider.IdOrderNew == null)
+                {
+                    if (file.Count() > 0)
+                    {
+                        string Photo = Guid.NewGuid().ToString() + Path.GetExtension(file[0].FileName);
+                        var fileStream = new FileStream(Path.Combine(@"wwwroot/Images/Home", Photo), FileMode.Create);
+                        file[0].CopyTo(fileStream);
+                        slider.Photo = Photo;
+                        fileStream.Close();
+                    }
+                    else
+                    {
+                        TempData["Message"] = ResourceWeb.VLimageuplode;
+                        return Redirect(returnUrl);
+                    }
+                    if (dbcontext.TBOrderNews.Where(a => a.CatchReceiptNo == slider.CatchReceiptNo).ToList().Count > 0)
+                    {
+                        var PhotoNAme = slider.Photo;
+                        var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+
+                        TempData["CatchReceiptNo"] = ResourceWeb.VLCatchReceiptNoDoplceted;
+                        return Redirect(returnUrl);
+                    }
+                    if (dbcontext.TBOrderNews.Where(a => a.DescriptionOrder == slider.DescriptionOrder).ToList().Count > 0)
+                    {
+                        var PhotoNAme = slider.Photo;
+                        var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+
+                        TempData["DescriptionOrder"] = ResourceWeb.VLDescriptionOrderDoplceted;
+                        return Redirect(returnUrl);
+                    }
+
+                    var reqwest = iOrderNew.saveData(slider);
+                    if (reqwest == true)
+                    {
+                        //send email
+                        var emailSetting = await dbcontext.TBEmailAlartSettings
+                           .OrderByDescending(n => n.IdEmailAlartSetting)
+                           .Where(a => a.CurrentState == true && a.Active == true)
+                           .FirstOrDefaultAsync();
+
+                        // التحقق من وجود إعدادات البريد الإلكتروني
+                        if (emailSetting != null)
+                        {
+                            var message = new MimeMessage();
+                            message.From.Add(new MailboxAddress("New Order", emailSetting.MailSender));
+                            message.To.Add(new MailboxAddress("saif aldin", "saifaldin_s@hotmail.com"));
+                            message.Subject = "طلب جديد من :" + slider.DataEntry;
+                            var builder = new BodyBuilder
+                            {
+                                TextBody = $"طلب جديد\n" +
+                                           $"وصف الطلب: {slider.DescriptionOrder}\n" +
+                                           $"تاريخ الطلب: {slider.OrderDate}\n" +
+                                           $"الوزن: {slider.Weight}\n" +
+                                           $"المبلغ: {slider.CostPrice}\n" +
+                                           $"مبلغ العميل: {slider.Price}\n" +
+                                           $"سعر الصرف: {slider.ExchangedPrice}\n" +
+                                           $"رقم السند: {slider.CatchReceiptNo}"
+                            };
+
+                            // إضافة الصورة كملف مرفق إذا كانت موجودة
+                            if (!string.IsNullOrEmpty(slider.Photo))
+                            {
+                                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Home", slider.Photo);
+                                builder.Attachments.Add(imagePath);
+                            }
+
+                            message.Body = builder.ToMessageBody();
+
+                            using (var client = new SmtpClient())
+                            {
+                                await client.ConnectAsync(emailSetting.SmtpServer, emailSetting.PortServer, SecureSocketOptions.StartTls);
+                                await client.AuthenticateAsync(emailSetting.MailSender, emailSetting.PasswordEmail);
+                                await client.SendAsync(message);
+                                await client.DisconnectAsync(true);
+                            }
+                        }
+                        else
+                        {
+                            // التعامل مع الحالة التي لا توجد فيها إعدادات البريد الإلكتروني
+                            // يمكنك تسجيل خطأ أو تنفيذ إجراءات أخرى هنا
+                        }
+
+                        TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
+                        return RedirectToAction("MyOrderNewAr");
+                    }
+                    else
+                    {
+                        var PhotoNAme = slider.Photo;
+                        var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+                        TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+                        return Redirect(returnUrl);
+                    }
+                }
+                else
+                {
+                    //var reqweistDeletPoto = iOrderNew.DELETPHOTO(slider.IdInformationCompanies);
+
+                    if (file.Count() == 0)
+                    {
+                        slider.Photo = model.OrderNew.Photo;
+                        //TempData["Message"] = ResourceWeb.VLimageuplode;
+                        var reqestUpdate2 = iOrderNew.UpdateData(slider);
+                        if (reqestUpdate2 == true)
+                        {
+                            TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+                            return RedirectToAction("MyCheckCustmer");
+                        }
+                        else
+                        {
+                            var PhotoNAme = slider.Photo;
+                            //var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+                            TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+                            return Redirect(returnUrl);
+                        }
+                    }
+                    else
+                    {
+                        var reqweistDeletPoto = iOrderNew.DELETPHOTO(slider.IdInformationCompanies);
+                        var reqestUpdate2 = iOrderNew.UpdateData(slider);
+                        if (reqestUpdate2 == true)
+                        {
+                            TempData["Saved successfully"] = ResourceWeb.VLUpdatedSuccessfully;
+                            return RedirectToAction("MyCheckCustmer");
+                        }
+                        else
+                        {
+                            var PhotoNAme = slider.Photo;
+                            var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+                            TempData["ErrorSave"] = ResourceWeb.VLErrorUpdate;
+                            return Redirect(returnUrl);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                var file = HttpContext.Request.Form.Files;
+                if (file.Count() == 0)
+                {
+                    //var PhotoNAme = slider.Photo;
+                    //var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+                    TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    var PhotoNAme = slider.Photo;
+                    var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
+                    TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
+                    return Redirect(returnUrl);
+                }
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetPrices(int selectedCompanyId, float weight, int toCurrencyId, int fromCurrencyId)
+        {
+            var exchangeRate = iExchangeRate.GetAll()
+            .LastOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?
+            .Rate;
+            //var eeee=   exchangeRate.FirstOrDefault(e => e.IdCurrenciesExchangeRates == fromCurrencyId && e.ToIdCurrenciesExchangeRates == toCurrencyId)?.Rate;
+
+            //        var clintDeliveryTariff = dbcontext.TBExchangeRates
+            //.Where(t => t.IdCurrenciesExchangeRates == fromCurrencyId)?.Rate;
+
+            //      var towr= dbcontext.TBExchangeRates
+            //.Where(t => t.ToIdCurrenciesExchangeRates == toCurrencyId);
+            //int fromCurrencyId = 1;
+            var prices = iShippingPrice.GetAll()
+                .FirstOrDefault(x => x.IdInformationCompanies == selectedCompanyId);
+            if (prices != null)
+            {
+                if (weight <= 10)
+                {
+                    return Json(new
+                    {
+                        costPrice = prices.CoPricePerkgUnder10 * (decimal)weight,
+                        price = prices.CoPricePerkgAbove10 * (decimal)weight,
+                        exchangePrice = prices.CoPricePerkgAbove10 * (decimal)weight * exchangeRate
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        costPrice = prices.ClintPricePerkgUnder10 * (decimal)weight,
+                        price = prices.ClintPricePerkgAbove10 * (decimal)weight,
+                        exchangePrice = prices.CoPricePerkgAbove10 * (decimal)weight * exchangeRate
+                    });
+                }
+            }
+
+            return Json(null);
         }
     }
 }
