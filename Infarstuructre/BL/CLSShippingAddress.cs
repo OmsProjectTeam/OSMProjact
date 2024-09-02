@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Infarstuructre.BL;
 
@@ -14,7 +15,7 @@ public interface IIShippingAddress
     TBShippingAddress GetById(int IdShippingAddress);
     bool saveData(TBShippingAddress save);
     bool UpdateData(TBShippingAddress updats);
-    bool deleteData(int IdShippingAddress);
+    bool deleteData(int id);
     List<TBViewShippingAddress> GetAllv(int IdShippingAddress);
     List<TBViewShippingAddress> GetAllDataentry(string user);
 
@@ -103,6 +104,21 @@ public class CLSShippingAddress : IIShippingAddress
         }
     }
 
+    public bool deleteData(int id)
+    {
+        try
+        {
+            var ctr = GetById(id);
+            ctr.CurrentState = false;
+            dbcontext.Entry(ctr).State = EntityState.Modified;
+            dbcontext.SaveChanges();
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
 
 
     ////////////////////////////////////////////////////////////////////API/////////////////////////////////////////////////////////////////////////
@@ -182,4 +198,6 @@ public class CLSShippingAddress : IIShippingAddress
             return false;
         }
     }
+
+
 }

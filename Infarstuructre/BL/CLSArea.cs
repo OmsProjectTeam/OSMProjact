@@ -12,6 +12,7 @@ namespace Infarstuructre.BL
         bool deleteData(int Id);
         List<TBViewAreas> GetAllv(int Id);
 
+
         //////////////////////////////Api//////////////////////////////////
         
         Task<List<TBViewAreas>> GetAllAsync();
@@ -20,6 +21,7 @@ namespace Infarstuructre.BL
         Task<bool> DeleteAsync(int Id);
         Task<bool> AddAsync(Area savee);
         Task<bool> UpdateAsync(Area updatss);
+        List<TBViewAreas> GetAllByCityId(int cityId);
     }
     public class CLSArea: IIArea
     {
@@ -86,6 +88,14 @@ namespace Infarstuructre.BL
         {
             List<TBViewAreas> MySlIder = dbcontext.ViewAreas.OrderByDescending(n => n.id == Id).Where(a => a.id == Id).ToList();
             return MySlIder;
+        }
+
+        public List<TBViewAreas> GetAllByCityId(int cityId)
+        {
+            return dbcontext.ViewAreas
+                .Where(a => a.city_id == cityId && a.CurrentState == true)
+                .OrderByDescending(n => n.id)
+                .ToList();
         }
 
 
