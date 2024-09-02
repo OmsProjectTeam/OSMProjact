@@ -30,9 +30,9 @@
 		<form asp-action="Login" asp-controller="Accounts" method="post" class="frm-single">
 	
 			<div class="inside">
-				<div class="title"><strong>Ninja</strong>Admin</div>
+				<div class="title"><strong>نظام </strong>الشحن</div>
 				<!-- /.title -->
-				<div class="frm-title">Login</div>
+				<div class="frm-title">تسجيل الدخول</div>
 
 				@if (ViewBag.ErrorLogin == false)
 				{
@@ -46,13 +46,13 @@
 				<!-- /.frm-title -->
 				<input type="hidden" class="form-control" asp-for="returnUrl" placeholder="Email">
 				<div class="frm-input">
-					<input asp-for="Eamil" type="email" placeholder="Username" class="frm-inp">
+					<input asp-for="Eamil" type="email" placeholder="بريد المستخدم" class="frm-inp">
 					<i class="fa fa-user frm-ico"></i>
 					<span asp-validation-for="Eamil"></span>
 				</div>
 				<!-- /.frm-input -->
 				<div class="frm-input">
-					<input asp-for="Password" type="password" placeholder="Password" class="frm-inp">
+					<input asp-for="Password" type="password" placeholder="كلمة المرور" class="frm-inp">
 					<i class="fa fa-lock frm-ico"></i>
 					<span asp-validation-for="Password"></span>
 				</div>
@@ -61,18 +61,18 @@
 					<div class="pull-left">
 						<div class="checkbox primary">
 							<input asp-for="RememberMy" type="checkbox" id="rememberme">
-							<label for="rememberme">Remember me</label>
+							<label for="rememberme">تذكر بياناتي</label>
 						</div>
 						<!-- /.checkbox -->
 					</div>
 					<!-- /.pull-left -->
-					<div class="pull-right"><a href="page-recoverpw.html" class="a-link"><i class="fa fa-unlock-alt"></i>Forgot password?</a></div>
+					<div class="pull-right"><a href="page-recoverpw.html" class="a-link"><i class="fa fa-unlock-alt"></i>هل نسيت الباسورد؟</a></div>
 					<!-- /.pull-right -->
 				</div>
 				<!-- /.clearfix -->
-				<button type="submit" class="frm-submit">Login<i class="fa fa-arrow-circle-right"></i></button>
+				<button type="submit" class="frm-submit">تسجيل الدخول<i class="fa fa-arrow-circle-right"></i></button>
 
-				<div class="row small-spacing">
+				@* <div class="row small-spacing">
 					<div class="col-sm-12">
 						<div class="txt-login-with txt-center">or login with</div>
 						<!-- /.txt-login-with -->
@@ -83,11 +83,11 @@
 					<!-- /.col-sm-6 -->
 					<div class="col-sm-6"><button type="button" class="btn btn-sm btn-icon btn-icon-left btn-social-with-text btn-google-plus text-white waves-effect waves-light"><i class="ico fa fa-google-plus"></i>Google+</button></div>
 					<!-- /.col-sm-6 -->
-				</div>
+				</div> *@
 				<!-- /.row -->
 
-				<a asp-area="Admin" asp-controller="Accounts" asp-action="Register" class="a-link"><i class="fa fa-key"></i>New to NinjaAdmin? Register.</a>
-				<div class="frm-footer">NinjaAdmin © 2016.</div>
+				<a asp-area="Admin" asp-controller="Accounts" asp-action="Register" class="a-link"><i class="fa fa-key"></i>ليس لديك حساب ؟ تسجيل حساب جديد .</a>
+				<div class="frm-footer">جميع الحقوق  محفوظة سيف  © 2024.</div>
 				<!-- /.footer -->
 			</div>
 			<!-- .inside -->

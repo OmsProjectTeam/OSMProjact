@@ -4,7 +4,7 @@
 @inject SignInManager<ApplicationUser> signInManager
 
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,33 +15,33 @@
     <title>Home - Ninja Admin Template</title>
 
     <!-- Main Styles -->
-    <link rel="stylesheet" href="~/Admin/assets/styles/style.min.css">
+    <link rel="stylesheet" href="~/AdminEn/assets/styles/style.min.css">
 
     <!-- mCustomScrollbar -->
-    <link rel="stylesheet" href="~/Admin/assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="~/AdminEn/assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
 
     <!-- Waves Effect -->
-    <link rel="stylesheet" href="~/Admin/assets/plugin/waves/waves.min.css">
+    <link rel="stylesheet" href="~/AdminEn/assets/plugin/waves/waves.min.css">
 
     <!-- Sweet Alert -->
-    <link rel="stylesheet" href="~/Admin/assets/plugin/sweet-alert/sweetalert.css">
+    <link rel="stylesheet" href="~/AdminEn/assets/plugin/sweet-alert/sweetalert.css">
 
     <!-- Percent Circle -->
-    <link rel="stylesheet" href="~/Admin/assets/plugin/percircle/css/percircle.css">
+    <link rel="stylesheet" href="~/AdminEn/assets/plugin/percircle/css/percircle.css">
 
     <!-- Chartist Chart -->
-    <link rel="stylesheet" href="~/Admin/assets/plugin/chart/chartist/chartist.min.css">
+    <link rel="stylesheet" href="~/AdminEn/assets/plugin/chart/chartist/chartist.min.css">
 
     <!-- FullCalendar -->
-    <link rel="stylesheet" href="~/Admin/assets/plugin/fullcalendar/fullcalendar.min.css">
-    <link rel="stylesheet" href="~/Admin/assets/plugin/fullcalendar/fullcalendar.print.css" media='print'>
+    <link rel="stylesheet" href="~/AdminEn/assets/plugin/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="~/AdminEn/assets/plugin/fullcalendar/fullcalendar.print.css" media='print'>
     <!-- Select2 -->
-    <link rel="stylesheet" href="~/Admin/assets/plugin/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/AdminEn/assets/plugin/select2/css/select2.min.css">
 
     <!-- Dark Themes -->
-    <link rel="stylesheet" href="~/Admin/assets/styles/style-dark.min.css">
+    <link rel="stylesheet" href="~/AdminEn/assets/styles/style-dark.min.css">
     <!-- RTL -->
-    <link rel="stylesheet" href="~/Admin/assets/styles/style-rtl.min.css">
+ @*    <link rel="stylesheet" href="~/AdminEn/assets/styles/style.min.css"> *@
 
     <script src="~/js/signalr.min.js"></script>
 
@@ -235,7 +235,10 @@
                     <li>
                         <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon fa fa-th-large"></i><span>@ResourceWeb.LBCustomers</span></a>
                         <ul class="sub-menu js__content">
+
                             <li><a asp-area="Admin" asp-controller="CustomerMessages" asp-action="MyCustomerMessages" asp-route-userId="@user.Id">@ResourceWeb.LBMyCustomerMessages</a></li>
+                            <li><a asp-area="Admin" asp-controller="CheckCustmer" asp-action="MyCheckCustmer" asp-route-userId="@user.Id">Check Custmer</a></li>
+                            <li><a asp-area="Admin" asp-controller="ShippingAddresseClint" asp-action="MyShippingAddresseClint" asp-route-userId="@user.Id">@ResourceWeb.LBMyShippingAddresseClint</a></li>
                             <li><a asp-area="Admin" asp-controller="Customer" asp-action="MyCustomer" asp-route-userId="@user.Id">@ResourceWeb.LBMyCustomer</a></li>
 
                         </ul>
@@ -528,8 +531,8 @@
     </div><!--/#wrapper -->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-        <script src="~/Admin/assets/script/html5shiv.min.js"></script>
-        <script src="~/Admin/assets/script/respond.min.js"></script>
+        <script src="~/AdminEn/assets/script/html5shiv.min.js"></script>
+        <script src="~/AdminEn/assets/script/respond.min.js"></script>
     <![endif]-->
     <!--
     ================================================== -->
@@ -537,31 +540,31 @@
 
 
 
-    <script src="~/Admin/assets/scripts/jquery.min.js"></script>
-    <script src="~/Admin/assets/scripts/modernizr.min.js"></script>
-    <script src="~/Admin/assets/plugin/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/Admin/assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="~/Admin/assets/plugin/nprogress/nprogress.js"></script>
-    <script src="~/Admin/assets/plugin/sweet-alert/sweetalert.min.js"></script>
-    <script src="~/Admin/assets/plugin/waves/waves.min.js"></script>
+    <script src="~/AdminEn/assets/scripts/jquery.min.js"></script>
+    <script src="~/AdminEn/assets/scripts/modernizr.min.js"></script>
+    <script src="~/AdminEn/assets/plugin/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/AdminEn/assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/AdminEn/assets/plugin/nprogress/nprogress.js"></script>
+    <script src="~/AdminEn/assets/plugin/sweet-alert/sweetalert.min.js"></script>
+    <script src="~/AdminEn/assets/plugin/waves/waves.min.js"></script>
     <!-- Full Screen Plugin -->
-    <script src="~/Admin/assets/plugin/fullscreen/jquery.fullscreen-min.js"></script>
+    <script src="~/AdminEn/assets/plugin/fullscreen/jquery.fullscreen-min.js"></script>
 
     <!-- Percent Circle -->
-    <script src="~/Admin/assets/plugin/percircle/js/percircle.js"></script>
+    <script src="~/AdminEn/assets/plugin/percircle/js/percircle.js"></script>
 
     <!-- Google Chart -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <!-- Chartist Chart -->
-    <script src="~/Admin/assets/plugin/chart/chartist/chartist.min.js"></script>
-    <script src="~/Admin/assets/scripts/chart.chartist.init.min.js"></script>
+    <script src="~/AdminEn/assets/plugin/chart/chartist/chartist.min.js"></script>
+    <script src="~/AdminEn/assets/scripts/chart.chartist.init.min.js"></script>
 
     <!-- FullCalendar -->
-    <script src="~/Admin/assets/plugin/moment/moment.js"></script>
-    <script src="~/Admin/assets/plugin/fullcalendar/fullcalendar.min.js"></script>
-    <script src="~/Admin/assets/scripts/fullcalendar.init.js"></script>
-    <script src="~/Admin/assets/scripts/main.min.js"></script>
+    <script src="~/AdminEn/assets/plugin/moment/moment.js"></script>
+    <script src="~/AdminEn/assets/plugin/fullcalendar/fullcalendar.min.js"></script>
+    <script src="~/AdminEn/assets/scripts/fullcalendar.init.js"></script>
+    <script src="~/AdminEn/assets/scripts/main.min.js"></script>
 
 
     @* <script>
@@ -589,7 +592,16 @@
     </script> *@
 
 
-
+    <script src="~/Admin/assets/plugin/form-wizard/prettify.js"></script>
+    <script src="~/Admin/assets/plugin/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/Admin/assets/plugin/datatables/media/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Admin/assets/plugin/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Admin/assets/plugin/datatables/extensions/Responsive/js/responsive.bootstrap.min.js"></script>
+    <script src="~/Admin/assets/plugin/form-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="~/Admin/assets/plugin/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/Admin/assets/scripts/datatables.demo.min.js"></script>
+    <script src="~/Admin/assets/scripts/form.wizard.init.min.js"></script>
+    <script src="~/js/site.js"></script>
 
     <!-- Placed at the end of the document so the pages load faster -->
     <!-- Full Screen Plugin -->

@@ -405,28 +405,28 @@ namespace Yara.Areas.Admin.Controllers
                     if (roles.Contains("Merchant"))
                     {
                         // Redirect to merchant area with user ID
-                        return RedirectToAction("Index", "Home", new { area = "merchantAccount", userId = user.Id, token = token });
+                        return RedirectToAction("IndexAr", "Home", new { area = "merchantAccount", userId = user.Id, token = token });
                     }
                     // Check if user has the role "Customer"
                     if (roles.Contains("Customer"))
                     {
                         // Redirect to merchant area with user ID
-                        return RedirectToAction("Index", "Home", new { area = "ClintAccount", userId = user.Id, token = token });
+                        return RedirectToAction("IndexAr", "Home", new { area = "ClintAccount", userId = user.Id, token = token });
                     }// Check if user has the role "Admin"
                     if (roles.Contains("Admin"))
                     {
                         // Redirect to merchant area with user ID
-                        return RedirectToAction("Index", "Home", new { area = "Admin", userId = user.Id, token = token });
+                        return RedirectToAction("IndexAr", "Home", new { area = "Admin", userId = user.Id, token = token });
                     }// Check if user has the role "Admin"
                     if (roles.Contains("AirFreight"))
                     {
                         // Redirect to AirFreight area with user ID
-                        return RedirectToAction("Index", "Home", new { area = "AirFreight", userId = user.Id, token = token });
+                        return RedirectToAction("IndexAr", "Home", new { area = "AirFreight", userId = user.Id, token = token });
                     }
                     if (string.IsNullOrEmpty(returnUrl))
                     {
                         // Token Here
-                        return RedirectToAction("Index", "Home", new { area = "", token = token });
+                        return RedirectToAction("IndexAr", "Home", new { area = "", token = token });
                     }
                     else
                     {

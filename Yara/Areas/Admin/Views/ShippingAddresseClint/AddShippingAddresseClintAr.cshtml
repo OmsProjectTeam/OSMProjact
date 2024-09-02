@@ -1,0 +1,368 @@
+﻿@model ViewmMODeElMASTER
+@{
+    ViewData["Title"] = ResourceWebAr.LBAddShippingAddresseClint;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminAr.cshtml";
+}
+
+
+<div class="col-xs-12">
+    <div class="box-content">
+        <ul class="list-inline">
+            <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWebAr.LBAddShippingAddresseClint</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
+            <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
+            <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
+            <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
+        </ul>
+
+        <div class="row small-spacing">
+            <div class="col-lg-6 col-xs-12">
+                <div class="box-content card white">
+                    <h4 class="box-title">@ResourceWebAr.LBEmageSise</h4>
+
+                    <div class="card-content">
+                        <form role="form" method="post" asp-controller="ShippingAddresseClint" asp-action="Save" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <input type="hidden" asp-for="@Model.ShippingAddresseClint.DataEntry" class="form-control" value="@User.Identity.Name">
+                                <input type="hidden" asp-for="@Model.ShippingAddresseClint.IdShippingAddresseClint" class="form-control">
+                                <input type="hidden" asp-for="@Model.ShippingAddresseClint.DateTimeEntry" value="@DateTime.Now">
+                                <input type="hidden" asp-for="@Model.returnUrl" id="url">
+                            </div>
+
+                            <div class="card-content">
+                                <div class="row small-spacing">
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.ShippingAddresseClint.IdUser" for="exampleInputEmail1">@ResourceWebAr.LbDescriptionClint</label>
+                                            <select id="clintName" class="form-control" asp-for="@Model.ShippingAddresseClint.IdUser" asp-items="@(new SelectList(ViewBag.user, "Id", "Name"))">
+                                            </select>
+                                            <span asp-validation-for="@Model.ShippingAddresseClint.IdUser" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.ShippingAddresseClint.IdCity" for="exampleInputEmail1">@ResourceWebAr.LbCity</label>
+                                            <select id="city-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdCity" asp-items="@(new SelectList(ViewBag.City, "Id", "Description"))">
+                                            </select>
+                                            <span asp-validation-for="@Model.ShippingAddresseClint.IdCity" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.ShippingAddresseClint.IdArea" for="exampleInputEmail1">@ResourceWebAr.LBLbAreaName</label>
+                                            <select id="area-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdArea" asp-items="@(new SelectList(ViewBag.Area, "id", "Description"))">
+                                            </select>
+                                            <span asp-validation-for="@Model.ShippingAddresseClint.IdArea" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="row small-spacing">
+
+                                    <div class="col-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.ShippingAddresseClint.NearestLandmark" for="exampleInputEmail1">@ResourceWebAr.LBNearestLandmark</label>
+                                            <input id="landmark" asp-for="@Model.ShippingAddresseClint.NearestLandmark" type="text" placeholder="@ResourceWebAr.LBNearestLandmark ...." class="form-control" maxlength="300">
+                                            <span asp-validation-for="@Model.ShippingAddresseClint.NearestLandmark" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="row small-spacing">
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.ShippingAddresseClint.IdShippingPrices" for="exampleInputEmail1">@ResourceWebAr.LbNikeNAme</label>
+                                            <select id="nike-name-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdShippingPrices" asp-items="@(new SelectList(ViewBag.ShippingPrice, "IdShipping", "NikeNAme"))">
+                                                <option value="">-- Select Nickname --</option>
+                                            </select>
+                                            <span asp-validation-for="@Model.ShippingAddresseClint.IdShippingPrices" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">@ResourceWebAr.LbCoPricePerkgUnder10</label>
+                                            <input id="price-under-10" type="text" placeholder="@ResourceWebAr.LbCoPricePerkgUnder10 ...." class="form-control" maxlength="300" readonly>
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">@ResourceWebAr.LbCoPricePerkgAbove10</label>
+                                            <input id="price-above-10" type="text" placeholder="@ResourceWebAr.LbCoPricePerkgAbove10 ...." class="form-control" maxlength="300" readonly>
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="row small-spacing">
+
+
+
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" for="exampleInputEmail1">@ResourceWebAr.LbClintPricePerkgUnder10</label>
+                                            <input id="shipping-under-10" asp-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" type="text" placeholder="@ResourceWebAr.LbClintPricePerkgUnder10 ...." class="form-control" maxlength="300">
+                                            <span asp-validation-for="@Model.ShippingAddresseClint.ClintPricePerkgUnder10" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" for="exampleInputEmail1">@ResourceWebAr.LbClintPricePerkgAbove10</label>
+                                            <input id="shipping-above-10" asp-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" type="text" placeholder="@ResourceWebAr.LbClintPricePerkgAbove10 ...." class="form-control" maxlength="300">
+                                            <span asp-validation-for="@Model.ShippingAddresseClint.ClintPricePerkgAbove10" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="row small-spacing">
+
+                                    <div class="col-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.ShippingAddresseClint.IdTypeSystemDelivery" for="exampleInputEmail1">@ResourceWebAr.LbTypeSystem</label>
+                                            <select id="type-system-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdTypeSystemDelivery" asp-items="@(new SelectList(ViewBag.TypeSystemDelivery, "IdTypeSystemDelivery", "TypeSystemDelivery"))">
+                                            </select>
+                                            <span asp-validation-for="@Model.ShippingAddresseClint.IdTypeSystemDelivery" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="row small-spacing">
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.ShippingAddresseClint.IdCityDeliveryTariffs" for="exampleInputEmail1">@ResourceWebAr.LbdescriptioncityType</label>
+                                            <select id="delivery-tarrif-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdCityDeliveryTariffs" asp-items="@(new SelectList(ViewBag.CityDeliveryTariffs, "IdCityDeliveryTariffs", "TitleShipping"))">
+                                                <option value="">-- Select --</option>
+                                            </select>
+                                            <span asp-validation-for="@Model.ShippingAddresseClint.IdCityDeliveryTariffs" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">@ResourceWebAr.LbCompanyDelivery</label>
+                                            <input id="delivery-company" type="text" placeholder="@ResourceWebAr.LbCompanyDelivery ...." class="form-control" maxlength="300" readonly>
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">@ResourceWebAr.LbClintDelivery</label>
+                                            <input id="delivery-client" type="text" placeholder="@ResourceWebAr.LbClintDelivery ...." class="form-control" maxlength="300" readonly>
+                                            <span class="text-danger"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12 col-sm-3">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.ShippingAddresseClint.DeliveryPriceClint" for="exampleInputEmail1">@ResourceWebAr.LbClintDelivery</label>
+                                            <input id="delivery-customer" asp-for="@Model.ShippingAddresseClint.DeliveryPriceClint" type="text" placeholder="@ResourceWebAr.LbClintDelivery ...." class="form-control" maxlength="300">
+                                            <span asp-validation-for="@Model.ShippingAddresseClint.DeliveryPriceClint" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="row small-spacing">
+
+                                    <div class="col-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.ShippingAddresseClint.IdCurrenciesExchangeRates" for="exampleInputEmail1">@ResourceWebAr.LbCountry</label>
+                                            <select id="type-system-select" class="form-control" asp-for="@Model.ShippingAddresseClint.IdCurrenciesExchangeRates" asp-items="@(new SelectList(ViewBag.Currenc, "IdCurrenciesExchangeRates", "Country"))">
+                                            </select>
+                                            <span asp-validation-for="@Model.ShippingAddresseClint.IdCurrenciesExchangeRates" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="row small-spacing">
+
+                                    <div class="col-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.ShippingAddresseClint.Description" for="exampleInputEmail1">@ResourceWebAr.LBDescriptionAll</label>
+                                            <textarea id="delivery-price-clint" asp-for="@Model.ShippingAddresseClint.Description" type="text" placeholder="@ResourceWebAr.LbDescription ...." class="form-control" rows="8"></textarea>
+                                            <span asp-validation-for="@Model.ShippingAddresseClint.Description" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkbox margin-bottom-20">
+                                <div class="switch success"><input id="dealing-status" type="checkbox" asp-for="@Model.ShippingAddresseClint.Active" id="switch-2" checked="checked"><label for="switch-2">@ResourceWebAr.LbActive</label></div>
+                            </div>
+                            <div class="checkbox margin-bottom-20">
+                                <div class="switch success"><input type="checkbox" asp-for="@Model.ShippingAddresseClint.CurrentState" id="switch-10" checked="checked"><label for="switch-10">@ResourceWebAr.lbCurrentState</label></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWebAr.lbSave</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+    <script>
+        $("#url").val(window.location.href);
+    </script>
+    <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
+    <script src="~/Admin/assets/plugin/multiselect/multiselect.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2_1').select2({
+                placeholder: "Select an option",
+                allowClear: true
+            });
+
+            $('#merchant-select').change(function () {
+                var userId = $(this).val();
+                if (userId) {
+                    $.getJSON('@Url.Action("GetUserDetails", "ShippingAddresseClint")', { id: userId }, function (data) {
+                        $('input[name="ShippingAddresseClint.CompanyName"]').val(data.companyName);
+                        $('input[name="ShippingAddresseClint.PhoneCompany"]').val(data.phoneCompany);
+                        $('input[name="ShippingAddresseClint.PhoneCompanySecand"]').val(data.phoneCompanySecand);
+                        $('input[name="ShippingAddresseClint.EmailCompany"]').val(data.emailCompany);
+
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+        $("#url").val(window.location.href);
+        $(document).ready(function () {
+            $('#city-select').change(function () {
+                var cityId = $(this).val();
+                if (cityId) {
+                    $.getJSON('@Url.Action("GetAreasByCity", "ShippingAddresseClint")', { cityId: cityId }, function (data) {
+                        var $areaSelect = $('#area-select');
+                        $areaSelect.empty();
+                        $.each(data, function (index, item) {
+                            $areaSelect.append($('<option>', {
+                                value: item.id,
+                                text: item.description
+                            }));
+                        });
+                    });
+                } else {
+                    $('#area-select').empty();
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('#nike-name-select').change(function () {
+                console.log('Nike name changed');  // Check if the event is firing
+
+                var shippingPriceId = $(this).val();
+                console.log('Selected Shipping Price ID:', shippingPriceId);  // Log the selected ID
+
+                if (shippingPriceId) {
+                    var url = '@Url.Action("GetShippingPricesByNikeName", "ShippingAddresseClint", new { area = "Admin" })';
+                    console.log('Request URL:', url);  // Log the request URL
+
+                    $.getJSON(url, { shippingPriceId: shippingPriceId }, function (data) {
+                        console.log('Received Data:', data);  // Log the received data
+
+                        if (data) {
+                            $('#price-under-10').val(data.coPricePerkgUnder10);
+                            $('#price-above-10').val(data.coPricePerkgAbove10);
+                        } else {
+                            console.log('No data received or data is null');
+                        }
+                    }).fail(function (jqxhr, textStatus, error) {  // Handle errors
+                        console.error('Request Failed:', textStatus, error);
+                    });
+                } else {
+                    console.log('No Shipping Price ID selected');
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('#delivery-tarrif-select').change(function () {
+                console.log('Delivery name changed');  // Check if the event is firing
+
+                var typeSystemId = $(this).val();
+                console.log('Selected Shipping Price ID:', typeSystemId);  // Log the selected ID
+
+                if (typeSystemId) {
+                    var url = '@Url.Action("GetDeliveryDetailsByTypeSystem", "ShippingAddresseClint", new { area = "Admin" })';
+                    console.log('Request URL:', url);  // Log the request URL
+
+                    $.getJSON(url, { typeSystemId: typeSystemId }, function (data) {
+                        console.log('Received Data:', data);  // Log the received data
+
+                        if (data) {
+                            $('#delivery-company').val(data.companyPricing);
+                            $('#delivery-client').val(data.deliveryPriceClint);
+                        } else {
+                            console.log('No data received or data is null');
+                        }
+                    }).fail(function (jqxhr, textStatus, error) {  // Handle errors
+                        console.error('Request Failed:', textStatus, error);
+                    });
+                } else {
+                    console.log('No Shipping Price ID selected');
+                }
+            });
+        });
+        $(document).ready(function () {
+            function updateDeliveryPriceClint() {
+                // Clear the existing value before updating
+                $('#delivery-price-clint').val('');
+
+                // Get the text of the selected option for Clint Name
+                var clintName = $('#clintName option:selected').text() || 'N/A';
+                var city = $('#city-select option:selected').text() || 'N/A';
+                var area = $('#area-select option:selected').text() || 'N/A';
+                var landmark = $('#landmark').val() || 'N/A';
+                var nikeName = $('#nike-name-select option:selected').text() || 'N/A';
+                var under10 = $('#shipping-under-10').val() || 'N/A';
+                var above10 = $('#shipping-above-10').val() || 'N/A';
+                var system = $('#type-system-select option:selected').text() || 'N/A';
+                var localDescription = $('#local-delivery-description').val() || 'N/A';
+                var dealingStatus = $('#dealing-status').val() || 'N/A';
+                var deliveryCustomer = $('#delivery-customer').val() || 'N/A';
+                var exchangePrice = $('#type-system-select option:selected').val() || 'N/A';
+
+                // Combine the values in the correct order
+                var combined = `Clint Name: ${clintName} -- City Name: ${city} -- Area Name: ${area} -- Landmark: ${landmark} -- Customer shipping price is less than 10: ${under10} -- Customer shipping price is more than 10: ${above10} -- Nick name: ${nikeName} -- System: ${system} -- Delivery price to the customer: ${deliveryCustomer} -- exchange: ${exchangePrice} -- Dealing status: ${dealingStatus}`;
+
+                // Set the combined string to the delivery price field
+                $('#delivery-price-clint').val(combined);
+            }
+
+            // Attach the function to the change and input events
+            $('#clintName, #city-select, #area-select, #nike-name-select, #type-system-select').change(updateDeliveryPriceClint);
+            $('#description, #landmark, #price-under-10, #price-above-10, #local-delivery-description, #dealingStatus, #deliveryCustomer, #exchangePrice').on('input', updateDeliveryPriceClint);
+        });
+
+    </script>
+}

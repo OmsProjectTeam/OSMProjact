@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domin.Entity
-{ 
-public partial class Account
 {
-    public int Id { get; set; }
+    public partial class Account
+    {
+        public int Id { get; set; }
 
-    public string? AccountName { get; set; }
+        public string? AccountName { get; set; }
 
-    public int? IsActive { get; set; }
-}
+        public int? IsActive { get; set; }
+    }
 }

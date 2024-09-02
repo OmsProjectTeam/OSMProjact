@@ -14,7 +14,7 @@ namespace Domin.Entity
 
         public string? CustName { get; set; }
 
-        public string? CustMob { get; set; }
+        public string? CustMob { get; set; } // need to 
 
         public string? CustMob2 { get; set; }
 

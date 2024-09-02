@@ -198,6 +198,9 @@
   <data name="LBAddShippingAddress" xml:space="preserve">
     <value>Add Shipping Address</value>
   </data>
+  <data name="LBAddShippingAddresseClint" xml:space="preserve">
+    <value>Adding and modifying Shipping Addresse Clint</value>
+  </data>
   <data name="LBAddShippingPrice" xml:space="preserve">
     <value>Adding and modifying pricing for shipping systems</value>
   </data>
@@ -273,6 +276,9 @@
   <data name="LbCompanyDelivery" xml:space="preserve">
     <value>Delivery company pricing</value>
   </data>
+  <data name="LbCompanydeliveryprice" xml:space="preserve">
+    <value>Company delivery price</value>
+  </data>
   <data name="LbCompanyDescription" xml:space="preserve">
     <value>Company description</value>
   </data>
@@ -289,10 +295,10 @@
     <value>المبلغ المحول</value>
   </data>
   <data name="LbCoPricePerkgAbove10" xml:space="preserve">
-    <value>The company's shipping price is more than 10</value>
+    <value>shipping price is more than 10</value>
   </data>
   <data name="LbCoPricePerkgUnder10" xml:space="preserve">
-    <value>The company's shipping price is less than 10</value>
+    <value>shipping price is less than 10</value>
   </data>
   <data name="LbCostPrice" xml:space="preserve">
     <value>Cost Price</value>
@@ -345,6 +351,12 @@
   <data name="LBDeliveryAddress" xml:space="preserve">
     <value>DeliveryAddress</value>
   </data>
+  <data name="lbDeliveryPriceClint" xml:space="preserve">
+    <value>Delivery Price Clint</value>
+  </data>
+  <data name="lbDeliveryPriceCompany" xml:space="preserve">
+    <value>Delivery Price Company</value>
+  </data>
   <data name="Lbdelivery_charges" xml:space="preserve">
     <value>Delivery Charges</value>
   </data>
@@ -354,8 +366,14 @@
   <data name="LbDescription1" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="LBDescriptionAll" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="Lbdescriptioncity" xml:space="preserve">
     <value>City</value>
+  </data>
+  <data name="LbdescriptioncityType" xml:space="preserve">
+    <value>Description of the local delivery system</value>
   </data>
   <data name="LbDescriptionClint" xml:space="preserve">
     <value>Description Clint</value>
@@ -450,6 +468,9 @@
   <data name="LbInformationCompany" xml:space="preserve">
     <value>Information Company</value>
   </data>
+  <data name="LBinformationUser" xml:space="preserve">
+    <value>Information Users</value>
+  </data>
   <data name="Lbinsert_dt" xml:space="preserve">
     <value>Date added</value>
   </data>
@@ -467,6 +488,9 @@
   </data>
   <data name="LBLbAreaName" xml:space="preserve">
     <value>Area Name</value>
+  </data>
+  <data name="LbLbDefaultdeliveryprice" xml:space="preserve">
+    <value>Default delivery price</value>
   </data>
   <data name="LBLbRoles" xml:space="preserve">
     <value>Roles</value>
@@ -573,6 +597,12 @@
   <data name="LBMyShippingAddress" xml:space="preserve">
     <value>MyShipping Address</value>
   </data>
+  <data name="LBMyShippingAddresseClint" xml:space="preserve">
+    <value>Shipping Addresse Clint</value>
+  </data>
+  <data name="LBMyShippingInformation" xml:space="preserve">
+    <value>Shipping Information</value>
+  </data>
   <data name="LBMyShippingPrice" xml:space="preserve">
     <value>Shipping systems pricing</value>
   </data>
@@ -614,6 +644,9 @@
   </data>
   <data name="LbNameRols" xml:space="preserve">
     <value>NameRols</value>
+  </data>
+  <data name="LBNearestLandmark" xml:space="preserve">
+    <value>Landmark</value>
   </data>
   <data name="LbNikeNAme" xml:space="preserve">
     <value>Nick name</value>
@@ -714,6 +747,9 @@
   <data name="LBPricingSystem" xml:space="preserve">
     <value>Pricing System</value>
   </data>
+  <data name="lbPrivatedeliveryprice" xml:space="preserve">
+    <value>Private delivery price</value>
+  </data>
   <data name="LBProfile" xml:space="preserve">
     <value>Profile</value>
   </data>
@@ -803,6 +839,9 @@
   </data>
   <data name="LbSupportTicketType" xml:space="preserve">
     <value> Type</value>
+  </data>
+  <data name="LbSystemDelivery" xml:space="preserve">
+    <value>System Delivery Information </value>
   </data>
   <data name="LbTaskStatus" xml:space="preserve">
     <value>Task Status</value>
