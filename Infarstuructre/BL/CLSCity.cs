@@ -1,5 +1,8 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+
 namespace Infarstuructre.BL
 {
     public interface IICity
@@ -10,6 +13,14 @@ namespace Infarstuructre.BL
         bool UpdateData(City updatss);
         bool deleteData(int Id);
         List<City> GetAllv(int Id);
+        // //////////////////////////////API//////////////////////////////////////
+        Task<List<City>> GetAllAsync(int pageNumber, int pageSize);
+        Task<List<City>> GetAllvAsync(int Id);
+        Task<City> GetByIdAsync(int Id);
+        Task<bool> DeleteAsync(int Id);
+        Task<bool> AddAsync(City savee);
+        Task<bool> UpdateAsync(City updatss);
+        Task<List<City>> GetAlWithConditionAsync(Expression<Func<City, bool>> condition);
     }
     public class CLSCity: IICity
     {
@@ -77,6 +88,79 @@ namespace Infarstuructre.BL
         {
             List<City> MySlider = dbcontext.cities.OrderByDescending(n => n.Id == Id).Where(a => a.Id == Id).Where(a => a.CurrentState == true).ToList();
             return MySlider;
+        }
+
+        // //////////////////////////////////////////////////////API/////////////////////////////////////////////////////
+
+        public async Task<List<City>> GetAllAsync(int pageNumber, int pageSize)
+        {
+            List<City> MySlIder = await dbcontext.cities.OrderByDescending(n => n.Id).Where(a => a.CurrentState == true).Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<List<City>> GetAlWithConditionAsync(Expression<Func<City, bool>> condition)
+        {
+            List<City> data = await dbcontext.cities.Where(condition).ToListAsync();
+            return data;
+        }
+
+        public async Task<List<City>> GetAllvAsync(int Id)
+        {
+            List<City> MySlIder = await dbcontext.cities.OrderByDescending(n => n.Id == Id).Where(a => a.Id == Id).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<City> GetByIdAsync(int Id)
+        {
+            City sslId = await dbcontext.cities.FirstOrDefaultAsync(a => a.Id == Id && a.CurrentState == true);
+            return sslId;
+        }
+
+        public async Task<bool> DeleteAsync(int Id)
+        {
+            try
+            {
+                var catr = await GetByIdAsync(Id);
+                catr.CurrentState = false;
+                //TbSubCateegoory dele = dbcontex.TbSubCateegoorys.Where(a => a.IdBrand == IdBrand).FirstOrDefault();
+                //dbcontex.TbSubCateegoorys.Remove(dele);
+                dbcontext.Entry(catr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> AddAsync(City savee)
+        {
+            try
+            {
+                await dbcontext.AddAsync<City>(savee);
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateAsync(City updatss)
+        {
+            try
+            {
+                dbcontext.Entry(updatss).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

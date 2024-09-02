@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+
 namespace Infarstuructre.BL
 {
     public interface IITypeSystem
@@ -9,6 +11,16 @@ namespace Infarstuructre.BL
         bool UpdateData(TBTypeSystem updatss);
         bool deleteData(int IdTypeSystem);
         public List<TBTypeSystem> GetAllv(int IdTypeSystem);
+
+        //////////////////////////////Api//////////////////////////////////
+
+        Task<List<TBTypeSystem>> GetAllAsync(int pageNumber, int pageSize);
+        Task<List<TBTypeSystem>> GetAllvAsync(int Id);
+        Task<TBTypeSystem> GetByIdAsync(int Id);
+        Task<bool> DeleteAsync(int Id);
+        Task<bool> AddAsync(TBTypeSystem savee);
+        Task<bool> UpdateAsync(TBTypeSystem updatss);
+
     }
     public class CLSTBTypeSystem: IITypeSystem
     {
@@ -75,6 +87,73 @@ namespace Infarstuructre.BL
         {
             List<TBTypeSystem> MySlider = dbcontext.TBTypeSystems.OrderByDescending(n => n.IdTypeSystem == IdTypeSystem).Where(a => a.IdTypeSystem == IdTypeSystem).Where(a => a.CurrentState == true).ToList();
             return MySlider;
+        }
+
+        // //////////////////////////////////////////////////////API/////////////////////////////////////////////////////
+
+        public async Task<List<TBTypeSystem>> GetAllAsync(int pageNumber, int pageSize)
+        {
+            List<TBTypeSystem> MySlIder = await dbcontext.TBTypeSystems.OrderByDescending(n => n.IdTypeSystem).Where(a => a.CurrentState == true).Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<List<TBTypeSystem>> GetAllvAsync(int Id)
+        {
+            List<TBTypeSystem> MySlIder = await dbcontext.TBTypeSystems.OrderByDescending(n => n.IdTypeSystem == Id).Where(a => a.IdTypeSystem == Id).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<TBTypeSystem> GetByIdAsync(int Id)
+        {
+            TBTypeSystem sslId = await dbcontext.TBTypeSystems.FirstOrDefaultAsync(a => a.IdTypeSystem == Id && a.CurrentState == true);
+            return sslId;
+        }
+
+        public async Task<bool> DeleteAsync(int Id)
+        {
+            try
+            {
+                var catr = await GetByIdAsync(Id);
+                catr.CurrentState = false;
+                //TbSubCateegoory dele = dbcontex.TbSubCateegoorys.Where(a => a.IdBrand == IdBrand).FirstOrDefault();
+                //dbcontex.TbSubCateegoorys.Remove(dele);
+                dbcontext.Entry(catr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> AddAsync(TBTypeSystem savee)
+        {
+            try
+            {
+                await dbcontext.AddAsync<TBTypeSystem>(savee);
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateAsync(TBTypeSystem updatss)
+        {
+            try
+            {
+                dbcontext.Entry(updatss).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

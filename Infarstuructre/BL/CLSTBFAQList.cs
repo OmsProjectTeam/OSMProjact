@@ -1,4 +1,6 @@
-﻿namespace Infarstuructre.BL
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Infarstuructre.BL
 {
 	public interface IIFAQList 
 	{
@@ -8,7 +10,16 @@
 		bool UpdateData(TBFAQList updatss);
 		bool deleteData(int IdFAQList);
 		List<TBViewFAQList> GetAllv(int IdFAQList);
-	}
+
+        ///////////////////////////API//////////////////////////////////////
+        ///
+        Task<List<TBViewFAQList>> GetAllAsync(int pageNumber, int pageSize);
+        Task<List<TBViewFAQList>> GetAllvAsync(int Id);
+        Task<TBFAQList> GetByIdAsync(int Id);
+        Task<bool> DeleteAsync(int Id);
+        Task<bool> AddAsync(TBFAQList savee);
+        Task<bool> UpdateAsync(TBFAQList updatss);
+    }
 
 
 	public class CLSTBFAQList : IIFAQList
@@ -78,5 +89,73 @@
 			List<TBViewFAQList> MySlIdFAQLister = dbcontext.ViewFAQList.OrderByDescending(n => n.IdFAQ == IdFAQList).Where(a => a.IdFAQ == IdFAQList).Where(a => a.CurrentState == true).ToList();
 			return MySlIdFAQLister;
 		}
-	}
+
+        // //////////////////////////////////////////////////////API/////////////////////////////////////////////////////
+
+        public async Task<List<TBViewFAQList>> GetAllAsync(int pageNumber, int pageSize)
+        {
+            List<TBViewFAQList> MySlIder = await dbcontext.ViewFAQList.OrderByDescending(n => n.IdFAQList).Where(a => a.CurrentState == true)
+				.Where(a => a.Active == true).Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<List<TBViewFAQList>> GetAllvAsync(int Id)
+        {
+            List<TBViewFAQList> MySlIder = await dbcontext.ViewFAQList.OrderByDescending(n => n.IdFAQ == Id).Where(a => a.IdFAQ == Id).Where(a => a.CurrentState == true).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<TBFAQList> GetByIdAsync(int Id)
+        {
+            TBFAQList sslId = await dbcontext.TBFAQLists.FirstOrDefaultAsync(a => a.IdFAQList == Id && a.CurrentState == true);
+            return sslId;
+        }
+
+        public async Task<bool> DeleteAsync(int Id)
+        {
+            try
+            {
+                var catr = await GetByIdAsync(Id);
+                catr.CurrentState = false;
+                //TbSubCateegoory dele = dbcontex.TbSubCateegoorys.Where(a => a.IdBrand == IdBrand).FirstOrDefault();
+                //dbcontex.TbSubCateegoorys.Remove(dele);
+                dbcontext.Entry(catr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> AddAsync(TBFAQList savee)
+        {
+            try
+            {
+                await dbcontext.AddAsync<TBFAQList>(savee);
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateAsync(TBFAQList updatss)
+        {
+            try
+            {
+                dbcontext.Entry(updatss).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+    }
 }

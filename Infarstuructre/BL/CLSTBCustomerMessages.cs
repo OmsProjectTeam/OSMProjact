@@ -12,6 +12,15 @@ namespace Infarstuructre.BL
         bool deleteData(int IdCustomerMessages);
         List<TBViewCustomerMessages> GetAllv(int IdCustomerMessages);
         List<TBViewCustomerMessages> GetAllDataentry(string dataEntry);
+        ///////////////////////////////API/////////////////////////////////////////////////
+        ///
+        Task<List<TBViewCustomerMessages>> GetAllAsync(int pageNumber, int pageSize);
+        Task<List<TBViewCustomerMessages>> GetAllvAsync(int Id);
+        Task<List<TBViewCustomerMessages>> GetAllDataentryAsync(string dataEntry);
+        Task<TBCustomerMessages> GetByIdAsync(int Id);
+        Task<bool> DeleteAsync(int Id);
+        Task<bool> AddAsync(TBCustomerMessages savee);
+        Task<bool> UpdateAsync(TBCustomerMessages updatss);
     }
     public class CLSTBCustomerMessages: IICustomerMessages
     {
@@ -82,7 +91,79 @@ namespace Infarstuructre.BL
             List<TBViewCustomerMessages> MySlider = dbcontext.ViewCustomerMessages.Where(a => a.DataEntry == dataEntry && a.CurrentState == true).ToList();
             return MySlider;
         }
+        // //////////////////////////////////////////////////////API/////////////////////////////////////////////////////
 
+        public async Task<List<TBViewCustomerMessages>> GetAllAsync(int pageNumber, int pageSize)
+        {
+            List<TBViewCustomerMessages> MySlIder = await dbcontext.ViewCustomerMessages.OrderByDescending(n => n.IdCustomerMessages).Where(a => a.CurrentState == true)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<List<TBViewCustomerMessages>> GetAllvAsync(int Id)
+        {
+            List<TBViewCustomerMessages> MySlIder = await dbcontext.ViewCustomerMessages.OrderByDescending(n => n.IdCustomerMessages == Id).Where(a => a.IdCustomerMessages == Id).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<List<TBViewCustomerMessages>> GetAllDataentryAsync(string dataEntry)
+        {
+            List<TBViewCustomerMessages> MySlider = await dbcontext.ViewCustomerMessages.Where(a => a.DataEntry == dataEntry && a.CurrentState == true).ToListAsync();
+            return MySlider;
+        }
+
+        public async Task<TBCustomerMessages> GetByIdAsync(int Id)
+        {
+            TBCustomerMessages sslId = await dbcontext.TBCustomerMessagess.FirstOrDefaultAsync(a => a.IdCustomerMessages == Id && a.CurrentState == true);
+            return sslId;
+        }
+
+        public async Task<bool> DeleteAsync(int Id)
+        {
+            try
+            {
+                var catr = await GetByIdAsync(Id);
+                catr.CurrentState = false;
+                //TbSubCateegoory dele = dbcontex.TbSubCateegoorys.Where(a => a.IdBrand == IdBrand).FirstOrDefault();
+                //dbcontex.TbSubCateegoorys.Remove(dele);
+                dbcontext.Entry(catr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> AddAsync(TBCustomerMessages savee)
+        {
+            try
+            {
+                await dbcontext.AddAsync<TBCustomerMessages>(savee);
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateAsync(TBCustomerMessages updatss)
+        {
+            try
+            {
+                dbcontext.Entry(updatss).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
     }
 }

@@ -19,12 +19,13 @@ namespace Infarstuructre.BL
 		Task<IEnumerable<TBViewOrder>> GetAllOrdersAsync(int pageNumber, int pageSize);
 		Task<IEnumerable<TBViewOrder>> GetAllOrdersWithConditionAsync(Expression<Func<TBViewOrder, bool>> condition);
 		Task<Order> GetOrderAsync(int id);
+        Task<bool> DeletOrderAsync(int id);
 		Task AddOrderAsync(Order merchant);
 		Task UpdateOrderAsync(Order merchant);
 		Task<IEnumerable<TBViewOrder>> GetOrdersByPhoneAsync(string phoneNumber);
 
     }
-	public class CLSOrder: IIOrder
+	public class CLSOrder : IIOrder
 	{
 		MasterDbcontext dbcontext;
 		public CLSOrder(MasterDbcontext dbcontext1)
@@ -135,6 +136,24 @@ namespace Infarstuructre.BL
 				.Take(10)
 				.ToListAsync();
 			return order;
+        }
+
+        public async Task<bool> DeletOrderAsync(int id)
+        {
+            try
+            {
+                var catr = await GetOrderAsync(id);
+                catr.CurrentState = false;
+                //TbSubCateegoory dele = dbcontex.TbSubCateegoorys.Where(a => a.IdBrand == IdBrand).FirstOrDefault();
+                //dbcontex.TbSubCateegoorys.Remove(dele);
+                dbcontext.Entry(catr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }	
 }

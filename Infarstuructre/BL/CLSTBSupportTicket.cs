@@ -1,5 +1,7 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Infarstuructre.BL
 {
     public interface IISupportTicket
@@ -12,6 +14,18 @@ namespace Infarstuructre.BL
         bool DELETPHOTO(int IdSupportTicket);
         bool DELETPHOTOWethError(string PhotoNAme);
         bool UpdateData(TBSupportTicket updatss);
+
+        //////////////////////////////////API/////////////////////////////////////////
+        ///
+        Task<List<TBViewSupportTicket>> GetAllAsync(int pageNumber, int pageSize);
+        Task<List<TBViewSupportTicket>> GetAllvAsync(int Id);
+        Task<TBSupportTicket> GetByIdAsync(int Id);
+        Task<bool> DeleteAsync(int Id);
+        Task<bool> AddAsync(TBSupportTicket savee);
+        Task<bool> UpdateAsync(TBSupportTicket updatss);
+        Task<bool> DELETPHOTOAsync(int IdInformationCompanies);
+        Task<bool> DELETPHOTOWethErrorAsync(string PhotoNAme);
+
     }
     public class CLSTBSupportTicket: IISupportTicket
     {
@@ -147,6 +161,85 @@ namespace Infarstuructre.BL
                 // يفضل ألا تترك البرنامج يتجاوز الأخطاء بصمت، يفضل تسجيل الخطأ أو إعادة رميه
                 return false;
             }
+        }
+
+        // //////////////////////////////////////////////////////API/////////////////////////////////////////////////////
+
+        public async Task<List<TBViewSupportTicket>> GetAllAsync(int pageNumber, int pageSize)
+        {
+            List<TBViewSupportTicket> MySlIder = await dbcontext.ViewSupportTicket.OrderByDescending(n => n.IdSupportTicket).Where(a => a.CurrentState == true)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<List<TBViewSupportTicket>> GetAllvAsync(int Id)
+        {
+            List<TBViewSupportTicket> MySlIder = await dbcontext.ViewSupportTicket.OrderByDescending(n => n.IdSupportTicket == Id).Where(a => a.IdSupportTicket == Id).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<TBSupportTicket> GetByIdAsync(int Id)
+        {
+            TBSupportTicket sslId = await dbcontext.TBSupportTickets.FirstOrDefaultAsync(a => a.IdSupportTicket == Id && a.CurrentState == true);
+            return sslId;
+        }
+
+        public async Task<bool> DeleteAsync(int Id)
+        {
+            try
+            {
+                var catr = await GetByIdAsync(Id);
+                catr.CurrentState = false;
+                //TbSubCateegoory dele = dbcontex.TbSubCateegoorys.Where(a => a.IdBrand == IdBrand).FirstOrDefault();
+                //dbcontex.TbSubCateegoorys.Remove(dele);
+                dbcontext.Entry(catr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public async Task<bool> AddAsync(TBSupportTicket savee)
+        {
+            try
+            {
+                await dbcontext.AddAsync<TBSupportTicket>(savee);
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateAsync(TBSupportTicket updatss)
+        {
+            try
+            {
+                dbcontext.Entry(updatss).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public Task<bool> DELETPHOTOAsync(int IdInformationCompanies)
+        {
+            var result = DELETPHOTO(IdInformationCompanies);
+            return Task.FromResult(result);
+        }
+        public Task<bool> DELETPHOTOWethErrorAsync(string PhotoNAme)
+        {
+            var result = DELETPHOTOWethError(PhotoNAme);
+            return Task.FromResult(result);
         }
     }
 }

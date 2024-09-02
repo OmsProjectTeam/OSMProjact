@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+
 namespace Infarstuructre.BL
 {
     public interface IITransaction
@@ -9,6 +11,15 @@ namespace Infarstuructre.BL
         bool UpdateData(TBTransaction updatss);
         bool deleteData(int IdTransaction);
         List<TBViewTransaction> GetAllv(int IdTransaction);
+
+        /////////////////////////////////////API////////////////////////////////////////
+        ///
+        Task<List<TBViewTransaction>> GetAllAsync(int pageNumber, int pageSize);
+        Task<List<TBViewTransaction>> GetAllvAsync(int Id);
+        Task<TBTransaction> GetByIdAsync(int Id);
+        Task<bool> DeleteAsync(int Id);
+        Task<bool> AddAsync(TBTransaction savee);
+        Task<bool> UpdateAsync(TBTransaction updatss);
     }
 
     public class CLSTBTransaction: IITransaction
@@ -76,6 +87,74 @@ namespace Infarstuructre.BL
         {
             List<TBViewTransaction> MySlider = dbcontext.ViewTransaction.OrderByDescending(n => n.IdTransaction == IdTransaction).Where(a => a.IdTransaction == IdTransaction).Where(a => a.CurrentState == true).ToList();
             return MySlider;
+        }
+
+        // //////////////////////////////////////////////////////API/////////////////////////////////////////////////////
+
+        public async Task<List<TBViewTransaction>> GetAllAsync(int pageNumber, int pageSize)
+        {
+            List<TBViewTransaction> MySlIder = await dbcontext.ViewTransaction.OrderByDescending(n => n.IdTransaction).Where(a => a.CurrentState == true)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<List<TBViewTransaction>> GetAllvAsync(int Id)
+        {
+            List<TBViewTransaction> MySlIder = await dbcontext.ViewTransaction.OrderByDescending(n => n.IdTransaction == Id).Where(a => a.IdTransaction == Id).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<TBTransaction> GetByIdAsync(int Id)
+        {
+            TBTransaction sslId = await dbcontext.TBTransactions.FirstOrDefaultAsync(a => a.IdTransaction == Id && a.CurrentState == true);
+            return sslId;
+        }
+
+        public async Task<bool> DeleteAsync(int Id)
+        {
+            try
+            {
+                var catr = await GetByIdAsync(Id);
+                catr.CurrentState = false;
+                //TbSubCateegoory dele = dbcontex.TbSubCateegoorys.Where(a => a.IdBrand == IdBrand).FirstOrDefault();
+                //dbcontex.TbSubCateegoorys.Remove(dele);
+                dbcontext.Entry(catr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> AddAsync(TBTransaction savee)
+        {
+            try
+            {
+                await dbcontext.AddAsync<TBTransaction>(savee);
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateAsync(TBTransaction updatss)
+        {
+            try
+            {
+                dbcontext.Entry(updatss).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

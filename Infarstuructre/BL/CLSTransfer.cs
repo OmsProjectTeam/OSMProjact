@@ -24,10 +24,10 @@ public interface IITransfer
     Task<IEnumerable<TBViewTransfer>> GetAllProfitsAsync(int pageNumber, int pageSize);
     Task<TBTransfer> GetProfitByIdAsync(int Id);
     Task<IEnumerable<TBViewTransfer>> GetAllProfitsWithConditionAsync(Expression<Func<TBViewTransfer, bool>> condition);
-    Task AddProfitsAsync(TBTransfer IdProfit);
-    Task UpdateProfitAsync(TBTransfer IdProfit);
-    bool DELETPHOTOWethError(string PhotoNAme);
-    bool DELETPHOTO(int IdProfit);
+    Task<bool> AddProfitsAsync(TBTransfer save);
+    Task<bool> UpdateProfitAsync(TBTransfer update);
+    Task<bool> DELETPHOTOWethErrorAsync(string PhotoNAme);
+    Task<bool> DELETPHOTOAsync(int IdProfit);
 }
 
 public class CLSTransfer : IITransfer
@@ -180,27 +180,65 @@ public class CLSTransfer : IITransfer
 
     //  /////////////////Api//////////////////////////////////////////////////////////////////////
 
-    public Task<IEnumerable<TBViewTransfer>> GetAllProfitsAsync(int pageNumber, int pageSize)
+    public async Task<IEnumerable<TBViewTransfer>> GetAllProfitsAsync(int pageNumber, int pageSize)
     {
-        throw new NotImplementedException();
+        List<TBViewTransfer> MySlider = await dbcontext.ViewProfits.OrderByDescending(n => n.IdTransfer).Where(a => a.CurrentState == true).Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+        return MySlider;
     }
 
-    public Task<IEnumerable<TBViewTransfer>> GetAllProfitsWithConditionAsync(Expression<Func<TBViewTransfer, bool>> condition)
+    public async Task<IEnumerable<TBViewTransfer>> GetAllProfitsWithConditionAsync(Expression<Func<TBViewTransfer, bool>> condition)
     {
-        throw new NotImplementedException();
+        List<TBViewTransfer> data = await dbcontext.ViewProfits.Where(condition).ToListAsync();
+        return data;
     }
-    public Task<TBTransfer> GetProfitByIdAsync(int Id)
+    public async Task<TBTransfer> GetProfitByIdAsync(int Id)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task AddProfitsAsync(TBTransfer IdProfit)
-    {
-        throw new NotImplementedException();
+        TBTransfer sslid = await dbcontext.TBTransfers.FirstOrDefaultAsync(p => p.IdTransfer == Id);
+        return sslid;
     }
 
-    public Task UpdateProfitAsync(TBTransfer IdProfit)
+    public async Task<bool> AddProfitsAsync(TBTransfer save)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await dbcontext.AddAsync<TBTransfer>(save);
+            await dbcontext.SaveChangesAsync();
+
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
+
+    public async Task<bool> UpdateProfitAsync(TBTransfer updats)
+    {
+        try
+        {
+            dbcontext.Entry(updats).State = EntityState.Modified;
+            await dbcontext.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+
+    public Task<bool> DELETPHOTOAsync(int IdInformationCompanies)
+    {
+        var result = DELETPHOTO(IdInformationCompanies);
+        return Task.FromResult(result);
+    }
+
+    public Task<bool> DELETPHOTOWethErrorAsync(string PhotoNAme)
+    {
+        var result = DELETPHOTOWethError(PhotoNAme);
+        return Task.FromResult(result);
+    }
+
+
+
 }

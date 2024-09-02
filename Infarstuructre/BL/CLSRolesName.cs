@@ -1,5 +1,7 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Infarstuructre.BL
 {
     public interface IIRolesName
@@ -9,6 +11,13 @@ namespace Infarstuructre.BL
         bool saveData(RolesName savee);
         bool UpdateData(RolesName updatss);
         bool deleteData(int Id);
+        /////////////////////////////API////////////////////////////////////////////////
+        ///
+        Task<List<RolesName>> GetAllAsync(int pageNumber, int pageSize);
+        Task<RolesName> GetByIdAsync(int Id);
+        Task<bool> DeleteAsync(int Id);
+        Task<bool> AddAsync(RolesName savee);
+        Task<bool> UpdateAsync(RolesName updatss);
 
     }
 
@@ -72,6 +81,67 @@ namespace Infarstuructre.BL
                 return false;
             }
 
+        }
+
+        // //////////////////////////////////////////////////////API/////////////////////////////////////////////////////
+
+        public async Task<List<RolesName>> GetAllAsync(int pageNumber, int pageSize)
+        {
+            List<RolesName> MySlIder = await dbcontext.RolesNames.OrderByDescending(n => n.Id).Where(a => a.CurrentState == true).Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<RolesName> GetByIdAsync(int Id)
+        {
+            RolesName sslId = await dbcontext.RolesNames.FirstOrDefaultAsync(a => a.Id == Id && a.CurrentState == true);
+            return sslId;
+        }
+
+        public async Task<bool> DeleteAsync(int Id)
+        {
+            try
+            {
+                var catr = await GetByIdAsync(Id);
+                catr.CurrentState = false;
+                //TbSubCateegoory dele = dbcontex.TbSubCateegoorys.Where(a => a.IdBrand == IdBrand).FirstOrDefault();
+                //dbcontex.TbSubCateegoorys.Remove(dele);
+                dbcontext.Entry(catr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> AddAsync(RolesName savee)
+        {
+            try
+            {
+                await dbcontext.AddAsync<RolesName>(savee);
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateAsync(RolesName updatss)
+        {
+            try
+            {
+                dbcontext.Entry(updatss).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
