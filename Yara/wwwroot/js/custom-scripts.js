@@ -739,3 +739,111 @@ $(document).ready(function () {
     }
 });
 // ==================== Paidings ====================
+
+// ==================== Shipping Address Client ====================
+$(document).ready(function () {
+    $('#city-select').change(function () {
+        var cityId = $(this).val();
+        if (cityId) {
+            $.getJSON('@Url.Action("GetAreasByCity", "ShippingAddresseClint")', { cityId: cityId }, function (data) {
+                var $areaSelect = $('#area-select');
+                $areaSelect.empty();
+                $.each(data, function (index, item) {
+                    $areaSelect.append($('<option>', {
+                        value: item.id,
+                        text: item.description
+                    }));
+                });
+            });
+        } else {
+            $('#area-select').empty();
+        }
+    });
+});
+$(document).ready(function () {
+    $('#nike-name-select').change(function () {
+        console.log('Nike name changed');  // Check if the event is firing
+
+        var shippingPriceId = $(this).val();
+        console.log('Selected Shipping Price ID:', shippingPriceId);  // Log the selected ID
+
+        if (shippingPriceId) {
+            var url = '@Url.Action("GetShippingPricesByNikeName", "ShippingAddresseClint", new { area = "Admin" })';
+            console.log('Request URL:', url);  // Log the request URL
+
+            $.getJSON(url, { shippingPriceId: shippingPriceId }, function (data) {
+                console.log('Received Data:', data);  // Log the received data
+
+                if (data) {
+                    $('#price-under-10').val(data.coPricePerkgUnder10);
+                    $('#price-above-10').val(data.coPricePerkgAbove10);
+                } else {
+                    console.log('No data received or data is null');
+                }
+            }).fail(function (jqxhr, textStatus, error) {  // Handle errors
+                console.error('Request Failed:', textStatus, error);
+            });
+        } else {
+            console.log('No Shipping Price ID selected');
+        }
+    });
+});
+$(document).ready(function () {
+    $('#delivery-tarrif-select').change(function () {
+        console.log('Delivery name changed');  // Check if the event is firing
+
+        var typeSystemId = $(this).val();
+        console.log('Selected Shipping Price ID:', typeSystemId);  // Log the selected ID
+
+        if (typeSystemId) {
+            var url = '@Url.Action("GetDeliveryDetailsByTypeSystem", "ShippingAddresseClint", new { area = "Admin" })';
+            console.log('Request URL:', url);  // Log the request URL
+
+            $.getJSON(url, { typeSystemId: typeSystemId }, function (data) {
+                console.log('Received Data:', data);  // Log the received data
+
+                if (data) {
+                    $('#delivery-company').val(data.companyPricing);
+                    $('#delivery-client').val(data.deliveryPriceClint);
+                } else {
+                    console.log('No data received or data is null');
+                }
+            }).fail(function (jqxhr, textStatus, error) {  // Handle errors
+                console.error('Request Failed:', textStatus, error);
+            });
+        } else {
+            console.log('No Shipping Price ID selected');
+        }
+    });
+});
+$(document).ready(function () {
+    function updateDeliveryPriceClint() {
+        // Clear the existing value before updating
+        $('#delivery-price-clint').val('');
+
+        // Get the text of the selected option for Clint Name
+        var clintName = $('#clintName option:selected').text() || 'N/A';
+        var city = $('#city-select option:selected').text() || 'N/A';
+        var area = $('#area-select option:selected').text() || 'N/A';
+        var landmark = $('#landmark').val() || 'N/A';
+        var nikeName = $('#nike-name-select option:selected').text() || 'N/A';
+        var under10 = $('#shipping-under-10').val() || 'N/A';
+        var above10 = $('#shipping-above-10').val() || 'N/A';
+        var system = $('#type-system-select option:selected').text() || 'N/A';
+        var localDescription = $('#local-delivery-description').val() || 'N/A';
+        var dealingStatus = $('#dealing-status').val() || 'N/A';
+        var deliveryCustomer = $('#delivery-customer').val() || 'N/A';
+        var exchangePrice = $('#type-system-select option:selected').val() || 'N/A';
+
+        // Combine the values in the correct order
+        var combined = `Clint Name: ${clintName} -- City Name: ${city} -- Area Name: ${area} -- Landmark: ${landmark} -- Customer shipping price is less than 10: ${under10} -- Customer shipping price is more than 10: ${above10} -- Nick name: ${nikeName} -- System: ${system} -- Delivery price to the customer: ${deliveryCustomer} -- exchange: ${exchangePrice} -- Dealing status: ${dealingStatus}`;
+
+        // Set the combined string to the delivery price field
+        $('#delivery-price-clint').val(combined);
+    }
+
+    // Attach the function to the change and input events
+    $('#clintName, #city-select, #area-select, #nike-name-select, #type-system-select').change(updateDeliveryPriceClint);
+    $('#description, #landmark, #price-under-10, #price-above-10, #local-delivery-description, #dealingStatus, #deliveryCustomer, #exchangePrice').on('input', updateDeliveryPriceClint);
+});
+// ==================== Shipping Address Client ====================
