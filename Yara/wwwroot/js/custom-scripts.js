@@ -496,4 +496,25 @@ var loadFile = function (event) {
 };
 // ==================== My Check Customer ====================
 
-// ==================== My Check Customer ====================
+// ==================== City Delivery ====================
+$(document).ready(function () {
+    $('#city-select').change(function () {
+        var cityId = $(this).val();
+        if (cityId) {
+            $.getJSON('@Url.Action("GetAreasByCity", "CityDeliveryTariffs")', { cityId: cityId }, function (data) {
+                var $areaSelect = $('#area-select');
+                $areaSelect.empty();
+                $.each(data, function (index, item) {
+                    $areaSelect.append($('<option>', {
+                        value: item.id,
+                        text: item.description
+                    }));
+                });
+            });
+        } else {
+            $('#area-select').empty();
+        }
+    });
+});
+
+// ==================== City Delivery ====================
