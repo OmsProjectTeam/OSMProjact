@@ -126,7 +126,8 @@
 
 
 @section Scripts {
-    <script>
+    <script src="~/js/custom-scripts.js"> </script>
+    @* <script>
         var loadFile = function (event) {
             var image = document.getElementById('output');
             image.src = URL.createObjectURL(event.target.files[0]);
@@ -134,7 +135,7 @@
     </script>
     <script>
         $("#url").val(window.location.href);
-    </script>
+    </script> *@
     <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
 
     <!-- Multi Select -->
@@ -144,13 +145,13 @@
 
     <!-- تضمين مكتبة Select2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script>
+    @* <script>
         $(document).ready(function () {
             $('.select2_1').select2({
                 placeholder: "Select an option",
                 allowClear: true
             });
         });
-    </script>
+    </script> *@
 }
 
