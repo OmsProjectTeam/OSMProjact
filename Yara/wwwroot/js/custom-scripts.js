@@ -517,4 +517,43 @@ $(document).ready(function () {
     });
 });
 
-// ==================== City Delivery ====================
+// ==================== Customer Message ====================
+$(document).ready(function () {
+    $('.select2_1').select2({
+        placeholder: "Select an option",
+        allowClear: true
+    });
+
+    $('#merchant-select').change(function () {
+        var userId = $(this).val();
+        if (userId) {
+            $.getJSON('@Url.Action("GetUserDetails", "CustomerMessages")', { id: userId }, function (data) {
+                $('input[name="CustomerMessages.CompanyName"]').val(data.companyName);
+                $('input[name="CustomerMessages.PhoneCompany"]').val(data.phoneCompany);
+                $('input[name="CustomerMessages.PhoneCompanySecand"]').val(data.phoneCompanySecand);
+                $('input[name="CustomerMessages.EmailCompany"]').val(data.emailCompany);
+
+            });
+        }
+    });
+});
+$(document).ready(function () {
+    $('#city-select').change(function () {
+        var cityId = $(this).val();
+        if (cityId) {
+            $.getJSON('@Url.Action("GetAreasByCity", "CityDeliveryTariffs")', { cityId: cityId }, function (data) {
+                var $areaSelect = $('#area-select');
+                $areaSelect.empty();
+                $.each(data, function (index, item) {
+                    $areaSelect.append($('<option>', {
+                        value: item.id,
+                        text: item.description
+                    }));
+                });
+            });
+        } else {
+            $('#area-select').empty();
+        }
+    });
+});
+// ==================== Customer Message ====================
