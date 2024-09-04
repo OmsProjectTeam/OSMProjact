@@ -681,3 +681,61 @@ $(document).ready(function () {
     }
 });
 // ==================== Order New ====================
+
+// ==================== Paidings ====================
+$(document).ready(function () {
+    // Bind change event to the selected company
+    $('#orderId').change(function () {
+        updateCosting(false);
+    });
+    // Bind change event to the selected company
+    $('#toCurrency').change(function () {
+        updateCosting(false);
+    });
+    // Bind change event to the revisedMoney input field
+    $('#revisedMoney').on('input', function () {
+        updateCosting(true); // Pass true to indicate manual input
+    });
+
+    function updateCosting(isManual) {
+
+        const orderId = $('#orderId').val();
+        const revisedMoney = $('#revisedMoney').val();
+        const toCurrency = $('#toCurrency').val();
+
+        console.log("Updating costing");
+        console.log("isManual: ", isManual);
+        console.log("orderId: ", orderId);
+        console.log("revisedMoney: ", revisedMoney);
+        console.log("toCurrency: ", toCurrency);
+
+        $.ajax({
+            url: '@Url.Action("GetOrderDetails", "Paidings")',
+            data: {
+                toCurrencyId: toCurrency,
+                fromCurrencyId: 1,
+                revisedMoney: revisedMoney,
+                orderId: orderId,
+                isManual: isManual
+            },
+            success: function (data) {
+                console.log("AJAX success, data: ", data);
+                if (data) {
+                    $('#exchangePrice').val(data.exchangedPrice);
+                    // $('#revisedMoney').val(data.revisedMoney);
+                    if (!isManual) {
+                        $('#revisedMoney').val(data.revisedMoney);
+                    }
+                } else {
+                    $('#exchangePrice').val('');
+                    $('#revisedMoney').val('');
+                }
+            },
+            error: function () {
+                alert('Error! Please try again.');
+                console.log("AJAX error");
+            }
+        });
+    }
+});
+// ==================== Paidings ====================
