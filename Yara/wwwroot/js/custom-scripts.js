@@ -608,3 +608,76 @@ $(document).ready(function () {
     });
 });
 // ==================== Information Companies ====================
+
+// ==================== Order New ====================
+$(document).ready(function () {
+    // Bind change event to the selected company
+    $('#selectedcompany').change(function () {
+        console.log("Selected company changed");
+        updateCosting();
+    });
+    // Bind change event to the selected company
+    $('#toCurrency').change(function () {
+        console.log("Selected currency changed");
+        updateCosting();
+    });
+
+    // Bind input event to the weight field
+    $('#weight').on('input', function () {
+        updateCosting();
+    });
+
+    function updateCosting() {
+        const selectedCompany = $('#selectedcompany').val();
+        const weight = parseFloat($('#weight').val());
+        const toCurrency = $('#toCurrency').val();
+
+        if (isNaN(weight) || weight <= 0) {
+            console.log("Invalid weight value");
+            $('#costPrice').val('');
+            $('#price').val('');
+            return;
+        }
+
+        console.log("Selected company is: ", selectedCompany);
+        console.log("Weight is: ", weight);
+        console.log("toCurrency is: ", toCurrency);
+
+        $.ajax({
+            url: '@Url.Action("GetPrices", "OrderNew")',
+            data: { selectedCompanyId: selectedCompany, weight: weight, toCurrencyId: toCurrency, fromCurrencyId: 1 },
+            success: function (data) {
+                console.log("AJAX success, data: ", data);
+                if (data) {
+                    $('#costPrice').val(data.costPrice);
+                    $('#price').val(data.price);
+                    $('#exchangePrice').val(data.exchangePrice);
+                    // calculatePrice();
+                } else {
+                    $('#costPrice').val('');
+                    $('#price').val('');
+                    $('#exchangePrice').val('');
+                }
+            },
+            error: function () {
+                alert('Error! Please try again.');
+                console.log("AJAX error");
+            }
+        });
+    }
+
+    function calculatePrice() {
+        const weight = parseFloat($('#weight').val());
+        const costPrice = parseFloat($('#costPrice').val());
+
+        if (isNaN(weight) || isNaN(costPrice)) {
+            console.log("Invalid weight or cost price");
+            $('#price').val('');
+            return;
+        }
+
+        const price = weight * costPrice;
+        $('#price').val(price);
+    }
+});
+// ==================== Order New ====================
