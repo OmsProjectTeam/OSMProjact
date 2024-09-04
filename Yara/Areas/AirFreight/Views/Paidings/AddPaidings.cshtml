@@ -132,7 +132,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
     <script src="~/Admin/assets/plugin/multiselect/multiselect.min.js"></script>
-    <script>
+    @* <script>
         var loadFile = function (event) {
             var image = document.getElementById('output');
             image.src = URL.createObjectURL(event.target.files[0]);
@@ -140,7 +140,7 @@
     </script>
     <script>
         $("#url").val(window.location.href);
-    </script>
+    </script> *@
     <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
 
     <!-- Multi Select -->
@@ -150,13 +150,14 @@
 
     <!-- تضمين مكتبة Select2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script>
+    <script src="~/js/custom-scripts-airfreight.js"> </script>
+    @* <script>
         $(document).ready(function () {
-            console.log("Document is ready");
-            $('.select2_1').select2({
-                placeholder: "Select an option",
-                allowClear: true
-            });
+            // console.log("Document is ready");
+            // $('.select2_1').select2({
+            //     placeholder: "Select an option",
+            //     allowClear: true
+            // });
             // Bind change event to the selected company
             $('#orderId').change(function () {
                 updateCosting(false);
@@ -215,7 +216,7 @@
             var image = document.getElementById('output');
             image.src = URL.createObjectURL(event.target.files[0]);
         };
-    </script>
+    </script> *@
 }
 
 
