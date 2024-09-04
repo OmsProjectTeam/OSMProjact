@@ -18,7 +18,6 @@ function truncateText(text, maxLength) {
         return text;
     }
 }
-
 // Apply truncation on document ready
 $(document).ready(function () {
     $('.truncate-50').each(function () {
@@ -27,7 +26,6 @@ $(document).ready(function () {
         $(this).text(truncatedText); // Set the truncated text back to the cell
     });
 });
-
 // Destroy and reinitialize DataTable for #example2
 $(function () {
     $("#example2").DataTable().fnDestroy();
@@ -40,7 +38,6 @@ $(function () {
         "autoWidth": false,
     });
 });
-
 // Destroy and reinitialize DataTable for #example3
 $(function () {
     $("#example3").DataTable().fnDestroy();
@@ -53,3 +50,268 @@ $(function () {
         "autoWidth": false,
     });
 });
+// =============== ResourceWebAr.LBMyArea =================
+
+
+// ==================== Admin Chat ====================
+
+// SignalR Chat Initialization
+let connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+// Handle receiving messages from the server
+connection.on("ReceiveMessage", function (user, message, pathImg, img, time) {
+    appendMessage(user, message, pathImg, img, time);
+});
+
+// Function to send a message
+async function sendMessage() {
+    const message = document.getElementById("messageInput1").value;
+    const to = document.getElementById("sendTo").value;
+
+    if (!to) {
+        console.error("Recipient name (to) is null or undefined. Cannot send message.");
+        alert("Please select a user to chat with.");
+        return;
+    }
+
+    const fileInput = document.getElementById("ImgSend");
+    let filePath = null;
+    if (fileInput && fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        try {
+            filePath = await uploadFile(file);
+        } catch (error) {
+            console.error("Error uploading file:", error);
+            return;
+        }
+    }
+
+    document.getElementById("messageInput1").value = "";
+
+    connection.invoke("SendMessageToClients", message, to, filePath).then(() => {
+        // Append the message to the message list in the UI
+        appendMessage('@ViewBag.UserId', message, filePath, '@ViewBag.img', new Date().toLocaleTimeString());
+    }).catch(function (err) {
+        console.error("Error sending message:", err.toString());
+    });
+}
+
+// Function to upload a file to the server
+async function uploadFile(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch("/Admin/chat/uploadFile", {
+        method: "POST",
+        body: formData
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        return data.filePath;
+    } else {
+        throw new Error("File upload failed");
+    }
+}
+
+// Function to append the message to the chat UI
+function appendMessage(user, message, pathImg, img, time) {
+    const messageList = document.getElementById("messagesList");
+    const isSender = user === '@ViewBag.UserId'; // Compare with the current user's ID or name
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("message", isSender ? "sent" : "received");
+
+    let content = `<div class="message-content">${message}</div><div class="message-time">${time}</div>`;
+
+    // If there is an image attached to the message, add it to the content
+    if (pathImg) {
+        content = `<img src="${pathImg}" alt="Image message" class="message-image" />` + content;
+    }
+
+    messageDiv.innerHTML = content;
+    messageList.appendChild(messageDiv);
+    messageList.scrollTop = messageList.scrollHeight; // Scroll to the bottom after adding the message
+}
+
+// Start the SignalR connection
+connection.start().catch(function (err) {
+    return console.error(err.toString());
+});
+
+// Scroll the chat to the bottom on window load
+window.onload = function () {
+    scrollToBottom();
+}
+
+// Function to scroll the chat to the bottom
+function scrollToBottom() {
+    const messagesList = document.getElementById("messagesList");
+    messagesList.scrollTop = messagesList.scrollHeight;
+}
+
+// ==================== Admin Chat ====================
+// ==================== Own Chat ====================
+
+
+let connection;
+
+async function start() {
+    try {
+        await connection.start();
+        console.log("SignalR connected");
+    } catch (err) {
+        console.log("Error connecting to SignalR:", err.toString());
+        setTimeout(start, 5000); // Retry connection after 5 seconds
+    }
+}
+
+connection.on("ReceiveMessage", function (user, message, pathImg, img, time) {
+    console.log("Message received:", { user, message, pathImg, img, time });
+    appendMessage(user, message, pathImg, img, time);
+});
+
+async function sendMessage() {
+    const message = document.getElementById("messageInput1").value;
+    const to = document.getElementById("sendTo").value;
+    const fileInput = document.getElementById("ImgSend");
+    const file = fileInput.files[0];
+
+    let filePath = null;
+    if (file) {
+        try {
+            filePath = await uploadFile(file);
+        } catch (error) {
+            console.error("Error uploading file:", error);
+            return;
+        }
+    }
+
+    document.getElementById("messageInput1").value = "";
+    fileInput.value = "";
+
+    connection.invoke("SendMessageToClients", message, to, filePath).then(function () {
+        console.log("Message sent:", { message, to, filePath });
+        appendMessage(document.getElementById("userName").textContent, message, filePath, ViewBag.img, new Date().toLocaleTimeString());
+    }).catch(function (err) {
+        console.error("Error sending message:", err.toString());
+    });
+}
+
+async function uploadFile(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch("/Admin/Chat/UploadFile", {
+        method: "POST",
+        body: formData
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        return data.filePath;
+    } else {
+        throw new Error("File upload failed");
+    }
+}
+
+function appendMessage(user, message, pathImg, img, time) {
+    const messageList = document.getElementById("messagesList");
+
+    const messageItem = document.createElement("div");
+    messageItem.style.display = "flex";
+    messageItem.style.justifyContent = user === document.getElementById("userName").textContent ? "flex-start" : "flex-end";
+    messageItem.style.maxWidth = "80%";
+
+    const messageContent = document.createElement("li");
+    messageContent.style.display = "flex";
+    messageContent.style.backgroundColor = user === document.getElementById("userName").textContent ? "white" : "gray";
+    messageContent.style.color = user === document.getElementById("userName").textContent ? "black" : "white";
+    messageContent.style.border = "groove 1px black";
+    messageContent.style.marginBottom = "3px";
+    messageContent.style.borderRadius = "10px";
+    messageContent.style.height = "auto";
+    messageContent.style.padding = "10px";
+
+    const userImg = document.createElement("img");
+    userImg.src = img;
+    userImg.style.width = "50px";
+    userImg.style.height = "50px";
+    userImg.style.borderRadius = "50%";
+    messageContent.appendChild(userImg);
+
+    if (pathImg && pathImg.includes("Images/")) {
+        const imgContainer = document.createElement("div");
+        imgContainer.style.display = "flex";
+        imgContainer.style.flexDirection = "column";
+        imgContainer.style.gap = "5px";
+
+        const messageImg = document.createElement("img");
+        messageImg.src = pathImg;
+        messageImg.style.width = "150px";
+        messageImg.style.height = "200px";
+        messageImg.style.borderRadius = "150%";
+
+        const messageText = document.createElement("p");
+        messageText.textContent = `${message} :`;
+
+        imgContainer.appendChild(messageImg);
+        imgContainer.appendChild(messageText);
+        messageContent.appendChild(imgContainer);
+    } else {
+        const messageText = document.createElement("p");
+        messageText.textContent = `${message} :`;
+        messageContent.appendChild(messageText);
+    }
+
+    const messageTime = document.createElement("span");
+    messageTime.textContent = time;
+    messageContent.appendChild(messageTime);
+
+    messageItem.appendChild(messageContent);
+    messageList.appendChild(messageItem);
+    scrollToBottom();
+}
+
+function scrollToBottom() {
+    const messagesList = document.getElementById("messagesList");
+    messagesList.scrollTop = messagesList.scrollHeight;
+}
+
+window.onload = function () {
+    scrollToBottom();
+    const user = document.getElementById("userName").textContent;
+    connection.invoke("MarkMessagesAsRead", user).catch(function (err) {
+        console.error("Error marking messages as read:", err.toString());
+    });
+}
+
+function refreshMessagesList() {
+    const anotherId = document.getElementById("sendTo").value;
+    $.ajax({
+        url: '/Admin/Chat/GetMessages',
+        type: 'GET',
+        data: { anotherId: anotherId },
+        success: function (data) {
+            console.log("Messages fetched successfully", data);
+            const messageList = document.getElementById("messagesList");
+            messageList.innerHTML = ""; // Clear the current messages
+            data.forEach(message => {
+                appendMessage(message.SenderId, message.Message, message.ImgMsg, message.SenderId === document.getElementById("userName").textContent ? ViewBag.img : "", message.MessageeTime);
+            });
+        },
+        error: function (err) {
+            console.error("Error fetching messages:", err);
+            if (err.responseText) {
+                console.error("Error details:", err.responseText);
+            }
+        }
+    });
+}
+
+connection.onclose(async () => {
+    await start();
+});
+
+start();
+
+// ==================== Own Chat ====================
