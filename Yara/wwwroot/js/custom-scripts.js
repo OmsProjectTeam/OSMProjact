@@ -557,3 +557,13 @@ $(document).ready(function () {
     });
 });
 // ==================== Customer Message ====================
+
+// ==================== FAQ Descriptions ====================
+$(document).ready(function () {
+    // Bind change event to the selected company
+    $('#SelectFAQ').change(function () {
+        console.log("Selected FAQ changed");
+        updateCosting();
+    });
+});
+// ==================== FAQ Descriptions ====================
