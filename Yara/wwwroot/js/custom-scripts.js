@@ -150,6 +150,7 @@ function scrollToBottom() {
 }
 
 // ==================== Admin Chat ====================
+
 // ==================== My Check Customer ====================
 $(document).ready(function () {
     $('#phoneSearchForm').on('submit', function (e) {
@@ -493,4 +494,6 @@ var loadFile = function (event) {
     var image = document.getElementById('output');
     image.src = URL.createObjectURL(event.target.files[0]);
 };
+// ==================== My Check Customer ====================
+
 // ==================== My Check Customer ====================
