@@ -567,3 +567,44 @@ $(document).ready(function () {
     });
 });
 // ==================== FAQ Descriptions ====================
+
+// ==================== Information Companies ====================
+$(document).ready(function () {
+    $('.select2_1').select2({
+        placeholder: "Select an option",
+        allowClear: true
+    });
+
+    $('#merchant-select').change(function () {
+        var userId = $(this).val();
+        if (userId) {
+            $.getJSON('@Url.Action("GetUserDetails", "InformationCompanies")', { id: userId }, function (data) {
+                $('input[name="InformationCompanies.CompanyName"]').val(data.companyName);
+                $('input[name="InformationCompanies.PhoneCompany"]').val(data.phoneCompany);
+                $('input[name="InformationCompanies.PhoneCompanySecand"]').val(data.phoneCompanySecand);
+                $('input[name="InformationCompanies.EmailCompany"]').val(data.emailCompany);
+
+            });
+        }
+    });
+});
+$(document).ready(function () {
+    $('#city-select').change(function () {
+        var cityId = $(this).val();
+        if (cityId) {
+            $.getJSON('@Url.Action("GetAreasByCity", "CityDeliveryTariffs")', { cityId: cityId }, function (data) {
+                var $areaSelect = $('#area-select');
+                $areaSelect.empty();
+                $.each(data, function (index, item) {
+                    $areaSelect.append($('<option>', {
+                        value: item.id,
+                        text: item.description
+                    }));
+                });
+            });
+        } else {
+            $('#area-select').empty();
+        }
+    });
+});
+// ==================== Information Companies ====================
