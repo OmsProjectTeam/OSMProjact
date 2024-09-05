@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,15 @@ namespace Infarstuructre.BL
 		bool deleteData(int IdFAQDescreption);
 		List<TBViewFAQDescription> GetAllv(int IdFAQDescreption);
 		bool UpdateData(TBFAQDescreption updatss);
+		////////////////////////////API//////////////////////////////////
+		///
 
+		Task<List<TBViewFAQDescription>> GetAllAsync(int pageNumber, int pageSize);
+		Task<List<TBViewFAQDescription>> GetAllvAsync(int Id);
+		Task<TBFAQDescreption> GetByIdAsync(int Id);
+		Task<bool> DeleteAsync(int Id);
+		Task<bool> AddAsync(TBFAQDescreption savee);
+		Task<bool> UpdateAsync(TBFAQDescreption updatss);
     }
 
 	public class CLSTBFAQDescreption : IIFAQDescreption
@@ -86,7 +95,73 @@ namespace Infarstuructre.BL
 			List<TBViewFAQDescription> MySlIdFAQDescreptioner = dbcontext.ViewFAQDescription.OrderByDescending(n => n.IdFAQ == IdFAQDescreption).Where(a => a.IdFAQ == IdFAQDescreption).Where(a => a.CurrentState == true).ToList();
 			return MySlIdFAQDescreptioner;
 		}
+        // //////////////////////////////////////////////////////API/////////////////////////////////////////////////////
 
+        public async Task<List<TBViewFAQDescription>> GetAllAsync(int pageNumber, int pageSize)
+        {
+            List<TBViewFAQDescription> MySlIder = await dbcontext.ViewFAQDescription.OrderByDescending(n => n.IdFAQDescreption).Where(a => a.CurrentState == true)
+				.Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+            return MySlIder;
+        }
 
-	}
+        public async Task<List<TBViewFAQDescription>> GetAllvAsync(int Id)
+        {
+            List<TBViewFAQDescription> MySlIder = await dbcontext.ViewFAQDescription.OrderByDescending(n => n.IdFAQ == Id).Where(a => a.IdFAQ == Id).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<TBFAQDescreption> GetByIdAsync(int Id)
+        {
+            TBFAQDescreption sslId = await dbcontext.TBFAQDescreptions.FirstOrDefaultAsync(a => a.IdFAQDescreption == Id && a.CurrentState == true);
+            return sslId;
+        }
+
+        public async Task<bool> DeleteAsync(int Id)
+        {
+            try
+            {
+                var catr = await GetByIdAsync(Id);
+                catr.CurrentState = false;
+                //TbSubCateegoory dele = dbcontex.TbSubCateegoorys.Where(a => a.IdBrand == IdBrand).FirstOrDefault();
+                //dbcontex.TbSubCateegoorys.Remove(dele);
+                dbcontext.Entry(catr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> AddAsync(TBFAQDescreption savee)
+        {
+            try
+            {
+                await dbcontext.AddAsync<TBFAQDescreption>(savee);
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateAsync(TBFAQDescreption updatss)
+        {
+            try
+            {
+                dbcontext.Entry(updatss).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+    }
 }

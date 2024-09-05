@@ -22,6 +22,18 @@ namespace Infarstuructre.BL
 		List<VwUser> GetAllbyRole();
 		List<VwUser> GetActiveSupport();
 
+        ///////////////////////API////////////////////////
+
+        Task<List<VwUser>> GetAllAsync(int pageNumber, int pageSize);
+        Task<ApplicationUser> GetByIdAsync(string? Id);
+        Task<List<ApplicationUser>> GetAllByNameAsync(string name);
+        Task<List<VwUser>> GetAllbyIdAsync(string userId);
+        Task<List<ApplicationUser>> GetAllByNameallAsync();
+        Task<ApplicationUser> GetByNameAsync(string name);
+        Task<List<VwUser>> GetAllbyRoleAsync();
+        Task<List<VwUser>> GetActiveSupportAsync();
+
+
 
 
     }
@@ -98,6 +110,61 @@ namespace Infarstuructre.BL
         {
             ApplicationUser MySlider = _userManager.Users.Where(x => x.UserName == name).Where(n => n.ActiveUser == true).FirstOrDefault(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
                                                                                                                                        //List<VwUser> MySlider = dbcontext.VwUsers.OrderByDescending(n => n.Id).Where(a => a.ActiveUser == true).ToList();
+            return MySlider;
+        }
+
+        /// ////////////////////////////////API//////////////////////////////////////////////////////////////
+
+        public async Task<List<VwUser>> GetAllAsync(int pageNumber, int pageSize)
+        {
+            List<VwUser> MySlider = await dbcontext.VwUsers.OrderByDescending(n => n.Id).Where(n => n.ActiveUser == true).Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+            return MySlider;
+        }
+
+        public async Task<ApplicationUser> GetByIdAsync(string? Id)
+        {
+            ApplicationUser sslid = await _userManager.Users.FirstOrDefaultAsync(a => a.Id == Id);
+            return sslid;
+        }
+
+        public async Task<List<ApplicationUser>> GetAllByNameAsync(string name)
+        {
+            List<ApplicationUser> MySlider = await _userManager.Users.OrderByDescending(x => x.Id).Where(n => n.ActiveUser == true).ToListAsync();
+                                                                                                                                        
+            return MySlider;
+        }
+
+        public async Task<List<VwUser>> GetAllbyIdAsync(string userId)
+        {
+            List<VwUser> MySlider = await dbcontext.VwUsers.Where(x => x.Id == userId).Where(n => n.ActiveUser == true).ToListAsync();
+                                                                                                                            
+            return MySlider;
+        }
+
+        public async Task<List<ApplicationUser>> GetAllByNameallAsync()
+        {
+            List<ApplicationUser> MySlider = await _userManager.Users.OrderByDescending(x => x.Id).Where(n => n.ActiveUser == true).ToListAsync();
+            return MySlider;
+        }
+
+        public async Task<ApplicationUser> GetByNameAsync(string name)
+        {
+            ApplicationUser MySlider = await _userManager.Users.Where(x => x.UserName == name).Where(n => n.ActiveUser == true).FirstOrDefaultAsync();                                                                                                                     
+            return MySlider;
+        }
+
+        public async Task<List<VwUser>> GetAllbyRoleAsync()
+        {
+            List<VwUser> MySlider = await dbcontext.VwUsers.Where(x => x.Role == "Admin").ToListAsync();
+                                                                                              
+            return MySlider;
+        }
+
+        public async Task<List<VwUser>> GetActiveSupportAsync()
+        {
+            List<VwUser> MySlider = await dbcontext.VwUsers.Where(x => x.Role == "Support").Where(n => n.ActiveUser == true).ToListAsync(); //_userManager.Users.OrderBy(x=>x.Name).ToList()
+                                                                                                                                 //List<VwUser> MySlider = dbcontext.VwUsers.OrderByDescending(n => n.Id).Where(a => a.ActiveUser == true).ToList();
             return MySlider;
         }
     }

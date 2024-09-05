@@ -136,35 +136,7 @@
 </div>
 
 @section Scripts {
-    <script>
-        var loadFile = function (event) {
-            var image = document.getElementById('output');
-            image.src = URL.createObjectURL(event.target.files[0]);
-        };
-
-        $("#url").val(window.location.href);
-
-        // JavaScript لتحميل الضواحي عند تغيير المدينة
-        $(document).ready(function () {
-            $('#city-select').change(function () {
-                var cityId = $(this).val();
-                if (cityId) {
-                    $.getJSON('@Url.Action("GetAreasByCity", "CityDeliveryTariffs")', { cityId: cityId }, function (data) {
-                        var $areaSelect = $('#area-select');
-                        $areaSelect.empty();
-                        $.each(data, function (index, item) {
-                            $areaSelect.append($('<option>', {
-                                value: item.id,
-                                text: item.description
-                            }));
-                        });
-                    });
-                } else {
-                    $('#area-select').empty();
-                }
-            });
-        });
-    </script>
+    <script src="~/js/custom-scripts.js"> </script>
 }
 
 

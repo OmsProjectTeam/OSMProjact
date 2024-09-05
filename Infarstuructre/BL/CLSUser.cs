@@ -1,10 +1,17 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+
 namespace Infarstuructre.BL
 {
     public interface IIUser
     {
         List<TBViewUsers> GetAll();
         User GetById(int Id);
+
+        ////////////////////////////// API ///////////////////////////////////
+        ///
+        Task<List<TBViewUsers>> GetAllAsync(int pageNumber, int pageSize);
+        Task<User> GetByIdAsync(int Id);
     }
     public class CLSUser: IIUser
     {
@@ -43,6 +50,19 @@ namespace Infarstuructre.BL
         //    }
 
         //}
+        // //////////////////////////////////////////////////////API/////////////////////////////////////////////////////
 
+        public async Task<List<TBViewUsers>> GetAllAsync(int pageNumber, int pageSize)
+        {
+            List<TBViewUsers> MySlIder = await dbcontext.ViewUsers.OrderByDescending(n => n.id).Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<User> GetByIdAsync(int Id)
+        {
+            User sslId = await dbcontext.users.FirstOrDefaultAsync(a => a.Id == Id);
+            return sslId;
+        }
     }
 }

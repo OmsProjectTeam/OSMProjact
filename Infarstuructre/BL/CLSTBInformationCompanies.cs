@@ -1,4 +1,7 @@
 ﻿
+using Domin.Entity;
+using Microsoft.EntityFrameworkCore;
+
 namespace Infarstuructre.BL
 {
     public interface IIInformationCompanies
@@ -11,6 +14,19 @@ namespace Infarstuructre.BL
         List<TBInformationCompanies> GetAllv(int IdInformationCompanies);
         bool DELETPHOTO(int IdInformationCompanies);
         bool DELETPHOTOWethError(string PhotoNAme);
+
+        /////////////////////////////API////////////////////////////////////
+        ///
+        Task<List<TBViewInformationCompanies>> GetAllAsync(int pageNumber, int pageSize);
+        Task<List<TBViewInformationCompanies>> GetAllvAsync(int Id);
+        Task<TBInformationCompanies> GetByIdAsync(int Id);
+        Task<bool> DeleteAsync(int Id);
+        Task<bool> AddAsync(TBInformationCompanies savee);
+        Task<bool> UpdateAsync(TBInformationCompanies updatss);
+        Task<bool> DELETPHOTOAsync(int IdInformationCompanies);
+        Task<bool> DELETPHOTOWethErrorAsync(string PhotoNAme);
+
+
     }
     public class CLSTBInformationCompanies: IIInformationCompanies
     {
@@ -149,5 +165,84 @@ namespace Infarstuructre.BL
             }
         }
 
+        // //////////////////////////////////////////////////////API/////////////////////////////////////////////////////
+
+        public async Task<List<TBViewInformationCompanies>> GetAllAsync(int pageNumber, int pageSize)
+        {
+            List<TBViewInformationCompanies> MySlIder = await dbcontext.ViewInformationCompanies.OrderByDescending(n => n.IdInformationCompanies).Where(a => a.CurrentState == true)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<List<TBViewInformationCompanies>> GetAllvAsync(int Id)
+        {
+            List<TBViewInformationCompanies> MySlIder = await dbcontext.ViewInformationCompanies.OrderByDescending(n => n.IdInformationCompanies == Id).Where(a => a.IdInformationCompanies == Id).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<TBInformationCompanies> GetByIdAsync(int Id)
+        {
+            TBInformationCompanies sslId = await dbcontext.TBInformationCompaniess.FirstOrDefaultAsync(a => a.IdInformationCompanies == Id && a.CurrentState == true);
+            return sslId;
+        }
+
+        public async Task<bool> DeleteAsync(int Id)
+        {
+            try
+            {
+                var catr = await GetByIdAsync(Id);
+                catr.CurrentState = false;
+                //TbSubCateegoory dele = dbcontex.TbSubCateegoorys.Where(a => a.IdBrand == IdBrand).FirstOrDefault();
+                //dbcontex.TbSubCateegoorys.Remove(dele);
+                dbcontext.Entry(catr).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> AddAsync(TBInformationCompanies savee)
+        {
+            try
+            {
+                await dbcontext.AddAsync<TBInformationCompanies>(savee);
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateAsync(TBInformationCompanies updatss)
+        {
+            try
+            {
+                dbcontext.Entry(updatss).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public Task<bool> DELETPHOTOAsync(int IdInformationCompanies)
+        {
+            var result = DELETPHOTO(IdInformationCompanies);
+            return Task.FromResult(result);
+        }
+
+        public Task<bool> DELETPHOTOWethErrorAsync(string PhotoNAme)
+        {
+            var result = DELETPHOTOWethError(PhotoNAme);
+            return Task.FromResult(result);
+        }
     }
 }

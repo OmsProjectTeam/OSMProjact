@@ -1,9 +1,11 @@
 ﻿using Domin.Entity.SignalR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Infarstuructre.BL
 {
@@ -15,7 +17,17 @@ namespace Infarstuructre.BL
 		bool RemoveConnection(string ConnectId);
 		TBConnectAndDisConnect GetById(string ConnectId);
         TBConnectAndDisConnect GetByName(string name);
-	}
+
+        ///////////////////////API/////////////////////////////////
+        ///
+        Task<List<TBConnectAndDisConnect>> GetAllAsync(int pageNumber, int pageSize);
+        Task<TBConnectAndDisConnect> GetByIdAsync(string Id);
+        Task<TBConnectAndDisConnect> GetByNameAsync(string name);
+        Task<bool> DeleteAsync(string ConnectId);
+        Task<bool> AddAsync(TBConnectAndDisConnect savee);
+
+
+    }
 	public class CLSTBConnectAndDisconnect : IIConnectAndDisconnect
 	{
 		MasterDbcontext dbcontext;
@@ -72,6 +84,54 @@ namespace Infarstuructre.BL
 			}
 		}
 
+        // //////////////////////////////////////////////////////API/////////////////////////////////////////////////////
 
-	}
+        public async Task<List<TBConnectAndDisConnect>> GetAllAsync(int pageNumber, int pageSize)
+        {
+            List<TBConnectAndDisConnect> MySlIder = await dbcontext.TBConnectAndDisConnects.OrderByDescending(n => n.IdConnectAndDisConnect).Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+            return MySlIder;
+        }
+
+        public async Task<TBConnectAndDisConnect> GetByIdAsync(string Id)
+        {
+            TBConnectAndDisConnect sslId = await dbcontext.TBConnectAndDisConnects.FirstOrDefaultAsync(a => a.ConnectId == Id);
+            return sslId;
+        }
+
+        public async Task<TBConnectAndDisConnect> GetByNameAsync(string name)
+        {
+            TBConnectAndDisConnect sslid = await dbcontext.TBConnectAndDisConnects.OrderBy(a => a.TimeConnection).Where(a => a.UserName == name).LastOrDefaultAsync();
+            return sslid;
+        }
+
+        public async Task<bool> DeleteAsync(string ConnectId)
+        {
+            try
+            {
+                var catr = GetById(ConnectId);
+                dbcontext.Remove<TBConnectAndDisConnect>(catr);
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> AddAsync(TBConnectAndDisConnect savee)
+        {
+            try
+            {
+                await dbcontext.AddAsync<TBConnectAndDisConnect>(savee);
+                await dbcontext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+    }
 }

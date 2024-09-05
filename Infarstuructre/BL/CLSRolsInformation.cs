@@ -14,7 +14,11 @@ namespace Infarstuructre.BL
     {
         List<IdentityRole> GetAll();
         IdentityRole GetById(string Id);
-    public class CLSRolsInformation: IIRolsInformation
+        /////////////////////////////////////////API/////////////////////////////////////////////////////
+        Task<List<IdentityRole>> GetAllAsync();
+        Task<IdentityRole> GetByIdAsync(string Id);
+
+        public class CLSRolsInformation: IIRolsInformation
     {
         RoleManager<IdentityRole> _roleManager;
 
@@ -34,8 +38,20 @@ namespace Infarstuructre.BL
             return sslid;
         }
 
+            // //////////////////////////////////////////////////////API/////////////////////////////////////////////////////
 
-          
+            public async Task<List<IdentityRole>> GetAllAsync()
+            {
+                List<IdentityRole> MySlIder = await _roleManager.Roles.OrderBy(x => x.Name).ToListAsync();
+                return MySlIder;
+            }
+
+            public async Task<IdentityRole> GetByIdAsync(string Id)
+            {
+                IdentityRole sslId = await _roleManager.Roles.FirstOrDefaultAsync(a => a.Id == Id);
+                return sslId;
+            }
+
 
         }
 }
