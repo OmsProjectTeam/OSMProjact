@@ -1267,6 +1267,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Model Name.
+        /// </summary>
+        public static string lbModelName {
+            get {
+                return ResourceManager.GetString("lbModelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error User Name Or Password.....!.
         /// </summary>
         public static string lbMsgErrorLogin {
@@ -1488,6 +1497,15 @@ namespace Yara.Resource {
         public static string LBMyRolesName {
             get {
                 return ResourceManager.GetString("LBMyRolesName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to She In Scarping.
+        /// </summary>
+        public static string LBMySheInScarping {
+            get {
+                return ResourceManager.GetString("LBMySheInScarping", resourceCulture);
             }
         }
         

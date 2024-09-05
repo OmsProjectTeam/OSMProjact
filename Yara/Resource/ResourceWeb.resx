@@ -519,6 +519,9 @@
   <data name="LbMessageDescription" xml:space="preserve">
     <value>Message Description</value>
   </data>
+  <data name="lbModelName" xml:space="preserve">
+    <value>Model Name</value>
+  </data>
   <data name="lbMsgErrorLogin" xml:space="preserve">
     <value>Error User Name Or Password.....!</value>
   </data>
@@ -593,6 +596,9 @@
   </data>
   <data name="LBMyRolesName" xml:space="preserve">
     <value>Roles </value>
+  </data>
+  <data name="LBMySheInScarping" xml:space="preserve">
+    <value>She In Scarping</value>
   </data>
   <data name="LBMyShippingAddress" xml:space="preserve">
     <value>MyShipping Address</value>

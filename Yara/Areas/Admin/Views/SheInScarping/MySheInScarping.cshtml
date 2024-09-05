@@ -1,0 +1,50 @@
+﻿@model ViewmMODeElMASTER
+@{
+    ViewData["Title"] = ResourceWeb.LBMySheInScarping;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-xs-12">
+    <div class="box-content">
+        <ul class="list-inline">
+            <li class="margin-bottom-10">
+                <a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LBMySheInScarping</button></a>
+            </li>
+            <li class="margin-bottom-10">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a>
+            </li>
+            <li class="margin-bottom-10">
+                <a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a>
+            </li>
+            <span style="color:royalblue"><strong>@TempData["Saved successfully"]</strong></span>
+            <span style="color:red"><strong>@TempData["ErrorSave"]</strong></span>
+        </ul>
+
+        <div class="row small-spacing">
+            <div class="col-lg-6 col-xs-12">
+                <div class="box-content card white">
+                    <h4 class="box-title">@ResourceWeb.LBMySheInScarping</h4>
+                    <div class="card-content">
+                        <form role="form" method="post" asp-controller="SheInScarping" asp-action="showPhoto">
+                            <div class="form-group">
+                                <label for="modelInput">@ResourceWeb.lbModelName</label>
+                                <input type="text" id="modelInput" name="model" placeholder="...." class="form-control" maxlength="100">
+                                
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
+                        </form>
+                        <div class="form-group mt-3">
+                            <img id="output" src="@ViewBag.ImageUrl" style="max-width: 100%; height: auto;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $("#modelInput").val(window.location.href);
+    </script>
+}

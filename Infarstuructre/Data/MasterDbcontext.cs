@@ -1692,6 +1692,18 @@ namespace Infarstuructre.Data
            .Property(m => m.Active)
            .HasDefaultValueSql("((1))");
 
+            //---------------------------------   
+            
+            //--------------------------------- 
+
+            builder.Entity<TBSheInScarping>()
+           .Property(m => m.DateTimeEntry)
+           .HasDefaultValueSql("getdate()");
+            builder.Entity<TBSheInScarping>()
+           .Property(m => m.CurrentState)
+           .HasDefaultValueSql("((1))");
+ 
+
             //--------------------------------- 
         }
 
@@ -1894,6 +1906,7 @@ namespace Infarstuructre.Data
         public DbSet<TBViewNewsLetterSender> ViewNewsLetterSender { get; set; }
         public DbSet<TBShippingAddresseClint> TBShippingAddresseClints { get; set; }
         public DbSet<TBViewShippingAddresseClint> ViewShippingAddresseClint { get; set; }
+        public DbSet<TBSheInScarping> TBSheInScarpings { get; set; }
         //test
 
 

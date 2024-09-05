@@ -538,6 +538,15 @@ namespace Domin.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to يرجى أدراج رقم الموديل لتتم العملية بنجاح ...!.
+        /// </summary>
+        public static string VlModelName {
+            get {
+                return ResourceManager.GetString("VlModelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to يرجى إضافة أقرب معلم لتتم العملية بنجاح ....!.
         /// </summary>
         public static string VlNearestLandmark {

@@ -348,4 +348,7 @@
   <data name="VlDescriptionAll" xml:space="preserve">
     <value>يرجى أدراج الوصف العام الكامل لتتم العملية بنجاح .....!</value>
   </data>
+  <data name="VlModelName" xml:space="preserve">
+    <value>يرجى أدراج رقم الموديل لتتم العملية بنجاح ...!</value>
+  </data>
 </root>

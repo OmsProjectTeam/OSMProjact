@@ -130,7 +130,10 @@ namespace Infarstuructre.ViewModel
 
         public IEnumerable<TBViewShippingAddresseClint> ListViewShippingAddresseClint { get; set; }
 
-        public TBShippingAddresseClint ShippingAddresseClint { get; set; }
+        public TBShippingAddresseClint ShippingAddresseClint { get; set; }  
+        public IEnumerable<TBSheInScarping> ListSheInScarping { get; set; }
+
+        public TBSheInScarping SheInScarping { get; set; }
 
     }
 }
