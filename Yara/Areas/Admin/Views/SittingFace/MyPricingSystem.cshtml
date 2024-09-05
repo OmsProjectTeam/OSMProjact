@@ -1,135 +1,143 @@
-﻿
+﻿@using Domin.Entity.SignalR
+@model ViewmMODeElMASTER
+@inject UserManager<ApplicationUser> userManager
+@inject SignInManager<ApplicationUser> signInManager
 @{
-    ViewData["Title"] = "IndexAr";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminAr.cshtml";
+    ViewData["Title"] = "MyPricingSystem";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <link rel="stylesheet" href="~/css/home.css">
-
+@{
+    var user = await userManager.GetUserAsync(User);
+    var roles = await userManager.GetRolesAsync(user);
+    var userRole = roles.FirstOrDefault();
+}
 <div class="row small-spacing">
     <div class="col-xs-12">
         <div class="box-content">
             <div class="row">
                 <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a asp-area="Admin" asp-controller="CheckCustmer" asp-action="MyCheckCustmerAr" class="box-content-link">
+                    <a asp-area="Admin" asp-controller="CurrenciesExchangeRates" asp-action="AddCurrenciesExchangeRates" asp-route-userId="@user.Id" class="box-content-link">
                         <div class="icon-box">
-                            <i class="fa fa-shopping-cart"></i>
-                            <h4>بحث العملاء</h4>
+                            <i class="fa fa-dollar"></i>
+                            <h4>Add Currencies Exchange</h4>
                         </div>
                     </a>
                 </div>
                 <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
+                    <a asp-area="Admin" asp-controller="ExchangeRate" asp-action="AddExchangeRate" class="box-content-link">
                         <div class="icon-box">
-                            <i class="fa fa-star"></i>
-                            <h4>Premium</h4>
+                            <i class="fa fa-exchange"></i>
+                            <h4>Add Exchange</h4>
                         </div>
                     </a>
                 </div>
                 <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
+                    <a asp-area="Admin" asp-controller="InformationCompanies" asp-action="AddEditInformationCompanies" class="box-content-link">
                         <div class="icon-box">
-                            <i class="fa fa-user"></i>
-                            <h4>Profile</h4>
+                            <i class="fa fa-info"></i>
+                            <h4>Company Information</h4>
                         </div>
                     </a>
                 </div>
                 <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
+                    <a asp-area="Admin" asp-controller="City" asp-action="AddCity" class="box-content-link">
                         <div class="icon-box">
-                            <i class="fa fa-users"></i>
-                            <h4>Friends</h4>
+                            <i class="fa fa-map-signs"></i>
+                            <h4>Add cities</h4>
                         </div>
                     </a>
                 </div>
                 <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
+                    <a asp-area="Admin" asp-controller="Area" asp-action="AddArea" class="box-content-link">
                         <div class="icon-box">
-                            <i class="fa fa-group"></i>
-                            <h4>Groups</h4>
+                            <i class="fa fa-area-chart"></i>
+                            <h4>Add Area</h4>
                         </div>
                     </a>
                 </div>
                 <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
+                    <a asp-area="Admin" asp-controller="TaskStatus" asp-action="AddTaskStatus" class="box-content-link">
                         <div class="icon-box">
-                            <i class="fa fa-archive"></i>
-                            <h4>Inventory</h4>
+                            <i class="fa fa-tasks"></i>
+                            <h4>Add Task Status</h4>
                         </div>
                     </a>
                 </div>
                 <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
+                    <a asp-area="Admin" asp-controller="OrderCase" asp-action="AddOrderCase" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-first-order"></i>
+                            <h4>Add Order Case</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a asp-area="Admin" asp-controller="OrderStatus" asp-action="AddOrderStatus" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-reorder"></i>
+                            <h4>Add Order Status</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a asp-area="Admin" asp-controller="EmailAlartSetting" asp-action="AddEmailAlartSetting" class="box-content-link">
                         <div class="icon-box">
                             <i class="fa fa-envelope"></i>
-                            <h4>Messages</h4>
+                            <h4>Add Email Alart Setting</h4>
                         </div>
                     </a>
                 </div>
                 <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
+                    <a asp-area="admin" asp-controller="ShippingAddress" asp-action="AddShippingAddress" class="box-content-link">
                         <div class="icon-box">
-                            <i class="fa fa-pencil"></i>
-                            <h4>Create</h4>
+                            <i class="fa fa-globe"></i>
+                            <h4>Add shipping company address</h4>
                         </div>
                     </a>
                 </div>
                 <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
+                    <a asp-area="Admin" asp-controller="SupportTicketType" asp-action="AddSupportTicketType" class="box-content-link">
                         <div class="icon-box">
-                            <i class="fa fa-book"></i>
-                            <h4>Blog</h4>
+                            <i class="fa fa-ticket"></i>
+                            <h4>Add Support Ticket Type</h4>
                         </div>
                     </a>
                 </div>
                 <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
+                    <a asp-area="Admin" asp-controller="SupportTicketStatus" asp-action="AddSupportTicketStatus" class="box-content-link">
                         <div class="icon-box">
-                            <i class="fa fa-gift"></i>
-                            <h4>Gift Cards</h4>
+                            <i class="fa fa-magic"></i>
+                            <h4>Add Support Ticket Status</h4>
                         </div>
                     </a>
+                </div>
+
+                @*   <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                <a href="#" class="box-content-link">
+                <div class="icon-box">
+                <i class="fa fa-info-circle"></i>
+                <h4>About</h4>
+                </div>
+                </a>
                 </div>
                 <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
-                        <div class="icon-box">
-                            <i class="fa fa-shopping-cart"></i>
-                            <h4>Official Store</h4>
-                        </div>
-                    </a>
+                <a href="#" class="box-content-link">
+                <div class="icon-box">
+                <i class="fa fa-life-ring"></i>
+                <h4>Help & Safety</h4>
+                </div>
+                </a>
                 </div>
                 <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
-                        <div class="icon-box">
-                            <i class="fa fa-cog"></i>
-                            <h4>Settings</h4>
-                        </div>
-                    </a>
+                <a href="#" class="box-content-link">
+                <div class="icon-box">
+                <i class="fa fa-sign-in"></i>
+                <h4>Quick Sign In</h4>
                 </div>
-                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
-                        <div class="icon-box">
-                            <i class="fa fa-info-circle"></i>
-                            <h4>About</h4>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
-                        <div class="icon-box">
-                            <i class="fa fa-life-ring"></i>
-                            <h4>Help & Safety</h4>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
-                    <a href="#" class="box-content-link">
-                        <div class="icon-box">
-                            <i class="fa fa-sign-in"></i>
-                            <h4>Quick Sign In</h4>
-                        </div>
-                    </a>
-                </div>
+                </a>
+                </div> *@
             </div>
             <!-- /.col-xs-12 -->
             <div class="col-lg-3 col-md-6 col-xs-12">

@@ -233,6 +233,7 @@
             var areas = iArea.GetAllByCityId(cityId); // Fetching areas by city ID
             return Json(areas.Select(a => new { id = a.id, description = a.Description }));
         }
+
         [HttpGet]
         public JsonResult GetShippingPricesByNikeName(int shippingPriceId)
         {

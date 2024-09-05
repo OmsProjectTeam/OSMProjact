@@ -66,7 +66,26 @@ namespace Yara.Areas.Admin.Controllers
 
             return View();
         }
-        
+        public IActionResult MyCheckCustmerAr()
+        {
+            ViewBag.City = iCity.GetAll();
+            ViewBag.Area = iArea.GetAll();
+            ViewBag.ShippingPrice = iShippingPrice.GetAll();
+            ViewBag.Currenc = iCurrenciesExchangeRates.GetAll();
+            ViewBag.TypeSystemDelivery = iTypeSystemDelivery.GetAll();
+            ViewBag.CityDeliveryTariffs = iCityDeliveryTariffs.GetAll();
+            ViewBag.user = iUserInformation.GetAllByNameall();
+
+            ViewBag.OrderCase = iOrderCase.GetAll();
+            ViewBag.OrderStatus = iOrderStatus.GetAll();
+            ViewBag.ClintWith = iClintWitheDeliveryTariffs.GetAll();
+            ViewBag.ShippingPrice = iShippingPrice.GetAll();
+            ViewBag.Currenc = iCurrenciesTransactions.GetAll();
+
+            return View();
+        }
+     
+
         [HttpPost]
         public async Task<IActionResult> GitPhouneNumber(string PhoneNumber)
         {
@@ -387,15 +406,15 @@ namespace Yara.Areas.Admin.Controllers
                         }
 
                         TempData["Saved successfully"] = ResourceWeb.VLSavedSuccessfully;
-                        return RedirectToAction("MyOrderNewAr");
-                    }
+						return RedirectToAction("MyCheckCustmer");
+					}
                     else
                     {
                         var PhotoNAme = slider.Photo;
                         var delet = iOrderNew.DELETPHOTOWethError(PhotoNAme);
                         TempData["ErrorSave"] = ResourceWeb.VLErrorSave;
-                        return Redirect(returnUrl);
-                    }
+						return RedirectToAction("MyCheckCustmer");
+					}
                 }
                 else
                 {
