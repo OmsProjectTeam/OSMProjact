@@ -22,7 +22,7 @@ public class SheInAPIController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult GetPhoto(string name)
+    public IActionResult GetPhoto([FromBody] string name)
     {
         try
         {
