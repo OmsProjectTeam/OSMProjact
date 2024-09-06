@@ -175,6 +175,7 @@ namespace Yara.Areas.Admin.Controllers
 
             using (var driver = new ChromeDriver(options))
             {
+
                 driver.Navigate().GoToUrl("https://ar.shein.com/pdsearch/" + model);
 
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
