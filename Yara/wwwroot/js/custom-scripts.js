@@ -28,11 +28,11 @@ $(document).ready(function () {
 });
 // Destroy and reinitialize DataTable for #example2
 $(function () {
-    $("#example2").DataTable().fnDestroy();
+    //$("#example2").DataTable().fnDestroy();
     $('#example2').DataTable({
-        "paging": false,
-        "lengthChange": false,
-        "searching": false,
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
         "ordering": true,
         "info": true,
         "autoWidth": false,
@@ -40,11 +40,11 @@ $(function () {
 });
 // Destroy and reinitialize DataTable for #example3
 $(function () {
-    $("#example3").DataTable().fnDestroy();
+    //$("#example3").DataTable().fnDestroy();
     $('#example3').DataTable({
-        "paging": false,
-        "lengthChange": false,
-        "searching": false,
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
         "ordering": true,
         "info": true,
         "autoWidth": false,

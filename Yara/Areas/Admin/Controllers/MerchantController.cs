@@ -19,6 +19,11 @@ namespace Yara.Areas.Admin.Controllers
             iInformationCompanies= iInformationCompanies1;
             iMerchant = iMerchant1;
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
         public IActionResult MyMerchant()
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();

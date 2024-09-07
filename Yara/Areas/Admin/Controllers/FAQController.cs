@@ -22,7 +22,16 @@ namespace Yara.Areas.Admin.Controllers
 			_userManager = _userManager1;
 
         }
-		public async Task<IActionResult> MyFAQ()
+		public ActionResult Index()
+		{
+			return View();
+		}
+
+        public ActionResult IndexAr()
+        {
+            return View();
+        }
+        public async Task<IActionResult> MyFAQ()
 		{
 			ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
 

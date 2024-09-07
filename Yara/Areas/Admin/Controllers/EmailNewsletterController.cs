@@ -16,6 +16,10 @@ namespace Yara.Areas.Admin.Controllers
             dbcontext = dbcontext1;
 			iEmailNewsletter = iEmailNewsletter1;
 		}
+		public ActionResult Index()
+		{
+			return View();
+		}
 
 		public async Task<IActionResult> MyEmailNewsletter()
 		{

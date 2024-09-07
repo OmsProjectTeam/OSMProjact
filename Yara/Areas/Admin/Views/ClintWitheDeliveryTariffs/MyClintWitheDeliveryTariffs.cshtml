@@ -12,12 +12,8 @@
             <li class="margin-bottom-10"><a href="#"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">@ResourceWeb.LBMyClintWitheDeliveryTariffs</button></a></li>/
             <li class="margin-bottom-10"><a asp-area="Admin" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Admin Home</button></a></li>/
             <li class="margin-bottom-10"><a asp-area="" asp-controller="Home" asp-action="Index"><button type="button" class="btn btn-primary btn-rounded btn-bordered waves-effect waves-light">Home</button></a></li>
-            <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
-            <br>
-            <br>
-            <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
-            <br>
-            <br>
+            @* <span style="color:royalblue"> <strong>@TempData["Saved successfullyl"]</strong></span>
+            <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span> *@
 
         </ul>
         <!-- /.box-title -->
@@ -30,19 +26,11 @@
             <div class="row">
 
                 <div class="col-sm-12">
-
-
-                    <div class="box-content">
-
                         <div id="rootwizard-progress">
                             <div class="tab-header">
                                 <div class="navbar">
                                     <span style="color:royalblue"> <strong>@TempData["Saved successfully"]</strong></span>
-                                    <br>
-                                    <br>
                                     <span style="color:red"> <strong>@TempData["ErrorSave"]</strong></span>
-                                    <br>
-                                    <br>
                                     <div class="navbar-inner">
                                         <ul>
                                             <li><a href="#tab-progress-1" data-toggle="tab">@ResourceWeb.LbInformaitionco</a></li>
@@ -78,10 +66,10 @@
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbDescriptionClint</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbPhoto</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbName</th>                                                 
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbName</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbUserEmail</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbPhoneCompany</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbnotes</th>                                                   
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.Lbnotes</th>
                                                 </tfoot>
                                                 <tbody>
                                                             @foreach (var item in Model.ListViewClintWitheDeliveryTariffs)
@@ -96,7 +84,7 @@
                                                             <td class="truncate-50">@item.Name</td>
                                                             <td class="truncate-50">@item.Email</td>
                                                             <td class="truncate-50">@item.PhoneNumber</td>
-                                                            <td class="truncate-50">@item.Nouts</td>                                              
+                                                            <td class="truncate-50">@item.Nouts</td>
                                                         </tr>
                                                             }
                                                 </tbody>
@@ -126,21 +114,21 @@
 
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LbClintDelivery</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 64px;">@ResourceWeb.LTitleShipping</th>
-                                                     
+
 
 
                                                 <tfoot>
                                                     <tr>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbId</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbPhoto</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbName</th>                                                             
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbName</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbDescriptionClint</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbCity</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LBLbAreaName</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbNikeNAme</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbClintDelivery</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LTitleShipping</th>
-                                                        
+
 
                                                 </tfoot>
                                                 <tbody>
@@ -160,9 +148,9 @@
                                                             <td class="truncate-50">@item.NikeNAme</td>
                                                             <td class="truncate-50">@item.ClintDelivery</td>
                                                             <td class="truncate-50">@item.TitleShipping</td>
-                                                            
 
-                                                        
+
+
 
 
                                                         </tr>
@@ -198,7 +186,7 @@
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbDescriptionClint</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbClintDelivery</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.Lbcode</th>
-                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbNouts</th>                                        
+                                                        <th rowspan="1" colspan="1">@ResourceWeb.LbNouts</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbDataEntry</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.LbDateTimeEntry</th>
                                                         <th rowspan="1" colspan="1">@ResourceWeb.lbCurrentState</th>
@@ -222,8 +210,8 @@
 
 
 
-                                                          
-                                                       
+
+
                                                             <td style="font-size:12px">@item.DataEntry</td>
                                                             <td>@item.DateTimeEntry</td>
                                                             <td>
@@ -251,7 +239,6 @@
                         </div>
                     </div>
                     <!-- /.box-content -->
-                </div>
             </div>
         </div>
         <div class="row">
@@ -269,18 +256,6 @@
 
 @section Scripts
 {
-    <!-- Data Tables -->
-    <script src="~/Admin/assets/plugin/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="~/Admin/assets/plugin/datatables/media/js/dataTables.bootstrap.min.js"></script>
-    <script src="~/Admin/assets/plugin/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
-    <script src="~/Admin/assets/plugin/datatables/extensions/Responsive/js/responsive.bootstrap.min.js"></script>
-    <script src="~/Admin/assets/scripts/datatables.demo.min.js"></script>
-    <script src="~/Admin/assets/plugin/form-wizard/prettify.js"></script>
-    <script src="~/Admin/assets/plugin/form-wizard/jquery.bootstrap.wizard.min.js"></script>
-    <script src="~/Admin/assets/plugin/jquery-validation/jquery.validate.min.js"></script>
-    <script src="~/Admin/assets/scripts/form.wizard.init.min.js"></script>
-
-    <script src="~/js/custom-scripts.js"> </script>
 }
 
 
