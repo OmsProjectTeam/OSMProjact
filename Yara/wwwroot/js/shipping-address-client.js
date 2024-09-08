@@ -1,4 +1,26 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
+  
+        // Array of table IDs to initialize DataTables on
+        var tableIds = ["example", "example1", "example2", "example3", "example4", "example5", "example6", "example7", "example8", "example9"];
+
+        // Loop through each table ID and initialize DataTable
+        $.each(tableIds, function (index, tableId) {
+            // Destroy any existing DataTable instance on this table
+            $("#" + tableId).DataTable().fnDestroy();
+
+            // Initialize DataTable with options
+            $('#' + tableId).DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+        });
+    }
+    
     // Initialize Select2
     $('.select2_1').select2({
         placeholder: "Select an option",

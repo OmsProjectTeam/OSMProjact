@@ -688,7 +688,7 @@
     <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
     <script src="~/Admin/assets/plugin/multiselect/multiselect.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="~/js/custom-scripts.js"> </script>
+   @*  <script src="~/js/custom-scripts.js"> </script> *@
 
     @* <script>
 
@@ -1039,6 +1039,17 @@
             image.src = URL.createObjectURL(event.target.files[0]);
         }; *@
 
+ 
+
+    <script>
+        var gitPhoneNumberUrl = '@Url.Action("GitPhouneNumber", "CheckCustmer", new { area = "Admin" })';
+        var getAreasByCityUrl = '@Url.Action("GetAreasByCity", "ShippingAddresseClint", new { area = "Admin" })';
+        var getShippingPricesByNikeNameUrl = '@Url.Action("GetShippingPricesByNikeName", "ShippingAddresseClint", new { area = "Admin" })';
+        var getDeliveryDetailsByTypeSystemUrl = '@Url.Action("GetDeliveryDetailsByTypeSystem", "ShippingAddresseClint", new { area = "Admin" })';
+        var getPricesUrl = '@Url.Action("GetPrices", "CheckCustmer", new { area = "Admin" })';
     </script>
+
+    <script src="~/js/check-customer.js"></script>
+
 }
 
