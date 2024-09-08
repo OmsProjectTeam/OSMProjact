@@ -216,7 +216,12 @@
     <script src="~/Admin/assets/plugin/select2/js/select2.min.js"></script>
     <script src="~/Admin/assets/plugin/multiselect/multiselect.min.js"></script>
 
-    <script src="~/js/custom-scripts.js"> </script>
+    <script>
+        var getPricesUrl = '@Url.Action("GetPrices", "OrderNew")'; // URL for AJAX requests
+    </script>
+    <script src="~/js/order-new.js"></script>
+
+    @* <script src="~/js/custom-scripts.js"> </script> *@
     @* <script>
         $(document).ready(function () {
             console.log("Document is ready");
@@ -298,6 +303,6 @@
             var image = document.getElementById('output');
             image.src = URL.createObjectURL(event.target.files[0]);
         };
-    </script>
-     *@
+    </script> *@
+    
 }
