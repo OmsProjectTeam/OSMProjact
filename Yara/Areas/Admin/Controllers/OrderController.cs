@@ -25,6 +25,15 @@ namespace Yara.Areas.Admin.Controllers
             iInformationCompanies =iInformationCompanies1;
             iTaskStatus =iTaskStatus1;
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult IndexAr()
+        {
+            return View();
+        }
         public IActionResult MyOrder()
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();

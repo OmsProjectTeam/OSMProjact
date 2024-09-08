@@ -53,6 +53,16 @@ namespace Yara.Areas.Admin.Controllers
             return View(vmodel);
         }
 
+        public IActionResult UserInfo()
+        {
+            return View();
+        }
+
+        public IActionResult UserInfoAr()
+        {
+            return View();
+        }
+
         [Authorize(Roles = "Admin,User")]
         public IActionResult RolesAr()
         {

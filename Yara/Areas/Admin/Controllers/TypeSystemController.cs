@@ -13,6 +13,16 @@ namespace Yara.Areas.Admin.Controllers
             dbcontext = dbcontext1;
             iTypeSystem= iTypeSystem1;
         }
+
+        public IActionResult General()
+        {
+            return View();
+        }
+
+        public IActionResult GeneralAr()
+        {
+            return View();
+        }
         public IActionResult MyTypeSystem()
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
