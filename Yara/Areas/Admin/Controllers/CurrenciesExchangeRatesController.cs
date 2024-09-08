@@ -41,6 +41,22 @@ namespace Yara.Areas.Admin.Controllers
                 return View(vmodel);
             }
         }
+
+        public IActionResult AddCurrenciesExchangeRatesAr(int? IdCurrenciesExchangeRates)
+        {
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListCurrenciesExchangeRates = iCurrenciesExchangeRates.GetAll();
+            if (IdCurrenciesExchangeRates != null)
+            {
+                vmodel.CurrenciesExchangeRates = iCurrenciesExchangeRates.GetById(Convert.ToInt32(IdCurrenciesExchangeRates));
+                return View(vmodel);
+            }
+            else
+            {
+                return View(vmodel);
+            }
+        }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Save(ViewmMODeElMASTER model, TBCurrenciesExchangeRates slider, List<IFormFile> Files, string returnUrl)

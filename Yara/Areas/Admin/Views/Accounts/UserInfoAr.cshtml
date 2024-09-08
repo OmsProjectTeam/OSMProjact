@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "UserInfoAr";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminAr.cshtml";
+}
+@using Domin.Entity.SignalR
+@model ViewmMODeElMASTER
+@inject UserManager<ApplicationUser> userManager
+@inject SignInManager<ApplicationUser> signInManager
+
+<link rel="stylesheet" href="~/css/home.css">
+@{
+    var user = await userManager.GetUserAsync(User);
+    var roles = await userManager.GetRolesAsync(user);
+    var userRole = roles.FirstOrDefault();
+}
+<div class="row small-spacing">
+    <div class="col-xs-12">
+        <div class="box-content">
+            <div class="row">
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a asp-area="Admin" asp-controller="Accounts" asp-action="RolesAr" asp-route-userId="@user.Id" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-cubes"></i>
+                            <h4>Roles</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-5 col-md-4 col-sm-6 col-xs-12">
+                    <a asp-area="Admin" asp-controller="Accounts" asp-action="RegistersAr" asp-route-userId="@user.Id" class="box-content-link">
+                        <div class="icon-box">
+                            <i class="fa fa-users"></i>
+                            <h4>Users</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- /.col-xs-12 -->
+        </div>
+        <div class="logout-button-container">
+            <a href="#" class="logout-button">Log Out</a>
+        </div>
+    </div>
+</div>
+

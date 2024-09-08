@@ -24,6 +24,16 @@ namespace Yara.Areas.Admin.Controllers
             dbcontext= dbcontext1;
         }
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult IndexAr()
+        {
+            return View();
+        }
+
         public IActionResult MyCustomerMessages()
         {
             ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();

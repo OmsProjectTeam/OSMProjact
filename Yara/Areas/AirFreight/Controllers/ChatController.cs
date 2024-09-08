@@ -84,9 +84,57 @@ namespace Yara.Areas.AirFreight.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> IndexAr(string anotherId)
+        {
+            var viewModel = new ViewmMODeElMASTER();
+            var currentUserId = iUserManager.GetUserId(User);
+
+            // Retrieve the messages for the selected chat
+            if (!string.IsNullOrEmpty(anotherId))
+            {
+                var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
+                var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
+                IamSender.AddRange(IamReciver);
+
+                viewModel.ViewChatMessage = IamSender.OrderBy(m => m.MessageeTime).ToList();
+
+                // Set the ViewBag properties
+                ViewBag.another = iUserInformation.GetById(anotherId)?.UserName;
+                ViewBag.anotherId = anotherId;
+                ViewBag.img = iUserInformation.GetById(currentUserId)?.ImageUser;
+                ViewBag.UserId = currentUserId;
+                //ViewBag.LastSeen = iConnectAndDisconnect.GetById(anotherId)?.LastSeen;
+            }
+
+            // Fetching all messages received by the current user (for the contacts list)
+            viewModel.ViewChatMessage = iMessageChat.GetByReciverId(currentUserId);
+
+            return View(viewModel);
+        }
+
         [HttpGet]
         [Route("/AirFreight/Chat/OwnChat/{anotherId}")]
         public async Task<IActionResult> OwnChat(string anotherId)
+        {
+            var viewModel = new ViewmMODeElMASTER();
+            var currentUserId = iUserManager.GetUserId(User);
+
+            var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
+            var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
+            IamSender.AddRange(IamReciver);
+
+            viewModel.ViewChatMessage = IamSender.OrderBy(m => m.MessageeTime).ToList();
+            ViewBag.another = iUserInformation.GetById(anotherId).UserName;
+            ViewBag.anotherId = anotherId;
+            ViewBag.img = iUserInformation.GetById(currentUserId).ImageUser;
+            ViewBag.UserId = currentUserId;
+
+            return RedirectToAction("Index", new { anotherId });
+        }
+
+        [HttpGet]
+        [Route("/AirFreight/Chat/OwnChat/{anotherId}")]
+        public async Task<IActionResult> OwnChatAr(string anotherId)
         {
             var viewModel = new ViewmMODeElMASTER();
             var currentUserId = iUserManager.GetUserId(User);
