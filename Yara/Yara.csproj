@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\check-customer.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\check-customer.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Domin\Domin.csproj" />
     <ProjectReference Include="..\Infarstuructre\Infarstuructre.csproj" />
   </ItemGroup>
@@ -38,6 +46,10 @@
     <Folder Include="wwwroot\Images\Users\" />
     <Folder Include="wwwroot\AdminEn\" />
     <Folder Include="wwwroot\Web\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\check-customer.js" />
   </ItemGroup>
 
   <ItemGroup>
