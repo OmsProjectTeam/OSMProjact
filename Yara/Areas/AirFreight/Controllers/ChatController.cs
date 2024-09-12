@@ -122,7 +122,6 @@ namespace Yara.Areas.AirFreight.Controllers
             var IamSender = iMessageChat.GetBySenderIdAndReciverId(currentUserId, anotherId);
             var IamReciver = iMessageChat.GetBySenderIdAndReciverId(anotherId, currentUserId);
             IamSender.AddRange(IamReciver);
-
             viewModel.ViewChatMessage = IamSender.OrderBy(m => m.MessageeTime).ToList();
             ViewBag.another = iUserInformation.GetById(anotherId).UserName;
             ViewBag.anotherId = anotherId;
