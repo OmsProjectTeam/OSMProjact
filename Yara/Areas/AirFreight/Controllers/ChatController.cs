@@ -133,7 +133,7 @@ namespace Yara.Areas.AirFreight.Controllers
         }
 
         [HttpGet]
-        [Route("/AirFreight/Chat/OwnChat/{anotherId}")]
+        [Route("/AirFreight/Chat/OwnChatAr/{anotherId}")]
         public async Task<IActionResult> OwnChatAr(string anotherId)
         {
             var viewModel = new ViewmMODeElMASTER();

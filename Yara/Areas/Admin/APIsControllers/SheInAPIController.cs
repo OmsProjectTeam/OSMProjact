@@ -22,7 +22,7 @@ public class SheInAPIController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult GetPhoto([FromBody] string name)
+    public IActionResult GetPhoto([FromBody] SheIn newModel)
     {
         try
         {
@@ -31,7 +31,7 @@ public class SheInAPIController : ControllerBase
 
             using (var driver = new ChromeDriver(options))
             {
-                driver.Navigate().GoToUrl("https://ar.shein.com/pdsearch/" + name);
+                driver.Navigate().GoToUrl("https://ar.shein.com/pdsearch/" + newModel.Name);
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
                 wait.Until(driver => driver.FindElement(By.XPath("//img")));
 
