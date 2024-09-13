@@ -179,5 +179,15 @@ namespace Yara.Areas.Admin.Controllers
 			}
 			return RedirectToAction("MyEmailNewsletter");
 		}
-	}
+
+        public async Task<IActionResult> MyEmailNewsletter1()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return NotFound();
+            ViewmMODeElMASTER vmodel = new ViewmMODeElMASTER();
+            vmodel.ListEmailNewsletters = iEmailNewsletter.GetAll();
+            return View(vmodel);
+        }
+    }
 }
