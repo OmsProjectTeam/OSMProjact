@@ -31,7 +31,7 @@ public class SheInAPIController : ControllerBase
 
             using (var driver = new ChromeDriver(options))
             {
-                driver.Navigate().GoToUrl("https://ar.shein.com/pdsearch/" + newModel.Name);
+                driver.Navigate().GoToUrl("https://ar.shein.com/pdsearch/" + newModel.pdsearch);
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
                 wait.Until(driver => driver.FindElement(By.XPath("//img")));
 
