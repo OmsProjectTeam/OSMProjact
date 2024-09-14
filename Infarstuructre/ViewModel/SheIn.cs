@@ -8,6 +8,6 @@ namespace Infarstuructre.ViewModel
 {
     public class SheIn
     {
-        public string pdsearch { get; set; }
+        public string name { get; set; }
     }
 }
