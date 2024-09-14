@@ -1420,6 +1420,15 @@ namespace Yara.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to شي ان سكاربنج.
+        /// </summary>
+        public static string LBMySheInScarping {
+            get {
+                return ResourceManager.GetString("LBMySheInScarping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to عناوين الشحن.
         /// </summary>
         public static string LBMyShippingAddress {

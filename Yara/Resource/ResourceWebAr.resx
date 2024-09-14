@@ -1008,4 +1008,7 @@
   <data name="VLUpdatedSuccessfully" xml:space="preserve">
     <value>تمت عملية التعديل بنجاح</value>
   </data>
+  <data name="LBMySheInScarping" xml:space="preserve">
+    <value>شي ان سكاربنج</value>
+  </data>
 </root>

@@ -1,0 +1,23 @@
+﻿@model ViewmMODeElMASTER
+@{
+    ViewData["Title"] = ResourceWebAr.LBMySheInScarping;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdminAr.cshtml";
+}
+
+
+
+
+
+@if (ViewBag.ImageUrl != null)
+{
+    <div>
+        <img id="output" width="450" height="300" src="@ViewBag.ImageUrl" alt="Fetched Image" />
+    </div>
+    <label>@ViewBag.model</label>
+}
+
+else
+{
+    <p>No images found.</p>
+}
+
