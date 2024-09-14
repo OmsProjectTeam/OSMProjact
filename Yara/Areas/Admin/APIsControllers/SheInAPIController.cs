@@ -40,8 +40,13 @@ public class SheInAPIController : ControllerBase
                 var imageElement = driver.FindElements(By.XPath("//img[contains(@class, 'crop-image-container__img')]")).FirstOrDefault();
                 if (imageElement != null)
                 {
+
+
                     var imageUrl = imageElement.GetAttribute("src");
-                    return Ok(imageUrl);
+
+                    _response.StatusCode = HttpStatusCode.OK;
+                    _response.Result = imageUrl;
+                    return Ok(_response);
                 }
                 else
                 {
@@ -74,20 +79,29 @@ public class SheInAPIController : ControllerBase
                         if (imageElement1 != null)
                         {
                             var imageUrl = imageElement.GetAttribute("src");
-                            return Ok(imageUrl);
+                            _response.Result = imageUrl;
+                            _response.StatusCode = HttpStatusCode.OK;
+                            return Ok(_response);
                         }
                     }
                     else
                     {
-                        return Content("Failed to fetch image.");
+                        _response.StatusCode = HttpStatusCode.BadRequest;
+                        _response.Result = "Failed to fetch image.";
+                        return Ok(_response);
                     }
-                    return NotFound("Image not found.");
+
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.Result = "Image not found.";
+                    return Ok(_response);
                 }
             }
             catch (Exception ex)
             {
-                return Content("An error occurred: " + ex.Message);
+                _response.IsSuccess = false;
+                _response.ErrorMessage = new List<string> { ex.Message };
             }
+            return Ok(_response);
         }
 
     }
