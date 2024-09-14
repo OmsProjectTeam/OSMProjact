@@ -32,7 +32,7 @@ public class SheInAPIController : ControllerBase
         {
             try
             {
-                driver.Navigate().GoToUrl("https://m.shein.com/pdsearch/" + newModel.pdsearch);
+                driver.Navigate().GoToUrl("https://m.shein.com/pdsearch/" + newModel.name);
 
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
                 wait.Until(driver => driver.FindElement(By.XPath("//img")));
@@ -50,7 +50,7 @@ public class SheInAPIController : ControllerBase
                     request.AddHeader("x-api-key", "0fe96c41-bb73-4a00-9752-557723482b23");
                     request.AddJsonBody(new
                     {
-                        url = "https://m.shein.com/pdsearch/" + newModel.pdsearch,
+                        url = "https://m.shein.com/pdsearch/" + newModel.name,
                         proxyType = "datacenter",
                         proxyCountry = "US",
                         blockResources = true,
