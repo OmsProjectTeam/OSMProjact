@@ -6,6 +6,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 using System.Net;
 using Yara.Areas.Admin.Controllers;
+using RestSharp;
 
 namespace Yara.Areas.Admin.APIsControllers;
 
@@ -22,16 +23,17 @@ public class SheInAPIController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult GetPhoto([FromBody] SheIn newModel)
+    public async Task<IActionResult> GetPhoto([FromBody] SheIn newModel)
     {
-        try
-        {
-            var options = new ChromeOptions();
-            options.AddArgument("start-maximized");
+        var options = new ChromeOptions();
+        options.AddArgument("start-maximized");
 
-            using (var driver = new ChromeDriver(options))
+        using (var driver = new ChromeDriver(options))
+        {
+            try
             {
-                driver.Navigate().GoToUrl("https://ar.shein.com/pdsearch/" + newModel.pdsearch);
+                driver.Navigate().GoToUrl("https://m.shein.com/pdsearch/" + newModel.pdsearch);
+
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
                 wait.Until(driver => driver.FindElement(By.XPath("//img")));
 
@@ -39,25 +41,54 @@ public class SheInAPIController : ControllerBase
                 if (imageElement != null)
                 {
                     var imageUrl = imageElement.GetAttribute("src");
-
-                    _response.Result = imageUrl;
-                    _response.StatusCode = HttpStatusCode.Created;
-
-                    return Ok(_response);
+                    return Ok(imageUrl);
                 }
                 else
                 {
-                    _response.StatusCode = HttpStatusCode.NotFound;
-                    return Ok(_response);
+                    var client = new RestClient("https://api.hasdata.com/scrape/web");
+                    var request = new RestRequest();
+                    request.AddHeader("x-api-key", "0fe96c41-bb73-4a00-9752-557723482b23");
+                    request.AddJsonBody(new
+                    {
+                        url = "https://m.shein.com/pdsearch/" + newModel.pdsearch,
+                        proxyType = "datacenter",
+                        proxyCountry = "US",
+                        blockResources = true,
+                        blockAds = true,
+                        screenshot = true,
+                        jsRendering = true,
+                        excludeHtml = false,
+                        extractEmails = true
+                    });
+
+                    request.Method = Method.Post; // Set method here
+
+                    var response = await client.ExecuteAsync(request);
+
+                    if (response.IsSuccessful)
+                    {
+                        //WebDriverWait wait1 = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+                        //wait1.Until(driver => driver.FindElement(By.XPath("//img")));
+
+                        var imageElement1 = driver.FindElements(By.XPath("//img[contains(@class, 'crop-image-container__img')]")).FirstOrDefault();
+                        if (imageElement1 != null)
+                        {
+                            var imageUrl = imageElement.GetAttribute("src");
+                            return Ok(imageUrl);
+                        }
+                    }
+                    else
+                    {
+                        return Content("Failed to fetch image.");
+                    }
+                    return NotFound("Image not found.");
                 }
             }
-
-        }catch(Exception ex)
-        {
-            _response.IsSuccess = false;
-            _response.ErrorMessage = new List<string> { ex.Message };
+            catch (Exception ex)
+            {
+                return Content("An error occurred: " + ex.Message);
+            }
         }
-        return Ok(_response);
-    }
 
+    }
 }
