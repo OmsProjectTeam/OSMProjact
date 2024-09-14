@@ -40,8 +40,6 @@ public class SheInAPIController : ControllerBase
                 var imageElement = driver.FindElements(By.XPath("//img[contains(@class, 'crop-image-container__img')]")).FirstOrDefault();
                 if (imageElement != null)
                 {
-
-
                     var imageUrl = imageElement.GetAttribute("src");
 
                     _response.StatusCode = HttpStatusCode.OK;
