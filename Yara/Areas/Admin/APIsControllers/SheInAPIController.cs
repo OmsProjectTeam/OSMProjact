@@ -73,6 +73,7 @@ public class SheInAPIController : ControllerBase
                         //WebDriverWait wait1 = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
                         //wait1.Until(driver => driver.FindElement(By.XPath("//img")));
 
+
                         var imageElement1 = driver.FindElements(By.XPath("//img[contains(@class, 'crop-image-container__img')]")).FirstOrDefault();
                         if (imageElement1 != null)
                         {
