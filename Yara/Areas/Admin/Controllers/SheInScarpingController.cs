@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
@@ -212,6 +213,84 @@ namespace Yara.Areas.Admin.Controllers
         //}
 
 
+        //[HttpPost]
+        //public async Task<IActionResult> ShowPhoto(string model)
+        //{
+        //    var options = new ChromeOptions();
+        //    options.AddArgument("start-maximized");
+
+        //    using (var driver = new ChromeDriver(options))
+        //    {
+        //        try
+        //        {
+        //            driver.Navigate().GoToUrl("https://m.shein.com/pdsearch/" + model);
+
+        //            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+        //            wait.Until(driver => driver.FindElement(By.XPath("//img")));
+
+        //            var imageElement = driver.FindElements(By.XPath("//img[contains(@class, 'crop-image-container__img')]")).FirstOrDefault();
+        //            if (imageElement != null)
+        //            {
+        //                var imageUrl = imageElement.GetAttribute("src");
+        //                ViewBag.ImageUrl = imageUrl;
+        //                ViewBag.Model = model;
+        //                return View();
+        //            }
+        //            else
+        //            {
+        //                var client = new RestClient("https://api.hasdata.com/scrape/web");
+        //                var request = new RestRequest();
+        //                request.AddHeader("x-api-key", "0fe96c41-bb73-4a00-9752-557723482b23");
+        //                request.AddJsonBody(new
+        //                {
+        //                    url = "https://m.shein.com/pdsearch/" + model,
+        //                    proxyType = "datacenter",
+        //                    proxyCountry = "US",
+        //                    blockResources = true,
+        //                    blockAds = true,
+        //                    screenshot = true,
+        //                    jsRendering = true,
+        //                    excludeHtml = false,
+        //                    extractEmails = true
+        //                });
+
+        //                request.Method = Method.Post; // Set method here
+
+        //                var response = await client.ExecuteAsync(request);
+
+        //                if (response.IsSuccessful)
+        //                {
+        //                    //WebDriverWait wait1 = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+        //                    //wait1.Until(driver => driver.FindElement(By.XPath("//img")));
+
+        //                    var imageElement1 = driver.FindElements(By.XPath("//img[contains(@class, 'crop-image-container__img')]")).FirstOrDefault();
+        //                    if (imageElement1 != null)
+        //                    {
+        //                        var imageUrl = imageElement.GetAttribute("src");
+        //                        ViewBag.ImageUrl = imageUrl;
+        //                        ViewBag.Model = model;
+        //                        return View();
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    ViewBag.Message = "Failed to fetch image.";
+        //                }
+
+        //                ViewBag.Message = "Image not found.";
+        //                return View();
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            ViewBag.Message = "An error occurred: " + ex.Message;
+        //            return View();
+        //        }
+        //    }
+        //}
+
+
+
         [HttpPost]
         public async Task<IActionResult> ShowPhoto(string model)
         {
@@ -222,74 +301,165 @@ namespace Yara.Areas.Admin.Controllers
             {
                 try
                 {
+                    // الخطوة الأولى: محاولة العثور على الصورة باستخدام WebDriver
                     driver.Navigate().GoToUrl("https://m.shein.com/pdsearch/" + model);
 
                     WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
                     wait.Until(driver => driver.FindElement(By.XPath("//img")));
 
                     var imageElement = driver.FindElements(By.XPath("//img[contains(@class, 'crop-image-container__img')]")).FirstOrDefault();
+
                     if (imageElement != null)
                     {
+                        // إذا تم العثور على الصورة باستخدام WebDriver
                         var imageUrl = imageElement.GetAttribute("src");
                         ViewBag.ImageUrl = imageUrl;
                         ViewBag.Model = model;
                         return View();
                     }
-                    else
-                    {
-                        var client = new RestClient("https://api.hasdata.com/scrape/web");
-                        var request = new RestRequest();
-                        request.AddHeader("x-api-key", "0fe96c41-bb73-4a00-9752-557723482b23");
-                        request.AddJsonBody(new
+                   else {
+
+                        driver.Navigate().GoToUrl("https://app.scrapingbee.com/api/v1?api_key=HYMUUZ1BPAJU3PF6EO6BVO0AEZLS603AIYCR57H0NNJIUJA41P9HF9TQJDZPVC0BDPO3NFUWT26SFLG3&url=https://jp.shein.com/pdsearch/" + model);
+
+                        WebDriverWait wait2 = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+                        wait2.Until(driver => driver.FindElement(By.XPath("//img")));
+
+                        var imageElement2 = driver.FindElements(By.XPath("//img[contains(@class, 'crop-image-container__img')]")).FirstOrDefault();
+
+                        if (imageElement2 != null)
                         {
-                            url = "https://m.shein.com/pdsearch/" + model,
-                            proxyType = "datacenter",
-                            proxyCountry = "US",
-                            blockResources = true,
-                            blockAds = true,
-                            screenshot = true,
-                            jsRendering = true,
-                            excludeHtml = false,
-                            extractEmails = true
-                        });
-
-                        request.Method = Method.Post; // Set method here
-
-                        var response = await client.ExecuteAsync(request);
-
-                        if (response.IsSuccessful)
-                        {
-                            //WebDriverWait wait1 = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
-                            //wait1.Until(driver => driver.FindElement(By.XPath("//img")));
-
-                            var imageElement1 = driver.FindElements(By.XPath("//img[contains(@class, 'crop-image-container__img')]")).FirstOrDefault();
-                            if (imageElement1 != null)
-                            {
-                                var imageUrl = imageElement.GetAttribute("src");
-                                ViewBag.ImageUrl = imageUrl;
-                                ViewBag.Model = model;
-                                return View();
-                            }
+                            // إذا تم العثور على الصورة باستخدام WebDriver
+                            var imageUrl2 = imageElement2.GetAttribute("src");
+                            ViewBag.ImageUrl = imageUrl2;
+                            ViewBag.Model = model;
+                            return View();
                         }
                         else
                         {
-                            ViewBag.Message = "Failed to fetch image.";
+                            ViewBag.Message = "Image not found.";
+                                           return View();
                         }
 
-                        ViewBag.Message = "Image not found.";
-                        return View();
+
                     }
-                }
+                    }
                 catch (Exception ex)
                 {
                     ViewBag.Message = "An error occurred: " + ex.Message;
-                    return View();
                 }
             }
+
+            return View();
         }
 
 
-		[HttpPost]
+        //[HttpPost]
+        //public async Task<IActionResult> ShowPhoto(string model)
+        //{
+        //    try
+        //    {
+        //        // الخطوة الأولى: استخدام Scraping API للحصول على الصورة
+        //        var client = new RestClient("https://api.hasdata.com/scrape/web");
+        //        var request = new RestRequest();
+        //        request.AddHeader("x-api-key", "0fe96c41-bb73-4a00-9752-557723482b23");
+        //        request.AddJsonBody(new
+        //        {
+        //            url = "https://m.shein.com/pdsearch/" + model,
+        //            proxyType = "datacenter",
+        //            proxyCountry = "US",
+        //            blockResources = true,
+        //            blockAds = true,
+        //            screenshot = true,
+        //            jsRendering = true,
+        //            excludeHtml = false,
+        //            extractEmails = true
+        //        });
+
+        //        request.Method = Method.Post;
+
+        //        var response = await client.ExecuteAsync(request);
+
+        //        if (response.IsSuccessful)
+        //        {
+        //            // تحليل الاستجابة من API
+        //            dynamic data = JsonConvert.DeserializeObject(response.Content);
+
+        //            if (data != null && data.screenshot != null)
+        //            {
+        //                // إذا تم العثور على الصورة من الـ API
+        //                string imageUrl = data.screenshot;
+        //                ViewBag.ImageUrl = imageUrl;
+        //                ViewBag.Model = model;
+        //                return View();
+        //            }
+        //            else
+        //            {
+        //                ViewBag.Message = "Image not found in the API response.";
+        //                System.Diagnostics.Debug.WriteLine("API Response did not contain 'screenshot'.");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            ViewBag.Message = "Failed to fetch image from the API. Status code: " + response.StatusCode;
+        //            System.Diagnostics.Debug.WriteLine("API Response: " + response.Content);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ViewBag.Message = "An error occurred while fetching image from the API: " + ex.Message;
+        //        System.Diagnostics.Debug.WriteLine("API Error: " + ex.Message);
+        //    }
+
+        //    // الخطوة الثانية: محاولة العثور على الصورة باستخدام WebDriver
+        //    var options = new ChromeOptions();
+        //    options.AddArgument("start-maximized");
+
+        //    using (var driver = new ChromeDriver(options))
+        //    {
+        //        try
+        //        {
+        //            driver.Navigate().GoToUrl("https://m.shein.com/pdsearch/" + model);
+
+        //            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+        //            wait.Until(driver => driver.FindElement(By.XPath("//img")));
+
+        //            var imageElement = driver.FindElements(By.XPath("//img[contains(@class, 'crop-image-container__img')]")).FirstOrDefault();
+
+        //            if (imageElement != null)
+        //            {
+        //                // إذا تم العثور على الصورة باستخدام WebDriver
+        //                var imageUrl = imageElement.GetAttribute("src");
+        //                ViewBag.ImageUrl = imageUrl;
+        //                ViewBag.Model = model;
+        //                return View();
+        //            }
+        //            else
+        //            {
+        //                ViewBag.Message = "Image not found in the webpage.";
+        //                System.Diagnostics.Debug.WriteLine("WebDriver did not find any image.");
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            ViewBag.Message = "An error occurred while fetching image using WebDriver: " + ex.Message;
+        //            System.Diagnostics.Debug.WriteLine("WebDriver Error: " + ex.Message);
+        //        }
+        //    }
+
+        //    return View();
+        //}
+
+
+
+
+
+
+
+
+
+
+
+        [HttpPost]
 		public async Task<IActionResult> ShowPhotoAr(string model)
 		{
 			var options = new ChromeOptions();
