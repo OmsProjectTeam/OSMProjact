@@ -25,10 +25,10 @@
                 <div class="box-content card white">
                     <h4 class="box-title">@ResourceWeb.LBMySheInScarping</h4>
                     <div class="card-content">
-                        <form role="form" method="post" asp-controller="SheInScarping" asp-action="showPhoto">
+                        <form role="form" method="post" asp-controller="SheInScarping" asp-action="ShowPhoto">
                             <div class="form-group">
                                 <label for="modelInput">@ResourceWeb.lbModelName</label>
-                                <input type="text" id="modelInput" name="model" placeholder="...." class="form-control" maxlength="100">
+                                <input type="text" id="modelInput" name="model" placeholder="insert url" class="form-control" >
                                 
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">@ResourceWeb.lbSave</button>
@@ -44,7 +44,7 @@
 </div>
 
 @section Scripts {
-    <script>
+  @*   <script>
         $("#modelInput").val(window.location.href);
-    </script>
+    </script> *@
 }

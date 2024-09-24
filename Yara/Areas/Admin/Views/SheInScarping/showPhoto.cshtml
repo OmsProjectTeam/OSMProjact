@@ -1,7 +1,6 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "showPhoto";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml"; 
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 
@@ -23,19 +22,37 @@
 
 
 
+<div class="row small-spacing">
+    <div class="col-xs-6">
+        <div class="box-content card white">
+            @if (ViewBag.ImageUrl != null)
+            {
+                <div>
+                    <img id="output" width="450" height="300" src="@ViewBag.ImageUrl" alt="Fetched Image" />
+                </div>
 
+              @*   <label>@ViewBag.SKU </label>
+                <label>@ViewBag.ImageUrl </label> *@
 
+                <div class="card-content">
 
-@if (ViewBag.ImageUrl != null)
-{
-    <div>
-        <img  id="output" width="450" height="300" src="@ViewBag.ImageUrl" alt="Fetched Image" />
+                <div class="row small-spacing">
+                    <div class="col-12 col-sm-06">
+                        <label for="exampleInputEmail1">SKU</label>
+                        <input type="text" class="form-control" value="@ViewBag.SKU" readonly>
+
+                    </div>
+                    <div class="col-12 col-sm-06">
+                        <label for="exampleInputEmail1">ImageUrl</label>
+                        <input type="text" class="form-control" value="@ViewBag.ImageUrl" readonly >
+                    </div>
+                </div>
+                </div>
+            }
+            else
+            {
+                <p>No Information  found.</p>
+            }
+        </div>
     </div>
-    <label >@ViewBag.model</label>
-}
-
-else
-{
-    <p>No images found.</p>
-}
-
+</div>
