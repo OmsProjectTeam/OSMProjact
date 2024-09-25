@@ -125,7 +125,11 @@ public class SheInAPIController : ControllerBase
                     if (skuElement != null)
                     {
                         var sku = skuElement.Text.Replace("SKU: ", "");
+
                         _response.Result = new { ImageURL = imageUrl, Title = sku };
+
+                       
+
                         _response.StatusCode = HttpStatusCode.OK;
                         return Ok(_response);
 
@@ -176,10 +180,10 @@ public class SheInAPIController : ControllerBase
             }
             catch (Exception ex)
             {
-                _response.IsSuccess = false;
-                _response.ErrorMessage = new List<string> { ex.Message };
+              _response.IsSuccess = false;
+              _response.ErrorMessage = new List<string> { ex.Message };
             }
-            return Ok(_response);
+           return Ok(_response);
         }
 
 

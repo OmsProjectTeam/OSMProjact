@@ -37,6 +37,7 @@ namespace Yara.Areas.Admin.APIsControllers
                 _response.IsSuccess = false;
                 _response.ErrorMessage = new List<string> { ex.Message };
             }
+
             return Ok(_response);
         }
 
