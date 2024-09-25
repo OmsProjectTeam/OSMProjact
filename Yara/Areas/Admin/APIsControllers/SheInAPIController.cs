@@ -1,4 +1,5 @@
-﻿using Infarstuructre.BL;
+﻿
+using Infarstuructre.BL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OpenQA.Selenium.Chrome;
@@ -124,7 +125,11 @@ public class SheInAPIController : ControllerBase
                     if (skuElement != null)
                     {
                         var sku = skuElement.Text.Replace("SKU: ", "");
-                        _response.Result = new {ImageURL = imageUrl , Title = sku };
+
+                        _response.Result = new { ImageURL = imageUrl, Title = sku };
+
+                       
+
                         _response.StatusCode = HttpStatusCode.OK;
                         return Ok(_response);
 
